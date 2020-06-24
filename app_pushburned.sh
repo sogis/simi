@@ -16,6 +16,6 @@ do
   cat $f | docker run --rm -i puml_burner > $out
 done
 
-#git add simi/doc/puml/rendered/*
-#git commit -m 'Skript: PUML-Diagramme regeneriert und beigefügt'
-#git push
+git add simi/doc/puml/rendered/*
+git commit -m 'Skript: PUML-Diagramme der Simi-Dokumentation regeneriert und beigefügt'
+git push
