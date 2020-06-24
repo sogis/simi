@@ -42,6 +42,22 @@ Bündelt 1-n Permissions gegenüber 1-n SingleLayer.
 
 UK auf "name".
 
+## Klasse Identity
+
+Gruppe oder User. Die Rollenzuweisungen erfolgen auf die Identity.
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|identifier|String(100)|j|Kennung der Identity. Für einen User beispielsweise der Name seines Windows-Account|
+|remarks|String|n|AGI-Notizen zur Identity.|
+
+### Konstraints
+
+identifier ist eindeutig innerhalb aller User und der als User publizierten Gruppen. Kann der Einfachheit halber
+wahrscheinlich auch "global" eindeutig gesetzt werden.
+
 ## Klasse Group
 
 Meist organisatorisch bedingte Gruppe, welche die gleichen Rollen gegenüber SingleLayer hat. 
@@ -50,43 +66,25 @@ Meist organisatorisch bedingte Gruppe, welche die gleichen Rollen gegenüber Sin
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|name|String(100)|j|Name der Gruppe.|
-|remarks|String|n|AGI-Notizen zur Gruppe.|
+|pubAsUser|boolean|j|Gibt an, ob die entsprechende Gruppe zusätzlich als "Benutzer-Vertreter" publiziert wird.|
 
-### Konstraints
-
-UK auf "name".
+#### Bemerkung zu pubAsUser
+Ist true für Gruppen, welche als Zwillinge der Eigenschaft "Abteilung" des Active-Directory (AD) des AIO erstellt wurden.
+Mit der Integration auf das AD können damit "pauschal" GDI-Rechte für alle AD-Benutzer vergeben werden, ohne
+dass die Benutzer noch einmal in der Klasse User erfasst werden müssen.
 
 ## Klasse User
 
 Benutzer der GDI. Die Identität des Benutzers wird via SES des AIO verifiziert.
 
-Es bestehen funktionale Einheiten der GDI mit eigenem (redundantem) Benutzerverzeichnis. Bsp: GRETL.
+Bemerkung: Es bestehen funktionale Einheiten der GDI mit eigenem (redundantem) Benutzerverzeichnis. Bsp: GRETL.
 
 ### Attribute
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|name|String(100)|j|Name des Benutzers.|
+|nachname|String(100)|j|Nachname des Benutzers.|
 |vorname|String(100)|j|Vorname des Benutzers.|
-|remarks|String|n|AGI-Notizen zum Benutzer.|
 
-### Konstraints
 
-UK über name, vorname und FK auf Klasse Team.
-
-## Klasse Team
-
-Organisationseinheit des User. AFU, ARP, ...
-
-### Attribute
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|name|String(100)|j|Name der Organisationseinheit.|
-|remarks|String|n|AGI-Notizen zum Benutzer.|
-
-### Konstraints
-
-UK auf name.
 

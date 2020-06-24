@@ -1,20 +1,19 @@
 @startuml
 package IAM {
+class "Identity" as ident
 class "Group" as grp
 class "User" as usr
-class "Team" as team
 class "Role" as role
 class "Permission" as perm
+
+ident <|-- grp
+ident <|-- usr
+
+perm "*" -right- "1" role
+role "*" -right- "*" ident
+grp "*" -right- "*" usr
 }
 
 class "SingleLayer (SL)" as sl << package Core >>
-
-sl "1" -right- "*" perm
-perm "*" -right- "1" role
-
-role "*" -- "*" grp
-role "*" -- "*" usr
-grp "*" -right- "*" usr
-
-usr "*" -- "1" team
+sl "1" -- "*" perm
 @enduml
