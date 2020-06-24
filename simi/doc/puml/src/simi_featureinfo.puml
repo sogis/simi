@@ -1,0 +1,11 @@
+@startuml
+class "SingleLayer (SL)" as sl << package Core >>
+
+package FeatureInfo {
+  class "FeatureInfo" as fi
+  class "LayerRelation" as lr
+}
+
+fi "1" -left- "1..*" lr : "    "
+lr "*" -- "1" sl
+@enduml

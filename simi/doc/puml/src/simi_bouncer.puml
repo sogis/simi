@@ -1,0 +1,14 @@
+@startuml
+class "SingleLayer (SL)" as sl << package Core >>
+
+package "Bouncer" {
+	class "ProtectedService" as ps
+    class "Ressource" as res
+    class "LayerRelation" as lr
+}
+
+res "1" -- "1..n" lr
+lr "*" -- "1" sl
+
+res "1-n" -- "1" ps
+@enduml

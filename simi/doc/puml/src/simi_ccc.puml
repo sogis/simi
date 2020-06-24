@@ -1,0 +1,28 @@
+@startuml
+package "Core" {
+  class "SingleLayer (SL)" as sl{}
+
+
+
+  class "Map (Map)" as map {}
+}
+
+
+package "CCC Client" {
+
+  class "CCC Client" as ccc {}
+
+  class "Locator Layer" as ll {}
+
+  class "Notify Layer" as nl {}
+
+
+  ccc "*" -- "1" map
+
+  ccc "1" -- "*" ll
+  ll "*" -- "1" sl
+
+  ccc "1" -- "*" nl
+  nl "*" -- "1" sl
+}
+@enduml

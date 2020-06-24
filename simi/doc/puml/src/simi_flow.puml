@@ -1,0 +1,11 @@
+@startuml
+class "SingleLayer (SL)" as sl << package Core >>
+
+package Flow {
+  class "Job" as job
+  class "LayerUsage" as lu
+}
+
+job "1" -- "1..*" lu
+lu "*" -- "1" sl
+@enduml

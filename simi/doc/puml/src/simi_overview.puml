@@ -1,0 +1,28 @@
+@startuml
+package Metamodel {
+  [Product] as prod
+
+  [Bouncer] as bouncer
+  [CCC] as ccc
+  [Contact] as con
+  [Data] as data
+
+  [Dependency] as dep
+  [Flow] as flow
+  [IAM] as iam
+  [Print] as print
+
+  [Featureinfo] as fi
+}
+
+bouncer --> prod
+ccc --> prod
+con --> prod
+data --> prod
+fi --> prod
+
+dep -up-> prod
+flow -up-> prod
+iam -up-> prod
+print -up-> prod
+@enduml

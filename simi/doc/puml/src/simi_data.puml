@@ -1,0 +1,53 @@
+@startuml
+class "SingleLayer (SL)" as sl << package Core >>
+package data {
+    abstract class "DataSetView (DSV)" as dsv
+    abstract class "DataSet (DS)" as ds
+    abstract class "DataTheme (DT)" as dt
+
+    package tabular {
+        class "TableView" as tv
+        class "TableDS" as tds
+        class "PostgresTable" as pt
+        class "ExternalTable" as et
+        class "TableDS" as tds
+        class "PostgresDB" as pdb
+        class "TableField" as tf
+        class "ViewField" as vf
+        class "ModelSchema" as ms
+
+        tds <|-- pt
+        tds <|-- et
+
+        tv "*" --* "1" pt
+
+        pt "*" --* "1" ms
+        pt "1" *-- "0..*" tf
+
+        tv "1" -- "1..n" vf
+        vf "1..n" -- "1" tf
+
+        ms "1..*" --* "1" pdb
+    }
+
+    package "raster"{
+        class "RasterTheme" as rt
+        class "RasterView" as rv
+        class "RasterDS" as rds
+
+        rt "1" -- "*" rds
+        rv "1-n" -- "1" rds
+    }
+    dt "*" -- "0..1" tv
+
+    dt <|-- ms
+    dt <|-- rt
+
+    dsv <|-- rv
+    dsv <|-- tv
+
+    ds <|-- rds
+    ds <|-- tds
+}
+sl "0..1" -- "0..1" dsv
+@enduml
