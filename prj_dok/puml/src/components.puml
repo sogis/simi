@@ -1,0 +1,71 @@
+@startuml
+package "Metadata" {
+    package "Transformers" {
+        [JsonTrafo] as jt
+        [QmlTrafo] as qt
+        [qmlcontent.json] as qj
+
+        jt --> qj
+        qj -up-> qt
+    }
+
+    package "Config" {
+        [Json Files] as json
+        [Qml File] as qml
+    }
+
+    package "SIMI" {
+        [GUI] as gui
+        [Entities] as class
+        () "REST GRETL" as gi
+
+        gui --> class
+        gi - class
+    }
+
+    database "Meta-DB" {
+        [Meta-Tables] as mdb
+    }
+
+    together {
+      [Model-Reader] as mr
+      () "REST GET" as mri
+      mr - mri
+    }
+    gui -left-> mri
+
+    class --> mdb : jdbc
+    jt --> mdb : db con
+
+    jt --> json
+    qt --> qml
+}
+
+
+cloud "INTERLIS-Repos" {
+    [INTERLIS-Model] as model
+}
+mr --> model
+
+database "Geo-DB" {
+    [Catalog] as cat
+}
+mr --> cat : db con
+
+together {
+  [API / WGC Deployment] as pipe
+  () "Jenkins" as pi
+  pi - pipe
+}
+
+gui --> pi
+pipe --> jt
+pipe --> qt
+
+[GRETL] as gretl
+gretl --> gi
+
+gretl -[hidden]-> gui
+qj -[hidden]-> json
+model -[hidden]-> cat
+@enduml

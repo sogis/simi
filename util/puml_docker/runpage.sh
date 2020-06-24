@@ -5,5 +5,5 @@ docker run \
   --name puml \
   plantuml/plantuml-server:jetty
 
-docker rm -f /puml # Docker sagt, der container sei noch vorhanden, obwohl "docker container ls" nichts zurückgibt...?
+docker rm -f /puml # Docker sagt, der container sei noch vorhanden, obwohl "puml_docker container ls" nichts zurückgibt...?
 
