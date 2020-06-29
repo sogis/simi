@@ -48,7 +48,7 @@ Ebene, für die ein Rückaufruf GIS --> Fachapplikation über das Feature-Info F
 
 UK über die FK's.
 
-## Mapping auf Inhalt von cccConfig.json
+## Mapping auf den Inhalt von cccConfig.json
 
 |cccConfig.json|simi|Bemerkungen|
 |---|---|---|

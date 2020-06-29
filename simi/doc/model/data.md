@@ -173,7 +173,9 @@ GDI Postgres-Tabelle oder -View.
 |idFieldName|String(100)|n|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
 |rawDownload|boolean|j|Gibt an, ob die PostgresTable in der Form von AtOS, DataService, WFS bezogen werden kann. Default: Ja|
 |catSyncStamp|DateTime|j|Zeitpunkt des letzten Abgleiches mit dem effektiven Schema der Geodatenbank.|
-|geomFieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
+|geo_FieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
+|geo_Type|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
+|geo_EpsgCode|Integer|n|EPSG-Code des Koordinatensystems. In aller Regel 2056|
 
 ### Klasse TableField
 
@@ -185,6 +187,8 @@ Umfasst die Eigenschaften eines Attributs einer PostgresDS. Die Geometriespalten
 |---|---|---|---|
 |name|String(100)|j|Name des Attributes in Postgres. Maximallänge in Postgres scheint 64 zu sein, darum String(100).|
 |typeName|String(100)|j|Name des Datentypes des Attributes.|
+|regExPattern|String(512)|n|RegEx-Pattern. Wird von Dataservice bei Datenänderungen validiert.|
+|strLength|Integer|n|Länge des Stringtyps (Sofern die Länge limitiert ist).|
 |catSynced|boolean|j|Gibt an, ob das Attribut bei der letzten Katalogabfrage in der Datenbank vorhanden war.|
 |remarks|String|n|Beschreibung (Metadaten) zum Attribut. Wird initial aus INTERLIS-Modell befüllt.|
 
@@ -398,6 +402,28 @@ die im RasterTheme ersichtliche url.
 |id|id_rasterds|default_view|name|
 |---|---|---|---|
 |rv1|ds1|true| |
+
+## Mapping auf den Inhalt von dataConfig.json (Data-Service)
+
+|cccConfig.json|simi|Bemerkungen|
+|---|---|---|
+|$schema|globals.data.schemaURI||
+|$schema|globals.data.serviceName||
+|resources.datasets.name|DataSetView -> SingleLayer.identifier||
+|resources.datasets.db_url|globals.gdi.dbURI||
+|resources.datasets.schema|ModelSchema.schemaName||
+|resources.datasets.table_name|TableDS.tableName||
+|resources.datasets.primary_key|PostgresTable.idFieldName|$td Es muss hoffentlich nicht ein pk definiert sein, damit es funktioniert...?|
+|resources.datasets.fields.name|TableField.name||
+|resources.datasets.fields.data_type|TableField.typeName|$td: Sind dies die von postgres zurückgegebenen Datentypen. Wenn Nein über globals.data.typeMap mappen|
+|resources.datasets.fields.constraints.maxlength|TableField.stringLength||
+|resources.datasets.fields.constraints.pattern|TableField.regExPattern|$td: Wo im AGDI sind diese heute zu pflegen?|
+|resources.datasets.geometry.geometry_column|PostgresTable.geo_FieldName||
+|resources.datasets.geometry.geometry_type|PostgresTable.geo_Type||
+|resources.datasets.geometry.srid|PostgresTable.geo_EpsgCode||
+
+
+
   
   
  

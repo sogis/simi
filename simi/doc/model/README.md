@@ -66,8 +66,20 @@ Teilmodell globals erfolgen. Für die betroffenen configXY.json ist in der Spalt
 
 |Konfig-Datei|Simi-Teilmodell|Bemerkungen|
 |---|---|---|
-|cccConfig.json|ccc||
-|landregConfig.json|globals|Nachteil bei Lösung über globals: Know your GDI ist schwieriger zu lösen. Ist dies nicht sowieso ein eigenes qml?|
+|agdiConfig.json|globals.gdi.*|Viele der Eigenschaften werden in die Pipeline wandern.|
+|cccConfig.json|ccc|
+|dataConfig|data||
+|documentConfig.json|globals|Wo sind die Referenzen auf die datasets abgebildet? Diese sollten sich mittels bouncer abbilden lassen||
+|elevationConfig.json|globals.elevation.*||
+|featureInfoConfig.json|FeatureInfo||
+|landregConfig.json|globals.landreg.*|Nachteil bei Lösung über globals: Know your GDI ist schwieriger zu lösen. Ist dies nicht sowieso ein eigenes qml? $td|
+|permission.json|?|$td|
+|printConfig.json|globals.wgcPrint.*||
+
+
+
+
+
 
 
 
