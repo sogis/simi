@@ -38,3 +38,35 @@ Bei einem sqlQuery wird über die erste queries-Verknüpfung die Datenbank ermit
 
 ### Konstraints
 UK auf FK's und "relation".
+
+## Mapping auf den Inhalt von featureInfoConfig.json
+
+|cccConfig.json|simi|Bemerkungen|
+|---|---|---|
+|$schema|globals.featureinfo.schemaURI||
+|service|globals.featureinfo.serviceName||
+|config.default_qgis_server_url|globals.featureinfo.wmsFeatureInfoServerURL||
+|config.#default_info_template|globals.featureinfo.defaultJinyaTemplate||
+|resources.wms_services.name|globals.featureinfo.*||
+|resources.wms_services.root_layer.name|globals.featureinfo.*||
+|resources.wms_services.root_layer.type|globals.featureinfo.*||
+|resources.wms_services.root_layer.title|globals.featureinfo.*||
+|---|---|---|
+|**Abschnitt für SingleLayer**|-|-|
+|resources.wms_services.root_layer.layers.name|SingleLayer.identifier||
+|resources.wms_services.root_layer.layers.title|SingleLayer.title||
+|resources.wms_services.root_layer.layers.type|Wert: "layer"||
+|resources.wms_services.root_layer.layers.attributes.name|SingleLayer -> DataSetView -> ViewField -> TableField.Name||
+|resources.wms_services.root_layer.layers.attributes.alias|SingleLayer -> DataSetView -> ViewField.alias||
+|---|---|---|
+|**Abschnitt für FacadeLayer**|-|-|
+|resources.wms_services.root_layer.layers.name|FacadeLayer.identifier||
+|resources.wms_services.root_layer.layers.type|Wert: "layergroup"||
+|resources.wms_services.root_layer.layers.title|FacadeLayer.title||
+|resources.wms_services.root_layer.layers.layers.name|FacadeLayer -> PropertiesInFacade -> SingleLayer.identifier||
+|resources.wms_services.root_layer.layers.layers.title|FacadeLayer -> PropertiesInFacade -> SingleLayer.title||
+|resources.wms_services.root_layer.layers.layers.type|Wert: "layer"||
+|resources.wms_services.root_layer.layers.layers.attributes.name|FacadeLayer -> PropertiesInFacade -> SingleLayer -> DataSetView -> ViewField -> TableField.Name||
+|resources.wms_services.root_layer.layers.layers.attributes.alias|FacadeLayer -> PropertiesInFacade -> SingleLayer -> DataSetView -> ViewField.alias||
+
+$td Wieso sind in den Config-Beispielen auch LayerListen enthalten?
