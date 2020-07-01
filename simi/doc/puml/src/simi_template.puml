@@ -1,0 +1,13 @@
+@startuml
+class "SingleLayer (SL)" as sl << package Core >>
+
+package "Template" {
+    class "Template" as tpl
+    class "LayerRelation" as lr
+
+    tpl "1" -- "1..n" lr
+}
+
+lr "*" -- "1" sl
+
+@enduml

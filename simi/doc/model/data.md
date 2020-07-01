@@ -117,6 +117,7 @@ Spalten (via AttributeList) wie auch auf die angebotenen Zeilen (mittels Where-C
 |---|---|---|---|
 |whereClause|String(200)|n|Where-Clause zur Einschränkung der Anzahl Zeilen in der TableView.|
 |geomFieldName|String(100)|n|Bei mehreren Geometriespalten: Name der zu verwendenden Geometrie der TableView.|
+|wgcEdit|boolean|j|Gibt an, ob die TableView im Web GIS Client editiert wird. Default: false|
 
 ### Klasse ViewField
 

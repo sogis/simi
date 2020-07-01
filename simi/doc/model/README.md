@@ -15,6 +15,7 @@ bezüglich der genutzten Daten.
 * **Print [[Link]](print.md):** Modelliert die Metainformationen für das Erzeugen von Karten-PDF's.
 * **Dependency [[Link]](dependency.md):** Doku der Komponenten, welche von Datenstrukturen der GDI abhängig sind.
 * **Featureinfo [[Link]](featureinfo.md):** Konfig von Featureinfo. Dieses erweitert das QGIS-Server Featureinfo mit templated HTML-Output und Datenquellen.
+* **Globals [[Link]](globals.md):** Konfig von GDI-weiten Konstanten.
 
 ## Konstraints
 
@@ -73,6 +74,7 @@ Teilmodell globals erfolgen. Für die betroffenen configXY.json ist in der Spalt
 |elevationConfig.json|globals.elevation.*||
 |featureInfoConfig.json|FeatureInfo||
 |landregConfig.json|globals.landreg.*|Nachteil bei Lösung über globals: Know your GDI ist schwieriger zu lösen. Ist dies nicht sowieso ein eigenes qml? $td|
+|mapViewerConfig.json|product||
 |permission.json|?|$td|
 |printConfig.json|globals.wgcPrint.*||
 

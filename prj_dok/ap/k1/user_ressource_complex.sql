@@ -1,185 +1,45 @@
-WITH
+--Bildet die Berechtigungen exemplarisch auf die DatasetView's ab, um die Machbarkeit der Ausgabe mittels Json zu demonstrieren
+WITH 
 
-uid_role_direct AS (
-	SELECT 
-		id_user,
-		id_role
+ds_attributes AS (
+	SELECT
+		data_set_view.gdi_oid,
+		data_set_view."name" AS identifier,
+		jsonb_agg(data_set_view_attributes.name ORDER BY data_set_view_attributes.name) AS attr_json
 	FROM 
-		user_role
-),
-
-uid_role_via_group AS (
-	SELECT 
-		id_user,
-		id_role
-	FROM 
-		group_user
+		gdi_knoten.data_set_view
 	JOIN
-		group_role 
-			ON group_user.id_group = group_role.id_group 
-),
-
-uid_role_all AS (
-	SELECT * FROM uid_role_direct
-	UNION ALL 
-	SELECT * FROM uid_role_via_group
-),
-
-realuser_role AS (
-	SELECT 
-		"name" AS user_ident,
-		id_role
-	FROM 
-		iam."user" u 
-	JOIN
-		uid_role_all
-			ON u.id = uid_role_all.id_user
-),
-
-user_from_group__role AS (
-	SELECT 
-		"name" AS user_ident,
-		id_role
-	FROM 
-		iam."group"
-	JOIN
-		iam.group_role 
-			ON "group".id = group_role.id_group 
-	WHERE
-		"name" LIKE 'Bau- und Justizdepartement/%' -- Am Beispiel BJD
-),
-
-user_from_role__role AS ( -- sauberer, wenn zukünftig der Benutzer "anonymous" erfasst wird, mit Rollenzuweisung zu "public". Wird hier simuliert
-	SELECT 
-		'anonymous' AS user_ident,
-		id AS id_role
-	FROM 
-		iam."role"
-	WHERE
-		"name" = 'public'
-),
-
-allusers_allroles AS (
-	SELECT * FROM realuser_role
-	UNION ALL 
-	SELECT * FROM user_from_group__role
-	UNION ALL
-	SELECT * FROM user_from_role__role
-),
-
-/*
-Unverständlich, wieso es in der config-db knapp 6000 ressourcen gibt. Erwartet: < 1000
-*/
-perm_level AS (
-	SELECT 
-		id_role, 
-		gdi_oid_resource, 
-		CASE "write"
-			WHEN TRUE THEN '2_write'
-			WHEN FALSE	THEN '1_read'
-			ELSE NULL
-		END AS perm_level
-	FROM 
-		iam.resource_permission
-),
-
-allusers_maxperm AS (
-	SELECT 
-		user_ident,
-		gdi_oid_resource,
-		max(perm_level) AS max_level
-	FROM 
-		allusers_allroles
-	JOIN 
-		perm_level 
-			ON allusers_allroles.id_role = perm_level.id_role
+		gdi_knoten.data_set_view_attributes
+			ON data_set_view.gdi_oid = data_set_view_attributes.gdi_oid_data_set_view
 	GROUP BY 
-		user_ident,
-		gdi_oid_resource
+		data_set_view.gdi_oid,
+		data_set_view."name"
 ),
 
-user_ressource_permission AS (
+ds_json AS (
 	SELECT 
-		user_ident,
-		"name" AS resource_ident,
-		max_level
+		gdi_oid,
+		json_build_object('name', identifier, 'attributes', attr_json) AS ds_json
 	FROM 
-		allusers_maxperm
-	JOIN
-		gdi_knoten.data_set 
-			ON allusers_maxperm.gdi_oid_resource = data_set.gdi_oid
-	ORDER BY 
-		user_ident,
-		"name"
+		ds_attributes	
+),
+
+role_permission AS (
+	SELECT 
+		r."name" AS role_name,
+		to_jsonb(array_agg(ds_json.ds_json)) AS layers
+	FROM 
+		iam.resource_permission rp 
+	JOIN 
+		iam."role" r ON rp.id_role = r.id 
+	JOIN 
+		ds_json ON rp.gdi_oid_resource = ds_json.gdi_oid
+	GROUP BY 
+		r."name" 
 )
 
-SELECT 
-	json_build_object(
-		'user_ident', user_ident, 
-		'resource_ident', resource_ident, 
-		'max_level', max_level
-		) AS json_obj
-FROM user_ressource_permission
 
-/*
-
-realuser_maxperm_ AS (
-	SELECT
-		name AS user_name,
-		max(perm_level) AS max_level,
-		gdi_oid_resource
-	FROM 
-		iam.USER
-	JOIN
-		uid_role_all
-			ON iam.USER.id = uid_role_all.id_user
-	JOIN 
-		perm_level
-			ON uid_role_all.id_role = perm_level.id_role
-	GROUP BY 
-		name,
-		gdi_oid_resource
-),
-
-user_from_group_maxperm AS (
-	SELECT 
-		"name" AS user_name,
-		max(perm_level) AS max_level,
-		gdi_oid_resource
-	FROM 
-		iam."group"
-	JOIN
-		iam.group_role 
-			ON "group".id = group_role.id_group 
-	JOIN
-		perm_level
-			ON group_role.id_role = perm_level.id_role
-	WHERE
-		"name" LIKE 'Bau- und Justizdepartement/%' -- Am Beispiel BJD
-	GROUP BY 
-		name,
-		gdi_oid_resource
-),
-
-user_from_role_maxperm AS ( -- für "public"
-	SELECT 
-		"name" AS user_name,
-		max(perm_level) AS max_level,
-		gdi_oid_resource
-	FROM 
-		iam."role"
-	JOIN
-		perm_level
-			ON "role".id = perm_level.id_role
-	WHERE
-		"name" = 'public'
-	GROUP BY 
-		name,
-		gdi_oid_resource
-),
-
-*/
-
+SELECT * FROM role_permission
 
 
 

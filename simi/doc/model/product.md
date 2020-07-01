@@ -109,7 +109,11 @@ bezieht.
 
 #### Attributbeschreibung
 
-SL hat keine weiteren eigene Attribute.
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|suche|enum|j|Gibt an, ob und wie der SL durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
+|sucheFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
+|sucheFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieses SL eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
 
 ### Klasse PropertiesInFacade
 
@@ -264,6 +268,49 @@ Gruppierung des KBS mit dem KBS-WMS von Geodienste.ch
 |---|---|---|
 |l1|s1|10|
 |l1|w1|5|
+
+## Mapping auf den Inhalt von mapViewerConfig.json
+
+Aufgrund der enthaltenen Informationen empfielt es sich, die variablen Informationen in ein Rumpf-Json hineinzugenerieren.
+Variabel sind einzig die angebotenen Karten (und die darin enthaltenen Ebenen). 
+
+Konstanter Präfix im mapViewerConfig.json ist folglich immer **resources.qwc2_themes.themes.items**
+
+|cccConfig.json|simi|Bemerkungen|
+|---|---|---|
+|id|Map.identifier||
+|name|Map.identifier||
+|title|Map.title||
+|wms_name|globals.wms.name||
+|url|globals.wms.url|Scheint nur der Pfad-Teil der URL zu sein|
+|attribution.title|globals.wgc.*||
+|attribution.OnlineResource|globals.wgc.*||
+|keywords|globals.wgc.*||
+|mapCrs|globals.wgc.crs|Beispielwert für EPSG-Code 2056: "EPSG:2056"|
+|bbox|globals.wgc.bbox|Kann heute im AGDI konfiguriert werden|
+|initialBbox|globals.wgc.bbox|Kann heute im AGDI konfiguriert werden|
+|---|---|---|
+|**SingleLayer...**|||
+|sublayers.name|Dataproduct.identifier||
+|sublayers.title|Dataproduct.title||
+|sublayers.visibility|PropertiesInList.visible||
+|sublayers.queryable|globals.wgc.*||
+|sublayers.opacity|PropertiesInList.transparency||
+|sublayers.bbox|globals.wgc.bbox||
+|expanded|Wert immer = "true"||
+|drawingOrder|PropertiesInList.sort||
+|backgroundLayers|globals.wgc.backgroundLayers||
+|print|globals.wgc.print||
+|printLabelConfig|globals.wgc.printLabelConfig||
+|searchProviders[0]|globals.wgc.searchCoordinates||
+|searchProviders[1]|?|Für den Karteninhalt relevante Suchen? (= globale und spezifische Suchen)|
+|editConfig|SingleActor.wgcEdit|Konfiguration für das Editieren im WGC. Wird in Config für jede Map wiederholt...?|
+|---|---|---|
+|**FacadeLayer...**|||
+|Beispiele fehlen in aktueller Konfiguration...|||
+
+
+
 
 
 

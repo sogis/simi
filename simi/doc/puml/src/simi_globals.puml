@@ -1,0 +1,5 @@
+@startuml
+package Globals {
+class "Globals"
+}
+@enduml

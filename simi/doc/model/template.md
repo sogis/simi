@@ -1,4 +1,4 @@
-# Bouncer (Nicht in Scope des Projektes "Metadatenpflege")
+# Template (Jasper)
 
 Prüft für eine angeforderte Ressource, ob der Benutzer diese anfordern (lesen) darf. Uebersetzt den HTTP-GET Aufruf
 an den Bouncer in den HTTP-GET Aufruf der mittels Bouncer geschützten Ressource des "background" Service.
@@ -12,7 +12,7 @@ Beispiel: http://geo.so.ch/bouncer/dox42/naturreservate\[...\]
 
 Metamodell für die Bouncer-Konfiguration:
 
-![Bouncer](../puml/rendered/simi_bouncer.png)
+![Template](../puml/rendered/simi_template.png)
 
 Beziehungen Ressource - SingleLayer:
 * contains data: Beschreibt, aus welchen Ebenen eine Ressource Daten bezieht.
@@ -20,22 +20,9 @@ Beziehungen Ressource - SingleLayer:
 
 ## Klassenbeschreibung
 
-### Klasse ProtectedService
+### Klasse Template
 
-Service (des Servers), dessen Ressourcen via Bouncer geschützt werden. Beispielsweise "Jasper Server"
-
-#### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|UrlTemplate|String(1000)|j|Template der URL des geschützten Service. In diese wird an der mittels Wildcard gekennzeichneten Stelle das UrlSnipplet der Ressource eingefügt.|
-|Name|String(100)|j|Sprechender Name für die Ressource.|
-|Remarks|String|n|AGI-Interne Beschreibung zur Ressource.|
-
-### Klasse Ressource
-
-Die Ressource, welche mit den Daten aus 1-n SingleLayern erzeugt wird. Typisches Beispiel ist ein Report, welcher
-Daten in der Form von Tabellen / Karten / etc. ausgibt.
+Das Jasper-Template, welches mit den Daten aus 1-n SingleLayern erzeugt wird.
 
 #### Attributbeschreibung
 
@@ -56,7 +43,3 @@ Enthält die Konfiguration der Beziehungstypen Ressource - SingleLayer:
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |relationType|enum|j|Werte der enum: "show_in_fi" und "queries".|
-
-#### Konstraints
-
-Unique-Key über relationType und die beiden FK's auf Ressource und SingleLayer.
