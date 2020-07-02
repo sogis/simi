@@ -4,20 +4,25 @@ package "Realisierung" {
     [R2: Model-Reader] as r2
     [R3: GRETL-Integration] as r3
     [R4: Datenmigrationsskripte] as r4
-    [R5: Config-Deployment] as r5
-    [R6: «Know your GDI» Auswertung] as r6
-    [R7: Integrationstest] as r7
+    [R5: Trafo SQL] as r5
+    [R6: JsonTrafo] as r6
+    [R7: QmlTrafo] as r7
+    [R8: Config-Deployment] as r8
+    [R9: «Know your GDI» Auswertung] as r9
+    [R10: Integrationstest] as r10
 
     r1 --> r2
+    r1 --> r3
     r1 --> r4
     r4 --> r5
-    r4 --> r6
+    r4 --> r9
+    r7 --> r5
+    r5 --> r6
+    r6 --> r8
 
-    r1 --> r7
-    r2 --> r7
-    r3 --> r7
-    r4 --> r7
-    r5 --> r7
-    r6 --> r7
+    r8 --> r10
+    r2 --> r10
+    r3 --> r10
+    r9 --> r10
 }
 @enduml
