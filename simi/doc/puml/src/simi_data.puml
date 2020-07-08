@@ -3,7 +3,7 @@ class "SingleLayer (SL)" as sl << package Core >>
 package data {
     abstract class "DataSetView (DSV)" as dsv
     abstract class "DataSet (DS)" as ds
-    abstract class "DataTheme (DT)" as dt
+    abstract class "DataTheme (DT)" as dt << Datenbezug >>
 
     package tabular {
         class "TableView" as tv
@@ -31,14 +31,14 @@ package data {
     }
 
     package "raster"{
-        class "RasterTheme" as rt
+        class "RasterTheme" as rt << Datenbezug >>
         class "RasterView" as rv
         class "RasterDS" as rds
 
         rt "1" -- "*" rds
         rv "1-n" -- "1" rds
     }
-    dt "*" -- "0..1" tv
+    dt "*" -- "0..1" tv : Gebietseinteilung
 
     dt <|-- ms
     dt <|-- rt

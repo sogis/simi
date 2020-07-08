@@ -62,6 +62,7 @@ Tabelle "DataSet" zusammengefasst werden.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |remarks|String|n|Interne Bemerkungen zum DS.|
+|description|String|n|Metainformationen zum DataSet.|
 
 ### Klasse DataSetView
 
@@ -173,10 +174,11 @@ GDI Postgres-Tabelle oder -View.
 |---|---|---|---|
 |idFieldName|String(100)|n|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
 |rawDownload|boolean|j|Gibt an, ob die PostgresTable in der Form von AtOS, DataService, WFS bezogen werden kann. Default: Ja|
+|descriptionModel|String|Beschreibung Klasse im INTERLIS-Modell.|
 |catSyncStamp|DateTime|j|Zeitpunkt des letzten Abgleiches mit dem effektiven Schema der Geodatenbank.|
-|geo_FieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
-|geo_Type|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
-|geo_EpsgCode|Integer|n|EPSG-Code des Koordinatensystems. In aller Regel 2056|
+|geoFieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
+|geoType|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
+|geoEpsgCode|Integer|n|EPSG-Code des Koordinatensystems. In aller Regel 2056|
 
 ### Klasse TableField
 
@@ -188,14 +190,20 @@ Umfasst die Eigenschaften eines Attributs einer PostgresDS. Die Geometriespalten
 |---|---|---|---|
 |name|String(100)|j|Name des Attributes in Postgres. Maximallänge in Postgres scheint 64 zu sein, darum String(100).|
 |typeName|String(100)|j|Name des Datentypes des Attributes.|
+|mandatory|boolean|j|Ist der Feldwert zwingend?|
 |regExPattern|String(512)|n|RegEx-Pattern. Wird von Dataservice bei Datenänderungen validiert.|
 |strLength|Integer|n|Länge des Stringtyps (Sofern die Länge limitiert ist).|
 |catSynced|boolean|j|Gibt an, ob das Attribut bei der letzten Katalogabfrage in der Datenbank vorhanden war.|
-|remarks|String|n|Beschreibung (Metadaten) zum Attribut. Wird initial aus INTERLIS-Modell befüllt.|
+|remarks|String|n|Beschreibung (Metadaten) zum Attribut. Wird bei Ausführung des ModelReader befüllt, sofern NULL.|
+|remarksModel|String|n|Beschreibung zum Attribut im Interlis-Modell. Wird bei jeder Ausführung des ModelReader befüllt.|
 
 #### Konstraints
 
-UK über "name" und FK zu PostgresTable.
+UK über "name" und FK zu PostgresTable.   
+
+Bezüglich Auslesen des Kataloges mittels ModelReader ist zu entscheiden:
+* Ob bei geändertem Datentyp ein neues Attribut angelegt wird (eher nein)
+* 
     
 #### Bemerkungen:
 * Die Namen der Attribute werden mittels Katalogabfrage aus Postgres gelesen.
@@ -227,9 +235,11 @@ Postgres-Datenbank, in welcher das Schema (PostgresSchema) enthalten ist. Univer
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|dbName|String(100)|j|Name der Datenbank auf dem Cluster.|
-|clusterHost|String(100)|j|Hostname des Postgres-Cluster.|
-|clusterPort|int|j|Port des Cluster.|
+|dbName|String(100)|j|Name der Datenbank (auf dem Cluster). Name muss GDI-weit eindeutig sein.|
+
+#### Konstraints
+
+UK über dbName.
 
 ## Klassen in Teilmodell "raster"
 
