@@ -88,10 +88,12 @@ join
         on tv.relnamespace = ns.oid
 where 
         tv.relkind in ('r','v')
+/*
     and
         tv.relname like '%sta%'
     and 
         ns.nspname like '%igel%'
+*/
 ```
 
 ### TableInfo
@@ -157,38 +159,98 @@ table_view_all as (
 			on table_view_base.tv_oid = table_view_desc.tv_oid
 )
 
-select * from table_view_all where tv_schema_name = 'afu_igel_pub' and tv_name = 'igel_stall'
+select * from table_view_all 
+--where tv_schema_name = 'afu_igel_pub' and tv_name = 'igel_stall'
 ```
 
 #### Attribute einer Tabelle
 
-#### "Hauptmodell" des Schemas
-
--- Informationen zu einem Attribut (Name, datentyp, zwingend, zugehörige Tabelle)
-
-SELECT 
-	attrelid AS tv_oid,
-	attname AS att_name,
-	typname AS att_typ,
-	attlen AS att_typ_length,
-	attnotnull AS att_mandatory
-FROM 
-	pg_attribute
-JOIN	
-	pg_catalog.pg_type 
-		ON atttypid = pg_type.oid
-		
-		
-
+```sql
 WITH 
 
-att_desc AS (
-SELECT 
-	objoid AS tv_oid,
-	objsubid AS att_num,
-	description AS att_desc
-FROM 
-	pg_catalog.pg_description 
+att_base AS (
+	SELECT 
+		nspname AS schema_name,
+		relname AS tv_name,
+		attrelid AS tv_oid,
+		attnum AS att_num,
+		attname AS att_name,
+		attnotnull AS att_mandatory,
+		typname AS att_typ,
+		CASE 
+			WHEN typname = 'varchar' THEN atttypmod - 4
+			ELSE NULL
+		END AS att_length
+	FROM	
+		pg_namespace
+	JOIN 
+		pg_class 
+			ON  pg_namespace.oid = pg_class.relnamespace
+	JOIN 
+		pg_attribute
+			ON pg_class.oid = pg_attribute.attrelid
+	JOIN 
+		pg_type 
+			ON pg_attribute.atttypid = pg_type.oid
+	WHERE
+		attnum > 0 --exclude system columns
+),
+
+geo_att AS (
+	SELECT 
+		f_table_schema AS geo_schema_name,
+		f_table_name AS geo_table_name,
+		f_geometry_column AS geo_att_name,
+		"type" AS geo_col_type,
+		srid AS geo_col_srid   
+	FROM 
+		geometry_columns gc 
+),
+
+att_desc AS ( 
+	SELECT 
+		objoid AS tv_oid, 
+		objsubid AS att_num, 
+		description AS att_desc 
+	FROM 
+		pg_description 
 )
 
-SELECT * FROM relation_desc
+SELECT
+	schema_name,
+	tv_name,
+	att_name,
+	att_mandatory,
+	att_typ,
+	att_length,
+	att_desc,
+	geo_col_type,
+	geo_col_srid   
+FROM 
+	att_base
+LEFT JOIN 
+	att_desc
+		ON att_base.tv_oid = att_desc.tv_oid 
+		AND att_base.att_num = att_desc.att_num
+LEFT JOIN 
+	geo_att
+		ON att_base.schema_name = geo_att.geo_schema_name
+		AND att_base.tv_name = geo_att.geo_table_name
+		AND att_base.att_name = geo_att_name
+--WHERE schema_name = 'afu_igel_pub' AND tv_name NOT LIKE 't_ili2db%'
+```
+
+#### "Hauptmodell" des Schemas
+
+Wird ermittelt, falls:
+* die ili2db Metatabelle "t_ili2db_model" im entsprechenden Schema existiert
+* in "t_ili2db_model" genau ein Modell mit Anfangsnamen "SO_" existiert 
+
+```sql
+SELECT 
+	split_part(modelname, '{', 1) AS model_name
+FROM 
+	arp_npl_pub.t_ili2db_model
+WHERE 
+	modelname LIKE 'SO_%'
+```
