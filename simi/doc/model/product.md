@@ -21,7 +21,7 @@ Beispiele:
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |identifier|String(100)|j|Eindeutiger hierarchischer Identifier des DataProduct (ch.so.fuu.bar).|
-|pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](./README.md#ebenenpublikation_in_dataproduct).|
+|pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](./README.md#ebenenpublikation-in-dataproduct).|
 |keywords|String(200)|n|Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|
 |synonyms|String(200)|n|Synonyme für das DataProduct.|
