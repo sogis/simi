@@ -67,10 +67,55 @@ Beispiel: https://geo.so.ch/simi/tsearch/edit/?schema=igel&table=sta
 
 ## Signatur von TableInfo
 
+### REST Request-URL
 
-## Umsetzungsentscheid
+[BasisURL]/[Datenbankname]/[Schemaname]/[Tabellenname]
 
-Der Modelreader kann ausschliesslich mittels SQL-Abfragen auf Katalog und Datenbank umgesetzt werden.
+Beispiel: https://geo.so.ch/simi/tinfo/pub/afu_igel_pub/stall
+
+### Response (Json)
+
+```json
+{
+	"model": "AFU_IGEL_PUB_20200106",
+	"schema": "afu_igel_pub",
+	"tableOrView": "igel_stall",
+    "tvDescription": null,
+	"pkColumn": "t_id",
+	"columns": {
+		"name": {
+			"name": "name",
+			"mandatory": true,
+			"type": "varchar",
+			"length": 255,
+			"description": "Transfer-ID",
+			"geoColType": null,
+			"geoColSrOrg": null,
+			"geoColSrID": null
+		},
+		"geometry": {
+			"name": "geometry",
+			"mandatory": true,
+			"type": "geometry",
+			"length": null,
+			"description": "Koordinaten des Stalls",
+			"geoColType": "POINT",
+			"geoColSrOrg": "EPSG",
+			"geoColSrID": 2056
+		},
+		"nr": {
+			"...": "..."
+		}
+	}
+}
+```
+
+
+## Bemerkung zu den Services
+
+Wenn aufgrund der Antwortzeit möglich, wird nur der Service "TableSearch" umgesetzt, mit der Response von TableInfo
+(volle Informationstiefe). Die Abfrage der Modellnamen benötigt ein Query pro zurückgegebener Tabelle, erzeugt also
+bei Treffer auf 20 Tabellen 20 Queries.
 
 ## Queries
 
@@ -136,10 +181,12 @@ table_pk as ( -- pk attribut einer tabelle, sofern pk genau ein attribut umfasst
 
 table_view_desc as (
 	SELECT 
-		classoid AS tv_oid,
+		objoid AS tv_oid,
 		description AS tv_desc
 	FROM 
 		pg_catalog.pg_description 
+	where
+		objsubid = 0
 ),
 
 table_view_all as (
@@ -254,3 +301,12 @@ FROM
 WHERE 
 	modelname LIKE 'SO_%'
 ```
+
+# Entscheide
+
+|Thema|Entscheid|Bemerkungen|
+|---|---|---|
+|Auslesen der Informationen aus Geo-DB's / Ili-Repo|Das Auslesen erfolgt ausschliesslich mittels SQL auf die Geo-DB's|Voraussichtlich wird für den Datenbezug lediglich der Modellname benötigt. Dieser kann ebenfalls mittels SQL aus t_ili2db_model ausgleesen werden.|
+|Scope Tabelle oder Schema|Voraussichtlich wird das API den Scope Tabelle haben.|Definitiver Entscheid erfolgt in K3.|
+|Umgang mit nicht vorhandenen Informationen|Diese werden explixit als json:null in der Response zurückgegeben.|API-Klarheit ist (hier) wichtiger als die Transfergrösse.|
+|Benennung der Komponente|Neu: SchemaReader|Die Komponente liest grossmehrheitlich Informationen aus einem Schema von PostgreSQL aus und heisst darum folgerichtig **Schemareader**.| 
