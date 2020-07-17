@@ -77,6 +77,7 @@ Daten ist das Styling als QML optional enthalten.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |defaultView|boolean|j|Für ca. 3/4 der DS gibt es "nur" die Default-View. Default: true.|
+|rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
 |name|String(100)|n|Interne Bezeichnung der DataSetView, um diese von weiteren DSV's des gleichen DS unterscheiden zu können. Wird nur manuell gesetzt falls defaultView=false.|
 |remarks|String|n|Interne Bemerkungen zur DSV.|
 |styleServer|byte[]|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
@@ -173,7 +174,6 @@ GDI Postgres-Tabelle oder -View.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |idFieldName|String(100)|n|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
-|rawDownload|boolean|j|Gibt an, ob die PostgresTable in der Form von AtOS, DataService, WFS bezogen werden kann. Default: Ja|
 |descriptionModel|String|Beschreibung Klasse im INTERLIS-Modell.|
 |catSyncStamp|DateTime|j|Zeitpunkt des letzten Abgleiches mit dem effektiven Schema der Geodatenbank.|
 |geoFieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|

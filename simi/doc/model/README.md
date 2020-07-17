@@ -49,11 +49,13 @@ Die Attributtabellen sind sortiert gemäss:
 Die Steuerung betrifft die folgenden Applikationen und Dienste und bezieht sich auf Produkte (= Zusammensetzungen)
 und Rohdaten. Das Datenthema = Klassen im Modell wird ebenfalls betrachtet.
 
-|Datenklasse \><br>Apps und Dienste|SingleLayer|DataTheme|FacadeLayer|Singleactor|LayerList|
-|---|---|---|---|---|---|
-|Featureservice (WFS u. DataService)|x|-|-|-|-|
-|Bulkservice|x (1.)|-|-|-|-|
-|WMS (2.)|-|-|-|x|x|
+|Datenklasse \><br>Apps und Dienste|SingleLayer|Singleactor|LayerList|Map|
+|---|---|---|---|---|
+|Featureservice (WFS u. DataService)|x|-|-|-|
+|Bulkservice|x (1.)|-|-|-|
+|WMS (2)|-|x|x|-|
+|WGC|-|x|x|x (3.)|
+|SO-Locator|-|x|x|x (4.)|
 
 Todo: 
 * Ergänzen mit Spalte Map
@@ -63,7 +65,35 @@ Bemerkungen:
 1. Die Berechtigung für den Bulk-Service leitet sich aus der Summe der Berechtigungen der enthaltenen SingleLayer ab.   
 Ein xtf kann auch abgegeben werden, sofern eine geschützte Spalte nullable ist --> wird in xtf auf null gesetzt.   
 Umsetzung davon muss in Konzeptphase zu Datenbezug gelöst werden. 
-2. Was ist das gewünschte Verhalten bei der Kombination der Flags für SingleActor und LayerList?
+2. Verhalten bei der Kombination der Flags für SingleActor (SA) und LayerList (LL)?
+    * SA:X LL:X --> SA ist sowohl alleine stehend wie auch in der LL Gruppe adressierbar. Ist dies je gewünscht oder   
+    eigentlich ein Konfigurationsfehler?
+    * SA:X LL:- --> SA ist nur alleine stehend adressierbar. Gleich wie wenn der SA in gar keiner Gruppe enthalten ist.
+    * SA:- LL:X --> SA ist nur via LL Gruppe adressierbar.
+3. Background Map's als WMTS eher statisch eingebunden --> Mittels json templating gelöst.   
+Foreground Maps werden dynamisch mittels sql2json in das themes.json geschrieben.   
+Wie ist er Zusammenhang beim Drucken aus dem WGC zum WMS der Background-Maps?
+4. Background Map's werden als "direct-connect" geladen. Foreground maps stehen nicht zur Verfügung.
+
+### Resultierende Steuerungselemente
+
+#### Ebenenpublikation in DataProduct
+
+|Auswahl-Zeile in Dropdown|SingleActor oder LayerList|Map|
+|---|---|---|
+|1: WMS, WGC u. QGIS|xx|-|
+|2: Nur WMS|x|-|
+|3: Nicht publiziert|x|-|
+|A: WGC u. QGIS|-|xx|
+|B: Nicht publiziert|-|x|
+
+xx = Default
+
+#### Publikation der Rohdaten
+
+Siehe Attribut data.DataSetView.rawDownload
+
+
 
 #### Snipplet für Tabellenerstellung
 
@@ -98,15 +128,6 @@ Teilmodell globals erfolgen. Für die betroffenen configXY.json ist in der Spalt
 |mapViewerConfig.json|product||
 |permission.json|?|$td|
 |printConfig.json|globals.wgcPrint.*||
-
-
-
-
-
-
-
-
-#
 
 
 

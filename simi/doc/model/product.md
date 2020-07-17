@@ -21,8 +21,7 @@ Beispiele:
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |identifier|String(100)|j|Eindeutiger hierarchischer Identifier des DataProduct (ch.so.fuu.bar).|
-|inWGC|boolean|j|Steuert, ob das Dataproduct im WebGIS Client publiziert ist. Default: Ja|
-|inWMS|boolean|j|Gibt an, ob die Ebene im WMS vorkommen soll. Default: Ja. Analoge Steuerung für DataService, WFS siehe data.PostgresDS.inDataService.|
+|pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](./README.md#ebenenpublikation_in_dataproduct).|
 |keywords|String(200)|n|Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|
 |synonyms|String(200)|n|Synonyme für das DataProduct.|
