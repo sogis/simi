@@ -44,6 +44,27 @@ Die Attributtabellen sind sortiert gemäss:
 1. Zwingende alphabetisch
 2. Optionale alphabetisch
 
+## Steuerung der Verfügbarkeit der Daten und Kartenebenen
+
+Die Steuerung betrifft die folgenden Applikationen und Dienste und bezieht sich auf Produkte (= Zusammensetzungen)
+und Rohdaten. Das Datenthema = Klassen im Modell wird ebenfalls betrachtet.
+
+|Datenklasse \><br>Apps und Dienste|SingleLayer|DataTheme|FacadeLayer|Singleactor|LayerList|
+|---|---|---|---|---|---|
+|Featureservice (WFS u. DataService)|x|-|-|-|-|
+|Bulkservice|x (1.)|-|-|-|-|
+|WMS (2.)|-|-|-|x|x|
+
+Todo: 
+* Ergänzen mit Spalte Map
+* Ergänzem mit Zeile WGC und SO-Locator
+
+Bemerkungen:
+1. Die Berechtigung für den Bulk-Service leitet sich aus der Summe der Berechtigungen der enthaltenen SingleLayer ab.   
+Ein xtf kann auch abgegeben werden, sofern eine geschützte Spalte nullable ist --> wird in xtf auf null gesetzt.   
+Umsetzung davon muss in Konzeptphase zu Datenbezug gelöst werden. 
+2. Was ist das gewünschte Verhalten bei der Kombination der Flags für SingleActor und LayerList?
+
 #### Snipplet für Tabellenerstellung
 
 ```markdown
@@ -85,44 +106,7 @@ Teilmodell globals erfolgen. Für die betroffenen configXY.json ist in der Spalt
 
 
 
-# Modellierungsfragen
-
-|Betrifft|Frage|Wer|
-|---|---|---|
-|data.PostgresSchema|Wann sind die verwendeten Parameter der Schemaerstellung mittels ili2pg Teil des Model-Repos?|Stefan|
-|-|Ist nicht nötig. Die Parameter werden in die ili2db Metatabellen im Schema selbst geschrieben.|-|
-|data.PostgresDB|Verwendung der Service-Definition verstehen. Host und Port als Attribute ok?|Michael|
-|-|Nein, bis auf weiteres der Servicename, da keine Automatisierungen für jdbc bestehen. jdbc kann nicht via Servicename connecten.|-|
-|data und core|Transparenz-Regeln verstehen.|Michael|
-|-|Facadelayer: Wenn in FL gesetzt: FL 0.5 * FL-Child 0.5 = 0.25 resultierend für FL-Child <br/> ProductList: Wenn gesetzt, wird der Wert des PL-Child überschrieben |-|
-|data|Externe WMS-Ebene wie einbinden? Vergleichen mit aktualisiertern Config-DB|Oliver|
-|-|Antwort...|-|
-|data|Wie die Raster in die GDI einbinden? Es gibt zu viele Möglichkeiten...|Stefan|
-|-|Antwort...|-|
-|Dependencies|Erfassen wir auch reine Identifier-Abhängigkeiten? Wie die Abhängigkeit auf den Namen einer WMS-Ebene?|Michael und Stefan|
-|-|Antwort...|-|
-|Konf Backgroundlayer|Soll das weiterhin erfasst werden? Eine flexiblere Konfigurationsvariante ist die Bereitstellung einer Rumpf-Konfiguration des config.json des Web GIS Client. In diese werden die dynamischeren Eigenschaften von beispielsweise den Vordergrundebenen hineingeneriert.|Michael und Stefan|
-|-|Antwort...|-|
-|GM03|Modellierung der Klassen und Beziehungen für GM03|Peter|
-|-|Antwort...|-|
-|GM03|Verifikation, dass Contacts-Modellierung GM03-Kompatibel ist|Peter|
-|-|Antwort...|-|
-|core.DataProduct.identifier|Namenskonvention einführen? ch.so.xy.[Thema].(edit.)[Layername](_data). Thema entspricht Modellname ohne Version.|Stefan|
-|-|Antwort...|-|
-|core.DataProduct.inWGC|Wie sind geschützte Edit-Ebenen im WMS enthalten? Diese sind aus Sicht public überflüssig und störend.|Oliver|
-|-|Antwort...|-|
-|core|Automatische Ableitung des TOC-Namen für SingleActors in Gruppen. TOC-Name = [SingleActor.Title] ([ProductList.Title])|Andrea|
-|-|Antwort...|-|
-|core.Map|Hintergrundkarten bestehen heute doppelt im AGDI (für SO-Locator) und als "Feeder-Projekt" für den WMTS. Kann dies einfach verhindert werden?|Andi|
-|-|Antwort...|-|
-|SL - DSV|In Ruhe reflektieren, ob ein Teil der Module besser auf DSV / DS wie auf SL verknüpft werden sollen (u.a: Versionierung)|Oliver|
-|-|Antwort...|-|
-|data DataTheme|Braucht es eine Klasse DataTheme? Diese ist nötig, wenn DataSets wie Beispielsweise die LIDAR-Produkte gruppiert als ein Paket abgegeben werden sollen (Kachel.zip mit DOM, DTM, Höhenlinien, ...).|Oliver|
-|-|Antwort...|-|
-|data bulk / object service|Steuerung vieleicht trennen. Datenbezug wird Modellweise freigeschaltet, Service-Booleans müssen auf TableView|Oliver|
-|-|Antwort...|-|
-|data taster|Wie soll die Bandselektion erfolgen? QML?|Stefan|
-|-|Antwort...|-|
+#
 
 
 
