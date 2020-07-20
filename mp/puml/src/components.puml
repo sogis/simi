@@ -2,8 +2,8 @@
 package "Metadata" {
     package "Transformers" {
         [JsonTrafo] as jt
-        [QmlTrafo] as qt
-        [qmlcontent.json] as qj
+        [QgsTrafo] as qt
+        [qgsContent.json] as qj
 
         jt --> qj
         qj -up-> qt
@@ -11,7 +11,7 @@ package "Metadata" {
 
     package "Config" {
         [Json Files] as json
-        [Qml File] as qml
+        [Qgs File] as qgs
     }
 
     package "SIMI" {
@@ -38,14 +38,8 @@ package "Metadata" {
     jt --> mdb : db con
 
     jt --> json
-    qt --> qml
+    qt --> qgs
 }
-
-
-cloud "INTERLIS-Repos" {
-    [INTERLIS-Model] as model
-}
-mr --> model
 
 database "Geo-DB" {
     [Catalog] as cat
