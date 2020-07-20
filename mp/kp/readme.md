@@ -6,31 +6,29 @@ Umfasst das Komponentendiagramm sowie Fragen und Resultate der Konzept-Arbeitspa
 
 # Arbeitspakete
 
-|ID|Konzept AP|Resultate|
-|---|---|---|
-|K1|SIMI Umsetzungsfragen|-|
+|ID|Link|
+|---|---|
+|K1|[SIMI Umsetzungsfragen](K1_Umsetzungsfragen.md)|
+|K2|[Transformation](K2_Transformation.md)|
+|K3|[SIMI-Hauptanwendungsfälle](K3_Hauptanwendungsfaelle.md)|
+|K4|[Magicbutton-Pipeline](K4_Pipeline.md)|
+|K5|[ModelReader](K5_ModelReader.md)|
+|K6|[GRETL-Schnittstelle](K6_GRETL_Schnittstelle.md)|
+|K7|[DataProduct-Service](K7_Dataproduct.md)|
 
 
-SIMI Umsetzungsfragen
-Inhalt:
-Klärung der maskenübergreifend «auftretenden» Fragestellungen:
-• In welchem «Vererbungsbaum» wird wieso welche Vererbung
-angewendet?
-• Best Practice für die Bereitstellung eines Service (→ Kenne dein
-GRETL)
-• Best Practice für das Konsumieren eines Service (ModelReader)
-• Validierung: Was gilt es für die Validierung auf dem Client zu
-beachten? (Lazy-Loading, …)
-• Wie können zwecks Entkoppelung der SIMI- von der Json-Export
-Entwicklung einfach «extended Properties» vorgesehen werden?
-• GUI-Hilfsfunktionen: Wie wird das Kopieren einer Layergruppe in
-eine Map im SIMI-GUI umgesetzt?
-Deployment:
-• Best-Practice bzgl. Docker-Image
-o Erstellung (Base-Image, …)
-o Umgebungsvariablen
-• DB-Setup
-• Notwendige Ressourcen für stabile und performante Ausführung
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

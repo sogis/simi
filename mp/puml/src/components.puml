@@ -61,5 +61,4 @@ gretl --> gi
 
 gretl -[hidden]-> gui
 qj -[hidden]-> json
-model -[hidden]-> cat
 @enduml
