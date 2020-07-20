@@ -80,8 +80,8 @@ Daten ist das Styling als QML optional enthalten.
 |rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
 |name|String(100)|n|Interne Bezeichnung der DataSetView, um diese von weiteren DSV's des gleichen DS unterscheiden zu können. Wird nur manuell gesetzt falls defaultView=false.|
 |remarks|String|n|Interne Bemerkungen zur DSV.|
-|styleServer|byte[]|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
-|styleDesktop|byte[]|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
+|styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
+|styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
 
 Bemerkungen zu der Default-View (defaultView=true):
 * SIMI setzt [name] auf NULL. Die defaultView hat den gleichen Identifier wie das DataSet. 

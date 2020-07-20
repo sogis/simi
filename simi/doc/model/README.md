@@ -89,6 +89,22 @@ Wie ist er Zusammenhang beim Drucken aus dem WGC zum WMS der Background-Maps?
 
 xx = Default
 
+**Umsetzung**
+
+Ausmodellieren in die Steuerungstabelle DataProduct_PubScope mit den folgenden Attributen:
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|displayText|String(100)|j|Anzeige-Text in SIMI (Beispielsweise `1: WMS, WGC u. QGIS`, Siehe oben)|
+|sort|Integer|j|Sortierung der Werte in SIMI - Kann auch wegfallen, wenn für die korrekte Sortierung der Werte nicht notwendig|
+|default|Boolean|j|Defaultwert - Kann auch wegfallen, wenn für die korrekte Anzeige des Default-Wertes nicht notwendig|
+|forSingleActor|Boolean|j|Wert auf SingleActor anwendbar?|
+|forLayerList|Boolean|j|Wert auf LayerList anwendbar?|
+|forMap|Boolean|j|Wert auf Map anwendbar?|
+|pubToWMS|Boolean|j|Wird das DataProduct im WMS publiziert?|
+|pubToWGC|Boolean|j|Wird das DataProduct im Web GIS Client publiziert?|
+|pubToLocator|Boolean|j|Wird das DataProduct im SO-Locator in QGIS Desktop publiziert?|
+
 #### Publikation der Rohdaten
 
 Siehe Attribut data.DataSetView.rawDownload
