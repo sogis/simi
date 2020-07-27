@@ -306,7 +306,51 @@ WHERE
 	modelname LIKE 'SO_%'
 ```
 
-# Entscheide
+## Unit Tests für TableInfo
+
+### Abzudeckende Aspekte
+
+* ILI: ili2pg Schema mit:
+    * 0 SO_ Klassen
+    * 1 SO_ Klasse
+    * 2 SO_ Klassen
+* GEO: Anzahl Geometriespalten (0 - 2)
+* PKF: Primary Key Field. Korrekte Rückgabe für:
+    * I: Int PK, 
+    * U: UUID PK, 
+    * V: Varchar PK
+* TD: Table Description (Ja, Nein)
+* AD: Attribute Description (Ja, Nein)
+* VW: Informationen aus View (Ja, Nein)
+* VAR: Varchar: Rückgabe der Länge  (Nur bei Varchar)
+* UID: UUID: Korrekte Rückgabe des Typs
+* DAT: Date: Korrekte Rückgabe des Typs
+* TS: TimeStamp: Korrekte Rückgabe des Typs
+* DBM: Uebergebener DB-Name kann nicht auf Connection gemappt werden --> Client Error 410
+* CON: Verbindung zu Zieldatenbank kann nicht aufgenommen werden --> Server Error 501
+* TYPO: Tabelle kann nicht gefunden werden (Aufgrund typo in qualifiziertem Schemanamen) --> Client Error 404
+
+### Tabelle Testfall - Testdaten
+
+|Testfall|Testdaten|Bemerkung|
+|---|---|---|
+|ILI 0|ILI-CH|Model "CH_ModelReader" mit einer Klasse (Schema ext_0)|
+|ILI 1|ILI-SO1|Model "SO_ModelReader_1" mit Erweiterung der Klasse aus CH_ModelReader (Schema ext_1)|
+|ILI 2|ILI-SO2|Model "SO_ModelReader_2" mit Erweiterung der Klasse aus SO_ModelReader_1 (Schema ext_2)|
+|GEO 0|Kl KeineGeometrie|Klasse KeineGeometrie in Modell SO_GEO (schema geo)|
+|GEO 1|Kl EineGeometrie|Klasse EineGeometrie in Modell SO_GEO (schema geo)|
+|GEO 2|Kl ZweiGeometrien|Klasse ZweiGeometrien in Modell SO_GEO (schema geo)|
+|PKF I|Tab IntPK|Tabelle IntPK in Schema pk|
+|PKF U|Tab UuidPK|Tabelle UuidPK in Schema pk|
+|PKF V|Tab VarcharPK|Tabelle VarcharPK in Schema pk|
+|TD Ja / Nein|Model SO_Desc|Klassen "MitKommentar" und "OhneKommentar" (schema desc)|
+|AD Ja / Nein|Model SO_Desc|Klasse "AttributKommentare" Attribute "MitKommentar" und "OhneKommentar" (schema desc)|
+|VW|View keine_geometrie_v|Verwendung von Modell SO_Desc (schema views)|
+|VAR, UID, DAT, TS|Klasse AttrTypes|Entsprechende Attribute in SO_AttrTypes.AttrTypes (schema attrtype)|
+
+DBM, CON und TYPO brauchen keine Testdaten
+
+## Entscheide
 
 |Thema|Entscheid|Bemerkungen|
 |---|---|---|

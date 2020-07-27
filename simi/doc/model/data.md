@@ -90,7 +90,8 @@ Bemerkungen zu der Default-View (defaultView=true):
 
 #### Konstraints
 
-UK auf den FK zum SingleLayer.
+UK auf den FK zum SingleLayer.   
+styleServer und styleDesktop: QML in korrekter Version hochgeladen?
 
 ### Beziehung SingleLayer - DataSetView
 

@@ -43,10 +43,16 @@ Teilmodell|Root-Klasse|Strategie|Bemerkungen|
 
 |Betreff|Frage / Antwort|Status|
 |---|---|---|
-|DataProduct.pubScope|Wie die enum mit Klassenabhängig zutreffenden Werten umsetzen?|Offen|
+|DataSetView.styleServer|Wie kann der Text-Inhalt einer Datei in ein String-Feld geschrieben werden?|Offen|
 | |ANTWORT| |
 | | | |
-|DataSetView.styleServer|Wie kann der Text-Inhalt einer Datei in ein String-Feld geschrieben werden?|Offen|
+|Login einmal wöchentlich|Gibt es einen einfachen Weg, nur einmal in der Woche nach den Credentials zur Fragen (etwa mittels langlebigem auth cookie)? Zusammenhang mit cuba.web.rememberMeEnabled?|Offen|
+| |ANTWORT| |
+| | | |
+|Entity Zusatzinformationen|Best practice für das Auslesen von zusätzlichen Informationen aus verknüpften Entities. Zum Beispiel ob ein SingleLayer "public" ist. JPQL Query / Native SQL auf DB-View / ...?|Offen|
+| |ANTWORT| |
+| | | |
+|Custom Query: Abdeckung von Änderungen|Feedback zur Idee, DB-Views für die Zusammenzüge zu verwenden. Behindert dies die automatisch generierten update Skripte? Zu verhindern mit "do last"?|Offen|
 | |ANTWORT| |
 | | | |
 |BETREFF|FRAGE|Offen|
