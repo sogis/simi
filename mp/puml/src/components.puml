@@ -23,6 +23,12 @@ package "Metadata" {
         gi - class
     }
 
+    package "Magic-Button (Jenkins)" {
+      [API / WGC Deployment] as pipe
+      () "Jenkins" as pi
+      pi - pipe
+    }
+
     database "Meta-DB" {
         [Meta-Tables] as mdb
     }
@@ -45,12 +51,6 @@ database "Geo-DB" {
     [Catalog] as cat
 }
 mr --> cat : db con
-
-together {
-  [API / WGC Deployment] as pipe
-  () "Jenkins" as pi
-  pi - pipe
-}
 
 gui --> pi
 pipe --> jt
