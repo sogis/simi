@@ -55,8 +55,14 @@ Teilmodell|Root-Klasse|Strategie|Bemerkungen|
 |Custom Query: Abdeckung von Änderungen|Feedback zur Idee, DB-Views für die Zusammenzüge zu verwenden. Behindert dies die automatisch generierten update Skripte? Zu verhindern mit "do last"?|Offen|
 | |ANTWORT| |
 | | | |
-|BETREFF|FRAGE|Offen|
-| |ANTWORT| |
+|Updated Info|Is the information on timestamp and user of last update available in the exiting admin interface?|Pending|
+| |Answer| |
+| | | |
+|Updated Info|If not available in admin interface: How can it be displayed without code duplication on every edit screen? Screen Fragment or Mixin or other?|Pending|
+| |Answer| |
+| | | |
+|Abstract|Question|Pending|
+| |Answer| |
 
 
 
