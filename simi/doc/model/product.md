@@ -9,7 +9,7 @@ Bildet alle möglichen Arten von Kartenebenen und deren Beziehung untereinander 
 Basisklasse aller Datenprodukte.
 
 Beispiel tabellarische Daten: Wenn ein DataProduct genau eine Tabelle umfasst ist es ein Objekt
-der Subklasse SingleLayer, wenn es mehrere Tabellen umfasst ein Objekt der Subklasse Productset respektive FacadeLayer.
+der Subklasse DataSetView, wenn es mehrere Tabellen umfasst ein Objekt der Subklasse Productset respektive FacadeLayer.
 
 Der Dateninhalt von externen Diensten wird nach Bedarf ebenfalls als DataProduct geführt.
 Beispiele:
@@ -100,25 +100,41 @@ FL hat keine weiteren eigene Attribute.
 Die Anforderungen an das Modell bewirken, dass LayerList und Facadelayer neu im Modell "weit entfernt" sind.
 Die Umwandlung von FL zu LL oder umgekehrt erfordert also etwas Handarbeit.
 
-### Klasse SingleLayer (SL)
+### Klasse DataSetView
 
-Einzelebene, welche die Daten aus 
-* einer Postgres-Tabelle oder -View mit oder ohne Geometrie
-* einem Geotif
-* ...
-bezieht.
+Direkt aus einem Dataset abgeleitetes Produkt, welches Eigenschaften 
+(Darstellung / Attribute) eines Dataset auf den entsprechenden Einsatzzweck anpasst.
+
+Keine Rendering-Information hat ein DSV vom Typ "externe WMS Ebene". Bei internen Raster- und Tabellarischen
+Daten ist das Styling als QML optional enthalten.
 
 #### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|suche|enum|j|Gibt an, ob und wie der SL durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
+|defaultView|boolean|j|Für ca. 3/4 der DS gibt es "nur" die Default-View. Default: true.|
+|rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
+|name|String(100)|n|Interne Bezeichnung der DataSetView, um diese von weiteren DSV's des gleichen DS unterscheiden zu können. Wird nur manuell gesetzt falls defaultView=false.|
+|remarks|String|n|Interne Bemerkungen zur DSV.|
+|styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
+|styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
+|suche|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
 |sucheFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
-|sucheFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieses SL eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
+|sucheFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieser DSV eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
+
+Bemerkungen zu der Default-View (defaultView=true):
+* SIMI setzt [name] auf NULL. Die defaultView hat den gleichen Identifier wie das DataSet. 
+* SIMI verhindert das Setzen einer WhereClause (Klasse TableView).
+* In der Regel umfasst die DefaultView alle Attribute des DS. Mögliche Ausnahme: Klasse mit zugriffsgeschütztem Attribut. 
+
+#### Konstraints
+
+UK auf den FK zur DataSetView.   
+styleServer und styleDesktop: QML in korrekter Version hochgeladen?
 
 ### Klasse PropertiesInFacade
 
-Attributierte Verknüpfungstabelle der m:n Beziehung zwischen FL und SL.
+Attributierte Verknüpfungstabelle der m:n Beziehung zwischen FL und DSV.
 
 #### Attributbeschreibung
 
@@ -195,7 +211,7 @@ UK über die FK's.
 
 Beipielsweise in der Archäologie werden kleine Denkmäler als Punktgeometrie, grosse als Polygon geführt.
 
-### SingleLayer
+### DataSetView
 
 |id|identifier|in_wms|in_wgc|
 |---|---|---|---|
@@ -210,7 +226,7 @@ Beipielsweise in der Archäologie werden kleine Denkmäler als Punktgeometrie, g
 
 ### PropertiesInFacade
 
-|id_facadelayer|id_singlelayer|sort|
+|id_facadelayer|id_datasetview|sort|
 |---|---|---|
 |f1|s1|10|
 |f1|s2|5|
@@ -245,7 +261,7 @@ Zusammenfassung von Haltestellen und Netz zu Layergruppe öV.
 
 Gruppierung des KBS mit dem KBS-WMS von Geodienste.ch
 
-### SingleLayer
+### DataSetView
 
 |id|identifier|in_wms|in_wgc|
 |---|---|---|---|
@@ -291,7 +307,7 @@ Konstanter Präfix im mapViewerConfig.json ist folglich immer **resources.qwc2_t
 |bbox|globals.wgc.bbox|Kann heute im AGDI konfiguriert werden|
 |initialBbox|globals.wgc.bbox|Kann heute im AGDI konfiguriert werden|
 |---|---|---|
-|**SingleLayer...**|||
+|**DataSetView...**|||
 |sublayers.name|Dataproduct.identifier||
 |sublayers.title|Dataproduct.title||
 |sublayers.visibility|PropertiesInList.visible||

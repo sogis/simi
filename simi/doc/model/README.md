@@ -49,7 +49,7 @@ Die Attributtabellen sind sortiert gemäss:
 Die Steuerung betrifft die folgenden Applikationen und Dienste und bezieht sich auf Produkte (= Zusammensetzungen)
 und Rohdaten. Das Datenthema = Klassen im Modell wird ebenfalls betrachtet.
 
-|Datenklasse \><br>Apps und Dienste|SingleLayer|Singleactor|LayerList|Map|
+|Datenklasse \><br>Apps und Dienste|DataSetView|Singleactor|LayerList|Map|
 |---|---|---|---|---|
 |Featureservice (WFS u. DataService)|x|-|-|-|
 |Bulkservice|x (1.)|-|-|-|
@@ -62,7 +62,7 @@ Todo:
 * Ergänzem mit Zeile WGC und SO-Locator
 
 Bemerkungen:
-1. Die Berechtigung für den Bulk-Service leitet sich aus der Summe der Berechtigungen der enthaltenen SingleLayer ab.   
+1. Die Berechtigung für den Bulk-Service leitet sich aus der Summe der Berechtigungen der enthaltenen DataSetView ab.   
 Ein xtf kann auch abgegeben werden, sofern eine geschützte Spalte nullable ist --> wird in xtf auf null gesetzt.   
 Umsetzung davon muss in Konzeptphase zu Datenbezug gelöst werden. 
 2. Verhalten bei der Kombination der Flags für SingleActor (SA) und LayerList (LL)?

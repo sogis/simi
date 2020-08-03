@@ -10,7 +10,7 @@ verzichtet:
 
 ## Klasse DataContact
 
-Beziehungstabelle in welcher jede Beziehung zwischen einem Kontakt und einem SingleLayer mit der entsprechenden Kontaktrolle qualifiziert wird.
+Beziehungstabelle in welcher jede Beziehung zwischen einem Kontakt und einer DataSetView mit der entsprechenden Kontaktrolle qualifiziert wird.
 
 ### Konstraints
 
@@ -22,7 +22,7 @@ Basisklasse welche die gemeinsamen Eigenschaften von Person und Organisation ver
 
 ## Klasse ContactRole
 
-Umfasst alle vorkommenden Kontaktrollen zwischen einem Kontakt und einem SingleLayer.
+Umfasst alle vorkommenden Kontaktrollen zwischen einem Kontakt und einer DataSetView.
 
 Beispiele für Kontaktrollen:
 * Ist Datenherr von

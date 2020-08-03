@@ -14,7 +14,7 @@ Metamodell für die Bouncer-Konfiguration:
 
 ![Template](../puml/rendered/simi_template.png)
 
-Beziehungen Ressource - SingleLayer:
+Beziehungen Ressource - DataSetView:
 * contains data: Beschreibt, aus welchen Ebenen eine Ressource Daten bezieht.
 * display in feature info: Beschreibt, in welchen Ebenen die Ressource im FeatureInfo-Dialog des Web GIS Client zum Öffnen angeboten wird.
 
@@ -22,7 +22,7 @@ Beziehungen Ressource - SingleLayer:
 
 ### Klasse Template
 
-Das Jasper-Template, welches mit den Daten aus 1-n SingleLayern erzeugt wird.
+Das Jasper-Template, welches mit den Daten aus 1-n DataSetViews erzeugt wird.
 
 #### Attributbeschreibung
 
@@ -34,7 +34,7 @@ Das Jasper-Template, welches mit den Daten aus 1-n SingleLayern erzeugt wird.
 
 ### Klasse LayerRelation
 
-Enthält die Konfiguration der Beziehungstypen Ressource - SingleLayer:
+Enthält die Konfiguration der Beziehungstypen Ressource - DataSetView:
 * queries: Beschreibt, aus welchen Ebenen eine Ressource Daten bezieht.
 * show in feature info: Beschreibt, in welchen Ebenen die Ressource im FeatureInfo-Dialog des Web GIS Client zum Öffnen angeboten wird.
 

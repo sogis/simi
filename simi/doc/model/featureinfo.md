@@ -34,7 +34,7 @@ Bei einem sqlQuery wird über die erste queries-Verknüpfung die Datenbank ermit
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|relation|enum|j|Beziehungstyp zwischen Featureinfo und SL (is_for_layer, queries).|
+|relation|enum|j|Beziehungstyp zwischen Featureinfo und DSV (is_for_layer, queries).|
 
 ### Konstraints
 UK auf FK's und "relation".
@@ -52,21 +52,21 @@ UK auf FK's und "relation".
 |resources.wms_services.root_layer.type|globals.featureinfo.*||
 |resources.wms_services.root_layer.title|globals.featureinfo.*||
 |---|---|---|
-|**Abschnitt für SingleLayer**|-|-|
-|resources.wms_services.root_layer.layers.name|SingleLayer.identifier||
-|resources.wms_services.root_layer.layers.title|SingleLayer.title||
+|**Abschnitt für DataSetView**|-|-|
+|resources.wms_services.root_layer.layers.name|DataSetView.identifier||
+|resources.wms_services.root_layer.layers.title|DataSetView.title||
 |resources.wms_services.root_layer.layers.type|Wert: "layer"||
-|resources.wms_services.root_layer.layers.attributes.name|SingleLayer -> DataSetView -> ViewField -> TableField.Name||
-|resources.wms_services.root_layer.layers.attributes.alias|SingleLayer -> DataSetView -> ViewField.alias||
+|resources.wms_services.root_layer.layers.attributes.name|DataSetView -> ViewField -> TableField.Name||
+|resources.wms_services.root_layer.layers.attributes.alias|DataSetView -> ViewField.alias||
 |---|---|---|
 |**Abschnitt für FacadeLayer**|-|-|
 |resources.wms_services.root_layer.layers.name|FacadeLayer.identifier||
 |resources.wms_services.root_layer.layers.type|Wert: "layergroup"||
 |resources.wms_services.root_layer.layers.title|FacadeLayer.title||
-|resources.wms_services.root_layer.layers.layers.name|FacadeLayer -> PropertiesInFacade -> SingleLayer.identifier||
-|resources.wms_services.root_layer.layers.layers.title|FacadeLayer -> PropertiesInFacade -> SingleLayer.title||
+|resources.wms_services.root_layer.layers.layers.name|FacadeLayer -> PropertiesInFacade -> DataSetView.identifier||
+|resources.wms_services.root_layer.layers.layers.title|FacadeLayer -> PropertiesInFacade -> DataSetView.title||
 |resources.wms_services.root_layer.layers.layers.type|Wert: "layer"||
-|resources.wms_services.root_layer.layers.layers.attributes.name|FacadeLayer -> PropertiesInFacade -> SingleLayer -> DataSetView -> ViewField -> TableField.Name||
-|resources.wms_services.root_layer.layers.layers.attributes.alias|FacadeLayer -> PropertiesInFacade -> SingleLayer -> DataSetView -> ViewField.alias||
+|resources.wms_services.root_layer.layers.layers.attributes.name|FacadeLayer -> PropertiesInFacade -> DataSetView -> ViewField -> TableField.Name||
+|resources.wms_services.root_layer.layers.layers.attributes.alias|FacadeLayer -> PropertiesInFacade -> DataSetView -> ViewField.alias||
 
 $td Wieso sind in den Config-Beispielen auch LayerListen enthalten?
