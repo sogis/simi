@@ -1,5 +1,6 @@
 @startuml
 package Product {
+  class "Mutation" as ab
   abstract class "DataProduct (DP)" as dp
 
   abstract class "ProductList (PL)" as pl
@@ -35,5 +36,7 @@ package Product {
 
   fl "1" -- "1..n" pif : "      "
   pif "*" -up- "1" dsv : "      "
+
+  ab "1" -left- "1..n" dp : "      "
 }
 @enduml

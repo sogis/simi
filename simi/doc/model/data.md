@@ -63,6 +63,7 @@ Tabelle "DataSet" zusammengefasst werden.
 |---|---|---|---|
 |remarks|String|n|Interne Bemerkungen zum DS.|
 |description|String|n|Metainformationen zum DataSet.|
+|abGeneration|enum|n|"A" oder "B". Generation innerhalb der AB-Mutation.|
 
 ## Klassen in Teilmodell "tabular"
 
@@ -177,6 +178,7 @@ Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Schem
 |---|---|---|---|
 |schemaName|String(100)|j|Name des Schemas.|
 |modelName|String(100)|n|Name des INTERLIS-Modelles, mit welchem das Schema angelegt wurde.|
+|abGeneration|enum|n|"A" oder "B". Generation innerhalb der AB-Mutation.|
 
 #### Konstraints
 

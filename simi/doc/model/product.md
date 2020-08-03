@@ -4,6 +4,43 @@ Bildet alle möglichen Arten von Kartenebenen und deren Beziehung untereinander 
 
 ![Product](../puml/rendered/simi_product.png)
 
+## Klasse Mutation
+
+Gruppiert alle in einer Modellmutation beteiligten DataProducts, DataSets und ModelSchema (bei tabellarischen Daten) in eine Mutation.
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|theme|String(100)|j|Thema (Modell respektive Schema), welches mutiert wird. Beispiel: "Geologie"|
+|remarks|String|n|Interne Bemerkungen zur Mutation|
+
+### Ablauf einer AB Mutation
+
+1. Bearbeiter wählt das Schema, welches mutiert wird
+1. Simi gruppiert (verlinkt) 
+    * alle betroffenen bestehenden DataProducts, DataSets und ModelSchema als Generation "A".
+    * erstellte identische Kopien der DataProducts, ... als Generation "B".   
+   Die Generation A ist nun schreibgeschützt, die Generation "B" wird publiziert.
+1. Bearbeiter mutiert Generation "B"
+1. Die Mutation geht in das erste Rollout - Generation "B" ist aktiv.
+1. Bearbeiter hat Bestätigung, dass Rollout bis auf Kosmetik "gut" ist.
+1. Bearbeiter löscht  das "A"-Schema in der DB und die Mutation in Simi. Mit dem Löschen der Mutation werden alle inaktiven Konfigurationen (Generation "A") gelöscht.
+
+Alternativablauf, falls die Mutation nicht vor dem Rollouttermin abgeschlossen werden kann:
+* (3.) Konfigurator mutiert Generation "B"
+* Bearbeiter aktiviert Generation "A", da "B" nicht auf den Rollouttermin fertig gestellt werden kann.   
+"A" bleibt weiterhin schreibgeschützt.
+* Die Mutation geht in das erste Rollout - Generation **"A"** ist aktiv.
+* Bearbeiter aktiviert nach dem Rollout wiederum die Generation "B", und arbeitet weiter.
+
+Alternativablauf, falls die Mutation komplett "verschossen" ist
+* (3.) Konfigurator mutiert Generation "B"
+* Da "B" komplett verschossen, aktiviert der Bearbeiter die Generation "A"
+* Bearbeiter löscht die Mutation. Mit dem Löschen der Mutation werden alle inaktiven Konfigurationen (Hier: Generation "B") gelöscht.
+
+ 
+
 ## Klasse DataProduct (DP)
 
 Basisklasse aller Datenprodukte.
@@ -28,6 +65,8 @@ Beispiele:
 |title|String(200)|n|Angezeigter Titel (Bezeichnung) des Dataproduct. Falls null in Erstellungsphase wird identifier verwendet.|
 |releasedAt|DateTime|n|Zeitpunkt der aktuellsten Freigabe.|
 |releasedThrough|String(100)|n|Name und Vorname des Benutzers, welcher die Freigabe vorgenommen hat.|
+|abGeneration|enum|n|"A" oder "B". Generation innerhalb der AB-Mutation.|
+|abPublished|Boolean|n|Gibt an, ob das DP zur gegenwärtig publizierten Generation gehört oder nicht.|
 
 ### Konstraints
 
