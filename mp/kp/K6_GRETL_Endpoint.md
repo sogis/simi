@@ -4,14 +4,14 @@
 
 GRETL (**G**radle **E**xtract **T**ransform **L**oad) is the central "dataset mover" in our geodata infrastructure.
 
-When the structure of source or destination tables of the dataset's change their schema, we need to now for every GRETL-Job, what
+When the structure of source or destination tables of the dataset's change their schema, we need to know for every GRETL-Job, what
 data it moves from source to destination tables.   
-GRETL invokes this endpoint after each successful run of a job to register a jobs dependencies on source and destination tables.
+GRETL invokes this endpoint after each successful run of a job to register a jobs run and its dependencies on source and destination tables.
 
 ## Preconditions
 
-The service does only register dependencies to already existing PostgresTables. If a corresponding entity in PostgresTable
-is missing, the service returns it's qualified name in the ignoredTables array in the response.
+The service does only register dependencies to already existing PostgresTables. If a corresponding PostgresTable entity
+is missing, the service does not link and returns `false` in the linkInfo for the corresponding table.
 
 See the following matrix to clarify how the data is manged:
 
@@ -20,6 +20,9 @@ See the following matrix to clarify how the data is manged:
 |PostgresTable|manual|manual|manual|
 |Job|endpoint|endpoint|manual|
 |LayerUsage|endpoint|endpoint|endpoint|
+
+* manual: Edited by an end user through the generic UI
+* endpoint: Edited by the endpoint "code"
 
 DataModel for the Endpoint: ![Flow](../../simi/doc/model/flow_en.md)
 
@@ -50,8 +53,8 @@ The principal execution paths are returned as information to the calling client 
 	"jobFullPath": "agi_mopublic_pub",
 	"schedule": "H H(1-3) * * 7",
 	"lastSuccessfulRun": "2020-03-18T15:46:38Z",
-	"sourceTables": ["schemaname1.tablenameA", "schemaname1.tablenameB", "schemaname2.tablenameC"],
-	"targetTables": ["schemaname3.tablenameD", "schemaname4.tablenameE", "schemaname4.tablenameF"]
+	"sourceTables": ["dbName.schemaname1.tablenameA", "dbName.schemaname1.tablenameB", "dbName.schemaname2.tablenameC"],
+	"targetTables": ["dbName.schemaname3.tablenameD", "dbName.schemaname4.tablenameE", "dbName.schemaname4.tablenameF"]
 }
 ```
 
@@ -150,8 +153,16 @@ The Sequence of work for the endpoint will be:
 
 ### Deliverables
 
-A github repo with a readme.md stating how to:
+A github repo with the endpoint code for:
+* entities
+* database create and update scripts for the entities
+* endpoint
+* integration tests (with code to initialize with test data for each test case)
+* The generic user interface is not part of this work package. If helpful for development, a simple generic user interface can be created.   
+
+and a readme.md stating how to:
 * Start the server (start the cuba-platform)
+* Invoke the endpoint with curl (or similar)
 * Start the integration tests
 
 The code must be "open source".
