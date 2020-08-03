@@ -8,7 +8,7 @@ package Product {
 
   abstract class "SingleActor (SA)" as sa
   class "FacadeLayer (FL)" as fl
-  class "SingleLayer (SL)" as sl
+  class "DataSetView (DSV)" as dsv
   class "ExtLayer" as el
   class "WmsLayer" as wl
 
@@ -22,7 +22,7 @@ package Product {
 
   dp <|-- sa
 
-  sa <|-- sl
+  sa <|-- dsv
   sa <|-- fl
   sa <|-- el
 
@@ -34,6 +34,6 @@ package Product {
   map "*" -- "0..1" map : "background"
 
   fl "1" -- "1..n" pif : "      "
-  pif "*" -up- "1" sl : "      "
+  pif "*" -up- "1" dsv : "      "
 }
 @enduml

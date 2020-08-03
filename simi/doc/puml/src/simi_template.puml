@@ -1,5 +1,5 @@
 @startuml
-class "SingleLayer (SL)" as sl << package Core >>
+abstract class "DataSetView (DSV)" as dsv << package Product >>
 
 package "Template" {
     class "Template" as tpl
@@ -8,6 +8,6 @@ package "Template" {
     tpl "1" -- "1..n" lr
 }
 
-lr "*" -- "1" sl
+lr "*" -- "1" dsv
 
 @enduml
