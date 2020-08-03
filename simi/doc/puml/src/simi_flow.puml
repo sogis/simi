@@ -1,5 +1,5 @@
 @startuml
-class "SingleLayer (SL)" as sl << package Core >>
+class "PostgresTable" as pgt << package Data >>
 
 package Flow {
   class "Job" as job
@@ -7,5 +7,5 @@ package Flow {
 }
 
 job "1" -- "1..*" lu
-lu "*" -- "1" sl
+lu "*" -- "1" pgt
 @enduml

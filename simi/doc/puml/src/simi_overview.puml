@@ -22,7 +22,7 @@ data --> prod
 fi --> prod
 
 dep -up-> prod
-flow -up-> prod
+flow --> data
 iam -up-> prod
 print -up-> prod
 @enduml

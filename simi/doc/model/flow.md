@@ -1,5 +1,8 @@
 # Flow
 
+##Todo: 
+Nach Abschluss der Endpointentwicklung abgleichen mit flow_en.md und Entwicklungsresultat.
+
 ![Flow](../puml/rendered/simi_flow.png)
 
 Modelliert die Beziehungen des GRETL-Job zu SingleLayer.
