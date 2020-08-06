@@ -141,6 +141,7 @@ Please declare in the quote if and why you would like to depend on additional co
 ### Integration test
 
 All of the above mentioned execution paths must be covered by automatic repeatable integration tests, including database test data and database modification.
+We expect 1-3 tests per execution path.
 
 ### Dependencies to other work
 
