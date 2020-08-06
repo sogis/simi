@@ -2,7 +2,7 @@
 
 ## Business Case
 
-GRETL (**G**radle **E**xtract **T**ransform **L**oad) is the central "dataset mover" in our geodata infrastructure.
+The already existing GRETL (**G**radle **E**xtract **T**ransform **L**oad) is the central "dataset mover" in our geodata infrastructure.
 
 When the structure of source or destination tables of the dataset's change their schema, we need to know for every GRETL-Job, what
 data it moves from source to destination tables.   
@@ -35,11 +35,11 @@ The principal execution paths are returned as information to the calling client 
 * Success paths:
     * JobCreated: No job with name "jobFullPath" was found. Job and its dependencies are registered.
     * JobUpdated: The dependencies of the already registered job are not changed due to the request. Only the jobs attributes are updated.
-    * TablesUpdated: Some (or all) dependencies to PostgresTable entities of the already registered job are changed due to the request.
+    * LinksActualized: Some (or all) dependencies to PostgresTable entities of the already registered job are actualized due to the request.
 * Failure paths:
     * Unauthorized: Authentication missing or incorrect.
     * Malformed: Request was malformed.
-    * TablesMissing: At least one source and one destination table must be registered. If no source and / or destination table could be registered, the TablesMissing exception is returned.
+    * TablesMissing: At least one source and one destination table must be linked. If no source and / or destination table could be linked, the TablesMissing exception is returned.
     * Error: Any unhandled server side exception.
 
 ## Request URL
@@ -63,17 +63,25 @@ the arrays.
 
 ## Response
 
-### Execution paths and response signature
+### Execution paths
 
 |path|status code|response.code|response.message|response.linkInfo null?|
 |---|---|---|---|---|
 |JobCreated|HTTP 200|JobCreated|"Job and dependencies created."|false|
 |JobUpdated|HTTP 200|JobUpdated|"Job updated (Dependencies untouched)."|false|
-|TablesUpdated|HTTP 200|TablesUpdated|"Updated table dependencies and job properties."|false|
+|LinksActualized|HTTP 200|LinksActualized|"Actualized table dependencies and job properties."|false|
 |Unauthorized|HTTP 401|Unauthorized|"Authentication missing or incorrect"|true|
 |Malformed|HTTP 400|Malformed|"Request signature is malformed. See server log for details. Root error message: {Exception message}"|true|
 |TablesMissing|HTTP 520|TablesMissing|"Could not create or update job, no matching source and or destination tables found"|false|
 |Error|HTTP 500|Error|"An unhandled error occurred while processing the request. See server log for details. Root error message: {Exception message}"|true|
+
+### Response signature
+
+* code: Keyword summarizing the work done by the server for the request
+* message: Human understandable explanation for the keyword
+* linkInfo: Informs the GRETL client on the new "link state" for all the tables in the request (arrays sourceTables, targetTables):
+    * false: Table is not linked to the job (As it is not (yet) manually registered in the cuba-platform db)
+    * true: Table is linked to the job 
 
 ### Samples for the response "payload"
 

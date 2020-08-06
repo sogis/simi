@@ -358,3 +358,4 @@ DBM, CON und TYPO brauchen keine Testdaten
 |Scope Tabelle oder Schema|Voraussichtlich wird das API den Scope Tabelle haben.|Definitiver Entscheid erfolgt in K3.|
 |Umgang mit nicht vorhandenen Informationen|Diese werden explixit als json:null in der Response zurückgegeben.|API-Klarheit ist (hier) wichtiger als die Transfergrösse.|
 |Benennung der Komponente|Neu: SchemaReader|Die Komponente liest grossmehrheitlich Informationen aus einem Schema von PostgreSQL aus und heisst darum folgerichtig **Schemareader**.| 
+|Quarkus oder Boot?|?|Umfang und Anforderungen passen sehr gut auf ein "Microservice-Framework" - Quarkus bietet gute Tutorials, welche sehr nahe an diesem UseCase liegen. Erleichtert die Umsetzung.|
