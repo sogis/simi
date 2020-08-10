@@ -14,7 +14,7 @@ Metamodell für die Bouncer-Konfiguration:
 
 ![Bouncer](../puml/rendered/simi_bouncer.png)
 
-Beziehungen Ressource - SingleLayer:
+Beziehungen Ressource - DataSetView:
 * contains data: Beschreibt, aus welchen Ebenen eine Ressource Daten bezieht.
 * display in feature info: Beschreibt, in welchen Ebenen die Ressource im FeatureInfo-Dialog des Web GIS Client zum Öffnen angeboten wird.
 
@@ -34,7 +34,7 @@ Service (des Servers), dessen Ressourcen via Bouncer geschützt werden. Beispiel
 
 ### Klasse Ressource
 
-Die Ressource, welche mit den Daten aus 1-n SingleLayern erzeugt wird. Typisches Beispiel ist ein Report, welcher
+Die Ressource, welche mit den Daten aus 1-n DataSetViews erzeugt wird. Typisches Beispiel ist ein Report, welcher
 Daten in der Form von Tabellen / Karten / etc. ausgibt.
 
 #### Attributbeschreibung
@@ -47,7 +47,7 @@ Daten in der Form von Tabellen / Karten / etc. ausgibt.
 
 ### Klasse LayerRelation
 
-Enthält die Konfiguration der Beziehungstypen Ressource - SingleLayer:
+Enthält die Konfiguration der Beziehungstypen Ressource - DataSetView:
 * queries: Beschreibt, aus welchen Ebenen eine Ressource Daten bezieht.
 * show in feature info: Beschreibt, in welchen Ebenen die Ressource im FeatureInfo-Dialog des Web GIS Client zum Öffnen angeboten wird.
 
@@ -59,4 +59,4 @@ Enthält die Konfiguration der Beziehungstypen Ressource - SingleLayer:
 
 #### Konstraints
 
-Unique-Key über relationType und die beiden FK's auf Ressource und SingleLayer.
+Unique-Key über relationType und die beiden FK's auf Ressource und DataSetView.

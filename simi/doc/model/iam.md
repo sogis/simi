@@ -1,7 +1,7 @@
 # IAM (Identity and Access Management)
 
 Das IAM ist neu ausschliesslich Datenbezogen. Es gibt keine Anwendungsfälle, welche sich nicht immer
-auf die Daten zurückführen liessen. Entsprechend werden die Berechtigungen einzig bezüglich des SingleLayer 
+auf die Daten zurückführen liessen. Entsprechend werden die Berechtigungen einzig bezüglich der DataSetView 
 gesetzt.
 
 ![IAM](../puml/rendered/simi_iam.png)
@@ -29,7 +29,7 @@ UK über FK's.
 
 ## Klasse Role (PermissionSet)
 
-Bündelt 1-n Permissions gegenüber 1-n SingleLayer.
+Bündelt 1-n Permissions gegenüber 1-n  DataSetView.
 
 ### Attributbeschreibung
 
@@ -60,7 +60,7 @@ wahrscheinlich auch "global" eindeutig gesetzt werden.
 
 ## Klasse Group
 
-Meist organisatorisch bedingte Gruppe, welche die gleichen Rollen gegenüber SingleLayer hat. 
+Meist organisatorisch bedingte Gruppe, welche die gleichen Rollen gegenüber der DataSetView hat. 
 
 ### Attributbeschreibung
 

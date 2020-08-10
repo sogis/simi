@@ -1,5 +1,5 @@
 @startuml
-class "SingleLayer (SL)" as sl << package Core >>
+abstract class "DataSetView (DSV)" as dsv << package Product >>
 
 package Contact {
 	class "ContactRole" as cr
@@ -9,7 +9,7 @@ package Contact {
     class "Organisation" as org
 }
 
-sl "1" -up- "1..n" dc
+dsv "1" -up- "1..n" dc
 cr "1 " -right- "1..n" dc : "       "
 dc "1..n" -- "1" con
 

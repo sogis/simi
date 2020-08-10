@@ -1,5 +1,5 @@
 @startuml
-class "DataProduct (DP)" as dp << package Core >>
+class "DataProduct (DP)" as dp << package Product >>
 
 package Dependency {
   class "Component" as comp

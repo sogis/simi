@@ -1,5 +1,5 @@
 @startuml
-class "SingleLayer (SL)" as sl << package Core >>
+abstract class "DataSetView (DSV)" as dsv << package Product >>
 
 package FeatureInfo {
   class "FeatureInfo" as fi
@@ -7,5 +7,5 @@ package FeatureInfo {
 }
 
 fi "1" -left- "1..*" lr : "    "
-lr "*" -- "1" sl
+lr "*" -- "1" dsv
 @enduml
