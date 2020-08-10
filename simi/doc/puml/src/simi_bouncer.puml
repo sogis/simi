@@ -1,5 +1,5 @@
 @startuml
-class "SingleLayer (SL)" as sl << package Core >>
+abstract class "DataSetView (DSV)" as dsv << package Product >>
 
 package "Bouncer" {
 	class "ProtectedService" as ps
@@ -8,7 +8,7 @@ package "Bouncer" {
 }
 
 res "1" -- "1..n" lr
-lr "*" -- "1" sl
+lr "*" -- "1" dsv
 
 res "1-n" -- "1" ps
 @enduml

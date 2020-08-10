@@ -49,7 +49,7 @@ Teilmodell|Root-Klasse|Strategie|Bemerkungen|
 |Login einmal wöchentlich|Gibt es einen einfachen Weg, nur einmal in der Woche nach den Credentials zur Fragen (etwa mittels langlebigem auth cookie)? Zusammenhang mit cuba.web.rememberMeEnabled?|Offen|
 | |ANTWORT| |
 | | | |
-|Entity Zusatzinformationen|Best practice für das Auslesen von zusätzlichen Informationen aus verknüpften Entities. Zum Beispiel ob ein SingleLayer "public" ist. JPQL Query / Native SQL auf DB-View / ...?|Offen|
+|Entity Zusatzinformationen|Best practice für das Auslesen von zusätzlichen Informationen aus verknüpften Entities. Zum Beispiel ob eine DataSetView "public" ist. JPQL Query / Native SQL auf DB-View / ...?|Offen|
 | |ANTWORT| |
 | | | |
 |Custom Query: Abdeckung von Änderungen|Feedback zur Idee, DB-Views für die Zusammenzüge zu verwenden. Behindert dies die automatisch generierten update Skripte? Zu verhindern mit "do last"?|Offen|

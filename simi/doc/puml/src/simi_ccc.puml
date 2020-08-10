@@ -1,9 +1,6 @@
 @startuml
-package "Core" {
-  class "SingleLayer (SL)" as sl{}
-
-
-
+package "Product" {
+  abstract class "DataSetView (DSV)" as dsv
   class "Map (Map)" as map {}
 }
 
@@ -20,9 +17,9 @@ package "CCC Client" {
   ccc "*" -- "1" map
 
   ccc "1" -- "*" ll
-  ll "*" -- "1" sl
+  ll "*" -- "1" dsv
 
   ccc "1" -- "*" nl
-  nl "*" -- "1" sl
+  nl "*" -- "1" dsv
 }
 @enduml

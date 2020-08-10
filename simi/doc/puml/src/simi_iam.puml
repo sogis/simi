@@ -1,4 +1,6 @@
 @startuml
+abstract class "DataSetView (DSV)" as dsv << package Product >>
+
 package IAM {
 class "Identity" as ident
 class "Group" as grp
@@ -14,6 +16,5 @@ role "*" -right- "*" ident
 grp "*" -right- "*" usr
 }
 
-class "SingleLayer (SL)" as sl << package Core >>
-sl "1" -- "*" perm
+dsv "1" -- "*" perm
 @enduml

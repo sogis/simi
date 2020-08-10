@@ -9,7 +9,7 @@ Beispiele für Komponenten:
 * ArtPlus (extern)
 
 Beispiele für Datenstrukturen:
-* SingleLayer: Beispielsweise die Abhängigkeit auf das gegenwärtige Schema.
+* DataSetView: Beispielsweise die Abhängigkeit auf das gegenwärtige Schema.
 * Map: Abhängigkeit auf den Identifier der Map aufgrund Nutzung der URL-Schnittstelle zum WGC 
 
 ![Dependency](../puml/rendered/simi_dependency.png) 

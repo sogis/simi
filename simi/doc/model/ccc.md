@@ -42,7 +42,7 @@ Ebene, für die ein Rückaufruf GIS --> Fachapplikation über das Feature-Info F
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |title|String|Ja|Bezeichnung, mit welcher der Rückaufruf im Feature-Info Fenster angezeigt wird.|
-|attributeMap|Json|Ja|Mapping des im CCC-Protokoll verwendeten Attributnamens auf den Attributnamen des SingleLayer. Strukturierung siehe Doku des config.json für CCC.|
+|attributeMap|Json|Ja|Mapping des im CCC-Protokoll verwendeten Attributnamens auf den Attributnamen der DataSetView. Strukturierung siehe Doku des config.json für CCC.|
 
 ### Konstraints
 
@@ -59,13 +59,13 @@ UK über die FK's.
 |config.clients.title|CCC Client.title||
 |config.clients.map|CCC Client -> Map.identifier||
 |config.clients.editGeomType|CCC Client.editGeomType||
-|config.clients.notifyLayers.layer|Notify Layer -> SingleLayer.identifier|---|
+|config.clients.notifyLayers.layer|Notify Layer -> DataSetView.identifier|---|
 |config.clients.notifyLayers.mapping|Notify Layer.attributeMap|Array von KeyValues: [{"agdi_attr_name": "laufnummer","ccc_attr_name": "geschaeft_laufnr"},{...}]|
 |config.clients.notifyLinkTitle|Notify Layer[0].title|Unklar, wieso dies in config.Json nicht eine Kind-Eigenschaft von config.clients.notifyLayers ist.|
 |config.zoomto_data_service_url|Dummy in globals.ccc.dataServiceUrl. Muss überschrieben werden mit: WGC ENV: "DATA_SERVICE_URL"||
 |config.zoomto_full_extent|globals.ccc.fullExtent||
 |config.zoomto_config.locatorType|globals.ccc.locatorType|Wert: PriorityLocator. In globals da dies bis auf Weiteres nicht ändern wird.|
-|config.zoomto_config.filters.dataset|Locator Layer -> SingleLayer.identifier||
+|config.zoomto_config.filters.dataset|Locator Layer -> DataSetView.identifier||
 |config.zoomto_config.filters.filter|Locator Layer.filter||
 
 

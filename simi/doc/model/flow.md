@@ -5,7 +5,7 @@ Nach Abschluss der Endpointentwicklung abgleichen mit flow_en.md und Entwicklung
 
 ![Flow](../puml/rendered/simi_flow.png)
 
-Modelliert die Beziehungen des GRETL-Job zu SingleLayer.
+Modelliert die Beziehungen des GRETL-Job zu  DataSetView.
 
 ### Klasse Job
 

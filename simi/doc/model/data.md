@@ -49,7 +49,7 @@ Beispiele für die Patterns (Java MessageFormat):
     * raw_display_attributes: `["x_min","y_min"]`
     * raw_display_pattern: `Kachel {0} / {1} (X Min / Y Min)`
 
-### Klasse DataSet
+### Interface DataSet
 
 Bei Vektor- oder tabellarischen Daten entspricht ein Dataset-Eintrag einer (Geo-) Tabelle. 
 Bei Rasterdaten entspricht es einem Rasterlayer (Es werden keine nicht georeferenzierten Bilder erfasst).
@@ -63,49 +63,7 @@ Tabelle "DataSet" zusammengefasst werden.
 |---|---|---|---|
 |remarks|String|n|Interne Bemerkungen zum DS.|
 |description|String|n|Metainformationen zum DataSet.|
-
-### Klasse DataSetView
-
-Direkt aus einem Dataset abgeleitetes Produkt, welches Eigenschaften 
-(Darstellung / Attribute) eines Dataset auf den entsprechenden Einsatzzweck anpasst.
-
-Keine Rendering-Information hat ein DSV vom Typ "externe WMS Ebene". Bei internen Raster- und Tabellarischen
-Daten ist das Styling als QML optional enthalten.
-
-#### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|defaultView|boolean|j|Für ca. 3/4 der DS gibt es "nur" die Default-View. Default: true.|
-|rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
-|name|String(100)|n|Interne Bezeichnung der DataSetView, um diese von weiteren DSV's des gleichen DS unterscheiden zu können. Wird nur manuell gesetzt falls defaultView=false.|
-|remarks|String|n|Interne Bemerkungen zur DSV.|
-|styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
-|styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
-
-Bemerkungen zu der Default-View (defaultView=true):
-* SIMI setzt [name] auf NULL. Die defaultView hat den gleichen Identifier wie das DataSet. 
-* SIMI verhindert das Setzen einer WhereClause (Klasse TableView).
-* In der Regel umfasst die DefaultView alle Attribute des DS. Mögliche Ausnahme: Klasse mit zugriffsgeschütztem Attribut. 
-
-#### Konstraints
-
-UK auf den FK zum SingleLayer.   
-styleServer und styleDesktop: QML in korrekter Version hochgeladen?
-
-### Beziehung SingleLayer - DataSetView
-
-Die 0..1 : 0..1 Beziehung existiert im Datenmodell bewusst. Motivationen:
-* Schlanke "Schnittstelle" zwischen den Teilmodellen Core und Data.
-* Technisch: Möglichkeit, die Vererbungsstrategien für Dataproduct und Kinder in Core anders zu wählen wie für DSV und Kinder in Data.
-* "Poor-Man-Versioning": Es besteht die Möglichkeit, temporär mehrere DSV mit oder ohne verdoppelten DS zu halten. Beispielablauf:
-    * Kopie des sich ändernden DS mit seinen DSV's erstellen (Zeigen beispielsweise auf neue Modellversion).
-    * Rollout 1: Original-DSV's haben weiterhin die Referenz auf den SingleLayer --> Diese werden deployt, und nicht die veränderten Kopien.
-    * Änderungen auf den Kopien sind fertiggestellt --> Kopien erhalten die Referenz auf die entsprechenden SingleLayer, und sind damit für den Rollout "scharf".
-    * Rollout 2: Kopien werden deployt.
-    
-Je nach Risikoeinschätzung werden vor oder nach dem Rollout 2 die Originale gelöscht. Solange die Originale noch vorhanden sind, 
-ist ein relativ einfaches "rollback" zu machen.
+|abGeneration|enum|n|"A" oder "B". Generation innerhalb der AB-Mutation.|
 
 ## Klassen in Teilmodell "tabular"
 
@@ -220,6 +178,7 @@ Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Schem
 |---|---|---|---|
 |schemaName|String(100)|j|Name des Schemas.|
 |modelName|String(100)|n|Name des INTERLIS-Modelles, mit welchem das Schema angelegt wurde.|
+|abGeneration|enum|n|"A" oder "B". Generation innerhalb der AB-Mutation.|
 
 #### Konstraints
 
@@ -421,7 +380,7 @@ die im RasterTheme ersichtliche url.
 |---|---|---|
 |$schema|globals.data.schemaURI||
 |$schema|globals.data.serviceName||
-|resources.datasets.name|DataSetView -> SingleLayer.identifier||
+|resources.datasets.name|DataSetView -> DataSetView.identifier||
 |resources.datasets.db_url|globals.gdi.dbURI||
 |resources.datasets.schema|ModelSchema.schemaName||
 |resources.datasets.table_name|TableDS.tableName||
