@@ -5,4 +5,4 @@ Es ist fraglich, ob eine Integration in SIMI überhaupt Sinn macht, da es um die
 Alternativ könnte auch eine Rumpf-QGIS-Projektdatei sinnvoll sein, welche die Templates direkt beinhaltet. 
 Der zukünftige Magicbutton würde dann den Rumpf einfach mit den Ebenen erweitern.
 
-![Print](../puml/rendered/simi_print.png) 
+![Print](../puml/rendered/print.png) 

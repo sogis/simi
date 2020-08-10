@@ -1,6 +1,6 @@
 # Contact
 
-![Contact](../puml/rendered/simi_contact.png) 
+![Contact](../puml/rendered/contact.png) 
 
 Kontaktinformationen können einzig zu einem SingleActor erfasst werden. Auf Erfassung zu den folgenden Klassen wurde
 verzichtet:

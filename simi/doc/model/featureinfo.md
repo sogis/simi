@@ -1,6 +1,6 @@
 # Featureinfo
 
-![Featureinfo](../puml/rendered/simi_featureinfo.png) 
+![Featureinfo](../puml/rendered/featureinfo.png) 
 
 ## Klasse Featureinfo
 

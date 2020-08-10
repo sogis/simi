@@ -2,44 +2,7 @@
 
 Bildet alle möglichen Arten von Kartenebenen und deren Beziehung untereinander ab.
 
-![Product](../puml/rendered/simi_product.png)
-
-## Klasse Mutation
-
-Gruppiert alle in einer Modellmutation beteiligten DataProducts, DataSets und ModelSchema (bei tabellarischen Daten) in eine Mutation.
-
-### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|theme|String(100)|j|Thema (Modell respektive Schema), welches mutiert wird. Beispiel: "Geologie"|
-|remarks|String|n|Interne Bemerkungen zur Mutation|
-
-### Ablauf einer AB Mutation
-
-1. Bearbeiter wählt das Schema, welches mutiert wird
-1. Simi gruppiert (verlinkt) 
-    * alle betroffenen bestehenden DataProducts, DataSets und ModelSchema als Generation "A".
-    * erstellte identische Kopien der DataProducts, ... als Generation "B".   
-   Die Generation A ist nun schreibgeschützt, die Generation "B" wird publiziert.
-1. Bearbeiter mutiert Generation "B"
-1. Die Mutation geht in das erste Rollout - Generation "B" ist aktiv.
-1. Bearbeiter hat Bestätigung, dass Rollout bis auf Kosmetik "gut" ist.
-1. Bearbeiter löscht  das "A"-Schema in der DB und die Mutation in Simi. Mit dem Löschen der Mutation werden alle inaktiven Konfigurationen (Generation "A") gelöscht.
-
-Alternativablauf, falls die Mutation nicht vor dem Rollouttermin abgeschlossen werden kann:
-* (3.) Konfigurator mutiert Generation "B"
-* Bearbeiter aktiviert Generation "A", da "B" nicht auf den Rollouttermin fertig gestellt werden kann.   
-"A" bleibt weiterhin schreibgeschützt.
-* Die Mutation geht in das erste Rollout - Generation **"A"** ist aktiv.
-* Bearbeiter aktiviert nach dem Rollout wiederum die Generation "B", und arbeitet weiter.
-
-Alternativablauf, falls die Mutation komplett "verschossen" ist
-* (3.) Konfigurator mutiert Generation "B"
-* Da "B" komplett verschossen, aktiviert der Bearbeiter die Generation "A"
-* Bearbeiter löscht die Mutation. Mit dem Löschen der Mutation werden alle inaktiven Konfigurationen (Hier: Generation "B") gelöscht.
-
- 
+![Product](../puml/rendered/product.png)
 
 ## Klasse DataProduct (DP)
 
@@ -98,9 +61,11 @@ mit welcher in der Karte noch nicht vorhandene SA's einer LL beigefügt werden k
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |background|boolean|j|Gibt an, ob es sich um eine Hintergrundkarte handelt oder nicht.|
+|wgcUrlValue|String(50)|j|Kürzel der Karte im Aufruf des WGC.|
 
-Bemerkung: Die Attribute inWGC und inWMS des Dataproduct sind für die Map immer "false". 
+#### Konstraints
 
+wgcUrlValue ist unique.
 
 ### Klasse LayerList (LL)
 

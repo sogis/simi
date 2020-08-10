@@ -1,6 +1,6 @@
 # Flow
 
-![Flow](../puml/rendered/simi_flow_en.png)
+![Flow](../puml/rendered/flow_en.png)
 
 Describes the Relationships of a GRETL-Job to source and target PostgresTable.
 

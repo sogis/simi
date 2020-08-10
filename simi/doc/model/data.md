@@ -1,6 +1,6 @@
 # Data
 
-![Data](../puml/rendered/simi_data.png)
+![Data](../puml/rendered/data.png)
 
 Stellt die Klassen des Datenkonfigurationsteils dar
 * Tabellarische Daten aus Postgres/PostGIS mit und ohne Geometrie
@@ -154,7 +154,7 @@ Umfasst die Eigenschaften eines Attributs einer PostgresDS. Die Geometriespalten
 |strLength|Integer|n|Länge des Stringtyps (Sofern die Länge limitiert ist).|
 |catSynced|boolean|j|Gibt an, ob das Attribut bei der letzten Katalogabfrage in der Datenbank vorhanden war.|
 |remarks|String|n|Beschreibung (Metadaten) zum Attribut. Wird bei Ausführung des ModelReader befüllt, sofern NULL.|
-|remarksModel|String|n|Beschreibung zum Attribut im Interlis-Modell. Wird bei jeder Ausführung des ModelReader befüllt.|
+|remarksModel|String|n|Beschreibung zum Attribut im Interlis-Modell. Wird ausschliesslich vom ModelReader befüllt.|
 
 #### Konstraints
 

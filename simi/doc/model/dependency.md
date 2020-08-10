@@ -12,7 +12,7 @@ Beispiele für Datenstrukturen:
 * DataSetView: Beispielsweise die Abhängigkeit auf das gegenwärtige Schema.
 * Map: Abhängigkeit auf den Identifier der Map aufgrund Nutzung der URL-Schnittstelle zum WGC 
 
-![Dependency](../puml/rendered/simi_dependency.png) 
+![Dependency](../puml/rendered/dependency.png) 
 
 Modelliert sind auch Abhängigkeiten einer Fachapplikation auf eine Map oder eine LayerList (Wie beispielsweise bei Baugis, ArtPlus der Fall)
 

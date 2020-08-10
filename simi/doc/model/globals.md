@@ -2,7 +2,7 @@
 
 Tabellen zur Verwaltung der globalen Variablen.
 
-![Globals](../puml/rendered/simi_globals.png) 
+![Globals](../puml/rendered/globals.png) 
 
 ## Klasse Globals
 

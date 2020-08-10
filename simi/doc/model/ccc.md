@@ -1,6 +1,6 @@
 # CCC
 
-![CCC](../puml/rendered/simi_ccc.png)
+![CCC](../puml/rendered/ccc.png)
 
 ## Klasse CCC Client
 

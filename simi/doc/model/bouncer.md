@@ -12,7 +12,7 @@ Beispiel: http://geo.so.ch/bouncer/dox42/naturreservate\[...\]
 
 Metamodell für die Bouncer-Konfiguration:
 
-![Bouncer](../puml/rendered/simi_bouncer.png)
+![Bouncer](../puml/rendered/bouncer.png)
 
 Beziehungen Ressource - DataSetView:
 * contains data: Beschreibt, aus welchen Ebenen eine Ressource Daten bezieht.

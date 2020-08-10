@@ -1,0 +1,13 @@
+@startuml
+abstract class "DataProduct (DP)" as dp << Package Product >>
+package Mutation {
+
+  class "Mutation" as mut
+  class "Tuple" as tup
+
+  mut "1" -- "1..n" tup
+}
+
+tup "0..1" -- "1" dp
+tup "0..1" -- "1" dp
+@enduml

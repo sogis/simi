@@ -1,6 +1,6 @@
 # Packages (Teilmodelle)
 
-![Übersicht der Teilmodelle](../puml/rendered/simi_overview.png)
+![Übersicht der Teilmodelle](../puml/rendered/overview.png)
 
 * **Product [[Link]](product.md):** Enthält die Klassen für die Konfiguration der aus Data abgeleiteten Produkte. 
 * **Data [[Link]](data.md):** Enthält die Klassen für die Beschreibung der von der GDI genutzten 
@@ -84,10 +84,15 @@ Wie ist er Zusammenhang beim Drucken aus dem WGC zum WMS der Background-Maps?
 |1: WMS, WGC u. QGIS|xx|-|
 |2: Nur WMS|x|-|
 |3: Nicht publiziert|x|-|
+|4: Zu Löschen|x|-|
 |A: WGC u. QGIS|-|xx|
 |B: Nicht publiziert|-|x|
+|C: Zu Löschen|-|x|
 
-xx = Default
+xx = Default   
+Die folgenden Status von SingleActor oder LayerList (SAL), Map sind identisch, und sollen nur einmal vorkommen:
+* SAL:3 == MAP:B
+* SAL:4 == MAP:C
 
 **Umsetzung**
 
@@ -96,20 +101,31 @@ Ausmodellieren in die Steuerungstabelle DataProduct_PubScope mit den folgenden A
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |displayText|String(100)|j|Anzeige-Text in SIMI (Beispielsweise `1: WMS, WGC u. QGIS`, Siehe oben)|
-|sort|Integer|j|Sortierung der Werte in SIMI - Kann auch wegfallen, wenn für die korrekte Sortierung der Werte nicht notwendig|
+|overallState|enum|j|"published", "not self published", "to be deleted"|
 |default|Boolean|j|Defaultwert - Kann auch wegfallen, wenn für die korrekte Anzeige des Default-Wertes nicht notwendig|
-|forSingleActor|Boolean|j|Wert auf SingleActor anwendbar?|
-|forLayerList|Boolean|j|Wert auf LayerList anwendbar?|
+|forDSV|Boolean|j|Wert auf DataSetView anwendbar?|
+|forGroup|Boolean|j|Wert auf SingleActor, FacadeLayer, ExtWMS anwendbar?|
 |forMap|Boolean|j|Wert auf Map anwendbar?|
 |pubToWMS|Boolean|j|Wird das DataProduct im WMS publiziert?|
 |pubToWGC|Boolean|j|Wird das DataProduct im Web GIS Client publiziert?|
 |pubToLocator|Boolean|j|Wird das DataProduct im SO-Locator in QGIS Desktop publiziert?|
+|sort|Integer|j|Sortierung der Werte in SIMI.|
+
+Inhalt der Steuerungstabelle
+
+|displayText|overallState|forDSV|forGroup|forMap|pubToWMS|pubToWGC|pubToLocator|sort|
+|---|---|---|---|---|---|---|---|---|---|
+|WGC, QGIS u. WMS|published|x|x|-|x|x|x|1|
+|Nur WMS|published|x|x|-|x|-|-|10|
+|WGC u. QGIS|published|-|-|x|-|x|x|20|
+|Nicht (selbst) publiziert|not self published|x|x|x|-|-|-|30|
+|Zu Löschen|to be deleted|x|x|x|-|-|-|40|
+
+Der Default ist jeweils die erste zutreffende Zeile der Steuerungstabelle (Nach Sortierung).
 
 #### Publikation der Rohdaten
 
 Siehe Attribut data.DataSetView.rawDownload
-
-
 
 #### Snipplet für Tabellenerstellung
 
