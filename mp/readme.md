@@ -2,19 +2,19 @@ Umfasst das Komponentendiagramm sowie Fragen und Resultate der Konzept-Arbeitspa
 
 # Komponentendiagramm
 
-![Komponentendiagramm](../puml/rendered/components.png)
+![Komponentendiagramm](puml/rendered/components.png)
 
 # Arbeitspakete
 
 |ID|Link|
 |---|---|
-|K1|[SIMI Umsetzungsfragen](K1_Umsetzungsfragen.md)|
-|K2|[Transformation](K2_Transformation.md)|
-|K3|[SIMI-Hauptanwendungsfälle](K3_Hauptanwendungsfaelle.md)|
-|K4|[Magicbutton-Pipeline](K4_Pipeline.md)|
-|K5|[ModelReader](K5_ModelReader.md)|
-|K6|[GRETL-Schnittstelle](K6_GRETL_Endpoint.md)|
-|K7|[DataProduct-Service](K7_Dataproduct.md)|
+|K1|[SIMI Umsetzungsfragen](kp/K1_Umsetzungsfragen.md)|
+|K2|[Transformation](kp/K2_Transformation.md)|
+|K3|[SIMI-Hauptanwendungsfälle](kp/K3_Hauptanwendungsfaelle.md)|
+|K4|[Magicbutton-Pipeline](kp/K4_Pipeline.md)|
+|K5|[ModelReader](kp/K5_ModelReader.md)|
+|K6|[GRETL-Schnittstelle](kp/K6_GRETL_Endpoint.md)|
+|K7|[DataProduct-Service](kp/K7_Dataproduct.md)|
 
 # Arbeitspaketübergreifende Entscheide der Konzeptphase
 

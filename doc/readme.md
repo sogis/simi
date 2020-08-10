@@ -1,6 +1,6 @@
 # Packages (Teilmodelle)
 
-![Übersicht der Teilmodelle](../puml/rendered/overview.png)
+![Übersicht der Teilmodelle](puml/rendered/overview.png)
 
 * **Product [[Link]](product.md):** Enthält die Klassen für die Konfiguration der aus Data abgeleiteten Produkte. 
 * **Data [[Link]](data.md):** Enthält die Klassen für die Beschreibung der von der GDI genutzten 
