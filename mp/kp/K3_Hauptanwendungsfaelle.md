@@ -39,3 +39,20 @@ Ca. jede zehnte Ebene hat auch Konfiguration bezüglich:
 |Python-Formattierung mittels Combobox verständlicher machen. Combobox muss freie Stringeingabe ebenfalls unterstützen|Formattierung ist krypisch||
 |Bei Mutation einer Layerliste auf die Karten hinweisen, welche dieselben SA enthalten|Arbeitsunterstützung, damit Karten nicht vergessen gehen|Aufwandabhängig wird zusätzlich die automatische "Nachmutation" der Karten angeboten.|
 |Automatische Ableitung von ch.so. ... aus den bestehenden Informationen|Homogenität|Muster: ch.so.[Amt].[Thema].(edit).[Ebenenname]|
+
+## A-B Mutation
+
+Ziele:
+* Muss
+    * Übersicht der in einer Mutation veränderten DataProducts
+    * Ein-Klick Umschalten zwischen A und B bezüglich der Publikation
+    * Hinweise und Abbruch, wenn eine alte, aber von ausserhalb referenzierte Version gelöscht werden soll
+* Kann
+    * Automatisches Löschen und Umhängen nach Beeindigung der Mutation
+    
+Probleme:
+Beziehungen umhängen
+* Beziehungen von aussen in das Product-Modell: Stabile Aussensicht ohne AB
+* Beziehungen innerhalb Product-Modell:"Nervöse" innensicht mit AB
+
+
