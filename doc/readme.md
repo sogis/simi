@@ -2,20 +2,21 @@
 
 ![Übersicht der Teilmodelle](puml/rendered/overview.png)
 
-* **Product [[Link]](product.md):** Enthält die Klassen für die Konfiguration der aus Data abgeleiteten Produkte. 
-* **Data [[Link]](data.md):** Enthält die Klassen für die Beschreibung der von der GDI genutzten 
+* **Product [[Link]](model/product.md):** Enthält die Klassen für die Konfiguration der aus Data abgeleiteten Produkte. 
+* **Data [[Link]](model/data.md):** Enthält die Klassen für die Beschreibung der von der GDI genutzten 
 Datenquellen (GIS-Tabellen, Raster, ...).
-* **IAM [[Link]](iam.md):** Klassen zur Konfiguration des Identity und 
+* **IAM [[Link]](model/iam.md):** Klassen zur Konfiguration des Identity und 
 Access Management (Benutzer, Gruppen, Rollen, ...).
-* **Contact [[Link]](contact.md):** Teilmodell zur Definition der Kontaktinformationen 
+* **Contact [[Link]](model/contact.md):** Teilmodell zur Definition der Kontaktinformationen 
 bezüglich der genutzten Daten.
-* **Flow [[Link]](flow.md):** Dokumentiert die Datenflüsse der GRETL-Jobs.
-* **CCC [[Link]](ccc.md):** Modelliert die einzelnen CCC-Integrationen (CCC-Client).
-* **Bouncer [[Link]](bouncer.md):** Klassen zur Konfiguration des Bouncer-Proxy, welcher den Zugriff auf eine Ressource einschränkt.
-* **Print [[Link]](print.md):** Modelliert die Metainformationen für das Erzeugen von Karten-PDF's.
-* **Dependency [[Link]](dependency.md):** Doku der Komponenten, welche von Datenstrukturen der GDI abhängig sind.
-* **Featureinfo [[Link]](featureinfo.md):** Konfig von Featureinfo. Dieses erweitert das QGIS-Server Featureinfo mit templated HTML-Output und Datenquellen.
-* **Globals [[Link]](globals.md):** Konfig von GDI-weiten Konstanten.
+* **Flow [[Link]](model/flow.md):** Dokumentiert die Datenflüsse der GRETL-Jobs.
+* **CCC [[Link]](model/ccc.md):** Modelliert die einzelnen CCC-Integrationen (CCC-Client).
+* **Bouncer [[Link]](model/bouncer.md):** Klassen zur Konfiguration des Bouncer-Proxy, welcher den Zugriff auf eine Ressource einschränkt.
+* **Print [[Link]](model/print.md):** Modelliert die Metainformationen für das Erzeugen von Karten-PDF's.
+* **Dependency [[Link]](model/dependency.md):** Doku der Komponenten, welche von Datenstrukturen der GDI abhängig sind.
+* **Featureinfo [[Link]](model/featureinfo.md):** Konfig von Featureinfo. Dieses erweitert das QGIS-Server Featureinfo mit templated HTML-Output und Datenquellen.
+* **Globals [[Link]](model/globals.md):** Konfig von GDI-weiten Konstanten.
+* **Mutation [[Link]](model/globals.md):** Modul zwecks Übersicht zu Mutationen.
 
 ## Konstraints
 

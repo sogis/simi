@@ -10,10 +10,10 @@ dass mehrheitlich bestehende Ebenen mutiert werden.
 ## Resultate des WS vom 27.07
 
 Hauptanwendungsfälle:
-* Modell nach kleiner Anpassung wieder publizieren (Änderung weniger Attribute)
+* Modell nach kleiner Anpassung wieder publizieren (Änderung weniger Attribute, Klassen (=DataSet's) bleiben gleich)
   * Beinhaltet die Anpassung von mutierten Kommentaren.
 * Thema komplett überarbeiten ("Neues Modell")
-  * $td: A -> B Mutation entwerfen
+  * --> Teilmodell ["Mutation"](../../doc/model/mutation.md)
 * Aus bestehender Konfiguration eine fast identische geschützte erstellen.
   * LayerListe
   * FacadeLayer
@@ -40,19 +40,8 @@ Ca. jede zehnte Ebene hat auch Konfiguration bezüglich:
 |Bei Mutation einer Layerliste auf die Karten hinweisen, welche dieselben SA enthalten|Arbeitsunterstützung, damit Karten nicht vergessen gehen|Aufwandabhängig wird zusätzlich die automatische "Nachmutation" der Karten angeboten.|
 |Automatische Ableitung von ch.so. ... aus den bestehenden Informationen|Homogenität|Muster: ch.so.[Amt].[Thema].(edit).[Ebenenname]|
 
-## A-B Mutation
+## Entscheide
 
-Ziele:
-* Muss
-    * Übersicht der in einer Mutation veränderten DataProducts
-    * Ein-Klick Umschalten zwischen A und B bezüglich der Publikation
-    * Hinweise und Abbruch, wenn eine alte, aber von ausserhalb referenzierte Version gelöscht werden soll
-* Kann
-    * Automatisches Löschen und Umhängen nach Beeindigung der Mutation
-    
-Probleme:
-Beziehungen umhängen
-* Beziehungen von aussen in das Product-Modell: Stabile Aussensicht ohne AB
-* Beziehungen innerhalb Product-Modell:"Nervöse" innensicht mit AB
-
-
+|Thema|Entscheid|Bemerkungen|
+|---|---|---|
+|Teilmodell Mutation|Entscheid dazu, nachdem 2/3 des GUI's der anderen Teilmodelle implementiert sind.|Das konzipierte Teilmodell ist mit vernünftigem Aufwand zu erstellen - Trotzdem muss Gewissheit zum Nutzen bestehen.|

@@ -46,8 +46,8 @@ Teilmodell|Root-Klasse|Strategie|Bemerkungen|
 |DataSetView.styleServer|Wie kann der Text-Inhalt einer Datei in ein String-Feld geschrieben werden?|Offen|
 | |ANTWORT| |
 | | | |
-|Login einmal wöchentlich|Gibt es einen einfachen Weg, nur einmal in der Woche nach den Credentials zur Fragen (etwa mittels langlebigem auth cookie)? Zusammenhang mit cuba.web.rememberMeEnabled?|Offen|
-| |ANTWORT| |
+|Login einmal wöchentlich|Gibt es einen einfachen Weg, nur einmal in der Woche nach den Credentials zur Fragen (etwa mittels langlebigem auth cookie)? Zusammenhang mit cuba.web.rememberMeEnabled?|Erledigt|
+| |Setting [rememberMeExpirationTimeoutSec](https://doc.cuba-platform.com/manual-latest/app_properties_reference.html#cuba.rememberMeExpirationTimeoutSec)| |
 | | | |
 |Entity Zusatzinformationen|Best practice für das Auslesen von zusätzlichen Informationen aus verknüpften Entities. Zum Beispiel ob eine DataSetView "public" ist. JPQL Query / Native SQL auf DB-View / ...?|Offen|
 | |ANTWORT| |
@@ -55,7 +55,7 @@ Teilmodell|Root-Klasse|Strategie|Bemerkungen|
 |Custom Query: Abdeckung von Änderungen|Feedback zur Idee, DB-Views für die Zusammenzüge zu verwenden. Behindert dies die automatisch generierten update Skripte? Zu verhindern mit "do last"?|Offen|
 | |ANTWORT| |
 | | | |
-|Updated Info|Is the information on timestamp and user of last update available in the exiting admin interface?|Pending|
+|Updated Info|Is the information on timestamp and user of last update available in the existing admin interface?|Pending|
 | |Answer| |
 | | | |
 |Updated Info|If not available in admin interface: How can it be displayed without code duplication on every edit screen? Screen Fragment or Mixin or other?|Pending|

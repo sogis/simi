@@ -2,6 +2,8 @@
 package Metamodel {
   [Product] as prod
 
+  [Mutation] as mut
+
   [Bouncer] as bouncer
   [CCC] as ccc
   [Contact] as con
@@ -21,8 +23,10 @@ con --> prod
 data --> prod
 fi --> prod
 
-dep -up-> prod
 flow --> data
+
+dep -up-> prod
 iam -up-> prod
 print -up-> prod
+mut -up-> prod
 @enduml
