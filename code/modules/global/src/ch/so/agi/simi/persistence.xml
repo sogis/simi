@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="simi" transaction-type="RESOURCE_LOCAL">
+
+        <class>ch.so.agi.simi.entity.featureinfo.FeatureInfo</class>
+        <class>ch.so.agi.simi.entity.featureinfo.LayerRelation</class>
+        <class>ch.so.agi.simi.entity.product.DataSetView</class>
+    </persistence-unit>
+</persistence>

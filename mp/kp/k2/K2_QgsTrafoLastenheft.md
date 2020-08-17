@@ -46,6 +46,9 @@ Vor der Implementation wird die Struktur des qmlContent.json in zwei Schritten f
 * Im Rahmen einer Feedbackrunde (Halbtägiger Workshop) wird besprochen, ob und wie in Einzelfällen die Struktur    
 nach den Bedürfnissen von QgsTrafo und/oder JsonTrafo angepasst werden kann.
 
+Sprich: Vom bestehenden Code können die grundsätzlichen Ideen übernommen werden (Einsatz Jinja-Template, ...).
+Der Codeaufbau wird aber wohl von Grund auf neu erfolgen, nicht zuletzt aufgrund der komplett neuen Datenquelle "qgsContent.json".
+
 ### Abgabetermin
 
 Wunschtermin Ende Oktober. Allerspätestens Ende November 2020.

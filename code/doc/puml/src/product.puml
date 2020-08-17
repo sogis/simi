@@ -1,0 +1,39 @@
+@startuml
+package Product {
+  abstract class "DataProduct (DP)" as dp
+
+  abstract class "ProductList (PL)" as pl
+  class "LayerList (LL)" as ll
+  class "Map (MAP)" as map
+
+  abstract class "SingleActor (SA)" as sa
+  class "FacadeLayer (FL)" as fl
+  class "DataSetView (DSV)" as dsv
+  class "ExtLayer" as el
+  class "WmsLayer" as wl
+
+  class "PropertiesInFacade" as pif << (H, grey) Association Class >>
+  class "PropertiesInList" as pil << (H, grey) Association Class >>
+
+  dp <|-- pl
+
+  pl <|-- ll
+  pl <|-- map
+
+  dp <|-- sa
+
+  sa <|-- dsv
+  sa <|-- fl
+  sa <|-- el
+
+  el <|-- wl
+
+  pl "1" -right- "1..n" pil : "      "
+  pil "*" -right- "1" sa : "      "
+
+  map "*" -- "0..1" map : "background"
+
+  fl "1" -- "1..n" pif : "      "
+  pif "*" -up- "1" dsv : "      "
+}
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+package Print {
+class "QGisTemplate"
+}
+@enduml
