@@ -62,9 +62,14 @@ Wunschtermin Ende Oktober. Allerspätestens Ende November 2020.
 
 Fragen intern: Wie machen wir jeweils das Anheben der qml? Dies ist nicht Teil des Projektes "Metadatenpflege"
 
-## Idee für Fallback, sofern die Assets nicht im jeweiligen QML enthalten sind:
+## Fallback, sofern die Assets nicht im jeweiligen QML enthalten sind
 
-Universell mit vollem relativem Pfad gemäss vom Benutzer hochgeladenem zip:
+Bitte dies in der Offerte als Option aufnehmen. Wir möchten diesbezüglich nach Möglichkeit nicht's umsetzen und auf QGIS 3.10 setzen (mit base64).
+Trotzdem müssen wir uns kurz konzeptionell zur Lösung austauschen, damit wir dies beauftragen können, falls es halt nicht anders geht.
+
+### Idee dazu - Codierung im qmlContent.json für ein *.qml:
+
+Universell mit vollem relativem Pfad zum QML. Der QgsTrafo muss dann das base64 decodieren, die Dateien erstellen und relativ zum qgs gemäss "fullPath" ablegen.
 
 ```json
 {
