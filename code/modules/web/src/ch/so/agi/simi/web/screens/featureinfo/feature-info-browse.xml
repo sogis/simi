@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://featureInfoBrowse.caption"
+        focusComponent="featureInfoesTable"
+        messagesPack="ch.so.agi.simi.web.screens.featureinfo">
+    <data readOnly="true">
+        <collection id="featureInfoesDc"
+                    class="ch.so.agi.simi.entity.featureinfo.FeatureInfo">
+            <view extends="_minimal">
+                <property name="layerRelations" view="_minimal">
+                    <property name="relType"/>
+                    <property name="dataSetView" view="_minimal">
+                        <property name="t_dispName"/>
+                    </property>
+                </property>
+                <property name="t_dispName"/>
+            </view>
+            <loader id="featureInfoesDl">
+                <query>
+                    <![CDATA[select e from fi_FeatureInfo e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="featureInfoesTable"
+            spacing="true">
+        <groupTable id="featureInfoesTable"
+                    width="100%"
+                    dataContainer="featureInfoesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="t_dispName"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="featureInfoesTable.create"/>
+                <button id="editBtn" action="featureInfoesTable.edit"/>
+                <button id="removeBtn" action="featureInfoesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

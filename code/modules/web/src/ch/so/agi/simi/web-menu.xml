@@ -2,5 +2,6 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-simi" insertBefore="administration" caption="mainMsg://menu_config.application-simi">
         <item screen="product_DataSetView.browse" caption="mainMsg://menu_config.product_DataSetView.browse"/>
+        <item screen="fi_FeatureInfo.browse" caption="mainMsg://menu_config.fi_FeatureInfo.browse"/>
     </menu>
 </menu-config>
