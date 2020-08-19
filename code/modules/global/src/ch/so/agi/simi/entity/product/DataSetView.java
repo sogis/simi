@@ -1,14 +1,12 @@
 package ch.so.agi.simi.entity.product;
 
+import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.featureinfo.LayerRelation;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -17,13 +15,25 @@ import java.util.List;
 public class DataSetView extends StandardEntity {
     private static final long serialVersionUID = 3720829701428961919L;
 
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "dataSetView")
+    private List<LayerRelation> fiLayerRelations;
+
     @NotNull
     @Column(name = "IDENTIFIER", nullable = false)
     private String identifier;
 
-    @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "dataSetView")
-    private List<LayerRelation> fiLayerRelations;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FEATURE_INFO_ID")
+    private FeatureInfo featureInfo;
+
+    public FeatureInfo getFeatureInfo() {
+        return featureInfo;
+    }
+
+    public void setFeatureInfo(FeatureInfo featureInfo) {
+        this.featureInfo = featureInfo;
+    }
 
     public List<LayerRelation> getFiLayerRelations() {
         return fiLayerRelations;

@@ -1,11 +1,16 @@
 package ch.so.agi.simi.entity.featureinfo;
 
+import ch.so.agi.simi.entity.product.DataSetView;
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "FI_FEATURE_INFO")
 @Entity(name = "fi_FeatureInfo")
@@ -13,10 +18,16 @@ import javax.persistence.*;
 public class FeatureInfo extends StandardEntity {
     private static final long serialVersionUID = 569650397231873442L;
 
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "featureInfo")
+    private List<LayerRelation> layerRelations;
+
     @Lob
     @Column(name = "DISPLAY_TEMPLATE", nullable = false)
     @Length(message = "{msg://fi_FeatureInfo.displayTemplate.validation.Length}", min = 0, max = 60000)
     private String displayTemplate;
+
 
     @Lob
     @Length(message = "{msg://fi_FeatureInfo.displayTemplate.validation.Length}", min = 0, max = 60000)
@@ -31,16 +42,26 @@ public class FeatureInfo extends StandardEntity {
     @Column(name = "REMARKS")
     private String remarks;
 
-    @Transient
-    @MetaProperty
-    private String t_dsvName;
-
-    public String getT_dsvName() {
-        return t_dsvName;
+    public List<LayerRelation> getLayerRelations() {
+        return layerRelations;
     }
 
-    public void setT_dsvName(String t_dsvName) {
-        this.t_dsvName = t_dsvName;
+    public void setLayerRelations(List<LayerRelation> layerRelations) {
+        this.layerRelations = layerRelations;
+    }
+
+    public List<DataSetView> getDataSetViews() {
+        return dataSetViews;
+    }
+
+    public void setDataSetViews(List<DataSetView> dataSetViews) {
+        this.dataSetViews = dataSetViews;
+    }
+
+    @Transient
+    @MetaProperty
+    public String getT_dsvName() {
+        return t_dsvName;
     }
 
     public String getRemarks() {
