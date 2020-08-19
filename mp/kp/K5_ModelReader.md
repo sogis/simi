@@ -359,3 +359,9 @@ DBM, CON und TYPO brauchen keine Testdaten
 |Umgang mit nicht vorhandenen Informationen|Diese werden explixit als json:null in der Response zurückgegeben.|API-Klarheit ist (hier) wichtiger als die Transfergrösse.|
 |Benennung der Komponente|Neu: SchemaReader|Die Komponente liest grossmehrheitlich Informationen aus einem Schema von PostgreSQL aus und heisst darum folgerichtig **Schemareader**.| 
 |Quarkus oder Boot?|?|Umfang und Anforderungen passen sehr gut auf ein "Microservice-Framework" - Quarkus bietet gute Tutorials, welche sehr nahe an diesem UseCase liegen. Erleichtert die Umsetzung.|
+
+* als Spring Boot, um Frameworksalat zu vermeiden (Quarkus und Boot)
+* Umbenennen!
+* Zwei Endpunkte
+    * Tabellen auflisten /[DB Name]/tables?schemahint=fuu&tablehint=bar
+    * Info zu einer Tabelle /[DB Name]/[Schema Name]/[Tabellen Name]

@@ -64,6 +64,15 @@ Teilmodell|Root-Klasse|Strategie|Bemerkungen|
 |Abstract|Question|Pending|
 | |Answer| |
 
+Entscheide:
+* Vererbungsarten
+* Einsatz von View's
+* Binäre Assets in DB als einfache Strings (base64)
+* Ein Screen für Rollen AGI-MA und GIS-Koord
+* Know your GDI als Screen (Daten aus View)
+
+
+
 
 
 

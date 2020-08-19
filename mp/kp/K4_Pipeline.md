@@ -4,3 +4,6 @@
 
 * Integration der Transformer in die bestehende Pipeline
 * Schnittstellengestaltung zum Anstossen der Pipeline aus dem SIMI-GUI
+
+
+* Aufwand Ertrag Agents ...
