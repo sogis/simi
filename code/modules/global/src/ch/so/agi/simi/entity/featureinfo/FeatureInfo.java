@@ -50,18 +50,10 @@ public class FeatureInfo extends StandardEntity {
         this.layerRelations = layerRelations;
     }
 
-    public List<DataSetView> getDataSetViews() {
-        return dataSetViews;
-    }
-
-    public void setDataSetViews(List<DataSetView> dataSetViews) {
-        this.dataSetViews = dataSetViews;
-    }
-
     @Transient
     @MetaProperty
     public String getT_dsvName() {
-        return t_dsvName;
+        return "NOT IMPLEMENTED";
     }
 
     public String getRemarks() {
