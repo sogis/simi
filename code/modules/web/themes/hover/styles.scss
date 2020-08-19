@@ -1,0 +1,11 @@
+@import "hover-defaults";
+@import "ch.so.agi.simi/hover-ext-defaults";
+@import "app-components";
+@import "ch.so.agi.simi/hover-ext";
+
+.hover {
+  // include auto-generated app components SCSS
+  @include app_components;
+
+  @include ch_so_agi_simi-hover-ext;
+}

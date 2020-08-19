@@ -6,8 +6,18 @@
     <data>
         <instance id="featureInfoDc"
                   class="ch.so.agi.simi.entity.featureinfo.FeatureInfo">
-            <view extends="_local"/>
+            <view extends="_local">
+                <property name="layerRelations" view="_minimal">
+                    <property name="relType"/>
+                    <property name="dataSetView" view="_minimal">
+                        <property name="t_dispName"/>
+                    </property>
+                </property>
+                <property name="t_dispName"/>
+            </view>
             <loader/>
+            <collection id="layerRelationsDc" property="layerRelations">
+            </collection>
         </instance>
     </data>
     <dialogMode height="AUTO"
@@ -23,6 +33,27 @@
                 <textArea id="remarksField" property="remarks" rows="5"/>
             </column>
         </form>
+        <groupBox id="layerRelationsGroupBox"
+                  caption="Verknüpfte DataSetViews" stylename="light">
+            <table id="layerRelationsTable"
+                   dataContainer="layerRelationsDc"
+                   width="100%"
+                   editable="true"
+                   height="200px">
+                <actions>
+                    <action id="add" caption="DataSetView verknüpfen" icon="ADD_ACTION" type="add"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="relType"/>
+                    <column id="dataSetView"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="layerRelationsTable.add" />
+                    <button action="layerRelationsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
