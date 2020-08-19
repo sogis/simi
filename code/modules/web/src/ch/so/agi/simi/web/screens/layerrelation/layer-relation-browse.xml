@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://layerRelationBrowse.caption"
+        focusComponent="layerRelationsTable"
+        messagesPack="ch.so.agi.simi.web.screens.layerrelation">
+    <data readOnly="true">
+        <collection id="layerRelationsDc"
+                    class="ch.so.agi.simi.entity.featureinfo.LayerRelation">
+            <view extends="_local">
+                <property name="dataSetView" view="_minimal">
+                    <property name="t_dispName"/>
+                </property>
+            </view>
+            <loader id="layerRelationsDl">
+                <query>
+                    <![CDATA[select e from fi_LayerRelation e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="layerRelationsTable"
+            spacing="true">
+        <groupTable id="layerRelationsTable"
+                    width="100%"
+                    dataContainer="layerRelationsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="relType"/>
+                <column id="dataSetView"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="layerRelationsTable.create"/>
+                <button id="editBtn" action="layerRelationsTable.edit"/>
+                <button id="removeBtn" action="layerRelationsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

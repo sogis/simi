@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://layerRelationEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.layerrelation">
+    <data>
+        <instance id="layerRelationDc"
+                  class="ch.so.agi.simi.entity.featureinfo.LayerRelation">
+            <view extends="_local">
+                <property name="dataSetView" view="_minimal">
+                    <property name="t_dispName"/>
+                </property>
+                <property name="featureInfo" view="_minimal">
+                    <property name="remarks"/>
+                </property>
+            </view>
+            <loader/>
+        </instance>
+        <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.product.DataSetView" view="_minimal">
+            <loader id="dataSetViewsDl">
+                <query>
+                    <![CDATA[select e from product_DataSetView e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="layerRelationDc">
+            <column width="350px">
+                <lookupField id="relTypeField" property="relType"/>
+                <lookupPickerField id="dataSetViewField" optionsContainer="dataSetViewsDc" property="dataSetView">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="open" type="picker_open"/>
+                    </actions>
+                </lookupPickerField>
+                <pickerField id="featureInfoField" property="featureInfo">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
