@@ -18,9 +18,9 @@
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="groupDc">
             <column width="350px">
-                <textField id="identifierField" property="identifier"/>
-                <textArea id="remarksField" property="remarks" rows="5"/>
-                <checkBox id="pubAsUserField" property="pubAsUser"/>
+                <textField id="identifierField" property="identifier" caption="Kennung"/>
+                <checkBox id="pubAsUserField" property="pubAsUser" caption="Als Benutzer Publizieren"/>
+                <textArea id="remarksField" property="remarks" rows="5" caption="Bemerkungen"/>
             </column>
         </form>
         <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Group.users">

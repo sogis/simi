@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "SIMI_USER")
 @Entity(name = "simi_User")
 @NamePattern("%s (%s %s)|identifier,nachname,vorname")
-@PrimaryKeyJoinColumn(name = "ID")
+@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class User extends Identity {
     private static final long serialVersionUID = -2918662812811270888L;
 
