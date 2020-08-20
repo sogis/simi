@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://groupEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.group">
+    <data>
+        <instance id="groupDc"
+                  class="ch.so.agi.simi.entity.iam.Group">
+            <view extends="_local">
+                <property name="users" view="_minimal"/>
+            </view>
+            <loader/>
+            <collection id="usersDc" property="users"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="groupDc">
+            <column width="350px">
+                <textField id="identifierField" property="identifier"/>
+                <textArea id="remarksField" property="remarks" rows="5"/>
+                <checkBox id="pubAsUserField" property="pubAsUser"/>
+            </column>
+        </form>
+        <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Group.users">
+            <table id="usersTable" dataContainer="usersDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="identifier"/>
+                    <column id="nachname"/>
+                    <column id="vorname"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="usersTable.add"/>
+                    <button action="usersTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

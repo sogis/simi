@@ -6,8 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Table(name = "SIMI_USER")
 @Entity(name = "simi_User")
 @NamePattern("%s (%s %s)|identifier,nachname,vorname")
+@PrimaryKeyJoinColumn(name = "ID")
 public class User extends Identity {
     private static final long serialVersionUID = -2918662812811270888L;
 
@@ -18,6 +20,7 @@ public class User extends Identity {
     @NotNull
     @Column(name = "VORNAME", nullable = false, length = 100)
     private String vorname;
+
     @JoinTable(name = "SIMI_GROUP_USER_LINK",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "GROUP_ID"))

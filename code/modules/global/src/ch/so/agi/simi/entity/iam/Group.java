@@ -6,8 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Table(name = "SIMI_GROUP")
 @Entity(name = "simi_Group")
 @NamePattern("%s|identifier")
+@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class Group extends Identity {
     private static final long serialVersionUID = 109810719306418897L;
 

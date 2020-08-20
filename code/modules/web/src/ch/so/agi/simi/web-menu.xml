@@ -4,5 +4,7 @@
         <item screen="product_DataSetView.browse" caption="mainMsg://menu_config.product_DataSetView.browse"/>
         <item screen="fi_FeatureInfo.browse" caption="mainMsg://menu_config.fi_FeatureInfo.browse"/>
         <item screen="fi_LayerRelation.browse" caption="mainMsg://menu_config.fi_LayerRelation.browse"/>
+        <item screen="simi_User.browse" caption="mainMsg://menu_config.simi_User.browse"/>
+        <item screen="simi_Group.browse" caption="mainMsg://menu_config.simi_Group.browse"/>
     </menu>
 </menu-config>

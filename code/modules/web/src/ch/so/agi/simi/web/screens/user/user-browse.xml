@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://userBrowse.caption"
+        focusComponent="usersTable"
+        messagesPack="ch.so.agi.simi.web.screens.user">
+    <data readOnly="true">
+        <collection id="usersDc"
+                    class="ch.so.agi.simi.entity.iam.User">
+            <view extends="_local">
+                <property name="groups" view="_minimal"/>
+            </view>
+            <loader id="usersDl">
+                <query>
+                    <![CDATA[select e from simi_User e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="usersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="usersTable"
+                dataLoader="usersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="usersTable"
+                    width="100%"
+                    dataContainer="usersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="identifier"/>
+                <column id="remarks"/>
+                <column id="nachname"/>
+                <column id="vorname"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="usersTable.create"/>
+                <button id="editBtn" action="usersTable.edit"/>
+                <button id="removeBtn" action="usersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
