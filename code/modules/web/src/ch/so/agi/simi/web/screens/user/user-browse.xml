@@ -13,6 +13,19 @@
             <loader id="usersDl">
                 <query>
                     <![CDATA[select e from simi_User e]]>
+                    <condition>
+                        <or>
+                            <c:jpql>
+                                <c:where>e.identifier like :term</c:where>
+                            </c:jpql>
+                            <c:jpql>
+                                <c:where>e.firstname like :term</c:where>
+                            </c:jpql>
+                            <c:jpql>
+                                <c:where>e.lastname like :term</c:where>
+                            </c:jpql>
+                        </or>
+                    </condition>
                 </query>
             </loader>
         </collection>
@@ -21,11 +34,6 @@
                 width="800"/>
     <layout expand="usersTable"
             spacing="true">
-        <filter id="filter"
-                applyTo="usersTable"
-                dataLoader="usersDl">
-            <properties include=".*"/>
-        </filter>
         <groupTable id="usersTable"
                     width="100%"
                     dataContainer="usersDc">
@@ -48,6 +56,10 @@
                 <button id="removeBtn" action="usersTable.remove"/>
             </buttonsPanel>
         </groupTable>
+        <hbox spacing="true" width="100%" expand="fldQuickFilter">
+            <textField id="fldQuickFilter" property="" inputPrompt="Filtern nach Kennung, Vorname und Nachname"/>
+            <button id="btnQuickFilter" caption="Filtern" box.expandRatio="0.0" stylename="friendly" />
+        </hbox>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>
