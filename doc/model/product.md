@@ -4,6 +4,11 @@ Bildet alle möglichen Arten von Kartenebenen und deren Beziehung untereinander 
 
 ![Product](../puml/rendered/product.png)
 
+$td Diagramm anpassen
+* Umbennennung LayerList --> LayerGroup
+* Strukt ChildLayerProperties aufnehmen
+* In Diagramm zeigen, dass die *Properties - Klassen von ChildLayerProperties vererben
+
 ## Klasse DataProduct (DP)
 
 Basisklasse aller Datenprodukte.
@@ -35,7 +40,7 @@ Beispiele:
 
 Feld "identifier" ist GDI-weit eindeutig.
 
-## Strukt "ChildLayerProperties"
+## Strukt ChildLayerProperties
 
 Die Attribute der Strukt definieren die Reihenfolge und überschriebene Eigenschaften (Bsp. Transparenz) einer Ebene innerhalb 
 der übergeordneten Gruppe von Ebenen.
