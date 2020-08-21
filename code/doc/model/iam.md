@@ -83,8 +83,8 @@ Bemerkung: Es bestehen funktionale Einheiten der GDI mit eigenem (redundantem) B
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|nachname|String(100)|j|Nachname des Benutzers.|
-|vorname|String(100)|j|Vorname des Benutzers.|
+|lastname|String(100)|j|Nachname des Benutzers.|
+|firstname|String(100)|j|Vorname des Benutzers.|
 
 
 
