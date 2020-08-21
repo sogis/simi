@@ -35,7 +35,19 @@ Beispiele:
 
 Feld "identifier" ist GDI-weit eindeutig.
 
-## "ProductList Klassen"
+## Strukt "ChildLayerProperties"
+
+Die Attribute der Strukt definieren die Reihenfolge und überschriebene Eigenschaften (Bsp. Transparenz) einer Ebene innerhalb 
+der übergeordneten Gruppe von Ebenen.
+
+#### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|sort|int|j|Sortierindex der Ebene innerhalb der ProductList.|
+|transparency|int|j|Transparenz der Ebene in Prozent. Default: 0 (nicht transparent).|
+
+## Rund um Klasse "ProductList"
 
 ### Klasse ProductList
 
@@ -54,7 +66,7 @@ ProductList hat keine weiteren eigene Attribute.
 Die enthaltenen SingleActor können aus beliebigen thematischen Kontexten zusammengesetzt sein.
 
 Da eine Map häufig aus 1-n LayerList's zusammengesetzt wird: Im GUI wird eine Hilfsfunktion implementiert, 
-mit welcher in der Karte noch nicht vorhandene SA's einer LL beigefügt werden können.
+mit welcher in der Karte noch nicht vorhandene SA's einer LG beigefügt werden können.
 
 #### Attributbeschreibung
 
@@ -67,13 +79,19 @@ mit welcher in der Karte noch nicht vorhandene SA's einer LL beigefügt werden k
 
 wgcUrlValue ist unique.
 
-### Klasse LayerList (LL)
+### Klasse LayerGroup (LG)
 
 Die enthaltenen SingleActor haben einen engen thematischen Kontext.
 
 #### Attributbeschreibung
 
 LL hat keine weiteren eigene Attribute.
+
+### Klasse PropertiesInList
+
+Attributierte Verknüpfungstabelle der m:n Beziehung zwischen FL und DSV.
+
+Attribute siehe Strukt "ChildLayerProperties"
 
 ## Rund um Klasse SingleActor
 
@@ -122,9 +140,9 @@ Daten ist das Styling als QML optional enthalten.
 |remarks|String|n|Interne Bemerkungen zur DSV.|
 |styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
 |styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
-|suche|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
-|sucheFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
-|sucheFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieser DSV eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
+|searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
+|searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
+|searchFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieser DSV eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
 
 Bemerkungen zu der Default-View (defaultView=true):
 * SIMI setzt [name] auf NULL. Die defaultView hat den gleichen Identifier wie das DataSet. 
@@ -140,12 +158,7 @@ styleServer und styleDesktop: QML in korrekter Version hochgeladen?
 
 Attributierte Verknüpfungstabelle der m:n Beziehung zwischen FL und DSV.
 
-#### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|sort|int|j|Sortierindex der Ebene innerhalb der ProductList.|
-|transparency|int|j|Transparenz der Ebene in Prozent. Default: 0 (nicht transparent).|
+Attribute siehe Strukt "ChildLayerProperties"
 
 #### Konstraints
 
