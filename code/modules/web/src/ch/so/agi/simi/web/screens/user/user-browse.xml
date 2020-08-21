@@ -37,8 +37,8 @@
             <columns>
                 <column id="identifier"/>
                 <column id="remarks"/>
-                <column id="nachname"/>
-                <column id="vorname"/>
+                <column id="lastname"/>
+                <column id="firstname"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

@@ -8,18 +8,18 @@ import java.util.List;
 
 @Table(name = "SIMI_USER")
 @Entity(name = "simi_User")
-@NamePattern("%s (%s %s)|identifier,nachname,vorname")
+@NamePattern("%s (%s %s)|identifier,lastname,firstname")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class User extends Identity {
     private static final long serialVersionUID = -2918662812811270888L;
 
     @NotNull
-    @Column(name = "NACHNAME", nullable = false, length = 100)
-    private String nachname;
+    @Column(name = "FIRSTNAME", nullable = false, length = 100)
+    private String firstname;
 
     @NotNull
-    @Column(name = "VORNAME", nullable = false, length = 100)
-    private String vorname;
+    @Column(name = "LASTNAME", nullable = false, length = 100)
+    private String lastname;
 
     @JoinTable(name = "SIMI_GROUP_USER_LINK",
             joinColumns = @JoinColumn(name = "USER_ID"),
@@ -35,19 +35,19 @@ public class User extends Identity {
         this.groups = groups;
     }
 
-    public String getVorname() {
-        return vorname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getNachname() {
-        return nachname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setNachname(String nachname) {
-        this.nachname = nachname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 }

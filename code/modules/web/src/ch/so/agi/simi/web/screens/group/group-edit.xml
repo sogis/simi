@@ -31,8 +31,8 @@
                 </actions>
                 <columns>
                     <column id="identifier"/>
-                    <column id="nachname"/>
-                    <column id="vorname"/>
+                    <column id="lastname"/>
+                    <column id="firstname"/>
                 </columns>
                 <buttonsPanel>
                     <button action="usersTable.add"/>
