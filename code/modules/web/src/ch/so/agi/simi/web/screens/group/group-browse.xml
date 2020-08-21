@@ -13,6 +13,13 @@
             <loader id="groupsDl">
                 <query>
                     <![CDATA[select e from simi_Group e]]>
+                    <condition>
+                        <or>
+                            <c:jpql>
+                                <c:where>e.identifier like :term</c:where>
+                            </c:jpql>
+                        </or>
+                    </condition>
                 </query>
             </loader>
         </collection>
@@ -21,11 +28,6 @@
                 width="800"/>
     <layout expand="groupsTable"
             spacing="true">
-        <filter id="filter"
-                applyTo="groupsTable"
-                dataLoader="groupsDl">
-            <properties include=".*"/>
-        </filter>
         <groupTable id="groupsTable"
                     width="100%"
                     dataContainer="groupsDc">
@@ -47,6 +49,10 @@
                 <button id="removeBtn" action="groupsTable.remove"/>
             </buttonsPanel>
         </groupTable>
+        <hbox spacing="true" width="100%" expand="fldQuickFilter">
+            <textField id="fldQuickFilter" property="" inputPrompt="Filtern nach Kennung"/>
+            <button id="btnQuickFilter" caption="Filtern" box.expandRatio="0.0" stylename="friendly" />
+        </hbox>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>
