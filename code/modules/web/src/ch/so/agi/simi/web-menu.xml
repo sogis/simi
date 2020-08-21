@@ -6,5 +6,7 @@
         <item screen="fi_LayerRelation.browse" caption="mainMsg://menu_config.fi_LayerRelation.browse"/>
         <item screen="simi_User.browse" caption="mainMsg://menu_config.simi_User.browse"/>
         <item screen="simi_Group.browse" caption="mainMsg://menu_config.simi_Group.browse"/>
+        <item screen="simi_Role.browse" caption="mainMsg://menu_config.simi_Role.browse"/>
+        <item screen="simi_Identity.browse" caption="mainMsg://menu_config.simi_Identity.browse"/>
     </menu>
 </menu-config>

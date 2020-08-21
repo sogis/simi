@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://roleEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.role">
+    <data>
+        <instance id="roleDc"
+                  class="ch.so.agi.simi.entity.iam.Role">
+            <view extends="_local">
+                <property name="identities" view="_minimal"/>
+            </view>
+            <loader/>
+            <collection id="identitiesDc" property="identities"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="roleDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <textArea id="remarksField" property="remarks" rows="5"/>
+            </column>
+        </form>
+        <groupBox id="identitiesBox" caption="msg://ch.so.agi.simi.entity.iam/Role.identities">
+            <table id="identitiesTable" dataContainer="identitiesDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="identifier"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="identitiesTable.add"/>
+                    <button action="identitiesTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

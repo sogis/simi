@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://identityBrowse.caption"
+        focusComponent="identitiesTable"
+        messagesPack="ch.so.agi.simi.web.screens.identity">
+    <data readOnly="true">
+        <collection id="identitiesDc"
+                    class="ch.so.agi.simi.entity.iam.Identity">
+            <view extends="_local"/>
+            <loader id="identitiesDl">
+                <query>
+                    <![CDATA[select e from simi_Identity e]]>
+                    <condition>
+                        <or>
+                            <c:jpql>
+                                <c:where>e.identifier like :term</c:where>
+                            </c:jpql>
+                        </or>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="identitiesTable"
+            spacing="true">
+        <groupTable id="identitiesTable"
+                    width="100%"
+                    dataContainer="identitiesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="identifier"/>
+                <column id="remarks"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="identitiesTable.create"/>
+                <button id="editBtn" action="identitiesTable.edit"/>
+                <button id="removeBtn" action="identitiesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox spacing="true" width="100%" expand="fldQuickFilter">
+            <textField id="fldQuickFilter" property="" inputPrompt="Filtern nach Kennung"/>
+            <button id="btnQuickFilter" caption="Filtern" box.expandRatio="0.0" stylename="friendly" />
+        </hbox>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
