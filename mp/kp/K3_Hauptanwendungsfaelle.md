@@ -13,7 +13,7 @@ Hauptanwendungsfälle:
 * Modell nach kleiner Anpassung wieder publizieren (Änderung weniger Attribute, Klassen (=DataSet's) bleiben gleich)
   * Beinhaltet die Anpassung von mutierten Kommentaren.
 * Thema komplett überarbeiten ("Neues Modell")
-  * --> Teilmodell ["Mutation"](../../doc/model/mutation.md)
+  * --> Teilmodell ["Mutation"](../../code/doc/model/mutation.md)
 * Aus bestehender Konfiguration eine fast identische geschützte erstellen.
   * LayerListe
   * FacadeLayer

@@ -1,9 +1,0 @@
-@startuml
-class "DataProduct (DP)" as dp << package Product >>
-
-package Dependency {
-  class "Component" as comp
-}
-
-comp "*" -- "1..n" dp
-@enduml

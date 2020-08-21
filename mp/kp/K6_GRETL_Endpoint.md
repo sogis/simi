@@ -24,7 +24,7 @@ See the following matrix to clarify how the data is manged:
 * manual: Edited by an end user through the generic UI
 * endpoint: Edited by the endpoint "code"
 
-DataModel for the Endpoint: ![Flow](../../simi/doc/model/flow_en.md)
+DataModel for the Endpoint: ![Flow](../../simi/code/doc/model/flow_en.md)
 
 The Class PostgresTable is contained in the "sibling" model "Data". For simplicity, please mock it as shown in
 the diagram.

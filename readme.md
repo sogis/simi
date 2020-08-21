@@ -2,5 +2,5 @@
 
 Das Repo umfasst die folgenden Teile (in Unterordnern):
 * [/code](code): Source-Code der Metadatenpflegeapplikation "simi"
-* [/doc](doc): Übergeordnete Dokumentation, insbesondere des Datenmodells
+* [doc (Pfad: code/doc)](code/doc): Übergeordnete Dokumentation, insbesondere des Datenmodells
 * [/mp](mp): Dokumentation des Projektes "Metadatenpflege" (Temporär)
