@@ -47,10 +47,12 @@
                 <button id="removeBtn" action="rolesTable.remove"/>
             </buttonsPanel>
         </groupTable>
-        <hbox spacing="true" width="100%" expand="fldQuickFilter">
-            <textField id="fldQuickFilter" property="" inputPrompt="Filtern nach Name"/>
-            <button id="btnQuickFilter" caption="Filtern" box.expandRatio="0.0" stylename="friendly" />
-        </hbox>
+        <fragment screen="simi_FilterFragment">
+            <properties>
+                <property name="dataLoader" ref="rolesDl"/>
+                <property name="inputPrompt" value="Filtern nach Name"/>
+            </properties>
+        </fragment>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>
