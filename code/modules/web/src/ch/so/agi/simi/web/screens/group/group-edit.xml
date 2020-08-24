@@ -13,8 +13,10 @@
             <collection id="usersDc" property="users"/>
         </instance>
     </data>
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode height="auto"
+                width="auto"
+                modal="true"
+                forceDialog="true"/>
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="groupDc">
             <column width="350px">
