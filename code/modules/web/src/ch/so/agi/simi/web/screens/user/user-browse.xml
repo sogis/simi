@@ -46,7 +46,6 @@
                 <column id="identifier"/>
                 <column id="firstname"/>
                 <column id="lastname"/>
-                <column id="remarks"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

@@ -38,8 +38,6 @@
             </actions>
             <columns>
                 <column id="identifier"/>
-                <column id="remarks"/>
-                <column id="pubAsUser"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

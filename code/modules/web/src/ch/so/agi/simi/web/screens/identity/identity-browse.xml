@@ -36,7 +36,6 @@
             </actions>
             <columns>
                 <column id="identifier"/>
-                <column id="remarks"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
