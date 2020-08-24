@@ -32,6 +32,7 @@
                 </actions>
                 <columns>
                     <column id="identifier"/>
+                    <column id="instanceName"/>
                 </columns>
                 <buttonsPanel>
                     <button action="identitiesTable.add"/>
