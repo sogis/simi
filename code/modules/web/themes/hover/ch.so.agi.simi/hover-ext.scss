@@ -1,4 +1,30 @@
 /* Define your theme modifications inside next mixin */
-@mixin ch_so_agi_simi-hover-ext {
 
+@mixin normal_button {
+    background-color: #1b6198;
+    color: #e8eff5;
+}
+
+@mixin friendly_button {
+    background-color: #52aa4b;
+    color: #eff5ef;
+}
+
+@mixin danger_button {
+    background-color: #d24f4f;
+    color: #f8f0f0;
+}
+
+@mixin ch_so_agi_simi-hover-ext {
+    //.v-button:not(.v-button-link) { // disable for link buttons, as they should not have background
+    //    @include normal_button;
+    //}
+
+    //.v-button-danger:not(.v-button-link) { // disable for link buttons, as they should not have background
+    //    @include danger_button;
+    //}
+
+    //.v-button.v-button-friendly:not(.v-button-link), .v-button.v-button-c-primary-action:not(.v-button-link) { // disable for link buttons, as they should not have background
+    //    @include friendly_button;
+    //}
 }
