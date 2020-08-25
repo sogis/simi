@@ -1,6 +1,7 @@
 package ch.so.agi.simi.web.screens.role;
 
 import ch.so.agi.simi.entity.iam.Identity;
+import ch.so.agi.simi.entity.iam.User;
 import com.haulmont.cuba.core.global.MetadataTools;
 import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.Component;
@@ -20,11 +21,10 @@ public class RoleEdit extends StandardEditor<Role> {
     @Inject
     private MetadataTools metadataTools;
 
-//    @Install(to = "identitiesTable.instanceName", subject = "columnGenerator")
-//    private Component identitiesTableInstanceNameColumnGenerator(Identity identity) {
-//        Label label = uiComponents.create(Label.NAME);
-//        //label.setValue(metadataTools.getInstanceName(identity));
-//        label.setValue("generated column");
-//        return label;
-//    }
+    @Install(to = "usersTable.instanceName", subject = "columnGenerator")
+    private Component usersTableInstanceNameColumnGenerator(User user) {
+        Label label = uiComponents.create(Label.NAME);
+        label.setValue(metadataTools.getInstanceName(user));
+        return label;
+    }
 }

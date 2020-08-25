@@ -22,6 +22,19 @@ public class Group extends Identity {
             inverseJoinColumns = @JoinColumn(name = "USER_ID"))
     @ManyToMany
     private List<User> users;
+    @JoinTable(name = "SIMI_ROLE_GROUP_LINK",
+            joinColumns = @JoinColumn(name = "GROUP_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    @ManyToMany
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public List<User> getUsers() {
         return users;

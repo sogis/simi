@@ -7,8 +7,12 @@
         <instance id="roleDc"
                   class="ch.so.agi.simi.entity.iam.Role">
             <view extends="_local">
+                <property name="users" view="_local"/>
+                <property name="groups" view="_local"/>
             </view>
             <loader/>
+            <collection id="usersDc" property="users"/>
+            <collection id="groupsDc" property="groups"/>
         </instance>
     </data>
     <dialogMode height="auto"
@@ -22,6 +26,36 @@
                 <textArea id="remarksField" property="remarks" rows="5"/>
             </column>
         </form>
+        <groupBox id="groupsBox" caption="msg://ch.so.agi.simi.entity.iam/Role.groups">
+            <table id="groupsTable" dataContainer="groupsDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="identifier"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="groupsTable.add"/>
+                    <button action="groupsTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Role.users">
+            <table id="usersTable" dataContainer="usersDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="instanceName" caption="Benutzer"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="usersTable.add"/>
+                    <button action="usersTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Table(name = "SIMI_USER")
 @Entity(name = "simi_User")
-@NamePattern("%s (%s %s)|identifier,lastname,firstname")
+@NamePattern("%s (%s %s)|identifier,firstname,lastname")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class User extends Identity {
     private static final long serialVersionUID = -2918662812811270888L;
@@ -26,6 +26,20 @@ public class User extends Identity {
             inverseJoinColumns = @JoinColumn(name = "GROUP_ID"))
     @ManyToMany
     private List<Group> groups;
+
+    @JoinTable(name = "SIMI_ROLE_USER_LINK",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    @ManyToMany
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public List<Group> getGroups() {
         return groups;
