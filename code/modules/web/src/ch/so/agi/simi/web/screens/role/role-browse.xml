@@ -43,7 +43,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="rolesTable.create"/>
                 <button id="editBtn" action="rolesTable.edit"/>
-                <button id="removeBtn" action="rolesTable.remove"/>
+                <button id="removeBtn" action="rolesTable.remove" stylename="danger"/>
             </buttonsPanel>
         </groupTable>
         <fragment screen="simi_FilterFragment">

@@ -44,7 +44,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="groupsTable.create"/>
                 <button id="editBtn" action="groupsTable.edit"/>
-                <button id="removeBtn" action="groupsTable.remove"/>
+                <button id="removeBtn" action="groupsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </groupTable>
         <fragment screen="simi_FilterFragment">
