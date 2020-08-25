@@ -37,7 +37,7 @@
                     <column id="firstname"/>
                 </columns>
                 <buttonsPanel>
-                    <button action="usersTable.add"/>
+                    <button action="usersTable.add" stylename="friendly"/>
                     <button action="usersTable.exclude"/>
                 </buttonsPanel>
             </table>

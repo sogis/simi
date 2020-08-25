@@ -36,7 +36,7 @@
                     <column id="identifier"/>
                 </columns>
                 <buttonsPanel>
-                    <button action="groupsTable.add"/>
+                    <button action="groupsTable.add" stylename="friendly"/>
                     <button action="groupsTable.exclude"/>
                 </buttonsPanel>
             </table>
