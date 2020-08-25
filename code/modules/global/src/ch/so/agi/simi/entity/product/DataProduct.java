@@ -1,5 +1,6 @@
 package ch.so.agi.simi.entity.product;
 
+import ch.so.agi.simi.entity.DataProduct_PubScope;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
@@ -19,6 +20,11 @@ public class DataProduct extends StandardEntity {
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
     private String identifier;
 
+    @JoinColumn(name = "PUB_SCOPE_ID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @NotNull
+    private DataProduct_PubScope pubScope;
+
     @Column(name = "KEYWORDS", length = 200)
     private String keywords;
 
@@ -37,6 +43,14 @@ public class DataProduct extends StandardEntity {
 
     @Column(name = "RELEASED_THROUGH", length = 100)
     private String releasedThrough;
+
+    public DataProduct_PubScope getPubScope() {
+        return pubScope;
+    }
+
+    public void setPubScope(DataProduct_PubScope pubScope) {
+        this.pubScope = pubScope;
+    }
 
     public String getReleasedThrough() {
         return releasedThrough;
