@@ -1,0 +1,17 @@
+package ch.so.agi.simi.core.role;
+
+import com.haulmont.cuba.security.app.role.AnnotatedRoleDefinition;
+import com.haulmont.cuba.security.app.role.annotation.Role;
+import com.haulmont.cuba.security.app.role.annotation.ScreenComponentAccess;
+import com.haulmont.cuba.security.role.ScreenComponentPermissionsContainer;
+
+@Role(name = GISCoordinatorRole.NAME)
+public class GISCoordinatorRole extends AnnotatedRoleDefinition {
+    public final static String NAME = "GISCoordinator";
+
+    @ScreenComponentAccess(screenId = "simi_Role.edit", view = {"editActions"})
+    @Override
+    public ScreenComponentPermissionsContainer screenComponentPermissions() {
+        return super.screenComponentPermissions();
+    }
+}
