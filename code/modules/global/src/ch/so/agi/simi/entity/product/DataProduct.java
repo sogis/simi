@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Table(name = "SIMI_DATA_PRODUCT")
 @Entity(name = "simi_DataProduct")
-@NamePattern("%s|title")
+@NamePattern("%s (%s)|identifier,title")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class DataProduct extends StandardEntity {
