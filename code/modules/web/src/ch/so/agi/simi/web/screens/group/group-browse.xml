@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://groupBrowse.caption"
+        focusComponent="groupsTable"
+        messagesPack="ch.so.agi.simi.web.screens.group">
+    <data readOnly="true">
+        <collection id="groupsDc"
+                    class="ch.so.agi.simi.entity.iam.Group">
+            <view extends="_local">
+                <property name="users" view="_minimal"/>
+            </view>
+            <loader id="groupsDl">
+                <query>
+                    <![CDATA[select e from simi_Group e]]>
+                    <condition>
+                        <or>
+                            <c:jpql>
+                                <c:where>e.identifier like :term</c:where>
+                            </c:jpql>
+                        </or>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="groupsTable"
+            spacing="true">
+        <groupTable id="groupsTable"
+                    width="100%"
+                    dataContainer="groupsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="identifier"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="groupsTable.create"/>
+                <button id="editBtn" action="groupsTable.edit"/>
+                <button id="removeBtn" action="groupsTable.remove" stylename="danger"/>
+            </buttonsPanel>
+        </groupTable>
+        <fragment screen="simi_FilterFragment">
+            <properties>
+                <property name="dataLoader" ref="groupsDl"/>
+                <property name="inputPrompt" value="Filtern nach Kennung"/>
+            </properties>
+        </fragment>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

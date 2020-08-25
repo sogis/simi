@@ -5,5 +5,9 @@
         <class>ch.so.agi.simi.entity.featureinfo.FeatureInfo</class>
         <class>ch.so.agi.simi.entity.featureinfo.LayerRelation</class>
         <class>ch.so.agi.simi.entity.product.DataSetView</class>
+        <class>ch.so.agi.simi.entity.iam.Identity</class>
+        <class>ch.so.agi.simi.entity.iam.User</class>
+        <class>ch.so.agi.simi.entity.iam.Group</class>
+        <class>ch.so.agi.simi.entity.iam.Role</class>
     </persistence-unit>
 </persistence>
