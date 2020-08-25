@@ -7,10 +7,8 @@
         <instance id="roleDc"
                   class="ch.so.agi.simi.entity.iam.Role">
             <view extends="_local">
-                <property name="identities" view="_minimal"/>
             </view>
             <loader/>
-            <collection id="identitiesDc" property="identities"/>
         </instance>
     </data>
     <dialogMode height="auto"
@@ -24,22 +22,6 @@
                 <textArea id="remarksField" property="remarks" rows="5"/>
             </column>
         </form>
-        <groupBox id="identitiesBox" caption="msg://ch.so.agi.simi.entity.iam/Role.identities">
-            <table id="identitiesTable" dataContainer="identitiesDc" width="100%" height="200px">
-                <actions>
-                    <action id="add" type="add"/>
-                    <action id="exclude" type="exclude"/>
-                </actions>
-                <columns>
-                    <column id="identifier"/>
-                    <column id="instanceName"/>
-                </columns>
-                <buttonsPanel>
-                    <button action="identitiesTable.add"/>
-                    <button action="identitiesTable.exclude"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

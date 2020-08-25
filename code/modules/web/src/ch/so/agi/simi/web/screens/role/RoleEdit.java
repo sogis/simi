@@ -20,11 +20,11 @@ public class RoleEdit extends StandardEditor<Role> {
     @Inject
     private MetadataTools metadataTools;
 
-    @Install(to = "identitiesTable.instanceName", subject = "columnGenerator")
-    private Component identitiesTableInstanceNameColumnGenerator(Identity identity) {
-        Label label = uiComponents.create(Label.NAME);
-        //label.setValue(metadataTools.getInstanceName(identity));
-        label.setValue("generated column");
-        return label;
-    }
+//    @Install(to = "identitiesTable.instanceName", subject = "columnGenerator")
+//    private Component identitiesTableInstanceNameColumnGenerator(Identity identity) {
+//        Label label = uiComponents.create(Label.NAME);
+//        //label.setValue(metadataTools.getInstanceName(identity));
+//        label.setValue("generated column");
+//        return label;
+//    }
 }

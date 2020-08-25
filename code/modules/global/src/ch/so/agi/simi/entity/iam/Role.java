@@ -3,9 +3,11 @@ package ch.so.agi.simi.entity.iam;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Table(name = "SIMI_ROLE")
 @Entity(name = "simi_Role")
@@ -20,20 +22,6 @@ public class Role extends StandardEntity {
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
-
-    @JoinTable(name = "SIMI_ROLE_IDENTITY_LINK",
-            joinColumns = @JoinColumn(name = "ROLE_ID"),
-            inverseJoinColumns = @JoinColumn(name = "IDENTITY_ID"))
-    @ManyToMany
-    private List<Identity> identities;
-
-    public List<Identity> getIdentities() {
-        return identities;
-    }
-
-    public void setIdentities(List<Identity> identities) {
-        this.identities = identities;
-    }
 
     public String getRemarks() {
         return remarks;
