@@ -115,7 +115,7 @@ Ausmodellieren in die Steuerungstabelle DataProduct_PubScope mit den folgenden A
 Inhalt der Steuerungstabelle
 
 |displayText|overallState|forDSV|forGroup|forMap|pubToWMS|pubToWGC|pubToLocator|sort|
-|---|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|
 |WGC, QGIS u. WMS|published|x|x|-|x|x|x|1|
 |Nur WMS|published|x|x|-|x|-|-|10|
 |WGC u. QGIS|published|-|-|x|-|x|x|20|
