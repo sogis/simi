@@ -6,6 +6,7 @@
         <item screen="fi_LayerRelation.browse" caption="mainMsg://menu_config.fi_LayerRelation.browse"/>
         <menu id="application-simi-product" caption="Product">
 
+            <item screen="simi_DataProduct.browse" caption="mainMsg://menu_config.simi_DataProduct.browse"/>
         </menu>
         <menu id="application-simi-iam" caption="IAM">
             <item screen="simi_User.browse" caption="mainMsg://menu_config.simi_User.browse"/>
