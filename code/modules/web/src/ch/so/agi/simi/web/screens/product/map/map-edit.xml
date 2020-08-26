@@ -23,8 +23,10 @@
             <collection id="singleActorsDc" property="singleActors"/>
         </instance>
     </data>
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode height="auto"
+                width="80%"
+                modal="true"
+                forceDialog="true"/>
     <layout expand="scrollBox" spacing="true">
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="mapDc">
