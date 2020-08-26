@@ -10,22 +10,22 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.List;
 
-@Table(name = "SIMI_PRODUCT_LIST")
-@Entity(name = "simi_ProductList")
+@Table(name = "SIMI_SINGLE_ACTOR")
+@Entity(name = "simi_SingleActor")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-public class ProductList extends DataProduct {
-    private static final long serialVersionUID = 7189309667378680986L;
+public class SingleActor extends DataProduct {
+    private static final long serialVersionUID = 7629032894155576081L;
 
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "productList")
-    private List<PropertiesInList> singleActors;
+    @OneToMany(mappedBy = "singleActor")
+    private List<PropertiesInList> productLists;
 
-    public List<PropertiesInList> getSingleActors() {
-        return singleActors;
+    public List<PropertiesInList> getProductLists() {
+        return productLists;
     }
 
-    public void setSingleActors(List<PropertiesInList> singleActors) {
-        this.singleActors = singleActors;
+    public void setProductLists(List<PropertiesInList> productLists) {
+        this.productLists = productLists;
     }
 }

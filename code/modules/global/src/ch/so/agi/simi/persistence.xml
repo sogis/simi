@@ -14,5 +14,8 @@
         <class>ch.so.agi.simi.entity.product.ProductList</class>
         <class>ch.so.agi.simi.entity.product.LayerList</class>
         <class>ch.so.agi.simi.entity.product.Map</class>
+        <class>ch.so.agi.simi.entity.product.SingleActor</class>
+        <class>ch.so.agi.simi.entity.product.ChildLayerProperties</class>
+        <class>ch.so.agi.simi.entity.product.PropertiesInList</class>
     </persistence-unit>
 </persistence>
