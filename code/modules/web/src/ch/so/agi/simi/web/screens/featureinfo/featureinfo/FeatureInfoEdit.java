@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.featureinfo;
+package ch.so.agi.simi.web.screens.featureinfo.featureinfo;
 
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.featureinfo.FeatureInfo;

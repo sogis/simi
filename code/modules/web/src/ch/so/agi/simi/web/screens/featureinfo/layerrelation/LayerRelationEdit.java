@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.layerrelation;
+package ch.so.agi.simi.web.screens.featureinfo.layerrelation;
 
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.featureinfo.LayerRelation;
