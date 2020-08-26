@@ -2,7 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://layerRelationEdit.caption"
         focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.layerrelation">
+        messagesPack="ch.so.agi.simi.web.screens.featureinfo.layerrelation">
     <data>
         <instance id="layerRelationDc"
                   class="ch.so.agi.simi.entity.featureinfo.LayerRelation">

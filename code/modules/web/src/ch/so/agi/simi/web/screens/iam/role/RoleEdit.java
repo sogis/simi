@@ -1,6 +1,5 @@
-package ch.so.agi.simi.web.screens.role;
+package ch.so.agi.simi.web.screens.iam.role;
 
-import ch.so.agi.simi.entity.iam.Identity;
 import ch.so.agi.simi.entity.iam.User;
 import com.haulmont.cuba.core.global.MetadataTools;
 import com.haulmont.cuba.gui.UiComponents;

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://userEdit.caption"
+        caption="msg://groupEdit.caption"
         focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.user">
+        messagesPack="ch.so.agi.simi.web.screens.iam.group">
     <data>
-        <instance id="userDc"
-                  class="ch.so.agi.simi.entity.iam.User">
+        <instance id="groupDc"
+                  class="ch.so.agi.simi.entity.iam.Group">
             <view extends="_local">
-                <property name="groups" view="_minimal"/>
+                <property name="users" view="_minimal"/>
             </view>
             <loader/>
-            <collection id="groupsDc" property="groups"/>
+            <collection id="usersDc" property="users"/>
         </instance>
     </data>
     <dialogMode height="auto"
@@ -18,26 +18,27 @@
                 modal="true"
                 forceDialog="true"/>
     <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="userDc">
+        <form id="form" dataContainer="groupDc">
             <column width="350px">
                 <textField id="identifierField" property="identifier"/>
-                <textField id="firstnameField" property="firstname"/>
-                <textField id="lastnameField" property="lastname"/>
+                <checkBox id="pubAsUserField" property="pubAsUser"/>
                 <textArea id="remarksField" property="remarks" rows="5"/>
             </column>
         </form>
-        <groupBox id="groupsBox" caption="msg://ch.so.agi.simi.entity.iam/User.groups">
-            <table id="groupsTable" dataContainer="groupsDc" width="100%" height="200px">
+        <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Group.users">
+            <table id="usersTable" dataContainer="usersDc" width="100%" height="200px">
                 <actions>
                     <action id="add" type="add"/>
                     <action id="exclude" type="exclude"/>
                 </actions>
                 <columns>
                     <column id="identifier"/>
+                    <column id="lastname"/>
+                    <column id="firstname"/>
                 </columns>
                 <buttonsPanel>
-                    <button action="groupsTable.add" stylename="friendly"/>
-                    <button action="groupsTable.exclude"/>
+                    <button action="usersTable.add" stylename="friendly"/>
+                    <button action="usersTable.exclude"/>
                 </buttonsPanel>
             </table>
         </groupBox>
