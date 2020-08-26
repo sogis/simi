@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://dataProduct_PubScopeBrowse.caption"
+        focusComponent="dataProduct_PubScopesTable"
+        messagesPack="ch.so.agi.simi.web.screens.dataproduct_pubscope">
+    <data readOnly="true">
+        <collection id="dataProduct_PubScopesDc"
+                    class="ch.so.agi.simi.entity.DataProduct_PubScope">
+            <view extends="_local"/>
+            <loader id="dataProduct_PubScopesDl">
+                <query>
+                    <![CDATA[select e from simi_DataProduct_PubScope e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="dataProduct_PubScopesTable"
+            spacing="true">
+        <groupTable id="dataProduct_PubScopesTable"
+                    width="100%"
+                    dataContainer="dataProduct_PubScopesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="displayText"/>
+                <column id="overallState"/>
+                <column id="defaultValue"/>
+                <column id="forDSV"/>
+                <column id="forGroup"/>
+                <column id="forMap"/>
+                <column id="pubToWMS"/>
+                <column id="pubToWGC"/>
+                <column id="pubToLocator"/>
+                <column id="sort"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="dataProduct_PubScopesTable.create"/>
+                <button id="editBtn" action="dataProduct_PubScopesTable.edit"/>
+                <button id="removeBtn" action="dataProduct_PubScopesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

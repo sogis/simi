@@ -13,5 +13,7 @@
             <item screen="simi_Group.browse" caption="mainMsg://menu_config.simi_Group.browse"/>
             <item screen="simi_Role.browse" caption="mainMsg://menu_config.simi_Role.browse"/>
         </menu>
+        <item screen="simi_DataProduct_PubScope.browse"
+              caption="mainMsg://menu_config.simi_DataProduct_PubScope.browse"/>
     </menu>
 </menu-config>

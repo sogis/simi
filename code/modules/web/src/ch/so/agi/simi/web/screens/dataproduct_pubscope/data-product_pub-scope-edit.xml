@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://dataProduct_PubScopeEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.dataproduct_pubscope">
+    <data>
+        <instance id="dataProduct_PubScopeDc"
+                  class="ch.so.agi.simi.entity.DataProduct_PubScope">
+            <view extends="_local"/>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="dataProduct_PubScopeDc">
+            <column width="350px">
+                <textField id="displayTextField" property="displayText"/>
+                <lookupField id="overallStateField" property="overallState"/>
+                <checkBox id="defaultValueField" property="defaultValue"/>
+                <checkBox id="forDSVField" property="forDSV"/>
+                <checkBox id="forGroupField" property="forGroup"/>
+                <checkBox id="forMapField" property="forMap"/>
+                <checkBox id="pubToWMSField" property="pubToWMS"/>
+                <checkBox id="pubToWGCField" property="pubToWGC"/>
+                <checkBox id="pubToLocatorField" property="pubToLocator"/>
+                <textField id="sortField" property="sort"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
