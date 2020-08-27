@@ -60,12 +60,12 @@
                         <action id="addSingleActorsFromLayerList" caption="Aus LayerList übernehmen" icon="ADD_ACTION"/>
                         <action id="edit" type="edit"/>
                         <action id="exclude" type="exclude"/>
-                        <action id="sort" caption="Sortieren" icon="SORT"/>
+                        <action id="sortAction" caption="Sortieren" icon="SORT"/>
                     </actions>
                     <columns>
                         <column id="singleActor.identifier"/>
                         <column id="singleActor.title"/>
-                        <column id="visible"/>
+                        <column id="visible" editable="true"/>
                         <column id="sort" editable="true"/>
                     </columns>
                     <buttonsPanel>
@@ -73,7 +73,7 @@
                         <button action="singleActorsTable.addSingleActorsFromLayerList"/>
                         <button action="singleActorsTable.edit"/>
                         <button action="singleActorsTable.exclude"/>
-                        <button action="singleActorsTable.sort"/>
+                        <button action="singleActorsTable.sortAction"/>
                     </buttonsPanel>
                 </table>
             </groupBox>
