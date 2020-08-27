@@ -20,7 +20,7 @@ public class ChildLayerProperties extends StandardEntity {
     @Column(name = "TRANSPARENCY", nullable = false)
     @Max(100)
     @Min(0)
-    private Integer transparency;
+    private Integer transparency = 0;
 
     public Integer getTransparency() {
         return transparency;

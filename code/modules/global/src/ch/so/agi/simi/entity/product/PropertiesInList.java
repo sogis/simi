@@ -10,7 +10,7 @@ public class PropertiesInList extends ChildLayerProperties {
 
     @NotNull
     @Column(name = "VISIBLE", nullable = false)
-    private Boolean visible = false;
+    private Boolean visible = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_LIST_ID")
