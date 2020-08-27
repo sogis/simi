@@ -209,7 +209,7 @@ Als Ebene eingebundener externer WMTS.
 
 UK über wmsURL und identifier. 
 
-## Klasse ProperitesInList
+## Klasse PropertiesInList
 
 Attributierte Verknüpfungstabelle der m:n Beziehung zwischen PL und SA.
 
