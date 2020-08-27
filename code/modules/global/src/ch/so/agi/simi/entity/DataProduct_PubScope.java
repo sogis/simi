@@ -1,5 +1,6 @@
 package ch.so.agi.simi.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMI_DATA_PRODUCT_PUB_SCOPE")
 @Entity(name = "simi_DataProduct_PubScope")
+@NamePattern("%s|displayText")
 public class DataProduct_PubScope extends StandardEntity {
     private static final long serialVersionUID = -1191099388059651336L;
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://mapEdit.caption"
         focusComponent="form"
         messagesPack="ch.so.agi.simi.web.screens.product.map">
@@ -7,12 +8,7 @@
         <instance id="mapDc"
                   class="ch.so.agi.simi.entity.product.Map">
             <view extends="_local">
-                <property name="pubScope" view="_minimal">
-                    <property name="displayText"/>
-                    <property name="defaultValue"/>
-                    <property name="forMap"/>
-                    <property name="sort"/>
-                </property>
+                <property name="pubScope" view="_minimal"/>
                 <property name="singleActors" view="_minimal">
                     <property name="singleActor" view="_minimal"/>
                     <property name="sort"/>
@@ -22,6 +18,20 @@
             <loader/>
             <collection id="singleActorsDc" property="singleActors"/>
         </instance>
+        <collection id="pubScopesDc"
+                    class="ch.so.agi.simi.entity.DataProduct_PubScope"
+                    view="_local">
+            <loader id="pubScopesDl">
+                <query>
+                    <![CDATA[select e from simi_DataProduct_PubScope e order by e.sort]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>e.forMap = true</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="auto"
                 width="80%"
@@ -33,12 +43,7 @@
                 <column width="350px">
                     <textField id="identifierField" property="identifier"/>
                     <textField id="titleField" property="title"/>
-                    <pickerField id="pubScopeField" property="pubScope">
-                        <actions>
-                            <action id="lookup" type="picker_lookup"/>
-                            <action id="clear" type="picker_clear"/>
-                        </actions>
-                    </pickerField>
+                    <lookupField id="pubScopeField" property="pubScope" optionsContainer="pubScopesDc"/>
                     <dateField id="releasedAtField" property="releasedAt"/>
                     <textField id="releasedThroughField" property="releasedThrough"/>
                     <textArea id="synonymsField" property="synonyms" rows="2"/>
