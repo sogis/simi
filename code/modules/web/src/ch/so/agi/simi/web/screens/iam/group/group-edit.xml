@@ -13,11 +13,12 @@
             <collection id="usersDc" property="users"/>
         </instance>
     </data>
-    <dialogMode height="auto"
-                width="auto"
+    <dialogMode height="80%"
+                width="80%"
                 modal="true"
-                forceDialog="true"/>
-    <layout expand="editActions" spacing="true">
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="usersBox" spacing="true">
         <form id="form" dataContainer="groupDc">
             <column width="350px">
                 <textField id="identifierField" property="identifier"/>
@@ -26,7 +27,7 @@
             </column>
         </form>
         <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Group.users">
-            <table id="usersTable" dataContainer="usersDc" width="100%" height="200px">
+            <table id="usersTable" dataContainer="usersDc" width="100%" height="100%">
                 <actions>
                     <action id="add" type="add"/>
                     <action id="exclude" type="exclude"/>
