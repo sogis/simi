@@ -5,6 +5,7 @@ import ch.so.agi.simi.entity.product.ChildLayerProperties;
 import ch.so.agi.simi.entity.product.PropertiesInList;
 import ch.so.agi.simi.entity.product.SingleActor;
 import com.haulmont.cuba.core.global.Metadata;
+import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
@@ -14,9 +15,11 @@ import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.product.Map;
+import org.apache.commons.lang3.NotImplementedException;
 
 import javax.inject.Inject;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @UiController("simi_Map.edit")
@@ -79,17 +82,22 @@ public class MapEdit extends StandardEditor<Map> {
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreCommit(DataContext.PreCommitEvent event) {
-        var i = 0;
-        var singleActors = singleActorsDc.getItems().stream()
-                .sorted(Comparator.comparing(ChildLayerProperties::getSort))
+        int i = 0;
+        List<PropertiesInList> singleActors = singleActorsDc.getItems().stream()
+                .sorted(Comparator.comparing(ChildLayerProperties::getSort, Comparator.nullsLast(Comparator.naturalOrder())))
                 .collect(Collectors.toList());
 
         // go through the data container items. The same can be done using getEditedEntity().getSingleActorList().
-        for (var item : singleActors) {
+        for (PropertiesInList item : singleActors) {
             // set new value and add modified instance to the commit list
             item.setSort(i);
             event.getModifiedInstances().add(item);
             i += 10;
         }
+    }
+
+    @Subscribe("singleActorsTable.addSingleActorsFromLayerList")
+    public void onSingleActorsTableAddSingleActorsFromLayerList(Action.ActionPerformedEvent event) {
+        throw new NotImplementedException("onSingleActorsTableAddSingleActorsFromLayerList");
     }
 }

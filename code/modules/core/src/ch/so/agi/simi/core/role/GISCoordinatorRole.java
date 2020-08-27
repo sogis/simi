@@ -9,7 +9,7 @@ import com.haulmont.cuba.security.role.ScreenComponentPermissionsContainer;
 public class GISCoordinatorRole extends AnnotatedRoleDefinition {
     public final static String NAME = "GISCoordinator";
 
-    @ScreenComponentAccess(screenId = "simi_Role.edit", view = {"editActions"})
+    @ScreenComponentAccess(screenId = "simi_Map.edit", view = {"pubScopeField", "releasedAtField", "releasedThroughField", "btnAddSingleActor", "btnAddSingleActorsFromLayerList", "btnExclude"})
     @Override
     public ScreenComponentPermissionsContainer screenComponentPermissions() {
         return super.screenComponentPermissions();
