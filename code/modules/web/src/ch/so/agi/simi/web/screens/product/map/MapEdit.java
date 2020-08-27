@@ -5,7 +5,6 @@ import ch.so.agi.simi.entity.product.ChildLayerProperties;
 import ch.so.agi.simi.entity.product.PropertiesInList;
 import ch.so.agi.simi.entity.product.SingleActor;
 import com.haulmont.cuba.core.global.Metadata;
-import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
