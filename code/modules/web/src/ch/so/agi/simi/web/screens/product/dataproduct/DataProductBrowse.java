@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
-import ch.so.agi.simi.entity.product.LayerList;
+import ch.so.agi.simi.entity.product.LayerGroup;
 import ch.so.agi.simi.entity.product.Map;
 import ch.so.agi.simi.entity.product.SingleActor;
 import com.haulmont.cuba.core.global.Metadata;
@@ -31,10 +31,10 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
         showCreateEditorForDataProduct(map);
     }
 
-    @Subscribe("createBtn.createLayerList")
-    protected void onCreateBtnCreateLayerList(Action.ActionPerformedEvent event) {
-        LayerList layerList = metadata.create(LayerList.class);
-        showCreateEditorForDataProduct(layerList);
+    @Subscribe("createBtn.createLayerGroup")
+    protected void onCreateBtnCreateLayerGroup(Action.ActionPerformedEvent event) {
+        LayerGroup layerGroup = metadata.create(LayerGroup.class);
+        showCreateEditorForDataProduct(layerGroup);
     }
 
     @Subscribe("createBtn.createSingleActor")

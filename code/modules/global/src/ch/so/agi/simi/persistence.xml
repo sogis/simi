@@ -12,7 +12,7 @@
         <class>ch.so.agi.simi.entity.product.DataProduct</class>
         <class>ch.so.agi.simi.entity.DataProduct_PubScope</class>
         <class>ch.so.agi.simi.entity.product.ProductList</class>
-        <class>ch.so.agi.simi.entity.product.LayerList</class>
+        <class>ch.so.agi.simi.entity.product.LayerGroup</class>
         <class>ch.so.agi.simi.entity.product.Map</class>
         <class>ch.so.agi.simi.entity.product.SingleActor</class>
         <class>ch.so.agi.simi.entity.product.ChildLayerProperties</class>

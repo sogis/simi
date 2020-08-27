@@ -189,13 +189,13 @@ create table SIMI_GROUP (
     primary key (ID)
 )^
 -- end SIMI_GROUP
--- begin SIMI_LAYER_LIST
-create table SIMI_LAYER_LIST (
+-- begin SIMI_LAYER_GROUP
+create table SIMI_LAYER_GROUP (
     ID uuid,
     --
     primary key (ID)
 )^
--- end SIMI_LAYER_LIST
+-- end SIMI_LAYER_GROUP
 -- begin SIMI_MAP
 create table SIMI_MAP (
     ID uuid,

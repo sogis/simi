@@ -53,7 +53,7 @@
                 <popupButton id="createBtn" caption="Erstellen" stylename="friendly" icon="ADD_ACTION">
                     <actions>
                         <action id="createMap" caption="Map erstellen"/>
-                        <action id="createLayerList" caption="LayerList erstellen"/>
+                        <action id="createLayerGroup" caption="LayerGroup erstellen"/>
                         <action id="createSingleActor" caption="SingleActor erstellen"/>
                     </actions>
                 </popupButton>

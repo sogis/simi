@@ -96,8 +96,8 @@ public class MapEdit extends StandardEditor<Map> {
         }
     }
 
-    @Subscribe("singleActorsTable.addSingleActorsFromLayerList")
-    public void onSingleActorsTableAddSingleActorsFromLayerList(Action.ActionPerformedEvent event) {
-        throw new NotImplementedException("onSingleActorsTableAddSingleActorsFromLayerList");
+    @Subscribe("singleActorsTable.addSingleActorsFromLayerGroup")
+    public void onSingleActorsTableAddSingleActorsFromLayerGroup(Action.ActionPerformedEvent event) {
+        throw new NotImplementedException("onSingleActorsTableAddSingleActorsFromLayerGroup");
     }
 }

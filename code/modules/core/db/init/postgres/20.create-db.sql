@@ -38,9 +38,9 @@ alter table SIMI_USER add constraint FK_SIMI_USER_ON_ID foreign key (ID) referen
 -- begin SIMI_GROUP
 alter table SIMI_GROUP add constraint FK_SIMI_GROUP_ON_ID foreign key (ID) references SIMI_IDENTITY(ID) on delete CASCADE^
 -- end SIMI_GROUP
--- begin SIMI_LAYER_LIST
-alter table SIMI_LAYER_LIST add constraint FK_SIMI_LAYER_LIST_ON_ID foreign key (ID) references SIMI_PRODUCT_LIST(ID) on delete CASCADE^
--- end SIMI_LAYER_LIST
+-- begin SIMI_LAYER_GROUP
+alter table SIMI_LAYER_GROUP add constraint FK_SIMI_LAYER_GROUP_ON_ID foreign key (ID) references SIMI_PRODUCT_LIST(ID) on delete CASCADE^
+-- end SIMI_LAYER_GROUP
 -- begin SIMI_MAP
 alter table SIMI_MAP add constraint FK_SIMI_MAP_ON_ID foreign key (ID) references SIMI_PRODUCT_LIST(ID) on delete CASCADE^
 -- end SIMI_MAP
