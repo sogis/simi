@@ -33,9 +33,10 @@
                 width="800"/>
     <layout expand="dataProductsTable"
             spacing="true">
-        <groupTable id="dataProductsTable"
-                    width="100%"
-                    dataContainer="dataProductsDc">
+        <table id="dataProductsTable"
+               width="100%"
+               multiselect="true"
+               dataContainer="dataProductsDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -60,7 +61,7 @@
                 <button id="editBtn" action="dataProductsTable.edit"/>
                 <button id="removeBtn" action="dataProductsTable.remove"/>
             </buttonsPanel>
-        </groupTable>
+        </table>
         <fragment screen="simi_FilterFragment">
             <properties>
                 <property name="dataLoader" ref="dataProductsDl"/>

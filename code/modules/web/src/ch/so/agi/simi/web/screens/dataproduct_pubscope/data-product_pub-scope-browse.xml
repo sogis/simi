@@ -19,9 +19,10 @@
                 width="800"/>
     <layout expand="dataProduct_PubScopesTable"
             spacing="true">
-        <groupTable id="dataProduct_PubScopesTable"
-                    width="100%"
-                    dataContainer="dataProduct_PubScopesDc">
+        <table id="dataProduct_PubScopesTable"
+               width="100%"
+               multiselect="true"
+               dataContainer="dataProduct_PubScopesDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -46,7 +47,7 @@
                 <button id="editBtn" action="dataProduct_PubScopesTable.edit"/>
                 <button id="removeBtn" action="dataProduct_PubScopesTable.remove"/>
             </buttonsPanel>
-        </groupTable>
+        </table>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

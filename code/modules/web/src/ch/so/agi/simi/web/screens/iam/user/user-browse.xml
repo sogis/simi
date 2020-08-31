@@ -34,9 +34,10 @@
                 width="800"/>
     <layout expand="usersTable"
             spacing="true">
-        <groupTable id="usersTable"
-                    width="100%"
-                    dataContainer="usersDc">
+        <table id="usersTable"
+               width="100%"
+               multiselect="true"
+               dataContainer="usersDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -54,7 +55,7 @@
                 <button id="editBtn" action="usersTable.edit"/>
                 <button id="removeBtn" action="usersTable.remove" stylename="danger"/>
             </buttonsPanel>
-        </groupTable>
+        </table>
         <fragment screen="simi_FilterFragment">
             <properties>
                 <property name="dataLoader" ref="usersDl"/>

@@ -6,7 +6,7 @@ import ch.so.agi.simi.entity.product.SingleActor;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
-import com.haulmont.cuba.gui.components.GroupTable;
+import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.product.DataProduct;
 
@@ -21,7 +21,7 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     @Inject
     private ScreenBuilders screenBuilders;
     @Inject
-    private GroupTable<DataProduct> dataProductsTable;
+    private Table<DataProduct> dataProductsTable;
     @Inject
     private Metadata metadata;
 
