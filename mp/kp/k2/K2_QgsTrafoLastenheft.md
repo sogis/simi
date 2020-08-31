@@ -83,3 +83,41 @@ Universell mit vollem relativem Pfad zum QML. Der QgsTrafo muss dann das base64 
 	}]
 }
 ```
+
+## XML in JSON
+
+### Resultat ohne base64
+
+WITH 
+
+xmlnote AS (
+SELECT '<note type="small">
+<to>Tove</to>
+<from>Jani</from>
+<heading>Reminder</heading>
+<body>Dont forget me this weekend!</body>
+</note>' AS note
+)
+
+SELECT 
+	to_json(note) AS encoded, 
+	json_build_object('note', note) AS obj, 
+	json_each_text(json_build_object('note', note)) AS encoded_decoded  
+FROM xmlnote
+
+
+Name           |Value                                                                                                                                                |
+---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+encoded        |"<note type=\"small\">\n<to>Tove</to>\n<from>Jani</from>\n<heading>Reminder</heading>\n<body>Dont forget me this weekend!</body>\n</note>"           |
+obj            |{"note" : "<note type=\"small\">\n<to>Tove</to>\n<from>Jani</from>\n<heading>Reminder</heading>\n<body>Dont forget me this weekend!</body>\n</note>"}|
+encoded_decoded|(note,"<note type=""small"">¶<to>Tove</to>¶<from>Jani</from>¶<heading>Reminder</heading>¶<body>Dont forget me this weekend!</body>¶</note>")         |
+
+|encoded|obj|encoded_decoded|
+|-------|---|---------------|
+|"<note type=\"small\">\n<to>Tove</to>\n<from>Jani</from>\n<heading>Reminder</heading>\n<body>Dont forget me this weekend!</body>\n</note>"|{"note" : "<note type=\"small\">\n<to>Tove</to>\n<from>Jani</from>\n<heading>Reminder</heading>\n<body>Dont forget me this weekend!</body>\n</note>"}|(note,"<note type=""small"">
+<to>Tove</to>
+<from>Jani</from>
+<heading>Reminder</heading>
+<body>Dont forget me this weekend!</body>
+</note>")|
+ 

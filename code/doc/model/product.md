@@ -4,11 +4,6 @@ Bildet alle möglichen Arten von Kartenebenen und deren Beziehung untereinander 
 
 ![Product](../puml/rendered/product.png)
 
-$td Diagramm anpassen
-* Umbennennung LayerList --> LayerGroup
-* Strukt ChildLayerProperties aufnehmen
-* In Diagramm zeigen, dass die *Properties - Klassen von ChildLayerProperties vererben
-
 ## Klasse DataProduct (DP)
 
 Basisklasse aller Datenprodukte.
@@ -137,25 +132,20 @@ Daten ist das Styling als QML optional enthalten.
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|defaultView|boolean|j|Für ca. 3/4 der DS gibt es "nur" die Default-View. Default: true.|
 |rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
 |name|String(100)|n|Interne Bezeichnung der DataSetView, um diese von weiteren DSV's des gleichen DS unterscheiden zu können. Wird nur manuell gesetzt falls defaultView=false.|
-|remarks|String|n|Interne Bemerkungen zur DSV.|
 |styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
 |styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
 |searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
 |searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
 |searchFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieser DSV eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
 
-Bemerkungen zu der Default-View (defaultView=true):
-* SIMI setzt [name] auf NULL. Die defaultView hat den gleichen Identifier wie das DataSet. 
-* SIMI verhindert das Setzen einer WhereClause (Klasse TableView).
-* In der Regel umfasst die DefaultView alle Attribute des DS. Mögliche Ausnahme: Klasse mit zugriffsgeschütztem Attribut. 
-
 #### Konstraints
 
 UK auf den FK zur DataSetView.   
 styleServer und styleDesktop: QML in korrekter Version hochgeladen?
+
+DSV darf nicht gelöscht werden, sofern es in einem FacadeLayer vorkommt.
 
 ### Klasse PropertiesInFacade
 
@@ -345,6 +335,20 @@ Konstanter Präfix im mapViewerConfig.json ist folglich immer **resources.qwc2_t
 |---|---|---|
 |**FacadeLayer...**|||
 |Beispiele fehlen in aktueller Konfiguration...|||
+
+# Ausblick Datenbezug
+
+## Default-View
+
+Fragestellung der "Defaultview" zwecks Zusammenbringen der Datenbezüge über Services und Dateien.
+
+Bemerkungen zu der Default-View (Attribut defaultView=true):
+* SIMI verhindert das Setzen einer WhereClause (Klasse TableView).
+* In der Regel umfasst die DefaultView alle Attribute des DS. Mögliche Ausnahme: Klasse mit zugriffsgeschütztem Attribut. 
+
+## 
+
+
 
 
 

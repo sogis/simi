@@ -34,11 +34,11 @@ package "Metadata" {
     }
 
     together {
-      [Model-Reader] as mr
-      () "REST GET" as mri
-      mr - mri
+      [Schema-Reader] as sr
+      () "REST GET" as sri
+      sr - sri
     }
-    gui -left-> mri
+    gui -left-> sri
 
     class --> mdb : jdbc
     jt --> mdb : db con
@@ -50,7 +50,7 @@ package "Metadata" {
 database "Geo-DB" {
     [Catalog] as cat
 }
-mr --> cat : db con
+sr --> cat : db con
 
 gui --> pi
 pipe --> jt

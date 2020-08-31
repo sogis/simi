@@ -1,4 +1,4 @@
-# K5 - ModelReader
+# K5 - ModelReader (Neu: SchemaReader)
 
 ## Übersicht der Fragestellungen
 
