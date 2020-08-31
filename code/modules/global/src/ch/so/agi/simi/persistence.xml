@@ -17,5 +17,14 @@
         <class>ch.so.agi.simi.entity.product.SingleActor</class>
         <class>ch.so.agi.simi.entity.product.ChildLayerProperties</class>
         <class>ch.so.agi.simi.entity.product.PropertiesInList</class>
+        <class>ch.so.agi.simi.entity.product.DataSetView</class>
+        <class>ch.so.agi.simi.entity.product.FacadeLayer</class>
+        <class>ch.so.agi.simi.entity.data.tabular.TableView</class>
+        <class>ch.so.agi.simi.entity.data.DataSet</class>
+        <class>ch.so.agi.simi.entity.data.tabular.TableDS</class>
+        <class>ch.so.agi.simi.entity.data.tabular.PostgresTable</class>
+        <class>ch.so.agi.simi.entity.data.tabular.ModelSchema</class>
+        <class>ch.so.agi.simi.entity.data.tabular.PostgresDB</class>
+        <class>ch.so.agi.simi.entity.product.PropertiesInFacade</class>
     </persistence-unit>
 </persistence>
