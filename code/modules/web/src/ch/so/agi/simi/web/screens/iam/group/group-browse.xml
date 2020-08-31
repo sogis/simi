@@ -28,9 +28,10 @@
                 width="800"/>
     <layout expand="groupsTable"
             spacing="true">
-        <groupTable id="groupsTable"
-                    width="100%"
-                    dataContainer="groupsDc">
+        <table id="groupsTable"
+               width="100%"
+               multiselect="true"
+               dataContainer="groupsDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -46,7 +47,7 @@
                 <button id="editBtn" action="groupsTable.edit"/>
                 <button id="removeBtn" action="groupsTable.remove" stylename="danger"/>
             </buttonsPanel>
-        </groupTable>
+        </table>
         <fragment screen="simi_FilterFragment">
             <properties>
                 <property name="dataLoader" ref="groupsDl"/>
