@@ -1,9 +1,10 @@
 @startuml
 package Product {
+  interface "ChildLayerProperties (CLP)" as clp
   abstract class "DataProduct (DP)" as dp
 
   abstract class "ProductList (PL)" as pl
-  class "LayerList (LL)" as ll
+  class "LayerGroup (LG)" as lg
   class "Map (MAP)" as map
 
   abstract class "SingleActor (SA)" as sa
@@ -12,12 +13,12 @@ package Product {
   class "ExtLayer" as el
   class "WmsLayer" as wl
 
-  class "PropertiesInFacade" as pif << (H, grey) Association Class >>
-  class "PropertiesInList" as pil << (H, grey) Association Class >>
+  class "PropertiesInFacade::CLP" as pif << (H, grey) Association Class >>
+  class "PropertiesInList::CLP" as pil << (H, grey) Association Class >>
 
   dp <|-- pl
 
-  pl <|-- ll
+  pl <|-- lg
   pl <|-- map
 
   dp <|-- sa

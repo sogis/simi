@@ -1,0 +1,23 @@
+@startuml
+package data {
+
+    abstract class "DataTheme (DT)" as dt << Datenbezug >>
+
+    package tabular {
+        class "TableView" as tv
+        class "ModelSchema" as ms
+    }
+
+    package "raster"{
+        class "RasterTheme" as rt << Datenbezug >>
+        class "RasterDS::DS" as rds
+
+        rt "1" -- "*" rds
+
+    }
+    dt "*" -- "0..1" tv : Gebietseinteilung
+
+    dt <|-- ms
+    dt <|-- rt
+}
+@enduml

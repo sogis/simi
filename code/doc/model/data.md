@@ -9,46 +9,6 @@ Stellt die Klassen des Datenkonfigurationsteils dar
 
 ## Übergeordnete Klassen
 
-### Klasse DataTheme
-
-DataTheme ist der enge fachlich-thematische Kontext, über den sich die Struktur des Datenbezuges definiert.
-
-Bemerkung: DataTheme wird besser erst mit Projekt "Datenbezug" in SIMI integriert. Damit keine umfangreichen
-Metamodellanpassungen mit SIMI anfallen, ist die Klasse jedoch im Vorprojekt Metamaster schon modelliert.
-
-#### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|name|String(100)|j|Sprechende Bezeichnung des Themas.|
-|remarks|String|n|Interne Bemerkungen zum DT.|
-
-#### Gebietseinteilung für Datenbezug
-
-Sofern das DataTheme über eine Gebietseinteilung verfügt, wird dies über die Beziehung DT - TableView und die 
-folgenden Attribute dokumentiert und gesteuert:
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|raw_url_attributes|String(200)|n|Json-Array der Attribute für die URL (Attribut part_url_pattern).|
-|raw_url_pattern|String(200)|n|Pattern, welches die Download-URL des DS oder der Teilgebiete bestimmt.|
-|raw_display_attributes|String(200)|n|Json-Array der Attribute für die Darstellung des Gebietes (Attribut part_display_pattern).|
-|raw_display_pattern|String(200)|n|Pattern, welches den Display-String des DS oder der Teilgebiete.|
-
-Beispiele für die Patterns (Java MessageFormat):
-* Vektordatensatz (AV):
-    * Foreign Key auf TableView: `agi_hoheitsgrenzen_pub.hoheitsgrenzen_gemeindegrenze [DEFAULT]`
-    * raw_url_attributes: `["bfs_gemeindenummer"]`
-    * raw_url_pattern: `https://geo.so.ch/api/rawdata/av/{0}`
-    * raw_display_attributes: `["gemeindename"]`
-    * raw_display_pattern: `AV-Daten der Gemeinde: {0}`
-* Oberflächenmodell (LIDAR):
-    * Foreign Key auf TableView: `agi_lidar_pub.lidarprodukte_lidarprodukt [DOM]`
-    * raw_url_attributes: `["x_min","y_min"]`
-    * raw_url_pattern: `https://geo.so.ch/api/rawdata/lidar_dom/{0}/{1}`
-    * raw_display_attributes: `["x_min","y_min"]`
-    * raw_display_pattern: `Kachel {0} / {1} (X Min / Y Min)`
-
 ### Interface DataSet
 
 Bei Vektor- oder tabellarischen Daten entspricht ein Dataset-Eintrag einer (Geo-) Tabelle. 
@@ -134,6 +94,7 @@ GDI Postgres-Tabelle oder -View.
 |---|---|---|---|
 |idFieldName|String(100)|n|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
 |descriptionModel|String|Beschreibung Klasse im INTERLIS-Modell.|
+|descriptionOverride|String|Übersteuerung der Beschreibung in SIMI (Wird bei "grösserer" Modelländerung in das Modell zurückgeschrieben.|
 |catSyncStamp|DateTime|j|Zeitpunkt des letzten Abgleiches mit dem effektiven Schema der Geodatenbank.|
 |geoFieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
 |geoType|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
@@ -196,6 +157,7 @@ Postgres-Datenbank, in welcher das Schema (PostgresSchema) enthalten ist. Univer
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |dbName|String(100)|j|Name der Datenbank (auf dem Cluster). Name muss GDI-weit eindeutig sein.|
+|default|Boolean|j|Default-DB in den SIMI-Auswahlfeldern.|
 
 #### Konstraints
 
@@ -392,6 +354,50 @@ die im RasterTheme ersichtliche url.
 |resources.datasets.geometry.geometry_column|PostgresTable.geo_FieldName||
 |resources.datasets.geometry.geometry_type|PostgresTable.geo_Type||
 |resources.datasets.geometry.srid|PostgresTable.geo_EpsgCode||
+
+# Ausblick Datenbezug
+
+![DataTheme](../puml/rendered/data_theme.png)
+
+## Klasse DataTheme
+
+DataTheme ist der enge fachlich-thematische Kontext, über den sich die Struktur des Datenbezuges definiert.
+
+Bemerkung: DataTheme wird besser erst mit Projekt "Datenbezug" in SIMI integriert. Damit keine umfangreichen
+Metamodellanpassungen mit SIMI anfallen, ist die Klasse jedoch im Vorprojekt Metamaster schon modelliert.
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|name|String(100)|j|Sprechende Bezeichnung des Themas.|
+|remarks|String|n|Interne Bemerkungen zum DT.|
+
+### Gebietseinteilung für Datenbezug
+
+Sofern das DataTheme über eine Gebietseinteilung verfügt, wird dies über die Beziehung DT - TableView und die 
+folgenden Attribute dokumentiert und gesteuert:
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|raw_url_attributes|String(200)|n|Json-Array der Attribute für die URL (Attribut part_url_pattern).|
+|raw_url_pattern|String(200)|n|Pattern, welches die Download-URL des DS oder der Teilgebiete bestimmt.|
+|raw_display_attributes|String(200)|n|Json-Array der Attribute für die Darstellung des Gebietes (Attribut part_display_pattern).|
+|raw_display_pattern|String(200)|n|Pattern, welches den Display-String des DS oder der Teilgebiete.|
+
+Beispiele für die Patterns (Java MessageFormat):
+* Vektordatensatz (AV):
+    * Foreign Key auf TableView: `agi_hoheitsgrenzen_pub.hoheitsgrenzen_gemeindegrenze [DEFAULT]`
+    * raw_url_attributes: `["bfs_gemeindenummer"]`
+    * raw_url_pattern: `https://geo.so.ch/api/rawdata/av/{0}`
+    * raw_display_attributes: `["gemeindename"]`
+    * raw_display_pattern: `AV-Daten der Gemeinde: {0}`
+* Oberflächenmodell (LIDAR):
+    * Foreign Key auf TableView: `agi_lidar_pub.lidarprodukte_lidarprodukt [DOM]`
+    * raw_url_attributes: `["x_min","y_min"]`
+    * raw_url_pattern: `https://geo.so.ch/api/rawdata/lidar_dom/{0}/{1}`
+    * raw_display_attributes: `["x_min","y_min"]`
+    * raw_display_pattern: `Kachel {0} / {1} (X Min / Y Min)`
 
 
 
