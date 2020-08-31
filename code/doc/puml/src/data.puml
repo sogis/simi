@@ -18,13 +18,13 @@ package data {
         tds <|-- pt
         tds <|-- et
 
-        tv "*" --* "1" pt
+        tv "1-n" --* "1" pt
 
         pt "*" --* "1" ms
         pt "1" *-- "0..*" tf
 
-        tv "1" -- "1..n" vf
-        vf "1..n" -- "1" tf
+        tv "1" *-- "1..n" vf
+        vf "1..n" --* "1" tf
 
         ms "1..*" -- "1" pdb
     }
@@ -33,7 +33,7 @@ package data {
         class "RasterView" as rv
         class "RasterDS::DS" as rds
 
-        rv "1-n" -- "1" rds
+        rv "1-n" --* "1" rds
     }
 
     dsv <|-- tv
