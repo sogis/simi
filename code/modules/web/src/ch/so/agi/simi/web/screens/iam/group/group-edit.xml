@@ -27,7 +27,7 @@
             </column>
         </form>
         <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Group.users">
-            <table id="usersTable" dataContainer="usersDc" width="100%" height="100%">
+            <table id="usersTable" dataContainer="usersDc" width="100%" height="100%" multiselect="true">
                 <actions>
                     <action id="add" type="add"/>
                     <action id="exclude" type="exclude"/>

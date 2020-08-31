@@ -27,7 +27,7 @@
             </column>
         </form>
         <groupBox id="groupsBox" caption="msg://ch.so.agi.simi.entity.iam/Role.groups">
-            <table id="groupsTable" dataContainer="groupsDc" width="100%" height="200px">
+            <table id="groupsTable" dataContainer="groupsDc" width="100%" height="200px" multiselect="true">
                 <actions>
                     <action id="add" type="add"/>
                     <action id="exclude" type="exclude"/>
@@ -42,7 +42,7 @@
             </table>
         </groupBox>
         <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Role.users">
-            <table id="usersTable" dataContainer="usersDc" width="100%" height="200px">
+            <table id="usersTable" dataContainer="usersDc" width="100%" height="200px" multiselect="true">
                 <actions>
                     <action id="add" type="add"/>
                     <action id="exclude" type="exclude"/>

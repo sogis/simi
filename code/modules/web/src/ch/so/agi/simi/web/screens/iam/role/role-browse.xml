@@ -27,9 +27,10 @@
                 width="800"/>
     <layout expand="rolesTable"
             spacing="true">
-        <groupTable id="rolesTable"
-                    width="100%"
-                    dataContainer="rolesDc">
+        <table id="rolesTable"
+               width="100%"
+               multiselect="true"
+               dataContainer="rolesDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -45,7 +46,7 @@
                 <button id="editBtn" action="rolesTable.edit"/>
                 <button id="removeBtn" action="rolesTable.remove" stylename="danger"/>
             </buttonsPanel>
-        </groupTable>
+        </table>
         <fragment screen="simi_FilterFragment">
             <properties>
                 <property name="dataLoader" ref="rolesDl"/>

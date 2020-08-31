@@ -1,0 +1,38 @@
+package ch.so.agi.simi.entity.product;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Table(name = "SIMI_MAP")
+@Entity(name = "simi_Map")
+@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
+public class Map extends ProductList {
+    private static final long serialVersionUID = -737058404500308993L;
+
+    @NotNull
+    @Column(name = "BACKGROUND", nullable = false)
+    private Boolean background = false;
+
+    @NotNull
+    @Column(name = "WGC_URL_VALUE", nullable = false, length = 50)
+    private String wgcUrlValue;
+
+    public String getWgcUrlValue() {
+        return wgcUrlValue;
+    }
+
+    public void setWgcUrlValue(String wgcUrlValue) {
+        this.wgcUrlValue = wgcUrlValue;
+    }
+
+    public Boolean getBackground() {
+        return background;
+    }
+
+    public void setBackground(Boolean background) {
+        this.background = background;
+    }
+}
