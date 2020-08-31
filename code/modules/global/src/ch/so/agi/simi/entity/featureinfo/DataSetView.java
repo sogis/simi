@@ -1,4 +1,4 @@
-package ch.so.agi.simi.entity.product;
+package ch.so.agi.simi.entity.featureinfo;
 
 import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.featureinfo.LayerRelation;
