@@ -1,11 +1,13 @@
 package ch.so.agi.simi.entity.data.tabular;
 
-import ch.so.agi.simi.entity.featureinfo.DataSetView;
+import ch.so.agi.simi.entity.product.DataSetView;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Table(name = "SIMI_TABLE_VIEW")
 @Entity(name = "simi_TableView")
+@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class TableView extends DataSetView {
     private static final long serialVersionUID = -4901858225372396346L;
 

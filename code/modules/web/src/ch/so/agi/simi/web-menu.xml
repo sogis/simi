@@ -15,5 +15,8 @@
         </menu>
         <item screen="simi_DataProduct_PubScope.browse"
               caption="mainMsg://menu_config.simi_DataProduct_PubScope.browse"/>
+        <item screen="simi_PostgresTable.browse" caption="mainMsg://menu_config.simi_PostgresTable.browse"/>
+        <item screen="simi_ModelSchema.browse" caption="mainMsg://menu_config.simi_ModelSchema.browse"/>
+        <item screen="simi_PostgresDB.browse" caption="mainMsg://menu_config.simi_PostgresDB.browse"/>
     </menu>
 </menu-config>

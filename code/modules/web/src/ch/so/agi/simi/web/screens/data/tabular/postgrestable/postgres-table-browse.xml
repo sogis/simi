@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://postgresTableBrowse.caption"
+        focusComponent="postgresTablesTable"
+        messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgrestable">
+    <data readOnly="true">
+        <collection id="postgresTablesDc"
+                    class="ch.so.agi.simi.entity.data.tabular.PostgresTable">
+            <view extends="_local">
+                <property name="modelSchema" view="_minimal">
+                    <property name="schemaName"/>
+                    <property name="postgresDB" view="_minimal">
+                        <property name="dbName"/>
+                    </property>
+                </property>
+                <property name="tableViews" view="_minimal"/>
+            </view>
+            <loader id="postgresTablesDl">
+                <query>
+                    <![CDATA[select e from simi_PostgresTable e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="postgresTablesTable"
+            spacing="true">
+        <table id="postgresTablesTable"
+               width="100%"
+               dataContainer="postgresTablesDc"
+               multiselect="true">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="remarks"/>
+                <column id="catSyncStamp"/>
+                <column id="tableViews"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="postgresTablesTable.create" caption="Neues DataSet"/>
+                <button id="createTableViewBtn" caption="Neue TableView" icon="ADD_ACTION"/>
+                <button id="editBtn" action="postgresTablesTable.edit"/>
+                <button id="removeBtn" action="postgresTablesTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

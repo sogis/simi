@@ -1,5 +1,6 @@
 package ch.so.agi.simi.entity.data.tabular;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Table(name = "SIMI_MODEL_SCHEMA")
 @Entity(name = "simi_ModelSchema")
+@NamePattern("%s.%s|postgresDB,schemaName")
 public class ModelSchema extends StandardEntity {
     private static final long serialVersionUID = -2988394575142052644L;
 

@@ -1,5 +1,6 @@
 package ch.so.agi.simi.entity.data.tabular;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Table(name = "SIMI_POSTGRES_DB")
 @Entity(name = "simi_PostgresDB")
+@NamePattern("%s|dbName")
 public class PostgresDB extends StandardEntity {
     private static final long serialVersionUID = 5599910294180509457L;
 
