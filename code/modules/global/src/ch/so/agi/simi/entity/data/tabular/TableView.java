@@ -1,6 +1,7 @@
 package ch.so.agi.simi.entity.data.tabular;
 
 import ch.so.agi.simi.entity.product.DataSetView;
+import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "SIMI_TABLE_VIEW")
 @Entity(name = "simi_TableView")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
+@NamePattern("%s (%s)|identifier,postgresTable")
 public class TableView extends DataSetView {
     private static final long serialVersionUID = -4901858225372396346L;
 

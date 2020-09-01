@@ -19,6 +19,19 @@
             <loader id="postgresTablesDl">
                 <query>
                     <![CDATA[select e from simi_PostgresTable e]]>
+                    <condition>
+                        <or>
+                            <c:jpql>
+                                <c:where>e.tableName like :term</c:where>
+                            </c:jpql>
+                            <c:jpql>
+                                <c:where>e.modelSchema.schemaName like :term</c:where>
+                            </c:jpql>
+                            <c:jpql>
+                                <c:where>e.modelSchema.postgresDB.dbName like :term</c:where>
+                            </c:jpql>
+                        </or>
+                    </condition>
                 </query>
             </loader>
         </collection>
@@ -32,24 +45,31 @@
                dataContainer="postgresTablesDc"
                multiselect="true">
             <actions>
-                <action id="create" type="create"/>
+                <action id="create" type="create" caption="Neues DataSet"/>
+                <action id="createTableView" caption="Neue TableView" icon="ADD_ACTION"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="remarks"/>
+                <column id="instanceName" caption="Kennung"/>
                 <column id="catSyncStamp"/>
-                <column id="tableViews"/>
+                <column id="tableViews" caption="TableViews"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="postgresTablesTable.create" caption="Neues DataSet"/>
-                <button id="createTableViewBtn" caption="Neue TableView" icon="ADD_ACTION"/>
+                <button id="createBtn" action="postgresTablesTable.create"/>
+                <button id="createTableViewBtn" action="postgresTablesTable.createTableView"/>
                 <button id="editBtn" action="postgresTablesTable.edit"/>
                 <button id="removeBtn" action="postgresTablesTable.remove"/>
             </buttonsPanel>
         </table>
+        <fragment screen="simi_FilterFragment">
+            <properties>
+                <property name="dataLoader" ref="postgresTablesDl"/>
+                <property name="inputPrompt" value="Filtern nach Kennung"/>
+            </properties>
+        </fragment>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

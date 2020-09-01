@@ -1,5 +1,7 @@
 package ch.so.agi.simi.entity.data.tabular;
 
+import com.haulmont.chile.core.annotations.NamePattern;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -8,6 +10,7 @@ import java.util.List;
 @Table(name = "SIMI_POSTGRES_TABLE")
 @Entity(name = "simi_PostgresTable")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
+@NamePattern("%s.%s|modelSchema,tableName")
 public class PostgresTable extends TableDS {
     private static final long serialVersionUID = -6324189221967537598L;
 
