@@ -1,6 +1,7 @@
 package ch.so.agi.simi.entity.product;
 
 import com.haulmont.chile.core.annotations.Composition;
+import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
@@ -45,6 +46,18 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "dataSetView")
     private List<PropertiesInFacade> facadeLayers;
+
+    @Transient
+    @MetaProperty(related = "styleServer")
+    public Boolean getIsStyleServerFilled() {
+        return styleServer != null && !styleServer.isEmpty();
+    }
+
+    @Transient
+    @MetaProperty(related = "styleDesktop")
+    public Boolean getIsStyleDesktopFilled() {
+        return styleDesktop != null && !styleDesktop.isEmpty();
+    }
 
     public List<PropertiesInFacade> getFacadeLayers() {
         return facadeLayers;
