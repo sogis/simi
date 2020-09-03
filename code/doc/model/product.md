@@ -43,7 +43,7 @@ der übergeordneten Gruppe von Ebenen.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |sort|int|j|Sortierindex der Ebene innerhalb der ProductList.|
-|transparency|int|j|Transparenz der Ebene in Prozent. Default: 0 (nicht transparent).|
+|transparency|int|n|Transparenz der Kindebene innerhalb der Gruppierung. Überschreibt den Transparenzwert der Kindebene.|
 
 ## Rund um Klasse "ProductList"
 
@@ -100,7 +100,9 @@ erscheinen beispielsweise nicht als WMS-Ebene und werden in der TOC des Web GIS 
 
 #### Attributbeschreibung
 
-SA hat keine weiteren eigene Attribute.
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|transparency|int|j|Transparenz in %. Default: 0%|
 
 ### Klasse FacadeLayer (FL)
 
