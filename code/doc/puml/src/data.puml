@@ -3,11 +3,9 @@ abstract class "DataSetView (DSV)" as dsv << package Product >>
 
 package data {
 
-    interface "DataSet (DS)" as ds
-
     package tabular {
         class "TableView" as tv
-        class "TableDS::DS" as tds
+        class "TableDS" as tds
         class "PostgresTable" as pt
         class "ExternalTable" as et
         class "PostgresDB" as pdb
@@ -31,14 +29,12 @@ package data {
 
     package "raster"{
         class "RasterView" as rv
-        class "RasterDS::DS" as rds
+        class "RasterDS" as rds
 
         rv "1-n" --* "1" rds
     }
 
     dsv <|-- tv
     dsv <|-- rv
-
-    dsv -[hidden]-> ds
 }
 @enduml

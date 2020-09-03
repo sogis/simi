@@ -63,18 +63,15 @@ UK über FK's.
  
 ### Klasse TableDS
 
-Tabelle einer Datenbank der GDI oder mit Bezug zur GDI
+Tabelle einer Datenbank der GDI oder eine externe mit Bezug zur GDI
 
 #### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |tableName|String(100)|j|Name der Tabelle oder View in der Datenbank|
-
-#### Konstraints
-
-Es wird explizit **kein** Konstraint auf tableName gesetzt, um das Arbeiten mit Versionen zu erlauben.
-
+|remarks|String|n|Interne Bemerkungen zur Tabelle.|
+ 
 ### Klasse ExternalTable
 
 Tabelle einer externen Datenbank, aus welcher die GDI liest oder schreibt (GRETL).
@@ -181,6 +178,8 @@ Ausgestaltung abhängig von den Resultaten der Abklärung zur "besten" Raster-Da
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |path|String(200)|j|Filepfad zur verwendeten Rasterebene.|
+|remarks|String|n|Interne Bemerkungen zum DS.|
+|description|String|n|Metainformationen zum DataSet.|
 
 # Datenumfang für verschiedene Modellarten
 
