@@ -54,10 +54,10 @@ public class PostgresTableBrowse extends StandardLookup<PostgresTable> {
         VBoxLayout vBox = uiComponents.create(VBoxLayout.class);
         vBox.setSpacing(true);
 
-        postgresTable.getTableViews().forEach(view -> {
+        postgresTable.getTableViews().forEach(tableView -> {
             LinkButton linkButton = uiComponents.create(LinkButton.class);
-            linkButton.setCaption(metadataTools.getInstanceName(view));
-            linkButton.addClickListener(event -> editTableView(view));
+            linkButton.setCaption(tableView.getIdentifier());
+            linkButton.addClickListener(event -> editTableView(tableView));
             vBox.add(linkButton);
         });
         return vBox;
