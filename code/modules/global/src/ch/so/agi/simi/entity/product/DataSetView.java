@@ -49,13 +49,13 @@ public class DataSetView extends SingleActor {
 
     @Transient
     @MetaProperty(related = "styleServer")
-    public Boolean getIsStyleServerFilled() {
+    public Boolean getStyleServerFilled() {
         return styleServer != null && !styleServer.isEmpty();
     }
 
     @Transient
     @MetaProperty(related = "styleDesktop")
-    public Boolean getIsStyleDesktopFilled() {
+    public Boolean getStyleDesktopFilled() {
         return styleDesktop != null && !styleDesktop.isEmpty();
     }
 

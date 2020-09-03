@@ -19,32 +19,30 @@
         </instance>
     </data>
     <dialogMode height="AUTO"
-                width="AUTO"
+                width="80%"
                 modal="true"
                 forceDialog="true"/>
     <layout expand="scrollBox" spacing="true">
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="postgresTableDc">
                 <column width="350px">
-                    <textArea id="remarksField" property="remarks" rows="5"/>
-                    <textArea id="descriptionField" property="description" rows="5"/>
-                    <textField id="tableNameField" property="tableName"/>
-                    <textField id="idFieldNameField" property="idFieldName"/>
-                    <pickerField id="modelSchemaField" property="modelSchema">
-                        <actions>
-                            <action id="lookup" type="picker_lookup"/>
-                            <action id="clear" type="picker_clear"/>
-                        </actions>
-                    </pickerField>
-                    <textArea id="descriptionModelField" property="descriptionModel" rows="5"/>
+                    <textArea id="descriptionModelField" property="descriptionModel" rows="5" editable="false"/>
                     <textArea id="descriptionOverrideField" property="descriptionOverride" rows="5"/>
-                    <dateField id="catSyncStampField" property="catSyncStamp"/>
-                    <textField id="geoFieldNameField" property="geoFieldName"/>
-                    <textField id="geoTypeField" property="geoType"/>
-                    <textField id="geoEpsgCodeField" property="geoEpsgCode"/>
+                    <textField id="idFieldNameField" property="idFieldName"/>
+
+                    <textField id="tableNameField" property="tableName" editable="false"/>
+                    <pickerField id="modelSchemaField" property="modelSchema" editable="false"/>
+                    <textArea id="descriptionField" property="description" rows="5" editable="false"/>
+                    <textArea id="remarksField" property="remarks" rows="5" editable="false"/>
+
+                    <dateField id="catSyncStampField" property="catSyncStamp" editable="false"/>
+                    <textField id="geoFieldNameField" property="geoFieldName" editable="false"/>
+                    <textField id="geoTypeField" property="geoType" editable="false"/>
+                    <textField id="geoEpsgCodeField" property="geoEpsgCode" editable="false"/>
                 </column>
             </form>
         </scrollBox>
+        <button id="readFromServiceBtn" caption="Lesen von Service" align="MIDDLE_RIGHT" stylename="friendly"/>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

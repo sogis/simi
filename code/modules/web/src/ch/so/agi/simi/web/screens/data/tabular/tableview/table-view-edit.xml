@@ -10,8 +10,8 @@
             <view extends="_local">
                 <property name="postgresTable" view="_minimal"/>
                 <property name="pubScope" view="_minimal"/>
-                <property name="isStyleServerFilled"/>
-                <property name="isStyleDesktopFilled"/>
+                <property name="styleServerFilled"/>
+                <property name="styleDesktopFilled"/>
             </view>
             <loader/>
         </instance>
@@ -51,12 +51,12 @@
                     <textField id="searchFilterWordField" property="searchFilterWord"/>
 
                     <hbox caption="Style Server">
-                        <checkBox id="isStyleServerFilledField" property="isStyleServerFilled" align="MIDDLE_CENTER" editable="false"/>
+                        <checkBox id="isStyleServerFilledField" property="styleServerFilled" align="MIDDLE_CENTER" editable="false" dataContainer="tableViewDc"/>
                         <button id="downloadStyleServerBtn" caption="Download"/>
                         <upload id="uploadStyleServerBtn" fileStoragePutMode="MANUAL"/>
                     </hbox>
                     <hbox caption="Style Desktop">
-                        <checkBox id="isStyleDesktopFilledField" property="isStyleDesktopFilled" align="MIDDLE_CENTER" editable="false"/>
+                        <checkBox id="isStyleDesktopFilledField" property="styleDesktopFilled" align="MIDDLE_CENTER" editable="false" dataContainer="tableViewDc"/>
                         <button id="downloadStyleDesktopBtn" caption="Download"/>
                         <upload id="uploadStyleDesktopBtn" fileStoragePutMode="MANUAL"/>
                     </hbox>
