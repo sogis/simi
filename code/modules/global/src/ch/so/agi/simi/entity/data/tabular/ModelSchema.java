@@ -1,30 +1,37 @@
 package ch.so.agi.simi.entity.data.tabular;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMI_MODEL_SCHEMA")
+@Table(name = "SIMI_MODEL_SCHEMA", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_SIMI_MODEL_SCHEMA_UNQ_SCHEMA_NAME_POSTGRES_DB_ID", columnNames = {"SCHEMA_NAME", "POSTGRES_DB_ID"})
+})
 @Entity(name = "simi_ModelSchema")
 @NamePattern("%s.%s|postgresDB,schemaName")
 public class ModelSchema extends StandardEntity {
     private static final long serialVersionUID = -2988394575142052644L;
 
-    @Column(name = "SCHEMA_NAME", nullable = false, unique = true, length = 100)
+    @Column(name = "SCHEMA_NAME", nullable = false, length = 100)
     @NotNull
     private String schemaName;
 
-    @Column(name = "MODEL_NAME", unique = true, length = 100)
+    @Column(name = "MODEL_NAME", length = 100)
     private String modelName;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "POSTGRES_DB_ID", unique = true)
+    @JoinColumn(name = "POSTGRES_DB_ID")
     private PostgresDB postgresDB;
 
     @OneToMany(mappedBy = "modelSchema")
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
     private List<PostgresTable> postgresTables;
 
     public List<PostgresTable> getPostgresTables() {

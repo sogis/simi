@@ -7,7 +7,9 @@
     <data readOnly="true">
         <collection id="postgresDBsDc"
                     class="ch.so.agi.simi.entity.data.tabular.PostgresDB">
-            <view extends="_local"/>
+            <view extends="_local">
+                <property name="modelSchemas" view="_minimal"/>
+            </view>
             <loader id="postgresDBsDl">
                 <query>
                     <![CDATA[select e from simi_PostgresDB e]]>

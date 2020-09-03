@@ -1,17 +1,15 @@
 package ch.so.agi.simi.web.screens.data.tabular.postgrestable;
 
+import ch.so.agi.simi.entity.data.tabular.PostgresTable;
 import ch.so.agi.simi.entity.data.tabular.TableView;
 import com.haulmont.cuba.core.global.MetadataTools;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.*;
-import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.data.tabular.PostgresTable;
 import com.haulmont.cuba.gui.screen.LookupComponent;
-import javafx.scene.layout.VBox;
+import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
-import java.util.List;
 
 @UiController("simi_PostgresTable.browse")
 @UiDescriptor("postgres-table-browse.xml")

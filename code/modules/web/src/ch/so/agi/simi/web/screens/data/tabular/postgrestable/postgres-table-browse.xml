@@ -48,7 +48,12 @@
                 <action id="create" type="create" caption="Neues DataSet"/>
                 <action id="createTableView" caption="Neue TableView" icon="ADD_ACTION"/>
                 <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="remove" type="remove">
+                    <properties>
+                        <property name="confirmationTitle" value="Löschen bestätigen"/>
+                        <property name="confirmationMessage" value="Alle zugehörigen TableViews werden ebenfalls gelöscht. Sind Sie sicher, dass sie die ausgewählten Postgres Tabellen löschen möchten?"/>
+                    </properties>
+                </action>
             </actions>
             <columns>
                 <column id="instanceName" caption="Kennung"/>

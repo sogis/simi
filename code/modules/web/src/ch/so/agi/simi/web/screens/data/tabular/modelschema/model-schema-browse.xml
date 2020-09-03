@@ -30,7 +30,13 @@
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="remove" type="remove">
+                    <properties>
+                        <property name="confirmationMessage"
+                                  value="Alle zugehörigen Postgres Tabellen und TableViews werden ebenfalls gelöscht. Sind Sie sicher, dass sie die ausgewählten Modell Schemas löschen möchten?"/>
+                        <property name="confirmationTitle" value="Löschen bestätigen"/>
+                    </properties>
+                </action>
             </actions>
             <columns>
                 <column id="schemaName"/>
