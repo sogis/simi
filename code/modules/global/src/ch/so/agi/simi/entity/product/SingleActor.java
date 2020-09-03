@@ -4,10 +4,10 @@ import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "SIMI_SINGLE_ACTOR")
@@ -20,6 +20,20 @@ public class SingleActor extends DataProduct {
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "singleActor")
     private List<PropertiesInList> productLists;
+
+    @NotNull
+    @Column(name = "TRANSPARENCY", nullable = false)
+    @Min(0)
+    @Max(100)
+    private Integer transparency = 0;
+
+    public Integer getTransparency() {
+        return transparency;
+    }
+
+    public void setTransparency(Integer transparency) {
+        this.transparency = transparency;
+    }
 
     public List<PropertiesInList> getProductLists() {
         return productLists;

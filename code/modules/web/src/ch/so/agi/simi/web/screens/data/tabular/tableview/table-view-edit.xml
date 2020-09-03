@@ -69,6 +69,8 @@
                     <textArea id="synonymsField" property="synonyms" rows="2"/>
                     <textArea id="keywordsField" property="keywords" rows="2"/>
                     <textArea id="remarksField" property="remarks" rows="5"/>
+
+                    <textField id="transparencyField" property="transparency"/>
                 </column>
             </form>
         </scrollBox>
