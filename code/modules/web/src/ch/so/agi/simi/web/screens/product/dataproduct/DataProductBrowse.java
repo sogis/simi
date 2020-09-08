@@ -1,5 +1,6 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
+import ch.so.agi.simi.entity.data.raster.RasterView;
 import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.product.*;
 import com.haulmont.cuba.core.global.Metadata;
@@ -45,6 +46,12 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     protected void onCreateBtnCreateTableView(Action.ActionPerformedEvent event) {
         TableView tableView = metadata.create(TableView.class);
         showCreateEditorForDataProduct(tableView);
+    }
+
+    @Subscribe("createBtn.createRasterView")
+    protected void onCreateBtnCreateRasterView(Action.ActionPerformedEvent event) {
+        RasterView rasterView = metadata.create(RasterView.class);
+        showCreateEditorForDataProduct(rasterView);
     }
 
     private void showCreateEditorForDataProduct(DataProduct dataProduct) {

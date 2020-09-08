@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://rasterDSBrowse.caption"
+        focusComponent="rasterDsesTable"
+        messagesPack="ch.so.agi.simi.web.screens.data.raster.rasterds">
+    <data readOnly="true">
+        <collection id="rasterDsesDc"
+                    class="ch.so.agi.simi.entity.data.raster.RasterDS">
+            <view extends="_local">
+                <property name="rasterViews" view="_minimal">
+                    <property name="identifier"/>
+                </property>
+            </view>
+            <loader id="rasterDsesDl">
+                <query>
+                    <![CDATA[select e from simi_RasterDS e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="rasterDsesTable"
+            spacing="true">
+        <table id="rasterDsesTable"
+               width="100%"
+               dataContainer="rasterDsesDc"
+               multiselect="true">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="path"/>
+                <column id="remarks"/>
+                <column id="description"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="rasterDsesTable.create"/>
+                <button id="editBtn" action="rasterDsesTable.edit"/>
+                <button id="removeBtn" action="rasterDsesTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
