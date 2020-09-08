@@ -36,6 +36,8 @@
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="rasterViewDc">
                 <column width="350px">
+                    <pickerField id="rasterDSField" property="rasterDS" editable="false"/>
+
                     <textField id="transparencyField" property="transparency"/>
                     <checkBox id="rawDownloadField" property="rawDownload"/>
                     <textField id="nameField" property="name"/>

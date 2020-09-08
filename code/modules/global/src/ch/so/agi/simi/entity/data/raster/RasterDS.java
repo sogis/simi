@@ -12,7 +12,7 @@ import java.util.List;
 
 @Table(name = "SIMI_RASTER_DS")
 @Entity(name = "simi_RasterDS")
-@NamePattern("%s|description")
+@NamePattern("%s|path")
 public class RasterDS extends StandardEntity {
     private static final long serialVersionUID = -1371985729459673568L;
 
