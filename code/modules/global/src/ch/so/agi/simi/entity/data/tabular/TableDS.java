@@ -4,6 +4,7 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMI_TABLE_DS")
 @Entity(name = "simi_TableDS")
@@ -13,7 +14,8 @@ import javax.persistence.*;
 public class TableDS extends StandardEntity {
     private static final long serialVersionUID = -2643498680251164635L;
 
-    @Column(name = "TABLE_NAME", length = 100)
+    @Column(name = "TABLE_NAME", nullable = false, length = 100)
+    @NotNull
     private String tableName;
 
     @Lob

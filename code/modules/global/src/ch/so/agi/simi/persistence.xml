@@ -29,5 +29,6 @@
         <class>ch.so.agi.simi.entity.data.raster.RasterDS</class>
         <class>ch.so.agi.simi.entity.data.tabular.TableField</class>
         <class>ch.so.agi.simi.entity.data.tabular.ViewField</class>
+        <class>ch.so.agi.simi.entity.data.tabular.ExternalTable</class>
     </persistence-unit>
 </persistence>
