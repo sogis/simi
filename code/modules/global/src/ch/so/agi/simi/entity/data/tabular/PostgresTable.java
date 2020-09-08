@@ -31,6 +31,11 @@ public class PostgresTable extends TableDS {
     @Composition
     private List<TableView> tableViews;
 
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "postgresTable")
+    private List<TableField> tableFields;
+
     @Lob
     @Column(name = "DESCRIPTION_MODEL")
     private String descriptionModel;
@@ -51,6 +56,14 @@ public class PostgresTable extends TableDS {
 
     @Column(name = "GEO_EPSG_CODE")
     private Integer geoEpsgCode;
+
+    public List<TableField> getTableFields() {
+        return tableFields;
+    }
+
+    public void setTableFields(List<TableField> tableFields) {
+        this.tableFields = tableFields;
+    }
 
     public List<TableView> getTableViews() {
         return tableViews;
