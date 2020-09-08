@@ -32,7 +32,6 @@
 
                     <textField id="tableNameField" property="tableName" editable="false"/>
                     <pickerField id="modelSchemaField" property="modelSchema" editable="false"/>
-                    <textArea id="descriptionField" property="description" rows="5" editable="false"/>
                     <textArea id="remarksField" property="remarks" rows="5" editable="false"/>
 
                     <dateField id="catSyncStampField" property="catSyncStamp" editable="false"/>
