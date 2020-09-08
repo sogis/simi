@@ -10,8 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMI_TABLE_VIEW")
-@Entity(name = "simi_TableView")
+@Table(name = "SIMIDATA_TABLE_VIEW")
+@Entity(name = "simiData_TableView")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("%s (%s)|identifier,postgresTable")
 public class TableView extends DataSetView {

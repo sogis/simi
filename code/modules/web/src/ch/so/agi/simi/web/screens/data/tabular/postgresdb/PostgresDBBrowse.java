@@ -14,7 +14,7 @@ import ch.so.agi.simi.entity.data.tabular.PostgresDB;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@UiController("simi_PostgresDB.browse")
+@UiController("simiData_PostgresDB.browse")
 @UiDescriptor("postgres-db-browse.xml")
 @LookupComponent("postgresDBsTable")
 @LoadDataBeforeShow

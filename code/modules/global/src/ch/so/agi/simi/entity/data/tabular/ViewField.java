@@ -5,8 +5,8 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMI_VIEW_FIELD")
-@Entity(name = "simi_ViewField")
+@Table(name = "SIMIDATA_VIEW_FIELD")
+@Entity(name = "simiData_ViewField")
 public class ViewField extends StandardEntity {
     private static final long serialVersionUID = -2665578122978329156L;
 

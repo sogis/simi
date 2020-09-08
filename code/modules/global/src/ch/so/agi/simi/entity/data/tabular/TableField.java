@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
-@Table(name = "SIMI_TABLE_FIELD")
-@Entity(name = "simi_TableField")
+@Table(name = "SIMIDATA_TABLE_FIELD")
+@Entity(name = "simiData_TableField")
 @NamePattern("%s|name")
 public class TableField extends StandardEntity {
     private static final long serialVersionUID = -1809352037109072642L;

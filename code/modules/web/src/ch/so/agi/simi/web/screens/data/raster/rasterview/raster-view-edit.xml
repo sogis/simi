@@ -18,7 +18,7 @@
                     view="_local">
             <loader id="pubScopesDl">
                 <query>
-                    <![CDATA[select e from simi_DataProduct_PubScope e order by e.sort]]>
+                    <![CDATA[select e from simiProduct_DataProduct_PubScope e order by e.sort]]>
                     <condition>
                         <c:jpql>
                             <c:where>e.forDSV = true</c:where>

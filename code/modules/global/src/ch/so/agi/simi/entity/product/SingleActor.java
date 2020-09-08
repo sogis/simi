@@ -10,8 +10,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMI_SINGLE_ACTOR")
-@Entity(name = "simi_SingleActor")
+@Table(name = "SIMIPRODUCT_SINGLE_ACTOR")
+@Entity(name = "simiProduct_SingleActor")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class SingleActor extends DataProduct {
     private static final long serialVersionUID = 7629032894155576081L;

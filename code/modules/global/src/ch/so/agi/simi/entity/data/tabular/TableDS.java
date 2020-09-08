@@ -6,8 +6,8 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMI_TABLE_DS")
-@Entity(name = "simi_TableDS")
+@Table(name = "SIMIDATA_TABLE_DS")
+@Entity(name = "simiData_TableDS")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamePattern("%s|tableName")

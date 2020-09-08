@@ -5,8 +5,8 @@ import ch.so.agi.simi.entity.product.DataSetView;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMI_RASTER_VIEW")
-@Entity(name = "simi_RasterView")
+@Table(name = "SIMIDATA_RASTER_VIEW")
+@Entity(name = "simiData_RasterView")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class RasterView extends DataSetView {
     private static final long serialVersionUID = 1986595030057944078L;

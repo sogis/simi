@@ -6,8 +6,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMI_MAP")
-@Entity(name = "simi_Map")
+@Table(name = "SIMIPRODUCT_MAP")
+@Entity(name = "simiProduct_Map")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class Map extends ProductList {
     private static final long serialVersionUID = -737058404500308993L;

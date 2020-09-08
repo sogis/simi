@@ -17,7 +17,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@UiController("simi_FacadeLayer.edit")
+@UiController("simiProduct_FacadeLayer.edit")
 @UiDescriptor("facade-layer-edit.xml")
 @EditedEntityContainer("facadeLayerDc")
 @LoadDataBeforeShow

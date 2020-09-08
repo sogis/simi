@@ -7,7 +7,7 @@ import ch.so.agi.simi.entity.data.raster.RasterView;
 
 import javax.inject.Inject;
 
-@UiController("simi_RasterView.edit")
+@UiController("simiData_RasterView.edit")
 @UiDescriptor("raster-view-edit.xml")
 @EditedEntityContainer("rasterViewDc")
 @LoadDataBeforeShow

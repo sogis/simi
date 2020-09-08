@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMI_POSTGRES_DB")
-@Entity(name = "simi_PostgresDB")
+@Table(name = "SIMIDATA_POSTGRES_DB")
+@Entity(name = "simiData_PostgresDB")
 @NamePattern("%s|dbName")
 public class PostgresDB extends StandardEntity {
     private static final long serialVersionUID = 5599910294180509457L;

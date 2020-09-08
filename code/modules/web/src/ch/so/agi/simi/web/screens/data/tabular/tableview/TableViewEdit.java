@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-@UiController("simi_TableView.edit")
+@UiController("simiData_TableView.edit")
 @UiDescriptor("table-view-edit.xml")
 @EditedEntityContainer("tableViewDc")
 @LoadDataBeforeShow

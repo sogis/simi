@@ -7,8 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMI_ROLE")
-@Entity(name = "simi_Role")
+@Table(name = "SIMIIAM_ROLE")
+@Entity(name = "simiIAM_Role")
 @NamePattern("%s|name")
 public class Role extends StandardEntity {
     private static final long serialVersionUID = -1282147615227159232L;
@@ -21,13 +21,13 @@ public class Role extends StandardEntity {
     @Column(name = "REMARKS")
     private String remarks;
 
-    @JoinTable(name = "SIMI_ROLE_GROUP_LINK",
+    @JoinTable(name = "SIMIIAM_ROLE_GROUP_LINK",
             joinColumns = @JoinColumn(name = "ROLE_ID"),
             inverseJoinColumns = @JoinColumn(name = "GROUP_ID"))
     @ManyToMany
     private List<Group> groups;
 
-    @JoinTable(name = "SIMI_ROLE_USER_LINK",
+    @JoinTable(name = "SIMIIAM_ROLE_USER_LINK",
             joinColumns = @JoinColumn(name = "ROLE_ID"),
             inverseJoinColumns = @JoinColumn(name = "USER_ID"))
     @ManyToMany

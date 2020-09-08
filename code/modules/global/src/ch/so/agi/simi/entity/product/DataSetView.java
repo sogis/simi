@@ -10,8 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMI_DATA_SET_VIEW")
-@Entity(name = "simi_DataSetView")
+@Table(name = "SIMIPRODUCT_DATA_SET_VIEW")
+@Entity(name = "simiProduct_DataSetView")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("%s|name")
 public class DataSetView extends SingleActor {

@@ -10,7 +10,7 @@
             <view extends="_local"/>
             <loader id="dataProduct_PubScopesDl">
                 <query>
-                    <![CDATA[select e from simi_DataProduct_PubScope e]]>
+                    <![CDATA[select e from simiProduct_DataProduct_PubScope e]]>
                 </query>
             </loader>
         </collection>

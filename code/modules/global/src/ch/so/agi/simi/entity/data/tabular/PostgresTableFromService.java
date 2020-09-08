@@ -5,7 +5,7 @@ import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseUuidEntity;
 
-@MetaClass(name = "simi_PostgresTableFromService")
+@MetaClass(name = "simiData_PostgresTableFromService")
 @NamePattern("%s.%s|schema,table")
 public class PostgresTableFromService extends BaseUuidEntity {
     private static final long serialVersionUID = -6377080672960855392L;

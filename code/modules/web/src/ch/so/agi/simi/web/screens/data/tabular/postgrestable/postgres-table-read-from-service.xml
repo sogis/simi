@@ -13,7 +13,7 @@
                     view="_local">
             <loader id="postgresDBsDl">
                 <query>
-                    <![CDATA[select e from simi_PostgresDB e order by e.dbName]]>
+                    <![CDATA[select e from simiData_PostgresDB e order by e.dbName]]>
                 </query>
             </loader>
         </collection>

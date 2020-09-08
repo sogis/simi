@@ -11,7 +11,7 @@ import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
 
-@UiController("simi_PostgresTable.browse")
+@UiController("simiData_PostgresTable.browse")
 @UiDescriptor("postgres-table-browse.xml")
 @LookupComponent("postgresTablesTable")
 @LoadDataBeforeShow

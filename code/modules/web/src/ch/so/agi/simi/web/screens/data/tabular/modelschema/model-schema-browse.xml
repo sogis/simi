@@ -14,7 +14,7 @@
             </view>
             <loader id="modelSchemasDl">
                 <query>
-                    <![CDATA[select e from simi_ModelSchema e]]>
+                    <![CDATA[select e from simiData_ModelSchema e]]>
                 </query>
             </loader>
         </collection>

@@ -3,7 +3,7 @@ package ch.so.agi.simi.web.screens.data.raster.rasterds;
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.data.raster.RasterDS;
 
-@UiController("simi_RasterDS.edit")
+@UiController("simiData_RasterDS.edit")
 @UiDescriptor("raster-ds-edit.xml")
 @EditedEntityContainer("rasterDSDc")
 @LoadDataBeforeShow

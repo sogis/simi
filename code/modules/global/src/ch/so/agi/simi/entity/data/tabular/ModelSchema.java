@@ -10,10 +10,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMI_MODEL_SCHEMA", uniqueConstraints = {
-        @UniqueConstraint(name = "IDX_SIMI_MODEL_SCHEMA_UNQ_SCHEMA_NAME_POSTGRES_DB_ID", columnNames = {"SCHEMA_NAME", "POSTGRES_DB_ID"})
+@Table(name = "SIMIDATA_MODEL_SCHEMA", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_SIMIDATA_MODEL_SCHEMA_UNQ_SCHEMA_NAME_POSTGRES_DB_ID", columnNames = {"SCHEMA_NAME", "POSTGRES_DB_ID"})
 })
-@Entity(name = "simi_ModelSchema")
+@Entity(name = "simiData_ModelSchema")
 @NamePattern("%s.%s|postgresDB,schemaName")
 public class ModelSchema extends StandardEntity {
     private static final long serialVersionUID = -2988394575142052644L;

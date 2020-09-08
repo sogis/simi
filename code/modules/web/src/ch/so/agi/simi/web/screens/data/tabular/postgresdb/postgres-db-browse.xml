@@ -12,7 +12,7 @@
             </view>
             <loader id="postgresDBsDl">
                 <query>
-                    <![CDATA[select e from simi_PostgresDB e]]>
+                    <![CDATA[select e from simiData_PostgresDB e]]>
                 </query>
             </loader>
         </collection>

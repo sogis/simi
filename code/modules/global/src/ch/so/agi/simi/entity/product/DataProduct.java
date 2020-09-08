@@ -8,8 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Table(name = "SIMI_DATA_PRODUCT")
-@Entity(name = "simi_DataProduct")
+@Table(name = "SIMIPRODUCT_DATA_PRODUCT")
+@Entity(name = "simiProduct_DataProduct")
 @NamePattern("%s (%s)|identifier,title")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)

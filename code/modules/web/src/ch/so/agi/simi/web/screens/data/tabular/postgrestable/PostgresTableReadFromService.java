@@ -14,7 +14,7 @@ import com.haulmont.cuba.gui.screen.*;
 import javax.inject.Inject;
 import java.util.List;
 
-@UiController("simi_PostgresTableReadFromService")
+@UiController("simiData_PostgresTableReadFromService")
 @UiDescriptor("postgres-table-read-from-service.xml")
 @LookupComponent("postgresTablesFromServiceTable")
 @LoadDataBeforeShow

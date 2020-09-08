@@ -17,7 +17,7 @@ import ch.so.agi.simi.entity.data.tabular.PostgresTable;
 import javax.inject.Inject;
 import java.util.Optional;
 
-@UiController("simi_PostgresTable.edit")
+@UiController("simiData_PostgresTable.edit")
 @UiDescriptor("postgres-table-edit.xml")
 @EditedEntityContainer("postgresTableDc")
 @LoadDataBeforeShow

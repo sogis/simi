@@ -15,7 +15,7 @@ import com.haulmont.cuba.gui.screen.*;
 import javax.inject.Inject;
 import java.util.function.Consumer;
 
-@UiController("simi_DataProduct.browse")
+@UiController("simiProduct_DataProduct.browse")
 @UiDescriptor("data-product-browse.xml")
 @LookupComponent("dataProductsTable")
 @LoadDataBeforeShow

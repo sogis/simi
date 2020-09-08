@@ -14,7 +14,7 @@
             </view>
             <loader id="rasterDsesDl">
                 <query>
-                    <![CDATA[select e from simi_RasterDS e]]>
+                    <![CDATA[select e from simiData_RasterDS e]]>
                 </query>
             </loader>
         </collection>

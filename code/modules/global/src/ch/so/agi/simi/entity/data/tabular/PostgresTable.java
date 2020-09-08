@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Table(name = "SIMI_POSTGRES_TABLE")
-@Entity(name = "simi_PostgresTable")
+@Table(name = "SIMIDATA_POSTGRES_TABLE")
+@Entity(name = "simiData_PostgresTable")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("%s.%s|modelSchema,tableName")
 public class PostgresTable extends TableDS {

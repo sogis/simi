@@ -10,8 +10,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.List;
 
-@Table(name = "SIMI_FACADE_LAYER")
-@Entity(name = "simi_FacadeLayer")
+@Table(name = "SIMIPRODUCT_FACADE_LAYER")
+@Entity(name = "simiProduct_FacadeLayer")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class FacadeLayer extends SingleActor {
     private static final long serialVersionUID = -5231187031797128001L;

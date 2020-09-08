@@ -2,8 +2,8 @@ package ch.so.agi.simi.entity.product;
 
 import javax.persistence.*;
 
-@Table(name = "SIMI_PROPERTIES_IN_FACADE")
-@Entity(name = "simi_PropertiesInFacade")
+@Table(name = "SIMIPRODUCT_PROPERTIES_IN_FACADE")
+@Entity(name = "simiProduct_PropertiesInFacade")
 public class PropertiesInFacade extends ChildLayerProperties {
     private static final long serialVersionUID = -5482773004746430054L;
 
