@@ -2,16 +2,16 @@ package ch.so.agi.simi.web.screens.data.tabular.tableview;
 
 import ch.so.agi.simi.entity.DataProduct_PubScope;
 import ch.so.agi.simi.entity.data.tabular.TableView;
+import ch.so.agi.simi.entity.data.tabular.ViewField;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
 import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.Notifications;
-import com.haulmont.cuba.gui.components.Button;
-import com.haulmont.cuba.gui.components.FileUploadField;
-import com.haulmont.cuba.gui.components.TextField;
-import com.haulmont.cuba.gui.components.ValidationException;
+import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.export.ByteArrayDataProvider;
 import com.haulmont.cuba.gui.export.ExportDisplay;
 import com.haulmont.cuba.gui.model.CollectionLoader;
+import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
+import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 
@@ -24,7 +24,10 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @UiController("simi_TableView.edit")
 @UiDescriptor("table-view-edit.xml")
@@ -47,6 +50,10 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private Dialogs dialogs;
     @Inject
     private TextField<String> searchFilterWordField;
+    @Inject
+    private Table<ViewField> viewFieldsTable;
+    @Inject
+    private CollectionPropertyContainer<ViewField> viewFieldsDc;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<TableView> event) {
@@ -160,5 +167,26 @@ public class TableViewEdit extends StandardEditor<TableView> {
             out.append(buffer, 0, charsRead);
         }
         return out.toString();
+    }
+
+    @Subscribe("viewFieldsTable.sortAction")
+    public void onSingleActorsTableSortAction(Action.ActionPerformedEvent event) {
+        viewFieldsTable.sort("sort", Table.SortDirection.ASCENDING);
+    }
+
+    @Subscribe(target = Target.DATA_CONTEXT)
+    public void onPreCommit(DataContext.PreCommitEvent event) {
+        int i = 0;
+        List<ViewField> viewFields = viewFieldsDc.getItems().stream()
+                .sorted(Comparator.comparing(ViewField::getSort, Comparator.nullsLast(Comparator.naturalOrder())))
+                .collect(Collectors.toList());
+
+        // go through the data container items. The same can be done using getEditedEntity().getSingleActorList().
+        for (ViewField item : viewFields) {
+            // set new value and add modified instance to the commit list
+            item.setSort(i);
+            event.getModifiedInstances().add(item);
+            i += 10;
+        }
     }
 }

@@ -12,8 +12,10 @@
                 <property name="pubScope" view="_minimal"/>
                 <property name="styleServerFilled"/>
                 <property name="styleDesktopFilled"/>
+                <property name="viewFields" view="_local"/>
             </view>
             <loader/>
+            <collection id="viewFieldsDc" property="viewFields"/>
         </instance>
         <collection id="pubScopesDc"
                     class="ch.so.agi.simi.entity.DataProduct_PubScope"
@@ -39,28 +41,26 @@
             <form id="form" dataContainer="tableViewDc">
                 <column width="350px">
                     <pickerField id="postgresTableField" property="postgresTable" editable="false"/>
-
                     <checkBox id="rawDownloadField" property="rawDownload"/>
                     <textField id="nameField" property="name"/>
                     <textField id="whereClauseField" property="whereClause"/>
                     <textField id="geomFieldNameField" property="geomFieldName"/>
                     <checkBox id="wgcEditField" property="wgcEdit"/>
-
                     <lookupField id="searchTypeField" property="searchType"/>
                     <textField id="searchFacetField" property="searchFacet"/>
                     <textField id="searchFilterWordField" property="searchFilterWord"/>
-
                     <hbox caption="Style Server">
-                        <checkBox id="isStyleServerFilledField" property="styleServerFilled" align="MIDDLE_CENTER" editable="false" dataContainer="tableViewDc"/>
+                        <checkBox id="isStyleServerFilledField" property="styleServerFilled" align="MIDDLE_CENTER"
+                                  editable="false" dataContainer="tableViewDc"/>
                         <button id="downloadStyleServerBtn" caption="Download"/>
                         <upload id="uploadStyleServerBtn" fileStoragePutMode="MANUAL"/>
                     </hbox>
                     <hbox caption="Style Desktop">
-                        <checkBox id="isStyleDesktopFilledField" property="styleDesktopFilled" align="MIDDLE_CENTER" editable="false" dataContainer="tableViewDc"/>
+                        <checkBox id="isStyleDesktopFilledField" property="styleDesktopFilled" align="MIDDLE_CENTER"
+                                  editable="false" dataContainer="tableViewDc"/>
                         <button id="downloadStyleDesktopBtn" caption="Download"/>
                         <upload id="uploadStyleDesktopBtn" fileStoragePutMode="MANUAL"/>
                     </hbox>
-
                     <textField id="identifierField" property="identifier"/>
                     <textField id="titleField" property="title"/>
                     <lookupField id="pubScopeField" property="pubScope" optionsContainer="pubScopesDc"/>
@@ -69,12 +69,31 @@
                     <textArea id="synonymsField" property="synonyms" rows="2"/>
                     <textArea id="keywordsField" property="keywords" rows="2"/>
                     <textArea id="remarksField" property="remarks" rows="5"/>
-
                     <textField id="transparencyField" property="transparency"/>
                 </column>
             </form>
+            <groupBox id="viewFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/TableView.viewFields">
+                <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                        <action id="sortAction" caption="Sortieren" icon="SORT"/>
+                    </actions>
+                    <columns>
+                        <column id="tableView.name"/>
+                        <column id="alias"/>
+                        <column id="sort" editable="true"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="viewFieldsTable.create"/>
+                        <button action="viewFieldsTable.edit"/>
+                        <button action="viewFieldsTable.remove"/>
+                        <button id="btnSortAction" action="viewFieldsTable.sortAction"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
         </scrollBox>
-
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

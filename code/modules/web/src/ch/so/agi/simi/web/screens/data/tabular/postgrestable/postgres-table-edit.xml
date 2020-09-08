@@ -40,6 +40,7 @@
                     <textField id="geoEpsgCodeField" property="geoEpsgCode" editable="false"/>
                 </column>
             </form>
+            <button id="readFromServiceBtn" caption="Lesen von Service" align="MIDDLE_RIGHT" stylename="friendly"/>
             <groupBox id="tableFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/PostgresTable.tableFields">
                 <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" height="200px">
                     <actions>
@@ -61,7 +62,6 @@
                 </table>
             </groupBox>
         </scrollBox>
-        <button id="readFromServiceBtn" caption="Lesen von Service" align="MIDDLE_RIGHT" stylename="friendly"/>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
