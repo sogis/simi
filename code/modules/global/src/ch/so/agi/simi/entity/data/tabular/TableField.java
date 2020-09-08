@@ -24,7 +24,7 @@ public class TableField extends StandardEntity {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "tableField")
-    private List<ViewField> tableFields;
+    private List<ViewField> viewFields;
 
     @NotNull
     @Column(name = "TYPE_NAME", nullable = false, length = 100)
@@ -57,12 +57,12 @@ public class TableField extends StandardEntity {
     @JoinColumn(name = "POSTGRES_TABLE_ID")
     private PostgresTable postgresTable;
 
-    public List<ViewField> getTableFields() {
-        return tableFields;
+    public List<ViewField> getViewFields() {
+        return viewFields;
     }
 
-    public void setTableFields(List<ViewField> tableFields) {
-        this.tableFields = tableFields;
+    public void setViewFields(List<ViewField> viewFields) {
+        this.viewFields = viewFields;
     }
 
     public PostgresTable getPostgresTable() {

@@ -14,8 +14,10 @@
                     </property>
                 </property>
                 <property name="tableViews" view="_minimal"/>
+                <property name="tableFields" view="_local"/>
             </view>
             <loader/>
+            <collection id="tableFieldsDc" property="tableFields"/>
         </instance>
     </data>
     <dialogMode height="AUTO"
@@ -29,17 +31,35 @@
                     <textArea id="descriptionModelField" property="descriptionModel" rows="5" editable="false"/>
                     <textArea id="descriptionOverrideField" property="descriptionOverride" rows="5"/>
                     <textField id="idFieldNameField" property="idFieldName"/>
-
                     <textField id="tableNameField" property="tableName" editable="false"/>
                     <pickerField id="modelSchemaField" property="modelSchema" editable="false"/>
                     <textArea id="remarksField" property="remarks" rows="5" editable="false"/>
-
                     <dateField id="catSyncStampField" property="catSyncStamp" editable="false"/>
                     <textField id="geoFieldNameField" property="geoFieldName" editable="false"/>
                     <textField id="geoTypeField" property="geoType" editable="false"/>
                     <textField id="geoEpsgCodeField" property="geoEpsgCode" editable="false"/>
                 </column>
             </form>
+            <groupBox id="tableFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/PostgresTable.tableFields">
+                <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                        <column id="mandatory"/>
+                        <column id="catSynced"/>
+                        <column id="viewFieldsCount" caption="Ref in DSV"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="tableFieldsTable.create"/>
+                        <button action="tableFieldsTable.edit"/>
+                        <button action="tableFieldsTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
         </scrollBox>
         <button id="readFromServiceBtn" caption="Lesen von Service" align="MIDDLE_RIGHT" stylename="friendly"/>
         <hbox id="editActions" spacing="true">

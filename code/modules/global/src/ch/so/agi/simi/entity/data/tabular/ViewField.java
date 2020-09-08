@@ -23,9 +23,11 @@ public class ViewField extends StandardEntity {
     @Lob
     @Column(name = "DISPLAY_PROPS4_JSON")
     private String displayProps4Json;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TABLE_FIELD_ID")
     private TableField tableField;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TABLE_VIEW_ID")
     private TableView tableView;
