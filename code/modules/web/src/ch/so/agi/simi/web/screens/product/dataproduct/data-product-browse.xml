@@ -55,7 +55,9 @@
                     <actions>
                         <action id="createMap" caption="Map erstellen"/>
                         <action id="createLayerGroup" caption="LayerGroup erstellen"/>
-                        <action id="createSingleActor" caption="SingleActor erstellen"/>
+                        <action id="createFacadeLayer" caption="FacadeLayer erstellen"/>
+                        <action id="createTableView" caption="TableView erstellen"/>
+                        <action id="createRasterView" caption="RasterView erstellen"/>
                     </actions>
                 </popupButton>
                 <button id="editBtn" action="dataProductsTable.edit"/>

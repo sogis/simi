@@ -1,14 +1,12 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
-import ch.so.agi.simi.entity.product.LayerGroup;
-import ch.so.agi.simi.entity.product.Map;
-import ch.so.agi.simi.entity.product.SingleActor;
+import ch.so.agi.simi.entity.data.tabular.TableView;
+import ch.so.agi.simi.entity.product.*;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.product.DataProduct;
 
 import javax.inject.Inject;
 
@@ -37,10 +35,16 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
         showCreateEditorForDataProduct(layerGroup);
     }
 
-    @Subscribe("createBtn.createSingleActor")
-    protected void onCreateBtnCreateSingleActor(Action.ActionPerformedEvent event) {
-        SingleActor singleActor = metadata.create(SingleActor.class);
-        showCreateEditorForDataProduct(singleActor);
+    @Subscribe("createBtn.createFacadeLayer")
+    protected void onCreateBtnCreateFacadeLayer(Action.ActionPerformedEvent event) {
+        FacadeLayer facadeLayer = metadata.create(FacadeLayer.class);
+        showCreateEditorForDataProduct(facadeLayer);
+    }
+
+    @Subscribe("createBtn.createTableView")
+    protected void onCreateBtnCreateTableView(Action.ActionPerformedEvent event) {
+        TableView tableView = metadata.create(TableView.class);
+        showCreateEditorForDataProduct(tableView);
     }
 
     private void showCreateEditorForDataProduct(DataProduct dataProduct) {
