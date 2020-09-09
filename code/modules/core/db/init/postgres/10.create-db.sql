@@ -10,6 +10,8 @@ create table SIMIDATA_TABLE_FIELD (
     DELETED_BY varchar(50),
     --
     NAME varchar(100) not null,
+    DESCRIPTION_MODEL text,
+    DESCRIPTION_OVERRIDE text,
     TYPE_NAME varchar(100) not null,
     MANDATORY boolean not null,
     REG_EX_PATTERN varchar(512),

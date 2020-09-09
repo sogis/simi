@@ -21,6 +21,14 @@ public class TableField extends StandardEntity {
     @Column(name = "NAME", nullable = false, length = 100)
     private String name;
 
+    @Lob
+    @Column(name = "DESCRIPTION_MODEL")
+    private String descriptionModel;
+
+    @Lob
+    @Column(name = "DESCRIPTION_OVERRIDE")
+    private String descriptionOverride;
+
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "tableField")
@@ -56,6 +64,22 @@ public class TableField extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_TABLE_ID")
     private PostgresTable postgresTable;
+
+    public String getDescriptionOverride() {
+        return descriptionOverride;
+    }
+
+    public void setDescriptionOverride(String descriptionOverride) {
+        this.descriptionOverride = descriptionOverride;
+    }
+
+    public String getDescriptionModel() {
+        return descriptionModel;
+    }
+
+    public void setDescriptionModel(String descriptionModel) {
+        this.descriptionModel = descriptionModel;
+    }
 
     public List<ViewField> getViewFields() {
         return viewFields;
