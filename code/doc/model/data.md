@@ -36,8 +36,10 @@ Spalten (via AttributeList) wie auch auf die angebotenen Zeilen (mittels Where-C
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |whereClause|String(200)|n|Where-Clause zur Einschränkung der Anzahl Zeilen in der TableView.|
-|geomFieldName|String(100)|n|Bei mehreren Geometriespalten: Name der zu verwendenden Geometrie der TableView.|
 |wgcEdit|boolean|j|Gibt an, ob die TableView im Web GIS Client editiert wird. Default: false|
+|geoFieldName|String(100)|n|Bei Tabellen mit mehreren Geometriespalten: Name der zu verwendenden Geometrie der TableView.|
+|geoType|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
+|geoEpsgCode|Integer|n|EPSG-Code des Koordinatensystems. In aller Regel 2056|
 
 ### Klasse ViewField
 
@@ -110,8 +112,8 @@ Umfasst die Eigenschaften eines Attributs einer PostgresDS. Die Geometriespalten
 |regExPattern|String(512)|n|RegEx-Pattern. Wird von Dataservice bei Datenänderungen validiert.|
 |strLength|Integer|n|Länge des Stringtyps (Sofern die Länge limitiert ist).|
 |catSynced|boolean|j|Gibt an, ob das Attribut bei der letzten Katalogabfrage in der Datenbank vorhanden war.|
-|remarks|String|n|Beschreibung (Metadaten) zum Attribut. Wird bei Ausführung des ModelReader befüllt, sofern NULL.|
-|remarksModel|String|n|Beschreibung zum Attribut im Interlis-Modell. Wird ausschliesslich vom ModelReader befüllt.|
+|descriptionModel|String|j|Beschreibung des Attributs im INTERLIS-Modell.|
+|descriptionOverride|String|n|Übersteuerung der Beschreibung in SIMI (Wird bei "grösserer" Modelländerung in das Modell zurückgeschrieben.|
 
 #### Konstraints
 
