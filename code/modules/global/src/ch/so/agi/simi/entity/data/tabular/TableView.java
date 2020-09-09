@@ -28,6 +28,12 @@ public class TableView extends DataSetView {
     @Column(name = "GEOM_FIELD_NAME", length = 100)
     private String geomFieldName;
 
+    @Column(name = "GEO_TYPE", length = 100)
+    private String geoType;
+
+    @Column(name = "GEO_EPSG_CODE")
+    private Integer geoEpsgCode;
+
     @NotNull
     @Column(name = "WGC_EDIT", nullable = false)
     private Boolean wgcEdit = false;
@@ -36,6 +42,22 @@ public class TableView extends DataSetView {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_TABLE_ID")
     private PostgresTable postgresTable;
+
+    public Integer getGeoEpsgCode() {
+        return geoEpsgCode;
+    }
+
+    public void setGeoEpsgCode(Integer geoEpsgCode) {
+        this.geoEpsgCode = geoEpsgCode;
+    }
+
+    public String getGeoType() {
+        return geoType;
+    }
+
+    public void setGeoType(String geoType) {
+        this.geoType = geoType;
+    }
 
     public List<ViewField> getViewFields() {
         return viewFields;

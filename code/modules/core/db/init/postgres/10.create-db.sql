@@ -405,6 +405,8 @@ create table SIMIDATA_TABLE_VIEW (
     --
     WHERE_CLAUSE varchar(200),
     GEOM_FIELD_NAME varchar(100),
+    GEO_TYPE varchar(100),
+    GEO_EPSG_CODE integer,
     WGC_EDIT boolean not null,
     POSTGRES_TABLE_ID uuid not null,
     --
