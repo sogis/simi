@@ -1,6 +1,5 @@
 package ch.so.agi.simi.entity.featureinfo;
 
-import ch.so.agi.simi.entity.product.DataSetView;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;

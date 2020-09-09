@@ -1,16 +1,16 @@
 package ch.so.agi.simi.entity.iam;
 
+import ch.so.agi.simi.entity.SimiStandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMI_ROLE")
-@Entity(name = "simi_Role")
+@Table(name = "SIMIIAM_ROLE")
+@Entity(name = "simiIAM_Role")
 @NamePattern("%s|name")
-public class Role extends StandardEntity {
+public class Role extends SimiStandardEntity {
     private static final long serialVersionUID = -1282147615227159232L;
 
     @NotNull
@@ -21,13 +21,13 @@ public class Role extends StandardEntity {
     @Column(name = "REMARKS")
     private String remarks;
 
-    @JoinTable(name = "SIMI_ROLE_GROUP_LINK",
+    @JoinTable(name = "SIMIIAM_ROLE_GROUP_LINK",
             joinColumns = @JoinColumn(name = "ROLE_ID"),
             inverseJoinColumns = @JoinColumn(name = "GROUP_ID"))
     @ManyToMany
     private List<Group> groups;
 
-    @JoinTable(name = "SIMI_ROLE_USER_LINK",
+    @JoinTable(name = "SIMIIAM_ROLE_USER_LINK",
             joinColumns = @JoinColumn(name = "ROLE_ID"),
             inverseJoinColumns = @JoinColumn(name = "USER_ID"))
     @ManyToMany

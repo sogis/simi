@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.product;
 
-import com.haulmont.cuba.core.entity.StandardEntity;
+import ch.so.agi.simi.entity.SimiStandardEntity;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
-public class ChildLayerProperties extends StandardEntity {
+public class ChildLayerProperties extends SimiStandardEntity {
     private static final long serialVersionUID = 4170602148331630171L;
 
     @NotNull

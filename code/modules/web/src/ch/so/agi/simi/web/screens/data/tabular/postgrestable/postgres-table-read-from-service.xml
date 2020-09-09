@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://postgresTableReadFromService.caption"
+        focusComponent="postgresTablesFromServiceTable"
+        messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgrestable">
+    <data readOnly="true">
+        <collection id="postgresTablesFromServiceDc"
+                    class="ch.so.agi.simi.entity.data.tabular.PostgresTableFromService">
+        </collection>
+        <collection id="postgresDBsDc"
+                    class="ch.so.agi.simi.entity.data.tabular.PostgresDB"
+                    view="_local">
+            <loader id="postgresDBsDl">
+                <query>
+                    <![CDATA[select e from simiData_PostgresDB e order by e.dbName]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="80%"
+                width="80%"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="postgresTablesFromServiceTable"
+            spacing="true">
+        <form>
+            <lookupField id="postgresDBLookupField" caption="Database" optionsContainer="postgresDBsDc" nullOptionVisible="false"/>
+            <textField id="schemaField" caption="Schema"/>
+            <hbox caption="Tabelle" spacing="true">
+                <textField id="tableField"/>
+                <button id="searchBtn" caption="Suchen"/>
+            </hbox>
+        </form>
+        <table id="postgresTablesFromServiceTable"
+               caption="Resultat"
+               width="100%"
+               dataContainer="postgresTablesFromServiceDc">
+            <columns>
+                <column id="schema"/>
+                <column id="table"/>
+            </columns>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

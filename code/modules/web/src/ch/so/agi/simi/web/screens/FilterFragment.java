@@ -42,7 +42,7 @@ public class FilterFragment<T extends Entity<T>> extends ScreenFragment {
     }
 
     @Subscribe
-    public void onInit(InitEvent event) {
+    public void onAttach(AttachEvent event) {
         fldQuickFilter.setInputPrompt(inputPrompt);
     }
 

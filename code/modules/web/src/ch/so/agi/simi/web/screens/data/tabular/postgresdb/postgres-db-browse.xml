@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://postgresDBBrowse.caption"
+        focusComponent="postgresDBsTable"
+        messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgresdb">
+    <data readOnly="true">
+        <collection id="postgresDBsDc"
+                    class="ch.so.agi.simi.entity.data.tabular.PostgresDB">
+            <view extends="_local">
+                <property name="modelSchemas" view="_minimal"/>
+            </view>
+            <loader id="postgresDBsDl">
+                <query>
+                    <![CDATA[select e from simiData_PostgresDB e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="postgresDBsTable"
+            spacing="true">
+        <table id="postgresDBsTable"
+               width="100%"
+               dataContainer="postgresDBsDc"
+               multiselect="true">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="dbName"/>
+                <column id="defaultValue"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="postgresDBsTable.create"/>
+                <button id="editBtn" action="postgresDBsTable.edit"/>
+                <button id="removeBtn" action="postgresDBsTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

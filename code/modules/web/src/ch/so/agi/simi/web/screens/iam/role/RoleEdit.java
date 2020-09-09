@@ -10,7 +10,7 @@ import ch.so.agi.simi.entity.iam.Role;
 
 import javax.inject.Inject;
 
-@UiController("simi_Role.edit")
+@UiController("simiIAM_Role.edit")
 @UiDescriptor("role-edit.xml")
 @EditedEntityContainer("roleDc")
 @LoadDataBeforeShow
