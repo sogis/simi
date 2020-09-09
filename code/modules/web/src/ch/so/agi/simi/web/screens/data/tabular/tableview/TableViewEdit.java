@@ -4,6 +4,7 @@ import ch.so.agi.simi.entity.DataProduct_PubScope;
 import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
+import ch.so.agi.simi.web.UploadStyleBean;
 import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.*;
@@ -16,13 +17,6 @@ import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
-import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 import java.util.List;
@@ -54,6 +48,8 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private Table<ViewField> viewFieldsTable;
     @Inject
     private CollectionPropertyContainer<ViewField> viewFieldsDc;
+    @Inject
+    private UploadStyleBean uploadStyleBean;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<TableView> event) {
@@ -81,7 +77,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
     @Subscribe("uploadStyleServerBtn")
     public void onUploadStyleServerBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
-        checkUpload(uploadStyleServerBtn, content -> tableViewDc.getItem().setStyleServer(content));
+        handleFileUploadSucceed(uploadStyleServerBtn, content -> tableViewDc.getItem().setStyleServer(content));
     }
 
     @Subscribe("downloadStyleDesktopBtn")
@@ -92,7 +88,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
     @Subscribe("uploadStyleDesktopBtn")
     public void onUploadStyleDesktopBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
-        checkUpload(uploadStyleDesktopBtn, content -> tableViewDc.getItem().setStyleDesktop(content));
+        handleFileUploadSucceed(uploadStyleDesktopBtn, content -> tableViewDc.getItem().setStyleDesktop(content));
     }
 
     private void downloadString(String content, String filename) {
@@ -101,72 +97,21 @@ public class TableViewEdit extends StandardEditor<TableView> {
         exportDisplay.show(new ByteArrayDataProvider(bytes), filename);
     }
 
-    private void checkUpload(FileUploadField uploadField, Consumer<String> assignResult) {
+    public void handleFileUploadSucceed(FileUploadField uploadField, Consumer<String> assignResult) {
         try {
-            InputStream inputStream = uploadField.getFileContent();
-            String fileContent = inputStreamToString(inputStream);
-
-            String qgisVersionString = getQGISVersion(fileContent);
-
-            String[] version = qgisVersionString.split("\\.");
-            int major = Integer.parseInt(version[0]);
-            int minor = Integer.parseInt(version[1]);
-
-            if (major == 2 && minor == 18) {
+            uploadStyleBean.checkUpload(uploadField.getFileContent(), fileContent -> {
                 assignResult.accept(fileContent);
-
                 notifications.create()
                         .withCaption(uploadField.getFileName() + " uploaded")
                         .show();
-            } else {
-                dialogs.createMessageDialog()
-                        .withCaption("Upload")
-                        .withMessage("Ausgewälte qml Datei hat eine falsche Version: " + qgisVersionString + "\nErwartet wird version 2.18")
-                        .withType(Dialogs.MessageType.WARNING)
-                        .show();
-            }
-        } catch (XMLStreamException | IOException e) {
+            });
+        } catch (UploadStyleBean.StyleUploadException e) {
             dialogs.createMessageDialog()
                     .withCaption("Upload")
-                    .withMessage("Beim Lesen der Datei " + uploadField.getFileName() + " ist ein fehler aufgetreten.")
+                    .withMessage(e.getLocalizedMessage())
                     .withType(Dialogs.MessageType.WARNING)
                     .show();
         }
-    }
-
-    /**
-     * Extract the qgis version from a .qml string
-     * @param content The content of the .qml file
-     * @return Version string
-     * @throws XMLStreamException
-     */
-    private static String getQGISVersion(String content) throws XMLStreamException {
-        XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-        XMLEventReader reader = xmlInputFactory.createXMLEventReader(new StringReader(content));
-
-        while (reader.hasNext()) {
-            XMLEvent nextEvent = reader.nextEvent();
-
-            if (nextEvent.isStartElement()) {
-                StartElement startElement = nextEvent.asStartElement();
-                if (startElement.getName().getLocalPart().equals("qgis")) {
-                    return startElement.getAttributeByName(new QName("version")).getValue();
-                }
-            }
-        }
-        return null;
-    }
-
-    private static String inputStreamToString(InputStream inputStream) throws IOException {
-        final int bufferSize = 1024;
-        final char[] buffer = new char[bufferSize];
-        final StringBuilder out = new StringBuilder();
-        Reader in = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-        int charsRead;
-        while((charsRead = in.read(buffer, 0, buffer.length)) > 0) {
-            out.append(buffer, 0, charsRead);
-        }
-        return out.toString();
     }
 
     @Subscribe("viewFieldsTable.sortAction")

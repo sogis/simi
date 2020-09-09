@@ -53,13 +53,13 @@
                         <checkBox id="isStyleServerFilledField" property="styleServerFilled" align="MIDDLE_CENTER"
                                   editable="false" dataContainer="tableViewDc"/>
                         <button id="downloadStyleServerBtn" caption="Download"/>
-                        <upload id="uploadStyleServerBtn" fileStoragePutMode="MANUAL"/>
+                        <upload id="uploadStyleServerBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml"/>
                     </hbox>
                     <hbox caption="Style Desktop">
                         <checkBox id="isStyleDesktopFilledField" property="styleDesktopFilled" align="MIDDLE_CENTER"
                                   editable="false" dataContainer="tableViewDc"/>
                         <button id="downloadStyleDesktopBtn" caption="Download"/>
-                        <upload id="uploadStyleDesktopBtn" fileStoragePutMode="MANUAL"/>
+                        <upload id="uploadStyleDesktopBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml"/>
                     </hbox>
                     <textField id="identifierField" property="identifier"/>
                     <textField id="titleField" property="title"/>
