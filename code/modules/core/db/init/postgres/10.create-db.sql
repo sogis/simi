@@ -1,5 +1,29 @@
--- begin SIMI_ROLE
-create table SIMI_ROLE (
+-- begin SIMIDATA_TABLE_FIELD
+create table SIMIDATA_TABLE_FIELD (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAME varchar(100) not null,
+    TYPE_NAME varchar(100) not null,
+    MANDATORY boolean not null,
+    REG_EX_PATTERN varchar(512),
+    STR_LENGTH integer,
+    CAT_SYNCED boolean not null,
+    REMARKS text,
+    REMARKS_MODEL text,
+    POSTGRES_TABLE_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_TABLE_FIELD
+-- begin SIMIIAM_ROLE
+create table SIMIIAM_ROLE (
     ID uuid,
     VERSION integer not null,
     CREATE_TS timestamp,
@@ -14,7 +38,25 @@ create table SIMI_ROLE (
     --
     primary key (ID)
 )^
--- end SIMI_ROLE
+-- end SIMIIAM_ROLE
+-- begin SIMIDATA_TABLE_DS
+create table SIMIDATA_TABLE_DS (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    DTYPE varchar(31),
+    --
+    TABLE_NAME varchar(100) not null,
+    REMARKS text,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_TABLE_DS
 -- begin FI_LAYER_RELATION
 create table FI_LAYER_RELATION (
     ID uuid,
@@ -33,6 +75,24 @@ create table FI_LAYER_RELATION (
     primary key (ID)
 )^
 -- end FI_LAYER_RELATION
+-- begin SIMIDATA_RASTER_DS
+create table SIMIDATA_RASTER_DS (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    PATH varchar(200) not null,
+    REMARKS text,
+    DESCRIPTION text,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_RASTER_DS
 -- begin FI_FEATURE_INFO
 create table FI_FEATURE_INFO (
     ID uuid,
@@ -52,8 +112,8 @@ create table FI_FEATURE_INFO (
     primary key (ID)
 )^
 -- end FI_FEATURE_INFO
--- begin SIMI_DATA_PRODUCT
-create table SIMI_DATA_PRODUCT (
+-- begin SIMIPRODUCT_DATA_PRODUCT
+create table SIMIPRODUCT_DATA_PRODUCT (
     ID uuid,
     VERSION integer not null,
     CREATE_TS timestamp,
@@ -75,7 +135,42 @@ create table SIMI_DATA_PRODUCT (
     --
     primary key (ID)
 )^
--- end SIMI_DATA_PRODUCT
+-- end SIMIPRODUCT_DATA_PRODUCT
+-- begin SIMIDATA_POSTGRES_DB
+create table SIMIDATA_POSTGRES_DB (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    DB_NAME varchar(100) not null,
+    DEFAULT_VALUE boolean,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_POSTGRES_DB
+-- begin SIMIDATA_MODEL_SCHEMA
+create table SIMIDATA_MODEL_SCHEMA (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    SCHEMA_NAME varchar(100) not null,
+    MODEL_NAME varchar(100),
+    POSTGRES_DB_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_MODEL_SCHEMA
 -- begin PRODUCT_DATA_SET_VIEW
 create table PRODUCT_DATA_SET_VIEW (
     ID uuid,
@@ -93,8 +188,8 @@ create table PRODUCT_DATA_SET_VIEW (
     primary key (ID)
 )^
 -- end PRODUCT_DATA_SET_VIEW
--- begin SIMI_IDENTITY
-create table SIMI_IDENTITY (
+-- begin SIMIIAM_IDENTITY
+create table SIMIIAM_IDENTITY (
     ID uuid,
     VERSION integer not null,
     CREATE_TS timestamp,
@@ -110,9 +205,9 @@ create table SIMI_IDENTITY (
     --
     primary key (ID)
 )^
--- end SIMI_IDENTITY
--- begin SIMI_DATA_PRODUCT_PUB_SCOPE
-create table SIMI_DATA_PRODUCT_PUB_SCOPE (
+-- end SIMIIAM_IDENTITY
+-- begin SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE
+create table SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE (
     ID uuid,
     VERSION integer not null,
     CREATE_TS timestamp,
@@ -135,9 +230,30 @@ create table SIMI_DATA_PRODUCT_PUB_SCOPE (
     --
     primary key (ID)
 )^
--- end SIMI_DATA_PRODUCT_PUB_SCOPE
--- begin SIMI_PROPERTIES_IN_LIST
-create table SIMI_PROPERTIES_IN_LIST (
+-- end SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE
+-- begin SIMIDATA_VIEW_FIELD
+create table SIMIDATA_VIEW_FIELD (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    SORT integer not null,
+    ALIAS varchar(100),
+    WMS_FI_FORMAT varchar(100),
+    DISPLAY_PROPS4_JSON text,
+    TABLE_FIELD_ID uuid not null,
+    TABLE_VIEW_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_VIEW_FIELD
+-- begin SIMIPRODUCT_PROPERTIES_IN_LIST
+create table SIMIPRODUCT_PROPERTIES_IN_LIST (
     ID uuid,
     VERSION integer not null,
     CREATE_TS timestamp,
@@ -155,23 +271,67 @@ create table SIMI_PROPERTIES_IN_LIST (
     --
     primary key (ID)
 )^
--- end SIMI_PROPERTIES_IN_LIST
--- begin SIMI_SINGLE_ACTOR
-create table SIMI_SINGLE_ACTOR (
+-- end SIMIPRODUCT_PROPERTIES_IN_LIST
+-- begin SIMIPRODUCT_PROPERTIES_IN_FACADE
+create table SIMIPRODUCT_PROPERTIES_IN_FACADE (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    SORT integer not null,
+    TRANSPARENCY integer not null,
+    --
+    DATA_SET_VIEW_ID uuid,
+    FACADE_LAYER_ID uuid,
+    --
+    primary key (ID)
+)^
+-- end SIMIPRODUCT_PROPERTIES_IN_FACADE
+-- begin SIMIDATA_EXTERNAL_TABLE
+create table SIMIDATA_EXTERNAL_TABLE (
     ID uuid,
     --
     primary key (ID)
 )^
--- end SIMI_SINGLE_ACTOR
--- begin SIMI_PRODUCT_LIST
-create table SIMI_PRODUCT_LIST (
+-- end SIMIDATA_EXTERNAL_TABLE
+-- begin SIMIDATA_POSTGRES_TABLE
+create table SIMIDATA_POSTGRES_TABLE (
+    ID uuid,
+    --
+    ID_FIELD_NAME varchar(100) not null,
+    MODEL_SCHEMA_ID uuid not null,
+    DESCRIPTION_MODEL text,
+    DESCRIPTION_OVERRIDE text,
+    CAT_SYNC_STAMP timestamp not null,
+    GEO_FIELD_NAME varchar(100),
+    GEO_TYPE varchar(100),
+    GEO_EPSG_CODE integer,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_POSTGRES_TABLE
+-- begin SIMIPRODUCT_SINGLE_ACTOR
+create table SIMIPRODUCT_SINGLE_ACTOR (
+    ID uuid,
+    --
+    TRANSPARENCY integer not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIPRODUCT_SINGLE_ACTOR
+-- begin SIMIPRODUCT_PRODUCT_LIST
+create table SIMIPRODUCT_PRODUCT_LIST (
     ID uuid,
     --
     primary key (ID)
 )^
--- end SIMI_PRODUCT_LIST
--- begin SIMI_USER
-create table SIMI_USER (
+-- end SIMIPRODUCT_PRODUCT_LIST
+-- begin SIMIIAM_USER
+create table SIMIIAM_USER (
     ID uuid,
     --
     FIRSTNAME varchar(100) not null,
@@ -179,25 +339,47 @@ create table SIMI_USER (
     --
     primary key (ID)
 )^
--- end SIMI_USER
--- begin SIMI_GROUP
-create table SIMI_GROUP (
+-- end SIMIIAM_USER
+-- begin SIMIIAM_GROUP
+create table SIMIIAM_GROUP (
     ID uuid,
     --
     PUB_AS_USER boolean not null,
     --
     primary key (ID)
 )^
--- end SIMI_GROUP
--- begin SIMI_LAYER_GROUP
-create table SIMI_LAYER_GROUP (
+-- end SIMIIAM_GROUP
+-- begin SIMIPRODUCT_FACADE_LAYER
+create table SIMIPRODUCT_FACADE_LAYER (
     ID uuid,
     --
     primary key (ID)
 )^
--- end SIMI_LAYER_GROUP
--- begin SIMI_MAP
-create table SIMI_MAP (
+-- end SIMIPRODUCT_FACADE_LAYER
+-- begin SIMIPRODUCT_DATA_SET_VIEW
+create table SIMIPRODUCT_DATA_SET_VIEW (
+    ID uuid,
+    --
+    RAW_DOWNLOAD boolean not null,
+    NAME varchar(100),
+    STYLE_SERVER text,
+    STYLE_DESKTOP text,
+    SEARCH_TYPE integer not null,
+    SEARCH_FACET varchar(100),
+    SEARCH_FILTER_WORD varchar(100),
+    --
+    primary key (ID)
+)^
+-- end SIMIPRODUCT_DATA_SET_VIEW
+-- begin SIMIPRODUCT_LAYER_GROUP
+create table SIMIPRODUCT_LAYER_GROUP (
+    ID uuid,
+    --
+    primary key (ID)
+)^
+-- end SIMIPRODUCT_LAYER_GROUP
+-- begin SIMIPRODUCT_MAP
+create table SIMIPRODUCT_MAP (
     ID uuid,
     --
     BACKGROUND boolean not null,
@@ -205,25 +387,46 @@ create table SIMI_MAP (
     --
     primary key (ID)
 )^
--- end SIMI_MAP
--- begin SIMI_GROUP_USER_LINK
-create table SIMI_GROUP_USER_LINK (
+-- end SIMIPRODUCT_MAP
+-- begin SIMIDATA_RASTER_VIEW
+create table SIMIDATA_RASTER_VIEW (
+    ID uuid,
+    --
+    RASTER_DS_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_RASTER_VIEW
+-- begin SIMIDATA_TABLE_VIEW
+create table SIMIDATA_TABLE_VIEW (
+    ID uuid,
+    --
+    WHERE_CLAUSE varchar(200),
+    GEOM_FIELD_NAME varchar(100),
+    WGC_EDIT boolean not null,
+    POSTGRES_TABLE_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_TABLE_VIEW
+-- begin SIMIIAM_GROUP_USER_LINK
+create table SIMIIAM_GROUP_USER_LINK (
     GROUP_ID uuid,
     USER_ID uuid,
     primary key (GROUP_ID, USER_ID)
 )^
--- end SIMI_GROUP_USER_LINK
--- begin SIMI_ROLE_GROUP_LINK
-create table SIMI_ROLE_GROUP_LINK (
+-- end SIMIIAM_GROUP_USER_LINK
+-- begin SIMIIAM_ROLE_GROUP_LINK
+create table SIMIIAM_ROLE_GROUP_LINK (
     GROUP_ID uuid,
     ROLE_ID uuid,
     primary key (GROUP_ID, ROLE_ID)
 )^
--- end SIMI_ROLE_GROUP_LINK
--- begin SIMI_ROLE_USER_LINK
-create table SIMI_ROLE_USER_LINK (
+-- end SIMIIAM_ROLE_GROUP_LINK
+-- begin SIMIIAM_ROLE_USER_LINK
+create table SIMIIAM_ROLE_USER_LINK (
     USER_ID uuid,
     ROLE_ID uuid,
     primary key (USER_ID, ROLE_ID)
 )^
--- end SIMI_ROLE_USER_LINK
+-- end SIMIIAM_ROLE_USER_LINK
