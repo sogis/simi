@@ -1,5 +1,12 @@
 package ch.so.agi.simi.web;
 
+import com.haulmont.cuba.gui.AppConfig;
+import com.haulmont.cuba.gui.Dialogs;
+import com.haulmont.cuba.gui.Notifications;
+import com.haulmont.cuba.gui.components.FileUploadField;
+import com.haulmont.cuba.gui.export.ByteArrayDataProvider;
+import com.haulmont.cuba.gui.screen.ScreenContext;
+import com.haulmont.cuba.gui.screen.UiControllerUtils;
 import org.springframework.stereotype.Component;
 
 import javax.xml.namespace.QName;
@@ -12,14 +19,41 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
 
-@Component(UploadStyleBean.NAME)
-public class UploadStyleBean {
-    public static final String NAME = "simi_UploadStyleBean";
+@Component(StyleUploadDownloadBean.NAME)
+public class StyleUploadDownloadBean {
+    public static final String NAME = "simi_StyleUploadDownloadBean";
 
     public static final int TARGET_MAJOR_VERSION = 2;
     public static final int TARGET_MINOR_VERSION = 18;
 
-    public static class StyleUploadException extends Exception {
+    public void handleFileUploadSucceed(FileUploadField uploadField, Consumer<String> assignResult) {
+        ScreenContext screenContext = UiControllerUtils.getScreenContext(uploadField.getFrame().getFrameOwner());
+        Notifications notifications = screenContext.getNotifications();
+        Dialogs dialogs = screenContext.getDialogs();
+
+        try {
+            checkUpload(uploadField.getFileContent(), fileContent -> {
+                assignResult.accept(fileContent);
+                notifications.create()
+                        .withCaption(uploadField.getFileName() + " uploaded")
+                        .show();
+            });
+        } catch (StyleUploadException e) {
+            dialogs.createMessageDialog()
+                    .withCaption("Upload")
+                    .withMessage(e.getLocalizedMessage())
+                    .withType(Dialogs.MessageType.WARNING)
+                    .show();
+        }
+    }
+
+    public void downloadString(String content, String filename) {
+        byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
+
+        AppConfig.createExportDisplay(null).show(new ByteArrayDataProvider(bytes), filename);
+    }
+
+    private static class StyleUploadException extends Exception {
         public StyleUploadException(String errorMessage) {
             super(errorMessage);
         }
@@ -35,7 +69,7 @@ public class UploadStyleBean {
      * @param assignResult Consumer with file content as a string, that gets called when the file is correct
      * @throws StyleUploadException Something went wrong either with reading the file or the version does not match
      */
-    public void checkUpload(InputStream inputStream, Consumer<String> assignResult) throws StyleUploadException {
+    private void checkUpload(InputStream inputStream, Consumer<String> assignResult) throws StyleUploadException {
         try {
             String fileContent = inputStreamToString(inputStream);
 
