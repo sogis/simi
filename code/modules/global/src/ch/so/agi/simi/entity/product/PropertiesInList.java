@@ -3,7 +3,9 @@ package ch.so.agi.simi.entity.product;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMIPRODUCT_PROPERTIES_IN_LIST")
+@Table(name = "SIMIPRODUCT_PROPERTIES_IN_LIST", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_SIMI_PROPERTIES_IN_LIST_UNQ_PRODUCT_LIST_ID_SINGLE_ACTOR_ID", columnNames = {"PRODUCT_LIST_ID", "SINGLE_ACTOR_ID"})
+})
 @Entity(name = "simiProduct_PropertiesInList")
 public class PropertiesInList extends ChildLayerProperties {
     private static final long serialVersionUID = 3933249168854903665L;
