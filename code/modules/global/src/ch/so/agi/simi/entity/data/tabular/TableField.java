@@ -11,7 +11,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
-@Table(name = "SIMIDATA_TABLE_FIELD")
+@Table(name = "SIMIDATA_TABLE_FIELD", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_SIMIDATA_TABLE_FIELD_UNQ_NAME_POSTGRES_TABLE_ID", columnNames = {"NAME", "POSTGRES_TABLE_ID"})
+})
 @Entity(name = "simiData_TableField")
 @NamePattern("%s|name")
 public class TableField extends StandardEntity {
