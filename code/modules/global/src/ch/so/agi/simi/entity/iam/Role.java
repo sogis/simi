@@ -1,7 +1,7 @@
 package ch.so.agi.simi.entity.iam;
 
+import ch.so.agi.simi.entity.SimiStandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "SIMIIAM_ROLE")
 @Entity(name = "simiIAM_Role")
 @NamePattern("%s|name")
-public class Role extends StandardEntity {
+public class Role extends SimiStandardEntity {
     private static final long serialVersionUID = -1282147615227159232L;
 
     @NotNull

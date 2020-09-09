@@ -1,8 +1,8 @@
 package ch.so.agi.simi.entity.data.tabular;
 
+import ch.so.agi.simi.entity.SimiStandardEntity;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
@@ -15,7 +15,7 @@ import java.util.List;
 })
 @Entity(name = "simiData_ModelSchema")
 @NamePattern("%s.%s|postgresDB,schemaName")
-public class ModelSchema extends StandardEntity {
+public class ModelSchema extends SimiStandardEntity {
     private static final long serialVersionUID = -2988394575142052644L;
 
     @Column(name = "SCHEMA_NAME", nullable = false, length = 100)

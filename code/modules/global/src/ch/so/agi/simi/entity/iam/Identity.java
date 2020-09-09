@@ -1,7 +1,7 @@
 package ch.so.agi.simi.entity.iam;
 
+import ch.so.agi.simi.entity.SimiStandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @NamePattern("%s|identifier")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Identity extends StandardEntity {
+public class Identity extends SimiStandardEntity {
     private static final long serialVersionUID = 8795833236734020501L;
 
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)

@@ -1,8 +1,8 @@
 package ch.so.agi.simi.entity.product;
 
 import ch.so.agi.simi.entity.DataProduct_PubScope;
+import ch.so.agi.simi.entity.SimiStandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NamePattern("%s (%s)|identifier,title")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
-public class DataProduct extends StandardEntity {
+public class DataProduct extends SimiStandardEntity {
     private static final long serialVersionUID = -3456773582487680912L;
 
     @NotNull

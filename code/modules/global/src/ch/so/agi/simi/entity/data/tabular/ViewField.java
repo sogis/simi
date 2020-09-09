@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.data.tabular;
 
-import com.haulmont.cuba.core.entity.StandardEntity;
+import ch.so.agi.simi.entity.SimiStandardEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
         @UniqueConstraint(name = "IDX_SIMI_VIEW_FIELD_UNQ_TABLE_FIELD_ID_TABLE_VIEW_ID", columnNames = {"TABLE_FIELD_ID", "TABLE_VIEW_ID"})
 })
 @Entity(name = "simiData_ViewField")
-public class ViewField extends StandardEntity {
+public class ViewField extends SimiStandardEntity {
     private static final long serialVersionUID = -2665578122978329156L;
 
     @NotNull

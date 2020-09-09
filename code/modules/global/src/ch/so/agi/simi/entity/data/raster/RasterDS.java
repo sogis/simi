@@ -1,8 +1,8 @@
 package ch.so.agi.simi.entity.data.raster;
 
+import ch.so.agi.simi.entity.SimiStandardEntity;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "SIMIDATA_RASTER_DS")
 @Entity(name = "simiData_RasterDS")
 @NamePattern("%s|path")
-public class RasterDS extends StandardEntity {
+public class RasterDS extends SimiStandardEntity {
     private static final long serialVersionUID = -1371985729459673568L;
 
     @NotNull
