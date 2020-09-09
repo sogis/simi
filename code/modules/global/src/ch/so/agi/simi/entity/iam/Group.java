@@ -6,8 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMI_GROUP")
-@Entity(name = "simi_Group")
+@Table(name = "SIMIIAM_GROUP")
+@Entity(name = "simiIAM_Group")
 @NamePattern("%s|identifier")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class Group extends Identity {
@@ -17,12 +17,12 @@ public class Group extends Identity {
     @Column(name = "PUB_AS_USER", nullable = false)
     private Boolean pubAsUser = false;
 
-    @JoinTable(name = "SIMI_GROUP_USER_LINK",
+    @JoinTable(name = "SIMIIAM_GROUP_USER_LINK",
             joinColumns = @JoinColumn(name = "GROUP_ID"),
             inverseJoinColumns = @JoinColumn(name = "USER_ID"))
     @ManyToMany
     private List<User> users;
-    @JoinTable(name = "SIMI_ROLE_GROUP_LINK",
+    @JoinTable(name = "SIMIIAM_ROLE_GROUP_LINK",
             joinColumns = @JoinColumn(name = "GROUP_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     @ManyToMany

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <metadata xmlns="http://schemas.haulmont.com/cuba/metadata.xsd">
 
-    <metadata-model root-package="ch.so.agi.simi" namespace="simi"/>
+    <metadata-model root-package="ch.so.agi.simi" namespace="simi">
+        <class>ch.so.agi.simi.entity.data.tabular.PostgresTableFromService</class>
+    </metadata-model>
 
 </metadata>

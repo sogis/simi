@@ -1,7 +1,7 @@
-package ch.so.agi.simi.web.screens.product.datasetview;
+package ch.so.agi.simi.web.screens.featureinfo.datasetview;
 
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.product.DataSetView;
+import ch.so.agi.simi.entity.featureinfo.DataSetView;
 
 @UiController("product_DataSetView.edit")
 @UiDescriptor("data-set-view-edit.xml")

@@ -10,8 +10,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.List;
 
-@Table(name = "SIMI_PRODUCT_LIST")
-@Entity(name = "simi_ProductList")
+@Table(name = "SIMIPRODUCT_PRODUCT_LIST")
+@Entity(name = "simiProduct_ProductList")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class ProductList extends DataProduct {
     private static final long serialVersionUID = 7189309667378680986L;

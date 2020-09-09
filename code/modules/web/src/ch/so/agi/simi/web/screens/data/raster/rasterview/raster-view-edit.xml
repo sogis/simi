@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://rasterViewEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.data.raster.rasterview">
+    <data>
+        <instance id="rasterViewDc"
+                  class="ch.so.agi.simi.entity.data.raster.RasterView">
+            <view extends="_local">
+                <property name="pubScope" view="_minimal"/>
+                <property name="rasterDS" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+        <collection id="pubScopesDc"
+                    class="ch.so.agi.simi.entity.DataProduct_PubScope"
+                    view="_local">
+            <loader id="pubScopesDl">
+                <query>
+                    <![CDATA[select e from simiProduct_DataProduct_PubScope e order by e.sort]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>e.forDSV = true</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="rasterViewDc">
+                <column width="350px">
+                    <pickerField id="rasterDSField" property="rasterDS" editable="false"/>
+
+                    <textField id="transparencyField" property="transparency"/>
+                    <checkBox id="rawDownloadField" property="rawDownload"/>
+                    <textField id="nameField" property="name"/>
+                    <lookupField id="searchTypeField" property="searchType"/>
+                    <textField id="searchFacetField" property="searchFacet"/>
+                    <textField id="searchFilterWordField" property="searchFilterWord"/>
+
+                    <textArea id="styleServerField" property="styleServer" rows="5"/>
+                    <textArea id="styleDesktopField" property="styleDesktop" rows="5"/>
+
+                    <textField id="identifierField" property="identifier"/>
+                    <textField id="titleField" property="title"/>
+                    <lookupField id="pubScopeField" property="pubScope" optionsContainer="pubScopesDc"/>
+                    <dateField id="releasedAtField" property="releasedAt"/>
+                    <textField id="releasedThroughField" property="releasedThrough"/>
+                    <textArea id="synonymsField" property="synonyms" rows="2"/>
+                    <textArea id="keywordsField" property="keywords" rows="2"/>
+                    <textArea id="remarksField" property="remarks" rows="5"/>
+                </column>
+            </form>
+        </scrollBox>
+
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

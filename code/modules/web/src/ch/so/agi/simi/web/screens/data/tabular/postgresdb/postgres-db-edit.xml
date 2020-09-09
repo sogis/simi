@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://postgresDBEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgresdb">
+    <data>
+        <instance id="postgresDBDc"
+                  class="ch.so.agi.simi.entity.data.tabular.PostgresDB">
+            <view extends="_local"/>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="postgresDBDc">
+            <column width="350px">
+                <textField id="dbNameField" property="dbName"/>
+                <checkBox id="defaultValueField" property="defaultValue"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

@@ -18,7 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@UiController("simi_LayerGroup.edit")
+@UiController("simiProduct_LayerGroup.edit")
 @UiDescriptor("layer-group-edit.xml")
 @EditedEntityContainer("layerGroupDc")
 @LoadDataBeforeShow

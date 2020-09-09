@@ -12,7 +12,7 @@
             </view>
             <loader id="groupsDl">
                 <query>
-                    <![CDATA[select e from simi_Group e]]>
+                    <![CDATA[select e from simiIAM_Group e]]>
                     <condition>
                         <or>
                             <c:jpql>

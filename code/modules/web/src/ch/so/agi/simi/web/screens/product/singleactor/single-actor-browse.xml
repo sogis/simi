@@ -12,7 +12,7 @@
             </view>
             <loader id="singleActorsDl">
                 <query>
-                    <![CDATA[select e from simi_SingleActor e]]>
+                    <![CDATA[select e from simiProduct_SingleActor e]]>
                 </query>
             </loader>
         </collection>
