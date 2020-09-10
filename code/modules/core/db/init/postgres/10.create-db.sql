@@ -320,11 +320,11 @@ create table SIMIPRODUCT_PROPERTIES_IN_LIST (
     EXT4 text,
     EXT5 text,
     SORT integer not null,
-    TRANSPARENCY integer not null,
+    TRANSPARENCY integer,
     --
     VISIBLE boolean not null,
-    PRODUCT_LIST_ID uuid,
-    SINGLE_ACTOR_ID uuid,
+    PRODUCT_LIST_ID uuid not null,
+    SINGLE_ACTOR_ID uuid not null,
     --
     primary key (ID)
 )^
@@ -345,10 +345,10 @@ create table SIMIPRODUCT_PROPERTIES_IN_FACADE (
     EXT4 text,
     EXT5 text,
     SORT integer not null,
-    TRANSPARENCY integer not null,
+    TRANSPARENCY integer,
     --
-    DATA_SET_VIEW_ID uuid,
-    FACADE_LAYER_ID uuid,
+    DATA_SET_VIEW_ID uuid not null,
+    FACADE_LAYER_ID uuid not null,
     --
     primary key (ID)
 )^
