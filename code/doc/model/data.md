@@ -87,7 +87,6 @@ Keine eigenen Attribute.
 GDI Postgres-Tabelle oder -View.
 
 #### Attributbeschreibung
-
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |idFieldName|String(100)|j|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
@@ -119,9 +118,11 @@ Umfasst die Eigenschaften eines Attributs einer PostgresDS. Die Geometriespalten
 
 UK über "name" und FK zu PostgresTable.   
 
-Bezüglich Auslesen des Kataloges mittels ModelReader ist zu entscheiden:
-* Ob bei geändertem Datentyp ein neues Attribut angelegt wird (eher nein)
-* 
+Bezüglich Auslesen des Kataloges mittels SchemaReader bei bestehenden Attributen: 
+* Wenn "name" und "typeName" in Simi und Geodatenbank identisch sind
+  * In Simi bestehendes TableField mit den Informationen aus dem Schemareader aktualisieren
+* Sonst
+  * Neues TableField anlegen, beim alten catSynced auf false setzen.
     
 #### Bemerkungen:
 * Die Namen der Attribute werden mittels Katalogabfrage aus Postgres gelesen.
@@ -140,7 +141,7 @@ Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Schem
 
 #### Konstraints
 
-UK über schemaName, modelName und FK auf PostgresDB.
+UK über schemaName und FK auf PostgresDB.
 
 ### Klasse PostgresDB
 
@@ -154,7 +155,7 @@ Postgres-Datenbank, in welcher das Schema (PostgresSchema) enthalten ist. Univer
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |dbName|String(100)|j|Name der Datenbank (auf dem Cluster). Name muss GDI-weit eindeutig sein.|
-|default|Boolean|j|Default-DB in den SIMI-Auswahlfeldern.|
+|defaultValue|Boolean|j|Default-DB in den SIMI-Auswahlfeldern.|
 
 #### Konstraints
 
