@@ -23,7 +23,6 @@ Tabelle "DataSet" zusammengefasst werden.
 |---|---|---|---|
 |remarks|String|n|Interne Bemerkungen zum DS.|
 |description|String|n|Metainformationen zum DataSet.|
-|abGeneration|enum|n|"A" oder "B". Generation innerhalb der AB-Mutation.|
 
 ## Klassen in Teilmodell "tabular"
 
@@ -64,18 +63,15 @@ UK über FK's.
  
 ### Klasse TableDS
 
-Tabelle einer Datenbank der GDI oder mit Bezug zur GDI
+Tabelle einer Datenbank der GDI oder eine externe mit Bezug zur GDI
 
 #### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |tableName|String(100)|j|Name der Tabelle oder View in der Datenbank|
-
-#### Konstraints
-
-Es wird explizit **kein** Konstraint auf tableName gesetzt, um das Arbeiten mit Versionen zu erlauben.
-
+|remarks|String|n|Interne Bemerkungen zur Tabelle.|
+ 
 ### Klasse ExternalTable
 
 Tabelle einer externen Datenbank, aus welcher die GDI liest oder schreibt (GRETL).
@@ -92,9 +88,9 @@ GDI Postgres-Tabelle oder -View.
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|idFieldName|String(100)|n|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
-|descriptionModel|String|Beschreibung Klasse im INTERLIS-Modell.|
-|descriptionOverride|String|Übersteuerung der Beschreibung in SIMI (Wird bei "grösserer" Modelländerung in das Modell zurückgeschrieben.|
+|idFieldName|String(100)|j|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
+|descriptionModel|String|j|Beschreibung Klasse im INTERLIS-Modell.|
+|descriptionOverride|String|n|Übersteuerung der Beschreibung in SIMI (Wird bei "grösserer" Modelländerung in das Modell zurückgeschrieben.|
 |catSyncStamp|DateTime|j|Zeitpunkt des letzten Abgleiches mit dem effektiven Schema der Geodatenbank.|
 |geoFieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
 |geoType|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
@@ -139,7 +135,6 @@ Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Schem
 |---|---|---|---|
 |schemaName|String(100)|j|Name des Schemas.|
 |modelName|String(100)|n|Name des INTERLIS-Modelles, mit welchem das Schema angelegt wurde.|
-|abGeneration|enum|n|"A" oder "B". Generation innerhalb der AB-Mutation.|
 
 #### Konstraints
 
@@ -183,6 +178,8 @@ Ausgestaltung abhängig von den Resultaten der Abklärung zur "besten" Raster-Da
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |path|String(200)|j|Filepfad zur verwendeten Rasterebene.|
+|remarks|String|n|Interne Bemerkungen zum DS.|
+|description|String|n|Metainformationen zum DataSet.|
 
 # Datenumfang für verschiedene Modellarten
 

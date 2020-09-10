@@ -16,8 +16,7 @@ public class ChildLayerProperties extends SimiStandardEntity {
     @Column(name = "SORT", nullable = false)
     private Integer sort;
 
-    @NotNull
-    @Column(name = "TRANSPARENCY", nullable = false)
+    @Column(name = "TRANSPARENCY")
     @Max(100)
     @Min(0)
     private Integer transparency = 0;
