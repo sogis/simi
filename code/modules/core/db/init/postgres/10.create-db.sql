@@ -180,7 +180,7 @@ create table SIMIDATA_POSTGRES_DB (
     EXT5 text,
     --
     DB_NAME varchar(100) not null,
-    DEFAULT_VALUE boolean,
+    DEFAULT_VALUE boolean not null,
     --
     primary key (ID)
 )^

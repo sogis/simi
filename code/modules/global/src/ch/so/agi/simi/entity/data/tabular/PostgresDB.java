@@ -20,8 +20,9 @@ public class PostgresDB extends SimiStandardEntity {
     @NotNull
     private String dbName;
 
-    @Column(name = "DEFAULT_VALUE")
-    private Boolean defaultValue;
+    @Column(name = "DEFAULT_VALUE", nullable = false)
+    @NotNull
+    private Boolean defaultValue = false;
 
     @OneToMany(mappedBy = "postgresDB")
     private List<ModelSchema> modelSchemas;
