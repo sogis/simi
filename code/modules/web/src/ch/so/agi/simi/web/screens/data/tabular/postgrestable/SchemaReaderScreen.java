@@ -48,16 +48,8 @@ public class SchemaReaderScreen extends Screen {
     @Inject
     private Action selectAction;
 
-    public String getSchema() {
-        return schema;
-    }
-
     public void setSchema(String schema) {
         this.schema = schema;
-    }
-
-    public String getTable() {
-        return table;
     }
 
     public void setTable(String table) {
@@ -74,10 +66,6 @@ public class SchemaReaderScreen extends Screen {
 
     public TableAndFieldInfo getResult() {
         return result;
-    }
-
-    public void setResult(TableAndFieldInfo result) {
-        this.result = result;
     }
 
     @Subscribe
@@ -106,6 +94,10 @@ public class SchemaReaderScreen extends Screen {
 
     @Subscribe("searchBtn")
     public void onSearchBtnClick(Button.ClickEvent event) {
+        if (postgresDBLookupField.getValue() == null) {
+            return;
+        }
+
         try {
             setPostgresDB(postgresDBLookupField.getValue());
 

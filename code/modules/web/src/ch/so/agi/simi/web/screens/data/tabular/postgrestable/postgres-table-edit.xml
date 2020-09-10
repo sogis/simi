@@ -8,13 +8,10 @@
                   class="ch.so.agi.simi.entity.data.tabular.PostgresTable">
             <view extends="_local">
                 <property name="modelSchema" view="_minimal">
-                    <property name="schemaName"/>
-                    <property name="postgresDB" view="_minimal">
-                        <property name="dbName"/>
-                    </property>
                 </property>
-                <property name="tableViews" view="_minimal"/>
-                <property name="tableFields" view="_local"/>
+                <property name="tableFields" view="_local">
+                    <property name="viewFields" view="_minimal"/>
+                </property>
             </view>
             <loader/>
             <collection id="tableFieldsDc" property="tableFields"/>

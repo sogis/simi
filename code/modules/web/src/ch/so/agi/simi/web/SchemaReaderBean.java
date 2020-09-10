@@ -8,6 +8,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component(SchemaReaderBean.NAME)
 public class SchemaReaderBean {
     public static final String NAME = "simi_SchemaReaderBean";
@@ -19,7 +21,10 @@ public class SchemaReaderBean {
 
     public TableAndFieldInfo getTableInfo(PostgresDB postgresDB, TableShortInfo tableShortInfo) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(TABLE_INFO, TableAndFieldInfo.class);
+        TableAndFieldInfo tableAndFieldInfo = objectMapper.readValue(TABLE_INFO, TableAndFieldInfo.class);
+        tableAndFieldInfo.setCatSyncStamp(LocalDateTime.now());
+        tableAndFieldInfo.setPostgresDB(postgresDB);
+        return tableAndFieldInfo;
     }
 
     private static String TABLE_SEARCH = "{\n" +
