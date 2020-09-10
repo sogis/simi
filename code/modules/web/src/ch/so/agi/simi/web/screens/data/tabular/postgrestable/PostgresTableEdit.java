@@ -1,8 +1,8 @@
 package ch.so.agi.simi.web.screens.data.tabular.postgrestable;
 
 import ch.so.agi.simi.entity.data.tabular.ModelSchema;
-import ch.so.agi.simi.entity.data.tabular.PostgresTableFromService;
 import ch.so.agi.simi.entity.data.tabular.TableField;
+import ch.so.agi.simi.entity.data.tabular.schemareader.TableAndFieldInfo;
 import com.haulmont.cuba.core.global.MetadataTools;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
@@ -36,11 +36,14 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
     @Subscribe("readFromServiceBtn")
     public void onReadFromServiceBtnClick(Button.ClickEvent event) {
         PostgresTable postgresTable = postgresTableDc.getItem();
-        PostgresTableReadFromService readFromServiceScreen = screenBuilders.lookup(PostgresTableFromService.class, this)
-                .withScreenClass(PostgresTableReadFromService.class)
-                .withSelectHandler(postgresTableFromServices -> {
-                    PostgresTableFromService postgresTableFromService = postgresTableFromServices.iterator().next();
-                    notifications.create().withCaption("Selected: " + metadataTools.getInstanceName(postgresTableFromService)).show();
+        SchemaReaderScreen readFromServiceScreen = screenBuilders.screen(this)
+                .withScreenClass(SchemaReaderScreen.class)
+                .withAfterCloseListener(afterScreenCloseEvent -> {
+                    SchemaReaderScreen schemaReaderScreen = afterScreenCloseEvent.getScreen();
+                    if (afterScreenCloseEvent.closedWith(StandardOutcome.COMMIT)) {
+                        TableAndFieldInfo tableAndFieldInfo = schemaReaderScreen.getResult();
+                        notifications.create().withCaption("Result: " + tableAndFieldInfo).show();
+                    }
                 })
                 .build();
         readFromServiceScreen.setSchema(Optional.of(postgresTable).map(PostgresTable::getModelSchema).map(ModelSchema::getSchemaName).orElse(null));

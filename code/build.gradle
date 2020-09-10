@@ -118,6 +118,9 @@ configure(webModule) {
     dependencies {
         compileOnly(servletApi)
         compile(globalModule)
+
+        // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
     }
 
     task webArchive(type: Zip) {

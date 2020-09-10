@@ -2,12 +2,10 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://postgresTableReadFromService.caption"
-        focusComponent="postgresTablesFromServiceTable"
+        focusComponent="tableShortInfosTable"
         messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgrestable">
     <data readOnly="true">
-        <collection id="postgresTablesFromServiceDc"
-                    class="ch.so.agi.simi.entity.data.tabular.PostgresTableFromService">
-        </collection>
+        <collection id="TableShortInfosDc" class="ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo"/>
         <collection id="postgresDBsDc"
                     class="ch.so.agi.simi.entity.data.tabular.PostgresDB"
                     view="_local">
@@ -22,28 +20,31 @@
                 width="80%"
                 modal="true"
                 forceDialog="true"/>
-    <layout expand="postgresTablesFromServiceTable"
+    <actions>
+        <action id="selectAction" icon="OK" caption="Auswählen"/>
+    </actions>
+    <layout expand="tableShortInfosTable"
             spacing="true">
         <form>
             <lookupField id="postgresDBLookupField" caption="Database" optionsContainer="postgresDBsDc" nullOptionVisible="false"/>
             <textField id="schemaField" caption="Schema"/>
             <hbox caption="Tabelle" spacing="true">
                 <textField id="tableField"/>
-                <button id="searchBtn" caption="Suchen"/>
+                <button id="searchBtn" caption="Suchen" stylename="primary"/>
             </hbox>
         </form>
-        <table id="postgresTablesFromServiceTable"
+        <table id="tableShortInfosTable"
                caption="Resultat"
                width="100%"
-               dataContainer="postgresTablesFromServiceDc">
+               dataContainer="TableShortInfosDc">
             <columns>
-                <column id="schema"/>
-                <column id="table"/>
+                <column id="schemaName"/>
+                <column id="tvName"/>
             </columns>
         </table>
-        <hbox id="lookupActions" spacing="true" visible="false">
-            <button action="lookupSelectAction"/>
-            <button action="lookupCancelAction"/>
+        <hbox id="dialogActions" spacing="true">
+            <button id="selectBtn" action="selectAction" stylename="primary"/>
+            <button id="cancelBtn" caption="Abbrechen" icon="CANCEL"/>
         </hbox>
     </layout>
 </window>
