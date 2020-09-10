@@ -14,12 +14,14 @@ public class PropertiesInList extends ChildLayerProperties {
     @Column(name = "VISIBLE", nullable = false)
     private Boolean visible = true;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_LIST_ID")
+    @NotNull
     private ProductList productList;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "SINGLE_ACTOR_ID")
+    @NotNull
     private SingleActor singleActor;
 
     public Boolean getVisible() {
