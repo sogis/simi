@@ -39,9 +39,10 @@
             </form>
             <button id="readFromServiceBtn" caption="Lesen von Service" align="MIDDLE_RIGHT" stylename="friendly"/>
             <groupBox id="tableFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/PostgresTable.tableFields">
-                <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" height="200px">
+                <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" height="200px" multiselect="true">
                     <actions>
                         <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
                     </actions>
                     <columns>
                         <column id="name"/>
@@ -51,6 +52,7 @@
                     </columns>
                     <buttonsPanel>
                         <button action="tableFieldsTable.edit"/>
+                        <button action="tableFieldsTable.remove"/>
                     </buttonsPanel>
                 </table>
             </groupBox>

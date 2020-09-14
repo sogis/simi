@@ -7,6 +7,7 @@ import ch.so.agi.simi.entity.data.tabular.TableField;
 import ch.so.agi.simi.entity.data.tabular.schemareader.TableAndFieldInfo;
 import ch.so.agi.simi.entity.data.tabular.schemareader.TableInfo;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Component;
@@ -36,6 +37,8 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
     private DataContext dataContext;
     @Inject
     private DataManager dataManager;
+    @Inject
+    private Dialogs dialogs;
 
     @Subscribe("readFromServiceBtn")
     public void onReadFromServiceBtnClick(Button.ClickEvent event) {
@@ -131,5 +134,13 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
                     postgresTable.setGeoType(fieldInfo.getGeoFieldType());
                     postgresTable.setGeoEpsgCode(fieldInfo.getGeoFieldSrId());
                 });
+    }
+
+    @Subscribe
+    public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
+        if (!tableFieldsDc.getItems().stream().allMatch(TableField::getCatSynced)) {
+            dialogs.createMessageDialog().withMessage("Dialog kann nicht geschlossen werden weil nicht alle Tabellenfelder synchronisiert sind. \nNicht synchronisierte Felder müssen gelöscht werden.").show();
+            event.preventCommit();
+        }
     }
 }
