@@ -10,7 +10,10 @@
             <view extends="_local">
                 <property name="pubScope" view="_minimal"/>
                 <property name="dataSetViews" view="_minimal">
-                    <property name="dataSetView" view="_minimal"/>
+                    <property name="dataSetView" view="_minimal">
+                        <property name="identifier"/>
+                        <property name="title"/>
+                    </property>
                     <property name="sort"/>
                     <property name="transparency"/>
                 </property>
