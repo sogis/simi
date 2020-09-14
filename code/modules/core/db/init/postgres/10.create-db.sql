@@ -494,3 +494,21 @@ create table SIMIIAM_ROLE_USER_LINK (
     primary key (USER_ID, ROLE_ID)
 )^
 -- end SIMIIAM_ROLE_USER_LINK
+-- begin SIMIIAM_PERMISSION
+create table SIMIIAM_PERMISSION (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    LEVEL_ varchar(50) not null,
+    DATA_SET_VIEW_ID uuid not null,
+    ROLE_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIIAM_PERMISSION

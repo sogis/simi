@@ -1,5 +1,6 @@
 package ch.so.agi.simi.entity.product;
 
+import ch.so.agi.simi.entity.iam.Permission;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
@@ -46,6 +47,19 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "dataSetView")
     private List<PropertiesInFacade> facadeLayers;
+
+    @OneToMany(mappedBy = "dataSetView")
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
+    private List<Permission> permissions;
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
+    }
 
     @Transient
     @MetaProperty(related = "styleServer")
