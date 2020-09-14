@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://viewFieldEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.data.tabular.viewfield">
+    <data>
+        <instance id="viewFieldDc"
+                  class="ch.so.agi.simi.entity.data.tabular.ViewField">
+            <view extends="_local">
+                <property name="tableField" view="_minimal">
+                    <property name="descriptionModel"/>
+                    <property name="descriptionOverride"/>
+                </property>
+                <property name="tableView" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+        <collection id="tableFieldsDc"
+                    class="ch.so.agi.simi.entity.data.tabular.TableField"
+                    view="_local">
+            <loader id="tableFieldsDl">
+                <query>
+                    <![CDATA[select e from simiData_TableField e]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>e.postgresTable = :table</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="viewFieldDc">
+                <column width="350px">
+                    <textField id="sortField" property="sort"/>
+                    <textField id="aliasField" property="alias"/>
+                    <textField id="wmsFiFormatField" property="wmsFiFormat"/>
+                    <textArea id="displayProps4JsonField" property="displayProps4Json" rows="5"/>
+                    <lookupField id="tableFieldField" property="tableField" optionsContainer="tableFieldsDc"/>
+                    <textArea id="descriptionModelField" property="tableField.descriptionModel" rows="5" editable="false"/>
+                    <textArea id="descriptionOverrideField" property="tableField.descriptionOverride" rows="5"/>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

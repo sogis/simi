@@ -15,7 +15,7 @@ import java.util.List;
         @UniqueConstraint(name = "IDX_SIMIDATA_TABLE_FIELD_UNQ_NAME_POSTGRES_TABLE_ID", columnNames = {"NAME", "POSTGRES_TABLE_ID"})
 })
 @Entity(name = "simiData_TableField")
-@NamePattern("%s|name")
+@NamePattern("#getCaption|name,typeName,strLength")
 public class TableField extends SimiStandardEntity {
     private static final long serialVersionUID = -1809352037109072642L;
 
@@ -161,5 +161,9 @@ public class TableField extends SimiStandardEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCaption() {
+        return name + " " + typeName + (strLength == null ? "" : "(" + strLength + ")");
     }
 }

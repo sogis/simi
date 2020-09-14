@@ -6,6 +6,7 @@ import com.haulmont.cuba.core.global.MetadataTools;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.cuba.gui.screen.*;
 
@@ -24,17 +25,26 @@ public class PostgresTableBrowse extends StandardLookup<PostgresTable> {
     private MetadataTools metadataTools;
     @Inject
     private UiComponents uiComponents;
+    @Inject
+    private CollectionLoader<PostgresTable> postgresTablesDl;
 
     @Subscribe("postgresTablesTable.createTableView")
     public void onPostgresTablesTableCreateTableView(Action.ActionPerformedEvent event) {
         PostgresTable postgresTable = postgresTablesTable.getSingleSelected();
-        screenBuilders.editor(TableView.class, this)
+        Screen editScreen = screenBuilders.editor(TableView.class, this)
                 .newEntity()
                 .withInitializer(tableView -> {
                     tableView.setPostgresTable(postgresTable);
                 })
-                .build()
-                .show();
+                .build();
+
+        editScreen.addAfterCloseListener(afterCloseEvent -> {
+            if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
+                postgresTablesDl.load();
+            }
+        });
+
+        editScreen.show();
     }
 
     @Install(to = "postgresTablesTable.createTableView", subject = "enabledRule")
