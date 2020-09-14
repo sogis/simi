@@ -3,6 +3,7 @@ package ch.so.agi.simi.web.screens.data.tabular.tableview;
 import ch.so.agi.simi.entity.DataProduct_PubScope;
 import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
+import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
 import ch.so.agi.simi.web.StyleUploadDownloadBean;
 import com.haulmont.cuba.gui.components.*;
@@ -38,6 +39,10 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private CollectionPropertyContainer<ViewField> viewFieldsDc;
     @Inject
     private StyleUploadDownloadBean styleUploadDownloadBean;
+    @Inject
+    private CollectionPropertyContainer<Permission> permissionsDc;
+    @Inject
+    private DataContext dataContext;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<TableView> event) {
@@ -98,5 +103,13 @@ public class TableViewEdit extends StandardEditor<TableView> {
             event.getModifiedInstances().add(item);
             i += 10;
         }
+    }
+
+    @Subscribe("addPermissionBtn")
+    public void onAddPermissionBtnClick(Button.ClickEvent event) {
+        Permission permission = dataContext.create(Permission.class);
+        permission.setDataSetView(this.getEditedEntity());
+
+        permissionsDc.getMutableItems().add(permission);
     }
 }

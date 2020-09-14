@@ -15,9 +15,14 @@
                 <property name="viewFields" view="_local">
                     <property name="tableField" view="_minimal"/>
                 </property>
+                <property name="permissions" view="_minimal">
+                    <property name="level"/>
+                    <property name="role" view="_minimal"/>
+                </property>
             </view>
             <loader/>
             <collection id="viewFieldsDc" property="viewFields"/>
+            <collection id="permissionsDc" property="permissions"/>
         </instance>
         <collection id="pubScopesDc"
                     class="ch.so.agi.simi.entity.DataProduct_PubScope"
@@ -92,6 +97,25 @@
                         <button action="viewFieldsTable.edit"/>
                         <button action="viewFieldsTable.remove"/>
                         <button id="btnSortAction" action="viewFieldsTable.sortAction"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <groupBox id="permissionsBox" caption="msg://ch.so.agi.simi.entity.product/DataSetView.permissions">
+                <table id="permissionsTable" dataContainer="permissionsDc" width="100%" height="200px" editable="true">
+                    <actions>
+                        <action id="remove" type="remove">
+                            <properties>
+                                <property name="confirmation" value="false"/>
+                            </properties>
+                        </action>
+                    </actions>
+                    <columns>
+                        <column id="level" editable="true"/>
+                        <column id="role" editable="true"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button id="addPermissionBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
+                        <button action="permissionsTable.remove"/>
                     </buttonsPanel>
                 </table>
             </groupBox>
