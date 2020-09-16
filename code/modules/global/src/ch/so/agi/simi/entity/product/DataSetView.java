@@ -1,5 +1,7 @@
 package ch.so.agi.simi.entity.product;
 
+import ch.so.agi.simi.entity.ccc.LocatorLayer;
+import ch.so.agi.simi.entity.ccc.NotifyLayer;
 import ch.so.agi.simi.entity.iam.Permission;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
@@ -21,6 +23,16 @@ public class DataSetView extends SingleActor {
     @NotNull
     @Column(name = "RAW_DOWNLOAD", nullable = false)
     private Boolean rawDownload = true;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "dataSetView")
+    private List<LocatorLayer> locatorLayers;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "dataSetView")
+    private List<NotifyLayer> notifyLayers;
 
     @Column(name = "NAME", length = 100)
     private String name;
@@ -52,6 +64,22 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @Composition
     private List<Permission> permissions;
+
+    public List<NotifyLayer> getNotifyLayers() {
+        return notifyLayers;
+    }
+
+    public void setNotifyLayers(List<NotifyLayer> notifyLayers) {
+        this.notifyLayers = notifyLayers;
+    }
+
+    public List<LocatorLayer> getLocatorLayers() {
+        return locatorLayers;
+    }
+
+    public void setLocatorLayers(List<LocatorLayer> locatorLayers) {
+        this.locatorLayers = locatorLayers;
+    }
 
     public List<Permission> getPermissions() {
         return permissions;
