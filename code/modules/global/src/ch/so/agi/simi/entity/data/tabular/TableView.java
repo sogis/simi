@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "SIMIDATA_TABLE_VIEW")
 @Entity(name = "simiData_TableView")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("%s (%s)|identifier,postgresTable")
+@NamePattern("%s|identifier")
 public class TableView extends DataSetView {
     private static final long serialVersionUID = -4901858225372396346L;
 

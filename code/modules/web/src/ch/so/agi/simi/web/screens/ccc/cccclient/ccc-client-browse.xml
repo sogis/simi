@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://CCCClientBrowse.caption"
+        focusComponent="cCCClientsTable"
+        messagesPack="ch.so.agi.simi.web.screens.ccc.cccclient">
+    <data readOnly="true">
+        <collection id="cCCClientsDc"
+                    class="ch.so.agi.simi.entity.ccc.CCCClient">
+            <view extends="_local">
+                <property name="locatorLayers" view="_minimal"/>
+                <property name="notifyLayers" view="_minimal"/>
+                <property name="map" view="_minimal"/>
+            </view>
+            <loader id="cCCClientsDl">
+                <query>
+                    <![CDATA[select e from simiCCC_CCCClient e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="cCCClientsTable"
+            spacing="true">
+        <table id="cCCClientsTable"
+               width="100%"
+               dataContainer="cCCClientsDc"
+               multiselect="true">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="key"/>
+                <column id="title"/>
+                <column id="editGeomType"/>
+                <column id="map"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="cCCClientsTable.create"/>
+                <button id="editBtn" action="cCCClientsTable.edit"/>
+                <button id="removeBtn" action="cCCClientsTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

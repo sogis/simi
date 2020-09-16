@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://mapBrowse.caption"
+        focusComponent="mapsTable"
+        messagesPack="ch.so.agi.simi.web.screens.product.map">
+    <data readOnly="true">
+        <collection id="mapsDc"
+                    class="ch.so.agi.simi.entity.product.Map">
+            <view extends="_local"/>
+            <loader id="mapsDl">
+                <query>
+                    <![CDATA[select e from simiProduct_Map e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="mapsTable"
+            spacing="true">
+        <table id="mapsTable"
+               width="100%"
+               dataContainer="mapsDc"
+               multiselect="true">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="identifier"/>
+                <column id="keywords"/>
+                <column id="remarks"/>
+                <column id="synonyms"/>
+                <column id="title"/>
+                <column id="releasedAt"/>
+                <column id="releasedThrough"/>
+                <column id="background"/>
+                <column id="wgcUrlValue"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="mapsTable.create"/>
+                <button id="editBtn" action="mapsTable.edit"/>
+                <button id="removeBtn" action="mapsTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

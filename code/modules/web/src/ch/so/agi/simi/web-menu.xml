@@ -19,6 +19,9 @@
             <item screen="simiIAM_Group.browse" caption="mainMsg://menu_config.simiIAM_Group.browse"/>
             <item screen="simiIAM_Role.browse" caption="mainMsg://menu_config.simiIAM_Role.browse"/>
         </menu>
+        <menu id="application-simi-ccc" caption="CCC ...">
+            <item screen="simiCCC_CCCClient.browse" caption="mainMsg://menu_config.simiCCC_CCCClient.browse"/>
+        </menu>
         <item screen="simiProduct_DataProduct_PubScope.browse" caption="mainMsg://menu_config.simiProduct_DataProduct_PubScope.browse"/>
     </menu>
 </menu-config>
