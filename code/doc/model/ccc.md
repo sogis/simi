@@ -10,8 +10,8 @@ Repräsentiert die Anbindung einer Fachapplikation via CCC-Schnittstelle.
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|key|String|Ja|Sprechender Key dieser Integration, welche als appIntegration URL-Parameter verwendet wird.|
-|title|String|Ja|Titel, welcher für das "verheiratete" WGC-Fenster angezeigt wird.|
+|key|String(100)|Ja|Sprechender Key dieser Integration, welche als appIntegration URL-Parameter verwendet wird.|
+|title|String(200)|Ja|Titel, welcher für das "verheiratete" WGC-Fenster angezeigt wird.|
 |editGeomType|enum|Ja|Geometrietyp, welcher für die Fachapplikation im GIS erstellt / editiert wird. Werte: Point (=Default), Line, Polygon|
 |remarks|String|Nein|Interne Bemerkungen des AGI zu dieser Anbindung.|
 
@@ -27,7 +27,7 @@ Beispiel mit zwei konfigurierten Ebenen:
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |sort_index|Integer|Ja|Sortierungsindex. Bestimmt, in welcher Priorität die Ebene für das Lokalisieren verwendet wird.|
-|filter|String|Ja|Filter, mit welchem mittels Dataservice die zutreffenden Geometrien für das Lokalisieren abgefragt werden.|
+|filter|String(200)|Ja|Filter, mit welchem mittels Dataservice die zutreffenden Geometrien für das Lokalisieren abgefragt werden.|
 
 ### Konstraints
 
@@ -41,7 +41,7 @@ Ebene, für die ein Rückaufruf GIS --> Fachapplikation über das Feature-Info F
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|title|String|Ja|Bezeichnung, mit welcher der Rückaufruf im Feature-Info Fenster angezeigt wird.|
+|title|String(200)|Ja|Bezeichnung, mit welcher der Rückaufruf im Feature-Info Fenster angezeigt wird.|
 |attributeMap|Json|Ja|Mapping des im CCC-Protokoll verwendeten Attributnamens auf den Attributnamen der DataSetView. Strukturierung siehe Doku des config.json für CCC.|
 
 ### Konstraints
