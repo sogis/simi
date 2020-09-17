@@ -33,5 +33,7 @@
         <class>ch.so.agi.simi.entity.ccc.LocatorLayer</class>
         <class>ch.so.agi.simi.entity.ccc.NotifyLayer</class>
         <class>ch.so.agi.simi.entity.dependency.Component</class>
+        <class>ch.so.agi.simi.entity.featureinfo.FeatureInfo</class>
+        <class>ch.so.agi.simi.entity.featureinfo.LayerRelation</class>
     </persistence-unit>
 </persistence>
