@@ -32,5 +32,6 @@
         <class>ch.so.agi.simi.entity.ccc.CCCClient</class>
         <class>ch.so.agi.simi.entity.ccc.LocatorLayer</class>
         <class>ch.so.agi.simi.entity.ccc.NotifyLayer</class>
+        <class>ch.so.agi.simi.entity.dependency.Component</class>
     </persistence-unit>
 </persistence>

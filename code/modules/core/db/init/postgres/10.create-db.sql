@@ -531,3 +531,39 @@ create table SIMICCC_LOCATOR_LAYER (
     primary key (ID)
 )^
 -- end SIMICCC_LOCATOR_LAYER
+-- begin SIMIDEPENDENCY_COMPONENT
+create table SIMIDEPENDENCY_COMPONENT (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    NAME varchar(100) not null,
+    REMARKS text,
+    --
+    primary key (ID)
+)^
+-- end SIMIDEPENDENCY_COMPONENT
+-- begin SIMI_COMPONENT_DATA_PRODUCT_LINK
+create table SIMI_COMPONENT_DATA_PRODUCT_LINK (
+    COMPONENT_ID uuid,
+    DATA_PRODUCT_ID uuid,
+    primary key (COMPONENT_ID, DATA_PRODUCT_ID)
+)^
+-- end SIMI_COMPONENT_DATA_PRODUCT_LINK
+-- begin SIMI_DATA_PRODUCT_COMPONENT_LINK
+create table SIMI_DATA_PRODUCT_COMPONENT_LINK (
+    DATA_PRODUCT_ID uuid,
+    COMPONENT_ID uuid,
+    primary key (DATA_PRODUCT_ID, COMPONENT_ID)
+)^
+-- end SIMI_DATA_PRODUCT_COMPONENT_LINK
