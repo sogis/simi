@@ -584,8 +584,8 @@ create table SIMIFEATUREINFO_LAYER_RELATION (
     EXT5 text,
     --
     RELATION integer not null,
-    FEATURE_INFO_ID uuid,
-    DATA_SET_VIEW_ID uuid,
+    FEATURE_INFO_ID uuid not null,
+    DATA_SET_VIEW_ID uuid not null,
     --
     primary key (ID)
 )^

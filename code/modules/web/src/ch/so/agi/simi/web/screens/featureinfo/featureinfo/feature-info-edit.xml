@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://featureInfoEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.featureinfo.featureinfo">
+    <data>
+        <instance id="featureInfoDc"
+                  class="ch.so.agi.simi.entity.featureinfo.FeatureInfo">
+            <view extends="_local">
+                <property name="layerRelation" view="_minimal">
+                    <property name="relation"/>
+                    <property name="featureInfo" view="_minimal"/>
+                    <property name="dataSetView" view="_minimal"/>
+                </property>
+            </view>
+            <loader/>
+            <collection id="layerRelationDc" property="layerRelation"/>
+        </instance>
+    </data>
+    <dialogMode height="80%"
+                width="80%"
+                modal="true"
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="splitPanel" spacing="true">
+        <form id="form" dataContainer="featureInfoDc">
+            <column width="350px">
+                <textArea id="sqlQueryField" property="sqlQuery" rows="5"/>
+                <textField id="pyModuleNameField" property="pyModuleName"/>
+                <textArea id="remarksField" property="remarks" rows="5"/>
+            </column>
+        </form>
+        <split id="splitPanel" orientation="vertical" width="100%">
+<!--                <label value="msg://ch.so.agi.simi.entity.featureinfo/FeatureInfo.displayTemplate"/>-->
+            <sourceCodeEditor id="displayTemplateField" property="displayTemplate" mode="XML" handleTabKey="true" width="100%" height="100%" dataContainer="featureInfoDc"/>
+            <groupBox id="layerRelationBox" caption="msg://ch.so.agi.simi.entity.featureinfo/FeatureInfo.layerRelation"
+                      expand="layerRelationTable">
+                <table id="layerRelationTable" dataContainer="layerRelationDc" width="100%" editable="true">
+                    <actions>
+                    </actions>
+                    <columns>
+                        <column id="relation" editable="true"/>
+                        <column id="featureInfo"/>
+                        <column id="dataSetView"/>
+                    </columns>
+                    <buttonsPanel>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </split>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

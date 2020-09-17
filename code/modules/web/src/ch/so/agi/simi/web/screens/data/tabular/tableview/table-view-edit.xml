@@ -19,6 +19,11 @@
                     <property name="level"/>
                     <property name="role" view="_minimal"/>
                 </property>
+                <property name="layerRelations" view="_minimal">
+                    <property name="relation"/>
+                    <property name="featureInfo" view="_minimal"/>
+                    <property name="dataSetView" view="_minimal"/>
+                </property>
             </view>
             <loader/>
             <collection id="viewFieldsDc" property="viewFields"/>
@@ -77,9 +82,15 @@
                     <textArea id="keywordsField" property="keywords" rows="2"/>
                     <textArea id="remarksField" property="remarks" rows="5"/>
                     <textField id="transparencyField" property="transparency"/>
+                    <hbox caption="FeatureInfo" spacing="true">
+                        <button id="createFeatureInfoBtn" caption="FeatureInfo erstellen" icon="CREATE_ACTION"/>
+                        <button id="editFeatureInfoBtn" caption="FeatureInfo bearbeiten" icon="EDIT"/>
+                        <button id="clearFeatureInfoBtn" caption="Löschen" icon="REMOVE"/>
+                    </hbox>
                 </column>
             </form>
             <groupBox id="viewFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/TableView.viewFields">
+                <label/>
                 <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" height="200px" editable="true">
                     <actions>
                         <action id="create" type="create"/>
