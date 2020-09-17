@@ -23,7 +23,8 @@
             spacing="true">
         <table id="singleActorsTable"
                width="100%"
-               dataContainer="singleActorsDc">
+               dataContainer="singleActorsDc"
+               multiselect="true">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>

@@ -46,7 +46,7 @@
                multiselect="true">
             <actions>
                 <action id="create" type="create" caption="Neues DataSet"/>
-                <action id="createTableView" caption="Neue TableView" icon="ADD_ACTION"/>
+                <action id="createTableView" caption="Neue TableView" icon="ADD_ACTION" trackSelection="true"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove">
                     <properties>

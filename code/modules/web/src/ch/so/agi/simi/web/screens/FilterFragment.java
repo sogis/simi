@@ -69,4 +69,10 @@ public class FilterFragment<T extends Entity<T>> extends ScreenFragment {
 
         dataLoader.load();
     }
+
+    public void setFilter(String filterString) {
+        fldQuickFilter.setValue(filterString);
+
+        filterSingleActors();
+    }
 }
