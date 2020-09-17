@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-simi" insertBefore="administration" caption="mainMsg://menu_config.application-simi">
-        <item screen="product_DataSetView.browse" caption="mainMsg://menu_config.product_DataSetView.browse"/>
-        <item screen="fi_FeatureInfo.browse" caption="mainMsg://menu_config.fi_FeatureInfo.browse"/>
-        <item screen="fi_LayerRelation.browse" caption="mainMsg://menu_config.fi_LayerRelation.browse"/>
         <menu id="application-simi-product" caption="Product ...">
             <item screen="simiProduct_DataProduct.browse" caption="mainMsg://menu_config.simiProduct_DataProduct.browse"/>
         </menu>
