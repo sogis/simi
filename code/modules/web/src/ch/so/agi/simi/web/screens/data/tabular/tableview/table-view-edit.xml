@@ -19,10 +19,8 @@
                     <property name="level"/>
                     <property name="role" view="_minimal"/>
                 </property>
-                <property name="layerRelations" view="_minimal">
-                    <property name="relation"/>
-                    <property name="featureInfo" view="_minimal"/>
-                    <property name="dataSetView" view="_minimal"/>
+                <property name="layerRelations" view="_local">
+                    <property name="featureInfo" view="_local"/>
                 </property>
             </view>
             <loader/>
@@ -79,8 +77,8 @@
                     </hbox>
                 </column>
             </form>
-            <groupBox id="viewFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/TableView.viewFields">
-                <label/>
+            <groupBox id="viewFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/TableView.viewFields" spacing="true">
+                <label id="featureInfoOverrideHint" value="Anzeigeeigenschaften der ViewFields sind übersteuert weil FeatureInfo gesetzt ist."/>
                 <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" height="200px" editable="true">
                     <actions>
                         <action id="create" type="create"/>

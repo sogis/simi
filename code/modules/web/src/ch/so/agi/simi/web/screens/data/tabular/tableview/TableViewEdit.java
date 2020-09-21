@@ -4,9 +4,13 @@ import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
 import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.featureinfo.LayerRelation;
+import ch.so.agi.simi.entity.featureinfo.LayerRelationEnum;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
 import ch.so.agi.simi.web.StyleUploadDownloadBean;
+import ch.so.agi.simi.web.screens.featureinfo.featureinfo.FeatureInfoEdit;
+import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
@@ -51,6 +55,10 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private Button editFeatureInfoBtn;
     @Inject
     private Button clearFeatureInfoBtn;
+    @Inject
+    private Metadata metadata;
+    @Inject
+    private Label<String> featureInfoOverrideHint;
 
     @Subscribe
     public void onAfterInit(AfterInitEvent event) {
@@ -126,44 +134,56 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
     @Subscribe("createFeatureInfoBtn")
     public void onCreateFeatureInfoBtnClick(Button.ClickEvent event) {
-        LayerRelation layerRelation = dataContext.create(LayerRelation.class);
+        LayerRelation layerRelation = metadata.create(LayerRelation.class);
 
         Screen screen = screenBuilders.editor(FeatureInfo.class, this)
                 .newEntity()
                 .withInitializer(featureInfo -> {
                     layerRelation.setDataSetView(this.getEditedEntity());
                     layerRelation.setFeatureInfo(featureInfo);
+                    layerRelation.setRelation(LayerRelationEnum.IS_FOR_LAYER);
 
                     ArrayList<LayerRelation> layerRelations = new ArrayList<>();
                     layerRelations.add(layerRelation);
-
                     featureInfo.setLayerRelation(layerRelations);
                 })
+                .withParentDataContext(dataContext)
                 .build();
+
         screen.addAfterCloseListener(afterCloseEvent -> {
             if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
-                this.getEditedEntity().getLayerRelations().add(layerRelation);
+                this.getEditedEntity().setLayerRelations(((FeatureInfoEdit)afterCloseEvent.getScreen()).getEditedEntity().getLayerRelation());
             }
+
+            refreshButtonVisibility();
         });
         screen.show();
-
-        refreshButtonVisibility();
     }
 
     @Subscribe("editFeatureInfoBtn")
     public void onEditFeatureInfoBtnClick(Button.ClickEvent event) {
-        screenBuilders.editor(FeatureInfo.class, this)
-                .editEntity(this.getEditedEntity().getLayerRelations().get(0).getFeatureInfo())
+        List<LayerRelation> layerRelation = this.getEditedEntity().getLayerRelations().stream().filter(lr -> lr.getRelation() == LayerRelationEnum.IS_FOR_LAYER).collect(Collectors.toList());
+
+        if (layerRelation.isEmpty()) {
+            throw new IllegalStateException("No LayerRelation to FeatureInfo for editing found");
+        } else if (layerRelation.size() > 1) {
+            throw new IllegalStateException("More than one LayerRelation to FeatureInfo for editing found");
+        } else {
+            screenBuilders.editor(FeatureInfo.class, this)
+                .editEntity(layerRelation.get(0).getFeatureInfo())
+                .withParentDataContext(dataContext)
                 .build()
                 .show();
+        }
     }
 
     private void refreshButtonVisibility() {
         List<LayerRelation> layerRelations = this.getEditedEntity().getLayerRelations();
-        boolean createVisible = layerRelations == null || layerRelations.isEmpty();
+        boolean isCreateVisible = layerRelations == null || layerRelations.isEmpty();
 
-        createFeatureInfoBtn.setVisible(createVisible);
-        editFeatureInfoBtn.setVisible(!createVisible);
-        clearFeatureInfoBtn.setVisible(!createVisible);
+        createFeatureInfoBtn.setVisible(isCreateVisible);
+        editFeatureInfoBtn.setVisible(!isCreateVisible);
+        clearFeatureInfoBtn.setVisible(!isCreateVisible);
+        featureInfoOverrideHint.setVisible(!isCreateVisible);
     }
 }

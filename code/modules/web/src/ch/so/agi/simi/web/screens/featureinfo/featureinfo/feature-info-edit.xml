@@ -17,8 +17,8 @@
             <collection id="layerRelationDc" property="layerRelation"/>
         </instance>
     </data>
-    <dialogMode height="80%"
-                width="80%"
+    <dialogMode height="60%"
+                width="60%"
                 modal="true"
                 forceDialog="true"
                 resizable="true"/>
@@ -31,25 +31,26 @@
             </column>
         </form>
         <split id="splitPanel" orientation="vertical" width="100%">
-<!--                <label value="msg://ch.so.agi.simi.entity.featureinfo/FeatureInfo.displayTemplate"/>-->
             <sourceCodeEditor id="displayTemplateField" property="displayTemplate" mode="XML" handleTabKey="true" width="100%" height="100%" dataContainer="featureInfoDc"/>
             <groupBox id="layerRelationBox" caption="msg://ch.so.agi.simi.entity.featureinfo/FeatureInfo.layerRelation"
                       expand="layerRelationTable">
                 <table id="layerRelationTable" dataContainer="layerRelationDc" width="100%" editable="true">
                     <actions>
+                        <action id="remove" type="remove"/>
                     </actions>
                     <columns>
-                        <column id="relation" editable="true"/>
-                        <column id="featureInfo"/>
-                        <column id="dataSetView"/>
+                        <column id="relation"/>
+                        <column id="dataSetView" editable="true"/>
                     </columns>
                     <buttonsPanel>
+                        <button id="addLayerRelationBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
+                        <button action="layerRelationTable.remove"/>
                     </buttonsPanel>
                 </table>
             </groupBox>
         </split>
         <hbox id="editActions" spacing="true">
-            <button action="windowCommitAndClose"/>
+            <button id="commitAndCloseBtn" caption="Übernehmen" icon="OK" primary="true"/>
             <button action="windowClose"/>
         </hbox>
     </layout>
