@@ -26,6 +26,9 @@
                 width="80%"
                 modal="true"
                 forceDialog="true"/>
+    <actions>
+        <action id="convertToLayerGroup" caption="In LayerGroup umwandeln" icon="EXCHANGE"/>
+    </actions>
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="dataProductDc">
             <column width="350px">
@@ -66,6 +69,7 @@
         </groupBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
+            <button id="btnConvertToLayerGroup" action="convertToLayerGroup"/>
             <button action="windowClose"/>
         </hbox>
     </layout>

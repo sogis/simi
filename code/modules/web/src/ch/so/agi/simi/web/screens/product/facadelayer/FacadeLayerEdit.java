@@ -1,10 +1,8 @@
 package ch.so.agi.simi.web.screens.product.facadelayer;
 
-import ch.so.agi.simi.entity.product.ChildLayerProperties;
-import ch.so.agi.simi.entity.product.DataSetView;
-import ch.so.agi.simi.entity.product.FacadeLayer;
-import ch.so.agi.simi.entity.product.PropertiesInFacade;
+import ch.so.agi.simi.entity.product.*;
 import com.haulmont.cuba.core.global.Metadata;
+import com.haulmont.cuba.core.global.MetadataTools;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
@@ -12,6 +10,7 @@ import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
+import com.haulmont.cuba.gui.util.OperationResult;
 
 import javax.inject.Inject;
 import java.util.Comparator;
@@ -33,6 +32,10 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
     private Table<PropertiesInFacade> dataSetViewsTable;
     @Inject
     private InstanceContainer<FacadeLayer> dataProductDc;
+    @Inject
+    private DataContext dataContext;
+    @Inject
+    private MetadataTools metadataTools;
 
     @Subscribe("dataSetViewsTable.addDataSetView")
     public void onSingleActorsTableAddSingleActor(Action.ActionPerformedEvent event) {
@@ -77,6 +80,43 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
             item.setSort(i);
             event.getModifiedInstances().add(item);
             i += 10;
+        }
+    }
+
+    @Subscribe("convertToLayerGroup")
+    public void onConvertToLayerGroup(Action.ActionPerformedEvent event) {
+        FacadeLayer facadeLayer = this.getEditedEntity();
+        dataContext.remove(facadeLayer);
+
+        LayerGroup layerGroup = dataContext.create(LayerGroup.class);
+        layerGroup.setIdentifier(facadeLayer.getIdentifier());
+        layerGroup.setPubScope(facadeLayer.getPubScope());
+        layerGroup.setKeywords(facadeLayer.getKeywords());
+        layerGroup.setRemarks(facadeLayer.getRemarks());
+        layerGroup.setSynonyms(facadeLayer.getSynonyms());
+        layerGroup.setTitle(facadeLayer.getTitle());
+        layerGroup.setReleasedAt(facadeLayer.getReleasedAt());
+        layerGroup.setReleasedThrough(facadeLayer.getReleasedThrough());
+
+        if (facadeLayer.getDataSetViews() != null) {
+            for (PropertiesInFacade propertiesInFacade : facadeLayer.getDataSetViews()) {
+                PropertiesInList propertiesInList = dataContext.create(PropertiesInList.class);
+                dataContext.remove(propertiesInFacade);
+
+                propertiesInList.setSort(propertiesInFacade.getSort());
+                propertiesInList.setTransparency(propertiesInFacade.getTransparency());
+                propertiesInList.setProductList(layerGroup);
+                propertiesInList.setSingleActor(propertiesInFacade.getDataSetView());
+            }
+        }
+
+        OperationResult result = closeWithCommit();
+
+        if (result == OperationResult.success()) {
+            screenBuilders.editor(LayerGroup.class, this)
+                    .editEntity(layerGroup)
+                    .build()
+                    .show();
         }
     }
 }

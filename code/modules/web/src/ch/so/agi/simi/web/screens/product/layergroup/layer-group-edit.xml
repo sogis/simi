@@ -10,7 +10,9 @@
             <view extends="_local">
                 <property name="pubScope" view="_minimal"/>
                 <property name="singleActors" view="_minimal">
-                    <property name="singleActor" view="_minimal"/>
+                    <property name="singleActor" view="_minimal">
+                        <property name="title"/>
+                    </property>
                     <property name="sort"/>
                     <property name="visible"/>
                     <property name="transparency"/>
@@ -24,6 +26,9 @@
                 width="80%"
                 modal="true"
                 forceDialog="true"/>
+    <actions>
+        <action id="convertToFacadeLayer" caption="In FacadeLayer umwandeln" icon="EXCHANGE"/>
+    </actions>
     <layout expand="editActions" spacing="true">
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="dataProductDc">
@@ -46,7 +51,6 @@
                 <table id="singleActorsTable" dataContainer="singleActorsDc" width="100%" height="200px" editable="true" multiselect="true">
                     <actions>
                         <action id="addSingleActor" caption="Hinzufügen" icon="ADD_ACTION"/>
-                        <action id="addSingleActorsFromLayerGroup" caption="Aus LayerGroup übernehmen" icon="ADD_ACTION"/>
                         <action id="exclude" type="exclude"/>
                         <action id="sortAction" caption="Sortieren" icon="SORT"/>
                     </actions>
@@ -59,7 +63,6 @@
                     </columns>
                     <buttonsPanel>
                         <button id="btnAddSingleActor" action="singleActorsTable.addSingleActor"/>
-                        <button id="btnAddSingleActorsFromLayerGroup" action="singleActorsTable.addSingleActorsFromLayerGroup"/>
                         <button id="btnExclude" action="singleActorsTable.exclude"/>
                         <button id="btnSortAction" action="singleActorsTable.sortAction"/>
                     </buttonsPanel>
@@ -68,6 +71,7 @@
         </scrollBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
+            <button id="btnConvertToFacadeLayer" action="convertToFacadeLayer"/>
             <button action="windowClose"/>
         </hbox>
     </layout>
