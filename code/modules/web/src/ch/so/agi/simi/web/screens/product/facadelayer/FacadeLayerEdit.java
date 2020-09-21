@@ -1,12 +1,13 @@
 package ch.so.agi.simi.web.screens.product.facadelayer;
 
-import ch.so.agi.simi.entity.DataProduct_PubScope;
-import ch.so.agi.simi.entity.product.*;
+import ch.so.agi.simi.entity.product.ChildLayerProperties;
+import ch.so.agi.simi.entity.product.DataSetView;
+import ch.so.agi.simi.entity.product.FacadeLayer;
+import ch.so.agi.simi.entity.product.PropertiesInFacade;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
-import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
@@ -19,11 +20,9 @@ import java.util.stream.Collectors;
 
 @UiController("simiProduct_FacadeLayer.edit")
 @UiDescriptor("facade-layer-edit.xml")
-@EditedEntityContainer("facadeLayerDc")
+@EditedEntityContainer("dataProductDc")
 @LoadDataBeforeShow
 public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
-    @Inject
-    private CollectionLoader<DataProduct_PubScope> pubScopesDl;
     @Inject
     private ScreenBuilders screenBuilders;
     @Inject
@@ -33,17 +32,7 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
     @Inject
     private Table<PropertiesInFacade> dataSetViewsTable;
     @Inject
-    private InstanceContainer<FacadeLayer> facadeLayerDc;
-
-    @Subscribe
-    public void onInitEntity(InitEntityEvent<FacadeLayer> event) {
-        FacadeLayer facadeLayer = event.getEntity();
-        pubScopesDl.load();
-        pubScopesDl.getContainer().getItems().stream()
-                .filter(DataProduct_PubScope::getDefaultValue)
-                .findFirst()
-                .ifPresent(facadeLayer::setPubScope);
-    }
+    private InstanceContainer<FacadeLayer> dataProductDc;
 
     @Subscribe("dataSetViewsTable.addDataSetView")
     public void onSingleActorsTableAddSingleActor(Action.ActionPerformedEvent event) {
@@ -60,7 +49,7 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
 
     private PropertiesInFacade createPropertiesInFacadeFromDataSetView(DataSetView dataSetView) {
         PropertiesInFacade propertiesInFacade = metadata.create(PropertiesInFacade.class);
-        propertiesInFacade.setFacadeLayer(facadeLayerDc.getItem());
+        propertiesInFacade.setFacadeLayer(dataProductDc.getItem());
         propertiesInFacade.setDataSetView(dataSetView);
 
         return propertiesInFacade;

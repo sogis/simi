@@ -1,12 +1,10 @@
 package ch.so.agi.simi.web.screens.product.layergroup;
 
-import ch.so.agi.simi.entity.DataProduct_PubScope;
 import ch.so.agi.simi.entity.product.*;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
-import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
@@ -20,11 +18,9 @@ import java.util.stream.Collectors;
 
 @UiController("simiProduct_LayerGroup.edit")
 @UiDescriptor("layer-group-edit.xml")
-@EditedEntityContainer("layerGroupDc")
+@EditedEntityContainer("dataProductDc")
 @LoadDataBeforeShow
 public class LayerGroupEdit extends StandardEditor<LayerGroup> {
-    @Inject
-    private CollectionLoader<DataProduct_PubScope> pubScopesDl;
     @Inject
     private ScreenBuilders screenBuilders;
     @Inject
@@ -34,17 +30,7 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
     @Inject
     private Table<PropertiesInList> singleActorsTable;
     @Inject
-    private InstanceContainer<LayerGroup> layerGroupDc;
-
-    @Subscribe
-    public void onInitEntity(InitEntityEvent<LayerGroup> event) {
-        LayerGroup layerGroup = event.getEntity();
-        pubScopesDl.load();
-        pubScopesDl.getContainer().getItems().stream()
-                .filter(DataProduct_PubScope::getDefaultValue)
-                .findFirst()
-                .ifPresent(layerGroup::setPubScope);
-    }
+    private InstanceContainer<LayerGroup> dataProductDc;
 
     @Subscribe("singleActorsTable.addSingleActor")
     public void onSingleActorsTableAddSingleActor(Action.ActionPerformedEvent event) {
@@ -61,7 +47,7 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
 
     private PropertiesInList createPropertiesInListFromSingleActor(SingleActor singleActor) {
         PropertiesInList propertiesInList = metadata.create(PropertiesInList.class);
-        propertiesInList.setProductList(layerGroupDc.getItem());
+        propertiesInList.setProductList(dataProductDc.getItem());
         propertiesInList.setSingleActor(singleActor);
 
         return propertiesInList;

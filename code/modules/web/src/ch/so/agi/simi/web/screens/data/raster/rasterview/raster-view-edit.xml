@@ -5,7 +5,7 @@
         focusComponent="form"
         messagesPack="ch.so.agi.simi.web.screens.data.raster.rasterview">
     <data>
-        <instance id="rasterViewDc"
+        <instance id="dataProductDc"
                   class="ch.so.agi.simi.entity.data.raster.RasterView">
             <view extends="_local">
                 <property name="pubScope" view="_minimal"/>
@@ -18,20 +18,6 @@
             <loader/>
             <collection id="permissionsDc" property="permissions"/>
         </instance>
-        <collection id="pubScopesDc"
-                    class="ch.so.agi.simi.entity.DataProduct_PubScope"
-                    view="_local">
-            <loader id="pubScopesDl">
-                <query>
-                    <![CDATA[select e from simiProduct_DataProduct_PubScope e order by e.sort]]>
-                    <condition>
-                        <c:jpql>
-                            <c:where>e.forDSV = true</c:where>
-                        </c:jpql>
-                    </condition>
-                </query>
-            </loader>
-        </collection>
     </data>
     <dialogMode height="80%"
                 width="80%"
@@ -39,7 +25,7 @@
                 forceDialog="true"/>
     <layout expand="scrollBox" spacing="true">
         <scrollBox id="scrollBox" spacing="true">
-            <form id="form" dataContainer="rasterViewDc">
+            <form id="form" dataContainer="dataProductDc">
                 <column width="350px">
                     <pickerField id="rasterDSField" property="rasterDS" editable="false"/>
 
@@ -55,7 +41,11 @@
 
                     <textField id="identifierField" property="identifier"/>
                     <textField id="titleField" property="title"/>
-                    <lookupField id="pubScopeField" property="pubScope" optionsContainer="pubScopesDc"/>
+                    <fragment screen="simi_PubScopeFragment" caption="msg://ch.so.agi.simi.entity.product/DataProduct.pubScope">
+                        <properties>
+                            <property name="filterProperty" value="forDSV"/>
+                        </properties>
+                    </fragment>
                     <dateField id="releasedAtField" property="releasedAt"/>
                     <textField id="releasedThroughField" property="releasedThrough"/>
                     <textArea id="synonymsField" property="synonyms" rows="2"/>

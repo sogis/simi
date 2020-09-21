@@ -38,7 +38,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="componentsTable.create"/>
                 <button id="editBtn" action="componentsTable.edit"/>
-                <button id="removeBtn" action="componentsTable.remove"/>
+                <button id="removeBtn" action="componentsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">

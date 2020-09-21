@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fragment xmlns="http://schemas.haulmont.com/cuba/screen/fragment.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd">
+    <data>
+        <instance id="dataProductDc" provided="true"/>
+        <collection id="pubScopesDc"
+                    class="ch.so.agi.simi.entity.DataProduct_PubScope"
+                    view="_local">
+            <loader id="pubScopesDl">
+                <query>
+                    <![CDATA[select e from simiProduct_DataProduct_PubScope e order by e.sort]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <layout>
+        <lookupField id="pubScopeField" property="pubScope" optionsContainer="pubScopesDc" dataContainer="dataProductDc" width="350px"/>
+    </layout>
+</fragment>

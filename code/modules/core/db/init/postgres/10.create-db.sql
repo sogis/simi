@@ -450,6 +450,11 @@ create table SIMIIAM_PERMISSION (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
     --
     LEVEL_ varchar(50) not null,
     DATA_SET_VIEW_ID uuid not null,

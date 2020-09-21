@@ -44,7 +44,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="mapsTable.create"/>
                 <button id="editBtn" action="mapsTable.edit"/>
-                <button id="removeBtn" action="mapsTable.remove"/>
+                <button id="removeBtn" action="mapsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">

@@ -20,6 +20,8 @@ public class FilterFragment<T extends Entity<T>> extends ScreenFragment {
     private TextField<String> fldQuickFilter;
 
     private CollectionLoader<T> dataLoader;
+    @Inject
+    private Button btnClearFilter;
 
     public void setDataLoader(CollectionLoader<T> dataLoader) {
         this.dataLoader = dataLoader;
@@ -33,12 +35,17 @@ public class FilterFragment<T extends Entity<T>> extends ScreenFragment {
 
     @Subscribe("btnQuickFilter")
     public void onBtnQuickFilterClick(Button.ClickEvent event) {
-        filterSingleActors();
+        applyFilter();
+    }
+
+    @Subscribe("btnClearFilter")
+    public void onBtnClearFilterClick(Button.ClickEvent event) {
+        setFilter("");
     }
 
     @Subscribe("fldQuickFilter")
     public void onFldQuickFilterEnterPress(TextInputField.EnterPressEvent event) {
-        filterSingleActors();
+        applyFilter();
     }
 
     @Subscribe
@@ -46,7 +53,7 @@ public class FilterFragment<T extends Entity<T>> extends ScreenFragment {
         fldQuickFilter.setInputPrompt(inputPrompt);
     }
 
-    private void filterSingleActors(){
+    private void applyFilter(){
         boolean validWhereClause = false;
 
         String term = fldQuickFilter.getValue();
@@ -62,9 +69,11 @@ public class FilterFragment<T extends Entity<T>> extends ScreenFragment {
 
         if(validWhereClause){
             dataLoader.setParameter("term", term);
+            btnClearFilter.setVisible(true);
         }
         else {
             dataLoader.removeParameter("term");
+            btnClearFilter.setVisible(false);
         }
 
         dataLoader.load();
@@ -73,6 +82,6 @@ public class FilterFragment<T extends Entity<T>> extends ScreenFragment {
     public void setFilter(String filterString) {
         fldQuickFilter.setValue(filterString);
 
-        filterSingleActors();
+        applyFilter();
     }
 }

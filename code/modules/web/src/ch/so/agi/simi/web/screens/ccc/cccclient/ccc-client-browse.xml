@@ -43,7 +43,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="cCCClientsTable.create"/>
                 <button id="editBtn" action="cCCClientsTable.edit"/>
-                <button id="removeBtn" action="cCCClientsTable.remove"/>
+                <button id="removeBtn" action="cCCClientsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">

@@ -39,7 +39,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="postgresDBsTable.create"/>
                 <button id="editBtn" action="postgresDBsTable.edit"/>
-                <button id="removeBtn" action="postgresDBsTable.remove"/>
+                <button id="removeBtn" action="postgresDBsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">

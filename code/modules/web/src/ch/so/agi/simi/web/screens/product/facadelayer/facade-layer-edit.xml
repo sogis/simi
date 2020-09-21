@@ -5,7 +5,7 @@
         focusComponent="form"
         messagesPack="ch.so.agi.simi.web.screens.product.facadelayer">
     <data>
-        <instance id="facadeLayerDc"
+        <instance id="dataProductDc"
                   class="ch.so.agi.simi.entity.product.FacadeLayer">
             <view extends="_local">
                 <property name="pubScope" view="_minimal"/>
@@ -21,31 +21,21 @@
             <loader/>
             <collection id="dataSetViewsDc" property="dataSetViews"/>
         </instance>
-        <collection id="pubScopesDc"
-                    class="ch.so.agi.simi.entity.DataProduct_PubScope"
-                    view="_local">
-            <loader id="pubScopesDl">
-                <query>
-                    <![CDATA[select e from simiProduct_DataProduct_PubScope e order by e.sort]]>
-                    <condition>
-                        <c:jpql>
-                            <c:where>e.forGroup = true</c:where>
-                        </c:jpql>
-                    </condition>
-                </query>
-            </loader>
-        </collection>
     </data>
     <dialogMode height="auto"
                 width="80%"
                 modal="true"
                 forceDialog="true"/>
     <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="facadeLayerDc">
+        <form id="form" dataContainer="dataProductDc">
             <column width="350px">
                 <textField id="identifierField" property="identifier"/>
                 <textField id="titleField" property="title"/>
-                <lookupField id="pubScopeField" property="pubScope" optionsContainer="pubScopesDc"/>
+                <fragment screen="simi_PubScopeFragment" caption="msg://ch.so.agi.simi.entity.product/DataProduct.pubScope">
+                    <properties>
+                        <property name="filterProperty" value="forGroup"/>
+                    </properties>
+                </fragment>
                 <dateField id="releasedAtField" property="releasedAt"/>
                 <textField id="releasedThroughField" property="releasedThrough"/>
                 <textField id="transparencyField" property="transparency"/>
