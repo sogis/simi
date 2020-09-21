@@ -4,12 +4,19 @@ import ch.so.agi.simi.entity.data.raster.RasterDS;
 import ch.so.agi.simi.entity.data.raster.RasterView;
 import ch.so.agi.simi.entity.data.tabular.PostgresTable;
 import ch.so.agi.simi.entity.data.tabular.TableView;
-import ch.so.agi.simi.entity.product.*;
+import ch.so.agi.simi.entity.product.DataProduct;
+import ch.so.agi.simi.entity.product.FacadeLayer;
+import ch.so.agi.simi.entity.product.LayerGroup;
+import ch.so.agi.simi.entity.product.Map;
+import ch.so.agi.simi.web.CopyDataProductBean;
+import ch.so.agi.simi.web.screens.FilterFragment;
 import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.Metadata;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
+import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
@@ -27,6 +34,14 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     private Table<DataProduct> dataProductsTable;
     @Inject
     private Metadata metadata;
+    @Inject
+    private Notifications notifications;
+    @Inject
+    private CollectionLoader<DataProduct> dataProductsDl;
+    @Inject
+    private CopyDataProductBean copyDataProductBean;
+    @Inject
+    private FilterFragment filter;
 
     @Subscribe("createBtn.createMap")
     protected void onCreateBtnCreateMap(Action.ActionPerformedEvent event) {
@@ -77,5 +92,23 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
                 .editEntity(dataProduct)
                 .build()
                 .show();
+    }
+
+    @Subscribe("dataProductsTable.copy")
+    public void onDataProductsTableCopy(Action.ActionPerformedEvent event) {
+        DataProduct selectedItem = dataProductsTable.getSingleSelected();
+
+        if (selectedItem != null) {
+            try {
+                copyDataProductBean.copyDataProduct(selectedItem.getClass(), selectedItem.getId());
+
+                filter.setFilter(selectedItem.getIdentifier());
+
+                // reload dataContainer
+                dataProductsDl.load();
+            } catch (IllegalArgumentException e) {
+                notifications.create(Notifications.NotificationType.WARNING).withCaption(e.getLocalizedMessage()).show();
+            }
+        }
     }
 }

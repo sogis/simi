@@ -47,11 +47,6 @@ public class PostgresTableBrowse extends StandardLookup<PostgresTable> {
         editScreen.show();
     }
 
-    @Install(to = "postgresTablesTable.createTableView", subject = "enabledRule")
-    private boolean postgresTablesTableCreateTableViewEnabledRule() {
-        return postgresTablesTable.getSingleSelected() != null;
-    }
-
     @Install(to = "postgresTablesTable.instanceName", subject = "columnGenerator")
     private Component postgresTablesTableInstanceNameColumnGenerator(PostgresTable postgresTable) {
         return new Table.PlainTextCell(metadataTools.getInstanceName(postgresTable));

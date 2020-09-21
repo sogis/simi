@@ -48,9 +48,11 @@ public class StyleUploadDownloadBean {
     }
 
     public void downloadString(String content, String filename) {
-        byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
+        if (content != null) {
+            byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
 
-        AppConfig.createExportDisplay(null).show(new ByteArrayDataProvider(bytes), filename);
+            AppConfig.createExportDisplay(null).show(new ByteArrayDataProvider(bytes), filename);
+        }
     }
 
     private static class StyleUploadException extends Exception {

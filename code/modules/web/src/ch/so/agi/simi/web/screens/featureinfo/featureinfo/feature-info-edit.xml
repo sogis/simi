@@ -2,58 +2,52 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://featureInfoEdit.caption"
         focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.featureinfo">
+        messagesPack="ch.so.agi.simi.web.screens.featureinfo.featureinfo">
     <data>
         <instance id="featureInfoDc"
                   class="ch.so.agi.simi.entity.featureinfo.FeatureInfo">
             <view extends="_local">
-                <property name="layerRelations" view="_minimal">
-                    <property name="relType"/>
-                    <property name="dataSetView" view="_minimal">
-                        <property name="t_dispName"/>
-                    </property>
+                <property name="layerRelation" view="_minimal">
+                    <property name="relation"/>
+                    <property name="featureInfo" view="_minimal"/>
+                    <property name="dataSetView" view="_minimal"/>
                 </property>
-                <property name="t_dispName"/>
             </view>
             <loader/>
-            <collection id="layerRelationsDc" property="layerRelations">
-            </collection>
+            <collection id="layerRelationDc" property="layerRelation"/>
         </instance>
     </data>
-    <dialogMode height="AUTO"
-                width="AUTO"
+    <dialogMode height="80%"
+                width="80%"
                 modal="true"
-                forceDialog="true"/>
-    <layout expand="editActions" spacing="true">
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="splitPanel" spacing="true">
         <form id="form" dataContainer="featureInfoDc">
-            <column width="800px">
-                <textArea id="displayTemplateField" property="displayTemplate" rows="5"/>
+            <column width="350px">
                 <textArea id="sqlQueryField" property="sqlQuery" rows="5"/>
                 <textField id="pyModuleNameField" property="pyModuleName"/>
                 <textArea id="remarksField" property="remarks" rows="5"/>
             </column>
         </form>
-        <groupBox id="layerRelationsGroupBox"
-                  caption="Verknüpfte DataSetViews" stylename="light">
-            <table id="layerRelationsTable"
-                   dataContainer="layerRelationsDc"
-                   width="100%"
-                   editable="true"
-                   height="200px">
-                <actions>
-                    <action id="add" caption="DataSetView verknüpfen" icon="ADD_ACTION" type="add"/>
-                    <action id="remove" type="remove"/>
-                </actions>
-                <columns>
-                    <column id="relType"/>
-                    <column id="dataSetView"/>
-                </columns>
-                <buttonsPanel>
-                    <button action="layerRelationsTable.add" />
-                    <button action="layerRelationsTable.remove"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
+        <split id="splitPanel" orientation="vertical" width="100%">
+<!--                <label value="msg://ch.so.agi.simi.entity.featureinfo/FeatureInfo.displayTemplate"/>-->
+            <sourceCodeEditor id="displayTemplateField" property="displayTemplate" mode="XML" handleTabKey="true" width="100%" height="100%" dataContainer="featureInfoDc"/>
+            <groupBox id="layerRelationBox" caption="msg://ch.so.agi.simi.entity.featureinfo/FeatureInfo.layerRelation"
+                      expand="layerRelationTable">
+                <table id="layerRelationTable" dataContainer="layerRelationDc" width="100%" editable="true">
+                    <actions>
+                    </actions>
+                    <columns>
+                        <column id="relation" editable="true"/>
+                        <column id="featureInfo"/>
+                        <column id="dataSetView"/>
+                    </columns>
+                    <buttonsPanel>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </split>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

@@ -46,7 +46,7 @@
                multiselect="true">
             <actions>
                 <action id="create" type="create" caption="Neues DataSet"/>
-                <action id="createTableView" caption="Neue TableView" icon="ADD_ACTION"/>
+                <action id="createTableView" caption="Neue TableView" icon="ADD_ACTION" trackSelection="true"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove">
                     <properties>
@@ -66,7 +66,7 @@
                 <button id="createBtn" action="postgresTablesTable.create"/>
                 <button id="createTableViewBtn" action="postgresTablesTable.createTableView"/>
                 <button id="editBtn" action="postgresTablesTable.edit"/>
-                <button id="removeBtn" action="postgresTablesTable.remove"/>
+                <button id="removeBtn" action="postgresTablesTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <fragment screen="simi_FilterFragment">

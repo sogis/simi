@@ -1,39 +1,31 @@
 package ch.so.agi.simi.entity.featureinfo;
 
-import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.core.entity.annotation.Lookup;
-import com.haulmont.cuba.core.entity.annotation.LookupType;
+import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.product.DataSetView;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "FI_LAYER_RELATION")
-@Entity(name = "fi_LayerRelation")
-public class LayerRelation extends StandardEntity {
+@Table(name = "SIMIFEATUREINFO_LAYER_RELATION", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_SIMI_LAYER_RELATION_UNQ_FEATURE_INFO_ID_DATA_SET_VIEW_ID", columnNames = {"FEATURE_INFO_ID", "DATA_SET_VIEW_ID"})
+})
+@Entity(name = "simiFeatureInfo_LayerRelation")
+public class LayerRelation extends SimiStandardEntity {
     private static final long serialVersionUID = -6013250778559070747L;
 
     @NotNull
-    @Column(name = "REL_TYPE", nullable = false)
-    private String relType;
+    @Column(name = "RELATION", nullable = false)
+    private Integer relation;
 
-    @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "DATA_SET_VIEW_ID")
-    private DataSetView dataSetView;
-
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "FEATURE_INFO_ID")
+    @NotNull
     private FeatureInfo featureInfo;
 
-    public FeatureInfo getFeatureInfo() {
-        return featureInfo;
-    }
-
-    public void setFeatureInfo(FeatureInfo featureInfo) {
-        this.featureInfo = featureInfo;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "DATA_SET_VIEW_ID")
+    @NotNull
+    private DataSetView dataSetView;
 
     public DataSetView getDataSetView() {
         return dataSetView;
@@ -43,11 +35,19 @@ public class LayerRelation extends StandardEntity {
         this.dataSetView = dataSetView;
     }
 
-    public RelationType getRelType() {
-        return relType == null ? null : RelationType.fromId(relType);
+    public FeatureInfo getFeatureInfo() {
+        return featureInfo;
     }
 
-    public void setRelType(RelationType relType) {
-        this.relType = relType == null ? null : relType.getId();
+    public void setFeatureInfo(FeatureInfo featureInfo) {
+        this.featureInfo = featureInfo;
+    }
+
+    public LayerRelationEnum getRelation() {
+        return relation == null ? null : LayerRelationEnum.fromId(relation);
+    }
+
+    public void setRelation(LayerRelationEnum relation) {
+        this.relation = relation == null ? null : relation.getId();
     }
 }

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <fragment xmlns="http://schemas.haulmont.com/cuba/screen/fragment.xsd">
     <layout>
-        <hbox spacing="true" width="100%" expand="fldQuickFilter">
-            <textField id="fldQuickFilter" property=""/>
+        <hbox spacing="true" width="100%" expand="hboxQuickFilter">
+            <hbox id="hboxQuickFilter" expand="fldQuickFilter">
+                <textField id="fldQuickFilter" property=""/>
+                <button id="btnClearFilter" icon="REMOVE" visible="false"/>
+            </hbox>
             <button id="btnQuickFilter" caption="Filtern" box.expandRatio="0.0" stylename="friendly" />
         </hbox>
     </layout>

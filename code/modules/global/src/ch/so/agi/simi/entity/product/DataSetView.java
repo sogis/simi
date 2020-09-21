@@ -1,5 +1,8 @@
 package ch.so.agi.simi.entity.product;
 
+import ch.so.agi.simi.entity.ccc.LocatorLayer;
+import ch.so.agi.simi.entity.ccc.NotifyLayer;
+import ch.so.agi.simi.entity.featureinfo.LayerRelation;
 import ch.so.agi.simi.entity.iam.Permission;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
@@ -14,13 +17,28 @@ import java.util.List;
 @Table(name = "SIMIPRODUCT_DATA_SET_VIEW")
 @Entity(name = "simiProduct_DataSetView")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("%s|name")
+@NamePattern("%s|identifier")
 public class DataSetView extends SingleActor {
     private static final long serialVersionUID = 3720829701428961919L;
 
     @NotNull
     @Column(name = "RAW_DOWNLOAD", nullable = false)
     private Boolean rawDownload = true;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "dataSetView")
+    private List<LayerRelation> layerRelations;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "dataSetView")
+    private List<LocatorLayer> locatorLayers;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "dataSetView")
+    private List<NotifyLayer> notifyLayers;
 
     @Column(name = "NAME", length = 100)
     private String name;
@@ -52,6 +70,30 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @Composition
     private List<Permission> permissions;
+
+    public List<LayerRelation> getLayerRelations() {
+        return layerRelations;
+    }
+
+    public void setLayerRelations(List<LayerRelation> layerRelations) {
+        this.layerRelations = layerRelations;
+    }
+
+    public List<NotifyLayer> getNotifyLayers() {
+        return notifyLayers;
+    }
+
+    public void setNotifyLayers(List<NotifyLayer> notifyLayers) {
+        this.notifyLayers = notifyLayers;
+    }
+
+    public List<LocatorLayer> getLocatorLayers() {
+        return locatorLayers;
+    }
+
+    public void setLocatorLayers(List<LocatorLayer> locatorLayers) {
+        this.locatorLayers = locatorLayers;
+    }
 
     public List<Permission> getPermissions() {
         return permissions;

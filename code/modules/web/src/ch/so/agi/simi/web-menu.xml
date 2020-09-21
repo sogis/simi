@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-simi" insertBefore="administration" caption="mainMsg://menu_config.application-simi">
-        <item screen="product_DataSetView.browse" caption="mainMsg://menu_config.product_DataSetView.browse"/>
-        <item screen="fi_FeatureInfo.browse" caption="mainMsg://menu_config.fi_FeatureInfo.browse"/>
-        <item screen="fi_LayerRelation.browse" caption="mainMsg://menu_config.fi_LayerRelation.browse"/>
-        <menu id="application-simi-product" caption="Product ...">
+        <menu id="application-simi-product" caption="Product ..." expanded="true">
             <item screen="simiProduct_DataProduct.browse" caption="mainMsg://menu_config.simiProduct_DataProduct.browse"/>
         </menu>
-        <menu id="application-simi-data" caption="Data ...">
+        <menu id="application-simi-data" caption="Data ..." expanded="true">
             <item screen="simiData_RasterDS.browse" caption="mainMsg://menu_config.simiData_RasterDS.browse"/>
             <item screen="simiData_ExternalTable.browse" caption="mainMsg://menu_config.simiData_ExternalTable.browse"/>
             <item screen="simiData_PostgresTable.browse" caption="mainMsg://menu_config.simiData_PostgresTable.browse"/>
             <item screen="simiData_ModelSchema.browse" caption="mainMsg://menu_config.simiData_ModelSchema.browse"/>
             <item screen="simiData_PostgresDB.browse" caption="mainMsg://menu_config.simiData_PostgresDB.browse"/>
         </menu>
-        <menu id="application-simi-iam" caption="IAM ...">
+        <menu id="application-simi-iam" caption="IAM ..." expanded="true">
             <item screen="simiIAM_User.browse" caption="mainMsg://menu_config.simiIAM_User.browse"/>
             <item screen="simiIAM_Group.browse" caption="mainMsg://menu_config.simiIAM_Group.browse"/>
             <item screen="simiIAM_Role.browse" caption="mainMsg://menu_config.simiIAM_Role.browse"/>
+        </menu>
+        <menu id="application-simi-ccc" caption="CCC ..." expanded="true">
+            <item screen="simiCCC_CCCClient.browse" caption="mainMsg://menu_config.simiCCC_CCCClient.browse"/>
+        </menu>
+        <menu id="application-simi-dependency" caption="Dependency ..." expanded="true">
+            <item screen="simiDependency_Component.browse" caption="mainMsg://menu_config.simiDependency_Component.browse"/>
         </menu>
         <item screen="simiProduct_DataProduct_PubScope.browse" caption="mainMsg://menu_config.simiProduct_DataProduct_PubScope.browse"/>
     </menu>

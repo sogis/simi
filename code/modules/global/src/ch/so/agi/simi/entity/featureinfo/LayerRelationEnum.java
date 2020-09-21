@@ -5,24 +5,24 @@ import com.haulmont.chile.core.datatypes.impl.EnumClass;
 import javax.annotation.Nullable;
 
 
-public enum RelationType implements EnumClass<String> {
+public enum LayerRelationEnum implements EnumClass<Integer> {
 
-    INFO_LAYER("infoLayer"),
-    QUERY_LAYER("queryLayer");
+    IS_FOR_LAYER(10),
+    QUERIES(20);
 
-    private String id;
+    private Integer id;
 
-    RelationType(String value) {
+    LayerRelationEnum(Integer value) {
         this.id = value;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     @Nullable
-    public static RelationType fromId(String id) {
-        for (RelationType at : RelationType.values()) {
+    public static LayerRelationEnum fromId(Integer id) {
+        for (LayerRelationEnum at : LayerRelationEnum.values()) {
             if (at.getId().equals(id)) {
                 return at;
             }

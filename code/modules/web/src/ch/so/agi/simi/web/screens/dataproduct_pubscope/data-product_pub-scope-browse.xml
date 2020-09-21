@@ -45,7 +45,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="dataProduct_PubScopesTable.create"/>
                 <button id="editBtn" action="dataProduct_PubScopesTable.edit"/>
-                <button id="removeBtn" action="dataProduct_PubScopesTable.remove"/>
+                <button id="removeBtn" action="dataProduct_PubScopesTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">

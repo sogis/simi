@@ -1,36 +1,25 @@
 package ch.so.agi.simi.entity.featureinfo;
 
+import ch.so.agi.simi.entity.SimiStandardEntity;
 import com.haulmont.chile.core.annotations.Composition;
-import com.haulmont.chile.core.annotations.MetaProperty;
-import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "FI_FEATURE_INFO")
-@Entity(name = "fi_FeatureInfo")
-@NamePattern("#getT_dispName|layerRelations")
-public class FeatureInfo extends StandardEntity {
-    private static final long serialVersionUID = 569650397231873442L;
+@Table(name = "SIMIFEATUREINFO_FEATURE_INFO")
+@Entity(name = "simiFeatureInfo_FeatureInfo")
+public class FeatureInfo extends SimiStandardEntity {
+    private static final long serialVersionUID = 3002954753875689457L;
 
-    @Composition
-    @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "featureInfo")
-    private List<LayerRelation> layerRelations;
-
+    @NotNull
     @Lob
     @Column(name = "DISPLAY_TEMPLATE", nullable = false)
-    @Length(message = "string length invalid", min = 0, max = 60000)
     private String displayTemplate;
 
-
     @Lob
-    @Length(message = "string length invalid", min = 0, max = 60000)
     @Column(name = "SQL_QUERY")
     private String sqlQuery;
 
@@ -38,36 +27,20 @@ public class FeatureInfo extends StandardEntity {
     private String pyModuleName;
 
     @Lob
-    @Length(message = "string length invalid", min = 0, max = 60000)
     @Column(name = "REMARKS")
     private String remarks;
 
-    @Transient
-    @MetaProperty(related = "layerRelations", mandatory = true)
-    @NotNull
-    public String getT_dispName() {
-        String res = "Info-DSV not set in layerRelations";
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "featureInfo")
+    private List<LayerRelation> layerRelation;
 
-        if(layerRelations == null)
-            return res;
-
-        for(LayerRelation lr:layerRelations){
-            if(lr.getDataSetView() == null)
-                break;
-
-            if(lr.getRelType() == RelationType.INFO_LAYER)
-                res = lr.getDataSetView().getIdentifier() + " (FI)";
-        }
-
-        return res;
+    public List<LayerRelation> getLayerRelation() {
+        return layerRelation;
     }
 
-    public List<LayerRelation> getLayerRelations() {
-        return layerRelations;
-    }
-
-    public void setLayerRelations(List<LayerRelation> layerRelations) {
-        this.layerRelations = layerRelations;
+    public void setLayerRelation(List<LayerRelation> layerRelation) {
+        this.layerRelation = layerRelation;
     }
 
     public String getRemarks() {

@@ -3,7 +3,7 @@ package ch.so.agi.simi.web.screens.featureinfo.featureinfo;
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 
-@UiController("fi_FeatureInfo.edit")
+@UiController("simiFeatureInfo_FeatureInfo.edit")
 @UiDescriptor("feature-info-edit.xml")
 @EditedEntityContainer("featureInfoDc")
 @LoadDataBeforeShow

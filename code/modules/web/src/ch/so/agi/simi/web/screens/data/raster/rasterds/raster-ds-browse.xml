@@ -42,7 +42,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="rasterDsesTable.create"/>
                 <button id="editBtn" action="rasterDsesTable.edit"/>
-                <button id="removeBtn" action="rasterDsesTable.remove"/>
+                <button id="removeBtn" action="rasterDsesTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">
