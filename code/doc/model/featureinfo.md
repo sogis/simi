@@ -2,10 +2,20 @@
 
 ![Featureinfo](../puml/rendered/featureinfo.png) 
 
+**TODO:**
+- FeatureInfo 0..1 : 1 DSV
+- LayerRelation ersetzen durch: FeatureInfo n:m DSV
+
 ## Klasse Featureinfo
 
 Enthält die Informationen bezüglich der verwendeten Quelle für die Layerabfrage 
 und das Rendering-Template für die Ausgabe.
+
+Jedes FeatureInfo hat genau eine **"is_for_layer"** Beziehung zu DataSetView. Das Ziel-Layer, für welches die Featureinfo erstellt wurde.
+Jedes FeatureInfo hat mehrere **"queries"** Beziehungen zu DataSetView. Aus der Ebene wird via SQL oder Modul Informationen für dieses Featureinfo bezogen.
+
+Mittels der "queries"-Verknüpfungen werden die Permissions geprüft und "Know your GDI" sichergestellt.
+Bei einem sqlQuery wird über die erste queries-Verknüpfung die Datenbank ermittelt, auf die das Query abgesetzt wird.
 
 ### Attributbeschreibung
 
@@ -18,26 +28,8 @@ und das Rendering-Template für die Ausgabe.
 
 ### Konstraints
 
-* Jedes Featureinfo muss genau einen "is_for_layer" Eintrag in der Klasse LayerRelation haben.
+* UK auf "is_for_layer" FK's
 * Entweder sqlQuery oder pyModuleName muss Null sein.
-
-## Klasse LayerRelation
-
-Bildet die Beziehungen des Featureinfo zu einer DataSetView ab:
-* **"is_for_layer":** Ziel-Layer, für welchen die Featureinfo erstellt wurde.
-* **"queries":** Aus der Ebene wird via SQL oder Modul Informationen für dieses Featureinfo bezogen.
-
-Mittels der "queries"-Verknüpfungen werden die Permissions geprüft und "Know your GDI" sichergestellt.
-Bei einem sqlQuery wird über die erste queries-Verknüpfung die Datenbank ermittelt, auf die das Query abgesetzt wird.
-
-### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|relation|enum|j|Beziehungstyp zwischen Featureinfo und DSV (is_for_layer, queries).|
-
-### Konstraints
-UK auf FK's und "relation".
 
 ## Mapping auf den Inhalt von featureInfoConfig.json
 
