@@ -2,7 +2,7 @@ package ch.so.agi.simi.entity.product;
 
 import ch.so.agi.simi.entity.ccc.LocatorLayer;
 import ch.so.agi.simi.entity.ccc.NotifyLayer;
-import ch.so.agi.simi.entity.featureinfo.LayerRelation;
+import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.iam.Permission;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
@@ -24,11 +24,6 @@ public class DataSetView extends SingleActor {
     @NotNull
     @Column(name = "RAW_DOWNLOAD", nullable = false)
     private Boolean rawDownload = true;
-
-    @Composition
-    @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "dataSetView")
-    private List<LayerRelation> layerRelations;
 
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
@@ -71,12 +66,30 @@ public class DataSetView extends SingleActor {
     @Composition
     private List<Permission> permissions;
 
-    public List<LayerRelation> getLayerRelations() {
-        return layerRelations;
+    @JoinTable(name = "SIMI_FEATURE_INFO_DATA_SET_VIEW_LINK",
+            joinColumns = @JoinColumn(name = "DATA_SET_VIEW_ID"),
+            inverseJoinColumns = @JoinColumn(name = "FEATURE_INFO_ID"))
+    @ManyToMany
+    private List<FeatureInfo> queryFeatureInfoes;
+
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "dataSetView")
+    private FeatureInfo featureInfo;
+
+    public FeatureInfo getFeatureInfo() {
+        return featureInfo;
     }
 
-    public void setLayerRelations(List<LayerRelation> layerRelations) {
-        this.layerRelations = layerRelations;
+    public void setFeatureInfo(FeatureInfo featureInfo) {
+        this.featureInfo = featureInfo;
+    }
+
+    public List<FeatureInfo> getQueryFeatureInfoes() {
+        return queryFeatureInfoes;
+    }
+
+    public void setQueryFeatureInfoes(List<FeatureInfo> queryFeatureInfoes) {
+        this.queryFeatureInfoes = queryFeatureInfoes;
     }
 
     public List<NotifyLayer> getNotifyLayers() {

@@ -7,14 +7,11 @@
         <instance id="featureInfoDc"
                   class="ch.so.agi.simi.entity.featureinfo.FeatureInfo">
             <view extends="_local">
-                <property name="layerRelation" view="_minimal">
-                    <property name="relation"/>
-                    <property name="featureInfo" view="_minimal"/>
-                    <property name="dataSetView" view="_minimal"/>
-                </property>
+                <property name="queryDataSetViews" view="_minimal"/>
+                <property name="dataSetView" view="_minimal"/>
             </view>
             <loader/>
-            <collection id="layerRelationDc" property="layerRelation"/>
+            <collection id="queryDataSetViewsDc" property="queryDataSetViews"/>
         </instance>
     </data>
     <dialogMode height="60%"
@@ -25,32 +22,35 @@
     <layout expand="splitPanel" spacing="true">
         <form id="form" dataContainer="featureInfoDc">
             <column width="350px">
+                <pickerField id="dataSetViewField" property="dataSetView" editable="false"/>
                 <textArea id="sqlQueryField" property="sqlQuery" rows="5"/>
                 <textField id="pyModuleNameField" property="pyModuleName"/>
                 <textArea id="remarksField" property="remarks" rows="5"/>
             </column>
         </form>
         <split id="splitPanel" orientation="vertical" width="100%">
-            <sourceCodeEditor id="displayTemplateField" property="displayTemplate" mode="XML" handleTabKey="true" width="100%" height="100%" dataContainer="featureInfoDc"/>
-            <groupBox id="layerRelationBox" caption="msg://ch.so.agi.simi.entity.featureinfo/FeatureInfo.layerRelation"
+            <sourceCodeEditor id="displayTemplateField" property="displayTemplate" mode="XML" handleTabKey="true"
+                              width="100%" height="100%" dataContainer="featureInfoDc"/>
+            <groupBox id="layerRelationBox"
+                      caption="msg://ch.so.agi.simi.entity.featureinfo/FeatureInfo.queryDataSetViews"
                       expand="layerRelationTable">
-                <table id="layerRelationTable" dataContainer="layerRelationDc" width="100%" editable="true">
+                <table id="layerRelationTable" dataContainer="queryDataSetViewsDc" width="100%">
                     <actions>
-                        <action id="remove" type="remove"/>
+                        <action id="add" type="add"/>
+                        <action id="exclude" type="exclude"/>
                     </actions>
                     <columns>
-                        <column id="relation"/>
-                        <column id="dataSetView" editable="true"/>
+                        <column id="identifier"/>
                     </columns>
                     <buttonsPanel>
-                        <button id="addLayerRelationBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
-                        <button action="layerRelationTable.remove"/>
+                        <button action="layerRelationTable.add"/>
+                        <button action="layerRelationTable.exclude"/>
                     </buttonsPanel>
                 </table>
             </groupBox>
         </split>
         <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" caption="Übernehmen" icon="OK" primary="true"/>
+            <button action="windowCommitAndClose" caption="Übernehmen"/>
             <button action="windowClose"/>
         </hbox>
     </layout>

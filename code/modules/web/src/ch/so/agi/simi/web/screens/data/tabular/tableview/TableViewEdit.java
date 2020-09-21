@@ -3,13 +3,10 @@ package ch.so.agi.simi.web.screens.data.tabular.tableview;
 import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
 import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
-import ch.so.agi.simi.entity.featureinfo.LayerRelation;
-import ch.so.agi.simi.entity.featureinfo.LayerRelationEnum;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
 import ch.so.agi.simi.web.StyleUploadDownloadBean;
 import ch.so.agi.simi.web.screens.featureinfo.featureinfo.FeatureInfoEdit;
-import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
@@ -19,7 +16,6 @@ import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -126,33 +122,25 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
     @Subscribe("clearFeatureInfoBtn")
     public void onClearFeatureInfoBtnClick(Button.ClickEvent event) {
-        this.getEditedEntity().getLayerRelations().forEach(layerRelation -> dataContext.remove(layerRelation.getFeatureInfo()));
-        this.getEditedEntity().getLayerRelations().clear();
+        dataContext.remove(this.getEditedEntity().getFeatureInfo());
+        this.getEditedEntity().setFeatureInfo(null);
 
         refreshButtonVisibility();
     }
 
     @Subscribe("createFeatureInfoBtn")
     public void onCreateFeatureInfoBtnClick(Button.ClickEvent event) {
-        LayerRelation layerRelation = metadata.create(LayerRelation.class);
-
         Screen screen = screenBuilders.editor(FeatureInfo.class, this)
                 .newEntity()
                 .withInitializer(featureInfo -> {
-                    layerRelation.setDataSetView(this.getEditedEntity());
-                    layerRelation.setFeatureInfo(featureInfo);
-                    layerRelation.setRelation(LayerRelationEnum.IS_FOR_LAYER);
-
-                    ArrayList<LayerRelation> layerRelations = new ArrayList<>();
-                    layerRelations.add(layerRelation);
-                    featureInfo.setLayerRelation(layerRelations);
+                    featureInfo.setDataSetView(this.getEditedEntity());
                 })
                 .withParentDataContext(dataContext)
                 .build();
 
         screen.addAfterCloseListener(afterCloseEvent -> {
             if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
-                this.getEditedEntity().setLayerRelations(((FeatureInfoEdit)afterCloseEvent.getScreen()).getEditedEntity().getLayerRelation());
+                this.getEditedEntity().setFeatureInfo(((FeatureInfoEdit)afterCloseEvent.getScreen()).getEditedEntity());
             }
 
             refreshButtonVisibility();
@@ -162,15 +150,11 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
     @Subscribe("editFeatureInfoBtn")
     public void onEditFeatureInfoBtnClick(Button.ClickEvent event) {
-        List<LayerRelation> layerRelation = this.getEditedEntity().getLayerRelations().stream().filter(lr -> lr.getRelation() == LayerRelationEnum.IS_FOR_LAYER).collect(Collectors.toList());
-
-        if (layerRelation.isEmpty()) {
-            throw new IllegalStateException("No LayerRelation to FeatureInfo for editing found");
-        } else if (layerRelation.size() > 1) {
-            throw new IllegalStateException("More than one LayerRelation to FeatureInfo for editing found");
+        if (this.getEditedEntity().getFeatureInfo() == null) {
+            throw new IllegalStateException("No FeatureInfo for editing found");
         } else {
             screenBuilders.editor(FeatureInfo.class, this)
-                .editEntity(layerRelation.get(0).getFeatureInfo())
+                .editEntity(this.getEditedEntity().getFeatureInfo())
                 .withParentDataContext(dataContext)
                 .build()
                 .show();
@@ -178,8 +162,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
     }
 
     private void refreshButtonVisibility() {
-        List<LayerRelation> layerRelations = this.getEditedEntity().getLayerRelations();
-        boolean isCreateVisible = layerRelations == null || layerRelations.isEmpty();
+        boolean isCreateVisible = this.getEditedEntity().getFeatureInfo() == null;
 
         createFeatureInfoBtn.setVisible(isCreateVisible);
         editFeatureInfoBtn.setVisible(!isCreateVisible);

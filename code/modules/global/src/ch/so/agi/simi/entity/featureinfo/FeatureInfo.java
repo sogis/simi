@@ -1,8 +1,9 @@
 package ch.so.agi.simi.entity.featureinfo;
 
 import ch.so.agi.simi.entity.SimiStandardEntity;
-import com.haulmont.chile.core.annotations.Composition;
+import ch.so.agi.simi.entity.product.DataSetView;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -30,17 +31,32 @@ public class FeatureInfo extends SimiStandardEntity {
     @Column(name = "REMARKS")
     private String remarks;
 
-    @Composition
+    @JoinTable(name = "SIMI_FEATURE_INFO_DATA_SET_VIEW_LINK",
+            joinColumns = @JoinColumn(name = "FEATURE_INFO_ID"),
+            inverseJoinColumns = @JoinColumn(name = "DATA_SET_VIEW_ID"))
     @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "featureInfo")
-    private List<LayerRelation> layerRelation;
+    @ManyToMany
+    private List<DataSetView> queryDataSetViews;
 
-    public List<LayerRelation> getLayerRelation() {
-        return layerRelation;
+    @OnDeleteInverse(DeletePolicy.CASCADE)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "DATASETVIEW_ID", unique = true)
+    private DataSetView dataSetView;
+
+    public DataSetView getDataSetView() {
+        return dataSetView;
     }
 
-    public void setLayerRelation(List<LayerRelation> layerRelation) {
-        this.layerRelation = layerRelation;
+    public void setDataSetView(DataSetView dataSetView) {
+        this.dataSetView = dataSetView;
+    }
+
+    public List<DataSetView> getQueryDataSetViews() {
+        return queryDataSetViews;
+    }
+
+    public void setQueryDataSetViews(List<DataSetView> queryDataSetViews) {
+        this.queryDataSetViews = queryDataSetViews;
     }
 
     public String getRemarks() {
