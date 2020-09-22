@@ -85,18 +85,28 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
 
     @Subscribe("convertToFacadeLayer")
     public void onConvertToFacadeLayer(Action.ActionPerformedEvent event) {
-        LayerGroup layerGroup = this.getEditedEntity();
-
         // check if conversion is possible
+        LayerGroup layerGroup = this.getEditedEntity();
         if (layerGroup.getSingleActors() != null && layerGroup.getSingleActors().stream().anyMatch(pil -> !(pil.getSingleActor() instanceof DataSetView))) {
-            notifications.create().withCaption("LayerGroup kann nicht in ein FacadeLayer umgewandelt werden, weil nicht alle SingleActors in DataSetViews umgewandelt werden können.").show();
+            notifications.create().withCaption("LayerGroup kann nicht in ein FacadeLayer umgewandelt werden, weil nicht alle Layer in DataSetViews umgewandelt werden können.").show();
             return;
         }
 
+        // change identifier of old LG to prevent UK constraint error on identifier
+        String identifier = this.getEditedEntity().getIdentifier();
+        this.getEditedEntity().setIdentifier(identifier + "_toFL");
+        try {
+            dataContext.commit();
+        } catch (Exception e) {
+            this.getEditedEntity().setIdentifier(identifier);
+            throw e;
+        }
+
+        layerGroup = this.getEditedEntity();
         dataContext.remove(layerGroup);
 
         FacadeLayer facadeLayer = dataContext.create(FacadeLayer.class);
-        facadeLayer.setIdentifier(layerGroup.getIdentifier());
+        facadeLayer.setIdentifier(identifier);
         facadeLayer.setPubScope(layerGroup.getPubScope());
         facadeLayer.setKeywords(layerGroup.getKeywords());
         facadeLayer.setRemarks(layerGroup.getRemarks());
@@ -124,6 +134,10 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
                     .editEntity(facadeLayer)
                     .build()
                     .show();
+        } else {
+            // change identifier back to original value
+            layerGroup.setIdentifier(identifier);
+            dataContext.commit();
         }
     }
 }

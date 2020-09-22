@@ -85,11 +85,21 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
 
     @Subscribe("convertToLayerGroup")
     public void onConvertToLayerGroup(Action.ActionPerformedEvent event) {
+        // change identifier of old FL to prevent UK constraint error on identifier
+        String identifier = this.getEditedEntity().getIdentifier();
+        this.getEditedEntity().setIdentifier(identifier + "_toLG");
+        try {
+            dataContext.commit();
+        } catch (Exception e) {
+            this.getEditedEntity().setIdentifier(identifier);
+            throw e;
+        }
+
         FacadeLayer facadeLayer = this.getEditedEntity();
         dataContext.remove(facadeLayer);
 
         LayerGroup layerGroup = dataContext.create(LayerGroup.class);
-        layerGroup.setIdentifier(facadeLayer.getIdentifier());
+        layerGroup.setIdentifier(identifier);
         layerGroup.setPubScope(facadeLayer.getPubScope());
         layerGroup.setKeywords(facadeLayer.getKeywords());
         layerGroup.setRemarks(facadeLayer.getRemarks());
@@ -117,6 +127,10 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
                     .editEntity(layerGroup)
                     .build()
                     .show();
+        } else {
+            // change identifier back to original value
+            facadeLayer.setIdentifier(identifier);
+            dataContext.commit();
         }
     }
 }

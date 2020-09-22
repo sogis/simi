@@ -16,6 +16,7 @@
                     <property name="sort"/>
                     <property name="visible"/>
                     <property name="transparency"/>
+                    <property name="productList" view="_minimal"/>
                 </property>
             </view>
             <loader/>
