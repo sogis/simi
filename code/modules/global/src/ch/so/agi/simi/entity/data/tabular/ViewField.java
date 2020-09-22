@@ -1,6 +1,7 @@
 package ch.so.agi.simi.entity.data.tabular;
 
 import ch.so.agi.simi.entity.SimiStandardEntity;
+import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,12 +10,13 @@ import javax.validation.constraints.NotNull;
         @UniqueConstraint(name = "IDX_SIMI_VIEW_FIELD_UNQ_TABLE_FIELD_ID_TABLE_VIEW_ID", columnNames = {"TABLE_FIELD_ID", "TABLE_VIEW_ID"})
 })
 @Entity(name = "simiData_ViewField")
+@NamePattern("%s|alias")
 public class ViewField extends SimiStandardEntity {
     private static final long serialVersionUID = -2665578122978329156L;
 
     @NotNull
     @Column(name = "SORT", nullable = false)
-    private Integer sort;
+    private Integer sort = 0;
 
     @Column(name = "ALIAS", length = 100)
     private String alias;

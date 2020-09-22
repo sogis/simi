@@ -5,32 +5,26 @@
         focusComponent="form"
         messagesPack="ch.so.agi.simi.web.screens.data.tabular.tableview">
     <data>
-        <instance id="tableViewDc"
+        <instance id="dataProductDc"
                   class="ch.so.agi.simi.entity.data.tabular.TableView">
             <view extends="_local">
                 <property name="postgresTable" view="_minimal"/>
                 <property name="pubScope" view="_minimal"/>
                 <property name="styleServerFilled"/>
                 <property name="styleDesktopFilled"/>
-                <property name="viewFields" view="_local"/>
+                <property name="viewFields" view="_local">
+                    <property name="tableField" view="_minimal"/>
+                </property>
+                <property name="permissions" view="_minimal">
+                    <property name="level"/>
+                    <property name="role" view="_minimal"/>
+                </property>
+                <property name="featureInfo" view="_minimal"/>
             </view>
             <loader/>
             <collection id="viewFieldsDc" property="viewFields"/>
+            <collection id="permissionsDc" property="permissions"/>
         </instance>
-        <collection id="pubScopesDc"
-                    class="ch.so.agi.simi.entity.DataProduct_PubScope"
-                    view="_local">
-            <loader id="pubScopesDl">
-                <query>
-                    <![CDATA[select e from simiProduct_DataProduct_PubScope e order by e.sort]]>
-                    <condition>
-                        <c:jpql>
-                            <c:where>e.forDSV = true</c:where>
-                        </c:jpql>
-                    </condition>
-                </query>
-            </loader>
-        </collection>
     </data>
     <dialogMode height="80%"
                 width="80%"
@@ -38,7 +32,7 @@
                 forceDialog="true"/>
     <layout expand="scrollBox" spacing="true">
         <scrollBox id="scrollBox" spacing="true">
-            <form id="form" dataContainer="tableViewDc">
+            <form id="form" dataContainer="dataProductDc">
                 <column width="350px">
                     <pickerField id="postgresTableField" property="postgresTable" editable="false"/>
                     <checkBox id="rawDownloadField" property="rawDownload"/>
@@ -51,29 +45,39 @@
                     <textField id="searchFilterWordField" property="searchFilterWord"/>
                     <hbox caption="Style Server">
                         <checkBox id="isStyleServerFilledField" property="styleServerFilled" align="MIDDLE_CENTER"
-                                  editable="false" dataContainer="tableViewDc"/>
+                                  editable="false" dataContainer="dataProductDc"/>
                         <button id="downloadStyleServerBtn" caption="Download"/>
-                        <upload id="uploadStyleServerBtn" fileStoragePutMode="MANUAL"/>
+                        <upload id="uploadStyleServerBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml"/>
                     </hbox>
                     <hbox caption="Style Desktop">
                         <checkBox id="isStyleDesktopFilledField" property="styleDesktopFilled" align="MIDDLE_CENTER"
-                                  editable="false" dataContainer="tableViewDc"/>
+                                  editable="false" dataContainer="dataProductDc"/>
                         <button id="downloadStyleDesktopBtn" caption="Download"/>
-                        <upload id="uploadStyleDesktopBtn" fileStoragePutMode="MANUAL"/>
+                        <upload id="uploadStyleDesktopBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml"/>
                     </hbox>
                     <textField id="identifierField" property="identifier"/>
                     <textField id="titleField" property="title"/>
-                    <lookupField id="pubScopeField" property="pubScope" optionsContainer="pubScopesDc"/>
+                    <fragment screen="simi_PubScopeFragment" caption="msg://ch.so.agi.simi.entity.product/DataProduct.pubScope">
+                        <properties>
+                            <property name="filterProperty" value="forDSV"/>
+                        </properties>
+                    </fragment>
                     <dateField id="releasedAtField" property="releasedAt"/>
                     <textField id="releasedThroughField" property="releasedThrough"/>
                     <textArea id="synonymsField" property="synonyms" rows="2"/>
                     <textArea id="keywordsField" property="keywords" rows="2"/>
                     <textArea id="remarksField" property="remarks" rows="5"/>
                     <textField id="transparencyField" property="transparency"/>
+                    <hbox caption="FeatureInfo" spacing="true">
+                        <button id="createFeatureInfoBtn" caption="FeatureInfo erstellen" icon="CREATE_ACTION"/>
+                        <button id="editFeatureInfoBtn" caption="FeatureInfo bearbeiten" icon="EDIT"/>
+                        <button id="clearFeatureInfoBtn" caption="Löschen" icon="REMOVE"/>
+                    </hbox>
                 </column>
             </form>
-            <groupBox id="viewFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/TableView.viewFields">
-                <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" height="200px">
+            <groupBox id="viewFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/TableView.viewFields" spacing="true">
+                <label id="featureInfoOverrideHint" value="Anzeigeeigenschaften der ViewFields sind übersteuert weil FeatureInfo gesetzt ist."/>
+                <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" height="200px" editable="true">
                     <actions>
                         <action id="create" type="create"/>
                         <action id="edit" type="edit"/>
@@ -81,7 +85,7 @@
                         <action id="sortAction" caption="Sortieren" icon="SORT"/>
                     </actions>
                     <columns>
-                        <column id="tableView.name"/>
+                        <column id="tableField.name"/>
                         <column id="alias"/>
                         <column id="sort" editable="true"/>
                     </columns>
@@ -90,6 +94,25 @@
                         <button action="viewFieldsTable.edit"/>
                         <button action="viewFieldsTable.remove"/>
                         <button id="btnSortAction" action="viewFieldsTable.sortAction"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <groupBox id="permissionsBox" caption="msg://ch.so.agi.simi.entity.product/DataSetView.permissions">
+                <table id="permissionsTable" dataContainer="permissionsDc" width="100%" height="200px" editable="true">
+                    <actions>
+                        <action id="remove" type="remove">
+                            <properties>
+                                <property name="confirmation" value="false"/>
+                            </properties>
+                        </action>
+                    </actions>
+                    <columns>
+                        <column id="level" editable="true"/>
+                        <column id="role" editable="true"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button id="addPermissionBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
+                        <button action="permissionsTable.remove"/>
                     </buttonsPanel>
                 </table>
             </groupBox>

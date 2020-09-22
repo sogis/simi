@@ -38,9 +38,10 @@
                multiselect="true"
                dataContainer="dataProductsDc">
             <actions>
-                <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
+                <action id="copy" icon="COPY" caption="Kopieren" trackSelection="true"/>
+                <action id="refresh" type="refresh"/>
             </actions>
             <columns>
                 <column id="identifier"/>
@@ -61,10 +62,12 @@
                     </actions>
                 </popupButton>
                 <button id="editBtn" action="dataProductsTable.edit"/>
-                <button id="removeBtn" action="dataProductsTable.remove"/>
+                <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
+                <button id="copyBtn" action="dataProductsTable.copy"/>
+                <button id="refreshBtn" action="dataProductsTable.refresh"/>
             </buttonsPanel>
         </table>
-        <fragment screen="simi_FilterFragment">
+        <fragment id="filter" screen="simi_FilterFragment">
             <properties>
                 <property name="dataLoader" ref="dataProductsDl"/>
                 <property name="inputPrompt" value="Filtern nach Kennung und Titel"/>

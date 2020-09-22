@@ -74,24 +74,6 @@ create table SIMIDATA_TABLE_DS (
     primary key (ID)
 )^
 -- end SIMIDATA_TABLE_DS
--- begin FI_LAYER_RELATION
-create table FI_LAYER_RELATION (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    --
-    REL_TYPE varchar(50) not null,
-    DATA_SET_VIEW_ID uuid not null,
-    FEATURE_INFO_ID uuid not null,
-    --
-    primary key (ID)
-)^
--- end FI_LAYER_RELATION
 -- begin SIMIDATA_RASTER_DS
 create table SIMIDATA_RASTER_DS (
     ID uuid,
@@ -115,25 +97,6 @@ create table SIMIDATA_RASTER_DS (
     primary key (ID)
 )^
 -- end SIMIDATA_RASTER_DS
--- begin FI_FEATURE_INFO
-create table FI_FEATURE_INFO (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    --
-    DISPLAY_TEMPLATE text not null,
-    SQL_QUERY text,
-    PY_MODULE_NAME varchar(100),
-    REMARKS text,
-    --
-    primary key (ID)
-)^
--- end FI_FEATURE_INFO
 -- begin SIMIPRODUCT_DATA_PRODUCT
 create table SIMIPRODUCT_DATA_PRODUCT (
     ID uuid,
@@ -208,23 +171,6 @@ create table SIMIDATA_MODEL_SCHEMA (
     primary key (ID)
 )^
 -- end SIMIDATA_MODEL_SCHEMA
--- begin PRODUCT_DATA_SET_VIEW
-create table PRODUCT_DATA_SET_VIEW (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    --
-    IDENTIFIER varchar(255) not null,
-    FEATURE_INFO_ID uuid,
-    --
-    primary key (ID)
-)^
--- end PRODUCT_DATA_SET_VIEW
 -- begin SIMIIAM_IDENTITY
 create table SIMIIAM_IDENTITY (
     ID uuid,
@@ -494,3 +440,167 @@ create table SIMIIAM_ROLE_USER_LINK (
     primary key (USER_ID, ROLE_ID)
 )^
 -- end SIMIIAM_ROLE_USER_LINK
+-- begin SIMIIAM_PERMISSION
+create table SIMIIAM_PERMISSION (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    LEVEL_ varchar(50) not null,
+    DATA_SET_VIEW_ID uuid not null,
+    ROLE_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIIAM_PERMISSION
+-- begin SIMICCC_CCC_CLIENT
+create table SIMICCC_CCC_CLIENT (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    KEY_ varchar(100) not null,
+    TITLE varchar(200) not null,
+    EDIT_GEOM_TYPE integer not null,
+    REMARKS text,
+    MAP_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMICCC_CCC_CLIENT
+-- begin SIMICCC_NOTIFY_LAYER
+create table SIMICCC_NOTIFY_LAYER (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    TITLE varchar(200) not null,
+    ATTRIBUTE_MAP text not null,
+    CCC_CLIENT_ID uuid not null,
+    DATA_SET_VIEW_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMICCC_NOTIFY_LAYER
+-- begin SIMICCC_LOCATOR_LAYER
+create table SIMICCC_LOCATOR_LAYER (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    SORT_INDEX integer not null,
+    FILTER_ varchar(200) not null,
+    CCC_CLIENT_ID uuid not null,
+    DATA_SET_VIEW_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMICCC_LOCATOR_LAYER
+-- begin SIMIDEPENDENCY_COMPONENT
+create table SIMIDEPENDENCY_COMPONENT (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    NAME varchar(100) not null,
+    REMARKS text,
+    --
+    primary key (ID)
+)^
+-- end SIMIDEPENDENCY_COMPONENT
+-- begin SIMI_COMPONENT_DATA_PRODUCT_LINK
+create table SIMI_COMPONENT_DATA_PRODUCT_LINK (
+    COMPONENT_ID uuid,
+    DATA_PRODUCT_ID uuid,
+    primary key (COMPONENT_ID, DATA_PRODUCT_ID)
+)^
+-- end SIMI_COMPONENT_DATA_PRODUCT_LINK
+-- begin SIMI_DATA_PRODUCT_COMPONENT_LINK
+create table SIMI_DATA_PRODUCT_COMPONENT_LINK (
+    DATA_PRODUCT_ID uuid,
+    COMPONENT_ID uuid,
+    primary key (DATA_PRODUCT_ID, COMPONENT_ID)
+)^
+-- end SIMI_DATA_PRODUCT_COMPONENT_LINK
+-- begin SIMIFEATUREINFO_FEATURE_INFO
+create table SIMIFEATUREINFO_FEATURE_INFO (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    DISPLAY_TEMPLATE text not null,
+    SQL_QUERY text,
+    PY_MODULE_NAME varchar(100),
+    REMARKS text,
+    DATASETVIEW_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIFEATUREINFO_FEATURE_INFO
+-- begin SIMI_FEATURE_INFO_DATA_SET_VIEW_LINK
+create table SIMI_FEATURE_INFO_DATA_SET_VIEW_LINK (
+    DATA_SET_VIEW_ID uuid,
+    FEATURE_INFO_ID uuid,
+    primary key (DATA_SET_VIEW_ID, FEATURE_INFO_ID)
+)^
+-- end SIMI_FEATURE_INFO_DATA_SET_VIEW_LINK

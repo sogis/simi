@@ -2,9 +2,6 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="simi" transaction-type="RESOURCE_LOCAL">
 
-        <class>ch.so.agi.simi.entity.featureinfo.FeatureInfo</class>
-        <class>ch.so.agi.simi.entity.featureinfo.LayerRelation</class>
-        <class>ch.so.agi.simi.entity.featureinfo.DataSetView</class>
         <class>ch.so.agi.simi.entity.iam.Identity</class>
         <class>ch.so.agi.simi.entity.iam.User</class>
         <class>ch.so.agi.simi.entity.iam.Group</class>
@@ -31,5 +28,11 @@
         <class>ch.so.agi.simi.entity.data.tabular.ViewField</class>
         <class>ch.so.agi.simi.entity.data.tabular.ExternalTable</class>
         <class>ch.so.agi.simi.entity.SimiStandardEntity</class>
+        <class>ch.so.agi.simi.entity.iam.Permission</class>
+        <class>ch.so.agi.simi.entity.ccc.CCCClient</class>
+        <class>ch.so.agi.simi.entity.ccc.LocatorLayer</class>
+        <class>ch.so.agi.simi.entity.ccc.NotifyLayer</class>
+        <class>ch.so.agi.simi.entity.dependency.Component</class>
+        <class>ch.so.agi.simi.entity.featureinfo.FeatureInfo</class>
     </persistence-unit>
 </persistence>

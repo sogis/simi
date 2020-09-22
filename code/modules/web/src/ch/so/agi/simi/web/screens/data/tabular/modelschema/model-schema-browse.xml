@@ -48,7 +48,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="modelSchemasTable.create"/>
                 <button id="editBtn" action="modelSchemasTable.edit"/>
-                <button id="removeBtn" action="modelSchemasTable.remove"/>
+                <button id="removeBtn" action="modelSchemasTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">

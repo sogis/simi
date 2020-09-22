@@ -1,7 +1,10 @@
 package ch.so.agi.simi.entity.iam;
 
 import ch.so.agi.simi.entity.SimiStandardEntity;
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,6 +35,19 @@ public class Role extends SimiStandardEntity {
             inverseJoinColumns = @JoinColumn(name = "USER_ID"))
     @ManyToMany
     private List<User> users;
+
+    @OneToMany(mappedBy = "role")
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
+    private List<Permission> permissions;
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
+    }
 
     public List<User> getUsers() {
         return users;

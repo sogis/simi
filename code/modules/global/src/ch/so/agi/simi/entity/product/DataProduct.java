@@ -2,11 +2,13 @@ package ch.so.agi.simi.entity.product;
 
 import ch.so.agi.simi.entity.DataProduct_PubScope;
 import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.dependency.Component;
 import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
 @Entity(name = "simiProduct_DataProduct")
@@ -19,6 +21,12 @@ public class DataProduct extends SimiStandardEntity {
     @NotNull
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
     private String identifier;
+
+    @JoinTable(name = "SIMI_DATA_PRODUCT_COMPONENT_LINK",
+            joinColumns = @JoinColumn(name = "DATA_PRODUCT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COMPONENT_ID"))
+    @ManyToMany
+    private List<Component> coponents;
 
     @JoinColumn(name = "PUB_SCOPE_ID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -43,6 +51,14 @@ public class DataProduct extends SimiStandardEntity {
 
     @Column(name = "RELEASED_THROUGH", length = 100)
     private String releasedThrough;
+
+    public List<Component> getCoponents() {
+        return coponents;
+    }
+
+    public void setCoponents(List<Component> coponents) {
+        this.coponents = coponents;
+    }
 
     public DataProduct_PubScope getPubScope() {
         return pubScope;

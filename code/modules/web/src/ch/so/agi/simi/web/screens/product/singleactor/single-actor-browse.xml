@@ -23,7 +23,8 @@
             spacing="true">
         <table id="singleActorsTable"
                width="100%"
-               dataContainer="singleActorsDc">
+               dataContainer="singleActorsDc"
+               multiselect="true">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -44,7 +45,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="singleActorsTable.create"/>
                 <button id="editBtn" action="singleActorsTable.edit"/>
-                <button id="removeBtn" action="singleActorsTable.remove"/>
+                <button id="removeBtn" action="singleActorsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">

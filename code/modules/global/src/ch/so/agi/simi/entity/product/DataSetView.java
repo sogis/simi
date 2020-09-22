@@ -1,9 +1,14 @@
 package ch.so.agi.simi.entity.product;
 
+import ch.so.agi.simi.entity.ccc.LocatorLayer;
+import ch.so.agi.simi.entity.ccc.NotifyLayer;
+import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
+import ch.so.agi.simi.entity.iam.Permission;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -13,13 +18,23 @@ import java.util.List;
 @Table(name = "SIMIPRODUCT_DATA_SET_VIEW")
 @Entity(name = "simiProduct_DataSetView")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("%s|name")
+@NamePattern("%s|identifier")
 public class DataSetView extends SingleActor {
     private static final long serialVersionUID = 3720829701428961919L;
 
     @NotNull
     @Column(name = "RAW_DOWNLOAD", nullable = false)
     private Boolean rawDownload = true;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "dataSetView")
+    private List<LocatorLayer> locatorLayers;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "dataSetView")
+    private List<NotifyLayer> notifyLayers;
 
     @Column(name = "NAME", length = 100)
     private String name;
@@ -45,7 +60,63 @@ public class DataSetView extends SingleActor {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "dataSetView")
+    @OnDeleteInverse(DeletePolicy.UNLINK)
     private List<PropertiesInFacade> facadeLayers;
+
+    @OneToMany(mappedBy = "dataSetView")
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
+    private List<Permission> permissions;
+
+    @JoinTable(name = "SIMI_FEATURE_INFO_DATA_SET_VIEW_LINK",
+            joinColumns = @JoinColumn(name = "DATA_SET_VIEW_ID"),
+            inverseJoinColumns = @JoinColumn(name = "FEATURE_INFO_ID"))
+    @ManyToMany
+    private List<FeatureInfo> queryFeatureInfoes;
+
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "dataSetView")
+    private FeatureInfo featureInfo;
+
+    public FeatureInfo getFeatureInfo() {
+        return featureInfo;
+    }
+
+    public void setFeatureInfo(FeatureInfo featureInfo) {
+        this.featureInfo = featureInfo;
+    }
+
+    public List<FeatureInfo> getQueryFeatureInfoes() {
+        return queryFeatureInfoes;
+    }
+
+    public void setQueryFeatureInfoes(List<FeatureInfo> queryFeatureInfoes) {
+        this.queryFeatureInfoes = queryFeatureInfoes;
+    }
+
+    public List<NotifyLayer> getNotifyLayers() {
+        return notifyLayers;
+    }
+
+    public void setNotifyLayers(List<NotifyLayer> notifyLayers) {
+        this.notifyLayers = notifyLayers;
+    }
+
+    public List<LocatorLayer> getLocatorLayers() {
+        return locatorLayers;
+    }
+
+    public void setLocatorLayers(List<LocatorLayer> locatorLayers) {
+        this.locatorLayers = locatorLayers;
+    }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
+    }
 
     @Transient
     @MetaProperty(related = "styleServer")

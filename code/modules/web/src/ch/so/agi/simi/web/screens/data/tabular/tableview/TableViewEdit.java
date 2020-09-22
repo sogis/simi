@@ -1,172 +1,94 @@
 package ch.so.agi.simi.web.screens.data.tabular.tableview;
 
-import ch.so.agi.simi.entity.DataProduct_PubScope;
 import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
+import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
+import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
-import com.haulmont.cuba.gui.Dialogs;
-import com.haulmont.cuba.gui.Notifications;
+import ch.so.agi.simi.web.StyleUploadDownloadBean;
+import ch.so.agi.simi.web.screens.featureinfo.featureinfo.FeatureInfoEdit;
+import com.haulmont.cuba.core.global.Metadata;
+import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
-import com.haulmont.cuba.gui.export.ByteArrayDataProvider;
-import com.haulmont.cuba.gui.export.ExportDisplay;
-import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @UiController("simiData_TableView.edit")
 @UiDescriptor("table-view-edit.xml")
-@EditedEntityContainer("tableViewDc")
+@EditedEntityContainer("dataProductDc")
 @LoadDataBeforeShow
 public class TableViewEdit extends StandardEditor<TableView> {
     @Inject
-    private CollectionLoader<DataProduct_PubScope> pubScopesDl;
-    @Inject
-    private InstanceContainer<TableView> tableViewDc;
-    @Inject
-    private ExportDisplay exportDisplay;
-    @Inject
-    private Notifications notifications;
+    private InstanceContainer<TableView> dataProductDc;
     @Inject
     private FileUploadField uploadStyleServerBtn;
     @Inject
     private FileUploadField uploadStyleDesktopBtn;
-    @Inject
-    private Dialogs dialogs;
     @Inject
     private TextField<String> searchFilterWordField;
     @Inject
     private Table<ViewField> viewFieldsTable;
     @Inject
     private CollectionPropertyContainer<ViewField> viewFieldsDc;
-
-    @Subscribe
-    public void onInitEntity(InitEntityEvent<TableView> event) {
-        TableView tableView = event.getEntity();
-        pubScopesDl.load();
-        pubScopesDl.getContainer().getItems().stream()
-            .filter(DataProduct_PubScope::getDefaultValue)
-            .findFirst()
-            .ifPresent(tableView::setPubScope);
-    }
+    @Inject
+    private StyleUploadDownloadBean styleUploadDownloadBean;
+    @Inject
+    private CollectionPropertyContainer<Permission> permissionsDc;
+    @Inject
+    private DataContext dataContext;
+    @Inject
+    private ScreenBuilders screenBuilders;
+    @Inject
+    private Button createFeatureInfoBtn;
+    @Inject
+    private Button editFeatureInfoBtn;
+    @Inject
+    private Button clearFeatureInfoBtn;
+    @Inject
+    private Metadata metadata;
+    @Inject
+    private Label<String> featureInfoOverrideHint;
 
     @Subscribe
     public void onAfterInit(AfterInitEvent event) {
         searchFilterWordField.addValidator(value -> {
-            if (tableViewDc.getItem().getSearchType() != DataSetView_SearchTypeEnum.NEIN && (value == null || value.isEmpty()))
+            if (dataProductDc.getItem().getSearchType() != DataSetView_SearchTypeEnum.NEIN && (value == null || value.isEmpty()))
                 throw  new ValidationException("Wenn Suchtyp 'Immer' oder 'falls geladen' ist, muss Filter Wort angegeben werden.");
         });
     }
 
+    @Subscribe
+    public void onAfterShow(AfterShowEvent event) {
+        refreshButtonVisibility();
+    }
+
     @Subscribe("downloadStyleServerBtn")
     public void onDownloadStyleServerBtnClick(Button.ClickEvent event) {
-        TableView tableView = tableViewDc.getItem();
-        downloadString(tableView.getStyleServer(), tableView.getIdentifier() + ".Server.qml");
+        TableView tableView = dataProductDc.getItem();
+        styleUploadDownloadBean.downloadString(tableView.getStyleServer(), tableView.getIdentifier() + ".Server.qml");
     }
 
     @Subscribe("uploadStyleServerBtn")
     public void onUploadStyleServerBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
-        checkUpload(uploadStyleServerBtn, content -> tableViewDc.getItem().setStyleServer(content));
+        styleUploadDownloadBean.handleFileUploadSucceed(uploadStyleServerBtn, content -> dataProductDc.getItem().setStyleServer(content));
     }
 
     @Subscribe("downloadStyleDesktopBtn")
     public void onDownloadStyleDesktopBtnClick(Button.ClickEvent event) {
-        TableView tableView = tableViewDc.getItem();
-        downloadString(tableView.getStyleDesktop(), tableView.getIdentifier() + ".Desktop.qml");
+        TableView tableView = dataProductDc.getItem();
+        styleUploadDownloadBean.downloadString(tableView.getStyleDesktop(), tableView.getIdentifier() + ".Desktop.qml");
     }
 
     @Subscribe("uploadStyleDesktopBtn")
     public void onUploadStyleDesktopBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
-        checkUpload(uploadStyleDesktopBtn, content -> tableViewDc.getItem().setStyleDesktop(content));
-    }
-
-    private void downloadString(String content, String filename) {
-        byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
-
-        exportDisplay.show(new ByteArrayDataProvider(bytes), filename);
-    }
-
-    private void checkUpload(FileUploadField uploadField, Consumer<String> assignResult) {
-        try {
-            InputStream inputStream = uploadField.getFileContent();
-            String fileContent = inputStreamToString(inputStream);
-
-            String qgisVersionString = getQGISVersion(fileContent);
-
-            String[] version = qgisVersionString.split("\\.");
-            int major = Integer.parseInt(version[0]);
-            int minor = Integer.parseInt(version[1]);
-
-            if (major == 2 && minor == 18) {
-                assignResult.accept(fileContent);
-
-                notifications.create()
-                        .withCaption(uploadField.getFileName() + " uploaded")
-                        .show();
-            } else {
-                dialogs.createMessageDialog()
-                        .withCaption("Upload")
-                        .withMessage("Ausgewälte qml Datei hat eine falsche Version: " + qgisVersionString + "\nErwartet wird version 2.18")
-                        .withType(Dialogs.MessageType.WARNING)
-                        .show();
-            }
-        } catch (XMLStreamException | IOException e) {
-            dialogs.createMessageDialog()
-                    .withCaption("Upload")
-                    .withMessage("Beim Lesen der Datei " + uploadField.getFileName() + " ist ein fehler aufgetreten.")
-                    .withType(Dialogs.MessageType.WARNING)
-                    .show();
-        }
-    }
-
-    /**
-     * Extract the qgis version from a .qml string
-     * @param content The content of the .qml file
-     * @return Version string
-     * @throws XMLStreamException
-     */
-    private static String getQGISVersion(String content) throws XMLStreamException {
-        XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-        XMLEventReader reader = xmlInputFactory.createXMLEventReader(new StringReader(content));
-
-        while (reader.hasNext()) {
-            XMLEvent nextEvent = reader.nextEvent();
-
-            if (nextEvent.isStartElement()) {
-                StartElement startElement = nextEvent.asStartElement();
-                if (startElement.getName().getLocalPart().equals("qgis")) {
-                    return startElement.getAttributeByName(new QName("version")).getValue();
-                }
-            }
-        }
-        return null;
-    }
-
-    private static String inputStreamToString(InputStream inputStream) throws IOException {
-        final int bufferSize = 1024;
-        final char[] buffer = new char[bufferSize];
-        final StringBuilder out = new StringBuilder();
-        Reader in = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-        int charsRead;
-        while((charsRead = in.read(buffer, 0, buffer.length)) > 0) {
-            out.append(buffer, 0, charsRead);
-        }
-        return out.toString();
+        styleUploadDownloadBean.handleFileUploadSucceed(uploadStyleDesktopBtn, content -> dataProductDc.getItem().setStyleDesktop(content));
     }
 
     @Subscribe("viewFieldsTable.sortAction")
@@ -188,5 +110,63 @@ public class TableViewEdit extends StandardEditor<TableView> {
             event.getModifiedInstances().add(item);
             i += 10;
         }
+    }
+
+    @Subscribe("addPermissionBtn")
+    public void onAddPermissionBtnClick(Button.ClickEvent event) {
+        Permission permission = dataContext.create(Permission.class);
+        permission.setDataSetView(this.getEditedEntity());
+
+        permissionsDc.getMutableItems().add(permission);
+    }
+
+    @Subscribe("clearFeatureInfoBtn")
+    public void onClearFeatureInfoBtnClick(Button.ClickEvent event) {
+        dataContext.remove(this.getEditedEntity().getFeatureInfo());
+        this.getEditedEntity().setFeatureInfo(null);
+
+        refreshButtonVisibility();
+    }
+
+    @Subscribe("createFeatureInfoBtn")
+    public void onCreateFeatureInfoBtnClick(Button.ClickEvent event) {
+        Screen screen = screenBuilders.editor(FeatureInfo.class, this)
+                .newEntity()
+                .withInitializer(featureInfo -> {
+                    featureInfo.setDataSetView(this.getEditedEntity());
+                })
+                .withParentDataContext(dataContext)
+                .build();
+
+        screen.addAfterCloseListener(afterCloseEvent -> {
+            if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
+                this.getEditedEntity().setFeatureInfo(((FeatureInfoEdit)afterCloseEvent.getScreen()).getEditedEntity());
+            }
+
+            refreshButtonVisibility();
+        });
+        screen.show();
+    }
+
+    @Subscribe("editFeatureInfoBtn")
+    public void onEditFeatureInfoBtnClick(Button.ClickEvent event) {
+        if (this.getEditedEntity().getFeatureInfo() == null) {
+            throw new IllegalStateException("No FeatureInfo for editing found");
+        } else {
+            screenBuilders.editor(FeatureInfo.class, this)
+                .editEntity(this.getEditedEntity().getFeatureInfo())
+                .withParentDataContext(dataContext)
+                .build()
+                .show();
+        }
+    }
+
+    private void refreshButtonVisibility() {
+        boolean isCreateVisible = this.getEditedEntity().getFeatureInfo() == null;
+
+        createFeatureInfoBtn.setVisible(isCreateVisible);
+        editFeatureInfoBtn.setVisible(!isCreateVisible);
+        clearFeatureInfoBtn.setVisible(!isCreateVisible);
+        featureInfoOverrideHint.setVisible(!isCreateVisible);
     }
 }

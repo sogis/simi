@@ -8,13 +8,10 @@
                   class="ch.so.agi.simi.entity.data.tabular.PostgresTable">
             <view extends="_local">
                 <property name="modelSchema" view="_minimal">
-                    <property name="schemaName"/>
-                    <property name="postgresDB" view="_minimal">
-                        <property name="dbName"/>
-                    </property>
                 </property>
-                <property name="tableViews" view="_minimal"/>
-                <property name="tableFields" view="_local"/>
+                <property name="tableFields" view="_local">
+                    <property name="viewFields" view="_minimal"/>
+                </property>
             </view>
             <loader/>
             <collection id="tableFieldsDc" property="tableFields"/>
@@ -42,9 +39,8 @@
             </form>
             <button id="readFromServiceBtn" caption="Lesen von Service" align="MIDDLE_RIGHT" stylename="friendly"/>
             <groupBox id="tableFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/PostgresTable.tableFields">
-                <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" height="200px">
+                <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" height="200px" multiselect="true">
                     <actions>
-                        <action id="create" type="create"/>
                         <action id="edit" type="edit"/>
                         <action id="remove" type="remove"/>
                     </actions>
@@ -55,7 +51,6 @@
                         <column id="viewFieldsCount" caption="Ref in DSV"/>
                     </columns>
                     <buttonsPanel>
-                        <button action="tableFieldsTable.create"/>
                         <button action="tableFieldsTable.edit"/>
                         <button action="tableFieldsTable.remove"/>
                     </buttonsPanel>

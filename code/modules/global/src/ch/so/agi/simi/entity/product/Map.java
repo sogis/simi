@@ -1,5 +1,7 @@
 package ch.so.agi.simi.entity.product;
 
+import com.haulmont.chile.core.annotations.NamePattern;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -9,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "SIMIPRODUCT_MAP")
 @Entity(name = "simiProduct_Map")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
+@NamePattern("%s|identifier")
 public class Map extends ProductList {
     private static final long serialVersionUID = -737058404500308993L;
 

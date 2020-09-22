@@ -36,7 +36,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="externalTablesTable.create"/>
                 <button id="editBtn" action="externalTablesTable.edit"/>
-                <button id="removeBtn" action="externalTablesTable.remove"/>
+                <button id="removeBtn" action="externalTablesTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">
