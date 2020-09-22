@@ -49,7 +49,7 @@
                     <actions>
                         <action id="addSingleActor" caption="Hinzufügen" icon="ADD_ACTION"/>
                         <action id="addSingleActorsFromLayerGroup" caption="Aus LayerGroup übernehmen" icon="ADD_ACTION"/>
-                        <action id="exclude" type="exclude"/>
+                        <action id="exclude" type="remove" caption="Ausschliessen"/>
                         <action id="sortAction" caption="Sortieren" icon="SORT"/>
                     </actions>
                     <columns>

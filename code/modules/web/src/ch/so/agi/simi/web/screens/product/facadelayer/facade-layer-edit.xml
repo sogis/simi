@@ -51,7 +51,7 @@
             <table id="dataSetViewsTable" dataContainer="dataSetViewsDc" width="100%" height="200px" editable="true">
                 <actions>
                     <action id="addDataSetView" caption="Hinzufügen" icon="ADD_ACTION"/>
-                    <action id="exclude" type="exclude"/>
+                    <action id="exclude" type="remove" caption="Ausschliessen"/>
                     <action id="sortAction" caption="Sortieren" icon="SORT"/>
                 </actions>
                 <columns>
