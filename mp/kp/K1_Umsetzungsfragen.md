@@ -64,12 +64,20 @@ Teilmodell|Root-Klasse|Strategie|Bemerkungen|
 |Abstract|Question|Pending|
 | |Answer| |
 
-Entscheide:
-* Vererbungsarten
-* Einsatz von View's
-* Binäre Assets in DB als einfache Strings (base64)
-* Ein Screen für Rollen AGI-MA und GIS-Koord
-* Know your GDI als Screen (Daten aus View)
+## Entscheide:
+* **Vererbungsarten:** Es wird pro Vererbungsbaum festgelegt, welche Vererbungsstrategie umgeseetzt wird. 
+Wenn die Kinder Beziehungen besitzen, wird die Vererbungsart "joined" verwendet, damit klar ersichtlich ist, 
+welche Kinder in welcher Beziehung teilnehmen.
+* **Einsatz von View's:** Für die Darstellung zusammengezogener Informationen (etwa: Know your GDI - "Report") werden
+DB-Views verwendet. Beobachten, ob dies im Zusammenhang mit Schemaänderungen mühsam wird (Nein gemäss Haulmont). 
+* **"Dateien":** Diese werden direkt in ihrem "nativen" Format als Spalte in der entsprechenden Tabelle gehalten.
+--> QML als String, Legende als byte[]. Die Benutzer merken davon nicht's - sie laden Dateien hoch und runter.
+Verortung in der Tabelle ist bei den Dateigrössen und -Mengen von Simi absolut problemlos und bringt den Vorteil, 
+dass man sich nicht noch um irgendwelche externe Referenzen kümmern muss.
+* **Rollen und Screens:** Die technischen Konfigurationen auf von den GIS-Koordinatoren genutzten Masken sind readonly zu gestalten.
+Es wird die einfachste Lösung verfolgt: Eine Maske für AGI und GIS-Koordinatoren, die technischen Felder sind für die GIS-Koordinatoren "readonly".
+* **Softdelete:** Dieses wird als Standardverhalten der Plattform übernommen. Vorteil: "Geschenkte" Informationen bezüglich Zeitpunkt und Nutzer der letzten Änderung
+(Insert, update UND delete). Nachteil: Die "soft-deleted" Records müssen periodisch gelöscht werden --> GRETL Job.
 
 
 

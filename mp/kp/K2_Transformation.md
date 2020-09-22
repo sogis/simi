@@ -21,14 +21,9 @@ gehalten werden (Legendenbilder, …)
 |Thema|Entscheid|Bemerkungen|
 |---|---|---|
 |Transformation mittels SQL-CTE?|Ja. Pilotierung mit Benutzer und Gruppen der Config-DB hat gezeigt, dass dies ein guter Weg ist.|Fraglich ist, ob es SQL-Fragmente gibt, welche X-Mal verwendet werden --> Ist während Erstellung der SQL CTE's zu beobachten.|
-|Ablauf / Abhängigkeit Trafo-SQL's von Trafo-Modul|1. Erstellen Modul V 1.0<br<2. Erstellen der SQL's<br>3. Erstellen Modul V 1.1|Benötigt "agiles" Vorgehen. Erst beim Schreiben der SQL's wird klar, wo es SQL-Codeverdoppelungen gibt und wie diese am Besten "ausgemerzt" werden.|
+|Ablauf / Abhängigkeit Trafo-SQL's von Trafo-Modul|1. Erstellen der SQL's<br>2. Erstellen Modul 3. Ausführen der SQL's mittels Modul.|Agiles Vorgehen. Erst beim Schreiben der SQL's wird klar, wo es SQL-Codeverdoppelungen gibt und wie diese am Besten "ausgemerzt" werden.|
 |Dateibasierte Konfigurationen: Originaldatenhaltung|Die Originale werden als Blobs in der Simi-DB gehalten.|Vorteil: Aufgeräumt. Kopieren braucht nur den Dump. Es geht nur um kleine Dateien - kein Problem für die DB.|
-|Dateibasierte Konfigurationen: Export|Es braucht ein Trafo-Element, welches die Blobs wiederum als Datei exportiert (vs. Kopieren von nach).|Bezüglich QGIS-Server die Möglichkeit der Zip-Erstellung beachten (*.qgz)|
+|Dateibasierte Konfigurationen: Export|Als Transfer-Codierung für binäre Informationen wird base64 verwendet und in die *.json als einfache Strings integriert.|Falls QGIS Server 2.18 wird das das QML mit zugehörigen Assets als "String of Json" in der Datenbank gespeichert, um einfachen Export sicherzustellen.|
+|Globals|Globale Informationen, welche in mehreren *.json genutzt werden: Diese werden in SIMI im Modul "globals" geführt, damit die Informationen einfach für sql2json zur Verfügung stehen.|
 
-* QgsTrafo: Json
-* sql2json: Erstellung nach Erfahrungen mit "rohem" sql
-* base64
-    * Erweiterung der bestehenden *.json wo notwendig
-    * Setzen auf qml mit base64 json
-* Globals in SIMI
  

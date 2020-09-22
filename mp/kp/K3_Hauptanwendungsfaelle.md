@@ -42,11 +42,7 @@ Ca. jede zehnte Ebene hat auch Konfiguration bezüglich:
 
 ## Entscheide
 
-|Thema|Entscheid|Bemerkungen|
-|---|---|---|
-|Teilmodell Mutation|Entscheid dazu, nachdem 2/3 des GUI's der anderen Teilmodelle implementiert sind.|Das konzipierte Teilmodell ist mit vernünftigem Aufwand zu erstellen - Trotzdem muss Gewissheit zum Nutzen bestehen.|
-
-* mutationen ja
+* **Mutationen:**
     * Generieren aus Schema
     * Manuelles, unterstütztes Mutieren zu "ersetzen", "neu", ("zu löschen")
     * Flippern zwischen A und B
