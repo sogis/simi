@@ -8,6 +8,7 @@ import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -59,6 +60,7 @@ public class DataSetView extends SingleActor {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "dataSetView")
+    @OnDeleteInverse(DeletePolicy.UNLINK)
     private List<PropertiesInFacade> facadeLayers;
 
     @OneToMany(mappedBy = "dataSetView")
