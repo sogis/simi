@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://viewFieldEdit.caption"
+        caption="Spalteneigenschaften - Edit"
         focusComponent="form"
         messagesPack="ch.so.agi.simi.web.screens.data.tabular.viewfield">
     <data>
@@ -12,7 +12,9 @@
                     <property name="descriptionModel"/>
                     <property name="descriptionOverride"/>
                 </property>
-                <property name="tableView" view="_minimal"/>
+                <property name="tableView" view="_minimal">
+                    <property name="postgresTable" view="_minimal"/>
+                </property>
             </view>
             <loader/>
         </instance>
@@ -39,11 +41,11 @@
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="viewFieldDc">
                 <column width="350px">
-                    <textField id="sortField" property="sort"/>
                     <textField id="aliasField" property="alias"/>
                     <textField id="wmsFiFormatField" property="wmsFiFormat"/>
-                    <textArea id="displayProps4JsonField" property="displayProps4Json" rows="5"/>
+                    <sourceCodeEditor id="displayProps4JsonField" property="displayProps4Json" mode="JavaScript"/>
                     <lookupField id="tableFieldField" property="tableField" optionsContainer="tableFieldsDc"/>
+                    <textField id="sortField" property="sort"/>
                     <textArea id="descriptionModelField" property="tableField.descriptionModel" rows="5" editable="false"/>
                     <textArea id="descriptionOverrideField" property="tableField.descriptionOverride" rows="5"/>
                 </column>
