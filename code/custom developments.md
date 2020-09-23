@@ -1,0 +1,30 @@
+# Custom Developments
+
+- CopyDataProductBean
+   - deep copy of some DataProducts
+- StyleUploadDownloadBean
+   - upload and check version of .qml
+- PostgresTableEdit
+   - read json in SchemaReaderBean
+   - generate TableFields from read data and update catSynced
+- PubScopeFragment
+   - set default value in onInitEntity
+   - programmatically add JpqlCondition
+- FilterFragment
+   - simple filter functionality for browse screens
+- DataProductBrowse
+   - create PropertiesInList / PropertiesInFacade joining entities when edit screen closes
+   - use *remove* action to properly remove joining entities
+- LayerGroupEdit / FacadeLayerEdit
+   - convert FL to LG
+- Sort on table in FacadeLayerEdit, LayerGroupEdit, MapEdit and TableViewEdit
+- RasterViewEdit / TableViewEdit
+   - create new Permission entity and add it directly to the table within the current edit screen
+- PostgresDBBrowse
+   - check if DB is empty before deleting it
+- PostgresTableBrowse
+   - initializer and afterCloseListener for TableViewEdit Screen
+   - generated columns to show related TableViews
+- Custom validator
+   - TableViewEdit for searchFilterWordField
+   - FeatureInfoEdit for pyModuleNameField and sqlQueryField
