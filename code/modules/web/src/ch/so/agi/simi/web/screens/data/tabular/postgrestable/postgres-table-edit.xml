@@ -40,7 +40,7 @@
                 <textArea id="descriptionOverrideField" property="descriptionOverride" rows="5" rowspan="3"/>
             </column>
         </form>
-        <groupBox id="tableFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/PostgresTable.tableFields"
+        <groupBox id="tableFieldsBox" caption="Tabellenspalten"
                   expand="tableFieldsTable">
             <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" multiselect="true">
                 <actions>

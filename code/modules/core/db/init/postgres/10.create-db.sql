@@ -22,8 +22,6 @@ create table SIMIDATA_TABLE_FIELD (
     REG_EX_PATTERN varchar(512),
     STR_LENGTH integer,
     CAT_SYNCED boolean not null,
-    REMARKS text,
-    REMARKS_MODEL text,
     POSTGRES_TABLE_ID uuid not null,
     --
     primary key (ID)
