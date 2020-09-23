@@ -4,9 +4,11 @@ import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
 import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.iam.Permission;
+import ch.so.agi.simi.entity.product.DataSetView;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
 import ch.so.agi.simi.web.StyleUploadDownloadBean;
 import ch.so.agi.simi.web.screens.featureinfo.featureinfo.FeatureInfoEdit;
+import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
@@ -55,12 +57,17 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private Metadata metadata;
     @Inject
     private Label<String> featureInfoOverrideHint;
+    @Inject
+    private Messages messages;
 
     @Subscribe
     public void onAfterInit(AfterInitEvent event) {
         searchFilterWordField.addValidator(value -> {
             if (dataProductDc.getItem().getSearchType() != DataSetView_SearchTypeEnum.NEIN && (value == null || value.isEmpty()))
-                throw  new ValidationException("Wenn Suchtyp 'Immer' oder 'falls geladen' ist, muss Filter Wort angegeben werden.");
+                throw  new ValidationException("Wenn Suchtyp '" +
+                        messages.getMessage(DataSetView_SearchTypeEnum.class, "DataSetView_SearchTypeEnum.IMMER") + "' oder '" +
+                        messages.getMessage(DataSetView_SearchTypeEnum.class, "DataSetView_SearchTypeEnum.FALLS_GELADEN") + "' ist, muss '" +
+                        messages.getMessage(DataSetView.class, "DataSetView.searchFilterWord") + "' angegeben werden.");
         });
     }
 
