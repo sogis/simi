@@ -28,6 +28,7 @@ Beispiele:
 |title|String(200)|n|Angezeigter Titel (Bezeichnung) des Dataproduct. Falls null in Erstellungsphase wird identifier verwendet.|
 |releasedAt|DateTime|n|Zeitpunkt der aktuellsten Freigabe.|
 |releasedThrough|String(100)|n|Name und Vorname des Benutzers, welcher die Freigabe vorgenommen hat.|
+|description|String|n|Beschreibung|
 
 ### Konstraints
 
