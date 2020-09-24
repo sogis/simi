@@ -87,6 +87,15 @@ public class GISCoordinatorRole extends AnnotatedRoleDefinition {
             "releasedAtField",
             "releasedThroughField",
     })
+    @ScreenComponentAccess(screenId = "simiProduct_FacadeLayer.edit", view = {
+            "identifierField",
+            "pubScopeFragment",
+            "releasedAtField",
+            "releasedThroughField",
+            "synonymsField",
+            "remarksField",
+            "btnConvertToLayerGroup",
+    })
     @Override
     public ScreenComponentPermissionsContainer screenComponentPermissions() {
         return super.screenComponentPermissions();
