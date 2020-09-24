@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://dataProductBrowse.caption"
+        caption="Produkte - Browse"
         focusComponent="dataProductsTable"
         messagesPack="ch.so.agi.simi.web.screens.product.dataproduct">
     <data readOnly="true">
@@ -54,23 +54,23 @@
                           alwaysVisible="true">
                 <popupButton id="createBtn" caption="Erstellen" stylename="friendly" icon="ADD_ACTION">
                     <actions>
+                        <action id="createLayerGroup" caption="Layergruppe erstellen"/>
+                        <action id="createFacadeLayer" caption="Facadelayer erstellen"/>
+                        <action id="createTableView" caption="View erstellen"/>
                         <action id="createMap" caption="Map erstellen"/>
-                        <action id="createLayerGroup" caption="LayerGroup erstellen"/>
-                        <action id="createFacadeLayer" caption="FacadeLayer erstellen"/>
-                        <action id="createTableView" caption="TableView erstellen"/>
-                        <action id="createRasterView" caption="RasterView erstellen"/>
+                        <action id="createRasterView" caption="Raster View erstellen"/>
                     </actions>
                 </popupButton>
                 <button id="editBtn" action="dataProductsTable.edit"/>
-                <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
                 <button id="copyBtn" action="dataProductsTable.copy"/>
                 <button id="refreshBtn" action="dataProductsTable.refresh"/>
+                <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <fragment id="filter" screen="simi_FilterFragment">
             <properties>
                 <property name="dataLoader" ref="dataProductsDl"/>
-                <property name="inputPrompt" value="Filtern nach Kennung und Titel"/>
+                <property name="inputPrompt" value="Filtern nach Kennung oder Titel"/>
             </properties>
         </fragment>
         <hbox id="lookupActions" spacing="true" visible="false">

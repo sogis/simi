@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://rasterViewEdit.caption"
+        caption="Raster View - Edit"
         focusComponent="form"
         messagesPack="ch.so.agi.simi.web.screens.data.raster.rasterview">
     <data>
@@ -22,11 +22,12 @@
     <dialogMode height="80%"
                 width="80%"
                 modal="true"
-                forceDialog="true"/>
+                forceDialog="true"
+                resizable="true"/>
     <layout expand="scrollBox" spacing="true">
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="dataProductDc">
-                <column width="350px">
+                <column width="450px">
                     <pickerField id="rasterDSField" property="rasterDS" editable="false"/>
 
                     <textField id="transparencyField" property="transparency"/>
@@ -35,9 +36,22 @@
                     <textField id="searchFacetField" property="searchFacet"/>
                     <textField id="searchFilterWordField" property="searchFilterWord"/>
 
-                    <textArea id="styleServerField" property="styleServer" rows="5"/>
-                    <textArea id="styleDesktopField" property="styleDesktop" rows="5"/>
-
+                    <fragment id="styleServerField" screen="simi_StyleFragment" caption="msg://ch.so.agi.simi.entity.product/DataSetView.styleServer">
+                        <properties>
+                            <property name="dataSetViewDc" ref="dataProductDc"/>
+                            <property name="styleProperty" value="styleServer"/>
+                            <property name="styleChangedProperty" value="styleServerChanged"/>
+                            <property name="fileSuffix" value=".Server.qml"/>
+                        </properties>
+                    </fragment>
+                    <fragment id="styleDesktopField" screen="simi_StyleFragment" caption="msg://ch.so.agi.simi.entity.product/DataSetView.styleDesktop">
+                        <properties>
+                            <property name="dataSetViewDc" ref="dataProductDc"/>
+                            <property name="styleProperty" value="styleDesktop"/>
+                            <property name="styleChangedProperty" value="styleDesktopChanged"/>
+                            <property name="fileSuffix" value=".Desktop.qml"/>
+                        </properties>
+                    </fragment>
                     <textField id="identifierField" property="identifier"/>
                     <textField id="titleField" property="title"/>
                     <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment" caption="msg://ch.so.agi.simi.entity.product/DataProduct.pubScope">
@@ -47,10 +61,12 @@
                     </fragment>
                     <dateField id="releasedAtField" property="releasedAt"/>
                     <textField id="releasedThroughField" property="releasedThrough"/>
-                    <textArea id="synonymsField" property="synonyms" rows="2"/>
-                    <textArea id="keywordsField" property="keywords" rows="2"/>
                     <textArea id="remarksField" property="remarks" rows="5"/>
-                    <textArea id="descriptionField" property="description" rows="5"/>
+                </column>
+                <column width="450px">
+                    <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
+                    <textArea id="keywordsField" property="keywords" rows="5" rowspan="3"/>
+                    <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
                 </column>
             </form>
             <groupBox id="permissionsBox" caption="msg://ch.so.agi.simi.entity.product/DataSetView.permissions">
@@ -63,8 +79,8 @@
                         </action>
                     </actions>
                     <columns>
+                        <column id="role" editable="true" sort="ASCENDING"/>
                         <column id="level" editable="true"/>
-                        <column id="role" editable="true"/>
                     </columns>
                     <buttonsPanel>
                         <button id="addPermissionBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>

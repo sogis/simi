@@ -32,6 +32,20 @@
                 </query>
             </loader>
         </collection>
+        <collection id="tableFieldsDc"
+                    class="ch.so.agi.simi.entity.data.tabular.TableField"
+                    view="_local">
+            <loader id="tableFieldsDl">
+                <query>
+                    <![CDATA[select e from simiData_TableField e]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>e.postgresTable = :table</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="80%"
                 width="80%"
@@ -115,9 +129,9 @@
                         <action id="sortAction" caption="Sortieren" icon="SORT"/>
                     </actions>
                     <columns>
-                        <column id="tableField.name"/>
-                        <column id="alias"/>
-                        <column id="sort" editable="true"/>
+                        <column id="tableField" editable="true" optionsContainer="tableFieldsDc"/>
+                        <column id="alias" editable="true"/>
+                        <column id="sort" editable="true" sort="ASCENDING"/>
                     </columns>
                     <buttonsPanel>
                         <button id="addViewFieldBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
