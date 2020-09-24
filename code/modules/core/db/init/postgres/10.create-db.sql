@@ -113,6 +113,7 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     DTYPE varchar(31),
     --
     IDENTIFIER varchar(100) not null,
+    DESCRIPTION text,
     PUB_SCOPE_ID uuid not null,
     KEYWORDS varchar(200),
     REMARKS text,
@@ -311,7 +312,6 @@ create table SIMIDATA_POSTGRES_TABLE (
     ID_FIELD_NAME varchar(100) not null,
     MODEL_SCHEMA_ID uuid not null,
     DESCRIPTION_MODEL text,
-    DESCRIPTION_OVERRIDE text,
     CAT_SYNC_STAMP timestamp not null,
     GEO_FIELD_NAME varchar(100),
     GEO_TYPE varchar(100),
@@ -367,9 +367,10 @@ create table SIMIPRODUCT_DATA_SET_VIEW (
     ID uuid,
     --
     RAW_DOWNLOAD boolean not null,
-    NAME varchar(100),
     STYLE_SERVER text,
+    STYLE_SERVER_UPLOADED timestamp,
     STYLE_DESKTOP text,
+    STYLE_DESKTOP_UPLOADED timestamp,
     SEARCH_TYPE integer not null,
     SEARCH_FACET varchar(100),
     SEARCH_FILTER_WORD varchar(100),

@@ -37,7 +37,6 @@
             <column width="350px">
                 <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
                 <textArea id="descriptionModelField" property="descriptionModel" rows="5" editable="false" rowspan="3"/>
-                <textArea id="descriptionOverrideField" property="descriptionOverride" rows="5" rowspan="3"/>
             </column>
         </form>
         <groupBox id="tableFieldsBox" caption="Tabellenspalten"

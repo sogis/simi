@@ -40,7 +40,6 @@
                 <column id="releasedThrough"/>
                 <column id="transparency"/>
                 <column id="rawDownload"/>
-                <column id="name"/>
                 <column id="styleServer"/>
                 <column id="styleDesktop"/>
                 <column id="searchType"/>

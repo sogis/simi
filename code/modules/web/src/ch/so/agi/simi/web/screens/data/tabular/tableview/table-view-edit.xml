@@ -10,8 +10,6 @@
             <view extends="_local">
                 <property name="postgresTable" view="_minimal"/>
                 <property name="pubScope" view="_minimal"/>
-                <property name="styleServerFilled"/>
-                <property name="styleDesktopFilled"/>
                 <property name="viewFields" view="_local">
                     <property name="tableField" view="_minimal"/>
                 </property>
@@ -36,7 +34,6 @@
                 <column width="350px">
                     <pickerField id="postgresTableField" property="postgresTable" editable="false"/>
                     <checkBox id="rawDownloadField" property="rawDownload"/>
-                    <textField id="nameField" property="name"/>
                     <textField id="whereClauseField" property="whereClause"/>
                     <textField id="geomFieldNameField" property="geomFieldName"/>
                     <checkBox id="wgcEditField" property="wgcEdit"/>
@@ -44,14 +41,10 @@
                     <textField id="searchFacetField" property="searchFacet"/>
                     <textField id="searchFilterWordField" property="searchFilterWord"/>
                     <hbox caption="Style Server">
-                        <checkBox id="isStyleServerFilledField" property="styleServerFilled" align="MIDDLE_CENTER"
-                                  editable="false" dataContainer="dataProductDc"/>
                         <button id="downloadStyleServerBtn" caption="Download"/>
                         <upload id="uploadStyleServerBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml"/>
                     </hbox>
                     <hbox caption="Style Desktop">
-                        <checkBox id="isStyleDesktopFilledField" property="styleDesktopFilled" align="MIDDLE_CENTER"
-                                  editable="false" dataContainer="dataProductDc"/>
                         <button id="downloadStyleDesktopBtn" caption="Download"/>
                         <upload id="uploadStyleDesktopBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml"/>
                     </hbox>
@@ -73,6 +66,7 @@
                         <button id="editFeatureInfoBtn" caption="FeatureInfo bearbeiten" icon="EDIT"/>
                         <button id="clearFeatureInfoBtn" caption="Löschen" icon="REMOVE"/>
                     </hbox>
+                    <textArea id="descriptionField" property="description" rows="5"/>
                 </column>
             </form>
             <groupBox id="viewFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/TableView.viewFields" spacing="true">

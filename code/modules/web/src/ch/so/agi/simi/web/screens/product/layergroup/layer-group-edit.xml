@@ -46,6 +46,7 @@
                     <textArea id="synonymsField" property="synonyms" rows="2"/>
                     <textArea id="keywordsField" property="keywords" rows="2"/>
                     <textArea id="remarksField" property="remarks" rows="5"/>
+                    <textArea id="descriptionField" property="description" rows="5"/>
                 </column>
             </form>
             <groupBox id="singleActorsBox" caption="Layer">
