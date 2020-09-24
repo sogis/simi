@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://postgresTableBrowse.caption"
+        caption="Vektor DS (Tabelle) - Browse"
         focusComponent="postgresTablesTable"
         messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgrestable">
     <data readOnly="true">
@@ -45,8 +45,8 @@
                dataContainer="postgresTablesDc"
                multiselect="true">
             <actions>
-                <action id="create" type="create" caption="Neues DataSet"/>
-                <action id="createTableView" caption="Neue TableView" icon="ADD_ACTION" trackSelection="true"/>
+                <action id="create" type="create" caption="Neues Vektor DS"/>
+                <action id="createTableView" caption="Neue View für DS" icon="ADD_ACTION" trackSelection="true"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove">
                     <properties>
@@ -64,9 +64,9 @@
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn" action="postgresTablesTable.create"/>
-                <button id="createTableViewBtn" action="postgresTablesTable.createTableView"/>
                 <button id="editBtn" action="postgresTablesTable.edit"/>
                 <button id="removeBtn" action="postgresTablesTable.remove" stylename="danger"/>
+                <button id="createTableViewBtn" action="postgresTablesTable.createTableView"/>
             </buttonsPanel>
         </table>
         <fragment screen="simi_FilterFragment">
