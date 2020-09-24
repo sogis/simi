@@ -72,6 +72,21 @@ public class GISCoordinatorRole extends AnnotatedRoleDefinition {
             "btnConvertToFacadeLayer",
             "btnExclude",
     })
+    @ScreenComponentAccess(screenId = "simiData_TableView.edit", view = {
+            "whereClauseField",
+            "geomFieldNameField",
+            "wgcEditField",
+            "searchTypeField",
+            "searchFacetField",
+            "searchFilterWordField",
+            "identifierField",
+            "transparencyField",
+            "remarksField",
+            "pubScopeFragment",
+            "rawDownloadField",
+            "releasedAtField",
+            "releasedThroughField",
+    })
     @Override
     public ScreenComponentPermissionsContainer screenComponentPermissions() {
         return super.screenComponentPermissions();
