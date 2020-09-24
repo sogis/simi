@@ -8,7 +8,7 @@ import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
 
-@UiController("simi_PubScopeFragment")
+@UiController("simiProduct_PubScopeFragment")
 @UiDescriptor("pub-scope-fragment.xml")
 public class PubScopeFragment extends ScreenFragment {
     @Inject

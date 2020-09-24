@@ -22,6 +22,10 @@ public class DataProduct extends SimiStandardEntity {
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
     private String identifier;
 
+    @Lob
+    @Column(name = "DESCRIPTION")
+    private String description;
+
     @JoinTable(name = "SIMI_DATA_PRODUCT_COMPONENT_LINK",
             joinColumns = @JoinColumn(name = "DATA_PRODUCT_ID"),
             inverseJoinColumns = @JoinColumn(name = "COMPONENT_ID"))
@@ -51,6 +55,14 @@ public class DataProduct extends SimiStandardEntity {
 
     @Column(name = "RELEASED_THROUGH", length = 100)
     private String releasedThrough;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public List<Component> getCoponents() {
         return coponents;

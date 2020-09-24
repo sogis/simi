@@ -5,13 +5,13 @@ import ch.so.agi.simi.entity.ccc.NotifyLayer;
 import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.iam.Permission;
 import com.haulmont.chile.core.annotations.Composition;
-import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "SIMIPRODUCT_DATA_SET_VIEW")
@@ -35,16 +35,19 @@ public class DataSetView extends SingleActor {
     @OneToMany(mappedBy = "dataSetView")
     private List<NotifyLayer> notifyLayers;
 
-    @Column(name = "NAME", length = 100)
-    private String name;
-
     @Lob
     @Column(name = "STYLE_SERVER")
     private String styleServer;
 
+    @Column(name = "STYLE_SERVER_UPLOADED")
+    private LocalDateTime styleServerChanged;
+
     @Lob
     @Column(name = "STYLE_DESKTOP")
     private String styleDesktop;
+
+    @Column(name = "STYLE_DESKTOP_UPLOADED")
+    private LocalDateTime styleDesktopChanged;
 
     @NotNull
     @Column(name = "SEARCH_TYPE", nullable = false)
@@ -75,6 +78,22 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "dataSetView")
     private FeatureInfo featureInfo;
+
+    public LocalDateTime getStyleServerChanged() {
+        return styleServerChanged;
+    }
+
+    public void setStyleServerChanged(LocalDateTime styleServerChanged) {
+        this.styleServerChanged = styleServerChanged;
+    }
+
+    public LocalDateTime getStyleDesktopChanged() {
+        return styleDesktopChanged;
+    }
+
+    public void setStyleDesktopChanged(LocalDateTime styleDesktopChanged) {
+        this.styleDesktopChanged = styleDesktopChanged;
+    }
 
     public FeatureInfo getFeatureInfo() {
         return featureInfo;
@@ -114,18 +133,6 @@ public class DataSetView extends SingleActor {
 
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
-    }
-
-    @Transient
-    @MetaProperty(related = "styleServer")
-    public Boolean getStyleServerFilled() {
-        return styleServer != null && !styleServer.isEmpty();
-    }
-
-    @Transient
-    @MetaProperty(related = "styleDesktop")
-    public Boolean getStyleDesktopFilled() {
-        return styleDesktop != null && !styleDesktop.isEmpty();
     }
 
     public List<PropertiesInFacade> getFacadeLayers() {
@@ -174,14 +181,6 @@ public class DataSetView extends SingleActor {
 
     public void setStyleServer(String styleServer) {
         this.styleServer = styleServer;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Boolean getRawDownload() {

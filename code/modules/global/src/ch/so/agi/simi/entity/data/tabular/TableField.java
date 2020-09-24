@@ -55,14 +55,6 @@ public class TableField extends SimiStandardEntity {
     @Column(name = "CAT_SYNCED", nullable = false)
     private Boolean catSynced = false;
 
-    @Lob
-    @Column(name = "REMARKS")
-    private String remarks;
-
-    @Lob
-    @Column(name = "REMARKS_MODEL")
-    private String remarksModel;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_TABLE_ID")
     private PostgresTable postgresTable;
@@ -97,22 +89,6 @@ public class TableField extends SimiStandardEntity {
 
     public void setPostgresTable(PostgresTable postgresTable) {
         this.postgresTable = postgresTable;
-    }
-
-    public String getRemarksModel() {
-        return remarksModel;
-    }
-
-    public void setRemarksModel(String remarksModel) {
-        this.remarksModel = remarksModel;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
     }
 
     public Boolean getCatSynced() {

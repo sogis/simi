@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://postgresTableReadFromService.caption"
+        caption="Aus Quell-DB einlesen"
         focusComponent="tableShortInfosTable"
         messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgrestable">
     <data readOnly="true">
@@ -19,17 +19,18 @@
     <dialogMode height="80%"
                 width="80%"
                 modal="true"
-                forceDialog="true"/>
+                forceDialog="true"
+                resizable="true"/>
     <actions>
         <action id="selectAction" icon="OK" caption="Auswählen"/>
     </actions>
     <layout expand="tableShortInfosTable"
             spacing="true">
         <form>
-            <lookupField id="postgresDBLookupField" caption="Database" optionsContainer="postgresDBsDc" nullOptionVisible="false"/>
-            <textField id="schemaField" caption="Schema"/>
-            <hbox caption="Tabelle" spacing="true">
-                <textField id="tableField"/>
+            <lookupField id="postgresDBLookupField" caption="Datenbank" optionsContainer="postgresDBsDc" nullOptionVisible="false"/>
+            <textField id="tableField" caption="Tabelle"/>
+            <hbox caption="Schema" spacing="true">
+                <textField id="schemaField"/>
                 <button id="searchBtn" caption="Suchen" stylename="primary"/>
             </hbox>
         </form>
@@ -38,8 +39,8 @@
                width="100%"
                dataContainer="TableShortInfosDc">
             <columns>
+                <column id="tvName" sort="ASCENDING"/>
                 <column id="schemaName"/>
-                <column id="tvName"/>
             </columns>
         </table>
         <hbox id="dialogActions" spacing="true">

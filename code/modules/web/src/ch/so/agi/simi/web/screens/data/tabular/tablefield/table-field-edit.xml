@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://tableFieldEdit.caption"
+        caption="Spalteneigenschaften - Edit"
         focusComponent="form"
         messagesPack="ch.so.agi.simi.web.screens.data.tabular.tablefield">
     <data>
@@ -19,15 +19,15 @@
             <form id="form" dataContainer="tableFieldDc">
                 <column width="350px">
                     <textField id="nameField" property="name" editable="false"/>
+                    <checkBox id="mandatoryField" property="mandatory" editable="false"/>
                     <textField id="typeNameField" property="typeName" editable="false"/>
                     <textField id="strLengthField" property="strLength" editable="false"/>
-                    <textArea id="descriptionModelField" property="descriptionModel" rows="5" editable="false"/>
-                    <textArea id="descriptionOverrideField" property="descriptionOverride" rows="5"/>
-                    <checkBox id="mandatoryField" property="mandatory" editable="false"/>
-                    <textField id="regExPatternField" property="regExPattern"/>
-                    <textArea id="remarksModelField" property="remarksModel" rows="5" editable="false"/>
-                    <textArea id="remarksField" property="remarks" rows="5"/>
                     <checkBox id="catSyncedField" property="catSynced" editable="false"/>
+                    <textField id="regExPatternField" property="regExPattern"/>
+                </column>
+                <column width="350px">
+                    <textArea id="descriptionModelField" property="descriptionModel" rows="5" editable="false" rowspan="3"/>
+                    <textArea id="descriptionOverrideField" property="descriptionOverride" rows="5" rowspan="3"/>
                 </column>
             </form>
         </scrollBox>

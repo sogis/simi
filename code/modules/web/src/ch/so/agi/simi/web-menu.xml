@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
-    <menu id="application-simi" insertBefore="administration" caption="mainMsg://menu_config.application-simi">
-        <menu id="application-simi-product" caption="Product ..." expanded="true">
-            <item screen="simiProduct_DataProduct.browse" caption="mainMsg://menu_config.simiProduct_DataProduct.browse"/>
-        </menu>
-        <menu id="application-simi-data" caption="Data ..." expanded="true">
-            <item screen="simiData_RasterDS.browse" caption="mainMsg://menu_config.simiData_RasterDS.browse"/>
-            <item screen="simiData_ExternalTable.browse" caption="mainMsg://menu_config.simiData_ExternalTable.browse"/>
-            <item screen="simiData_PostgresTable.browse" caption="mainMsg://menu_config.simiData_PostgresTable.browse"/>
-            <item screen="simiData_ModelSchema.browse" caption="mainMsg://menu_config.simiData_ModelSchema.browse"/>
-            <item screen="simiData_PostgresDB.browse" caption="mainMsg://menu_config.simiData_PostgresDB.browse"/>
-        </menu>
-        <menu id="application-simi-iam" caption="IAM ..." expanded="true">
-            <item screen="simiIAM_User.browse" caption="mainMsg://menu_config.simiIAM_User.browse"/>
-            <item screen="simiIAM_Group.browse" caption="mainMsg://menu_config.simiIAM_Group.browse"/>
-            <item screen="simiIAM_Role.browse" caption="mainMsg://menu_config.simiIAM_Role.browse"/>
-        </menu>
-        <menu id="application-simi-ccc" caption="CCC ..." expanded="true">
-            <item screen="simiCCC_CCCClient.browse" caption="mainMsg://menu_config.simiCCC_CCCClient.browse"/>
-        </menu>
-        <menu id="application-simi-dependency" caption="Dependency ..." expanded="true">
-            <item screen="simiDependency_Component.browse" caption="mainMsg://menu_config.simiDependency_Component.browse"/>
-        </menu>
-        <item screen="simiProduct_DataProduct_PubScope.browse" caption="mainMsg://menu_config.simiProduct_DataProduct_PubScope.browse"/>
+    <item screen="simiProduct_DataProduct.browse" caption="Produkte" insertBefore="administration"/>
+    <menu id="application-simi-data" caption="Datensätze (DS) ..." expanded="true" insertBefore="administration">
+        <item screen="simiData_PostgresTable.browse" caption="Vektor DS und Tabellen"/>
+        <item screen="simiData_ModelSchema.browse" caption="DB Schemas"/>
+        <item screen="simiData_PostgresDB.browse" caption="GDI Datenbanken"/>
+        <item screen="simiData_RasterDS.browse" caption="Raster DS"/>
+        <item screen="simiData_ExternalTable.browse" caption="Externe Tabellen"/>
     </menu>
+    <menu id="application-simi-iam" caption="Benutzer - Verwaltung ..." expanded="false" insertBefore="administration">
+        <item screen="simiIAM_User.browse" caption="Benutzer"/>
+        <item screen="simiIAM_Group.browse" caption="Gruppen"/>
+        <item screen="simiIAM_Role.browse" caption="Rollen"/>
+    </menu>
+    <menu id="application-simi-others" caption="Weitere ..." expanded="false" insertBefore="administration">
+        <item screen="simiDependency_Component.browse" caption="Abhängigkeiten"/>
+        <item screen="simiCCC_CCCClient.browse" caption="CCC - Anbindungen"/>
+    </menu>
+    <item screen="simiProduct_DataProduct_PubScope.browse" caption="Data Product Pub Scopes" insertBefore="administration"/>
 </menu-config>

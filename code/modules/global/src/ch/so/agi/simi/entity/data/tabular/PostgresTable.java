@@ -40,10 +40,6 @@ public class PostgresTable extends TableDS {
     @Column(name = "DESCRIPTION_MODEL")
     private String descriptionModel;
 
-    @Lob
-    @Column(name = "DESCRIPTION_OVERRIDE")
-    private String descriptionOverride;
-
     @NotNull
     @Column(name = "CAT_SYNC_STAMP", nullable = false)
     private LocalDateTime catSyncStamp;
@@ -111,14 +107,6 @@ public class PostgresTable extends TableDS {
 
     public void setCatSyncStamp(LocalDateTime catSyncStamp) {
         this.catSyncStamp = catSyncStamp;
-    }
-
-    public String getDescriptionOverride() {
-        return descriptionOverride;
-    }
-
-    public void setDescriptionOverride(String descriptionOverride) {
-        this.descriptionOverride = descriptionOverride;
     }
 
     public String getDescriptionModel() {
