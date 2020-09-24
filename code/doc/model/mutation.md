@@ -69,4 +69,16 @@ Simi ordnet daraufhin alle betroffenem DataProducts als Mutationsart "Unchanged 
 |ch.so.arp.richtplan.gewaesser (DSV)|Richtplan 2030 - Gewässer|Ersatz durch Kopie|zu Löschen|Publiziert|Klasse komplett überarbeitet|
 
 
+Stossrichtung:
+* Tupel aus Modell entfernen. Mutation hat neu lediglich eine Beziehung zum Schema "in Mutation"
+* Die Tupel werden zur Laufzeit mittels join auf den Identifier erzeugt
+* Das Aufbauen von Kopien erfolgt mittels der schon vorhandenen Masken - Die Mutationsmaske dient der Wahrung der Uebersicht und dem Umschalten A B. Maske siehe Email vom 24.09
+* Enum Mutstate auf DataProduct mit den folgenden Werten: Keine, Als A, Als B, Als inline Aenderung
+* Identifier bleibt gleich.
+
+Offene Fragen:
+* Beim Erstellen einer Kopie hat diese den State wie das Original. Der State müsste aber "zu löschen" sein, der State des Originals müsste voraussichtlich in den lastState der Kopie.
+
+
+
 
