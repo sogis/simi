@@ -1,5 +1,6 @@
 package ch.so.agi.simi.web.screens.data.tabular.tableview;
 
+import ch.so.agi.simi.entity.data.tabular.TableField;
 import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
 import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
@@ -11,6 +12,7 @@ import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.core.global.View;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
@@ -52,6 +54,8 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private Messages messages;
     @Inject
     private Table<Permission> permissionsTable;
+    @Inject
+    private CollectionLoader<TableField> tableFieldsDl;
 
     @Subscribe
     public void onAfterInit(AfterInitEvent event) {
@@ -67,6 +71,9 @@ public class TableViewEdit extends StandardEditor<TableView> {
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
         refreshButtonVisibility();
+
+        tableFieldsDl.setParameter("table", this.getEditedEntity().getPostgresTable());
+        tableFieldsDl.load();
     }
 
     @Subscribe("viewFieldsTable.sortAction")
