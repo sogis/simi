@@ -8,6 +8,7 @@ import ch.so.agi.simi.entity.product.DataSetView;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
 import ch.so.agi.simi.web.screens.featureinfo.featureinfo.FeatureInfoEdit;
 import com.haulmont.cuba.core.global.Messages;
+import com.haulmont.cuba.core.global.View;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
@@ -49,6 +50,8 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private Label<String> featureInfoOverrideHint;
     @Inject
     private Messages messages;
+    @Inject
+    private Table<Permission> permissionsTable;
 
     @Subscribe
     public void onAfterInit(AfterInitEvent event) {
@@ -87,12 +90,28 @@ public class TableViewEdit extends StandardEditor<TableView> {
         }
     }
 
+    @Subscribe("addViewFieldBtn")
+    public void onAddViewFieldBtnClick(Button.ClickEvent event) {
+        ViewField viewField = dataContext.create(ViewField.class);
+        viewField.setTableView(this.getEditedEntity());
+
+        // insert new viewField to table
+        viewFieldsDc.getMutableItems().add(viewField);
+
+        // set focus on the new viewField
+        viewFieldsTable.requestFocus(viewField, "sort");
+    }
+
     @Subscribe("addPermissionBtn")
     public void onAddPermissionBtnClick(Button.ClickEvent event) {
         Permission permission = dataContext.create(Permission.class);
         permission.setDataSetView(this.getEditedEntity());
 
+        // insert new permission to table
         permissionsDc.getMutableItems().add(permission);
+
+        // set focust to the new permission
+        permissionsTable.requestFocus(permission, "role");
     }
 
     @Subscribe("clearFeatureInfoBtn")
