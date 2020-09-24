@@ -6,10 +6,8 @@ import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.DataSetView;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
-import ch.so.agi.simi.web.StyleUploadDownloadBean;
 import ch.so.agi.simi.web.screens.featureinfo.featureinfo.FeatureInfoEdit;
 import com.haulmont.cuba.core.global.Messages;
-import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
@@ -30,17 +28,11 @@ public class TableViewEdit extends StandardEditor<TableView> {
     @Inject
     private InstanceContainer<TableView> dataProductDc;
     @Inject
-    private FileUploadField uploadStyleServerBtn;
-    @Inject
-    private FileUploadField uploadStyleDesktopBtn;
-    @Inject
     private TextField<String> searchFilterWordField;
     @Inject
     private Table<ViewField> viewFieldsTable;
     @Inject
     private CollectionPropertyContainer<ViewField> viewFieldsDc;
-    @Inject
-    private StyleUploadDownloadBean styleUploadDownloadBean;
     @Inject
     private CollectionPropertyContainer<Permission> permissionsDc;
     @Inject
@@ -53,8 +45,6 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private Button editFeatureInfoBtn;
     @Inject
     private Button clearFeatureInfoBtn;
-    @Inject
-    private Metadata metadata;
     @Inject
     private Label<String> featureInfoOverrideHint;
     @Inject
@@ -74,28 +64,6 @@ public class TableViewEdit extends StandardEditor<TableView> {
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
         refreshButtonVisibility();
-    }
-
-    @Subscribe("downloadStyleServerBtn")
-    public void onDownloadStyleServerBtnClick(Button.ClickEvent event) {
-        TableView tableView = dataProductDc.getItem();
-        styleUploadDownloadBean.downloadString(tableView.getStyleServer(), tableView.getIdentifier() + ".Server.qml");
-    }
-
-    @Subscribe("uploadStyleServerBtn")
-    public void onUploadStyleServerBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
-        styleUploadDownloadBean.handleFileUploadSucceed(uploadStyleServerBtn, content -> dataProductDc.getItem().setStyleServer(content));
-    }
-
-    @Subscribe("downloadStyleDesktopBtn")
-    public void onDownloadStyleDesktopBtnClick(Button.ClickEvent event) {
-        TableView tableView = dataProductDc.getItem();
-        styleUploadDownloadBean.downloadString(tableView.getStyleDesktop(), tableView.getIdentifier() + ".Desktop.qml");
-    }
-
-    @Subscribe("uploadStyleDesktopBtn")
-    public void onUploadStyleDesktopBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
-        styleUploadDownloadBean.handleFileUploadSucceed(uploadStyleDesktopBtn, content -> dataProductDc.getItem().setStyleDesktop(content));
     }
 
     @Subscribe("viewFieldsTable.sortAction")

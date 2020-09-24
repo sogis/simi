@@ -35,7 +35,7 @@ public class StyleUploadDownloadBean {
             checkUpload(uploadField.getFileContent(), fileContent -> {
                 assignResult.accept(fileContent);
                 notifications.create()
-                        .withCaption(uploadField.getFileName() + " uploaded")
+                        .withCaption(uploadField.getFileName() + " hochgeladen")
                         .show();
             });
         } catch (StyleUploadException e) {
