@@ -135,9 +135,10 @@ Daten ist das Styling als QML optional enthalten.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
-|name|String(100)|n|Interne Bezeichnung der DataSetView, um diese von weiteren DSV's des gleichen DS unterscheiden zu können. Wird nur manuell gesetzt falls defaultView=false.|
 |styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
+|styleServerChanged|DateTime|n|Zeitpunkt der letzten syleServer änderung.|
 |styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
+|styleDesktopChanged|DateTime|n|Zeitpunkt der letzten syleDesktop änderung.|
 |searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
 |searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
 |searchFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieser DSV eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
