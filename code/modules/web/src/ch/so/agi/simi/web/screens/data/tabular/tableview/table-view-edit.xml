@@ -137,7 +137,7 @@
                         </action>
                     </actions>
                     <columns>
-                        <column id="role" editable="true" optionsContainer="rolesDc"/>
+                        <column id="role" editable="true" optionsContainer="rolesDc" sort="ASCENDING"/>
                         <column id="level" editable="true"/>
                     </columns>
                     <buttonsPanel>
