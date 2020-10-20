@@ -12,6 +12,13 @@ import com.haulmont.cuba.gui.screen.UiDescriptor;
 
 import javax.inject.Inject;
 
+/*
+* Is used in Browse-Screens to limit the resultlist with the user entered filter wordfragment.
+*
+* The wordfragment is set as parameter "term" on the dataloader of the parent screen. The structure
+* of the whereclause is typically defined in the "<condition>" element for the dataloader in the
+* xml screen description of the parent screen.
+*/
 @UiController("simi_FilterFragment")
 @UiDescriptor("filter-fragment.xml")
 public class FilterFragment<T extends Entity<T>> extends ScreenFragment {
