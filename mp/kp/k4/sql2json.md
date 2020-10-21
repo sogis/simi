@@ -21,6 +21,36 @@
     * SQL-Value:`{"$sql:value": "permission.sql"}` permission.json ist der Dateiname der sql-Abfrage
     * Globals-Tag: `{"$sql:globals": "wgc.scales"}` wgc.scales ist der Key der abzufragenden Global-Variable
 * Zwecks Unterscheidung von "normalen" Json-Objekten wird der Pseudo-Namensraum "$sql:" für die Tags gesetzt. 
+
+Erweiterung SQL-Array:
+
+```json
+{
+	"$sql:array": {
+		"query": "permission.sql",
+		"rowtemplate": {
+			"permissions": {
+				"wms_services": [{
+					"name": "somap",
+					"layers": [{
+							"name": "somap"
+						},
+						{
+							"$sql:field": "wms_layer_with_attributes"
+						}
+					]
+				}],
+				"wfs_services": [{
+					"name": "somap",
+					"layers": [{
+						"$sql:field": "wfs_layer_with_attributes"
+					}]
+				}]
+			}
+		}
+	}
+}
+```
     
 ### Beispiel
 
