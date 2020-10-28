@@ -186,6 +186,7 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 }
 restart.finalizedBy start
 
+/*
 task buildUberJar(type: CubaUberJarBuilding) {
     logbackConfigurationFile = 'docker/image/uber-jar-logback.xml'
     singleJar = true
@@ -237,3 +238,4 @@ def getTimestamp() {
     def date = new Date()
     return date.format('yyyy-MM-dd HH:mm:ss')
 }
+*/
