@@ -186,7 +186,7 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 }
 restart.finalizedBy start
 
-
+/*
 task buildUberJar(type: CubaUberJarBuilding) {
     logbackConfigurationFile = 'docker/image/uber-jar-logback.xml'
     singleJar = true
@@ -233,6 +233,7 @@ String getTravisBuildNumber() {
 def getCheckedOutGitCommitHash() {
     'git log -1 --pretty=%H'.execute().text.trim()
 }
+*/
 
 def getTimestamp() {
     def date = new Date()
