@@ -6,7 +6,9 @@ import ch.so.agi.simi.entity.data.tabular.schemareader.TableListing;
 import ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 
@@ -14,9 +16,20 @@ import java.time.LocalDateTime;
 public class SchemaReaderBean {
     public static final String NAME = "simi_SchemaReaderBean";
 
+    private static final String HOST = "http://localhost";
+    private static final int PORT = 8081;
+
     public TableListing getTableSearch(PostgresDB postgresDB, String schema, String table) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(TABLE_SEARCH, TableListing.class);
+        String request_uri = HOST + ":" + PORT + "/" + postgresDB.getDbName() + "?schema=" + schema + "&table=" + table;
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<TableListing> entity = restTemplate.getForEntity(request_uri, TableListing.class);
+
+        if (entity.getStatusCode().is2xxSuccessful()) {
+            return entity.getBody();
+        } else {
+            return null;
+        }
     }
 
     public TableAndFieldInfo getTableInfo(PostgresDB postgresDB, TableShortInfo tableShortInfo) throws JsonProcessingException {
