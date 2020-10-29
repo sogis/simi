@@ -1,17 +1,17 @@
 # Laufzeitumgebung für die Entwicklung
 
 Der Ordner umfasst die Skripte zum Start der Docker-Container
-* der Entwicklungs-Datenbank
+* der Entwicklungs-Datenbanken
 * des Schemareader-Service
 
-Doku zum Schemareader in seinem [Repo](https://github.com/simi-so/schemareader)
+Der Schemareader zeigt auf die Standarddatenbank "postgres". Diese umfasst Beispiel-Geodaten im Schema "tiger".
 
-Der Schemareader zeigt der Abgeschlossenheit halber auf die Entwicklungs-Datenbank selbst.
+Doku zum Schemareader in seinem [Repo](https://github.com/simi-so/schemareader)
 
 Falls Beispielsweise nur die Entwicklungs-DB gestartet werden soll:
 
 ```shell script
-docker-compose start devdb
+docker-compose start databases
 ```
 
 anstatt
@@ -20,18 +20,24 @@ anstatt
 docker-compose up
 ```
 
-## Zugänge für Db und Schemareader-Service
+## Zugänge für Datenbanken und Schemareader-Service
 
-**Entwicklungs-DB:** Standardzugriff via localhost port 5432
+**Simi-DB:** Standardzugriff via localhost port 5432
 
 ```
 jdbc:postgresql://localhost:5432/simi
 ```
 
+**Geo-DB:** Standardzugriff via localhost port 5432
+
+```
+jdbc:postgresql://localhost:5432/postgres
+```
+
 **Schemareader-Service:** Zugriff via localhost port 8081
 
 ```
-http://localhost:8081/simi?schema=pub
+http://localhost:8081/geodb?schema=tiger
 ```
 
 Details siehe auch [docker-compose.yml](docker-compose.yml)

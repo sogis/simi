@@ -1,12 +1,15 @@
+# Zu beachten: "databases" ist ein Postgresql cluster, welches die Datenbanken "simi" und "psotgres" umfasst:
+# - "simi": Von der cuba-applikation "simi" genutzte und gemanagte metadatenbank.
+# - "postgres": Zieldatenbank für den Schemareader. Ist "Geo-Enabled" und enthält Beispieldatensätze.
 version: "3"
 services:
   schemareader:
     image: sogis/simi_schemareader
     environment:
-      - SPRING_APPLICATION_JSON={"dbs":[{"key":"simi","url":"jdbc:postgresql://devdb:5432/simi","user":"postgres","pass":"postgres"}]}
+      - SPRING_APPLICATION_JSON={"dbs":[{"key":"geodb","url":"jdbc:postgresql://databases:5432/postgres","user":"postgres","pass":"postgres"}]}
     ports:
       - "8081:8080"
-  devdb:
+  databases:
     image: postgis/postgis:11-2.5-alpine
     environment:
       - POSTGRES_PASSWORD=postgres
