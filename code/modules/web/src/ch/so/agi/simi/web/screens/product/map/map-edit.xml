@@ -10,7 +10,9 @@
             <view extends="_local">
                 <property name="pubScope" view="_minimal"/>
                 <property name="singleActors" view="_minimal">
-                    <property name="singleActor" view="_minimal"/>
+                    <property name="singleActor" view="_minimal">
+                        <property name="title"/>
+                    </property>
                     <property name="sort"/>
                     <property name="visible"/>
                     <property name="transparency"/>
