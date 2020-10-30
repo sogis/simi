@@ -1,6 +1,7 @@
 package ch.so.agi.simi.entity.data.tabular;
 
 import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.Sortable;
 import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotNull;
 })
 @Entity(name = "simiData_ViewField")
 @NamePattern("%s|alias")
-public class ViewField extends SimiStandardEntity {
+public class ViewField extends SimiStandardEntity implements Sortable {
     private static final long serialVersionUID = -2665578122978329156L;
 
     @NotNull

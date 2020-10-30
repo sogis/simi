@@ -7,9 +7,9 @@ import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.DataSetView;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
+import ch.so.agi.simi.web.SortBean;
 import ch.so.agi.simi.web.screens.featureinfo.featureinfo.FeatureInfoEdit;
 import com.haulmont.cuba.core.global.Messages;
-import com.haulmont.cuba.core.global.View;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionLoader;
@@ -19,9 +19,7 @@ import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @UiController("simiData_TableView.edit")
 @UiDescriptor("table-view-edit.xml")
@@ -56,6 +54,8 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private Table<Permission> permissionsTable;
     @Inject
     private CollectionLoader<TableField> tableFieldsDl;
+    @Inject
+    private SortBean sortBean;
 
     @Subscribe
     public void onAfterInit(AfterInitEvent event) {
@@ -83,18 +83,10 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreCommit(DataContext.PreCommitEvent event) {
-        int i = 0;
-        List<ViewField> viewFields = viewFieldsDc.getItems().stream()
-                .sorted(Comparator.comparing(ViewField::getSort, Comparator.nullsLast(Comparator.naturalOrder())))
-                .collect(Collectors.toList());
+        List<ViewField> entities = sortBean.AdjustSort(viewFieldsDc.getItems());
 
-        // go through the data container items. The same can be done using getEditedEntity().getSingleActorList().
-        for (ViewField item : viewFields) {
-            // set new value and add modified instance to the commit list
-            item.setSort(i);
-            event.getModifiedInstances().add(item);
-            i += 10;
-        }
+        //add modified instances to the commit list
+        event.getModifiedInstances().addAll(entities);
     }
 
     @Subscribe("addViewFieldBtn")
