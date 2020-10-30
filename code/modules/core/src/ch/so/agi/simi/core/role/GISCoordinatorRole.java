@@ -49,7 +49,7 @@ public class GISCoordinatorRole extends AnnotatedRoleDefinition {
             "simiData_RasterView.edit",
     })
     // Settings screen with "Change Password"
-    @ScreenAccess(screenIds = {"settings"})
+    @ScreenAccess(screenIds = {"settings", "sec$User.changePassword"})
     @Override
     public ScreenPermissionsContainer screenPermissions() {
         return super.screenPermissions();
@@ -95,6 +95,19 @@ public class GISCoordinatorRole extends AnnotatedRoleDefinition {
             "synonymsField",
             "remarksField",
             "btnConvertToLayerGroup",
+    })
+    @ScreenComponentAccess(screenId = "simiData_RasterView.edit", view = {
+            "searchTypeField",
+            "searchFacetField",
+            "searchFilterWordField",
+            "identifierField",
+            "transparencyField",
+            "remarksField",
+            "pubScopeFragment",
+            "rawDownloadField",
+            "releasedAtField",
+            "releasedThroughField",
+            "synonymsField",
     })
     @Override
     public ScreenComponentPermissionsContainer screenComponentPermissions() {
