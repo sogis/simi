@@ -22,6 +22,16 @@ public class SchemaReaderBean {
 
     private RestTemplate restTemplate = new RestTemplate();
 
+    /**
+     * Request Table list from Schemareader Rest Service
+     *
+     * @param postgresDB The PostgresDB to search
+     * @param schema The Schema search string
+     * @param table The Table search string
+     * @return Search result encapsulated in {@link TableListing}
+     * @throws RestClientException request failed
+     * @throws IllegalArgumentException required search parameters are null or empty
+     */
     public TableListing getTableSearch(PostgresDB postgresDB, String schema, String table) throws RestClientException, IllegalArgumentException {
         if (postgresDB == null) {
             throw new IllegalArgumentException("Das Feld Datenbank ist leer.");
@@ -40,6 +50,14 @@ public class SchemaReaderBean {
         return restTemplate.getForObject(request_uri, TableListing.class, urlParameters);
     }
 
+    /**
+     * Request details to a table from Schemareader Rest Service
+     *
+     * @param postgresDB The PostgresDB containing the table described in {@code tableShortInfo}
+     * @param tableShortInfo The Schema and Table information
+     * @return {@link TableAndFieldInfo} containing detailed information about fields inside the table.
+     * @throws RestClientException request failed
+     */
     public TableAndFieldInfo getTableInfo(PostgresDB postgresDB, TableShortInfo tableShortInfo) throws RestClientException {
         String request_uri = HOST + ":" + PORT + "/{db}/{schema}/{table}";
 
