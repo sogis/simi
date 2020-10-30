@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://externalTableEdit.caption"
-        focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.data.tabular.externaltable">
+        caption="Externe Tabelle - Edit"
+        focusComponent="form">
     <data>
         <instance id="externalTableDc"
                   class="ch.so.agi.simi.entity.data.tabular.ExternalTable">

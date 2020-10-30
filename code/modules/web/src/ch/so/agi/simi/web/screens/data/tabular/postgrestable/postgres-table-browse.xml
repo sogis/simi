@@ -2,8 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="Vektor DS (Tabelle) - Browse"
-        focusComponent="postgresTablesTable"
-        messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgrestable">
+        focusComponent="postgresTablesTable">
     <data readOnly="true">
         <collection id="postgresTablesDc"
                     class="ch.so.agi.simi.entity.data.tabular.PostgresTable">

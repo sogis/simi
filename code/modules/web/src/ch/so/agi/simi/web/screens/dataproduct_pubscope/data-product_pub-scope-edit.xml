@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://dataProduct_PubScopeEdit.caption"
-        focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.dataproduct_pubscope">
+        caption="Data Product Pub Scopes - Edit"
+        focusComponent="form">
     <data>
         <instance id="dataProduct_PubScopeDc"
                   class="ch.so.agi.simi.entity.DataProduct_PubScope">

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://CCCClientEdit.caption"
-        focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.ccc.cccclient">
+        caption="CCC - Anbindungen - Edit"
+        focusComponent="form">
     <data>
         <instance id="cCCClientDc"
                   class="ch.so.agi.simi.entity.ccc.CCCClient">

@@ -2,8 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="Produkte - Browse"
-        focusComponent="dataProductsTable"
-        messagesPack="ch.so.agi.simi.web.screens.product.dataproduct">
+        focusComponent="dataProductsTable">
     <data readOnly="true">
         <collection id="dataProductsDc"
                     class="ch.so.agi.simi.entity.product.DataProduct">

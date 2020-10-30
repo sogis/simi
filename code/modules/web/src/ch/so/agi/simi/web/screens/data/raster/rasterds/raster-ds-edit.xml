@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://rasterDSEdit.caption"
-        focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.data.raster.rasterds">
+        caption="Raster DS - Edit"
+        focusComponent="form">
     <data>
         <instance id="rasterDSDc"
                   class="ch.so.agi.simi.entity.data.raster.RasterDS">

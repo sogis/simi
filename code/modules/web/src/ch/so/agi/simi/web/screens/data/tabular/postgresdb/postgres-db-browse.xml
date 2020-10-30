@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://postgresDBBrowse.caption"
-        focusComponent="postgresDBsTable"
-        messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgresdb">
+        caption="GDI Datenbanken - Browse"
+        focusComponent="postgresDBsTable">
     <data readOnly="true">
         <collection id="postgresDBsDc"
                     class="ch.so.agi.simi.entity.data.tabular.PostgresDB">

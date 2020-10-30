@@ -2,8 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="Layergruppe - Edit"
-        focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.product.layergroup">
+        focusComponent="form">
     <data>
         <instance id="dataProductDc"
                   class="ch.so.agi.simi.entity.product.LayerGroup">
