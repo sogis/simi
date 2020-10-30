@@ -110,7 +110,7 @@ public class SchemaReaderScreen extends Screen {
         } catch (IllegalArgumentException e) {
             notifications.create(Notifications.NotificationType.WARNING).withCaption(e.getLocalizedMessage()).show();
         } catch (RestClientException e) {
-            dialogs.createExceptionDialog().withThrowable(e).show();
+            dialogs.createExceptionDialog().withMessage(e.getMessage()).withThrowable(e).show();
         }
     }
 
@@ -143,7 +143,7 @@ public class SchemaReaderScreen extends Screen {
                 result = schemaReaderBean.getTableInfo(getPostgresDB(), tableShortInfo);
                 close(StandardOutcome.COMMIT);
             } catch (RestClientException e) {
-                dialogs.createExceptionDialog().withThrowable(e).show();
+                dialogs.createExceptionDialog().withMessage(e.getMessage()).withThrowable(e).show();
             }
         }
     }
