@@ -18,7 +18,8 @@
         </collection>
     </data>
     <dialogMode height="600"
-                width="800"/>
+                width="800"
+                resizable="true"/>
     <layout expand="singleActorsTable"
             spacing="true">
         <table id="singleActorsTable"
@@ -32,13 +33,9 @@
             </actions>
             <columns>
                 <column id="identifier"/>
-                <column id="pubScope"/>
-                <column id="keywords"/>
-                <column id="remarks"/>
-                <column id="synonyms"/>
                 <column id="title"/>
+                <column id="pubScope"/>
                 <column id="releasedAt"/>
-                <column id="releasedThrough"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
