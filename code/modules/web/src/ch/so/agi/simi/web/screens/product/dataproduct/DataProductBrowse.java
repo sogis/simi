@@ -111,4 +111,10 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
             }
         }
     }
+
+    @Install(to = "dataProductsTable.edit", subject = "afterCommitHandler")
+    private void dataProductsTableEditAfterCommitHandler(DataProduct dataProduct) {
+        // reload dataContainer after entity was edited
+        dataProductsDl.load();
+    }
 }

@@ -41,7 +41,6 @@
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
                 <action id="copy" icon="COPY" caption="Kopieren" trackSelection="true"/>
-                <action id="refresh" type="refresh"/>
             </actions>
             <columns>
                 <column id="identifier"/>
@@ -63,7 +62,6 @@
                 </popupButton>
                 <button id="editBtn" action="dataProductsTable.edit"/>
                 <button id="copyBtn" action="dataProductsTable.copy"/>
-                <button id="refreshBtn" action="dataProductsTable.refresh"/>
                 <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
