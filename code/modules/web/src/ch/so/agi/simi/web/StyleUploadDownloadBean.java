@@ -17,6 +17,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 @Component(StyleUploadDownloadBean.NAME)
@@ -26,27 +27,6 @@ public class StyleUploadDownloadBean {
     public static final int TARGET_MAJOR_VERSION = 2;
     public static final int TARGET_MINOR_VERSION = 18;
 
-    public void handleFileUploadSucceed(FileUploadField uploadField, Consumer<String> assignResult) {
-        ScreenContext screenContext = UiControllerUtils.getScreenContext(uploadField.getFrame().getFrameOwner());
-        Notifications notifications = screenContext.getNotifications();
-        Dialogs dialogs = screenContext.getDialogs();
-
-        try {
-            checkUpload(uploadField.getFileContent(), fileContent -> {
-                assignResult.accept(fileContent);
-                notifications.create()
-                        .withCaption(uploadField.getFileName() + " hochgeladen")
-                        .show();
-            });
-        } catch (StyleUploadException e) {
-            dialogs.createMessageDialog()
-                    .withCaption("Upload")
-                    .withMessage(e.getLocalizedMessage())
-                    .withType(Dialogs.MessageType.WARNING)
-                    .show();
-        }
-    }
-
     public void downloadString(String content, String filename) {
         if (content != null) {
             byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
@@ -55,7 +35,7 @@ public class StyleUploadDownloadBean {
         }
     }
 
-    private static class StyleUploadException extends Exception {
+    public static class StyleUploadException extends Exception {
         public StyleUploadException(String errorMessage) {
             super(errorMessage);
         }
@@ -66,12 +46,12 @@ public class StyleUploadDownloadBean {
     }
 
     /**
-     * Check the Version of the uploaded file and call a consumer with the file content as a String.
+     * Check the Version of the uploaded file and return the file content as a String. If the file fails the check an
+     * exception is thrown.
      * @param inputStream The InputStream of the uploaded file
-     * @param assignResult Consumer with file content as a string, that gets called when the file is correct
      * @throws StyleUploadException Something went wrong either with reading the file or the version does not match
      */
-    private void checkUpload(InputStream inputStream, Consumer<String> assignResult) throws StyleUploadException {
+    public String checkUpload(InputStream inputStream) throws StyleUploadException {
         try {
             String fileContent = inputStreamToString(inputStream);
 
@@ -82,7 +62,7 @@ public class StyleUploadDownloadBean {
             int minor = Integer.parseInt(version[1]);
 
             if (major == TARGET_MAJOR_VERSION && minor == TARGET_MINOR_VERSION) {
-                assignResult.accept(fileContent);
+                return fileContent;
             } else {
                 throw new StyleUploadException("Ausgewälte qml Datei hat eine falsche Version: " + qgisVersionString + "\nErwartet wird version " + TARGET_MAJOR_VERSION + "." + TARGET_MINOR_VERSION);
             }

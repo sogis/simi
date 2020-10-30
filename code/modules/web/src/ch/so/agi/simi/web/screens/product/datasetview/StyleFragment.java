@@ -3,6 +3,8 @@ package ch.so.agi.simi.web.screens.product.datasetview;
 import ch.so.agi.simi.entity.product.DataSetView;
 import ch.so.agi.simi.web.StyleUploadDownloadBean;
 import com.haulmont.cuba.core.global.TimeSource;
+import com.haulmont.cuba.gui.Dialogs;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.FileUploadField;
 import com.haulmont.cuba.gui.components.Label;
@@ -32,6 +34,10 @@ public class StyleFragment extends ScreenFragment {
     private TimeSource timeSource;
     @Inject
     private Label<String> styleLabel;
+    @Inject
+    private Notifications notifications;
+    @Inject
+    private Dialogs dialogs;
 
     @Subscribe("downloadStyleBtn")
     public void onDownloadStyleBtnClick(Button.ClickEvent event) {
@@ -41,12 +47,27 @@ public class StyleFragment extends ScreenFragment {
 
     @Subscribe("uploadStyleBtn")
     public void onUploadStyleBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
-        DataSetView dataSetView = dataSetViewDc.getItem();
-        styleUploadDownloadBean.handleFileUploadSucceed(uploadStyleBtn, content -> {
-            dataSetView.setValue(styleProperty, content);
+        try {
+            String fileContent = styleUploadDownloadBean.checkUpload(uploadStyleBtn.getFileContent());
+
+            // checkUpload did not throw an exception, set the property
+            DataSetView dataSetView = dataSetViewDc.getItem();
+            dataSetView.setValue(styleProperty, fileContent);
             dataSetView.setValue(styleChangedProperty, timeSource.now().toLocalDateTime());
+
+            notifications.create()
+                    .withCaption(uploadStyleBtn.getFileName() + " hochgeladen")
+                    .show();
+
             refreshStyleLabel();
-        });
+
+        } catch (StyleUploadDownloadBean.StyleUploadException e) {
+            dialogs.createMessageDialog()
+                    .withCaption("Upload")
+                    .withMessage(e.getLocalizedMessage())
+                    .withType(Dialogs.MessageType.WARNING)
+                    .show();
+        }
     }
 
     @Subscribe(target = Target.PARENT_CONTROLLER)
