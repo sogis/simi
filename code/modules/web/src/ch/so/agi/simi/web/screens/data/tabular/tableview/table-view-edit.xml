@@ -131,7 +131,7 @@
                     <columns>
                         <column id="tableField" editable="true" optionsContainer="tableFieldsDc"/>
                         <column id="alias" editable="true"/>
-                        <column id="sort" editable="true" sort="ASCENDING"/>
+                        <column id="sort" editable="true"/>
                     </columns>
                     <buttonsPanel>
                         <button id="addViewFieldBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>

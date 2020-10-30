@@ -47,7 +47,7 @@
                     <action id="remove" type="remove"/>
                 </actions>
                 <columns>
-                    <column id="name" sort="ASCENDING"/>
+                    <column id="name"/>
                     <column id="mandatory"/>
                     <column id="catSynced"/>
                     <column id="viewFieldsCount" caption="# Verwendungen in DSV"/>

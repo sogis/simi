@@ -62,6 +62,7 @@ public class DataSetView extends SingleActor {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "dataSetView")
+    @OrderBy("sort")
     private List<PropertiesInFacade> facadeLayers;
 
     @OneToMany(mappedBy = "dataSetView")
