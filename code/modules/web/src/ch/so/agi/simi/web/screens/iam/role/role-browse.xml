@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://roleBrowse.caption"
-        focusComponent="rolesTable"
-        messagesPack="ch.so.agi.simi.web.screens.iam.role">
+        caption="Rollen - Browse"
+        focusComponent="rolesTable">
     <data readOnly="true">
         <collection id="rolesDc"
                     class="ch.so.agi.simi.entity.iam.Role">

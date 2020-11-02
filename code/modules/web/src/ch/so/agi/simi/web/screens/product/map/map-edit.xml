@@ -10,7 +10,9 @@
             <view extends="_local">
                 <property name="pubScope" view="_minimal"/>
                 <property name="singleActors" view="_minimal">
-                    <property name="singleActor" view="_minimal"/>
+                    <property name="singleActor" view="_minimal">
+                        <property name="title"/>
+                    </property>
                     <property name="sort"/>
                     <property name="visible"/>
                     <property name="transparency"/>
@@ -20,55 +22,56 @@
             <collection id="singleActorsDc" property="singleActors"/>
         </instance>
     </data>
-    <dialogMode height="auto"
+    <dialogMode height="80%"
                 width="80%"
                 modal="true"
-                forceDialog="true"/>
-    <layout expand="scrollBox" spacing="true">
-        <scrollBox id="scrollBox" spacing="true">
-            <form id="form" dataContainer="dataProductDc">
-                <column width="350px">
-                    <textField id="identifierField" property="identifier"/>
-                    <textField id="titleField" property="title"/>
-                    <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment" caption="msg://ch.so.agi.simi.entity.product/DataProduct.pubScope">
-                        <properties>
-                            <property name="filterProperty" value="forMap"/>
-                        </properties>
-                    </fragment>
-                    <dateField id="releasedAtField" property="releasedAt"/>
-                    <textField id="releasedThroughField" property="releasedThrough"/>
-                    <textArea id="synonymsField" property="synonyms" rows="2"/>
-                    <textArea id="keywordsField" property="keywords" rows="2"/>
-                    <checkBox id="backgroundField" property="background"/>
-                    <textField id="wgcUrlValueField" property="wgcUrlValue"/>
-                    <textArea id="remarksField" property="remarks" rows="5"/>
-                    <textArea id="descriptionField" property="description" rows="5"/>
-                </column>
-            </form>
-            <groupBox id="singleActorsBox" caption="Layer">
-                <table id="singleActorsTable" dataContainer="singleActorsDc" width="100%" height="200px" editable="true" multiselect="true">
-                    <actions>
-                        <action id="addSingleActor" caption="Hinzufügen" icon="ADD_ACTION"/>
-                        <action id="addSingleActorsFromLayerGroup" caption="Aus LayerGroup übernehmen" icon="ADD_ACTION"/>
-                        <action id="exclude" type="remove" caption="Ausschliessen"/>
-                        <action id="sortAction" caption="Sortieren" icon="SORT"/>
-                    </actions>
-                    <columns>
-                        <column id="singleActor.identifier"/>
-                        <column id="singleActor.title"/>
-                        <column id="visible" editable="true"/>
-                        <column id="transparency" editable="true"/>
-                        <column id="sort" editable="true"/>
-                    </columns>
-                    <buttonsPanel>
-                        <button id="btnAddSingleActor" action="singleActorsTable.addSingleActor"/>
-                        <button id="btnAddSingleActorsFromLayerGroup" action="singleActorsTable.addSingleActorsFromLayerGroup"/>
-                        <button id="btnExclude" action="singleActorsTable.exclude"/>
-                        <button id="btnSortAction" action="singleActorsTable.sortAction"/>
-                    </buttonsPanel>
-                </table>
-            </groupBox>
-        </scrollBox>
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="singleActorsBox" spacing="true">
+        <form id="form" dataContainer="dataProductDc">
+            <column width="350px">
+                <textField id="identifierField" property="identifier"/>
+                <textField id="titleField" property="title"/>
+                <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment" caption="msg://ch.so.agi.simi.entity.product/DataProduct.pubScope">
+                    <properties>
+                        <property name="filterProperty" value="forMap"/>
+                    </properties>
+                </fragment>
+                <dateField id="releasedAtField" property="releasedAt"/>
+                <textField id="releasedThroughField" property="releasedThrough"/>
+                <checkBox id="backgroundField" property="background"/>
+                <textField id="wgcUrlValueField" property="wgcUrlValue"/>
+                <textArea id="remarksField" property="remarks" rows="5"/>
+            </column>
+            <column width="350px">
+                <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
+                <textArea id="keywordsField" property="keywords" rows="5" rowspan="3"/>
+                <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
+            </column>
+        </form>
+        <groupBox id="singleActorsBox" caption="Layer" expand="singleActorsTable">
+            <table id="singleActorsTable" dataContainer="singleActorsDc" width="100%" editable="true" multiselect="true">
+                <actions>
+                    <action id="addSingleActor" caption="Hinzufügen" icon="ADD_ACTION"/>
+                    <action id="addSingleActorsFromLayerGroup" caption="Aus LayerGroup übernehmen" icon="ADD_ACTION"/>
+                    <action id="exclude" type="remove" caption="Ausschliessen"/>
+                    <action id="sortAction" caption="Sortieren" icon="SORT"/>
+                </actions>
+                <columns>
+                    <column id="singleActor.identifier"/>
+                    <column id="singleActor.title"/>
+                    <column id="visible" editable="true"/>
+                    <column id="transparency" editable="true"/>
+                    <column id="sort" editable="true"/>
+                </columns>
+                <buttonsPanel>
+                    <button id="btnAddSingleActor" action="singleActorsTable.addSingleActor"/>
+                    <button id="btnAddSingleActorsFromLayerGroup" action="singleActorsTable.addSingleActorsFromLayerGroup"/>
+                    <button id="btnExclude" action="singleActorsTable.exclude"/>
+                    <button id="btnSortAction" action="singleActorsTable.sortAction"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

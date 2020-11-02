@@ -2,8 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="Produkte - Browse"
-        focusComponent="dataProductsTable"
-        messagesPack="ch.so.agi.simi.web.screens.product.dataproduct">
+        focusComponent="dataProductsTable">
     <data readOnly="true">
         <collection id="dataProductsDc"
                     class="ch.so.agi.simi.entity.product.DataProduct">
@@ -41,7 +40,6 @@
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
                 <action id="copy" icon="COPY" caption="Kopieren" trackSelection="true"/>
-                <action id="refresh" type="refresh"/>
             </actions>
             <columns>
                 <column id="identifier"/>
@@ -63,7 +61,6 @@
                 </popupButton>
                 <button id="editBtn" action="dataProductsTable.edit"/>
                 <button id="copyBtn" action="dataProductsTable.copy"/>
-                <button id="refreshBtn" action="dataProductsTable.refresh"/>
                 <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>

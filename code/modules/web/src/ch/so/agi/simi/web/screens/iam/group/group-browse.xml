@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://groupBrowse.caption"
-        focusComponent="groupsTable"
-        messagesPack="ch.so.agi.simi.web.screens.iam.group">
+        caption="Gruppen - Browse"
+        focusComponent="groupsTable">
     <data readOnly="true">
         <collection id="groupsDc"
                     class="ch.so.agi.simi.entity.iam.Group">

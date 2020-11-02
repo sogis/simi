@@ -23,6 +23,7 @@ public class TableView extends DataSetView {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "tableView")
+    @OrderBy("sort")
     private List<ViewField> viewFields;
 
     @Column(name = "GEOM_FIELD_NAME", length = 100)

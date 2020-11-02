@@ -2,8 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="Aus Quell-DB einlesen"
-        focusComponent="tableShortInfosTable"
-        messagesPack="ch.so.agi.simi.web.screens.data.tabular.postgrestable">
+        focusComponent="tableShortInfosTable">
     <data readOnly="true">
         <collection id="TableShortInfosDc" class="ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo"/>
         <collection id="postgresDBsDc"

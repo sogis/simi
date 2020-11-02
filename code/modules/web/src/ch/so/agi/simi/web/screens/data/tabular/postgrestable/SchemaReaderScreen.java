@@ -5,7 +5,6 @@ import ch.so.agi.simi.entity.data.tabular.schemareader.TableAndFieldInfo;
 import ch.so.agi.simi.entity.data.tabular.schemareader.TableListing;
 import ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo;
 import ch.so.agi.simi.web.SchemaReaderBean;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.*;
@@ -13,6 +12,7 @@ import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.cuba.gui.screen.*;
+import org.springframework.web.client.RestClientException;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -94,23 +94,23 @@ public class SchemaReaderScreen extends Screen {
 
     @Subscribe("searchBtn")
     public void onSearchBtnClick(Button.ClickEvent event) {
-        if (postgresDBLookupField.getValue() == null) {
-            return;
-        }
-
         try {
-            setPostgresDB(postgresDBLookupField.getValue());
+            PostgresDB postgresDB = postgresDBLookupField.getValue();
+            TableListing tableListing = schemaReaderBean.getTableSearch(postgresDB, schemaField.getValue(), tableField.getValue());
 
-            TableListing tableListing = schemaReaderBean.getTableSearch(getPostgresDB(), schemaField.getValue(), tableField.getValue());
+            // assign search result to table and remember postgresDB
             TableShortInfosDc.setItems(tableListing.getTableViewList());
+            setPostgresDB(postgresDB);
 
-            if (tableListing.getTruncatedTo() != null) {
-                notifications.create().withCaption("Zu viele Treffer, die ersten " + tableListing.getTruncatedTo() + " werden angezeigt.");
+            if (tableListing.getTableViewList().isEmpty()) {
+                notifications.create().withCaption("Keine Treffer").show();
+            } else if (tableListing.getTruncatedTo() != null) {
+                notifications.create().withCaption("Zu viele Treffer, die ersten " + tableListing.getTruncatedTo() + " werden angezeigt.").show();
             }
-        } catch (JsonProcessingException e) {
-            dialogs.createExceptionDialog()
-                    .withThrowable(e)
-                    .show();
+        } catch (IllegalArgumentException e) {
+            notifications.create(Notifications.NotificationType.WARNING).withCaption(e.getLocalizedMessage()).show();
+        } catch (RestClientException e) {
+            dialogs.createExceptionDialog().withMessage(e.getMessage()).withThrowable(e).show();
         }
     }
 
@@ -142,10 +142,8 @@ public class SchemaReaderScreen extends Screen {
             try {
                 result = schemaReaderBean.getTableInfo(getPostgresDB(), tableShortInfo);
                 close(StandardOutcome.COMMIT);
-            } catch (JsonProcessingException e) {
-                dialogs.createExceptionDialog()
-                        .withThrowable(e)
-                        .show();
+            } catch (RestClientException e) {
+                dialogs.createExceptionDialog().withMessage(e.getMessage()).withThrowable(e).show();
             }
         }
     }

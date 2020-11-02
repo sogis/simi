@@ -1,229 +1,78 @@
 package ch.so.agi.simi.web;
 
+import ch.so.agi.simi.config.SchemareaderConfig;
 import ch.so.agi.simi.entity.data.tabular.PostgresDB;
 import ch.so.agi.simi.entity.data.tabular.schemareader.TableAndFieldInfo;
 import ch.so.agi.simi.entity.data.tabular.schemareader.TableListing;
 import ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.haulmont.cuba.core.global.TimeSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDateTime;
+import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component(SchemaReaderBean.NAME)
 public class SchemaReaderBean {
     public static final String NAME = "simi_SchemaReaderBean";
 
-    public TableListing getTableSearch(PostgresDB postgresDB, String schema, String table) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(TABLE_SEARCH, TableListing.class);
+    private RestTemplate restTemplate = new RestTemplate();
+
+    @Inject
+    private TimeSource timeSource;
+    @Inject
+    private SchemareaderConfig schemareaderConfig;
+
+    /**
+     * Request Table list from Schemareader Rest Service
+     *
+     * @param postgresDB The PostgresDB to search
+     * @param schema The Schema search string
+     * @param table The Table search string
+     * @return Search result encapsulated in {@link TableListing}
+     * @throws RestClientException request failed
+     * @throws IllegalArgumentException required search parameters are null or empty
+     */
+    public TableListing getTableSearch(PostgresDB postgresDB, String schema, String table) throws RestClientException, IllegalArgumentException {
+        if (postgresDB == null) {
+            throw new IllegalArgumentException("Das Feld Datenbank ist leer.");
+        }
+        if (StringUtils.isEmpty(schema) && StringUtils.isEmpty(table)) {
+            throw new IllegalArgumentException("Die Felder Schema und Tabelle können nicht beide leer sein.");
+        }
+
+        String request_uri = schemareaderConfig.getSchemareaderHost() + ":" + schemareaderConfig.getSchemareaderPort() + "/{db}?schema={schema}&table={table}";
+
+        Map<String, String> urlParameters = new HashMap<>();
+        urlParameters.put("db", postgresDB.getDbName());
+        urlParameters.put("schema", schema);
+        urlParameters.put("table", table);
+
+        return restTemplate.getForObject(request_uri, TableListing.class, urlParameters);
     }
 
-    public TableAndFieldInfo getTableInfo(PostgresDB postgresDB, TableShortInfo tableShortInfo) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        TableAndFieldInfo tableAndFieldInfo = objectMapper.readValue(getTableInfo(tableShortInfo), TableAndFieldInfo.class);
-        tableAndFieldInfo.setCatSyncStamp(LocalDateTime.now());
+    /**
+     * Request details to a table from Schemareader Rest Service
+     *
+     * @param postgresDB The PostgresDB containing the table described in {@code tableShortInfo}
+     * @param tableShortInfo The Schema and Table information
+     * @return {@link TableAndFieldInfo} containing detailed information about fields inside the table.
+     * @throws RestClientException request failed
+     */
+    public TableAndFieldInfo getTableInfo(PostgresDB postgresDB, TableShortInfo tableShortInfo) throws RestClientException {
+        String request_uri = schemareaderConfig.getSchemareaderHost() + ":" + schemareaderConfig.getSchemareaderPort() + "/{db}/{schema}/{table}";
+
+        Map<String, String> urlParameters = new HashMap<>();
+        urlParameters.put("db", postgresDB.getDbName());
+        urlParameters.put("schema", tableShortInfo.getSchemaName());
+        urlParameters.put("table", tableShortInfo.getTvName());
+
+        TableAndFieldInfo tableAndFieldInfo = restTemplate.getForObject(request_uri, TableAndFieldInfo.class, urlParameters);
+        tableAndFieldInfo.setCatSyncStamp(timeSource.now().toLocalDateTime());
         tableAndFieldInfo.setPostgresDB(postgresDB);
         return tableAndFieldInfo;
-    }
-
-    private static String TABLE_SEARCH = "{\n" +
-            "\t\"tableViewList\": [{\n" +
-            "\t\t\"schemaName\": \"tiger\",\n" +
-            "\t\t\"tvName\": \"county\"\n" +
-            "\t}, {\n" +
-            "\t\t\"schemaName\": \"tiger\",\n" +
-            "\t\t\"tvName\": \"county_lookup\"\n" +
-            "\t}, {\n" +
-            "\t\t\"schemaName\": \"tiger\",\n" +
-            "\t\t\"tvName\": \"countysub_lookup\"\n" +
-            "\t}, {\n" +
-            "\t\t\"schemaName\": \"tiger\",\n" +
-            "\t\t\"tvName\": \"cousub\"\n" +
-            "\t}],\n" +
-            "\t\"truncatedTo\": null\n" +
-            "}";
-
-    private static String getTableInfo(TableShortInfo tableShortInfo) {
-        return "{\n" +
-                "\t\"tableInfo\": {\n" +
-                "\t\t\"schemaName\": \"tiger\",\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"pkField\": \"cntyidfp\",\n" +
-                "\t\t\"tvName\": \"" + tableShortInfo.getTvName() + "\"\n" +
-                "\t},\n" +
-                "\t\"fields\": [{\n" +
-                "\t\t\"name\": \"gid\",\n" +
-                "\t\t\"mandatory\": true,\n" +
-                "\t\t\"type\": \"int4\",\n" +
-                "\t\t\"length\": null,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"statefp\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 2,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"countyfp\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 3,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"countyns\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 8,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"cntyidfp\",\n" +
-                "\t\t\"mandatory\": true,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 5,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"name\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 100,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"namelsad\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 100,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"lsad\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 2,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"classfp\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 2,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"mtfcc\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 5,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"csafp\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 3,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"cbsafp\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 5,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"metdivfp\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 5,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"funcstat\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 1,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"aland\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"int8\",\n" +
-                "\t\t\"length\": null,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"awater\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"float8\",\n" +
-                "\t\t\"length\": null,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"intptlat\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 11,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"intptlon\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"varchar\",\n" +
-                "\t\t\"length\": 12,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": null,\n" +
-                "\t\t\"geoFieldSrOrg\": null,\n" +
-                "\t\t\"geoFieldSrId\": null\n" +
-                "\t}, {\n" +
-                "\t\t\"name\": \"the_geom\",\n" +
-                "\t\t\"mandatory\": false,\n" +
-                "\t\t\"type\": \"geometry\",\n" +
-                "\t\t\"length\": null,\n" +
-                "\t\t\"description\": null,\n" +
-                "\t\t\"geoFieldType\": \"MULTIPOLYGON\",\n" +
-                "\t\t\"geoFieldSrOrg\": \"EPSG\",\n" +
-                "\t\t\"geoFieldSrId\": 4269\n" +
-                "\t}]\n" +
-                "}";
     }
 }

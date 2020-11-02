@@ -34,6 +34,7 @@ public class PostgresTable extends TableDS {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "postgresTable")
+    @OrderBy("name")
     private List<TableField> tableFields;
 
     @Lob

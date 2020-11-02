@@ -21,6 +21,7 @@ public class SingleActor extends DataProduct {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "singleActor")
+    @OrderBy("sort")
     private List<PropertiesInList> productLists;
 
     @NotNull

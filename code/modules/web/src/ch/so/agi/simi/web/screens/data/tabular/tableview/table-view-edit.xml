@@ -2,8 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="View - Edit"
-        focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.data.tabular.tableview">
+        focusComponent="form">
     <data>
         <instance id="dataProductDc"
                   class="ch.so.agi.simi.entity.data.tabular.TableView">
@@ -131,7 +130,7 @@
                     <columns>
                         <column id="tableField" editable="true" optionsContainer="tableFieldsDc"/>
                         <column id="alias" editable="true"/>
-                        <column id="sort" editable="true" sort="ASCENDING"/>
+                        <column id="sort" editable="true"/>
                     </columns>
                     <buttonsPanel>
                         <button id="addViewFieldBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>

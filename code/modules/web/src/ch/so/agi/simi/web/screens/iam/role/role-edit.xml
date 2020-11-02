@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://roleEdit.caption"
-        focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.iam.role">
+        caption="Rollen - Edit"
+        focusComponent="form">
     <data>
         <instance id="roleDc"
                   class="ch.so.agi.simi.entity.iam.Role">
@@ -15,47 +14,50 @@
             <collection id="groupsDc" property="groups"/>
         </instance>
     </data>
-    <dialogMode height="auto"
-                width="auto"
+    <dialogMode height="80%"
+                width="80%"
                 modal="true"
-                forceDialog="true"/>
-    <layout expand="editActions" spacing="true">
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="splitPanel" spacing="true">
         <form id="form" dataContainer="roleDc">
             <column width="350px">
                 <textField id="nameField" property="name"/>
                 <textArea id="remarksField" property="remarks" rows="5"/>
             </column>
         </form>
-        <groupBox id="groupsBox" caption="msg://ch.so.agi.simi.entity.iam/Role.groups">
-            <table id="groupsTable" dataContainer="groupsDc" width="100%" height="200px" multiselect="true">
-                <actions>
-                    <action id="add" type="add"/>
-                    <action id="exclude" type="exclude"/>
-                </actions>
-                <columns>
-                    <column id="identifier"/>
-                </columns>
-                <buttonsPanel>
-                    <button action="groupsTable.add" stylename="friendly"/>
-                    <button action="groupsTable.exclude"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
-        <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Role.users">
-            <table id="usersTable" dataContainer="usersDc" width="100%" height="200px" multiselect="true">
-                <actions>
-                    <action id="add" type="add"/>
-                    <action id="exclude" type="exclude"/>
-                </actions>
-                <columns>
-                    <column id="instanceName" caption="Benutzer"/>
-                </columns>
-                <buttonsPanel>
-                    <button action="usersTable.add" stylename="friendly"/>
-                    <button action="usersTable.exclude"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
+        <split id="splitPanel" orientation="vertical" width="100%">
+            <groupBox id="groupsBox" caption="msg://ch.so.agi.simi.entity.iam/Role.groups" height="100%">
+                <table id="groupsTable" dataContainer="groupsDc" width="100%" height="100%" multiselect="true">
+                    <actions>
+                        <action id="add" type="add"/>
+                        <action id="exclude" type="exclude"/>
+                    </actions>
+                    <columns>
+                        <column id="identifier"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="groupsTable.add" stylename="friendly"/>
+                        <button action="groupsTable.exclude"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Role.users" height="100%">
+                <table id="usersTable" dataContainer="usersDc" width="100%" height="100%" multiselect="true">
+                    <actions>
+                        <action id="add" type="add"/>
+                        <action id="exclude" type="exclude"/>
+                    </actions>
+                    <columns>
+                        <column id="instanceName" caption="Benutzer"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="usersTable.add" stylename="friendly"/>
+                        <button action="usersTable.exclude"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </split>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

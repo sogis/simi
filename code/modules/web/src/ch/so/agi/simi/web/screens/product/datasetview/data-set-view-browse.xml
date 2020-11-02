@@ -18,7 +18,8 @@
         </collection>
     </data>
     <dialogMode height="600"
-                width="800"/>
+                width="800"
+                resizable="true"/>
     <layout expand="dataSetViewsTable"
             spacing="true">
         <table id="dataSetViewsTable"
@@ -31,20 +32,9 @@
             </actions>
             <columns>
                 <column id="identifier"/>
-                <column id="pubScope"/>
-                <column id="keywords"/>
-                <column id="remarks"/>
-                <column id="synonyms"/>
                 <column id="title"/>
+                <column id="pubScope"/>
                 <column id="releasedAt"/>
-                <column id="releasedThrough"/>
-                <column id="transparency"/>
-                <column id="rawDownload"/>
-                <column id="styleServer"/>
-                <column id="styleDesktop"/>
-                <column id="searchType"/>
-                <column id="searchFacet"/>
-                <column id="searchFilterWord"/>
             </columns>
             <rowsCount/>
         </table>
