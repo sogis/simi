@@ -1,118 +1,71 @@
-# Betreff joining entities
+# Betreff joining m:n entities
 
-# Facadelayer
+Im Datenmodell von SIMI gibt es viele m:n Verbindungen, bei welchen auf der 
+Verknüpfungstabelle noch wenige Zusatzinformationen vorhanden sind.
 
-## Childtabelle in Screen
+Beispiel für Zusatzinformationen: Sortierindex einer DataSetView innerhalb 
+eines Facadelayer.
 
-"scharfer" Code
+Es gibt drei "einfache" Möglichkeiten, wie die Pflege der Verknüpfungen erfolgen kann:
+* Standardfunktionalität
+  * Öffnet ein Edit-Screen der Zeile der Verknüpfungstabelle
+* Listenauswahl in neuem Fenster: 
+  * Öffnet den Browse-Screen der ":n" Entity (Im Beispiel der DataSetViews)
+  * Die Zusatzinformationen der Verknüpfkungstabelle werden in der Kind-Ansicht 
+  des Edit-Screens der "m:" Entity gepflegt (Im Beispiel der Facadelayer)
+  * Bedingt custom code zur Erstellung der Zeile der Verknüpfungstabelle
+  * How to siehe Tutorial [Many-to-Many Association](https://www.cuba-platform.com/guides/data-modelling-many-to-many-association)
+* Auswahl in Combobox: 
+  * Zuweisung erfolgt in Kind-Ansicht des Edit-Screens der "m:" Entity.
+  * In der Tabellenansicht der Verknüpfungstabelle kann mittels Combobox die 
+  "n:" Entity verknüpft werden.
+  
+## "Auswahl in Combobox": Konfiguration am Beispiel der Rollen
+
+**Controller-XML:** Datencontainer
+
 ```xml
-        <groupBox id="dataSetViewsBox" caption="msg://ch.so.agi.simi.entity.product/FacadeLayer.dataSetViews">
-            <table id="dataSetViewsTable" dataContainer="dataSetViewsDc" width="100%" editable="true">
-                <actions>
-                    <action id="addDataSetView" caption="Hinzufügen" icon="ADD_ACTION"/>
-                    <action id="exclude" type="remove" caption="Ausschliessen"/>
-                    <action id="sortAction" caption="Sortieren" icon="SORT"/>
-                </actions>
-                <columns>
-                    <column id="dataSetView.identifier"/>
-                    <column id="dataSetView.title"/>
-                    <column id="transparency" editable="true"/>
-                    <column id="sort" editable="true"/>
-                </columns>
-                <buttonsPanel>
-                    <button id="btnAddDataSetView" action="dataSetViewsTable.addDataSetView"/>
-                    <button id="btnExclude" action="dataSetViewsTable.exclude"/>
-                    <button id="btnSortAction" action="dataSetViewsTable.sortAction"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
+<data>
+    <instance id="dataProductDc">
+    </instance>
+    <collection id="rolesDc" class="ch.so.agi.simi.entity.iam.Role" view="_minimal">
+        <loader id="rolesDl">
+            <query>
+                <![CDATA[select e from simiIAM_Role e]]>
+            </query>
+        </loader>
+    </collection>
+</data>  
 ```
 
-Prototyp:
+**Controller-XML:** Konfiguration der Combobox-Spalte in der Tabelle
+
 ```xml
-        <groupBox id="dataSetListPropertiesBox" caption="Liste der DataSets">
-            <table id="dataSetListPropertiesTable" dataContainer="dataSetListPropertiesDc" width="100%" height="200px"
-                   editable="true">
-                <actions>
-                    <action id="create" type="create"/>
-                    <action id="edit" type="edit"/>
-                    <action id="remove" type="remove"/>
-                </actions>
-                <columns>
-                    <column id="dataset" caption="Dataset" width="600"/>
-                    <column id="sort" editable="true" width="80" caption="Sort."/>
-                    <column id="visible" editable="true" caption="Sicht." width="80" sortable="false"/>
-                    <column id="transparency" caption="Trans. [%]" editable="true" width="100" sortable="false"/>
-                </columns>
-                <buttonsPanel>
-                    <linkButton id="btnSortTable" caption="Neu sortieren"/>
-                    <linkButton action="dataSetListPropertiesTable.create" caption="Listeneintrag erstellen"/>
-                    <linkButton action="dataSetListPropertiesTable.edit" caption="Listeneintrag editieren"/>
-                    <linkButton action="dataSetListPropertiesTable.remove" caption="Listeneintrag löschen"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
+<groupBox id="permissionsBox" caption="msg://ch.so.agi.simi.entity.product/DataSetView.permissions">
+    <table id="permissionsTable" dataContainer="permissionsDc" width="100%" height="200px" editable="true">
+        <columns>
+            <column id="role" editable="true" optionsContainer="rolesDc" sort="ASCENDING"/>
+        </columns>
+        <buttonsPanel>
+            <button id="addPermissionBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
+        </buttonsPanel>
+    </table>
+</groupBox>
 ```
 
+**Controller-Java:** Eventhandler für Click auf "addPermissionBtn"
+
+Erstellt eine Permission als neue Zeile der Verknüpfungstabelle und gibt
+der Spalte role darin den Fokus.
 
 ```java
-    @Subscribe("dataSetViewsTable.addDataSetView")
-    public void onSingleActorsTableAddSingleActor(Action.ActionPerformedEvent event) {
-        screenBuilders.lookup(DataSetView.class, this)
-                .withLaunchMode(OpenMode.DIALOG)
-                .withSelectHandler(dataSetViews -> {
-                    dataSetViews.stream()
-                            .map(this::createPropertiesInFacadeFromDataSetView)
-                            .forEach(this::addToPropertiesInFacade);
-                })
-                .build()
-                .show();
-    }
-```      
-Entities
-```java
-// Facadelayer - Scharf
-@Composition
-@OnDelete(DeletePolicy.CASCADE)
-@OneToMany(mappedBy = "facadeLayer")
-private List<PropertiesInFacade> dataSetViews;
+@Subscribe("addPermissionBtn")
+public void onAddPermissionBtnClick(Button.ClickEvent event) {
+    Permission permission = dataContext.create(Permission.class);
+    permission.setDataSetView(this.getEditedEntity());
 
-// Facadelayer - Proto
-@OrderBy("sort")
-@Composition
-@OnDelete(DeletePolicy.CASCADE)
-@OneToMany(mappedBy = "facadelayer")
-protected List<DatasetListProperties> dataSetListProperties;
+    permissionsDc.getMutableItems().add(permission);
 
-// Props in List - Scharf
-@ManyToOne(fetch = FetchType.LAZY, optional = false)
-@JoinColumn(name = "FACADE_LAYER_ID")
-@NotNull
-private FacadeLayer facadeLayer;
-
-@ManyToOne(fetch = FetchType.LAZY, optional = false)
-@JoinColumn(name = "DATA_SET_VIEW_ID")
-@NotNull
-private DataSetView dataSetView;
-
-// Props in List - Proto
-@NotNull
-@ManyToOne(fetch = FetchType.LAZY, optional = false)
-@JoinColumn(name = "FACADELAYER_ID")
-protected FacadeLayer facadelayer;
-
-@NotNull
-@ManyToOne(fetch = FetchType.LAZY, optional = false)
-@JoinColumn(name = "DATASET_ID")
-protected PostgresDS dataset;
-
-// DataSetView - Scharf
-@Composition
-@OnDelete(DeletePolicy.CASCADE)
-@OneToMany(mappedBy = "dataSetView")
-private List<PropertiesInFacade> facadeLayers;
-
-// PostgresDS - Proto (Entspricht DataSetView der scharfen Implementation)
-
-// Hat kein Verweis auf einen Facadelayer. Ist ok, solange PostgresDS nicht gelöscht wird 
-```    
+    permissionsTable.requestFocus(permission, "role");
+}
+```
