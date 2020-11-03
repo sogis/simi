@@ -2,7 +2,7 @@
 
 ## Aufbau der Pipeline
 
-![Jenkins](../../puml/rendered/k4_jenkins.png)
+![Jenkins](../puml/rendered/k4_jenkins.png)
 
 Die "Zudien-Programme" der Pipeline werden im Pipeline-Skript direkt via Shell oder ähnlich
 als Kommandozeilenprogramme aufgerufen (ohne Agent's). 
