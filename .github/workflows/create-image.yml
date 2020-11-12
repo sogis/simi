@@ -1,0 +1,46 @@
+name: Simi - Build docker image
+
+on:
+  push:
+    branches: master
+
+jobs:
+  buildImage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: build.gradle rename
+        run: mv build.gradle build1.gradle
+        working-directory: ./code
+      - name: build.gradle merge
+        run: cat build1.gradle build2.gradle > build.gradle
+        working-directory: ./code
+      - name: Build image with Gradle
+        run: ./gradlew imgTag
+        working-directory: ./code
+      - name: Start docker image
+        run: docker-compose up
+        working-directory: ./code/docker
+      - name: middle tier - check healh
+        uses: cygnetdigital/wait_for_response@v2.0.0
+        with:
+          url: 'http://localhost:8080/app-core/remoting/health'
+          interval: 1000
+      - name: middle tier - check healh
+        uses: cygnetdigital/wait_for_response@v2.0.0
+        with:
+          url: 'http://localhost:8080/app/dispatch/health'
+          interval: 1000
+      - name: docker login
+        env:
+          SIMI_DOCKER_USER: ${{ secrets.SIMI_DOCKER_USER }}
+          SIMI_DOCKER_PASS: ${{ secrets.SIMI_DOCKER_PASS }}
+        run: echo "$SIMI_DOCKER_PASS" | docker login -u "$SIMI_DOCKER_USER" --password-stdin
+      - name: docker push latest
+        run: docker push sogis/simi_schemareader:latest
+      - name: docker push buildnum
+        run: docker push sogis/simi_schemareader:$GITHUB_RUN_NUMBER

@@ -1,0 +1,64 @@
+/*
+Due to an issue with transient jars, the dev environment does not start
+when cuba studio reads the dependencies from a build.gradle with the
+buildUberJar task present.
+
+As a workaround, the tasks for building the docker image (containing the uber jar)
+are placed in this file.
+
+The build.gradle file and this file are merged in github actions when building
+the docker image.
+*/
+
+
+task buildUberJar(type: CubaUberJarBuilding) {
+    logbackConfigurationFile = 'docker/image/uber-jar-logback.xml'
+    singleJar = true
+    appProperties = ['cuba.automaticDatabaseUpdate': false]
+}
+
+task copyJar(type: Copy, dependsOn: buildUberJar){
+    from file("$buildDir/distributions/uberJar/app.jar")
+    into file("$projectDir/docker/image/tmp")
+}
+
+task imgBuild(type:Exec, dependsOn: copyJar) {
+    def githash = getCheckedOutGitCommitHash()
+    def buildident = getBuildNumber()
+    def build_timestamp = getTimestamp()
+
+    workingDir "$projectDir/docker/image"
+    commandLine 'docker', 'build',
+            '--no-cache', '--force-rm',
+            '-t', "sogis/simi:$buildident",
+            '--label', "simi.created=$build_timestamp",
+            '--label', "simi.git_commit=$githash",
+            '--label', "simi.travis_build=$buildident",
+            '-f', 'Dockerfile',  '.'
+}
+
+task imgTag(type:Exec, dependsOn: imgBuild) {
+    def buildident = getBuildNumber()
+
+    commandLine 'docker', 'tag',
+            "sogis/simi:$buildident",
+            "sogis/simi:latest"
+}
+
+String getBuildNumber() {
+    String val = System.getenv('GITHUB_RUN_NUMBER')
+
+    if(val == null)
+        val = 'localbuild'
+
+    return val
+}
+
+def getCheckedOutGitCommitHash() {
+    'git log -1 --pretty=%H'.execute().text.trim()
+}
+
+def getTimestamp() {
+    def date = new Date()
+    return date.format('yyyy-MM-dd HH:mm:ss')
+}
