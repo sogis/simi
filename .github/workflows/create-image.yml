@@ -25,12 +25,12 @@ jobs:
       - name: Start docker image
         run: docker-compose up -d
         working-directory: ./code/docker
-      - name: middle tier - check healh
+      - name: middle tier - check health
         uses: cygnetdigital/wait_for_response@v2.0.0
         with:
           url: 'http://localhost:8080/app-core/remoting/health'
           interval: 1000
-      - name: middle tier - check healh
+      - name: client tier - check health
         uses: cygnetdigital/wait_for_response@v2.0.0
         with:
           url: 'http://localhost:8080/app/dispatch/health'
@@ -41,6 +41,6 @@ jobs:
           SIMI_DOCKER_PASS: ${{ secrets.SIMI_DOCKER_PASS }}
         run: echo "$SIMI_DOCKER_PASS" | docker login -u "$SIMI_DOCKER_USER" --password-stdin
       - name: docker push latest
-        run: docker push sogis/simi_schemareader:latest
+        run: docker push sogis/simi:latest
       - name: docker push buildnum
-        run: docker push sogis/simi_schemareader:$GITHUB_RUN_NUMBER
+        run: docker push sogis/simi:$GITHUB_RUN_NUMBER
