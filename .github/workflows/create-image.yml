@@ -23,7 +23,7 @@ jobs:
         run: ./gradlew imgTag
         working-directory: ./code
       - name: Start docker image
-        run: docker-compose up
+        run: docker-compose up -d
         working-directory: ./code/docker
       - name: middle tier - check healh
         uses: cygnetdigital/wait_for_response@v2.0.0
