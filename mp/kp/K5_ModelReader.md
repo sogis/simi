@@ -349,13 +349,3 @@ WHERE
 |VAR, UID, DAT, TS|Klasse AttrTypes|Entsprechende Attribute in SO_AttrTypes.AttrTypes (schema attrtype)|
 
 DBM, CON und TYPO brauchen keine Testdaten
-
-## Entscheide
-
-|Thema|Entscheid|Bemerkungen|
-|---|---|---|
-|Auslesen der Informationen aus Geo-DB's / Ili-Repo|Das Auslesen erfolgt ausschliesslich mittels SQL auf die Geo-DB's|Voraussichtlich wird für den Datenbezug lediglich der Modellname benötigt. Dieser kann ebenfalls mittels SQL aus t_ili2db_model ausgleesen werden.|
-|Umgang mit nicht vorhandenen Informationen|Diese werden explixit als json:null in der Response zurückgegeben.|API-Klarheit ist (hier) wichtiger als die Transfergrösse.|
-|Benennung der Komponente|Neu: SchemaReader|Die Komponente liest grossmehrheitlich Informationen aus einem Schema von PostgreSQL aus und heisst darum folgerichtig **Schemareader**.| 
-|Quarkus oder Boot?|Spring Boot|Obwohl Umfang und Anforderungen sehr gut auf ein "Microservice-Framework" passen - "Frameworkitis" vermeiden --> Spring Boot|
-|Endpunkte|Der Schemareader wird zwei Endpunke umfassen. Erster Endpunkt zum Suchen von Tabellen, zweiter zur Anzeige der Detailinformationen zu einem Endpunkt.|

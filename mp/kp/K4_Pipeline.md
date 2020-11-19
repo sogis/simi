@@ -43,3 +43,6 @@ https://jenkins:8080/job/configupdate
 * Modifizieren des Build "ConfigUpdate": Entsprechend berechtigte und in Jenkins eingeloggte Benutzer
 * Starten des Build "ConfigUpdate": Alle Programme / Personen, welche im Besitz des korrekten Token sind.
 * Anschauen der letzten "ConfigUpdate" Builds: Jedermann (Anonymous) - Ohne Login ins Jenkins.
+
+
+ 

@@ -40,10 +40,10 @@ Ca. jede zehnte Ebene hat auch Konfiguration bezüglich:
 |Bei Mutation einer Layerliste auf die Karten hinweisen, welche dieselben SA enthalten|Arbeitsunterstützung, damit Karten nicht vergessen gehen|Aufwandabhängig wird zusätzlich die automatische "Nachmutation" der Karten angeboten.|
 |Automatische Ableitung von ch.so. ... aus den bestehenden Informationen|Homogenität|Muster: ch.so.[Amt].[Thema].(edit).[Ebenenname]|
 
-## Entscheide
+### Mutation: Letzer Stand
 
 * **Mutationen:**
-    * Generieren aus Schema
+    * Generieren aus Schema - Beziehung von Mutation neu auf das betroffene Schema, nicht auf die DataProducts im betroffenen Schema
     * Manuelles, unterstütztes Mutieren zu "ersetzen", "neu", ("zu löschen")
     * Flippern zwischen A und B
     * Keine Unterstützung beim effektiven Löschen

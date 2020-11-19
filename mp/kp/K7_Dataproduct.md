@@ -8,3 +8,6 @@ einzig im SO-Locator zu verwenden.
 DataProduct-Service noch verwendet.
 * Klärung, welche Teile des DataProduct-Service «befüllt» werden
 müssen, damit WGC und SO-Locator funktionieren.
+
+Die Fragen werden im Rahmen des Sourcepole-Auftrages geklärt.
+

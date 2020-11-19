@@ -30,6 +30,17 @@ public class SingleActor extends DataProduct {
     @Max(100)
     private Integer transparency = 0;
 
+    @Column(name = "CUSTOM_LEGEND")
+    private byte[] customLegend;
+
+    public byte[] getCustomLegend() {
+        return customLegend;
+    }
+
+    public void setCustomLegend(byte[] customLegend) {
+        this.customLegend = customLegend;
+    }
+
     public Integer getTransparency() {
         return transparency;
     }
