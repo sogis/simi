@@ -13,6 +13,14 @@
                     <property name="level"/>
                     <property name="role" view="_minimal"/>
                 </property>
+                <property name="styleServerAssets" view="_minimal">
+                    <property name="fileName"/>
+                    <property name="fileContent"/>
+                </property>
+                <property name="styleClientAssets" view="_minimal">
+                    <property name="fileName"/>
+                    <property name="fileContent"/>
+                </property>
             </view>
             <loader/>
             <collection id="permissionsDc" property="permissions"/>
@@ -40,7 +48,6 @@
                             <property name="dataSetViewDc" ref="dataProductDc"/>
                             <property name="styleProperty" value="styleServer"/>
                             <property name="styleChangedProperty" value="styleServerChanged"/>
-                            <property name="fileSuffix" value=".Server.qml"/>
                         </properties>
                     </fragment>
                     <fragment id="styleDesktopField" screen="simi_StyleFragment" caption="msg://ch.so.agi.simi.entity.product/DataSetView.styleDesktop">
@@ -48,7 +55,6 @@
                             <property name="dataSetViewDc" ref="dataProductDc"/>
                             <property name="styleProperty" value="styleDesktop"/>
                             <property name="styleChangedProperty" value="styleDesktopChanged"/>
-                            <property name="fileSuffix" value=".Desktop.qml"/>
                         </properties>
                     </fragment>
                     <textField id="identifierField" property="identifier"/>

@@ -19,6 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+// 8:45 - 10:35 / 11:35 - 12:15 / 12.50 -17.25
 
 /*
 Contains the logic to: ....
@@ -198,7 +199,22 @@ public class StyleStorageBean {
     }
 
     public enum FileContentType {
-        ZIP, QML
+        ZIP, QML;
+
+        public static FileContentType forFileName(String fileName){
+            String lower = fileName.toLowerCase();
+
+            for (FileContentType type : FileContentType.values()){
+                if(fileName.toLowerCase().endsWith(type.name().toLowerCase()))
+                    return type;
+            }
+
+            throw new RuntimeException("Could not determine style file type. File suffix must be either qml or zip");
+        }
+
+        public String asFileSuffix(){
+            return "." + name().toLowerCase();
+        }
     }
 
     /**

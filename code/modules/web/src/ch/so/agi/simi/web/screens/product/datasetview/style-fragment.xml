@@ -3,7 +3,7 @@
     <layout>
         <hbox spacing="true">
             <button id="downloadStyleBtn" caption="Download"/>
-            <upload id="uploadStyleBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml"/>
+            <upload id="uploadStyleBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml,.zip"/>
             <label id="styleLabel" align="MIDDLE_LEFT"/>
         </hbox>
     </layout>

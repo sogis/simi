@@ -21,8 +21,4 @@ public class StyleFileContent {
     public byte[] getData() {
         return data;
     }
-
-    public String getFileSuffix(){
-        return fileContentType.name().toLowerCase();
-    }
 }

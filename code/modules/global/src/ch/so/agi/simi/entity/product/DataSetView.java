@@ -4,6 +4,7 @@ import ch.so.agi.simi.entity.ccc.LocatorLayer;
 import ch.so.agi.simi.entity.ccc.NotifyLayer;
 import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.iam.Permission;
+import ch.so.agi.simi.entity.product.util.StyleAsset;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
@@ -24,6 +25,16 @@ public class DataSetView extends SingleActor {
     @NotNull
     @Column(name = "RAW_DOWNLOAD", nullable = false)
     private Boolean rawDownload = true;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "datasetSetView")
+    private List<StyleAsset> styleServerAssets;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "datasetSetView")
+    private List<StyleAsset> styleClientAssets;
 
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
@@ -79,6 +90,22 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "dataSetView")
     private FeatureInfo featureInfo;
+
+    public List<StyleAsset> getStyleServerAssets() {
+        return styleServerAssets;
+    }
+
+    public void setStyleServerAssets(List<StyleAsset> styleServerAssets) {
+        this.styleServerAssets = styleServerAssets;
+    }
+
+    public List<StyleAsset> getStyleClientAssets() {
+        return styleClientAssets;
+    }
+
+    public void setStyleClientAssets(List<StyleAsset> styleClientAssets) {
+        this.styleClientAssets = styleClientAssets;
+    }
 
     public LocalDateTime getStyleServerChanged() {
         return styleServerChanged;

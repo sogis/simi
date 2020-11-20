@@ -1,5 +1,6 @@
 package ch.so.agi.simi.web.beans.filetransfer;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -138,18 +139,48 @@ public class StyleStorageBeanTest {
         );
     }
 
+    @Test
+    public void encodeDecodeFatStyle_Success(){
+        StyleDbContent dbContent = createZipDbContent(new String[]{"fuu.png", "bar.png", "finally.qml"}, 20000);
+
+        StyleStorageBean trafo = new StyleStorageBean();
+        StyleFileContent fileContent = trafo.transformFieldsToFileContent(dbContent);
+
+        StyleDbContent dbContent2 = trafo.transformFileToFields(fileContent, QGIS_DEFAULT_VERSION);
+
+        assertTrue(
+                dbContent2.getQmlContent().contains("<qgis"),
+                "qml content string must contain \"<qgis\""
+        );
+    }
+
     private String createQmlXmlString(int[] qmlVersion){
+        return createQmlXmlString(qmlVersion, 0);
+    }
+
+    private String createQmlXmlString(int[] qmlVersion, int numFillCharacters){
+
+        String fillString = RandomStringUtils.random(numFillCharacters, true, true);
+        if(fillString == null)
+            fillString = "";
+
         String fakeQml = MessageFormat.format(
-                "<!DOCTYPE qgis PUBLIC \"http://mrcc.com/qgis.dtd\" \"SYSTEM\"><qgis version=\"{0}.{1}.17\"></qgis>",
+                "<!DOCTYPE qgis PUBLIC \"http://mrcc.com/qgis.dtd\" \"SYSTEM\"><qgis version=\"{0}.{1}.17\">{2}</qgis>",
                 qmlVersion[0],
-                qmlVersion[1]);
+                qmlVersion[1],
+                fillString
+                );
 
         return fakeQml;
     }
 
-    private StyleFileContent createQmlContent(int[] qmlVersion){
+    private StyleFileContent createQmlContent(int[] qmlVersion) {
+        return createQmlContent(qmlVersion, 100);
+    }
 
-        String fakeQml = createQmlXmlString(qmlVersion);
+    private StyleFileContent createQmlContent(int[] qmlVersion, int numFillCharacters){
+
+        String fakeQml = createQmlXmlString(qmlVersion, numFillCharacters);
 
         return new StyleFileContent(
                 fakeQml.getBytes(),
@@ -159,7 +190,7 @@ public class StyleStorageBeanTest {
 
     private StyleDbContent createZipDbContent(String[] fileNamesWithPaths, int maxAssetSize){
 
-        String qmlContent = createQmlXmlString(QGIS_DEFAULT_VERSION);
+        String qmlContent = createQmlXmlString(QGIS_DEFAULT_VERSION, maxAssetSize);
         HashMap<String, byte[]> assets = new HashMap<>();
 
         Random random = new Random();
