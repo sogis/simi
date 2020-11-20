@@ -9,13 +9,15 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.StringReader;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 
 /*
@@ -32,17 +34,13 @@ public class StyleStorageBean {
      *
      * <p>The content of the qml is returned in the first String in the return Pair.
      *
-     * <p>If the given File is a zip with assets, the assets are encoded as json key value pairs.
-     * The key is the non qualified file name of the asset (a symbol png, ...). The value is the
-     * base64 encoded String of the file content. XML asset files like svg's are also base64 encoded.
-     *
-     * @param styleContent The uploaded qml or zip File content
-     * @return maxQmlVersion highest acceptable version. maxQmlVersion[0] = major version, maxQmlVersion[1] = minor version,
+     * <p>If the given File is a zip with assets (and of course qml), the assets are
+     * extracted into [filename]-[fileContent] key value pairs.
      */
     public StyleDbContent transformFileToFields(StyleFileContent styleContent, int[] maxQmlVersion){
 
         String qmlContent = null;
-        String assetsContent = null;
+        HashMap<String, byte[]> assets = null;
 
         if(styleContent.getFileContentType() == FileContentType.QML) {
             qmlContent = qmlToXmlString(styleContent.getData(), maxQmlVersion);
@@ -50,16 +48,16 @@ public class StyleStorageBean {
         else {
             StyleStorageBean.ZipContent filesInZip = extractFilesInZip(styleContent.getData());
             qmlContent = qmlToXmlString(filesInZip.getQmlContent(), maxQmlVersion);
-            assetsContent = "fuu"; //encodeToJson(filesInZip.getAssets());
+            assets = filesInZip.getAssets();
         }
 
-        return new StyleDbContent(qmlContent, assetsContent);
+        return new StyleDbContent(qmlContent, assets);
     }
 
     private static StyleStorageBean.ZipContent extractFilesInZip(byte[] zipBytes){
 
         byte[] qml = null;
-        Map<String, byte[]> assets = new Hashtable<>();
+        HashMap<String, byte[]> assets = new HashMap<>();
 
         try {
             ZipInputStream zis = new ZipInputStream(new ByteArrayInputStream(zipBytes));
@@ -101,6 +99,11 @@ public class StyleStorageBean {
         return qml;
     }
 
+    private static byte[] qmlToBytes(String qmlXml){
+        ByteBuffer buf = StandardCharsets.UTF_8.encode(qmlXml);
+        return buf.array();
+    }
+
     private static void assertQmlMaxVersion(String qmlContent, int[] maxQmlVersion){
 
         String version = null;
@@ -120,8 +123,12 @@ public class StyleStorageBean {
                     if (startElement.getName().getLocalPart().equals("qgis")) {
                         version = startElement.getAttributeByName(new QName("version")).getValue();
                     }
+
+                    break; // we are not interested in rest of qml file....
                 }
             }
+
+            reader.close();
         }
         catch(Exception e){
             throw new RuntimeException(e);
@@ -146,7 +153,48 @@ public class StyleStorageBean {
      * @return The qml or zip file content.
      */
     public StyleFileContent transformFieldsToFileContent(StyleDbContent styleDbContent){
-        return null;
+
+        byte[] fileContent = null;
+        FileContentType contentType = null;
+
+        if(styleDbContent.getAssets().isPresent()){
+            contentType = FileContentType.ZIP;
+            fileContent = encodeZip(styleDbContent);
+        }
+        else {
+            contentType = FileContentType.QML;
+            fileContent = qmlToBytes(styleDbContent.getQmlContent());
+        }
+
+        return new StyleFileContent(fileContent, contentType);
+    }
+
+    private static byte[] encodeZip(StyleDbContent styleDbContent){
+
+        HashMap<String, byte[]> files = styleDbContent.getAssets().get();
+
+        byte[] qmlBytes = qmlToBytes(styleDbContent.getQmlContent());
+        files.put("qml.qml", qmlBytes);
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ZipOutputStream zipOut = new ZipOutputStream(bos);
+
+        try {
+            for (String fileName : files.keySet()) {
+                byte[] fileData = files.get(fileName);
+
+                ZipEntry zipEntry = new ZipEntry(fileName);
+                zipOut.putNextEntry(zipEntry);
+
+                zipOut.write(fileData);
+            }
+            zipOut.close();
+        }
+        catch (IOException ioe){
+            throw new RuntimeException("Could not encode file contents to zip", ioe);
+        }
+
+        return bos.toByteArray();
     }
 
     public enum FileContentType {
@@ -154,15 +202,15 @@ public class StyleStorageBean {
     }
 
     /**
-     * DTO for the content of a style zip with one
-     * qml and 1-n assets with
+     * Internal DTO for the content of a style zip with one
+     * qml and 1-n assets with filename and content as byte[]
      */
     private static class ZipContent{
 
         private byte[] qmlContent;
-        private Map<String, byte[]> assets;
+        private HashMap<String, byte[]> assets;
 
-        ZipContent(byte[] qmlContent, Map<String, byte[]> assets){
+        ZipContent(byte[] qmlContent, HashMap<String, byte[]> assets){
 
             if(qmlContent == null)
                 throw new IllegalArgumentException("qmlContent must not be null");
@@ -178,7 +226,7 @@ public class StyleStorageBean {
             return qmlContent;
         }
 
-        public Map<String, byte[]> getAssets() {
+        public HashMap<String, byte[]> getAssets() {
             return assets;
         }
     }

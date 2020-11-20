@@ -7,16 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class StyleStorageBeanTest {
 
+    private static final int[] QGIS_DEFAULT_VERSION = new int[]{2,18}; // Default qgis version for the testing
+
     @Test
     public void uploadQmlOnly_Success(){
         StyleStorageBean trafo = new StyleStorageBean();
-        StyleDbContent dbContent = trafo.transformFileToFields(createQmlContent(new int[]{2,18}), new int[]{2,18});
+        StyleDbContent dbContent = trafo.transformFileToFields(createQmlContent(QGIS_DEFAULT_VERSION), QGIS_DEFAULT_VERSION);
 
         assertTrue(
                 dbContent.getQmlContent().contains("<qgis"),
@@ -30,7 +33,7 @@ public class StyleStorageBeanTest {
         StyleStorageBean trafo = new StyleStorageBean();
 
         Exception ex = Assertions.assertThrows(RuntimeException.class, () -> {
-            trafo.transformFileToFields(createQmlContent(new int[]{3,0}), new int[]{2,18});
+            trafo.transformFileToFields(createQmlContent(new int[]{3,0}), QGIS_DEFAULT_VERSION);
         });
 
         assertTrue(
@@ -46,7 +49,7 @@ public class StyleStorageBeanTest {
         StyleStorageBean trafo = new StyleStorageBean();
 
         Exception ex = Assertions.assertThrows(RuntimeException.class, () -> {
-            trafo.transformFileToFields(createQmlContent(new int[]{2,19}), new int[]{2,18});
+            trafo.transformFileToFields(createQmlContent(new int[]{2,19}), QGIS_DEFAULT_VERSION);
         });
 
         assertTrue(
@@ -59,8 +62,8 @@ public class StyleStorageBeanTest {
     public void uploadZip_Success(){
         StyleStorageBean trafo = new StyleStorageBean();
         StyleDbContent dbContent = trafo.transformFileToFields(
-                createZipContent(new String[]{"fuu.png", "bar.qml", "buz.png"}, 100),
-                new int[]{2,18}
+                createZipFileContent(new String[]{"fuu.png", "bar.qml", "buz.png"}, 100),
+                QGIS_DEFAULT_VERSION
         );
 
         assertTrue(
@@ -69,7 +72,7 @@ public class StyleStorageBeanTest {
         );
 
         assertTrue(
-                dbContent.getAssetsContent().isPresent(),
+                dbContent.getAssets().isPresent(),
                 "Assets must be present"
         );
     }
@@ -81,8 +84,8 @@ public class StyleStorageBeanTest {
 
         Assertions.assertThrows(RuntimeException.class, () -> {
             trafo.transformFileToFields(
-                    createZipContent(new String[]{"fuu.png", "bar.png", "buz.png"}, 100),
-                    new int[]{2,18});
+                    createZipFileContent(new String[]{"fuu.png", "bar.png", "buz.png"}, 100),
+                    QGIS_DEFAULT_VERSION);
         });
     }
 
@@ -93,19 +96,60 @@ public class StyleStorageBeanTest {
 
         Assertions.assertThrows(RuntimeException.class, () -> {
             trafo.transformFileToFields(
-                    createZipContent(new String[]{"fuu.qml"}, 100),
-                    new int[]{2,18});
+                    createZipFileContent(new String[]{"fuu.qml"}, 100),
+                    QGIS_DEFAULT_VERSION);
         });
     }
 
+    @Test
+    public void downloadWithoutAssets_IsQmlFile(){
 
+        StyleStorageBean trafo = new StyleStorageBean();
+        StyleDbContent dbContent = new StyleDbContent(createQmlXmlString(QGIS_DEFAULT_VERSION), null);
 
-    private StyleFileContent createQmlContent(int[] version){
+        StyleFileContent fileContent = trafo.transformFieldsToFileContent(dbContent);
 
+        assertTrue(
+                fileContent.getFileContentType() == StyleStorageBean.FileContentType.QML,
+                "Resulting file content must be of type qml if no assets are present"
+        );
+
+        assertTrue(
+                trafo.transformFileToFields(fileContent, QGIS_DEFAULT_VERSION).getQmlContent().contains("<qgis"),
+                "qml content string must contain \"<qgis\""
+        );
+    }
+
+    @Test
+    public void downloadWithAssets_IsZipFile(){
+        StyleStorageBean trafo = new StyleStorageBean();
+        StyleDbContent dbContent = createZipDbContent(new String[]{"fuu.png", "bar.png", "finally.qml"}, 100);
+
+        StyleFileContent fileContent = trafo.transformFieldsToFileContent(dbContent);
+
+        assertTrue(
+                fileContent.getFileContentType() == StyleStorageBean.FileContentType.ZIP,
+                "Resulting file content must be of type qml if no assets are present"
+        );
+
+        assertTrue(
+                trafo.transformFileToFields(fileContent, QGIS_DEFAULT_VERSION).getQmlContent().contains("<qgis"),
+                "qml content string must contain \"<qgis\""
+        );
+    }
+
+    private String createQmlXmlString(int[] qmlVersion){
         String fakeQml = MessageFormat.format(
                 "<!DOCTYPE qgis PUBLIC \"http://mrcc.com/qgis.dtd\" \"SYSTEM\"><qgis version=\"{0}.{1}.17\"></qgis>",
-                version[0],
-                version[1]);
+                qmlVersion[0],
+                qmlVersion[1]);
+
+        return fakeQml;
+    }
+
+    private StyleFileContent createQmlContent(int[] qmlVersion){
+
+        String fakeQml = createQmlXmlString(qmlVersion);
 
         return new StyleFileContent(
                 fakeQml.getBytes(),
@@ -113,73 +157,63 @@ public class StyleStorageBeanTest {
                 );
     }
 
-    /**
-     * Creates a zip file content with the given full file names (path and name).
-     * maxAssetSize is the maximum size of the randomly generated byte[] of one asset
-     */
-    private StyleFileContent createZipContent(String[] fileNamesWithPaths, int maxAssetSize){
+    private StyleDbContent createZipDbContent(String[] fileNamesWithPaths, int maxAssetSize){
 
-        byte[] zipBytes = null;
-        boolean qmlIncluded = false;
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ZipOutputStream zipOut = new ZipOutputStream(bos);
+        String qmlContent = createQmlXmlString(QGIS_DEFAULT_VERSION);
+        HashMap<String, byte[]> assets = new HashMap<>();
 
         Random random = new Random();
 
-        try {
-            for (String fileName : fileNamesWithPaths) {
-                ZipEntry zipEntry = new ZipEntry(fileName);
-                zipOut.putNextEntry(zipEntry);
+        boolean qmlIncluded = false;
 
-                byte[] bytes = null;
-                if(fileName.endsWith("qml")) {
-                    bytes = createQmlContent(new int[]{2, 18}).getData();
-                    qmlIncluded = true;
-                }
-                else {
-                    bytes = new byte[random.nextInt(maxAssetSize)];
-                }
+        for (String fileName : fileNamesWithPaths) {
+            byte[] bytes = new byte[random.nextInt(maxAssetSize)];
+            random.nextBytes(bytes);
 
-                zipOut.write(bytes);
-            }
+            assets.put(fileName, bytes);
 
-            zipOut.close();
-
-            zipBytes = bos.toByteArray();
-        }
-        catch (IOException ioe){
-            throw new RuntimeException(ioe);
+            if(fileName.endsWith("qml"))
+                qmlIncluded = true;
         }
 
         if(!qmlIncluded)
             throw new IllegalArgumentException("One of the given file names must be the qml file");
 
+        return new StyleDbContent(qmlContent, assets);
+    }
+
+    /**
+     * Creates a zip file content with the given full file names (path and name).
+     * maxAssetSize is the maximum size of the randomly generated byte[] of one asset
+     */
+    private StyleFileContent createZipFileContent(String[] fileNamesWithPaths, int maxAssetSize) {
+
+        byte[] zipBytes = null;
+
+        StyleDbContent styleDbContent = createZipDbContent(fileNamesWithPaths, maxAssetSize);
+
+        HashMap<String, byte[]> allFiles = styleDbContent.getAssets().get();
+        byte[] qmlBytes = createQmlContent(QGIS_DEFAULT_VERSION).getData();
+        allFiles.put("qml.qml", qmlBytes);
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ZipOutputStream zipOut = new ZipOutputStream(bos);
+
+        try {
+            for (String fileName : allFiles.keySet()) {
+                ZipEntry zipEntry = new ZipEntry(fileName);
+                zipOut.putNextEntry(zipEntry);
+
+                zipOut.write(allFiles.get(fileName));
+            }
+
+            zipOut.close();
+
+            zipBytes = bos.toByteArray();
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+
         return new StyleFileContent(zipBytes, StyleStorageBean.FileContentType.ZIP);
     }
 }
-
-/*
-Funktionen des Beans
-* Tuple<String, Optional<String>> styleFileToStorage(File uploadedFile, String qmlVersion)
-* File storageToStyleFile(String qml, String assets)
-* String styleStorageInfo(String qml, String assets)
-
-Tests:
-
-* download ohne assets --> xy.qml
-* download mit assets --> valides zip
-* grosses qml mit vielenAssets --> OK
-
-```json
-{
-	"assets": [{
-			"blubb.png": "asdfölasdfjk"
-		},
-		{
-			"blubb.png": "asdfölasdfjk"
-		}
-	]
-}
-```
- */

@@ -42,34 +42,7 @@ Tabellenfelder:
 qml
 qml_assets
 
-Funktionen des Beans
-* Tuple<String, Optional<String>> styleFileToStorage(File uploadedFile, String qmlVersion)
-* File storageToStyleFile(String qml, String assets)
-* String styleStorageInfo(String qml, String assets)
 
-Tests:
-* Falsche qmlVersion --> Exception
-* qmlOnly
-* Flaches zip
-* Hierarchisches zip
-* zip upload ohne assets --> Exception
-* zip upload ohne qml --> Exception
-* download ohne assets --> xy.qml
-* download mit assets --> valides zip
-* duplicate asset name --> exception
-* grosses qml mit vielenAssets --> OK
-
-```json
-{
-	"assets": [{
-			"blubb.png": "asdfölasdfjk"
-		},
-		{
-			"blubb.png": "asdfölasdfjk"
-		}
-	]
-}
-```
 
 
 ## K3 Bedienungserleichterungen SIMI
@@ -100,6 +73,14 @@ Todo:
 ## K6 GRETL-Endpoint
 
 Siehe Ergebnis morgen
+
+curl \
+  -G \
+  -H "Accept: application/vnd.github.v3+json" \
+  --data-urlencode q="ada_denkmalschutz_pub repo:sogis/gretljobs" \
+  https://api.github.com/search/code 
+  
+Letzte aktualisierung: Gretl macht nach jedem run ein call simi mit dem schemanamen
 
 ## K7 - DataProduct-Service
 
