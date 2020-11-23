@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,14 +90,23 @@ public class StyleFragment extends ScreenFragment {
     }
 
     private List<StyleAsset> assetListForContext(){
-        List<StyleAsset> assetList = null;
 
-        if(isServerStyle())
-            assetList = dataSetViewDc.getItem().getStyleServerAssets();
-        else
-            assetList = dataSetViewDc.getItem().getStyleClientAssets();
+        // Must copy to new collection, as dataContext.remove(...) changes the ormList.
+        // Iterate over a changing list leeds to unexpected errors
+        List<StyleAsset> ormList = dataSetViewDc.getItem().getStyleAssets();
 
-        return assetList;
+        if(ormList == null || ormList.size() == 0)
+            return null;
+
+        List<StyleAsset> listForContext = new LinkedList<>();
+        boolean isForServer = isServerStyle();
+
+        for(StyleAsset asset : ormList){
+            if(isForServer == asset.getIsForServer())
+                listForContext.add(asset);
+        }
+
+        return listForContext;
     }
 
     private boolean isServerStyle(){
@@ -143,6 +153,7 @@ public class StyleFragment extends ScreenFragment {
         if(!assets.isPresent())
             return;
 
+        boolean isForServer = isServerStyle();
         HashMap<String, byte[]> fileAssets = assets.get();
         for(String fileName : fileAssets.keySet()){
             StyleAsset dbAsset = new StyleAsset();
@@ -150,6 +161,7 @@ public class StyleFragment extends ScreenFragment {
             dbAsset.setDatasetSetView(dataSetViewDc.getItem());
             dbAsset.setFileName(fileName);
             dbAsset.setFileContent(fileAssets.get(fileName));
+            dbAsset.setIsForServer(isForServer);
 
             dataContext.merge(dbAsset);
         }
@@ -158,15 +170,12 @@ public class StyleFragment extends ScreenFragment {
     private void removeStoredAssets(){
         DataContext dataContext = UiControllerUtils.getScreenData(getHostScreen()).getDataContext();
 
-        // Must copy to new collection, as dataContext.remove(...) changes the ormList.
-        // Iterate over a changing list leeds to unexpected errors
-        List<StyleAsset> ormList = assetListForContext();
-        if(ormList != null) {
-            List<StyleAsset> dbAssets = List.copyOf(ormList);
+        List<StyleAsset> contextList = assetListForContext();
+        if(contextList == null)
+            return;
 
-            for (StyleAsset dbAsset : dbAssets)
-                dataContext.remove(dbAsset);
-        }
+        for (StyleAsset dbAsset : contextList)
+            dataContext.remove(dbAsset);
     }
 
     @Subscribe(target = Target.PARENT_CONTROLLER)

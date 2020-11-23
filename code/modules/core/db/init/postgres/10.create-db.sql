@@ -621,6 +621,7 @@ create table SIMI_STYLE_ASSET (
     EXT5 text,
     --
     DATASET_SET_VIEW_ID uuid not null,
+    IS_FOR_SERVER boolean not null,
     FILE_NAME varchar(255) not null,
     FILE_CONTENT bytea not null,
     --

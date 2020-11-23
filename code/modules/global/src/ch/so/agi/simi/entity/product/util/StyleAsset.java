@@ -20,12 +20,24 @@ public class StyleAsset extends SimiStandardEntity {
     private DataSetView datasetSetView;
 
     @NotNull
+    @Column(name = "IS_FOR_SERVER", nullable = false)
+    private Boolean isForServer = false;
+
+    @NotNull
     @Column(name = "FILE_NAME", nullable = false)
     private String fileName;
 
     @NotNull
     @Column(name = "FILE_CONTENT", nullable = false)
     private byte[] fileContent;
+
+    public Boolean getIsForServer() {
+        return isForServer;
+    }
+
+    public void setIsForServer(Boolean isForServer) {
+        this.isForServer = isForServer;
+    }
 
     public DataSetView getDatasetSetView() {
         return datasetSetView;

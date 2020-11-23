@@ -13,13 +13,10 @@
                     <property name="level"/>
                     <property name="role" view="_minimal"/>
                 </property>
-                <property name="styleServerAssets" view="_minimal">
+                <property name="styleAssets" view="_minimal">
                     <property name="fileName"/>
                     <property name="fileContent"/>
-                </property>
-                <property name="styleClientAssets" view="_minimal">
-                    <property name="fileName"/>
-                    <property name="fileContent"/>
+                    <property name="isForServer"/>
                 </property>
             </view>
             <loader/>

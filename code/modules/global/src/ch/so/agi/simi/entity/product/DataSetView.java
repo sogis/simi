@@ -29,12 +29,7 @@ public class DataSetView extends SingleActor {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "datasetSetView")
-    private List<StyleAsset> styleServerAssets;
-
-    @Composition
-    @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "datasetSetView")
-    private List<StyleAsset> styleClientAssets;
+    private List<StyleAsset> styleAssets;
 
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
@@ -91,20 +86,12 @@ public class DataSetView extends SingleActor {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "dataSetView")
     private FeatureInfo featureInfo;
 
-    public List<StyleAsset> getStyleServerAssets() {
-        return styleServerAssets;
+    public List<StyleAsset> getStyleAssets() {
+        return styleAssets;
     }
 
-    public void setStyleServerAssets(List<StyleAsset> styleServerAssets) {
-        this.styleServerAssets = styleServerAssets;
-    }
-
-    public List<StyleAsset> getStyleClientAssets() {
-        return styleClientAssets;
-    }
-
-    public void setStyleClientAssets(List<StyleAsset> styleClientAssets) {
-        this.styleClientAssets = styleClientAssets;
+    public void setStyleAssets(List<StyleAsset> styleAssets) {
+        this.styleAssets = styleAssets;
     }
 
     public LocalDateTime getStyleServerChanged() {
