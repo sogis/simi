@@ -19,8 +19,13 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-// 8:45 - 10:35 / 11:35 - 12:15 / 12.50 -17.25gigi
-
+/*
+curl \
+        -G \
+        -H "Accept: application/vnd.github.v3+json" \
+        --data-urlencode q="ada_denkmalschutz_pub repo:sogis/gretljobs" \
+        https://api.github.com/search/code
+*/
 /*
 Contains the logic to: ....
 - check uploaded style files (including zipped with assets)
