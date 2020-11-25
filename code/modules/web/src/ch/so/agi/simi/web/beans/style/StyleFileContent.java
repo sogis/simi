@@ -1,4 +1,6 @@
-package ch.so.agi.simi.web.beans.filetransfer;
+package ch.so.agi.simi.web.beans.style;
+
+import ch.so.agi.simi.web.beans.style.StyleStorageBean;
 
 /**
  * DTO for the Content of a qml or zip style file

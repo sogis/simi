@@ -1,5 +1,8 @@
 package ch.so.agi.simi.web.beans.filetransfer;
 
+import ch.so.agi.simi.web.beans.style.StyleDbContent;
+import ch.so.agi.simi.web.beans.style.StyleFileContent;
+import ch.so.agi.simi.web.beans.style.StyleStorageBean;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;

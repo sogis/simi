@@ -62,7 +62,6 @@
                             <property name="dataSetViewDc" ref="dataProductDc"/>
                             <property name="styleProperty" value="styleServer"/>
                             <property name="styleChangedProperty" value="styleServerChanged"/>
-                            <property name="fileSuffix" value=".Server.qml"/>
                         </properties>
                     </fragment>
                     <textField id="transparencyField" property="transparency"/>
@@ -85,7 +84,6 @@
                                 <property name="dataSetViewDc" ref="dataProductDc"/>
                                 <property name="styleProperty" value="styleDesktop"/>
                                 <property name="styleChangedProperty" value="styleDesktopChanged"/>
-                                <property name="fileSuffix" value=".Desktop.qml"/>
                             </properties>
                         </fragment>
                         <checkBox id="wgcEditField" property="wgcEdit"/>

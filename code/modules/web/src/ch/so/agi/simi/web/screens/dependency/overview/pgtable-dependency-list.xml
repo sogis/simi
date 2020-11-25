@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://tableDependencyList.caption"
-        focusComponent="tableViewsTable"
-        messagesPack="ch.so.agi.simi.web.screens.dependency.overview">
+        caption="Abhängigkeiten"
+        focusComponent="tableViewsTable">
     <data readOnly="true">
         <keyValueCollection id="tablesDc">
             <loader id="tablesDl">
                 <query>
-                    <![CDATA[select tbl.tableName, tv.identifier from simiData_PostgresTable tbl LEFT JOIN simiData_TableView tv]]>
+                    <![CDATA[
+                    select
+                        tbl.id,
+                        concat(
+                            db.dbName,
+                            '-',
+                            ms.schemaName,
+                            '-',
+                            tbl.tableName,
+                            coalesce(
+                                concat(' (', tv.identifier, ')'),
+                                ''
+                            )
+                        )
+                    from simiData_PostgresDB db
+                        join db.modelSchemas ms
+                        join ms.postgresTables tbl
+                        left join tbl.tableViews tv
+                    ]]>
                 </query>
             </loader>
             <properties>
-                <property name="tableName" datatype="string"/>
-                <property name="identifier" datatype="string"/>
+                <property name="id" datatype="uuid"/><!-- tbl.tableName  tv.identifier    concat(tbl.tableName, nullif(concat(' (', tv.identifier, ')'),''))-->
+                <property name="repr" datatype="string"/>
             </properties>
         </keyValueCollection>
     </data>
@@ -25,8 +42,8 @@
                width="100%"
                dataContainer="tablesDc">
             <columns>
-                <column id="tableName"/>
-                <column id="identifier"/>
+                <column id="id"/>
+                <column id="repr"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

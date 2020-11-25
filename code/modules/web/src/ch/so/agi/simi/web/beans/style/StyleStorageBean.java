@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.beans.filetransfer;
+package ch.so.agi.simi.web.beans.style;
 
 
 import org.springframework.stereotype.Component;

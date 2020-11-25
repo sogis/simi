@@ -2,9 +2,9 @@ package ch.so.agi.simi.web.screens.product.datasetview;
 
 import ch.so.agi.simi.entity.product.DataSetView;
 import ch.so.agi.simi.entity.product.util.StyleAsset;
-import ch.so.agi.simi.web.beans.filetransfer.StyleDbContent;
-import ch.so.agi.simi.web.beans.filetransfer.StyleFileContent;
-import ch.so.agi.simi.web.beans.filetransfer.StyleStorageBean;
+import ch.so.agi.simi.web.beans.style.StyleDbContent;
+import ch.so.agi.simi.web.beans.style.StyleFileContent;
+import ch.so.agi.simi.web.beans.style.StyleStorageBean;
 import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.gui.AppConfig;
 import com.haulmont.cuba.gui.Notifications;

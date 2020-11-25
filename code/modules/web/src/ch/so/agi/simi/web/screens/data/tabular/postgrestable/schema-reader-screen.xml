@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Aus Quell-DB einlesen"
+        caption="Quell-DB einlesen ..."
         focusComponent="tableShortInfosTable">
     <data readOnly="true">
         <collection id="TableShortInfosDc" class="ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo"/>

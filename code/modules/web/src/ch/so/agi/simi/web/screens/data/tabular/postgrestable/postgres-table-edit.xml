@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Vektor DS (Tabelle) - Edit"
+        caption="Geo-Tabelle"
         focusComponent="form">
     <data>
         <instance id="postgresTableDc"
