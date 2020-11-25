@@ -20,8 +20,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-@Component(StyleUploadDownloadBean.NAME)
-public class StyleUploadDownloadBean {
+@Component(StyleUploadDownloadBean_.NAME)
+public class StyleUploadDownloadBean_ {
     public static final String NAME = "simi_StyleUploadDownloadBean";
 
     public static final int TARGET_MAJOR_VERSION = 2;

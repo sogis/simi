@@ -20,13 +20,6 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 /*
-curl \
-        -G \
-        -H "Accept: application/vnd.github.v3+json" \
-        --data-urlencode q="ada_denkmalschutz_pub repo:sogis/gretljobs" \
-        https://api.github.com/search/code
-*/
-/*
 Contains the logic to: ....
 - check uploaded style files (including zipped with assets)
 - transform between the storage in db fields and the file representation of the styles.

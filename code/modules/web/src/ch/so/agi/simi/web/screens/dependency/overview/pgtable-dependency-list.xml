@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://tableDependencyList.caption"
+        focusComponent="tableViewsTable"
+        messagesPack="ch.so.agi.simi.web.screens.dependency.overview">
+    <data readOnly="true">
+        <keyValueCollection id="tablesDc">
+            <loader id="tablesDl">
+                <query>
+                    <![CDATA[select tbl.tableName, tv.identifier from simiData_PostgresTable tbl LEFT JOIN simiData_TableView tv]]>
+                </query>
+            </loader>
+            <properties>
+                <property name="tableName" datatype="string"/>
+                <property name="identifier" datatype="string"/>
+            </properties>
+        </keyValueCollection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="tableViewsTable"
+            spacing="true">
+        <table id="tableViewsTable"
+               width="100%"
+               dataContainer="tablesDc">
+            <columns>
+                <column id="tableName"/>
+                <column id="identifier"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
