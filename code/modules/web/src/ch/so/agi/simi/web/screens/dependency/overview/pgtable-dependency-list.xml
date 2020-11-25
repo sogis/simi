@@ -2,19 +2,19 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="Abhängigkeiten"
-        focusComponent="tableViewsTable">
+        focusComponent="tableLookup">
     <data readOnly="true">
         <keyValueCollection id="tablesDc">
             <loader id="tablesDl">
-                <query>
+                <query><!--trim(' . ') is workaround to get a dot - did not work directly, no escape character for . findable-->
                     <![CDATA[
                     select
                         tbl.id,
                         concat(
                             db.dbName,
-                            '-',
+                            trim(' . '),
                             ms.schemaName,
-                            '-',
+                            trim(' . '),
                             tbl.tableName,
                             coalesce(
                                 concat(' (', tv.identifier, ')'),
@@ -29,30 +29,15 @@
                 </query>
             </loader>
             <properties>
-                <property name="id" datatype="uuid"/><!-- tbl.tableName  tv.identifier    concat(tbl.tableName, nullif(concat(' (', tv.identifier, ')'),''))-->
+                <property name="id" datatype="uuid"/>
                 <property name="repr" datatype="string"/>
             </properties>
         </keyValueCollection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="tableViewsTable"
-            spacing="true">
-        <table id="tableViewsTable"
-               width="100%"
-               dataContainer="tablesDc">
-            <columns>
-                <column id="id"/>
-                <column id="repr"/>
-            </columns>
-            <rowsCount/>
-            <buttonsPanel id="buttonsPanel"
-                          alwaysVisible="true">
-            </buttonsPanel>
-        </table>
-        <hbox id="lookupActions" spacing="true" visible="false">
-            <button action="lookupSelectAction"/>
-            <button action="lookupCancelAction"/>
-        </hbox>
+    <layout spacing="true">
+        <lookupField id="tableLookup" caption="Abhängigkeiten auflisten für:" optionsContainer="tablesDc"
+                     captionProperty="repr"/>
     </layout>
 </window>
