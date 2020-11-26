@@ -39,3 +39,48 @@
   - Ersatz der Konkatenierungen durch Verwendung von MessageFormat.format(). (Für Nachricht-Strings mit Parametern)
   - In ganzer codebasis suchen nach "Exception(", damit sollten die meisten Fälle gefunden werden.
 
+# Refactor
+
+## Jederzeit
+
+* Beans in entsprechende subpackages
+  Hilfsklassen und -Interfaces in das Package des Beans
+  
+## Nach Vorliegen der migrierten Daten
+
+* Browse-Zwischenscreens ersetzen mit direkter Auswahl in Edit-Form
+
+* Bei attributierten m:n Beziehungen: Direktes Auswählen in Kind-Tabelle des Edit-Form mittels Dropdown
+  * Rollenzuweisung
+  * Attributauswahl in DataSetView
+  * Zuweisen DSV zu Facade
+  * Zuweisen SA zu Layergruppe oder Karte
+
+* Ablauf mit Schemaauslesen prüfen.
+
+* Identifier für die verschiedenen Klassen setzen (Karte, Gruppe, Facade, Vector, Raster, Tabelle)
+
+# Neu
+
+## Middleware-Service "Depencencies"
+
+Signatur:
+* Input:
+  * UUID des postgrestable
+  * (Abhängigkeitstypen)
+    * Alle
+    * Nur Daten
+    * Nur Produkte
+* Output
+  * Abhängigkeitstyp (Produkt, Datenfluss, Komponente, Weitere (CCC, ...))
+  * Typ-Sort (Sortindex des Typs)
+  * Informationen zum abhängigen Objekt
+    * Name - Voll qualifiziert
+    * Bezug zu Tabelle - "Tabelle in dieser Datei des GRETL-Jobs gefunden"
+    
+# Aenderungen gegenüber Migrationsversion
+* bytea für Customlegenden in SingleActor
+* Neue Entity StyleAsset als Kind der DataSetViews
+* Login muss gesetzt werden (Siehe dev runtime settings)
+
+    

@@ -33,11 +33,27 @@
                 <property name="repr" datatype="string"/>
             </properties>
         </keyValueCollection>
+        <collection id="dependenciesDc"
+                    class="ch.so.agi.simi.service.dependency.DependencyInfo">
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout spacing="true">
+    <layout spacing="true" expand="dependenciesTable">
         <lookupField id="tableLookup" caption="Abhängigkeiten auflisten für:" optionsContainer="tablesDc"
                      captionProperty="repr"/>
+        <hbox spacing="true">
+            <textField id="fldTableName" property="Tabelle qualifiziert eingeben [Schemaname/Tabellenname]"/>
+            <button id="btnTableName"/>
+        </hbox>
+        <table id="dependenciesTable"
+               width="100%"
+               dataContainer="dependenciesDc">
+            <columns>
+                <column id="objectName" caption="Name der Abhängigkeit"/>
+                <column id="dependencyInfo" caption="Bezug zur Tabelle / Ebene"/>
+                <column id="objectType" caption="Typ der Abhängigkeit"/>
+            </columns>
+        </table>
     </layout>
 </window>

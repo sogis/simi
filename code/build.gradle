@@ -92,6 +92,8 @@ configure(coreModule) {
         compileOnly(servletApi)
         jdbc(postgres)
         testRuntime(postgres)
+
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
     }
 
     task cleanConf(description: 'Cleans up conf directory', type: Delete) {

@@ -7,5 +7,13 @@
     <context:component-scan base-package="ch.so.agi.simi"/>
     
     <gui:screens base-packages="ch.so.agi.simi.web"/>
+    <bean id="simi_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+        <property name="serverSelector" ref="cuba_ServerSelector"/>
+        <property name="remoteServices">
+            <map>
+                <entry key="simi_DependencyService" value="ch.so.agi.simi.service.dependency.DependencyService"/>
+            </map>
+        </property>
+    </bean>
 
 </beans>
