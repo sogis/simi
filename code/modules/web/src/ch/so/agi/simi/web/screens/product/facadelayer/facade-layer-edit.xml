@@ -65,7 +65,7 @@
                     </action>
                 </actions>
                 <columns>
-                    <column id="dataSetView" editable="true" optionsContainer="dataSetViewsDc"/>
+                    <column id="dataSetView" editable="true" optionsContainer="dataSetViewsDc" captionProperty="entityName"/>
                     <column id="transparency" editable="true"/>
                     <column id="sort" editable="true"/>
                 </columns>
@@ -77,7 +77,7 @@
             </table>
         </groupBox>
         <hbox id="editActions" spacing="true">
-            <button action="windowCommitAndClose"/>
+            <button action="windowCommitAndClose" align="TOP_LEFT"/>
             <button id="btnConvertToLayerGroup" action="convertToLayerGroup"/>
             <button action="windowClose"/>
         </hbox>

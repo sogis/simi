@@ -45,7 +45,7 @@
                 <column id="identifier"/>
                 <column id="title"/>
                 <column id="pubScope"/>
-                <column id="releasedAt"/>
+                <column id="typeAbbreviation"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "SIMIPRODUCT_DATA_SET_VIEW")
 @Entity(name = "simiProduct_DataSetView")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("%s|identifier")
+@NamePattern("#entityName|identifier,title") //needed to define minimal view
 public class DataSetView extends SingleActor {
     private static final long serialVersionUID = 3720829701428961919L;
 
@@ -85,6 +85,11 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "dataSetView")
     private FeatureInfo featureInfo;
+
+    @Override
+    protected String typeAbbreviation(){
+        return "View";
+    }
 
     public List<StyleAsset> getStyleAssets() {
         return styleAssets;

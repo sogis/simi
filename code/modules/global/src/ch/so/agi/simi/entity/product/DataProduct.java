@@ -3,6 +3,7 @@ package ch.so.agi.simi.entity.product;
 import ch.so.agi.simi.entity.DataProduct_PubScope;
 import ch.so.agi.simi.entity.SimiStandardEntity;
 import ch.so.agi.simi.entity.dependency.Component;
+import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
 @Entity(name = "simiProduct_DataProduct")
-@NamePattern("%s (%s)|identifier,title")
+@NamePattern("#entityName|identifier,title")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class DataProduct extends SimiStandardEntity {
@@ -55,6 +56,26 @@ public class DataProduct extends SimiStandardEntity {
 
     @Column(name = "RELEASED_THROUGH", length = 100)
     private String releasedThrough;
+
+    protected String typeAbbreviation(){
+        return " WARNING: override missing.";
+    }
+
+    @Transient
+    @MetaProperty
+    public String getEntityName() { // For use in Tables, can be referenced as entityName
+        return entityName();
+    }
+
+    @Transient
+    @MetaProperty
+    public String getTypeAbbreviation() { // For use in Tables, can be referenced as typeAbbreviation
+        return typeAbbreviation();
+    }
+
+    protected String entityName(){
+        return identifier + " - " + title + " (" +  typeAbbreviation() + " )";
+    }
 
     public String getDescription() {
         return description;
