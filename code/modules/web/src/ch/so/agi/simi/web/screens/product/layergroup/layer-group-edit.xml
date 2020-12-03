@@ -19,8 +19,15 @@
                 </property>
             </view>
             <loader/>
-            <collection id="singleActorsDc" property="singleActors"/>
+            <collection id="propertiesInListDc" property="singleActors"/>
         </instance>
+        <collection id="singleActorsDc" class="ch.so.agi.simi.entity.product.SingleActor">
+            <loader id="singleActorsDl">
+                <query>
+                    <![CDATA[select e from simiProduct_SingleActor e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="80%"
                 width="80%"
@@ -30,7 +37,7 @@
     <actions>
         <action id="convertToFacadeLayer" caption="In FacadeLayer umwandeln" icon="EXCHANGE"/>
     </actions>
-    <layout expand="singleActorsBox" spacing="true">
+    <layout expand="propertiesInListBox" spacing="true">
         <form id="form" dataContainer="dataProductDc">
             <column width="350px">
                 <textField id="identifierField" property="identifier"/>
@@ -50,24 +57,25 @@
                 <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
             </column>
         </form>
-        <groupBox id="singleActorsBox" caption="Enthaltene Facadelayer und DSV">
-            <table id="singleActorsTable" dataContainer="singleActorsDc" width="100%" editable="true" multiselect="true">
+        <groupBox id="propertiesInListBox" caption="Enthaltene Facadelayer und DSV">
+            <table id="propertiesInListTable" dataContainer="propertiesInListDc" width="100%" editable="true" multiselect="true">
                 <actions>
-                    <action id="addSingleActor" caption="Hinzufügen" icon="ADD_ACTION"/>
-                    <action id="exclude" type="remove" caption="Ausschliessen"/>
-                    <action id="sortAction" caption="Sortieren" icon="SORT"/>
+                    <action id="unlink" type="remove" caption="Verknüpfung löschen">
+                        <properties>
+                            <property name="confirmation" value="false"/>
+                        </properties>
+                    </action>
                 </actions>
                 <columns>
-                    <column id="singleActor.identifier"/>
-                    <column id="singleActor.title"/>
+                    <column id="singleActor" editable="true" optionsContainer="singleActorsDc" captionProperty="entityName"/>
                     <column id="visible" editable="true"/>
                     <column id="transparency" editable="true"/>
                     <column id="sort" editable="true"/>
                 </columns>
                 <buttonsPanel>
-                    <button id="btnAddSingleActor" action="singleActorsTable.addSingleActor"/>
-                    <button id="btnExclude" action="singleActorsTable.exclude"/>
-                    <button id="btnSortAction" action="singleActorsTable.sortAction"/>
+                    <button id="btnPilAdd" icon="ADD_ACTION" caption="Kindebene verknüpfen" primary="true"/>
+                    <button id="btnPilUnlink" action="propertiesInListTable.unlink"/>
+                    <button id="btnPilSort" caption="sortieren" icon="SORT"/>
                 </buttonsPanel>
             </table>
         </groupBox>

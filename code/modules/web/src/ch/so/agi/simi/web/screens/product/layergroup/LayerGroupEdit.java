@@ -6,6 +6,7 @@ import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
+import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
@@ -24,13 +25,9 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
     @Inject
     private ScreenBuilders screenBuilders;
     @Inject
-    private Metadata metadata;
+    private CollectionPropertyContainer<PropertiesInList> propertiesInListDc;
     @Inject
-    private CollectionPropertyContainer<PropertiesInList> singleActorsDc;
-    @Inject
-    private Table<PropertiesInList> singleActorsTable;
-    @Inject
-    private InstanceContainer<LayerGroup> dataProductDc;
+    private Table<PropertiesInList> propertiesInListTable;
     @Inject
     private DataContext dataContext;
     @Inject
@@ -38,39 +35,24 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
     @Inject
     private SortBean sortBean;
 
-    @Subscribe("singleActorsTable.addSingleActor")
-    public void onSingleActorsTableAddSingleActor(Action.ActionPerformedEvent event) {
-        screenBuilders.lookup(SingleActor.class, this)
-                .withLaunchMode(OpenMode.DIALOG)
-                .withSelectHandler(singleActors -> {
-                    singleActors.stream()
-                            .map(this::createPropertiesInListFromSingleActor)
-                            .forEach(this::addToPropertiesInList);
-                })
-                .build()
-                .show();
+    @Subscribe("btnPilAdd")
+    public void onBtnPilAddClick(Button.ClickEvent event) {
+        PropertiesInList pil = dataContext.create(PropertiesInList.class);
+        pil.setProductList(this.getEditedEntity());
+
+        propertiesInListDc.getMutableItems().add(pil);
+
+        propertiesInListTable.requestFocus(pil, "singleActor");
     }
 
-    private PropertiesInList createPropertiesInListFromSingleActor(SingleActor singleActor) {
-        PropertiesInList propertiesInList = metadata.create(PropertiesInList.class);
-        propertiesInList.setProductList(dataProductDc.getItem());
-        propertiesInList.setSingleActor(singleActor);
-
-        return propertiesInList;
-    }
-
-    private void addToPropertiesInList(PropertiesInList propertiesInList) {
-        singleActorsDc.getMutableItems().add(propertiesInList);
-    }
-
-    @Subscribe("singleActorsTable.sortAction")
-    public void onSingleActorsTableSortAction(Action.ActionPerformedEvent event) {
-        singleActorsTable.sort("sort", Table.SortDirection.ASCENDING);
+    @Subscribe("btnPilSort")
+    public void onBtnPilSortClick(Button.ClickEvent event) {
+        propertiesInListTable.sort("sort", Table.SortDirection.ASCENDING);
     }
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreCommit(DataContext.PreCommitEvent event) {
-        List<PropertiesInList> entities = sortBean.AdjustSort(singleActorsDc.getItems());
+        List<PropertiesInList> entities = sortBean.AdjustSort(propertiesInListDc.getItems());
 
         //add modified instances to the commit list
         event.getModifiedInstances().addAll(entities);

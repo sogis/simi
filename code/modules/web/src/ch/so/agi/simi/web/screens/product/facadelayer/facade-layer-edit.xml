@@ -70,9 +70,9 @@
                     <column id="sort" editable="true"/>
                 </columns>
                 <buttonsPanel>
-                    <button id="btnPifAddDataSetView" caption="View verknüpfen" icon="ADD_ACTION"/>
+                    <button id="btnPifAddDataSetView" caption="View verknüpfen" icon="ADD_ACTION" primary="true"/>
                     <button id="btnPifExclude" action="propertiesInFacadeTable.unlink"/>
-                    <button id="btnPifSort" caption="sortieren"/>
+                    <button id="btnPifSort" caption="sortieren" icon="SORT"/>
                 </buttonsPanel>
             </table>
         </groupBox>

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
 @Entity(name = "simiProduct_DataProduct")
-@NamePattern("#entityName|identifier,title")
+@NamePattern("entityName|identifier,title")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class DataProduct extends SimiStandardEntity {
