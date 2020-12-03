@@ -6,6 +6,7 @@ import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.global.MetadataTools;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
+import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
@@ -24,53 +25,32 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
     @Inject
     private ScreenBuilders screenBuilders;
     @Inject
-    private Metadata metadata;
+    private CollectionPropertyContainer<PropertiesInFacade> propertiesInFacadeDc;
     @Inject
-    private CollectionPropertyContainer<PropertiesInFacade> dataSetViewsDc;
-    @Inject
-    private Table<PropertiesInFacade> dataSetViewsTable;
-    @Inject
-    private InstanceContainer<FacadeLayer> dataProductDc;
+    private Table<PropertiesInFacade> propertiesInFacadeTable;
     @Inject
     private DataContext dataContext;
     @Inject
-    private MetadataTools metadataTools;
-    @Inject
     private SortBean sortBean;
 
-    @Subscribe("dataSetViewsTable.addDataSetView")
-    public void onSingleActorsTableAddSingleActor(Action.ActionPerformedEvent event) {
-        screenBuilders.lookup(DataSetView.class, this)
-                .withLaunchMode(OpenMode.DIALOG)
-                .withSelectHandler(dataSetViews -> {
-                    dataSetViews.stream()
-                            .map(this::createPropertiesInFacadeFromDataSetView)
-                            .forEach(this::addToPropertiesInFacade);
-                })
-                .build()
-                .show();
+    @Subscribe("btnPifAddDataSetView")
+    public void onBtnPifAddDataSetViewClick(Button.ClickEvent event) {
+        PropertiesInFacade pif = dataContext.create(PropertiesInFacade.class);
+        pif.setFacadeLayer(this.getEditedEntity());
+
+        propertiesInFacadeDc.getMutableItems().add(pif);
+
+        propertiesInFacadeTable.requestFocus(pif, "dataSetView");
     }
 
-    private PropertiesInFacade createPropertiesInFacadeFromDataSetView(DataSetView dataSetView) {
-        PropertiesInFacade propertiesInFacade = metadata.create(PropertiesInFacade.class);
-        propertiesInFacade.setFacadeLayer(dataProductDc.getItem());
-        propertiesInFacade.setDataSetView(dataSetView);
-
-        return propertiesInFacade;
-    }
-
-    private void addToPropertiesInFacade(PropertiesInFacade propertiesInFacade) {
-        dataSetViewsDc.getMutableItems().add(propertiesInFacade);
-    }
-
-    @Subscribe("dataSetViewsTable.sortAction")
-    public void onSingleActorsTableSortAction(Action.ActionPerformedEvent event) {
-        dataSetViewsTable.sort("sort", Table.SortDirection.ASCENDING);
+    @Subscribe("btnPifSort")
+    public void onBtnPifSortClick(Button.ClickEvent event) {
+        propertiesInFacadeTable.sort("sort", Table.SortDirection.ASCENDING);
     }
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreCommit(DataContext.PreCommitEvent event) {
-        List<PropertiesInFacade> entities = sortBean.AdjustSort(dataSetViewsDc.getItems());
+        List<PropertiesInFacade> entities = sortBean.AdjustSort(propertiesInFacadeDc.getItems());
 
         //add modified instances to the commit list
         event.getModifiedInstances().addAll(entities);
