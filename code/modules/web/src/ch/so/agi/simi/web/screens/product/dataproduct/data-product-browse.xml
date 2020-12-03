@@ -52,10 +52,10 @@
                           alwaysVisible="true">
                 <popupButton id="createBtn" caption="Erstellen" stylename="friendly" icon="ADD_ACTION">
                     <actions>
-                        <action id="createLayerGroup" caption="Layergruppe erstellen"/>
-                        <action id="createFacadeLayer" caption="Facadelayer erstellen"/>
+                        <action id="createLayerGroup" caption="Gruppe erstellen"/>
+                        <action id="createFacadeLayer" caption="Fassade erstellen"/>
                         <action id="createTableView" caption="View erstellen"/>
-                        <action id="createMap" caption="Map erstellen"/>
+                        <action id="createMap" caption="Karte erstellen"/>
                         <action id="createRasterView" caption="Raster View erstellen"/>
                     </actions>
                 </popupButton>

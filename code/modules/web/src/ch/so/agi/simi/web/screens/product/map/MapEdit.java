@@ -42,33 +42,6 @@ public class MapEdit extends StandardEditor<Map> {
 
         propertiesInListTable.requestFocus(pil, "singleActor");
     }
-/*
-    @Subscribe("propertiesInListTable.addSingleActor")
-    public void onpropertiesInListTableAddSingleActor(Action.ActionPerformedEvent event) {
-        screenBuilders.lookup(SingleActor.class, this)
-                .withLaunchMode(OpenMode.DIALOG)
-                .withSelectHandler(singleActors -> {
-                    singleActors.stream()
-                            .map(this::createPropertiesInListFromSingleActor)
-                            .forEach(this::addToPropertiesInList);
-                })
-                .build()
-                .show();
-    }
-
-    private PropertiesInList createPropertiesInListFromSingleActor(SingleActor singleActor) {
-        PropertiesInList propertiesInList = metadata.create(PropertiesInList.class);
-        propertiesInList.setProductList(dataProductDc.getItem());
-        propertiesInList.setSingleActor(singleActor);
-
-        return propertiesInList;
-    }
-
-    private void addToPropertiesInList(PropertiesInList propertiesInList) {
-        propertiesInListDc.getMutableItems().add(propertiesInList);
-    }
-
- */
 
     @Subscribe("btnPilSortAction")
     public void onBtnPilSortActionClick(Button.ClickEvent event) {

@@ -63,28 +63,14 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
 
     @Subscribe("createBtn.createTableView")
     protected void onCreateBtnCreateTableView(Action.ActionPerformedEvent event) {
-        showLookupForEntity(PostgresTable.class, postgresTable -> {
-            TableView tableView = metadata.create(TableView.class);
-            tableView.setPostgresTable(postgresTable);
-            showCreateEditorForDataProduct(tableView);
-        });
+        TableView tableView = metadata.create(TableView.class);
+        showCreateEditorForDataProduct(tableView);
     }
 
     @Subscribe("createBtn.createRasterView")
     protected void onCreateBtnCreateRasterView(Action.ActionPerformedEvent event) {
-        showLookupForEntity(RasterDS.class, rasterDS -> {
-            RasterView rasterView = metadata.create(RasterView.class);
-            rasterView.setRasterDS(rasterDS);
-            showCreateEditorForDataProduct(rasterView);
-        });
-    }
-
-    private <T, E extends Entity<T>> void showLookupForEntity(Class<E> entityClass, Consumer<E> selectHandler) {
-        screenBuilders.lookup(entityClass, this)
-                .withOpenMode(OpenMode.DIALOG)
-                .withSelectHandler(rasterDSs -> selectHandler.accept(rasterDSs.iterator().next()))
-                .build()
-                .show();
+        RasterView rv = metadata.create(RasterView.class);
+        showCreateEditorForDataProduct(rv);
     }
 
     private void showCreateEditorForDataProduct(DataProduct dataProduct) {
