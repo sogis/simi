@@ -24,7 +24,7 @@
         <collection id="singleActorsDc" class="ch.so.agi.simi.entity.product.SingleActor">
             <loader id="singleActorsDl">
                 <query>
-                    <![CDATA[select e from simiProduct_SingleActor e]]>
+                    <![CDATA[select e from simiProduct_SingleActor e order by e.identifier]]>
                 </query>
             </loader>
         </collection>
@@ -70,7 +70,7 @@
                     <column id="singleActor" editable="true" optionsContainer="singleActorsDc" captionProperty="entityName"/>
                     <column id="visible" editable="true"/>
                     <column id="transparency" editable="true"/>
-                    <column id="sort" editable="true"/>
+                    <column id="sort" editable="true" sort="ASCENDING"/>
                 </columns>
                 <buttonsPanel>
                     <button id="btnPilAdd" icon="ADD_ACTION" caption="Kindebene verknüpfen" primary="true"/>

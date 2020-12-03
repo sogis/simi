@@ -25,7 +25,7 @@
         <collection id="rasterDc" class="ch.so.agi.simi.entity.data.raster.RasterDS">
             <loader id="rasterDl">
                 <query>
-                    <![CDATA[select e from simiData_RasterDS e]]>
+                    <![CDATA[select e from simiData_RasterDS e ORDER BY e.path]]>
                 </query>
             </loader>
         </collection>

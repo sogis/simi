@@ -42,7 +42,7 @@
                 <action id="copy" icon="COPY" caption="Kopieren" trackSelection="true"/>
             </actions>
             <columns>
-                <column id="identifier"/>
+                <column id="identifier" sort="ASCENDING"/>
                 <column id="title"/>
                 <column id="pubScope"/>
                 <column id="typeAbbreviation"/>
