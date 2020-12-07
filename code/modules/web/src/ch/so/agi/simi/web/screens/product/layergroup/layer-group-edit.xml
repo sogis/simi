@@ -74,6 +74,7 @@
                 </columns>
                 <buttonsPanel>
                     <button id="btnPilAdd" icon="ADD_ACTION" caption="Kindebene verknüpfen" primary="true"/>
+                    <button id="btnPilAddSingleActorsFromLayerGroup" caption="Aus Gruppe übernehmen ..." icon="ADD_ACTION"/>
                     <button id="btnPilUnlink" action="propertiesInListTable.unlink"/>
                     <button id="btnPilSort" caption="sortieren" icon="SORT"/>
                 </buttonsPanel>

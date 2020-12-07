@@ -2,6 +2,7 @@ package ch.so.agi.simi.web.screens.product.layergroup;
 
 import ch.so.agi.simi.entity.product.*;
 import ch.so.agi.simi.web.SortBean;
+import ch.so.agi.simi.web.beans.copy.UpdateFromOtherListsBean;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
@@ -15,7 +16,9 @@ import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.gui.util.OperationResult;
 
 import javax.inject.Inject;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @UiController("simiProduct_LayerGroup.edit")
 @UiDescriptor("layer-group-edit.xml")
@@ -34,6 +37,8 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
     private Notifications notifications;
     @Inject
     private SortBean sortBean;
+    @Inject
+    private UpdateFromOtherListsBean listUpdateBean;
 
     @Subscribe("btnPilAdd")
     public void onBtnPilAddClick(Button.ClickEvent event) {
@@ -114,5 +119,32 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
             layerGroup.setIdentifier(identifier);
             dataContext.commit();
         }
+    }
+
+    @Subscribe("btnPilAddSingleActorsFromLayerGroup")
+    public void onBtnPilAddSingleActorsFromLayerGroupClick(Button.ClickEvent event) {
+        //throw new NotImplementedException("onpropertiesInListTableAddSingleActorsFromLayerGroup");
+
+        screenBuilders.lookup(LayerGroup.class, this)
+                .withLaunchMode(OpenMode.DIALOG)
+                .withSelectHandler(layerGroups -> {
+                    groupsSelected(layerGroups.iterator());
+                })
+                .build()
+                .show();
+    }
+
+    private void groupsSelected(Iterator<LayerGroup> selectedGroupsIterator){
+
+        Optional<PropertiesInList> firstAdded = listUpdateBean.updateLayersFromOtherLists(
+                this.getEditedEntity().getId(),
+                propertiesInListDc.getMutableItems(),
+                selectedGroupsIterator
+        );
+
+        if(!firstAdded.isPresent())
+            return;
+
+        propertiesInListTable.requestFocus(firstAdded.get(), "sort");
     }
 }

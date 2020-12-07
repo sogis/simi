@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.beans.copy;
 
-import ch.so.agi.simi.entity.product.ProductList;
+import ch.so.agi.simi.entity.product.LayerGroup;
 import ch.so.agi.simi.entity.product.PropertiesInList;
 import ch.so.agi.simi.entity.product.SingleActor;
 import org.junit.jupiter.api.Test;
@@ -13,23 +13,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UpdateFromOtherListsBeanTest {
 
-    private static final UUID[] DUMMY_ARRAY = new UUID[0];
+    private static final UUID PROD_LIST_UUID_DUMMY = UUID.randomUUID();
 
     UpdateFromOtherListsBean bean = new UpdateFromOtherListsBean();
 
     @Test
     public void newLayersAreAdded(){
 
-        ProductList updateCandidate = new ProductList();
+        //ProductList updateCandidate = new ProductList();
+        List<PropertiesInList> updateList = new LinkedList<>();
 
         List<PropertiesInList> otherChildLayers = new LinkedList<>();
         otherChildLayers.add(buildPil(UUID.randomUUID(), 11));
         otherChildLayers.add(buildPil(UUID.randomUUID(), 21));
 
-        bean.setOthersChildLayerLinks(otherChildLayers);
-        bean.updateLayersFromOtherLists(updateCandidate, DUMMY_ARRAY);
+        bean._setOthersChildLayerLinksForTest(otherChildLayers);
+        bean.updateLayersFromOtherLists(PROD_LIST_UUID_DUMMY, updateList, null);
 
-        assertChildrenContained(updateCandidate, otherChildLayers);
+        assertChildrenContained(updateList, otherChildLayers);
     }
 
     @Test
@@ -37,9 +38,7 @@ public class UpdateFromOtherListsBeanTest {
 
         UUID saUuid = UUID.randomUUID();
 
-        ProductList updateCandidate = new ProductList();
         List<PropertiesInList> candLayers = new LinkedList<>();
-        updateCandidate.setSingleActors(candLayers);
         candLayers.add(buildPil(saUuid, 10));
         candLayers.add(buildPil(UUID.randomUUID(), 20));
 
@@ -49,20 +48,19 @@ public class UpdateFromOtherListsBeanTest {
         otherChildLayers.add(transferLayer);
         otherChildLayers.add(buildPil(UUID.randomUUID(), 21));
 
-        bean.setOthersChildLayerLinks(otherChildLayers);
-        bean.updateLayersFromOtherLists(updateCandidate, DUMMY_ARRAY);
+        bean._setOthersChildLayerLinksForTest(otherChildLayers);
+        bean.updateLayersFromOtherLists(PROD_LIST_UUID_DUMMY, candLayers, null);
 
-        assertChildrenContained(updateCandidate, transferLayer);
+        assertChildrenContained(candLayers, transferLayer);
     }
 
     @Test
     public void duplicateChildLayersAddedJustOnce(){
 
-        ProductList updateCandidate = new ProductList();
+        List<PropertiesInList> candLayers = new LinkedList<>();
 
         UUID id = UUID.randomUUID();
         int trans = 11;
-
         List<PropertiesInList> otherChildLayers = new LinkedList<>();
 
         PropertiesInList link1 = buildPil(id, trans);
@@ -71,13 +69,13 @@ public class UpdateFromOtherListsBeanTest {
         otherChildLayers.add(link1);
         otherChildLayers.add(link2);
 
-        bean.setOthersChildLayerLinks(otherChildLayers);
-        bean.updateLayersFromOtherLists(updateCandidate, DUMMY_ARRAY);
+        bean._setOthersChildLayerLinksForTest(otherChildLayers);
+        bean.updateLayersFromOtherLists(PROD_LIST_UUID_DUMMY, candLayers, null);
 
-        assertChildrenContained(updateCandidate, link1);
-        assertChildrenContained(updateCandidate, link2); //must not make a difference whether link1 or link2 is checked
+        assertChildrenContained(candLayers, link1);
+        assertChildrenContained(candLayers, link2); //must not make a difference whether link1 or link2 is checked
 
-        assertEquals(1, updateCandidate.getSingleActors().size(), "updateCandidate must have exactly one child layer link");
+        assertEquals(1, candLayers.size(), "updateCandidate must have exactly one child layer link");
     }
 
     @Test
@@ -85,21 +83,20 @@ public class UpdateFromOtherListsBeanTest {
 
         UUID saUuid = UUID.randomUUID();
 
-        ProductList updateCandidate = new ProductList();
+
         List<PropertiesInList> candLayers = new LinkedList<>();
         PropertiesInList candPil = buildPil(UUID.randomUUID(), 10);
         candPil.setSort(5);
         candLayers.add(candPil);
-        updateCandidate.setSingleActors(candLayers);
 
         List<PropertiesInList> otherChildLayers = new LinkedList<>();
         otherChildLayers.add(buildPil(saUuid, 11));
 
-        bean.setOthersChildLayerLinks(otherChildLayers);
-        bean.updateLayersFromOtherLists(updateCandidate, DUMMY_ARRAY);
+        bean._setOthersChildLayerLinksForTest(otherChildLayers);
+        bean.updateLayersFromOtherLists(PROD_LIST_UUID_DUMMY, candLayers, null);
 
         int sortIndex = -1;
-        for(PropertiesInList pil : updateCandidate.getSingleActors()){
+        for(PropertiesInList pil : candLayers){
             if(saUuid.equals(pil.getSingleActor().getId()))
                 sortIndex = pil.getSort();
         }
@@ -109,7 +106,7 @@ public class UpdateFromOtherListsBeanTest {
 
     @Test
     public void returnsAddedWithLowestIndex(){
-                ProductList updateCandidate = new ProductList();
+        List<PropertiesInList> candLayers = new LinkedList<>();
 
         List<PropertiesInList> otherChildLayers = new LinkedList<>();
 
@@ -126,8 +123,8 @@ public class UpdateFromOtherListsBeanTest {
         otherChildLayers.add(sort10); // For testing by intent in the middle of the list
         otherChildLayers.add(sort30);
 
-        bean.setOthersChildLayerLinks(otherChildLayers);
-        Optional<PropertiesInList> lowestIndex = bean.updateLayersFromOtherLists(updateCandidate, DUMMY_ARRAY);
+        bean._setOthersChildLayerLinksForTest(otherChildLayers);
+        Optional<PropertiesInList> lowestIndex = bean.updateLayersFromOtherLists(PROD_LIST_UUID_DUMMY, candLayers, null);
 
         assertEquals(
                 sort10.getSingleActor().getId(),
@@ -135,21 +132,21 @@ public class UpdateFromOtherListsBeanTest {
                 "Returned Layerlink must point to child layer with expected id");
     }
 
-    private static void assertChildrenContained(ProductList updateCandidate, PropertiesInList childLayer) {
+    private static void assertChildrenContained(List<PropertiesInList> updatedList, PropertiesInList childLayer) {
 
         LinkedList<PropertiesInList> list = new LinkedList<>();
         list.add(childLayer);
 
-        assertChildrenContained(updateCandidate, list);
+        assertChildrenContained(updatedList, list);
     }
 
 
-    private static void assertChildrenContained(ProductList updateCandidate, List<PropertiesInList> children) {
+    private static void assertChildrenContained(List<PropertiesInList> updatedList, List<PropertiesInList> children) {
 
         for(PropertiesInList otherChild : children){
             boolean found = false;
 
-            for(PropertiesInList candidateChild : updateCandidate.getSingleActors()){
+            for(PropertiesInList candidateChild : updatedList){
                 UUID candidateId = candidateChild.getSingleActor().getId();
                 UUID otherId = otherChild.getSingleActor().getId();
 

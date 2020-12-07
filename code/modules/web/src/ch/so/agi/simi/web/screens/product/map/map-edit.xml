@@ -59,7 +59,7 @@
         <groupBox id="propertiesInListBox" caption="Layer" expand="propertiesInListTable">
             <table id="propertiesInListTable" dataContainer="propertiesInListDc" width="100%" editable="true" multiselect="true">
                 <actions>
-                    <action id="exclude" type="remove" caption="Ausschliessen">
+                    <action id="exclude" type="remove" caption="Verknüpfung löschen">
                         <properties>
                             <property name="confirmation" value="false"/>
                         </properties>

@@ -32,14 +32,9 @@ public class MapEdit extends StandardEditor<Map> {
     private DataContext dataContext;
     @Inject
     private ScreenBuilders screenBuilders;
-
     @Inject
     private UpdateFromOtherListsBean listUpdateBean;
 
-    @Inject
-    private DataManager dataManager;
-    @Inject
-    private Notifications notifications;
 
     @Subscribe("btnPilAddSingleActor")
     public void onBtnPilAddSingleActorClick(Button.ClickEvent event) {
@@ -80,22 +75,14 @@ public class MapEdit extends StandardEditor<Map> {
     private void groupsSelected(Iterator<LayerGroup> selectedGroupsIterator){
 
         Optional<PropertiesInList> firstAdded = listUpdateBean.updateLayersFromOtherLists(
-                this.getEditedEntity(),
+                this.getEditedEntity().getId(),
+                propertiesInListDc.getMutableItems(),
                 selectedGroupsIterator
         );
 
         if(!firstAdded.isPresent())
             return;
 
-
         propertiesInListTable.requestFocus(firstAdded.get(), "sort");
-
-        //notifications.create().withCaption(firstAdded.get().toString()).show();
-
-        /*
-
-
-
-         */
     }
 }

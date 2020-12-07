@@ -17,43 +17,39 @@ public class UpdateFromOtherListsBean {
     public static final String NAME = "simi_UpdateFromOtherListsBean";
     private static final String VIEW_NAME = "updateFromOtherListsBean-view";
 
-    private ProductList updateCandidate;
-    //private UUID productListUuid;
-    //private List<PropertiesInList> updatedList;
+    //private ProductList updateCandidate;
+    private UUID productListUuid;
+    private List<PropertiesInList> candidateList;
     private List<PropertiesInList> othersChildLayerLinks;
 
     @Inject
     private DataManager dataManager;
 
     /**
-     * Updates the updateCandidate's child layers from the given other product lists.
+     * Updates the "candidateList" from the given "otherLayerGroups".
      * </p>
-     * If a child layer exists in the updateCandidate, all properties except the sorting
-     * are updated from child of the other product list.
+     * If a child layer exists in "candidateList", all properties except the sorting
+     * are updated from the child of "otherLayerGroups".
      * </p>
-     * Child Layer in the other product lists that do not exist in the updateCandidate
-     * are added as new child layers to the updateCandidate. The added child layers are
-     * set to a higher sort index than the existing ones in the updateCandidate.
-     * </p>
-     * CAUTION: The used updateCandidate must have his child layers loaded, otherwise
-     * duplicate child layer references will be added to the updateCandidate
-     * @param updateCandidate The map or layergroup that is updated
-     * @param otherLayerGroups The other layergroups whose child layers are appended to the updateCandidate.
-     * @return The added PropertiesInList entry with the lowest sort index. Null if no entries where added.
+     * Child Layers in "otherLayerGroups" that do not exist in "candidateList"
+     * are added as new child layers to "candidateList". The added child layers are
+     * set to a higher sort index than the existing ones in "candidateList".
+     * @param productListUuid The UUID of the owning Map or LayerGroup of the "candidateList"
+     * @param candidateList The list of child layer links of the map of layergroup represented by "productListUuid"
+     * @param otherLayerGroups The other layergroups whose child layers are appended to the candidateList.
+     * @return
      */
-    public Optional<PropertiesInList> updateLayersFromOtherLists(ProductList updateCandidate, Iterator<LayerGroup> otherLayerGroups){
-        if(updateCandidate == null)
-            throw new IllegalArgumentException("updateCandidate must not be null and have a singleActors collection");
+    public Optional<PropertiesInList> updateLayersFromOtherLists(UUID productListUuid, List<PropertiesInList> candidateList, Iterator<LayerGroup> otherLayerGroups){
+        if(productListUuid == null)
+            throw new IllegalArgumentException("productListUuid must not be null");
 
-        if(updateCandidate.getSingleActors() == null)
-            updateCandidate.setSingleActors(new LinkedList<PropertiesInList>());
+        if(candidateList == null)
+            throw new IllegalArgumentException("pilList must not be null");
 
-        if(otherLayerGroups == null)
-            throw new IllegalArgumentException("otherProdListIds must not be null");
+        this.candidateList = candidateList;
+        this.productListUuid = productListUuid;
 
-        this.updateCandidate = updateCandidate;
-
-        if(!isUnderTest())
+        if(otherLayerGroups != null) //Is null in unit tests, they do not load from the db and use _setOthersChildLayerLinksForTest() instead.
             loadLayersFromOtherLists(otherLayerGroups);
 
         // 1. Update properties for contained layers
@@ -89,7 +85,7 @@ public class UpdateFromOtherListsBean {
 
         Hashtable<UUID, PropertiesInList> distinctNewChildLayers = new Hashtable<>();
 
-        Hashtable<UUID, PropertiesInList> candidateChildren = hashByLayerUuid(updateCandidate.getSingleActors());
+        Hashtable<UUID, PropertiesInList> candidateChildren = hashByLayerUuid(candidateList);
 
         for(PropertiesInList otherPil : othersChildLayerLinks){
             PropertiesInList candidatePil = candidateChildren.getOrDefault(otherPil.getSingleActor().getId(), null);
@@ -107,7 +103,7 @@ public class UpdateFromOtherListsBean {
 
         PropertiesInList addedWithLowestIndex = null;
 
-        int sortIndex = calcMaxSort(updateCandidate);
+        int sortIndex = calcMaxSort(candidateList);
 
         boolean firstIteration = true;
 
@@ -119,10 +115,13 @@ public class UpdateFromOtherListsBean {
             copyRelevantAttributes(otherPil, newPil);
 
             sortIndex += 10;
-            newPil.setProductList(updateCandidate);
+
+            ProductList pl = new ProductList();
+            pl.setId(productListUuid);
+            newPil.setProductList(pl);
             newPil.setSort(sortIndex);
 
-            updateCandidate.getSingleActors().add(newPil);
+            candidateList.add(newPil);
 
             if(firstIteration){
                 addedWithLowestIndex = newPil;
@@ -133,10 +132,10 @@ public class UpdateFromOtherListsBean {
         return addedWithLowestIndex;
     }
 
-    private static int calcMaxSort(ProductList updateCandidate) {
+    private static int calcMaxSort(List<PropertiesInList> updatedList) {
         int maxSort = 0;
 
-        for(PropertiesInList pil : updateCandidate.getSingleActors()){
+        for(PropertiesInList pil : updatedList){
 
             if(pil.getSort() != null) {
                 int curSort = pil.getSort();
@@ -155,7 +154,10 @@ public class UpdateFromOtherListsBean {
         copyRelevantAttributes(fromPil, toPil);
 
         toPil.setSort(sortIndex);
-        toPil.setProductList(updateCandidate);
+
+        ProductList pl = new ProductList();
+        pl.setId(productListUuid);
+        toPil.setProductList(pl);
     }
 
     private static Hashtable<UUID, PropertiesInList> hashByLayerUuid(List<PropertiesInList> inOutMapLayers) {
@@ -178,7 +180,7 @@ public class UpdateFromOtherListsBean {
         toPil.setSingleActor(fromPil.getSingleActor());
     }
 
-    void setOthersChildLayerLinks(List<PropertiesInList> othersChildLayerLinks){
+    void _setOthersChildLayerLinksForTest(List<PropertiesInList> othersChildLayerLinks){
         this.othersChildLayerLinks = othersChildLayerLinks;
     }
 
