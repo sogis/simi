@@ -56,4 +56,10 @@
             <property name="singleActor" view="_minimal"/>
         </property>
     </view>
+    <view entity="simiProduct_PropertiesInList" name="updateFromOtherListsBean-view" extends="_minimal">
+        <property name="visible"/>
+        <property name="singleActor" view="_minimal"/>
+        <property name="sort"/>
+        <property name="transparency"/>
+    </view>
 </views>

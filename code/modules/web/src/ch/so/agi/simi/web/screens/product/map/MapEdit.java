@@ -1,22 +1,20 @@
 package ch.so.agi.simi.web.screens.product.map;
 
+import ch.so.agi.simi.entity.product.*;
 import ch.so.agi.simi.entity.product.Map;
-import ch.so.agi.simi.entity.product.PropertiesInList;
-import ch.so.agi.simi.entity.product.SingleActor;
 import ch.so.agi.simi.web.SortBean;
-import com.haulmont.cuba.core.global.Metadata;
+import ch.so.agi.simi.web.beans.copy.UpdateFromOtherListsBean;
+import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
-import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
-import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
-import org.apache.commons.lang3.NotImplementedException;
 
 import javax.inject.Inject;
-import java.util.List;
+import java.util.*;
 
 @UiController("simiProduct_Map.edit")
 @UiDescriptor("map-edit.xml")
@@ -32,6 +30,16 @@ public class MapEdit extends StandardEditor<Map> {
     private SortBean sortBean;
     @Inject
     private DataContext dataContext;
+    @Inject
+    private ScreenBuilders screenBuilders;
+
+    @Inject
+    private UpdateFromOtherListsBean listUpdateBean;
+
+    @Inject
+    private DataManager dataManager;
+    @Inject
+    private Notifications notifications;
 
     @Subscribe("btnPilAddSingleActor")
     public void onBtnPilAddSingleActorClick(Button.ClickEvent event) {
@@ -58,6 +66,36 @@ public class MapEdit extends StandardEditor<Map> {
 
     @Subscribe("btnPilAddSingleActorsFromLayerGroup")
     public void onBtnPilAddSingleActorsFromLayerGroupClick(Button.ClickEvent event) {
-        throw new NotImplementedException("onpropertiesInListTableAddSingleActorsFromLayerGroup");
+        //throw new NotImplementedException("onpropertiesInListTableAddSingleActorsFromLayerGroup");
+
+        screenBuilders.lookup(LayerGroup.class, this)
+                .withLaunchMode(OpenMode.DIALOG)
+                .withSelectHandler(layerGroups -> {
+                    groupsSelected(layerGroups.iterator());
+                })
+                .build()
+                .show();
+    }
+
+    private void groupsSelected(Iterator<LayerGroup> selectedGroupsIterator){
+
+        Optional<PropertiesInList> firstAdded = listUpdateBean.updateLayersFromOtherLists(
+                this.getEditedEntity(),
+                selectedGroupsIterator
+        );
+
+        if(!firstAdded.isPresent())
+            return;
+
+
+        propertiesInListTable.requestFocus(firstAdded.get(), "sort");
+
+        //notifications.create().withCaption(firstAdded.get().toString()).show();
+
+        /*
+
+
+
+         */
     }
 }

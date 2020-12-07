@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="Layergruppen auswählen"
+        focusComponent="layerGroupsTable">
+    <data readOnly="true">
+        <collection id="layerGroupsDc"
+                    class="ch.so.agi.simi.entity.product.LayerGroup">
+            <view extends="_minimal"/>
+            <loader id="layerGroupsDl">
+                <query>
+                    <![CDATA[select e from simiProduct_LayerGroup e]]>
+                    <condition>
+                        <or>
+                            <c:jpql>
+                                <c:where>e.identifier like :term</c:where>
+                            </c:jpql>
+                            <c:jpql>
+                                <c:where>e.title like :term</c:where>
+                            </c:jpql>
+                        </or>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="layerGroupsTable"
+            spacing="true">
+        <table id="layerGroupsTable"
+               width="100%"
+               dataContainer="layerGroupsDc"
+               multiselect="true">
+            <columns>
+                <column id="identifier" sort="ASCENDING"/>
+                <column id="title"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+            </buttonsPanel>
+        </table>
+        <fragment id="filter" screen="simi_FilterFragment">
+            <properties>
+                <property name="dataLoader" ref="layerGroupsDl"/>
+                <property name="inputPrompt" value="Filtern nach Kennung oder Titel"/>
+            </properties>
+        </fragment>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

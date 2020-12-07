@@ -6,7 +6,7 @@
     <data readOnly="true">
         <keyValueCollection id="tablesDc">
             <loader id="tablesDl">
-                <query><!--trim(' . ') is workaround to get a dot - did not work directly, no escape character for . findable-->
+                <query><!-- trim(' . ') is workaround to get a dot - did not work directly, no escape character for . findable -->
                     <![CDATA[
                     select
                         tbl.id,

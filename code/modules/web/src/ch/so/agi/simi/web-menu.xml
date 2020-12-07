@@ -18,5 +18,7 @@
     <menu id="application-simi-others" caption="Weitere ..." expanded="false" insertBefore="administration">
         <item screen="simiCCC_CCCClient.browse" caption="CCC - Anbindungen"/>
         <item screen="simiProduct_DataProduct_PubScope.browse" caption="Pub Scopes"/>
+        <item screen="simiProduct_LayerGroup.lookup" caption="Choose"/>
+
     </menu>
 </menu-config>

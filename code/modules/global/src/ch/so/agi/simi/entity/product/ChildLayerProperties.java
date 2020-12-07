@@ -17,6 +17,7 @@ public class ChildLayerProperties extends SimiStandardEntity implements Sortable
     @Column(name = "SORT", nullable = false)
     private Integer sort;
 
+    @NotNull
     @Column(name = "TRANSPARENCY")
     @Max(100)
     @Min(0)
