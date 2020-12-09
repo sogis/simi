@@ -628,3 +628,44 @@ create table SIMIIAM_ROLE_USER_LINK (
     primary key (USER_ID, ROLE_ID)
 )^
 -- end SIMIIAM_ROLE_USER_LINK
+-- begin SIMIDEPENDENCY_RELATION
+create table SIMIDEPENDENCY_RELATION (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    RELATION_TYPE varchar(255) not null,
+    DEPENDENCY_ID uuid not null,
+    DATA_SET_VIEW_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIDEPENDENCY_RELATION
+-- begin SIMIDEPENDENCY_DEPENDENCY
+create table SIMIDEPENDENCY_DEPENDENCY (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    DTYPE varchar(31),
+    --
+    NAME varchar(100) not null,
+    REMARKS text,
+    --
+    primary key (ID)
+)^
+-- end SIMIDEPENDENCY_DEPENDENCY
