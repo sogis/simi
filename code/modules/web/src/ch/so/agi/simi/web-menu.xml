@@ -19,6 +19,8 @@
         <item screen="simiCCC_CCCClient.browse" caption="CCC - Anbindungen"/>
         <item screen="simiProduct_DataProduct_PubScope.browse" caption="Pub Scopes"/>
         <item screen="simiProduct_LayerGroup.lookup" caption="Choose"/>
+        <item screen="simiDependency_Dependency.browse"
+              caption="mainMsg://menu_config.simiDependency_Dependency.browse"/>
 
     </menu>
 </menu-config>

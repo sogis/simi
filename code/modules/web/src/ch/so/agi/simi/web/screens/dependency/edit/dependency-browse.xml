@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://dependencyBrowse.caption"
+        focusComponent="dependenciesTable"
+        messagesPack="ch.so.agi.simi.web.screens.dependency.edit">
+    <data readOnly="true">
+        <collection id="dependenciesDc"
+                    class="ch.so.agi.simi.entity.dependency.Dependency">
+            <view extends="_minimal">
+                <property name="name"/>
+                <property name="typeAbbreviation"/>
+            </view>
+            <loader id="dependenciesDl">
+                <query>
+                    <![CDATA[select e from simiDependency_Dependency e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="dependenciesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="dependenciesTable"
+                dataLoader="dependenciesDl">
+            <properties include=".*"/>
+        </filter>
+        <table id="dependenciesTable"
+               width="100%"
+               dataContainer="dependenciesDc">
+            <actions>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="typeAbbreviation"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <popupButton id="createBtn" caption="Erstellen" stylename="friendly" icon="ADD_ACTION">
+                    <actions>
+                        <action id="createReport" caption="Report erstellen"/>
+                    </actions>
+                </popupButton>
+                <button id="editBtn" action="dependenciesTable.edit"/>
+                <button id="removeBtn" action="dependenciesTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
