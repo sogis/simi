@@ -82,5 +82,13 @@ Signatur:
 * bytea für Customlegenden in SingleActor
 * Neue Entity StyleAsset als Kind der DataSetViews
 * Login muss gesetzt werden (Siehe dev runtime settings)
+* Beziehung FeatureInfo - DSV als Attributierte n:M Beziehung. 
+  * In diesem Zusammenhang überlegen, wie angezeigt wird, dass eine spezielle Featureinfo vorliegt.
+  Am einfachsten indem der Alias nicht gesetzt ist.
 
+# Findings zu Erstversion der Datenmigration
+* Karten haben keine Kinder
+* Publikationstyp muss noch aus "In WMS verfügbar" abgeleitet werden
+* Rohdaten publiziert aus "In WFS verfügbar" ableiten
+* Suchtyp muss abgefüllt werden
     
