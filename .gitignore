@@ -1,6 +1,6 @@
 
 # Database update scripts
-modules/core/db/update/*
+**/modules/core/db/update/*
 
 # anything under a gitignored folder
 **/gitignored/**

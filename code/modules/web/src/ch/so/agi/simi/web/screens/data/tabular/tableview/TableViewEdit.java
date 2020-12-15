@@ -3,12 +3,10 @@ package ch.so.agi.simi.web.screens.data.tabular.tableview;
 import ch.so.agi.simi.entity.data.tabular.TableField;
 import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
-import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.DataSetView;
 import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
 import ch.so.agi.simi.web.SortBean;
-import ch.so.agi.simi.web.screens.featureinfo.featureinfo.FeatureInfoEdit;
 import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
@@ -39,16 +37,6 @@ public class TableViewEdit extends StandardEditor<TableView> {
     @Inject
     private DataContext dataContext;
     @Inject
-    private ScreenBuilders screenBuilders;
-    @Inject
-    private Button createFeatureInfoBtn;
-    @Inject
-    private Button editFeatureInfoBtn;
-    @Inject
-    private Button clearFeatureInfoBtn;
-    @Inject
-    private Label<String> featureInfoOverrideHint;
-    @Inject
     private Messages messages;
     @Inject
     private Table<Permission> permissionsTable;
@@ -70,8 +58,6 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
-        refreshButtonVisibility();
-
         tableFieldsDl.setParameter("table", this.getEditedEntity().getPostgresTable());
         tableFieldsDl.load();
     }
@@ -111,55 +97,5 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
         // set focust to the new permission
         permissionsTable.requestFocus(permission, "role");
-    }
-
-    @Subscribe("clearFeatureInfoBtn")
-    public void onClearFeatureInfoBtnClick(Button.ClickEvent event) {
-        dataContext.remove(this.getEditedEntity().getFeatureInfo());
-        this.getEditedEntity().setFeatureInfo(null);
-
-        refreshButtonVisibility();
-    }
-
-    @Subscribe("createFeatureInfoBtn")
-    public void onCreateFeatureInfoBtnClick(Button.ClickEvent event) {
-        Screen screen = screenBuilders.editor(FeatureInfo.class, this)
-                .newEntity()
-                .withInitializer(featureInfo -> {
-                    featureInfo.setDataSetView(this.getEditedEntity());
-                })
-                .withParentDataContext(dataContext)
-                .build();
-
-        screen.addAfterCloseListener(afterCloseEvent -> {
-            if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
-                this.getEditedEntity().setFeatureInfo(((FeatureInfoEdit)afterCloseEvent.getScreen()).getEditedEntity());
-            }
-
-            refreshButtonVisibility();
-        });
-        screen.show();
-    }
-
-    @Subscribe("editFeatureInfoBtn")
-    public void onEditFeatureInfoBtnClick(Button.ClickEvent event) {
-        if (this.getEditedEntity().getFeatureInfo() == null) {
-            throw new IllegalStateException("No FeatureInfo for editing found");
-        } else {
-            screenBuilders.editor(FeatureInfo.class, this)
-                .editEntity(this.getEditedEntity().getFeatureInfo())
-                .withParentDataContext(dataContext)
-                .build()
-                .show();
-        }
-    }
-
-    private void refreshButtonVisibility() {
-        boolean isCreateVisible = this.getEditedEntity().getFeatureInfo() == null;
-
-        createFeatureInfoBtn.setVisible(isCreateVisible);
-        editFeatureInfoBtn.setVisible(!isCreateVisible);
-        clearFeatureInfoBtn.setVisible(!isCreateVisible);
-        featureInfoOverrideHint.setVisible(!isCreateVisible);
     }
 }

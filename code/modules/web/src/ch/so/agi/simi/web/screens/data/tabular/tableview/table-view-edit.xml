@@ -18,7 +18,6 @@
                     <property name="level"/>
                     <property name="role" view="_minimal"/>
                 </property>
-                <property name="featureInfo" view="_minimal"/>
             </view>
             <loader/>
             <collection id="viewFieldsDc" property="viewFields"/>
@@ -98,11 +97,6 @@
                             </properties>
                         </fragment>
                         <checkBox id="wgcEditField" property="wgcEdit"/>
-                        <hbox id="featureInfoField" caption="msg://ch.so.agi.simi.entity.product/DataSetView.featureInfo" spacing="true">
-                            <button id="createFeatureInfoBtn" caption="FeatureInfo erstellen" icon="CREATE_ACTION"/>
-                            <button id="editFeatureInfoBtn" caption="FeatureInfo bearbeiten" icon="EDIT"/>
-                            <button id="clearFeatureInfoBtn" caption="Löschen" icon="REMOVE"/>
-                        </hbox>
                     </column>
                     <column width="450px">
                         <textArea id="descriptionModelField" property="postgresTable.descriptionModel" editable="false" rows="5" rowspan="3"/>
@@ -129,7 +123,6 @@
                 </form>
             </groupBox>
             <groupBox id="viewFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/TableView.viewFields" spacing="true" collapsable="true">
-                <label id="featureInfoOverrideHint" value="Anzeigeeigenschaften der ViewFields sind übersteuert weil FeatureInfo gesetzt ist."/>
                 <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" editable="true" multiselect="true">
                     <actions>
                         <action id="edit" type="edit"/>
