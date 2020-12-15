@@ -3,7 +3,7 @@
 modules/core/db/update/*
 
 # anything under a gitignored folder
-gitignored/**
+**/gitignored/**
 
 # Compiled class file
 *.class
