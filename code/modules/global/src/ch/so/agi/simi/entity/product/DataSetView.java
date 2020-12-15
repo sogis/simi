@@ -56,10 +56,6 @@ public class DataSetView extends SingleActor {
     private LocalDateTime styleDesktopChanged;
 
     @NotNull
-    @Column(name = "SEARCH_TYPE_INT", nullable = false)
-    private Integer searchTypeInt = DataSetView_SearchTypeEnum_Int.NEIN.getId();
-
-    @NotNull
     @Column(name = "SEARCH_TYPE", nullable = false)
     private String searchType;
 
@@ -163,14 +159,6 @@ public class DataSetView extends SingleActor {
 
     public void setSearchFacet(String searchFacet) {
         this.searchFacet = searchFacet;
-    }
-
-    public DataSetView_SearchTypeEnum_Int getSearchTypeInt() {
-        return searchTypeInt == null ? null : DataSetView_SearchTypeEnum_Int.fromId(searchTypeInt);
-    }
-
-    public void setSearchTypeInt(DataSetView_SearchTypeEnum_Int searchTypeInt) {
-        this.searchTypeInt = searchTypeInt == null ? null : searchTypeInt.getId();
     }
 
     public String getStyleDesktop() {

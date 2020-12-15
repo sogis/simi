@@ -2,13 +2,10 @@ package ch.so.agi.simi.web.screens.data.raster.rasterview;
 
 import ch.so.agi.simi.entity.data.raster.RasterView;
 import ch.so.agi.simi.entity.iam.Permission;
-import ch.so.agi.simi.entity.product.DataSetView;
-import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum_Int;
 import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.components.TextField;
-import com.haulmont.cuba.gui.components.ValidationException;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
@@ -42,16 +39,5 @@ public class RasterViewEdit extends StandardEditor<RasterView> {
         permissionsDc.getMutableItems().add(permission);
 
         permissionsTable.requestFocus(permission, "role");
-    }
-
-    @Subscribe
-    public void onAfterInit(AfterInitEvent event) {
-        searchFilterWordField.addValidator(value -> {
-            if (dataProductDc.getItem().getSearchTypeInt() != DataSetView_SearchTypeEnum_Int.NEIN && (value == null || value.isEmpty()))
-                throw  new ValidationException("Wenn Suchtyp '" +
-                        messages.getMessage(DataSetView_SearchTypeEnum_Int.class, "DataSetView_SearchTypeEnum.IMMER") + "' oder '" +
-                        messages.getMessage(DataSetView_SearchTypeEnum_Int.class, "DataSetView_SearchTypeEnum.FALLS_GELADEN") + "' ist, muss '" +
-                        messages.getMessage(DataSetView.class, "DataSetView.searchFilterWord") + "' angegeben werden.");
-        });
     }
 }

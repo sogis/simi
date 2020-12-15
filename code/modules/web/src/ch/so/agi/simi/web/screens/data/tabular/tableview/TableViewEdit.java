@@ -4,15 +4,11 @@ import ch.so.agi.simi.entity.data.tabular.TableField;
 import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
 import ch.so.agi.simi.entity.iam.Permission;
-import ch.so.agi.simi.entity.product.DataSetView;
-import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum_Int;
 import ch.so.agi.simi.web.SortBean;
-import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
-import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
