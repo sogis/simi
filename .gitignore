@@ -1,3 +1,10 @@
+
+# Database update scripts
+modules/core/db/update/*
+
+# Dev-DB data dirs
+.pgdata*/*
+
 # Compiled class file
 *.class
 
