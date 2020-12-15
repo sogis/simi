@@ -43,6 +43,8 @@
                           alwaysVisible="true">
                 <popupButton id="createBtn" caption="Erstellen" stylename="friendly" icon="ADD_ACTION">
                     <actions>
+                        <action id="createComponent" caption="Modul erstellen"/>
+                        <action id="createFeatureinfo" caption="Spez. FeatureInfo erstellen"/>
                         <action id="createReport" caption="Report erstellen"/>
                     </actions>
                 </popupButton>

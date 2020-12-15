@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Abhängigkeiten - Edit"
+        caption="Modulabhängigkeit"
         focusComponent="form">
     <data>
         <instance id="componentDc"
                   class="ch.so.agi.simi.entity.dependency.Component">
-            <view extends="_local">
-                <property name="dataProducts" view="_minimal">
-                    <property name="pubScope" view="_minimal"/>
-                    <property name="releasedAt"/>
+            <view extends="_minimal">
+                <property name="relations" view="_minimal">
+                    <property name="relationType"/>
+                    <property name="dataSetView" view="_minimal"/>
                 </property>
+                <property name="name"/>
+                <property name="remarks"/>
             </view>
             <loader/>
-            <collection id="dataProductsDc" property="dataProducts"/>
+            <collection id="relationsDc" property="relations"/>
         </instance>
     </data>
     <dialogMode height="80%"
@@ -20,31 +22,14 @@
                 modal="true"
                 forceDialog="true"
                 resizable="true"/>
-    <layout expand="dataProductsBox" spacing="true">
+    <layout expand="relations" spacing="true">
         <form id="form" dataContainer="componentDc">
             <column width="350px">
-                <textField id="nameField" property="name"/>
-                <textArea id="remarksField" property="remarks" rows="5"/>
+                <textField id="nameField" caption="Name" property="name"/>
+                <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5"/>
             </column>
         </form>
-        <groupBox id="dataProductsBox" caption="msg://ch.so.agi.simi.entity.dependency/Component.dataProducts" expand="dataProductsTable">
-            <table id="dataProductsTable" dataContainer="dataProductsDc" width="100%" height="200px">
-                <actions>
-                    <action id="add" type="add"/>
-                    <action id="exclude" type="exclude"/>
-                </actions>
-                <columns>
-                    <column id="identifier"/>
-                    <column id="title"/>
-                    <column id="pubScope"/>
-                    <column id="releasedAt"/>
-                </columns>
-                <buttonsPanel>
-                    <button action="dataProductsTable.add"/>
-                    <button action="dataProductsTable.exclude"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
+        <fragment id="relations" screen="simi_RelationsFragment"/>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

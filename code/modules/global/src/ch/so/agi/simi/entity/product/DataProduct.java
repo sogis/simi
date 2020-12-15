@@ -27,12 +27,6 @@ public class DataProduct extends SimiStandardEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @JoinTable(name = "SIMI_DATA_PRODUCT_COMPONENT_LINK",
-            joinColumns = @JoinColumn(name = "DATA_PRODUCT_ID"),
-            inverseJoinColumns = @JoinColumn(name = "COMPONENT_ID"))
-    @ManyToMany
-    private List<Component> coponents;
-
     @JoinColumn(name = "PUB_SCOPE_ID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @NotNull
@@ -83,14 +77,6 @@ public class DataProduct extends SimiStandardEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Component> getCoponents() {
-        return coponents;
-    }
-
-    public void setCoponents(List<Component> coponents) {
-        this.coponents = coponents;
     }
 
     public DataProduct_PubScope getPubScope() {
