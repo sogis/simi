@@ -2,8 +2,8 @@
 # Database update scripts
 modules/core/db/update/*
 
-# Dev-DB data dirs, ....
-gitignored/*
+# anything under a gitignored folder
+gitignored/**
 
 # Compiled class file
 *.class
