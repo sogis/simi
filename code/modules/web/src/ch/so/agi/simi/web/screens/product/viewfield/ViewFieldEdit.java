@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.data.tabular.viewfield;
+package ch.so.agi.simi.web.screens.product.viewfield;
 
 import ch.so.agi.simi.entity.data.TableField;
 import com.haulmont.cuba.gui.model.CollectionLoader;

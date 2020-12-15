@@ -26,9 +26,6 @@
                             <c:jpql>
                                 <c:where>e.modelSchema.schemaName like :term</c:where>
                             </c:jpql>
-                            <c:jpql>
-                                <c:where>e.modelSchema.postgresDB.dbName like :term</c:where>
-                            </c:jpql>
                         </or>
                     </condition>
                 </query>
@@ -71,7 +68,7 @@
         <fragment screen="simi_FilterFragment">
             <properties>
                 <property name="dataLoader" ref="postgresTablesDl"/>
-                <property name="inputPrompt" value="Filtern nach Kennung"/>
+                <property name="inputPrompt" value="Filtern nach Tabellen- oder Schemaname"/>
             </properties>
         </fragment>
         <hbox id="lookupActions" spacing="true" visible="false">

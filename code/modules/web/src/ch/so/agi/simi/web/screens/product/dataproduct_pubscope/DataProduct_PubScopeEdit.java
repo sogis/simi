@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.dataproduct_pubscope;
+package ch.so.agi.simi.web.screens.product.dataproduct_pubscope;
 
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.product.non_dsv.DataProduct_PubScope;

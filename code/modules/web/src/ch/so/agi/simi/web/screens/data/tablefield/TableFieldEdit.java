@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.data.tabular.tablefield;
+package ch.so.agi.simi.web.screens.data.tablefield;
 
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.data.TableField;

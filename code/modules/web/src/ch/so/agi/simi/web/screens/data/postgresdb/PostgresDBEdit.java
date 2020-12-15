@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.data.tabular.postgresdb;
+package ch.so.agi.simi.web.screens.data.postgresdb;
 
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.data.PostgresDB;

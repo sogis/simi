@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.data.tabular.postgrestable;
+package ch.so.agi.simi.web.screens.data.postgrestable;
 
 import ch.so.agi.simi.entity.data.PostgresDB;
 import ch.so.agi.simi.entity.data.schemareader.TableAndFieldInfo;

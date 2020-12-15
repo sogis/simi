@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.data.tabular.externaltable;
+package ch.so.agi.simi.web.screens.data.externaltable;
 
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.data.ExternalTable;

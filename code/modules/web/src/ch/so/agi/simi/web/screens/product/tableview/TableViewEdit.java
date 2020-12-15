@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.data.tabular.tableview;
+package ch.so.agi.simi.web.screens.product.tableview;
 
 import ch.so.agi.simi.entity.data.TableField;
 import ch.so.agi.simi.entity.product.datasetview.TableView;
