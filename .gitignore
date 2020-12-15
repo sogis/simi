@@ -3,7 +3,7 @@
 modules/core/db/update/*
 
 # Dev-DB data dirs
-.pgdata*/*
+devdb/.pgdata*/*
 
 # Compiled class file
 *.class
