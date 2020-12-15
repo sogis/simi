@@ -3,6 +3,7 @@ package ch.so.agi.simi.entity.dependency;
 import ch.so.agi.simi.entity.product.DataSetView;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -47,5 +48,10 @@ public class Relation extends StandardEntity {
 
     public void setRelationType(RelationType relationType) {
         this.relationType = relationType == null ? null : relationType.getId();
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        setRelationType(RelationType.DATA);
     }
 }

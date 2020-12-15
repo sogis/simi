@@ -91,4 +91,17 @@ Signatur:
 * Publikationstyp muss noch aus "In WMS verfügbar" abgeleitet werden
 * Rohdaten publiziert aus "In WFS verfügbar" ableiten
 * Suchtyp muss abgefüllt werden
+
+## Skript für Anpassung SearchType
+
+```sql
+alter table SIMIPRODUCT_DATA_SET_VIEW rename column search_type to search_type__u46724 ;
+alter table SIMIPRODUCT_DATA_SET_VIEW alter column search_type__u46724 drop not null ;
+alter table SIMIPRODUCT_DATA_SET_VIEW add column SEARCH_TYPE_INT integer ^
+update SIMIPRODUCT_DATA_SET_VIEW set SEARCH_TYPE_INT = 10 where SEARCH_TYPE_INT is null ;
+alter table SIMIPRODUCT_DATA_SET_VIEW alter column SEARCH_TYPE_INT set not null ;
+alter table SIMIPRODUCT_DATA_SET_VIEW add column SEARCH_TYPE varchar(50) ^
+update SIMIPRODUCT_DATA_SET_VIEW set SEARCH_TYPE = '1_no_search' where SEARCH_TYPE is null ;
+alter table SIMIPRODUCT_DATA_SET_VIEW alter column SEARCH_TYPE set not null ;
+```
     

@@ -5,24 +5,24 @@ import com.haulmont.chile.core.datatypes.impl.EnumClass;
 import javax.annotation.Nullable;
 
 
-public enum DataSetView_SearchTypeEnum implements EnumClass<Integer> {
+public enum DataSetView_SearchTypeEnum implements EnumClass<String> {
 
-    NEIN(10),
-    IMMER(20),
-    FALLS_GELADEN(30);
+    NO_SEARCH("1_no_search"),
+    IF_LOADED("2_if_loaded"),
+    ALWAYS("3_always");
 
-    private Integer id;
+    private String id;
 
-    DataSetView_SearchTypeEnum(Integer value) {
+    DataSetView_SearchTypeEnum(String value) {
         this.id = value;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
     @Nullable
-    public static DataSetView_SearchTypeEnum fromId(Integer id) {
+    public static DataSetView_SearchTypeEnum fromId(String id) {
         for (DataSetView_SearchTypeEnum at : DataSetView_SearchTypeEnum.values()) {
             if (at.getId().equals(id)) {
                 return at;

@@ -492,7 +492,8 @@ create table SIMIPRODUCT_DATA_SET_VIEW (
     STYLE_SERVER_UPLOADED timestamp,
     STYLE_DESKTOP text,
     STYLE_DESKTOP_UPLOADED timestamp,
-    SEARCH_TYPE integer not null,
+    SEARCH_TYPE_INT integer not null,
+    SEARCH_TYPE varchar(50) not null,
     SEARCH_FACET varchar(100),
     SEARCH_FILTER_WORD varchar(100),
     --

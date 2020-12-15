@@ -9,6 +9,7 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -55,8 +56,12 @@ public class DataSetView extends SingleActor {
     private LocalDateTime styleDesktopChanged;
 
     @NotNull
+    @Column(name = "SEARCH_TYPE_INT", nullable = false)
+    private Integer searchTypeInt = DataSetView_SearchTypeEnum_Int.NEIN.getId();
+
+    @NotNull
     @Column(name = "SEARCH_TYPE", nullable = false)
-    private Integer searchType = DataSetView_SearchTypeEnum.NEIN.getId();
+    private String searchType;
 
     @Column(name = "SEARCH_FACET", length = 100)
     private String searchFacet;
@@ -74,6 +79,14 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @Composition
     private List<Permission> permissions;
+
+    public DataSetView_SearchTypeEnum getSearchType() {
+        return searchType == null ? null : DataSetView_SearchTypeEnum.fromId(searchType);
+    }
+
+    public void setSearchType(DataSetView_SearchTypeEnum searchType) {
+        this.searchType = searchType == null ? null : searchType.getId();
+    }
 
     @Override
     protected String typeAbbreviation(){
@@ -152,12 +165,12 @@ public class DataSetView extends SingleActor {
         this.searchFacet = searchFacet;
     }
 
-    public DataSetView_SearchTypeEnum getSearchType() {
-        return searchType == null ? null : DataSetView_SearchTypeEnum.fromId(searchType);
+    public DataSetView_SearchTypeEnum_Int getSearchTypeInt() {
+        return searchTypeInt == null ? null : DataSetView_SearchTypeEnum_Int.fromId(searchTypeInt);
     }
 
-    public void setSearchType(DataSetView_SearchTypeEnum searchType) {
-        this.searchType = searchType == null ? null : searchType.getId();
+    public void setSearchTypeInt(DataSetView_SearchTypeEnum_Int searchTypeInt) {
+        this.searchTypeInt = searchTypeInt == null ? null : searchTypeInt.getId();
     }
 
     public String getStyleDesktop() {
@@ -182,5 +195,10 @@ public class DataSetView extends SingleActor {
 
     public void setRawDownload(Boolean rawDownload) {
         this.rawDownload = rawDownload;
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        setSearchType(DataSetView_SearchTypeEnum.NO_SEARCH);
     }
 }

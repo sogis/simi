@@ -5,10 +5,9 @@ import ch.so.agi.simi.entity.data.tabular.TableView;
 import ch.so.agi.simi.entity.data.tabular.ViewField;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.DataSetView;
-import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum;
+import ch.so.agi.simi.entity.product.DataSetView_SearchTypeEnum_Int;
 import ch.so.agi.simi.web.SortBean;
 import com.haulmont.cuba.core.global.Messages;
-import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
@@ -25,10 +24,6 @@ import java.util.List;
 @LoadDataBeforeShow
 public class TableViewEdit extends StandardEditor<TableView> {
     @Inject
-    private InstanceContainer<TableView> dataProductDc;
-    @Inject
-    private TextField<String> searchFilterWordField;
-    @Inject
     private Table<ViewField> viewFieldsTable;
     @Inject
     private CollectionPropertyContainer<ViewField> viewFieldsDc;
@@ -37,24 +32,11 @@ public class TableViewEdit extends StandardEditor<TableView> {
     @Inject
     private DataContext dataContext;
     @Inject
-    private Messages messages;
-    @Inject
     private Table<Permission> permissionsTable;
     @Inject
     private CollectionLoader<TableField> tableFieldsDl;
     @Inject
     private SortBean sortBean;
-
-    @Subscribe
-    public void onAfterInit(AfterInitEvent event) {
-        searchFilterWordField.addValidator(value -> {
-            if (dataProductDc.getItem().getSearchType() != DataSetView_SearchTypeEnum.NEIN && (value == null || value.isEmpty()))
-                throw  new ValidationException("Wenn Suchtyp '" +
-                        messages.getMessage(DataSetView_SearchTypeEnum.class, "DataSetView_SearchTypeEnum.IMMER") + "' oder '" +
-                        messages.getMessage(DataSetView_SearchTypeEnum.class, "DataSetView_SearchTypeEnum.FALLS_GELADEN") + "' ist, muss '" +
-                        messages.getMessage(DataSetView.class, "DataSetView.searchFilterWord") + "' angegeben werden.");
-        });
-    }
 
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
