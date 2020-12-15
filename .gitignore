@@ -2,8 +2,8 @@
 # Database update scripts
 modules/core/db/update/*
 
-# Dev-DB data dirs
-devdb/.pgdata*/*
+# Dev-DB data dirs, ....
+gitignored/*
 
 # Compiled class file
 *.class
