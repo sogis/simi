@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fragment xmlns="http://schemas.haulmont.com/cuba/screen/fragment.xsd">
+    <data>
+        <instance id="relationsDc" class="ch.so.agi.simi.entity.dependency.Relation"
+                  provided="true"/>
+    </data>
+    <layout>
+        <groupBox id="relationsBox" caption="Beziehungen">
+            <table id="relationsTable" dataContainer="relationsDc" width="100%" height="200px">
+                <actions>
+                    <action id="remove" caption="Verknüpfung löschen" type="remove">
+                        <properties>
+                            <property name="confirmation" value="false"/>
+                        </properties>
+                    </action>
+                    <action id="create" caption="View verknüpfen" type="create"/>
+                    <action id="edit" caption="Verknüpfung bearbeiten" type="edit"/>
+                </actions>
+                <columns>
+                    <column id="dataSetView" caption="View" captionProperty="dataSetView.entityName"/>
+                    <column id="relationType" caption="Beziehungstyp" sort="ASCENDING"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="relationsTable.create"/>
+                    <button action="relationsTable.edit"/>
+                    <button action="relationsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+    </layout>
+</fragment>

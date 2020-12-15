@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "SIMIDATA_RASTER_VIEW")
 @Entity(name = "simiData_RasterView")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("%s|identifier")
+@NamePattern("entityName|identifier,title") //needed to define minimal view
 public class RasterView extends DataSetView {
     private static final long serialVersionUID = 1986595030057944078L;
 

@@ -1,7 +1,6 @@
-package ch.so.agi.simi.web.screens.dependency.edit;
+package ch.so.agi.simi.web.screens.dependency.browse;
 
 import ch.so.agi.simi.entity.dependency.Report;
-import ch.so.agi.simi.entity.product.DataProduct;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;

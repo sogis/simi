@@ -63,4 +63,10 @@ public class Dependency extends SimiStandardEntity {
     protected String typeAbbreviation(){
         return "WARNING: override missing.";
     }
+
+    @Transient
+    @MetaProperty
+    public String getSort() { // For use in Tables, can be referenced as typeAbbreviation
+        return typeAbbreviation() + name;
+    }
 }

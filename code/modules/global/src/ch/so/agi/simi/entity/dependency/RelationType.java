@@ -7,8 +7,8 @@ import javax.annotation.Nullable;
 
 public enum RelationType implements EnumClass<String> {
 
-    ANZEIGE("2_display"),
-    DATEN("1_data");
+    DISPLAY("1_display"),
+    DATA("2_data");
 
     private String id;
 
