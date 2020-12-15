@@ -6,7 +6,9 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMIDEPENDENCY_RELATION")
+@Table(name = "SIMIDEPENDENCY_RELATION", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_SIMI_RELATION_UNQ", columnNames = {"RELATION_TYPE", "DEPENDENCY_ID", "DATA_SET_VIEW_ID"})
+})
 @Entity(name = "simiDependency_Relation")
 public class Relation extends StandardEntity {
     private static final long serialVersionUID = -7067104417294138445L;

@@ -32,14 +32,14 @@ public class DataProduct extends SimiStandardEntity {
     @NotNull
     private DataProduct_PubScope pubScope;
 
-    @Column(name = "KEYWORDS", length = 200)
+    @Column(name = "KEYWORDS", length = 500)
     private String keywords;
 
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
 
-    @Column(name = "SYNONYMS", length = 200)
+    @Column(name = "SYNONYMS", length = 500)
     private String synonyms;
 
     @Column(name = "TITLE", length = 200)

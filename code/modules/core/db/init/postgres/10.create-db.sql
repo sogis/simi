@@ -304,9 +304,9 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     IDENTIFIER varchar(100) not null,
     DESCRIPTION text,
     PUB_SCOPE_ID uuid not null,
-    KEYWORDS varchar(200),
+    KEYWORDS varchar(500),
     REMARKS text,
-    SYNONYMS varchar(200),
+    SYNONYMS varchar(500),
     TITLE varchar(200),
     RELEASED_AT timestamp,
     RELEASED_THROUGH varchar(100),
@@ -605,7 +605,7 @@ create table SIMIDEPENDENCY_RELATION (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    RELATION_TYPE varchar(255) not null,
+    RELATION_TYPE varchar(50) not null,
     DEPENDENCY_ID uuid not null,
     DATA_SET_VIEW_ID uuid not null,
     --
