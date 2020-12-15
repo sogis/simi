@@ -2,7 +2,6 @@ package ch.so.agi.simi.entity.product;
 
 import ch.so.agi.simi.entity.ccc.LocatorLayer;
 import ch.so.agi.simi.entity.ccc.NotifyLayer;
-import ch.so.agi.simi.entity.featureinfo.FeatureInfo;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.util.StyleAsset;
 import com.haulmont.chile.core.annotations.Composition;
@@ -76,16 +75,6 @@ public class DataSetView extends SingleActor {
     @Composition
     private List<Permission> permissions;
 
-    @JoinTable(name = "SIMI_FEATURE_INFO_DATA_SET_VIEW_LINK",
-            joinColumns = @JoinColumn(name = "DATA_SET_VIEW_ID"),
-            inverseJoinColumns = @JoinColumn(name = "FEATURE_INFO_ID"))
-    @ManyToMany
-    private List<FeatureInfo> queryFeatureInfoes;
-
-    @OnDelete(DeletePolicy.CASCADE)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "dataSetView")
-    private FeatureInfo featureInfo;
-
     @Override
     protected String typeAbbreviation(){
         return "View";
@@ -113,22 +102,6 @@ public class DataSetView extends SingleActor {
 
     public void setStyleDesktopChanged(LocalDateTime styleDesktopChanged) {
         this.styleDesktopChanged = styleDesktopChanged;
-    }
-
-    public FeatureInfo getFeatureInfo() {
-        return featureInfo;
-    }
-
-    public void setFeatureInfo(FeatureInfo featureInfo) {
-        this.featureInfo = featureInfo;
-    }
-
-    public List<FeatureInfo> getQueryFeatureInfoes() {
-        return queryFeatureInfoes;
-    }
-
-    public void setQueryFeatureInfoes(List<FeatureInfo> queryFeatureInfoes) {
-        this.queryFeatureInfoes = queryFeatureInfoes;
     }
 
     public List<NotifyLayer> getNotifyLayers() {
