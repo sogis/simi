@@ -1,0 +1,1 @@
+alter table simi_data_product_component_link rename to SIMI_DATA_PRODUCT_COMPONENT_LINK__U76627 ;

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Report - Edit"
+        caption="Featureinfo - Edit"
         focusComponent="form">
     <data>
-        <instance id="reportDc"
-                  class="ch.so.agi.simi.entity.dependency.Report">
+        <instance id="featureInfoDc"
+                  class="ch.so.agi.simi.entity.dependency.FeatureInfo">
             <view extends="_minimal">
                 <property name="relations" view="_minimal">
                     <property name="relationType"/>
-                    <property name="dataSetView" view="_minimal">
-
-                    </property>
+                    <property name="dataSetView" view="_minimal"/>
                 </property>
                 <property name="name"/>
                 <property name="remarks"/>
+                <property name="displayTemplate"/>
+                <property name="pyModuleName"/>
+                <property name="sqlQuery"/>
             </view>
             <loader/>
             <collection id="relationsDc" property="relations"/>
@@ -25,10 +26,15 @@
                 forceDialog="true"
                 resizable="true"/>
     <layout expand="relationsBox" spacing="true">
-        <form id="form" dataContainer="reportDc">
-            <column width="350px">
+        <form id="form" dataContainer="featureInfoDc">
+            <column width="450px">
                 <textField id="nameField" caption="Name" property="name"/>
                 <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5"/>
+                <sourceCodeEditor id="displayTemplate" caption="Anzeige-Template" property="displayTemplate" showGutter="true" rowspan="10"/>
+            </column>
+            <column width="450px">
+                <textField id="pyModuleNameField" caption="Python Modulname" property="pyModuleName"/>
+                <sourceCodeEditor id="sqlQueryField" caption="SQL Abfrage" property="sqlQuery" showGutter="true" rowspan="10"/>
             </column>
         </form>
         <groupBox id="relationsBox" caption="Beziehungen">

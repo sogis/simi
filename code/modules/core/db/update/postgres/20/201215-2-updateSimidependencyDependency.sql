@@ -1,0 +1,5 @@
+alter table SIMIDEPENDENCY_DEPENDENCY add column SQL_QUERY text ;
+alter table SIMIDEPENDENCY_DEPENDENCY add column DISPLAY_TEMPLATE text ^
+update SIMIDEPENDENCY_DEPENDENCY set DISPLAY_TEMPLATE = '' where DISPLAY_TEMPLATE is null ;
+alter table SIMIDEPENDENCY_DEPENDENCY alter column DISPLAY_TEMPLATE set not null ;
+alter table SIMIDEPENDENCY_DEPENDENCY add column PY_MODULE_NAME varchar(100) ;

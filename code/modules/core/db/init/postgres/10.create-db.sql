@@ -572,13 +572,7 @@ create table SIMIIAM_GROUP_USER_LINK (
     primary key (GROUP_ID, USER_ID)
 )^
 -- end SIMIIAM_GROUP_USER_LINK
--- begin SIMI_DATA_PRODUCT_COMPONENT_LINK
-create table SIMI_DATA_PRODUCT_COMPONENT_LINK (
-    DATA_PRODUCT_ID uuid,
-    COMPONENT_ID uuid,
-    primary key (DATA_PRODUCT_ID, COMPONENT_ID)
-)^
--- end SIMI_DATA_PRODUCT_COMPONENT_LINK
+
 -- begin SIMI_FEATURE_INFO_DATA_SET_VIEW_LINK
 create table SIMI_FEATURE_INFO_DATA_SET_VIEW_LINK (
     DATA_SET_VIEW_ID uuid,
@@ -637,6 +631,11 @@ create table SIMIDEPENDENCY_DEPENDENCY (
     --
     NAME varchar(100) not null,
     REMARKS text,
+    --
+    -- from simiDependency_FeatureInfo
+    DISPLAY_TEMPLATE text not null,
+    SQL_QUERY text,
+    PY_MODULE_NAME varchar(100),
     --
     primary key (ID)
 )^

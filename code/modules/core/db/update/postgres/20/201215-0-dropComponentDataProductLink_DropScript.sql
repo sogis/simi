@@ -1,1 +1,0 @@
-drop table if exists SIMI_COMPONENT_DATA_PRODUCT_LINK__U36027 cascade ;

@@ -4,7 +4,7 @@ import com.haulmont.cuba.gui.screen.ScreenFragment;
 import com.haulmont.cuba.gui.screen.UiController;
 import com.haulmont.cuba.gui.screen.UiDescriptor;
 
-@UiController("simi_RelationsFragment")
+@UiController("simiDependency_RelationsFragment")
 @UiDescriptor("relations-fragment.xml")
 public class RelationsFragment extends ScreenFragment {
 }
