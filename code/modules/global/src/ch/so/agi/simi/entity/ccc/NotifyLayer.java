@@ -1,7 +1,7 @@
 package ch.so.agi.simi.entity.ccc;
 
 import ch.so.agi.simi.entity.SimiStandardEntity;
-import ch.so.agi.simi.entity.product.DataSetView;
+import ch.so.agi.simi.entity.product.datasetview.DataSetView;
 import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;

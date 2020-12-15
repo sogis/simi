@@ -1,7 +1,7 @@
 package ch.so.agi.simi.entity.ccc;
 
 import ch.so.agi.simi.entity.SimiStandardEntity;
-import ch.so.agi.simi.entity.product.Map;
+import ch.so.agi.simi.entity.product.non_dsv.Map;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;

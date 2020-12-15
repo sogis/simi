@@ -2,11 +2,11 @@
 <metadata xmlns="http://schemas.haulmont.com/cuba/metadata.xsd">
 
     <metadata-model root-package="ch.so.agi.simi" namespace="simi">
-        <class>ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo</class>
-        <class>ch.so.agi.simi.entity.data.tabular.schemareader.TableListing</class>
-        <class>ch.so.agi.simi.entity.data.tabular.schemareader.FieldInfo</class>
-        <class>ch.so.agi.simi.entity.data.tabular.schemareader.TableInfo</class>
-        <class>ch.so.agi.simi.entity.data.tabular.schemareader.TableAndFieldInfo</class>
+        <class>ch.so.agi.simi.entity.data.schemareader.TableShortInfo</class>
+        <class>ch.so.agi.simi.entity.data.schemareader.TableListing</class>
+        <class>ch.so.agi.simi.entity.data.schemareader.FieldInfo</class>
+        <class>ch.so.agi.simi.entity.data.schemareader.TableInfo</class>
+        <class>ch.so.agi.simi.entity.data.schemareader.TableAndFieldInfo</class>
         <class>ch.so.agi.simi.web.screens.dependency.overview.DisplayString</class>
         <class>ch.so.agi.simi.viewmodel.NewEntity</class>
         <class>ch.so.agi.simi.viewmodel.IdValue</class>

@@ -1,7 +1,7 @@
 package ch.so.agi.simi.web.screens.product.singleactor;
 
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.product.SingleActor;
+import ch.so.agi.simi.entity.product.non_dsv.SingleActor;
 
 @UiController("simiProduct_SingleActor.browse")
 @UiDescriptor("single-actor-browse.xml")

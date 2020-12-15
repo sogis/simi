@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
-    <view name="copy-rasterView" class="ch.so.agi.simi.entity.data.raster.RasterView" extends="_local">
+    <view name="copy-rasterView" class="ch.so.agi.simi.entity.product.datasetview.RasterView" extends="_local">
         <property name="permissions" view="_local">
             <property name="role" view="_minimal"/>
         </property>
@@ -19,7 +19,7 @@
             <property name="facadeLayer" view="_minimal"/>
         </property>
     </view>
-    <view name="copy-tableView" class="ch.so.agi.simi.entity.data.tabular.TableView" extends="_local">
+    <view name="copy-tableView" class="ch.so.agi.simi.entity.product.datasetview.TableView" extends="_local">
         <property name="viewFields" view="_local">
             <property name="tableField" view="_minimal"/>
         </property>
@@ -41,7 +41,7 @@
             <property name="role" view="_minimal"/>
         </property>
     </view>
-    <view name="copy-facadeLayer" class="ch.so.agi.simi.entity.product.FacadeLayer" extends="_local">
+    <view name="copy-facadeLayer" class="ch.so.agi.simi.entity.product.non_dsv.FacadeLayer" extends="_local">
         <property name="dataSetViews" view="_local">
             <property name="dataSetView" view="_minimal"/>
         </property>
@@ -50,7 +50,7 @@
             <property name="productList" view="_minimal"/>
         </property>
     </view>
-    <view name="copy-layerGroup" class="ch.so.agi.simi.entity.product.LayerGroup" extends="_local">
+    <view name="copy-layerGroup" class="ch.so.agi.simi.entity.product.non_dsv.LayerGroup" extends="_local">
         <property name="pubScope" view="_minimal"/>
         <property name="singleActors" view="_local">
             <property name="singleActor" view="_minimal"/>

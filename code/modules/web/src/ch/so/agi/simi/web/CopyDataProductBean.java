@@ -1,8 +1,9 @@
 package ch.so.agi.simi.web;
 
-import ch.so.agi.simi.entity.data.raster.RasterView;
-import ch.so.agi.simi.entity.data.tabular.TableView;
-import ch.so.agi.simi.entity.product.*;
+import ch.so.agi.simi.entity.product.datasetview.RasterView;
+import ch.so.agi.simi.entity.product.datasetview.TableView;
+import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import ch.so.agi.simi.entity.product.non_dsv.*;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;

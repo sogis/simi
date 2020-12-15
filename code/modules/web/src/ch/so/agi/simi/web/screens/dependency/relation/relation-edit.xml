@@ -15,7 +15,7 @@
             </view>
             <loader/>
         </instance>
-        <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.product.DataSetView">
+        <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.product.datasetview.DataSetView">
             <loader id="dataSetViewsDl">
                 <query>
                     <![CDATA[select e from simiProduct_DataSetView e order by e.identifier]]>

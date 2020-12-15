@@ -1,16 +1,13 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
-import ch.so.agi.simi.entity.data.raster.RasterDS;
-import ch.so.agi.simi.entity.data.raster.RasterView;
-import ch.so.agi.simi.entity.data.tabular.PostgresTable;
-import ch.so.agi.simi.entity.data.tabular.TableView;
-import ch.so.agi.simi.entity.product.DataProduct;
-import ch.so.agi.simi.entity.product.FacadeLayer;
-import ch.so.agi.simi.entity.product.LayerGroup;
-import ch.so.agi.simi.entity.product.Map;
+import ch.so.agi.simi.entity.product.datasetview.RasterView;
+import ch.so.agi.simi.entity.product.datasetview.TableView;
+import ch.so.agi.simi.entity.product.non_dsv.DataProduct;
+import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
+import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
+import ch.so.agi.simi.entity.product.non_dsv.Map;
 import ch.so.agi.simi.web.CopyDataProductBean;
 import ch.so.agi.simi.web.screens.FilterFragment;
-import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
@@ -20,7 +17,6 @@ import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
-import java.util.function.Consumer;
 
 @UiController("simiProduct_DataProduct.browse")
 @UiDescriptor("data-product-browse.xml")

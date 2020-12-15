@@ -1,10 +1,10 @@
 package ch.so.agi.simi.web;
 
 import ch.so.agi.simi.web.config.SchemareaderConfig;
-import ch.so.agi.simi.entity.data.tabular.PostgresDB;
-import ch.so.agi.simi.entity.data.tabular.schemareader.TableAndFieldInfo;
-import ch.so.agi.simi.entity.data.tabular.schemareader.TableListing;
-import ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo;
+import ch.so.agi.simi.entity.data.PostgresDB;
+import ch.so.agi.simi.entity.data.schemareader.TableAndFieldInfo;
+import ch.so.agi.simi.entity.data.schemareader.TableListing;
+import ch.so.agi.simi.entity.data.schemareader.TableShortInfo;
 import com.haulmont.cuba.core.global.TimeSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

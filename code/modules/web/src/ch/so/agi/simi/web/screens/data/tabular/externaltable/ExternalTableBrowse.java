@@ -1,7 +1,7 @@
 package ch.so.agi.simi.web.screens.data.tabular.externaltable;
 
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.data.tabular.ExternalTable;
+import ch.so.agi.simi.entity.data.ExternalTable;
 
 @UiController("simiData_ExternalTable.browse")
 @UiDescriptor("external-table-browse.xml")

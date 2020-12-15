@@ -4,7 +4,7 @@
     <data>
         <instance id="dataProductDc" provided="true"/>
         <collection id="pubScopesDc"
-                    class="ch.so.agi.simi.entity.DataProduct_PubScope"
+                    class="ch.so.agi.simi.entity.product.non_dsv.DataProduct_PubScope"
                     view="_local">
             <loader id="pubScopesDl">
                 <query>

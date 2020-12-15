@@ -1,7 +1,7 @@
 package ch.so.agi.simi.entity.iam;
 
 import ch.so.agi.simi.entity.SimiStandardEntity;
-import ch.so.agi.simi.entity.product.DataSetView;
+import ch.so.agi.simi.entity.product.datasetview.DataSetView;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

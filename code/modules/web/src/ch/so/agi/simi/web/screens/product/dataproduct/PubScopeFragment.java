@@ -1,7 +1,7 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
-import ch.so.agi.simi.entity.DataProduct_PubScope;
-import ch.so.agi.simi.entity.product.DataProduct;
+import ch.so.agi.simi.entity.product.non_dsv.DataProduct_PubScope;
+import ch.so.agi.simi.entity.product.non_dsv.DataProduct;
 import com.haulmont.cuba.core.global.queryconditions.JpqlCondition;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;

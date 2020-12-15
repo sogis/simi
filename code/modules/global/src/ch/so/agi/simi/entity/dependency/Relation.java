@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.dependency;
 
-import ch.so.agi.simi.entity.product.DataSetView;
+import ch.so.agi.simi.entity.product.datasetview.DataSetView;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.annotation.PostConstruct;

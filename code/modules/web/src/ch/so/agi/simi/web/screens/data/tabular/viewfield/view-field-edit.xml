@@ -5,7 +5,7 @@
         focusComponent="form">
     <data>
         <instance id="viewFieldDc"
-                  class="ch.so.agi.simi.entity.data.tabular.ViewField">
+                  class="ch.so.agi.simi.entity.product.datasetview.ViewField">
             <view extends="_local">
                 <property name="tableField" view="_minimal">
                     <property name="descriptionModel"/>
@@ -18,7 +18,7 @@
             <loader/>
         </instance>
         <collection id="tableFieldsDc"
-                    class="ch.so.agi.simi.entity.data.tabular.TableField"
+                    class="ch.so.agi.simi.entity.data.TableField"
                     view="_local">
             <loader id="tableFieldsDl">
                 <query>

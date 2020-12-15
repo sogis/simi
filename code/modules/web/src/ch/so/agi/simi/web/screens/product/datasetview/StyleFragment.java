@@ -1,7 +1,7 @@
 package ch.so.agi.simi.web.screens.product.datasetview;
 
-import ch.so.agi.simi.entity.product.DataSetView;
-import ch.so.agi.simi.entity.product.util.StyleAsset;
+import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import ch.so.agi.simi.entity.product.datasetview.StyleAsset;
 import ch.so.agi.simi.web.beans.style.StyleDbContent;
 import ch.so.agi.simi.web.beans.style.StyleFileContent;
 import ch.so.agi.simi.web.beans.style.StyleStorageBean;

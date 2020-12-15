@@ -1,8 +1,8 @@
 package ch.so.agi.simi.web.beans.copy;
 
-import ch.so.agi.simi.entity.product.LayerGroup;
-import ch.so.agi.simi.entity.product.ProductList;
-import ch.so.agi.simi.entity.product.PropertiesInList;
+import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
+import ch.so.agi.simi.entity.product.non_dsv.ProductList;
+import ch.so.agi.simi.entity.product.non_dsv.PropertiesInList;
 import com.haulmont.cuba.core.global.DataManager;
 import org.springframework.stereotype.Component;
 

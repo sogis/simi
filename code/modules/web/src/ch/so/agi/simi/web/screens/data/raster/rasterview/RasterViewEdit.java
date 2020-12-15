@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.screens.data.raster.rasterview;
 
-import ch.so.agi.simi.entity.data.raster.RasterView;
+import ch.so.agi.simi.entity.product.datasetview.RasterView;
 import ch.so.agi.simi.entity.iam.Permission;
 import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.gui.components.Button;

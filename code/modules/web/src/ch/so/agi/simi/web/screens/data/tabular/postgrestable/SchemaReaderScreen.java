@@ -1,9 +1,9 @@
 package ch.so.agi.simi.web.screens.data.tabular.postgrestable;
 
-import ch.so.agi.simi.entity.data.tabular.PostgresDB;
-import ch.so.agi.simi.entity.data.tabular.schemareader.TableAndFieldInfo;
-import ch.so.agi.simi.entity.data.tabular.schemareader.TableListing;
-import ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo;
+import ch.so.agi.simi.entity.data.PostgresDB;
+import ch.so.agi.simi.entity.data.schemareader.TableAndFieldInfo;
+import ch.so.agi.simi.entity.data.schemareader.TableListing;
+import ch.so.agi.simi.entity.data.schemareader.TableShortInfo;
 import ch.so.agi.simi.web.SchemaReaderBean;
 import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.Notifications;

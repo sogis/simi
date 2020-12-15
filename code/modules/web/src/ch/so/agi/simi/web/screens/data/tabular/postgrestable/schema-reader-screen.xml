@@ -4,9 +4,9 @@
         caption="Quell-DB einlesen ..."
         focusComponent="tableShortInfosTable">
     <data readOnly="true">
-        <collection id="TableShortInfosDc" class="ch.so.agi.simi.entity.data.tabular.schemareader.TableShortInfo"/>
+        <collection id="TableShortInfosDc" class="ch.so.agi.simi.entity.data.schemareader.TableShortInfo"/>
         <collection id="postgresDBsDc"
-                    class="ch.so.agi.simi.entity.data.tabular.PostgresDB"
+                    class="ch.so.agi.simi.entity.data.PostgresDB"
                     view="_local">
             <loader id="postgresDBsDl">
                 <query>

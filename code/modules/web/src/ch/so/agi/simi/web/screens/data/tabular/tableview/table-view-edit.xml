@@ -5,7 +5,7 @@
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
-                  class="ch.so.agi.simi.entity.data.tabular.TableView">
+                  class="ch.so.agi.simi.entity.product.datasetview.TableView">
             <view extends="_local">
                 <property name="postgresTable" view="_minimal">
                     <property name="descriptionModel"/>
@@ -31,7 +31,7 @@
             </loader>
         </collection>
         <collection id="tableFieldsDc"
-                    class="ch.so.agi.simi.entity.data.tabular.TableField"
+                    class="ch.so.agi.simi.entity.data.TableField"
                     view="_local">
             <loader id="tableFieldsDl">
                 <query>
@@ -45,7 +45,7 @@
             </loader>
         </collection>
         <collection id="pgTableDc"
-                    class="ch.so.agi.simi.entity.data.tabular.PostgresTable">
+                    class="ch.so.agi.simi.entity.data.PostgresTable">
             <view extends="_minimal">
                 <property name="descriptionModel"/>
             </view>
@@ -122,7 +122,7 @@
                     </column>
                 </form>
             </groupBox>
-            <groupBox id="viewFieldsBox" caption="msg://ch.so.agi.simi.entity.data.tabular/TableView.viewFields" spacing="true" collapsable="true">
+            <groupBox id="viewFieldsBox" caption="Attribute" spacing="true" collapsable="true">
                 <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" editable="true" multiselect="true">
                     <actions>
                         <action id="edit" type="edit"/>

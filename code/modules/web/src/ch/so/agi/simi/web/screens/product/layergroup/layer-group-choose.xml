@@ -5,7 +5,7 @@
         focusComponent="layerGroupsTable">
     <data readOnly="true">
         <collection id="layerGroupsDc"
-                    class="ch.so.agi.simi.entity.product.LayerGroup">
+                    class="ch.so.agi.simi.entity.product.non_dsv.LayerGroup">
             <view extends="_minimal"/>
             <loader id="layerGroupsDl">
                 <query>

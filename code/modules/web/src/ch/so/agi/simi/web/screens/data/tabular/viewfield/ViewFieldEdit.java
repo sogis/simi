@@ -1,10 +1,10 @@
 package ch.so.agi.simi.web.screens.data.tabular.viewfield;
 
-import ch.so.agi.simi.entity.data.tabular.TableField;
+import ch.so.agi.simi.entity.data.TableField;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.data.tabular.ViewField;
+import ch.so.agi.simi.entity.product.datasetview.ViewField;
 
 import javax.inject.Inject;
 

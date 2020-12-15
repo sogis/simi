@@ -8,7 +8,7 @@ import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.components.TextInputField;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.data.tabular.TableView;
+import ch.so.agi.simi.entity.product.datasetview.TableView;
 
 import javax.inject.Inject;
 import java.util.List;

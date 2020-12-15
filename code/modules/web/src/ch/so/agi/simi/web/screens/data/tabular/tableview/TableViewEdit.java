@@ -1,8 +1,8 @@
 package ch.so.agi.simi.web.screens.data.tabular.tableview;
 
-import ch.so.agi.simi.entity.data.tabular.TableField;
-import ch.so.agi.simi.entity.data.tabular.TableView;
-import ch.so.agi.simi.entity.data.tabular.ViewField;
+import ch.so.agi.simi.entity.data.TableField;
+import ch.so.agi.simi.entity.product.datasetview.TableView;
+import ch.so.agi.simi.entity.product.datasetview.ViewField;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.web.SortBean;
 import com.haulmont.cuba.gui.components.*;

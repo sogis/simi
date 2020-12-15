@@ -1,16 +1,16 @@
 package ch.so.agi.simi.web.screens.product.facadelayer;
 
-import ch.so.agi.simi.entity.product.*;
+import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
+import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
+import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
+import ch.so.agi.simi.entity.product.non_dsv.PropertiesInList;
 import ch.so.agi.simi.web.SortBean;
-import com.haulmont.cuba.core.global.Metadata;
-import com.haulmont.cuba.core.global.MetadataTools;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
-import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.gui.util.OperationResult;
 

@@ -1,11 +1,11 @@
 package ch.so.agi.simi.web.screens.data.tabular.postgrestable;
 
-import ch.so.agi.simi.entity.data.tabular.ModelSchema;
-import ch.so.agi.simi.entity.data.tabular.PostgresDB;
-import ch.so.agi.simi.entity.data.tabular.PostgresTable;
-import ch.so.agi.simi.entity.data.tabular.TableField;
-import ch.so.agi.simi.entity.data.tabular.schemareader.TableAndFieldInfo;
-import ch.so.agi.simi.entity.data.tabular.schemareader.TableInfo;
+import ch.so.agi.simi.entity.data.ModelSchema;
+import ch.so.agi.simi.entity.data.PostgresDB;
+import ch.so.agi.simi.entity.data.PostgresTable;
+import ch.so.agi.simi.entity.data.TableField;
+import ch.so.agi.simi.entity.data.schemareader.TableAndFieldInfo;
+import ch.so.agi.simi.entity.data.schemareader.TableInfo;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.ScreenBuilders;

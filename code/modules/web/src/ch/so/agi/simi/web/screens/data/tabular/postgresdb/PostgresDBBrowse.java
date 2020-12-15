@@ -1,15 +1,11 @@
 package ch.so.agi.simi.web.screens.data.tabular.postgresdb;
 
-import ch.so.agi.simi.entity.data.tabular.TableView;
 import com.haulmont.cuba.gui.Dialogs;
-import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.actions.list.RemoveAction;
 import com.haulmont.cuba.gui.components.Action;
-import com.haulmont.cuba.gui.components.Button;
-import com.haulmont.cuba.gui.components.DialogAction;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.data.tabular.PostgresDB;
+import ch.so.agi.simi.entity.data.PostgresDB;
 
 import javax.inject.Inject;
 import javax.inject.Named;
