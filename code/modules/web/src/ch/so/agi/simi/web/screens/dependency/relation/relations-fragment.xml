@@ -3,26 +3,30 @@
     <data>
         <instance id="relationsDc" class="ch.so.agi.simi.entity.dependency.Relation"
                   provided="true"/>
+        <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.product.datasetview.DataSetView">
+            <loader id="dataSetViewsDl">
+                <query>
+                    <![CDATA[select e from simiProduct_DataSetView e order by e.identifier]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <layout>
-        <table id="relationsTable" dataContainer="relationsDc" width="100%" height="200px">
+        <table id="relationsTable" dataContainer="relationsDc" width="100%" height="200px" editable="true">
             <actions>
-                <action id="remove" caption="Verknüpfung löschen" type="remove">
+                <action id="unlink" caption="Verknüpfung löschen" type="remove">
                     <properties>
                         <property name="confirmation" value="false"/>
                     </properties>
                 </action>
-                <action id="create" caption="View verknüpfen" type="create"/>
-                <action id="edit" caption="Verknüpfung bearbeiten" type="edit"/>
             </actions>
             <columns>
-                <column id="dataSetView" caption="View" captionProperty="dataSetView.entityName"/>
-                <column id="relationType" caption="Beziehungstyp" sort="ASCENDING"/>
+                <column id="dataSetView" editable="true" caption="View" optionsContainer="dataSetViewsDc" captionProperty="entityName"/>
+                <column id="relationType" caption="Beziehungstyp" sort="ASCENDING" editable="true"/>
             </columns>
             <buttonsPanel>
-                <button action="relationsTable.create"/>
-                <button action="relationsTable.edit"/>
-                <button action="relationsTable.remove"/>
+                <button id="btnAddRelation" caption="View verknüpfen" icon="ADD_ACTION" primary="true"/>
+                <button action="relationsTable.unlink"/>
             </buttonsPanel>
         </table>
     </layout>

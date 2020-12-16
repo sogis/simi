@@ -46,6 +46,7 @@
                         <action id="createComponent" caption="Modul erstellen"/>
                         <action id="createFeatureinfo" caption="Spez. FeatureInfo erstellen"/>
                         <action id="createReport" caption="Report erstellen"/>
+                        <action id="createCCC" caption="CCCIntegration erstellen"/>
                     </actions>
                 </popupButton>
                 <button id="editBtn" action="dependenciesTable.edit"/>

@@ -8,9 +8,7 @@
             <view extends="_minimal">
                 <property name="relations" view="_minimal">
                     <property name="relationType"/>
-                    <property name="dataSetView" view="_minimal">
-
-                    </property>
+                    <property name="dataSetView" view="_minimal"/>
                 </property>
                 <property name="name"/>
                 <property name="remarks"/>

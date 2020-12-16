@@ -1,14 +1,11 @@
 package ch.so.agi.simi.web.screens.dependency.browse;
 
-import ch.so.agi.simi.entity.dependency.Component;
-import ch.so.agi.simi.entity.dependency.FeatureInfo;
-import ch.so.agi.simi.entity.dependency.Report;
+import ch.so.agi.simi.entity.dependency.*;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.dependency.Dependency;
 
 import javax.inject.Inject;
 
@@ -40,6 +37,12 @@ public class DependencyBrowse extends StandardLookup<Dependency> {
     public void onCreateBtnCreateFeatureinfo(Action.ActionPerformedEvent event) {
         FeatureInfo fi = metdata.create(FeatureInfo.class);
         showCreateEditorForDependency(fi);
+    }
+
+    @Subscribe("createBtn.createCCC")
+    public void onCreateBtnCreateCCCIntegration(Action.ActionPerformedEvent event) {
+        CCCIntegration ci = metdata.create(CCCIntegration.class);
+        showCreateEditorForDependency(ci);
     }
 
     private void showCreateEditorForDependency(Dependency dependency) {

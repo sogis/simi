@@ -1,11 +1,12 @@
 package ch.so.agi.simi.entity.product.non_dsv;
 
+import ch.so.agi.simi.entity.dependency.CCCIntegration;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMIPRODUCT_MAP")
@@ -22,6 +23,18 @@ public class Map extends ProductList {
     @NotNull
     @Column(name = "WGC_URL_VALUE", nullable = false, length = 50)
     private String wgcUrlValue;
+    @OnDeleteInverse(DeletePolicy.CASCADE)
+    @OnDelete(DeletePolicy.DENY)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "map")
+    private CCCIntegration cccIntegration;
+
+    public CCCIntegration getCccIntegration() {
+        return cccIntegration;
+    }
+
+    public void setCccIntegration(CCCIntegration cccIntegration) {
+        this.cccIntegration = cccIntegration;
+    }
 
     @Override
     protected String typeAbbreviation(){

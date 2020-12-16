@@ -601,9 +601,14 @@ create table SIMIDEPENDENCY_DEPENDENCY (
     REMARKS text,
     --
     -- from simiDependency_FeatureInfo
-    DISPLAY_TEMPLATE text not null,
+    DISPLAY_TEMPLATE text,
     SQL_QUERY text,
     PY_MODULE_NAME varchar(100),
+    --
+    -- from simiDependency_CCCIntegration
+    MAP_ID uuid,
+    LOCATOR_LAYERS text,
+    NOTIFY_LAYERS text,
     --
     primary key (ID)
 )^

@@ -9,9 +9,9 @@ import javax.validation.constraints.NotNull;
 public class FeatureInfo extends Dependency {
     private static final long serialVersionUID = 449117253137188881L;
 
-    @NotNull
     @Lob
-    @Column(name = "DISPLAY_TEMPLATE", nullable = false)
+    @Column(name = "DISPLAY_TEMPLATE")
+    @NotNull
     private String displayTemplate;
 
     @Lob

@@ -38,5 +38,6 @@
         <class>ch.so.agi.simi.entity.dependency.Dependency</class>
         <class>ch.so.agi.simi.entity.dependency.Report</class>
         <class>ch.so.agi.simi.entity.dependency.FeatureInfo</class>
+        <class>ch.so.agi.simi.entity.dependency.CCCIntegration</class>
     </persistence-unit>
 </persistence>

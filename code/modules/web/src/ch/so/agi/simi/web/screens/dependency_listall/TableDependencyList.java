@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.dependency.overview;
+package ch.so.agi.simi.web.screens.dependency_listall;
 
 import ch.so.agi.simi.service.dependency.DependencyInfo;
 import ch.so.agi.simi.service.dependency.DependencyService;

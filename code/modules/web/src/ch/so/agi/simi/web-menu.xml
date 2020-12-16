@@ -2,7 +2,7 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <item screen="simiProduct_DataProduct.browse" caption="Produkte" insertBefore="administration"/>
     <item id="simiData_PostgresTable.browse" screen="simiData_PostgresTable.browse" caption="Geo-Tabellen" insertBefore="administration"/>
-    <item screen="simiData_TableDependency.list" caption="Abhängigkeiten" insertBefore="administration"/>
+    <item screen="simiData_TableDependency.list" caption="Abhängigkeits-Liste" insertBefore="administration"/>
     <menu id="application-simi-iam" caption="Benutzer - Verwaltung ..." expanded="false" insertBefore="administration">
         <item screen="simiIAM_User.browse" caption="Benutzer"/>
         <item screen="simiIAM_Group.browse" caption="Gruppen"/>
@@ -16,11 +16,7 @@
         <item screen="simiData_ExternalTable.browse" caption="Externe Tabellen"/>
     </menu>
     <menu id="application-simi-others" caption="Weitere ..." expanded="false" insertBefore="administration">
-        <item screen="simiCCC_CCCClient.browse" caption="CCC - Anbindungen"/>
+        <item screen="simiDependency_Dependency.browse" caption="Abhängigkeiten pflegen"/>
         <item screen="simiProduct_DataProduct_PubScope.browse" caption="Pub Scopes"/>
-        <item screen="simiProduct_LayerGroup.lookup" caption="Choose"/>
-        <item screen="simiDependency_Dependency.browse"
-              caption="mainMsg://menu_config.simiDependency_Dependency.browse"/>
-
     </menu>
 </menu-config>
