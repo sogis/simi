@@ -6,7 +6,7 @@
 
 WITH
 
--- DATENPRODUKTE ********************************************************************
+-- Shared ********************************************************************
 
 ds_dsv AS ( -- datasetviews für ein dataset
 	SELECT 
@@ -21,6 +21,8 @@ ds_dsv AS ( -- datasetviews für ein dataset
 	LEFT JOIN 
 		simidata_table_view tv ON dsv.id = tv.id
 ),
+
+-- DATENPRODUKTE ********************************************************************
 
 ds_fl AS ( -- facadelayer für eine datasetview
 	SELECT 
@@ -69,7 +71,7 @@ dp_union AS (
 	SELECT ds_id, dsv_id, pl_id AS dp_id, typ, sort FROM ds_pl
 ),
 
-dp_cols AS ( -- notwendige informationen aller ungelöschten Datenprodukte
+dataprod_cols AS ( -- notwendige informationen aller ungelöschten Datenprodukte
 	SELECT 
 		id,
 		title,
@@ -80,28 +82,96 @@ dp_cols AS ( -- notwendige informationen aller ungelöschten Datenprodukte
 		dp.delete_ts IS NULL
 ),
 
-dp AS (
+dataprod AS (
 	SELECT
 		ds_id,
 		concat(dp_union.typ, ' (Produkt)') AS dep_typ,
-		concat(dp.identifier, ' (', dp.title, ')') AS dep_name,
+		concat(dp.identifier, ' | ', dp.title) AS dep_name,
 		CASE 
 			WHEN dsv_id = dp_id THEN 'Ist View des Dataset'
-			ELSE concat('Dataset is via View ', dsv.identifier, ' in ', dp_union.typ, ' enthalten.')
+			ELSE concat('Dataset ist via View "', dsv.identifier, '" in ', dp_union.typ, ' enthalten.')
 		END AS dep_relation,
-		sort
+		sort AS subsort,
+		1 AS sort
 	FROM 
 		dp_union
 	JOIN 
-		dp_cols dp ON dp_union.dp_id = dp.id
+		dataprod_cols dp ON dp_union.dp_id = dp.id
 	JOIN 
-		dp_cols dsv ON dp_union.dsv_id = dsv.id
+		dataprod_cols dsv ON dp_union.dsv_id = dsv.id
+),
+
+-- Dependencies ********************************************************************
+
+ds_dsv_relation AS ( -- Alle Beziehungen eines DS via DSV auf eine Dependency
+	SELECT 
+		ds_id,
+		dsv_id,
+		dp.identifier AS dsv_identifier,
+		rel.dependency_id AS dep_id
+	FROM 
+		ds_dsv
+	JOIN 
+		simidependency_relation rel ON ds_dsv.dsv_id = rel.data_set_view_id
+	JOIN 
+		simiproduct_data_product dp ON ds_dsv.dsv_id = dp.id 
+	WHERE 
+			rel.delete_ts IS NULL 
+		AND 
+			dp.delete_ts IS NULL
+		AND 
+			rel.relation_type NOT LIKE '%display%' -- "Verzeihender" Filter, falls die Nachführung vergessen geht...
+),
+
+dependency_extprop AS (
+	SELECT 
+		* 
+	FROM (
+		VALUES 
+			('simiDependency_Component', 'Modul', 1),
+			('simiDependency_FeatureInfo', 'Spez. Featureinfo', 3),
+			('simiDependency_CCCIntegration', 'CCC-Integration', 6),
+			('simiDependency_Report', 'Report', 9)
+	) 
+	AS t (dtype, typename, sort)
+),
+
+dependency AS (
+	SELECT 
+		ds_id,
+		"name" AS dep_name,
+		concat(typename, ' (Abhängigkeit)') AS dep_typ,
+		concat('Dataset ist via View "', rel.dsv_identifier, '" in ', typename, ' enthalten.') AS dep_relation,
+		sort AS subsort,
+		2 AS sort
+	FROM 
+		simidependency_dependency dep
+	JOIN
+		dependency_extprop ep ON dep.dtype = ep.dtype
+	JOIN 
+		ds_dsv_relation rel ON dep.id = rel.dep_id
+	WHERE 
+		dep.delete_ts IS NULL 
+),
+
+-- ***********************************************************************************
+
+all_dependencies AS (
+	SELECT * FROM (
+		SELECT ds_id, dep_typ, dep_name, dep_relation, subsort, sort FROM dataprod
+		UNION ALL 
+		SELECT ds_id, dep_typ, dep_name, dep_relation, subsort, sort FROM dependency
+	) sub
+	ORDER BY 
+		sort, 
+		subsort,
+		dep_name
 )
 
+SELECT * FROM all_dependencies WHERE ds_id = '30903fd9-2d3e-4e12-99a5-3f1e038b5087'
 
-SELECT * FROM dp WHERE ds_id = 'ee372679-247f-489f-a384-9b80f60addd7' ORDER BY sort
 
--- FEATURE-INFO ********************************************************************
+
 
 
 

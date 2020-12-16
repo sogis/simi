@@ -12,7 +12,7 @@
         </collection>
     </data>
     <layout>
-        <table id="relationsTable" dataContainer="relationsDc" width="100%" height="200px" editable="true">
+        <table id="relationsTable" dataContainer="relationsDc" width="100%" height="100%" editable="true">
             <actions>
                 <action id="unlink" caption="Verknüpfung löschen" type="remove">
                     <properties>
@@ -21,7 +21,7 @@
                 </action>
             </actions>
             <columns>
-                <column id="dataSetView" editable="true" caption="View" optionsContainer="dataSetViewsDc" captionProperty="entityName"/>
+                <column id="dataSetView" editable="true" caption="View" optionsContainer="dataSetViewsDc"/>
                 <column id="relationType" caption="Beziehungstyp" sort="ASCENDING" editable="true"/>
             </columns>
             <buttonsPanel>

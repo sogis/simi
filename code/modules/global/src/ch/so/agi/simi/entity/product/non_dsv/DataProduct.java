@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
 @Entity(name = "simiProduct_DataProduct")
-@NamePattern("entityName|identifier,title")
+@NamePattern("#concatName|identifier,title")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class DataProduct extends SimiStandardEntity {
@@ -52,20 +52,20 @@ public class DataProduct extends SimiStandardEntity {
         return " WARNING: override missing.";
     }
 
+    public String concatName(){
+        return this.identifier + " | " + this.title + " | " +  typeAbbreviation() ;
+    }
+
     @Transient
     @MetaProperty
     public String getEntityName() { // For use in Tables, can be referenced as entityName
-        return entityName();
+        return concatName();
     }
 
     @Transient
     @MetaProperty
     public String getTypeAbbreviation() { // For use in Tables, can be referenced as typeAbbreviation
         return typeAbbreviation();
-    }
-
-    protected String entityName(){
-        return identifier + " - " + title + " (" +  typeAbbreviation() + " )";
     }
 
     public String getDescription() {

@@ -55,8 +55,9 @@
                 <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
             </column>
         </form>
-        <groupBox id="dataSetViewsBox" caption="msg://ch.so.agi.simi.entity.product/FacadeLayer.dataSetViews">
-            <table id="propertiesInFacadeTable" dataContainer="propertiesInFacadeDc" width="100%" height="100%" editable="true">
+        <groupBox id="dataSetViewsBox" caption="Enthaltene Views">
+            <table id="propertiesInFacadeTable" dataContainer="propertiesInFacadeDc" width="100%" height="100%" editable="true"
+                   reorderingAllowed="false" settingsEnabled="false">
                 <actions>
                     <action id="unlink" type="remove" caption="Verknüpfung löschen">
                         <properties>
@@ -66,8 +67,8 @@
                 </actions>
                 <columns>
                     <column id="dataSetView" editable="true" optionsContainer="dataSetViewsDc" captionProperty="entityName"/>
-                    <column id="transparency" editable="true"/>
-                    <column id="sort" editable="true" sort="ASCENDING"/>
+                    <column id="transparency" editable="true" width="160"/>
+                    <column id="sort" editable="true" sort="ASCENDING" width="100"/>
                 </columns>
                 <buttonsPanel>
                     <button id="btnPifAddDataSetView" caption="View verknüpfen" icon="ADD_ACTION" primary="true"/>

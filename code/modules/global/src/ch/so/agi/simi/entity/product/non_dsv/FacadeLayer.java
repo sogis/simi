@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "SIMIPRODUCT_FACADE_LAYER")
 @Entity(name = "simiProduct_FacadeLayer")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("entityName|identifier,title") //needed to define minimal view
+@NamePattern("#concatName|identifier,title") //needed to define minimal view
 public class FacadeLayer extends SingleActor {
     private static final long serialVersionUID = -5231187031797128001L;
 

@@ -43,26 +43,21 @@
 
 ## Jederzeit
 
-* Beans in entsprechende subpackages
-  Hilfsklassen und -Interfaces in das Package des Beans
+* Grooming der Screens
+  * Tabellen
+    * Settings disable
+    * Spaltenweiten
+    * Row-Header für edit-Rows (falls verfügbar)
+  * Publikations-Datum, ... raus
   
 ## Nach Vorliegen der migrierten Daten
 
-* Browse-Zwischenscreens ersetzen mit direkter Auswahl in Edit-Form
-
-* Bei attributierten m:n Beziehungen: Direktes Auswählen in Kind-Tabelle des Edit-Form mittels Dropdown
-  * Rollenzuweisung
-  * Attributauswahl in DataSetView
-  * Zuweisen DSV zu Facade
-  * Zuweisen SA zu Layergruppe oder Karte
-
 * Ablauf mit Schemaauslesen prüfen.
 
-* Identifier für die verschiedenen Klassen setzen (Karte, Gruppe, Facade, Vector, Raster, Tabelle)
 
 # Neu
 
-## Middleware-Service "Depencencies"
+## Middleware-Service "Dependencies"
 
 Signatur:
 * Input:
@@ -85,6 +80,7 @@ Signatur:
 * Beziehung FeatureInfo - DSV als Attributierte n:M Beziehung. 
   * In diesem Zusammenhang überlegen, wie angezeigt wird, dass eine spezielle Featureinfo vorliegt.
   Am einfachsten indem der Alias nicht gesetzt ist.
+* DataSetView_SearchTypeEnum geändert von int auf string
 
 # Findings zu Erstversion der Datenmigration
 * Karten haben keine Kinder

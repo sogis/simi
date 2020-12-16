@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="CCC-Integration - edit"
+        focusComponent="form">
+    <data>
+        <instance id="cCCIntegrationDc"
+                  class="ch.so.agi.simi.entity.dependency.CCCIntegration">
+            <view extends="_minimal">
+                <property name="relations" view="_minimal">
+                    <property name="relationType"/>
+                    <property name="dataSetView" view="_minimal"/>
+                </property>
+                <property name="name"/>
+                <property name="remarks"/>
+                <property name="map" view="_minimal"/>
+                <property name="locatorLayers"/>
+                <property name="notifyLayers"/>
+            </view>
+            <loader/>
+            <collection id="relationsDc" property="relations"/>
+        </instance>
+        <collection id="mapsDc" class="ch.so.agi.simi.entity.product.non_dsv.Map">
+            <loader id="mapsDl">
+                <query>
+                    <![CDATA[select e from simiProduct_Map e order by e.identifier]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="80%"
+                width="80%"
+                modal="true"
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="relationsBox" spacing="true">
+        <form id="form" dataContainer="cCCIntegrationDc">
+            <column width="450px">
+                <textField id="nameField" caption="Name" property="name"/>
+                <lookupField id="map" caption="Karte" optionsContainer="mapsDc" captionProperty="entityName"/>
+                <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5"/>
+            </column>
+            <column width="450px">
+                <sourceCodeEditor id="locatorLayersField" caption="Locator-Konfig (Json)" property="locatorLayers" rowspan="10" showGutter="true"/>
+                <sourceCodeEditor id="notifyLayersField" caption="Rückaufruf-Konfig (Json)" property="notifyLayers" rowspan="10" showGutter="true"/>
+            </column>
+        </form>
+        <groupBox id="relationsBox" caption="Beziehungen">
+            <fragment id="relations" screen="simiDependency_RelationsFragment"/>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
