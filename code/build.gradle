@@ -135,7 +135,12 @@ configure(webModule) {
         archives webArchive
     }
 
-    task deployConf(type: Copy) {
+    task deploySqlQueries(type: Copy) {
+        from file('db_queries')
+        into "$cuba.appHome/${modulePrefix}/conf"
+    }
+
+    task deployConf(dependsOn: deploySqlQueries, type: Copy) {
         from file('src')
         include "ch/so/agi/simi/**"
         into "$cuba.appHome/${modulePrefix}/conf"

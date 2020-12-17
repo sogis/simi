@@ -62,4 +62,10 @@
         <property name="sort"/>
         <property name="transparency"/>
     </view>
+    <view entity="simiData_PostgresTable" name="dependencyService-fullTableName">
+        <property name="modelSchema">
+            <property name="schemaName"/>
+        </property>
+        <property name="tableName"/>
+    </view>
 </views>

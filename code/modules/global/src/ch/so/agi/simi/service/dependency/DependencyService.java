@@ -8,7 +8,5 @@ public interface DependencyService {
 
     List<DependencyInfo> collectDependenciesForTable(UUID tableId);
 
-    List<DependencyInfo> productDependenciesForSingleActor(UUID singleActorId);
-
     List<DependencyInfo> collectDependenciesForUnregisteredTable(String schemaName, String tableName);
 }

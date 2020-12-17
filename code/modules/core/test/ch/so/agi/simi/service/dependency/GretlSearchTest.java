@@ -1,6 +1,5 @@
 package ch.so.agi.simi.service.dependency;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -31,10 +30,10 @@ public class GretlSearchTest {
     public void searchExistingTherm_Success(){
         List<DependencyInfo> di = GretlSearch.queryGretlDependencies(SCHEMA_TABLE_EXISTING[0], SCHEMA_TABLE_EXISTING[1], CONF_VALID);
 
-        Assert.assertEquals(
-                "Size must be 12. Therms must be found in all 6 files, with the test repo being configured twice. 6 Files * 2 Repos = 12",
+        Assertions.assertEquals(
                 12,
-                di.size()
+                di.size(),
+                "Size must be 12. Therms must be found in all 6 files, with the test repo being configured twice. 6 Files * 2 Repos = 12"
         );
     }
 
@@ -42,10 +41,10 @@ public class GretlSearchTest {
     public void searchMissingTherm_EmptyList(){
         List<DependencyInfo> di = GretlSearch.queryGretlDependencies(SCHEMA_TABLE_NONEXISTING[0], SCHEMA_TABLE_NONEXISTING[1], CONF_VALID);
 
-        Assert.assertEquals(
-                "Size must 0. UUID search therms are not part of the test repo",
+        Assertions.assertEquals(
                 0,
-                di.size()
+                di.size(),
+                "Size must 0. UUID search therms are not part of the test repo"
         );
     }
 

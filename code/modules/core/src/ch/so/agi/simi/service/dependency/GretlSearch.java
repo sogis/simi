@@ -16,15 +16,6 @@ public class GretlSearch {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    /*
-curl \
-        -G \
-        -H "Accept: application/vnd.github.v3+json" \
-        --data-urlencode q="TransferSet repo:sogis/gretljobs" \
-        https://api.github.com/search/code
-
-        getForObject
-*/
     private GretlSearch(String schemaName, String tableName, GretlSearchConfig config){
         this.schemaName = schemaName;
         this.tableName = tableName;
