@@ -26,7 +26,7 @@ jobs:
         run: docker-compose up -d -V db
         working-directory: ./code/docker
       - name: Wait until db is up
-        run: docker-compose up -V await-db
+        run: docker-compose up -V --exit-code-from await-db await-db
         working-directory: ./code/docker
       - name: Start simi image
         run: docker-compose up -d -V simi
