@@ -23,23 +23,20 @@ jobs:
         run: ./gradlew imgTag
         working-directory: ./code
       - name: Start db image
-        run: docker-compose up -d -V postgres
+        run: docker-compose up -d -V db
         working-directory: ./code/docker
       - name: Wait until db is up
-        run: sleep 10s
-      - name: Start cuba image
-        run: docker-compose up -d -V web
+        run: docker-compose up -d -V await-db
+        working-directory: ./code/docker
+      - name: Start simi image
+        run: docker-compose up -d -V simi
         working-directory: ./code/docker
       - name: middle tier - check health
-        uses: cygnetdigital/wait_for_response@v2.0.0
-        with:
-          url: 'http://localhost:8080/app-core/remoting/health'
-          interval: 1000
+        run: await.sh http://localhost:8080/app-core/remoting/health
+        working-directory: ./code/docker/await-url
       - name: client tier - check health
-        uses: cygnetdigital/wait_for_response@v2.0.0
-        with:
-          url: 'http://localhost:8080/app/dispatch/health'
-          interval: 1000
+        run: await.sh http://localhost:8080/app/dispatch/health
+        working-directory: ./code/docker/await-url
       - name: docker login
         env:
           SIMI_DOCKER_USER: ${{ secrets.SIMI_DOCKER_USER }}
