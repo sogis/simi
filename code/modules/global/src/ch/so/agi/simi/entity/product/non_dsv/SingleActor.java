@@ -33,6 +33,17 @@ public class SingleActor extends DataProduct {
     @Column(name = "CUSTOM_LEGEND")
     private byte[] customLegend;
 
+    @Column(name = "CUSTOM_LEGEND_SUFFIX", length = 100)
+    private String customLegendSuffix;
+
+    public String getCustomLegendSuffix() {
+        return customLegendSuffix;
+    }
+
+    public void setCustomLegendSuffix(String customLegendSuffix) {
+        this.customLegendSuffix = customLegendSuffix;
+    }
+
     public byte[] getCustomLegend() {
         return customLegend;
     }

@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.data.rasterview;
+package ch.so.agi.simi.web.screens.product.rasterview;
 
 import ch.so.agi.simi.entity.product.datasetview.RasterView;
 import ch.so.agi.simi.entity.iam.Permission;

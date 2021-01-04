@@ -11,10 +11,12 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "SIMIDATA_POSTGRES_DB")
-@Entity(name = "simiData_PostgresDB")
+@Entity(name = PostgresDB.NAME)
 @NamePattern("%s|dbName")
 public class PostgresDB extends SimiStandardEntity {
     private static final long serialVersionUID = 5599910294180509457L;
+
+    public static final String NAME = "simiData_PostgresDB";
 
     @Column(name = "DB_NAME", nullable = false, unique = true, length = 100)
     @NotNull

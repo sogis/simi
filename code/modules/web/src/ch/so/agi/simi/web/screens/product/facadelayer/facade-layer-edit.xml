@@ -44,17 +44,29 @@
                         <property name="filterProperty" value="forGroup"/>
                     </properties>
                 </fragment>
-                <dateField id="releasedAtField" property="releasedAt"/>
-                <textField id="releasedThroughField" property="releasedThrough"/>
-                <textField id="transparencyField" property="transparency"/>
-                <textArea id="remarksField" property="remarks" rows="5"/>
+
             </column>
             <column width="350px">
-                <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
-                <textArea id="keywordsField" property="keywords" rows="5" rowspan="3"/>
-                <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
+                <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
             </column>
         </form>
+        <groupBox caption="Weitere Eigenschaften" collapsable="true" collapsed="true">
+            <form dataContainer="dataProductDc">
+                <column width="350px">
+                    <textField id="transparencyField" property="transparency"/>
+                    <fragment id="custLegend" screen="simi_LegendFragment" caption="Spez. Legende">
+                        <properties>
+                            <property name="singleActorDc" ref="dataProductDc"/>
+                        </properties>
+                    </fragment>
+                    <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
+                </column>
+                <column width="350px">
+                    <textArea id="keywordsField" property="keywords" rows="5" rowspan="2"/>
+                    <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
+                </column>
+            </form>
+        </groupBox>
         <groupBox id="dataSetViewsBox" caption="Enthaltene Views">
             <table id="propertiesInFacadeTable" dataContainer="propertiesInFacadeDc" width="100%" height="100%" editable="true"
                    reorderingAllowed="false" settingsEnabled="false">

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fragment xmlns="http://schemas.haulmont.com/cuba/screen/fragment.xsd">
+    <layout>
+        <hbox spacing="false" >
+            <button id="legendDownloadBtn" caption="Download"/>
+            <hbox width="10"/>
+            <upload id="legendUploadBtn" fileStoragePutMode="MANUAL" permittedExtensions=".png"/>
+            <button id="legendDeleteBtn" icon="REMOVE"/>
+            <hbox width="10"/>
+            <label id="legendLabel" align="MIDDLE_LEFT"/>
+        </hbox>
+    </layout>
+</fragment>

@@ -87,6 +87,7 @@ Signatur:
 * Publikationstyp muss noch aus "In WMS verfügbar" abgeleitet werden
 * Rohdaten publiziert aus "In WFS verfügbar" ableiten
 * Suchtyp muss abgefüllt werden
+* Mit den QML scheint etwas nicht zu stimmen. Nach Runterladen, Hochladen kommt beim Speichern die Fehlermeldung "PSQLException: ERROR: invalid byte sequence for encoding "UTF8": 0x00". Fehler tritt beim Hochladen und Speichern von "neuen" QML nicht auf.
 
 ## Skript für Anpassung SearchType
 

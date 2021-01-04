@@ -39,13 +39,8 @@
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="dataProductDc">
                 <column width="450px">
-                    <lookupField id="rasterDSField" dataContainer="dataProductDc" property="rasterDS" optionsContainer="rasterDc"/>
-                    <textField id="transparencyField" property="transparency"/>
-                    <checkBox id="rawDownloadField" property="rawDownload"/>
-                    <lookupField id="searchTypeField" property="searchType"/>
-                    <textField id="searchFacetField" property="searchFacet"/>
-                    <textField id="searchFilterWordField" property="searchFilterWord"/>
-
+                    <textField id="identifierField" property="identifier"/>
+                    <textField id="titleField" property="title"/>
                     <fragment id="styleServerField" screen="simi_StyleFragment" caption="msg://ch.so.agi.simi.entity.product/DataSetView.styleServer">
                         <properties>
                             <property name="dataSetViewDc" ref="dataProductDc"/>
@@ -53,30 +48,48 @@
                             <property name="styleChangedProperty" value="styleServerChanged"/>
                         </properties>
                     </fragment>
-                    <fragment id="styleDesktopField" screen="simi_StyleFragment" caption="msg://ch.so.agi.simi.entity.product/DataSetView.styleDesktop">
-                        <properties>
-                            <property name="dataSetViewDc" ref="dataProductDc"/>
-                            <property name="styleProperty" value="styleDesktop"/>
-                            <property name="styleChangedProperty" value="styleDesktopChanged"/>
-                        </properties>
-                    </fragment>
-                    <textField id="identifierField" property="identifier"/>
-                    <textField id="titleField" property="title"/>
-                    <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment" caption="msg://ch.so.agi.simi.entity.product/DataProduct.pubScope">
-                        <properties>
-                            <property name="filterProperty" value="forDSV"/>
-                        </properties>
-                    </fragment>
-                    <dateField id="releasedAtField" property="releasedAt"/>
-                    <textField id="releasedThroughField" property="releasedThrough"/>
-                    <textArea id="remarksField" property="remarks" rows="5"/>
+                    <hbox spacing="true" caption="Publikation">
+                        <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment">
+                            <properties>
+                                <property name="filterProperty" value="forDSV"/>
+                            </properties>
+                        </fragment>
+                        <hbox width="10"/>
+                        <checkBox id="rawDownloadField" align="MIDDLE_CENTER" property="rawDownload" caption="Rohdaten pub?"/>
+                    </hbox>
                 </column>
                 <column width="450px">
-                    <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
-                    <textArea id="keywordsField" property="keywords" rows="5" rowspan="3"/>
-                    <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
+                    <lookupField id="rasterDSField" dataContainer="dataProductDc" property="rasterDS" optionsContainer="rasterDc"/>
+                    <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
                 </column>
             </form>
+            <groupBox caption="Weitere Eigenschaften" collapsable="true" collapsed="true">
+                <form dataContainer="dataProductDc">
+                    <column width="450px">
+                        <textField id="transparencyField" property="transparency"/>
+                        <fragment id="styleDesktopField" screen="simi_StyleFragment" caption="msg://ch.so.agi.simi.entity.product/DataSetView.styleDesktop">
+                            <properties>
+                                <property name="dataSetViewDc" ref="dataProductDc"/>
+                                <property name="styleProperty" value="styleDesktop"/>
+                                <property name="styleChangedProperty" value="styleDesktopChanged"/>
+                            </properties>
+                        </fragment>
+                        <fragment id="custLegend" screen="simi_LegendFragment" caption="Spez. Legende">
+                            <properties>
+                                <property name="singleActorDc" ref="dataProductDc"/>
+                            </properties>
+                        </fragment>
+                        <lookupField id="searchTypeField" property="searchType"/>
+                        <textField id="searchFacetField" property="searchFacet"/>
+                        <textField id="searchFilterWordField" property="searchFilterWord"/>
+                    </column>
+                    <column width="450px">
+                        <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
+                        <textArea id="keywordsField" property="keywords" rows="5" rowspan="3"/>
+                        <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
+                    </column>
+                </form>
+            </groupBox>
             <groupBox id="permissionsBox" caption="msg://ch.so.agi.simi.entity.product/DataSetView.permissions">
                 <table id="permissionsTable" dataContainer="permissionsDc" width="100%" height="200px" editable="true">
                     <actions>

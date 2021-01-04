@@ -465,6 +465,7 @@ create table SIMIPRODUCT_SINGLE_ACTOR (
     --
     TRANSPARENCY integer not null,
     CUSTOM_LEGEND bytea,
+    CUSTOM_LEGEND_SUFFIX varchar(100),
     --
     primary key (ID)
 )^

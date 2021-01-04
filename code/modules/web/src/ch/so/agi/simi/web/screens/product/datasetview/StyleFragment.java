@@ -39,7 +39,7 @@ public class StyleFragment extends ScreenFragment {
     @Inject
     private StyleStorageBean styleStorageBean;
     @Inject
-    private FileUploadField uploadStyleBtn;
+    private FileUploadField styleUploadBtn;
     @Inject
     private TimeSource timeSource;
     @Inject
@@ -47,9 +47,35 @@ public class StyleFragment extends ScreenFragment {
     @Inject
     private Notifications notifications;
 
-    @Subscribe("downloadStyleBtn")
-    public void onDownloadStyleBtnClick(Button.ClickEvent event) {
+    @Subscribe("styleUploadBtn")
+    public void onStyleUploadBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) throws IOException {
+        InputStream is = styleUploadBtn.getFileContent();
+        byte[] bytes = is.readAllBytes();
+
+        StyleFileContent styleFileContent = new StyleFileContent(
+                bytes,
+                StyleStorageBean.FileContentType.forFileName(styleUploadBtn.getFileName())
+        );
+
+        StyleDbContent dbContent = styleStorageBean.transformFileToFields(styleFileContent, new int[]{2,18});
+
         DataSetView dataSetView = dataSetViewDc.getItem();
+        dataSetView.setValue(styleProperty, dbContent.getQmlContent());
+        dataSetView.setValue(styleChangedProperty, timeSource.now().toLocalDateTime());
+
+        updateStyleAssets(dbContent.getAssets());
+
+        refreshStyleLabel();
+    }
+
+    @Subscribe("styleDownloadBtn")
+    public void onStyleDownloadBtnClick(Button.ClickEvent event) {
+
+        DataSetView dataSetView = dataSetViewDc.getItem();
+        String qmlContent = dataSetView.getValue(styleProperty);
+
+        if(qmlContent == null || qmlContent.length() == 0)
+            return;
 
         //Create the assets
         HashMap<String, byte[]> assets = new HashMap<>();
@@ -65,7 +91,7 @@ public class StyleFragment extends ScreenFragment {
             assets = null;
 
         StyleDbContent dbContent = new StyleDbContent(
-                dataSetView.getValue(styleProperty),
+                qmlContent,
                 assets
         );
 
@@ -75,6 +101,17 @@ public class StyleFragment extends ScreenFragment {
                 new ByteArrayDataProvider(fileContent.getData()),
                 buildStyleFileName(fileContent.getFileContentType().asFileSuffix())
         );
+    }
+
+    @Subscribe("styleDeleteBtn")
+    public void onStyleDeleteBtnClick(Button.ClickEvent event) {
+        DataSetView dataSetView = dataSetViewDc.getItem();
+        dataSetView.setValue(styleProperty, null);
+        dataSetView.setValue(styleChangedProperty, null);
+
+        removeStoredAssets();
+
+        refreshStyleLabel();
     }
 
     private String buildStyleFileName(String fileSuffix){
@@ -118,40 +155,14 @@ public class StyleFragment extends ScreenFragment {
             throw new RuntimeException("Could not determine if fragment is configured for server or client style");
     }
 
-    @Subscribe("uploadStyleBtn")
-    public void onUploadStyleBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) throws IOException {
-
-        InputStream is = uploadStyleBtn.getFileContent();
-        byte[] bytes = is.readAllBytes();
-
-        StyleFileContent styleFileContent = new StyleFileContent(
-                bytes,
-                StyleStorageBean.FileContentType.forFileName(uploadStyleBtn.getFileName())
-        );
-
-        StyleDbContent dbContent = styleStorageBean.transformFileToFields(styleFileContent, new int[]{2,18});
-
-        DataSetView dataSetView = dataSetViewDc.getItem();
-        dataSetView.setValue(styleProperty, dbContent.getQmlContent());
-        dataSetView.setValue(styleChangedProperty, timeSource.now().toLocalDateTime());
-
-        updateStyleAssets(dbContent.getAssets());
-
-        notifications.create()
-                .withCaption(uploadStyleBtn.getFileName() + " hochgeladen")
-                .show();
-
-        refreshStyleLabel();
-    }
-
     private void updateStyleAssets(Optional<HashMap<String, byte[]>> assets){
 
         removeStoredAssets();
 
-        DataContext dataContext = UiControllerUtils.getScreenData(getHostScreen()).getDataContext();
-
         if(!assets.isPresent())
             return;
+
+        DataContext dataContext = UiControllerUtils.getScreenData(getHostScreen()).getDataContext();
 
         boolean isForServer = isServerStyle();
         HashMap<String, byte[]> fileAssets = assets.get();

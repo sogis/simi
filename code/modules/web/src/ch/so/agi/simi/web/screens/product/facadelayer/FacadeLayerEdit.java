@@ -1,20 +1,27 @@
 package ch.so.agi.simi.web.screens.product.facadelayer;
 
-import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
-import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
-import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
-import ch.so.agi.simi.entity.product.non_dsv.PropertiesInList;
+import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import ch.so.agi.simi.entity.product.datasetview.StyleAsset;
+import ch.so.agi.simi.entity.product.non_dsv.*;
 import ch.so.agi.simi.web.SortBean;
+import ch.so.agi.simi.web.beans.style.StyleDbContent;
+import ch.so.agi.simi.web.beans.style.StyleFileContent;
+import ch.so.agi.simi.web.beans.style.StyleStorageBean;
+import com.haulmont.cuba.gui.AppConfig;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
-import com.haulmont.cuba.gui.components.Action;
-import com.haulmont.cuba.gui.components.Button;
-import com.haulmont.cuba.gui.components.Table;
+import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.gui.export.ByteArrayDataProvider;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
+import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.gui.util.OperationResult;
 
 import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 
 @UiController("simiProduct_FacadeLayer.edit")

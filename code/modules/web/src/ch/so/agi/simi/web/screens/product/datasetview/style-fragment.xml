@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <fragment xmlns="http://schemas.haulmont.com/cuba/screen/fragment.xsd">
     <layout>
-        <hbox spacing="true">
-            <button id="downloadStyleBtn" caption="Download"/>
-            <upload id="uploadStyleBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml,.zip"/>
+        <hbox spacing="false">
+            <button id="styleDownloadBtn" caption="Download"/>
+            <hbox width="10"/>
+            <upload id="styleUploadBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml,.zip"/>
+            <button id="styleDeleteBtn" icon="REMOVE"/>
+            <hbox width="10"/>
             <label id="styleLabel" align="MIDDLE_LEFT"/>
         </hbox>
     </layout>
