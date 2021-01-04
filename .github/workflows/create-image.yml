@@ -26,16 +26,16 @@ jobs:
         run: docker-compose up -d -V db
         working-directory: ./code/docker
       - name: Wait until db is up
-        run: docker-compose up -d -V await-db
+        run: docker-compose up -V await-db
         working-directory: ./code/docker
       - name: Start simi image
         run: docker-compose up -d -V simi
         working-directory: ./code/docker
       - name: middle tier - check health
-        run: await.sh http://localhost:8080/app-core/remoting/health
+        run: ./await.sh http://localhost:8080/app-core/remoting/health
         working-directory: ./code/docker/await-url
       - name: client tier - check health
-        run: await.sh http://localhost:8080/app/dispatch/health
+        run: ./await.sh http://localhost:8080/app/dispatch/health
         working-directory: ./code/docker/await-url
       - name: docker login
         env:
