@@ -7,7 +7,7 @@ package Metamodel {
 }
 
 
-data --> prod
-iam --> prod
-ext --> prod
+prod --> data
+iam --> data
+ext --> data
 @enduml

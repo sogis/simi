@@ -1,5 +1,5 @@
 @startuml
-abstract class "DataSetView (DSV)" as dsv << package Product >>
+abstract class "DataSetView (DSV)" as dsv << package data >>
 
 package IAM {
 class "Identity" as ident
