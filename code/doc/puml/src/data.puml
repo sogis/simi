@@ -1,7 +1,8 @@
 @startuml
-abstract class "DataSetView (DSV)" as dsv << package Product >>
-
 package data {
+
+	abstract class "DataSetView (DSV)" as dsv
+    class "StyleAsset" as sta
 
     package tabular {
         class "TableView" as tv
@@ -36,5 +37,7 @@ package data {
 
     dsv <|-- tv
     dsv <|-- rv
+
+    dsv "1" -left- "*" sta
 }
 @enduml

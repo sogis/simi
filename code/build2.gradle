@@ -33,7 +33,7 @@ task imgBuild(type:Exec, dependsOn: copyJar) {
             '-t', "sogis/simi:$buildident",
             '--label', "simi.created=$build_timestamp",
             '--label', "simi.git_commit=$githash",
-            '--label', "simi.travis_build=$buildident",
+            '--label', "simi.build_nr=$buildident",
             '-f', 'Dockerfile',  '.'
 }
 

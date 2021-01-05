@@ -1,0 +1,23 @@
+@startuml
+abstract class "DataSetView (DSV)" as dsv << package data >>
+class "Map" as map << package product >>
+
+package extended {
+class "CCCIntegration" as ccc
+class "Component" as comp
+class "Dependency" as dep
+class "FeatureInfo" as fi
+class "Relation" as rel
+class "Report" as rep
+
+dep <|-- ccc
+dep <|-- comp
+dep <|-- fi
+dep <|-- rep
+
+dep "1" -up- "*" rel
+}
+
+dsv "1" -- "*" rel
+map "1" -- "1" ccc
+@enduml

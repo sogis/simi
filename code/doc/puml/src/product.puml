@@ -9,9 +9,9 @@ package Product {
 
   abstract class "SingleActor (SA)" as sa
   class "FacadeLayer (FL)" as fl
-  abstract class "DataSetView (DSV)" as dsv
+  abstract class "DataSetView (DSV)" as dsv << package data >>
   abstract class "ExtLayer" as el
-  class "WmsLayer" as wl
+  abstract class "WmsLayer" as wl
 
   class "PropertiesInFacade::CLP" as pif << (H, grey) Association Class >>
   class "PropertiesInList::CLP" as pil << (H, grey) Association Class >>

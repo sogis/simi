@@ -9,7 +9,53 @@ Stellt die Klassen des Datenkonfigurationsteils dar
 
 ## Übergeordnete Klassen
 
-### Interface DataSet
+### Klasse DataSetView (DSV)
+
+Direkt aus einem Dataset abgeleitete View, welche Eigenschaften 
+eines Dataset (Darstellung / Attribute / Zeilenumfang) auf den entsprechenden Einsatzzweck anpasst.
+
+Keine Rendering-Information hat ein DSV vom Typ "externe WMS Ebene". Bei internen Raster- und Tabellarischen
+Daten ist das Styling als QML optional enthalten.
+
+Bemerkung: Im DB-Schema ist die DSV im Moment noch mit Präfix "simiproduct_" enthalten. $td
+
+#### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
+|styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
+|styleServerChanged|DateTime|n|Zeitpunkt der letzten syleServer änderung.|
+|styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
+|styleDesktopChanged|DateTime|n|Zeitpunkt der letzten syleDesktop änderung.|
+|searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
+|searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
+|searchFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieser DSV eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
+
+Siehe "DataSetView_SearchTypeEnum.java" bezüglich der in der Datenbank codierten searchType-Enumerationen. 
+
+#### Konstraints
+
+UK auf den FK zur DataSetView.   
+styleServer und styleDesktop: QML in korrekter Version hochgeladen?
+
+DSV darf nicht gelöscht werden, sofern es in einem FacadeLayer vorkommt.
+
+### Klasse StyleAsset
+
+Speichert die von einem QML referenzierten Dateien (Icons, SVG's) beim upload der Darstellung
+als zip.
+
+#### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|fileContent|byte[]|j|Dateiinhalt des Assets|
+|fileName|String(255)|j|Dateiname des Assets|
+|isForServer|Boolean|j|Gibt an, ob es sich um ein Asset für die Server- oder die QGIS-Desktop Darstellung handelt.|
+
+
+### Interface DataSet (DS)
 
 Bei Vektor- oder tabellarischen Daten entspricht ein Dataset-Eintrag einer (Geo-) Tabelle. 
 Bei Rasterdaten entspricht es einem Rasterlayer (Es werden keine nicht georeferenzierten Bilder erfasst).

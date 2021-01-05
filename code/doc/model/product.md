@@ -34,9 +34,9 @@ Beispiele:
 
 Feld "identifier" ist GDI-weit eindeutig.
 
-## Strukt ChildLayerProperties
+## Interface ChildLayerProperties
 
-Die Attribute der Strukt definieren die Reihenfolge und überschriebene Eigenschaften (Bsp. Transparenz) einer Ebene innerhalb 
+Die Attribute des Interface definieren die Reihenfolge und überschriebene Eigenschaften (Bsp. Transparenz) einer Ebene innerhalb 
 der übergeordneten Gruppe von Ebenen.
 
 #### Attributbeschreibung
@@ -104,6 +104,11 @@ erscheinen beispielsweise nicht als WMS-Ebene und werden in der TOC des Web GIS 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |transparency|int|j|Transparenz in %. Default: 0%|
+|customLegend|byte[]|n|Dateiinhalt der Custom-Legende (falls vorhanden)|
+|customLegendSuffix|String(100)|n|Dateityp-suffix der Custom-Legende (falls vorhanden).|
+
+Der customLegendSuffix wird aus dem Namen der hochgeladenen Datei extrahiert und nicht harmonisiert.
+Beispiel: Jpeg-Dateien können als suffix jpeg oder jpg enthalten sein.
 
 ### Klasse FacadeLayer (FL)
 
@@ -123,33 +128,9 @@ FL hat keine weiteren eigene Attribute.
 Die Anforderungen an das Modell bewirken, dass LayerList und Facadelayer neu im Modell "weit entfernt" sind.
 Die Umwandlung von FL zu LL oder umgekehrt erfordert also etwas Handarbeit.
 
-### Klasse DataSetView
+### Klasse DataSetView (data)
 
-Direkt aus einem Dataset abgeleitetes Produkt, welches Eigenschaften 
-(Darstellung / Attribute) eines Dataset auf den entsprechenden Einsatzzweck anpasst.
-
-Keine Rendering-Information hat ein DSV vom Typ "externe WMS Ebene". Bei internen Raster- und Tabellarischen
-Daten ist das Styling als QML optional enthalten.
-
-#### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
-|styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
-|styleServerChanged|DateTime|n|Zeitpunkt der letzten syleServer änderung.|
-|styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
-|styleDesktopChanged|DateTime|n|Zeitpunkt der letzten syleDesktop änderung.|
-|searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
-|searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
-|searchFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieser DSV eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
-
-#### Konstraints
-
-UK auf den FK zur DataSetView.   
-styleServer und styleDesktop: QML in korrekter Version hochgeladen?
-
-DSV darf nicht gelöscht werden, sofern es in einem FacadeLayer vorkommt.
+Siehe [Beschreibung in Modell "Data"](data.md#klasse-datasetview-dsv) 
 
 ### Klasse PropertiesInFacade
 
