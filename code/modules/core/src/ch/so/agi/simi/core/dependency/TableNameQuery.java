@@ -1,8 +1,7 @@
-package ch.so.agi.simi.service.dependency;
+package ch.so.agi.simi.core.dependency;
 
 import ch.so.agi.simi.entity.data.PostgresTable;
 import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.filter.Condition;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -11,11 +10,8 @@ public class TableNameQuery {
 
     public static String[] execute(UUID dataSetId, DataManager dbClient){
 
-        String query = "select e from simiData_PostgresTable e where e.id = :dataSetId";
-
         Optional<PostgresTable> tableInfo = dbClient.load(PostgresTable.class)
-                .query(query)
-                .parameter("dataSetId", dataSetId)
+                .id(dataSetId)
                 .view("dependencyService-fullTableName")
                 .optional();
 

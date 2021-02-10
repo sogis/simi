@@ -10,7 +10,7 @@
         <class>ch.so.agi.simi.web.screens.dependency_listall.DisplayString</class>
         <class>ch.so.agi.simi.viewmodel.NewEntity</class>
         <class>ch.so.agi.simi.viewmodel.IdValue</class>
-        <class>ch.so.agi.simi.service.dependency.DependencyInfo</class>
+        <class>ch.so.agi.simi.core.dependency.DependencyInfo</class>
     </metadata-model>
 
 </metadata>

@@ -1,4 +1,4 @@
-package ch.so.agi.simi.service.dependency;
+package ch.so.agi.simi.core.dependency;
 
 import com.haulmont.chile.core.annotations.MetaClass;
 import com.haulmont.chile.core.annotations.MetaProperty;

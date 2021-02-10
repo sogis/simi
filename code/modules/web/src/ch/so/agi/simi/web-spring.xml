@@ -11,7 +11,7 @@
         <property name="serverSelector" ref="cuba_ServerSelector"/>
         <property name="remoteServices">
             <map>
-                <entry key="simi_DependencyService" value="ch.so.agi.simi.service.dependency.DependencyService"/>
+                <entry key="simi_DependencyService" value="ch.so.agi.simi.core.dependency.DependencyService"/>
             </map>
         </property>
     </bean>

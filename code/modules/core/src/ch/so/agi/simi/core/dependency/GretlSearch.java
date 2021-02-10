@@ -1,4 +1,4 @@
-package ch.so.agi.simi.service.dependency;
+package ch.so.agi.simi.core.dependency;
 
 import ch.so.agi.simi.util.Props;
 import org.springframework.web.client.RestTemplate;
@@ -22,8 +22,8 @@ public class GretlSearch {
         this.config = config;
     }
 
-    public static List<DependencyInfo> queryGretlDependencies(String schemaName, String tableName, GretlSearchConfig config){
-        GretlSearch query = new GretlSearch(schemaName, tableName, config);
+    public static List<DependencyInfo> queryGretlDependencies(String[] qualTableName, GretlSearchConfig config){
+        GretlSearch query = new GretlSearch(qualTableName[0], qualTableName[1], config);
         return query.execQuery();
     }
 
@@ -31,7 +31,7 @@ public class GretlSearch {
 
         List<DependencyInfo> diUnion = new LinkedList<>();
 
-        for(String repo : Props.toArray(config.getReposToSearch())){
+        for(String repo : config.getReposToSearch()){
 
             String qValue = MessageFormat.format(
                     "repo:{0} {1} {2}",

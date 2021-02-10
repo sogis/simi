@@ -16,7 +16,8 @@
   Konfigurations-Jsons.
   * Aufräumen DataSetView-Klassen (TableView, ViewField, RasterView)
     * Db-Präfix simidata. 
-    * Java-Package data.*    
+    * Java-Package data.*
+  * Entfernen der ext-Felder der Datenmigration    
    
 # Version 1.x
 - Exception Messages: 

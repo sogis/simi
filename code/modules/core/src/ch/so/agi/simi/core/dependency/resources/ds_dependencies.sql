@@ -168,5 +168,5 @@ all_dependencies AS (
 		dep_name
 )
 
-SELECT dep_typ, dep_name, dep_relation FROM all_dependencies WHERE ds_id = '#ds_id' --'30903fd9-2d3e-4e12-99a5-3f1e038b5087'
+SELECT dep_typ, dep_name, dep_relation FROM all_dependencies WHERE ds_id = ?
 

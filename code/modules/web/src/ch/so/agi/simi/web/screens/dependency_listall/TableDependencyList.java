@@ -1,17 +1,18 @@
 package ch.so.agi.simi.web.screens.dependency_listall;
 
-import ch.so.agi.simi.service.dependency.DependencyInfo;
-import ch.so.agi.simi.service.dependency.DependencyService;
-import com.haulmont.cuba.gui.Notifications;
+import ch.so.agi.simi.core.dependency.DependencyInfo;
+import ch.so.agi.simi.core.dependency.DependencyService;
+import com.haulmont.cuba.core.entity.KeyValueEntity;
 import com.haulmont.cuba.gui.components.Button;
-import com.haulmont.cuba.gui.components.TextField;
-import com.haulmont.cuba.gui.components.TextInputField;
 import com.haulmont.cuba.gui.model.CollectionContainer;
+import com.haulmont.cuba.gui.model.InstanceContainer;
+import com.haulmont.cuba.gui.model.KeyValueContainer;
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.product.datasetview.TableView;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.UUID;
 
 @UiController("simiData_TableDependency.list")
 @UiDescriptor("pgtable-dependency-list.xml")
@@ -23,13 +24,47 @@ public class TableDependencyList extends StandardLookup<TableView> {
     private DependencyService bean;
 
     @Inject
-    private TextField fldTableName;
-
-    @Inject
-    private Notifications notifications;
+    private KeyValueContainer tablesDc;
 
     @Inject
     private CollectionContainer<DependencyInfo> dependenciesDc;
+
+    @Subscribe("btnListDependencies")
+    public void onBtnListDependenciesClick(Button.ClickEvent event) {
+        KeyValueEntity kv = tablesDc.getItemOrNull();
+
+        if(kv == null)
+            return;
+
+        UUID tableUuid = kv.getValue("id");
+        List<DependencyInfo> dependencies = bean.collectAllDependenciesForTable(tableUuid);
+
+        int numFound = 0;
+        if(dependencies != null)
+            numFound = dependencies.size();
+
+        dependenciesDc.setItems(dependencies);
+    }
+
+    @Subscribe(id = "tablesDc", target = Target.DATA_CONTAINER)
+    public void onTablesDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<KeyValueEntity> event) {
+
+        
+    }
+/*
+    @Subscribe(id = "orderDc", target = Target.DATA_CONTAINER)
+    protected void onOrderDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<Order> event) {
+        Object str = event.getValue() instanceof Entity
+                ? metadataTools.getInstanceName((Entity) event.getValue())
+                : event.getValue();
+        notifications.create()
+                .withCaption(event.getProperty() + " = " + str)
+                .show();
+    }*/
+    
+    
+    
+    /*
 
     @Subscribe("fldTableName")
     public void onFldTableNameEnterPress(TextInputField.EnterPressEvent event) {
@@ -40,6 +75,8 @@ public class TableDependencyList extends StandardLookup<TableView> {
     public void onBtnTableNameClick(Button.ClickEvent event) {
         queryNonRegisteredTable();
     }
+    
+    /*
 
     private void queryNonRegisteredTable(){
         if(fldTableName.getValue() == null)
@@ -57,4 +94,6 @@ public class TableDependencyList extends StandardLookup<TableView> {
 
         dependenciesDc.setItems(dependencies);
     }
+    
+     */
 }

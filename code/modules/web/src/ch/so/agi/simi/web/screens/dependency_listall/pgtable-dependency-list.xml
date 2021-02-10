@@ -11,11 +11,11 @@
                     select
                         tbl.id,
                         concat(
-                            db.dbName,
-                            trim(' . '),
                             ms.schemaName,
                             trim(' . '),
                             tbl.tableName,
+                            ' | Db: ',
+                            db.dbName,
                             coalesce(
                                 concat(' (', tv.identifier, ')'),
                                 ''
@@ -34,26 +34,36 @@
             </properties>
         </keyValueCollection>
         <collection id="dependenciesDc"
-                    class="ch.so.agi.simi.service.dependency.DependencyInfo">
+                    class="ch.so.agi.simi.core.dependency.DependencyInfo">
         </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
     <layout spacing="true" expand="dependenciesTable">
-        <lookupField id="tableLookup" caption="Abhängigkeiten auflisten für:" optionsContainer="tablesDc"
-                     captionProperty="repr"/>
         <hbox spacing="true">
-            <textField id="fldTableName" property="Tabelle qualifiziert eingeben [Schemaname/Tabellenname]"/>
-            <button id="btnTableName"/>
+            <lookupField id="tableLookup" optionsContainer="tablesDc"
+                         captionProperty="repr" width="800px"/>
+            <button id="btnListDependencies" caption="Abfragen" stylename="primary"/>
         </hbox>
         <table id="dependenciesTable"
                width="100%"
                dataContainer="dependenciesDc">
+            <actions>
+                <action id="excel" caption="Als Excel exportieren" icon="icons/excel.png" type="excel">
+                    <properties>
+                        <property name="fileName" value="abhaengigkeiten"/>
+                        <property name="exportAggregation" value="false"/>
+                    </properties>
+                </action>
+            </actions>
             <columns>
                 <column id="objectName" caption="Name der Abhängigkeit"/>
                 <column id="dependencyInfo" caption="Bezug zur Tabelle / Ebene"/>
                 <column id="objectType" caption="Typ der Abhängigkeit"/>
             </columns>
         </table>
+        <buttonsPanel>
+            <button action="dependenciesTable.excel"></button>
+        </buttonsPanel>
     </layout>
 </window>

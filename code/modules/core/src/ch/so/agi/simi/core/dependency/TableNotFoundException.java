@@ -1,4 +1,4 @@
-package ch.so.agi.simi.service.dependency;
+package ch.so.agi.simi.core.dependency;
 
 public class TableNotFoundException extends RuntimeException {
     public TableNotFoundException(String msg){

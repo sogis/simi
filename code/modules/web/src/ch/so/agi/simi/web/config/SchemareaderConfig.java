@@ -8,6 +8,6 @@ import com.haulmont.cuba.core.config.SourceType;
 @Source(type = SourceType.APP)
 public interface SchemareaderConfig extends Config {
 
-    @Property("simi.web.schemareader.baseurl")
+    @Property("simi.schemaReader.url")
     String getBaseUrl();
 }

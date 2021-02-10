@@ -1,9 +1,8 @@
-package ch.so.agi.simi.service.dependency;
+package ch.so.agi.simi.core.dependency;
 
 import ch.so.agi.simi.SimiTestContainer;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.Resources;
 import com.haulmont.cuba.testsupport.TestContainer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,25 +13,25 @@ import java.util.UUID;
 
 // See https://doc.cuba-platform.com/manual-7.2/integration_tests_mw.html
 
-class DependencyQueryTest {
+class TableNameQueryTest {
 
     @RegisterExtension
     static TestContainer container = SimiTestContainer.Common.INSTANCE;
 
-    static Resources resources;
+    static DataManager dataManager;
 
     @BeforeAll
     static void beforeAll() {
-        resources = AppBeans.get(Resources.class);
+        dataManager = AppBeans.get(DataManager.class);
     }
 
     @Test
-    void queryDependencies_throwsNoException() {
+    void queryFullTableName_throwsTableNotFoundException() {
 
         UUID dataSetId = UUID.randomUUID();
 
-        Assertions.assertDoesNotThrow(() -> {
-            DependencyQuery.execute(dataSetId, container.persistence(), resources);
+        Assertions.assertThrows(TableNotFoundException.class ,() -> {
+            TableNameQuery.execute(UUID.randomUUID(), dataManager);
         });
     }
 }
