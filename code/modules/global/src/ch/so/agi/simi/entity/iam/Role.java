@@ -11,9 +11,11 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "SIMIIAM_ROLE")
-@Entity(name = "simiIAM_Role")
+@Entity(name = Role.NAME)
 @NamePattern("%s|name")
 public class Role extends SimiStandardEntity {
+
+    public static final String NAME = "simiIAM_Role";
     private static final long serialVersionUID = -1282147615227159232L;
 
     @NotNull

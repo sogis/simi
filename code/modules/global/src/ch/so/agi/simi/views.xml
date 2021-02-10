@@ -103,4 +103,28 @@
         </property>
     </view>
     <view entity="simiData_RasterDS" name="rasterDs_edit" extends="_local"/>
+    <view entity="simiIAM_Group" name="group_browse" extends="_local">
+        <property name="users" view="_minimal"/>
+    </view>
+    <view entity="simiIAM_Group" name="group_edit" extends="_local">
+        <property name="users" view="_minimal"/>
+    </view>
+    <view entity="simiIAM_User" name="user_browse" extends="_local">
+        <property name="groups" view="_minimal"/>
+    </view>
+    <view entity="simiIAM_User" name="user_edit" extends="_local">
+        <property name="groups" view="_minimal"/>
+    </view>
+    <view entity="simiIAM_Role" name="role_browse" extends="_local"/>
+    <view entity="simiIAM_Role" name="role_edit" extends="_local">
+        <property name="users" view="_local"/>
+        <property name="groups" view="_local"/>
+    </view>
+
+
 </views>
+
+       <!--
+public static final String NAME = null;
+
+       -->

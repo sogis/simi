@@ -2,6 +2,9 @@ package ch.so.agi.simi.core.entity;
 
 import ch.so.agi.simi.SimiTestContainer;
 import ch.so.agi.simi.entity.data.*;
+import ch.so.agi.simi.entity.iam.Group;
+import ch.so.agi.simi.entity.iam.Role;
+import ch.so.agi.simi.entity.iam.User;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
@@ -124,6 +127,64 @@ class EntityLoadingTest {
 
         dataManager.loadList(context);
     }
+
+    @Test
+    void group_Browse_OK() {
+        LoadContext context = LoadContext.create(Group.class)
+                .setQuery(queryFor(Group.NAME))
+                .setView("group_browse");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void group_Edit_OK() {
+        LoadContext context = LoadContext.create(Group.class)
+                .setQuery(queryFor(Group.NAME))
+                .setView("group_edit");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void user_Browse_OK() {
+        LoadContext context = LoadContext.create(User.class)
+                .setQuery(queryFor(User.NAME))
+                .setView("user_browse");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void user_Edit_OK() {
+        LoadContext context = LoadContext.create(User.class)
+                .setQuery(queryFor(User.NAME))
+                .setView("user_edit");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void role_Browse_OK() {
+        LoadContext context = LoadContext.create(Role.class)
+                .setQuery(queryFor(Role.NAME))
+                .setView("role_browse");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void role_Edit_OK() {
+        LoadContext context = LoadContext.create(Role.class)
+                .setQuery(queryFor(Role.NAME))
+                .setView("role_edit");
+
+        dataManager.loadList(context);
+    }
+
+
+
+
 
 
 

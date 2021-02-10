@@ -7,10 +7,12 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "SIMIIAM_GROUP")
-@Entity(name = "simiIAM_Group")
+@Entity(name = Group.NAME)
 @NamePattern("%s|identifier")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class Group extends Identity {
+
+    public static final String NAME = "simiIAM_Group";
     private static final long serialVersionUID = 109810719306418897L;
 
     @NotNull

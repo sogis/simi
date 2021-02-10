@@ -5,10 +5,7 @@
         focusComponent="groupsTable">
     <data readOnly="true">
         <collection id="groupsDc"
-                    class="ch.so.agi.simi.entity.iam.Group">
-            <view extends="_local">
-                <property name="users" view="_minimal"/>
-            </view>
+                    class="ch.so.agi.simi.entity.iam.Group" view="group_browse">
             <loader id="groupsDl">
                 <query>
                     <![CDATA[select e from simiIAM_Group e]]>

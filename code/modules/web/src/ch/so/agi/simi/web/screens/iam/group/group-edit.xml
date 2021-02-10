@@ -4,10 +4,7 @@
         focusComponent="form">
     <data>
         <instance id="groupDc"
-                  class="ch.so.agi.simi.entity.iam.Group">
-            <view extends="_local">
-                <property name="users" view="_minimal"/>
-            </view>
+                  class="ch.so.agi.simi.entity.iam.Group" view="group_edit">
             <loader/>
             <collection id="usersDc" property="users"/>
         </instance>
