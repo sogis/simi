@@ -42,7 +42,6 @@ jobs:
           SIMI_DOCKER_USER: ${{ secrets.SIMI_DOCKER_USER }}
           SIMI_DOCKER_PASS: ${{ secrets.SIMI_DOCKER_PASS }}
         run: echo "$SIMI_DOCKER_PASS" | docker login -u "$SIMI_DOCKER_USER" --password-stdin
-      - name: docker push latest
-        run: docker push sogis/simi:latest
-      - name: docker push buildnum
-        run: docker push sogis/simi:$GITHUB_RUN_NUMBER
+      - name: Push image with Gradle
+        run: ./gradlew pushImg
+        working-directory: ./code

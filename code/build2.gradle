@@ -44,6 +44,15 @@ task imgTag(type:Exec, dependsOn: imgBuild) {
             "sogis/simi:latest"
 }
 
+task pushImgLatest(type:Exec) {
+    commandLine 'docker', 'push', "sogis/simi:latest"
+}
+
+task pushImg(type:Exec, dependsOn: pushImgLatest) {
+    def version = getVersion()
+    commandLine 'docker', 'push', "sogis/simi:$version"
+}
+
 String getVersion(){
     return "0.9." + getBuildNumber()
 }
