@@ -12,9 +12,11 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "SIMIDATA_RASTER_DS")
-@Entity(name = "simiData_RasterDS")
+@Entity(name = RasterDS.NAME)
 @NamePattern("%s [Raster]|path")
 public class RasterDS extends SimiStandardEntity {
+
+    public static final String NAME = "simiData_RasterDS";
     private static final long serialVersionUID = -1371985729459673568L;
 
     @NotNull

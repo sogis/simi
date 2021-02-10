@@ -13,9 +13,11 @@ import java.util.List;
 @Table(name = "SIMIDATA_MODEL_SCHEMA", uniqueConstraints = {
         @UniqueConstraint(name = "IDX_SIMIDATA_MODEL_SCHEMA_UNQ_SCHEMA_NAME_POSTGRES_DB_ID", columnNames = {"SCHEMA_NAME", "POSTGRES_DB_ID"})
 })
-@Entity(name = "simiData_ModelSchema")
+@Entity(name = ModelSchema.NAME)
 @NamePattern("%s.%s|postgresDB,schemaName")
 public class ModelSchema extends SimiStandardEntity {
+    public static final String NAME = "simiData_ModelSchema";
+
     private static final long serialVersionUID = -2988394575142052644L;
 
     @Column(name = "SCHEMA_NAME", nullable = false, length = 100)

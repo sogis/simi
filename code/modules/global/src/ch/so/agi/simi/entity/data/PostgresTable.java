@@ -12,10 +12,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "SIMIDATA_POSTGRES_TABLE")
-@Entity(name = "simiData_PostgresTable")
+@Entity(name = PostgresTable.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("%s.%s|modelSchema,tableName")
 public class PostgresTable extends TableDS {
+
+    public static final String NAME = "simiData_PostgresTable";
     private static final long serialVersionUID = -6324189221967537598L;
 
     @Column(name = "ID_FIELD_NAME", nullable = false, length = 100)

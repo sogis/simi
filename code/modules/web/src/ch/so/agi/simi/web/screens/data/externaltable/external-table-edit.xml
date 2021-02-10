@@ -4,8 +4,7 @@
         focusComponent="form">
     <data>
         <instance id="externalTableDc"
-                  class="ch.so.agi.simi.entity.data.ExternalTable">
-            <view extends="_local"/>
+                  class="ch.so.agi.simi.entity.data.ExternalTable" view="externalTable-edit">
             <loader/>
         </instance>
     </data>

@@ -72,4 +72,35 @@
         <property name="modelSchemas" view="_minimal"/>
     </view>
     <view entity="simiData_PostgresDB" name="postgresDB-edit" extends="_local"/>
+    <view entity="simiData_ModelSchema" name="modelSchema-browse" extends="_local">
+        <property name="postgresDB" view="_minimal"/>
+    </view>
+    <view entity="simiData_ModelSchema" name="modelSchema-edit" extends="_local">
+        <property name="postgresDB" view="_minimal"/>
+    </view>
+    <view entity="simiData_PostgresTable" name="postgresTable-browse" extends="_local">
+        <property name="modelSchema" view="_minimal">
+            <property name="schemaName"/>
+            <property name="postgresDB" view="_minimal">
+                <property name="dbName"/>
+            </property>
+        </property>
+        <property name="tableViews" view="_minimal"/>
+    </view>
+    <view entity="simiData_PostgresTable" name="postgresTable-edit" extends="_local">
+        <property name="modelSchema" view="_minimal">
+        </property>
+        <property name="tableFields" view="_local">
+            <property name="viewFields" view="_minimal"/>
+        </property>
+    </view>
+    <view entity="simiData_TableField" name="tableField-edit" extends="_local"/>
+    <view entity="simiData_ExternalTable" name="externalTable-browse" extends="_local"/>
+    <view entity="simiData_ExternalTable" name="externalTable-edit" extends="_local"/>
+    <view entity="simiData_RasterDS" name="rasterDs_browse" extends="_local">
+        <property name="rasterViews" view="_minimal">
+            <property name="identifier"/>
+        </property>
+    </view>
+    <view entity="simiData_RasterDS" name="rasterDs_edit" extends="_local"/>
 </views>

@@ -15,9 +15,11 @@ import java.util.List;
 @Table(name = "SIMIDATA_TABLE_FIELD", uniqueConstraints = {
         @UniqueConstraint(name = "IDX_SIMIDATA_TABLE_FIELD_UNQ_NAME_POSTGRES_TABLE_ID", columnNames = {"NAME", "POSTGRES_TABLE_ID"})
 })
-@Entity(name = "simiData_TableField")
+@Entity(name = TableField.NAME)
 @NamePattern("#getCaption|name,typeName,strLength")
 public class TableField extends SimiStandardEntity {
+
+    public static final String NAME = "simiData_TableField";
     private static final long serialVersionUID = -1809352037109072642L;
 
     @NotNull

@@ -4,12 +4,7 @@
         focusComponent="form">
     <data>
         <instance id="modelSchemaDc"
-                  class="ch.so.agi.simi.entity.data.ModelSchema">
-            <view extends="_local">
-                <property name="postgresDB" view="_minimal">
-                    <property name="dbName"/>
-                </property>
-            </view>
+                  class="ch.so.agi.simi.entity.data.ModelSchema" view="modelSchema-edit">
             <loader/>
         </instance>
     </data>

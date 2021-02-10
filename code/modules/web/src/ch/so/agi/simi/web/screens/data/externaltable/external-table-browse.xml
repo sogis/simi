@@ -5,8 +5,7 @@
         focusComponent="externalTablesTable">
     <data readOnly="true">
         <collection id="externalTablesDc"
-                    class="ch.so.agi.simi.entity.data.ExternalTable">
-            <view extends="_local"/>
+                    class="ch.so.agi.simi.entity.data.ExternalTable" view="externalTable-browse">
             <loader id="externalTablesDl">
                 <query>
                     <![CDATA[select e from simiData_ExternalTable e]]>

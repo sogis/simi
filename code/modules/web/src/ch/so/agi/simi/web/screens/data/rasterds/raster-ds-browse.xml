@@ -5,12 +5,7 @@
         focusComponent="rasterDsesTable">
     <data readOnly="true">
         <collection id="rasterDsesDc"
-                    class="ch.so.agi.simi.entity.data.RasterDS">
-            <view extends="_local">
-                <property name="rasterViews" view="_minimal">
-                    <property name="identifier"/>
-                </property>
-            </view>
+                    class="ch.so.agi.simi.entity.data.RasterDS" view="rasterDs_browse">
             <loader id="rasterDsesDl">
                 <query>
                     <![CDATA[select e from simiData_RasterDS e]]>
