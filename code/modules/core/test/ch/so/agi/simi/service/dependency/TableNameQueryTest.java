@@ -26,7 +26,7 @@ class TableNameQueryTest {
     }
 
     @Test
-    void queryFullTablName_throwsTableNotFoundException() {
+    void queryFullTableName_throwsTableNotFoundException() {
 
         UUID dataSetId = UUID.randomUUID();
 

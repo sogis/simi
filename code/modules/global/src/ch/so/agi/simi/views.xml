@@ -68,4 +68,8 @@
         </property>
         <property name="tableName"/>
     </view>
+    <view entity="simiData_PostgresDB" name="postgresDB-browse" extends="_local">
+        <property name="modelSchemas" view="_minimal"/>
+    </view>
+    <view entity="simiData_PostgresDB" name="postgresDB-edit" extends="_local"/>
 </views>

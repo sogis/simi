@@ -7,7 +7,6 @@
 |1|Es können mehrere mittels SQL-Abfrage ausgelesene Json-Fragmente in ein Json-Gerüstdokument integriert werden.|
 |1.1|Das Gerüstdokument ist selbst ein valides Json-Dokument.|
 |2|Im Gerüstdokument sind die Stellen, an denen ein Json-Fragment eingesetzt werden soll, mit einem entsprechenden "Json-Tag" gekennzeichnet.|
-|2.1|Die folgenden "Json-Tags" sind vorhanden:<br>- SQL: Setzt das Resultat einer SQL-Abfrage als Json-Fragment in das Gerüstdokument ein.<br>- Globals: Setzt die entsprechende Globalvariable als Json-Fragment ein.|
 |3|Implementation in Java|
 |4|Packetierung als executable "fat-jar". Das jar umfasst sämtliche Abhängigkeiten auf Dritt-Bibliotheken|
 |5|Es werden nur Standard-Bibliotheken oder "De-Fakto-Standard" Bibliotheken eingesetzt, da diese sehr zuverlässig und API-Stabil sind.|
@@ -42,6 +41,8 @@ Das Trafo-Tag ist ein Json-Objekt, dessen Name mit "$trafo:" beginnt: `{"$trafo:
 * **"$trafo:set":** Rendert ein Set von Json-Objekten in das Output-Json.
 
 "Element" ist der Sammelbegriff für Objekt, und "Einzelwert" wie z.B: string, number, boolean, null
+
+Siehe zum Verständnis der Subtypen die folgenden Beispiele.
 
 **Datei mit SQL-Query**
 
@@ -149,7 +150,7 @@ Neben Objekten können auch einfache Strings zurückgegeben werden. Json-Ausgabe
 **Query-Rückgabe**
 
 |buz|
-|---|
+|---|D
 |"ch.so.agi.gemeindegrenzen": {"title": "Gemeindegrenzen", "visible": true }|
 |"ch.so.agi.bezirksgrenzen": {"title": "Bezirksgrenzen", "visible": false }|
 
