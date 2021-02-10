@@ -28,7 +28,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'ch.so.agi.simi'
-        version = '0.9'
+        //version = '0.9'
         isSnapshot = false
     }
 }

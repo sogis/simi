@@ -10,7 +10,6 @@ The build.gradle file and this file are merged in github actions when building
 the docker image.
 */
 
-
 task buildUberJar(type: CubaUberJarBuilding) {
     logbackConfigurationFile = 'docker/image/uber-jar-logback.xml'
     singleJar = true
@@ -24,25 +23,29 @@ task copyJar(type: Copy, dependsOn: buildUberJar){
 
 task imgBuild(type:Exec, dependsOn: copyJar) {
     def githash = getCheckedOutGitCommitHash()
-    def buildident = getBuildNumber()
+    def version = getVersion()
     def build_timestamp = getTimestamp()
 
     workingDir "$projectDir/docker/image"
     commandLine 'docker', 'build',
             '--no-cache', '--force-rm',
-            '-t', "sogis/simi:$buildident",
+            '-t', "sogis/simi:$version",
             '--label', "simi.created=$build_timestamp",
             '--label', "simi.git_commit=$githash",
-            '--label', "simi.build_nr=$buildident",
+            '--label', "simi.version=$version",
             '-f', 'Dockerfile',  '.'
 }
 
 task imgTag(type:Exec, dependsOn: imgBuild) {
-    def buildident = version + "." + getBuildNumber()
+    def version = getVersion()
 
     commandLine 'docker', 'tag',
-            "sogis/simi:$buildident",
+            "sogis/simi:$version",
             "sogis/simi:latest"
+}
+
+String getVersion(){
+    return "0.9." + getBuildNumber()
 }
 
 String getBuildNumber() {
