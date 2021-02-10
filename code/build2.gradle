@@ -38,7 +38,7 @@ task imgBuild(type:Exec, dependsOn: copyJar) {
 }
 
 task imgTag(type:Exec, dependsOn: imgBuild) {
-    def buildident = getBuildNumber()
+    def buildident = version + "." + getBuildNumber()
 
     commandLine 'docker', 'tag',
             "sogis/simi:$buildident",
