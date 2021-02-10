@@ -4,7 +4,7 @@
         focusComponent="form">
     <data>
         <instance id="rasterDSDc"
-                  class="ch.so.agi.simi.entity.data.RasterDS" view="rasterDs_edit">
+                  class="ch.so.agi.simi.entity.data.RasterDS" view="rasterDs-edit">
             <loader/>
         </instance>
     </data>

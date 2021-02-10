@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "simiDependency_FeatureInfo")
+@Entity(name = FeatureInfo.NAME)
 public class FeatureInfo extends Dependency {
+
+    public static final String NAME = "simiDependency_FeatureInfo";
     private static final long serialVersionUID = 449117253137188881L;
 
     @Lob

@@ -10,8 +10,10 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "simiDependency_CCCIntegration")
+@Entity(name = CCCIntegration.NAME)
 public class CCCIntegration extends Dependency {
+
+    public static final String NAME = "simiDependency_CCCIntegration";
     private static final long serialVersionUID = -7415262245786732300L;
 
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "clear"})

@@ -4,15 +4,7 @@
         focusComponent="form">
     <data>
         <instance id="reportDc"
-                  class="ch.so.agi.simi.entity.dependency.Report">
-            <view extends="_minimal">
-                <property name="relations" view="_minimal">
-                    <property name="relationType"/>
-                    <property name="dataSetView" view="_minimal"/>
-                </property>
-                <property name="name"/>
-                <property name="remarks"/>
-            </view>
+                  class="ch.so.agi.simi.entity.dependency.Report" view="report-edit">
             <loader/>
             <collection id="relationsDc" property="relations"/>
         </instance>

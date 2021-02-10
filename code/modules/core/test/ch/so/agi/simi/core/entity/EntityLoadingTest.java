@@ -2,6 +2,7 @@ package ch.so.agi.simi.core.entity;
 
 import ch.so.agi.simi.SimiTestContainer;
 import ch.so.agi.simi.entity.data.*;
+import ch.so.agi.simi.entity.dependency.*;
 import ch.so.agi.simi.entity.iam.Group;
 import ch.so.agi.simi.entity.iam.Role;
 import ch.so.agi.simi.entity.iam.User;
@@ -123,7 +124,7 @@ class EntityLoadingTest {
     void rasterDs_Edit_OK() {
         LoadContext context = LoadContext.create(RasterDS.class)
                 .setQuery(queryFor(RasterDS.NAME))
-                .setView("rasterDs_edit");
+                .setView("rasterDs-edit");
 
         dataManager.loadList(context);
     }
@@ -141,7 +142,7 @@ class EntityLoadingTest {
     void group_Edit_OK() {
         LoadContext context = LoadContext.create(Group.class)
                 .setQuery(queryFor(Group.NAME))
-                .setView("group_edit");
+                .setView("group-edit");
 
         dataManager.loadList(context);
     }
@@ -150,7 +151,7 @@ class EntityLoadingTest {
     void user_Browse_OK() {
         LoadContext context = LoadContext.create(User.class)
                 .setQuery(queryFor(User.NAME))
-                .setView("user_browse");
+                .setView("user-browse");
 
         dataManager.loadList(context);
     }
@@ -159,7 +160,7 @@ class EntityLoadingTest {
     void user_Edit_OK() {
         LoadContext context = LoadContext.create(User.class)
                 .setQuery(queryFor(User.NAME))
-                .setView("user_edit");
+                .setView("user-edit");
 
         dataManager.loadList(context);
     }
@@ -168,7 +169,7 @@ class EntityLoadingTest {
     void role_Browse_OK() {
         LoadContext context = LoadContext.create(Role.class)
                 .setQuery(queryFor(Role.NAME))
-                .setView("role_browse");
+                .setView("role-browse");
 
         dataManager.loadList(context);
     }
@@ -177,23 +178,64 @@ class EntityLoadingTest {
     void role_Edit_OK() {
         LoadContext context = LoadContext.create(Role.class)
                 .setQuery(queryFor(Role.NAME))
-                .setView("role_edit");
+                .setView("role-edit");
 
         dataManager.loadList(context);
     }
 
+    @Test
+    void dependency_Browse_OK() {
+        LoadContext context = LoadContext.create(Dependency.class)
+                .setQuery(queryFor(Dependency.NAME))
+                .setView("dependency-browse");
 
+        dataManager.loadList(context);
+    }
 
+    @Test
+    void ccc_Edit_OK() {
+        LoadContext context = LoadContext.create(CCCIntegration.class)
+                .setQuery(queryFor(CCCIntegration.NAME))
+                .setView("ccc-edit");
 
+        dataManager.loadList(context);
+    }
 
+    @Test
+    void component_Edit_OK() {
+        LoadContext context = LoadContext.create(Component.class)
+                .setQuery(queryFor(Component.NAME))
+                .setView("component-edit");
 
+        dataManager.loadList(context);
+    }
 
+    @Test
+    void featureInfo_Edit_OK() {
+        LoadContext context = LoadContext.create(FeatureInfo.class)
+                .setQuery(queryFor(FeatureInfo.NAME))
+                .setView("featureInfo-edit");
 
+        dataManager.loadList(context);
+    }
 
+    @Test
+    void relation_Edit_OK() {
+        LoadContext context = LoadContext.create(Relation.class)
+                .setQuery(queryFor(Relation.NAME))
+                .setView("relation-edit");
 
+        dataManager.loadList(context);
+    }
 
+    @Test
+    void report_Edit_OK() {
+        LoadContext context = LoadContext.create(Report.class)
+                .setQuery(queryFor(Report.NAME))
+                .setView("report-edit");
 
-
+        dataManager.loadList(context);
+    }
 
 
 

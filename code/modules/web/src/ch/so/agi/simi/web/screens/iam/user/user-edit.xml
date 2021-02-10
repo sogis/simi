@@ -4,7 +4,7 @@
         focusComponent="form">
     <data>
         <instance id="userDc"
-                  class="ch.so.agi.simi.entity.iam.User" view="user_edit">
+                  class="ch.so.agi.simi.entity.iam.User" view="user-edit">
             <loader/>
             <collection id="groupsDc" property="groups"/>
         </instance>

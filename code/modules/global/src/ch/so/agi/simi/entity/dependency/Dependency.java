@@ -11,10 +11,12 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "SIMIDEPENDENCY_DEPENDENCY")
-@Entity(name = "simiDependency_Dependency")
+@Entity(name = Dependency.NAME)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 public class Dependency extends SimiStandardEntity {
+
+    public static final String NAME = "simiDependency_Dependency";
     private static final long serialVersionUID = -8171356992105401614L;
 
     @Composition

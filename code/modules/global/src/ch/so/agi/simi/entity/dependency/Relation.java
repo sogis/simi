@@ -10,8 +10,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "SIMIDEPENDENCY_RELATION", uniqueConstraints = {
         @UniqueConstraint(name = "IDX_SIMI_RELATION_UNQ", columnNames = {"RELATION_TYPE", "DEPENDENCY_ID", "DATA_SET_VIEW_ID"})
 })
-@Entity(name = "simiDependency_Relation")
+@Entity(name = Relation.NAME)
 public class Relation extends StandardEntity {
+
+    public static final String NAME = "simiDependency_Relation";
     private static final long serialVersionUID = -7067104417294138445L;
 
     @NotNull

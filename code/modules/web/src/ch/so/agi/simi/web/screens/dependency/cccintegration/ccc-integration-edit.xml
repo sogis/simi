@@ -4,18 +4,7 @@
         focusComponent="form">
     <data>
         <instance id="cCCIntegrationDc"
-                  class="ch.so.agi.simi.entity.dependency.CCCIntegration">
-            <view extends="_minimal">
-                <property name="relations" view="_minimal">
-                    <property name="relationType"/>
-                    <property name="dataSetView" view="_minimal"/>
-                </property>
-                <property name="name"/>
-                <property name="remarks"/>
-                <property name="map" view="_minimal"/>
-                <property name="locatorLayers"/>
-                <property name="notifyLayers"/>
-            </view>
+                  class="ch.so.agi.simi.entity.dependency.CCCIntegration" view="ccc-edit">
             <loader/>
             <collection id="relationsDc" property="relations"/>
         </instance>

@@ -102,29 +102,78 @@
             <property name="identifier"/>
         </property>
     </view>
-    <view entity="simiData_RasterDS" name="rasterDs_edit" extends="_local"/>
+    <view entity="simiData_RasterDS" name="rasterDs-edit" extends="_local"/>
     <view entity="simiIAM_Group" name="group_browse" extends="_local">
         <property name="users" view="_minimal"/>
     </view>
-    <view entity="simiIAM_Group" name="group_edit" extends="_local">
+    <view entity="simiIAM_Group" name="group-edit" extends="_local">
         <property name="users" view="_minimal"/>
     </view>
-    <view entity="simiIAM_User" name="user_browse" extends="_local">
+    <view entity="simiIAM_User" name="user-browse" extends="_local">
         <property name="groups" view="_minimal"/>
     </view>
-    <view entity="simiIAM_User" name="user_edit" extends="_local">
+    <view entity="simiIAM_User" name="user-edit" extends="_local">
         <property name="groups" view="_minimal"/>
     </view>
-    <view entity="simiIAM_Role" name="role_browse" extends="_local"/>
-    <view entity="simiIAM_Role" name="role_edit" extends="_local">
+    <view entity="simiIAM_Role" name="role-browse" extends="_local"/>
+    <view entity="simiIAM_Role" name="role-edit" extends="_local">
         <property name="users" view="_local"/>
         <property name="groups" view="_local"/>
     </view>
-
+    <view entity="simiDependency_Dependency" name="dependency-browse" extends="_minimal">
+        <property name="name"/>
+        <property name="typeAbbreviation"/>
+    </view>
+    <view entity="simiDependency_CCCIntegration" name="ccc-edit" extends="_minimal">
+        <property name="relations" view="_minimal">
+            <property name="relationType"/>
+            <property name="dataSetView" view="_minimal"/>
+        </property>
+        <property name="name"/>
+        <property name="remarks"/>
+        <property name="map" view="_minimal"/>
+        <property name="locatorLayers"/>
+        <property name="notifyLayers"/>
+    </view>
+    <view entity="simiDependency_Component" name="component-edit" extends="_minimal">
+        <property name="relations" view="_minimal">
+            <property name="relationType"/>
+            <property name="dataSetView" view="_minimal"/>
+        </property>
+        <property name="name"/>
+        <property name="remarks"/>
+    </view>
+    <view entity="simiDependency_FeatureInfo" name="featureInfo-edit" extends="_minimal">
+        <property name="relations" view="_minimal">
+            <property name="relationType"/>
+            <property name="dataSetView" view="_minimal"/>
+        </property>
+        <property name="name"/>
+        <property name="remarks"/>
+        <property name="displayTemplate"/>
+        <property name="pyModuleName"/>
+        <property name="sqlQuery"/>
+    </view>
+    <view entity="simiDependency_Relation" name="relation-edit" extends="_minimal">
+        <property name="dependency" view="_minimal">
+            <property name="name"/>
+            <property name="typeAbbreviation"/>
+        </property>
+        <property name="dataSetView" view="_minimal"/>
+        <property name="relationType"/>
+    </view>
+    <view entity="simiDependency_Report" name="report-edit" extends="_minimal">
+        <property name="relations" view="_minimal">
+            <property name="relationType"/>
+            <property name="dataSetView" view="_minimal"/>
+        </property>
+        <property name="name"/>
+        <property name="remarks"/>
+    </view>
 
 </views>
+<!--
 
-       <!--
 public static final String NAME = null;
 
        -->
