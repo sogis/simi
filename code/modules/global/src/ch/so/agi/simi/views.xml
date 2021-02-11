@@ -170,10 +170,87 @@
         <property name="name"/>
         <property name="remarks"/>
     </view>
-
+    <view entity="simiProduct_DataProduct" name="dataProduct-browse" extends="_local">
+        <property name="pubScope" view="_minimal">
+            <property name="displayText"/>
+        </property>
+    </view>
+    <view entity="simiProduct_DataProduct_PubScope" name="dataProduct-pubScope-fragment" extends="_local"/>
+    <view entity="simiProduct_FacadeLayer" name="facadeLayer-edit" extends="_local">
+        <property name="pubScope" view="_minimal"/>
+        <property name="dataSetViews" view="_minimal">
+            <property name="dataSetView" view="_minimal"/>
+            <property name="sort"/>
+            <property name="transparency"/>
+            <property name="facadeLayer" view="_minimal"/>
+        </property>
+    </view>
+    <view entity="simiProduct_DataSetView" name="facadeLayer-edit-dataSetViews" extends="_local"/>
+    <view entity="simiProduct_LayerGroup" name="layerGroup-edit" extends="_local">
+        <property name="pubScope" view="_minimal"/>
+        <property name="singleActors" view="_minimal">
+            <property name="singleActor" view="_minimal">
+                <property name="title"/>
+            </property>
+            <property name="sort"/>
+            <property name="visible"/>
+            <property name="transparency"/>
+            <property name="productList" view="_minimal"/>
+        </property>
+    </view>
+    <view entity="simiProduct_SingleActor" name="layerGroup-edit-singleActors" extends="_local"/>
+    <view entity="simiProduct_Map" name="map-edit" extends="_local">
+        <property name="pubScope" view="_minimal"/>
+        <property name="singleActors" view="_minimal">
+            <property name="singleActor" view="_minimal">
+                <property name="title"/>
+            </property>
+            <property name="sort"/>
+            <property name="visible"/>
+            <property name="transparency"/>
+        </property>
+    </view>
+    <view entity="simiProduct_SingleActor" name="map-edit-singleActors" extends="_local"/>
+    <view entity="simiData_RasterView" name="rasterView-edit" extends="_local">
+        <property name="pubScope" view="_minimal"/>
+        <property name="rasterDS" view="_minimal"/>
+        <property name="permissions" view="_minimal">
+            <property name="level"/>
+            <property name="role" view="_minimal"/>
+        </property>
+        <property name="styleAssets" view="_minimal">
+            <property name="fileName"/>
+            <property name="fileContent"/>
+            <property name="isForServer"/>
+        </property>
+    </view>
+    <view entity="simiData_RasterDS" name="rasterView-edit-rasters" extends="_local"/>
+    <view entity="simiData_TableView" name="tableView-edit" extends="_local">
+        <property name="postgresTable" view="_minimal">
+            <property name="descriptionModel"/>
+        </property>
+        <property name="pubScope" view="_minimal"/>
+        <property name="viewFields" view="_local">
+            <property name="tableField" view="_minimal"/>
+        </property>
+        <property name="permissions" view="_minimal">
+            <property name="level"/>
+            <property name="role" view="_minimal"/>
+        </property>
+    </view>
+    <view entity="simiIAM_Role" name="tableView-edit-roles" extends="_local"/>
+    <view entity="simiData_TableField" name="tableView-edit-tableFields" extends="_local"/>
+    <view entity="simiData_PostgresTable" name="tableView-edit-postgresTables" extends="_minimal">
+        <property name="descriptionModel"/>
+    </view>
+    <view entity="simiData_ViewField" name="viewField-edit" extends="_local">
+        <property name="tableField" view="_minimal">
+            <property name="descriptionModel"/>
+            <property name="descriptionOverride"/>
+        </property>
+        <property name="tableView" view="_minimal">
+            <property name="postgresTable" view="_minimal"/>
+        </property>
+    </view>
+    <view entity="simiData_TableField" name="viewField-edit-tableFields" extends="_local"/>
 </views>
-<!--
-
-public static final String NAME = null;
-
-       -->

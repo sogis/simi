@@ -17,10 +17,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "SIMIPRODUCT_DATA_SET_VIEW")
-@Entity(name = "simiProduct_DataSetView")
+@Entity(name = DataSetView.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("#concatName|identifier,title") //needed to define minimal view
 public class DataSetView extends SingleActor {
+
+    public static final String NAME = "simiProduct_DataSetView";
     private static final long serialVersionUID = 3720829701428961919L;
 
     @NotNull

@@ -5,24 +5,14 @@
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
-                  class="ch.so.agi.simi.entity.product.datasetview.RasterView">
-            <view extends="_local">
-                <property name="pubScope" view="_minimal"/>
-                <property name="rasterDS" view="_minimal"/>
-                <property name="permissions" view="_minimal">
-                    <property name="level"/>
-                    <property name="role" view="_minimal"/>
-                </property>
-                <property name="styleAssets" view="_minimal">
-                    <property name="fileName"/>
-                    <property name="fileContent"/>
-                    <property name="isForServer"/>
-                </property>
-            </view>
+                  class="ch.so.agi.simi.entity.product.datasetview.RasterView"
+                  view="rasterView-edit">
             <loader/>
             <collection id="permissionsDc" property="permissions"/>
         </instance>
-        <collection id="rasterDc" class="ch.so.agi.simi.entity.data.RasterDS">
+        <collection id="rasterDc"
+                    class="ch.so.agi.simi.entity.data.RasterDS"
+                    view="rasterView-edit-rasters">
             <loader id="rasterDl">
                 <query>
                     <![CDATA[select e from simiData_RasterDS e ORDER BY e.path]]>

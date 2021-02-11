@@ -7,10 +7,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMIDATA_RASTER_VIEW")
-@Entity(name = "simiData_RasterView")
+@Entity(name = RasterView.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("#concatName|identifier,title") //needed to define minimal view
 public class RasterView extends DataSetView {
+
+    public static final String NAME = "simiData_RasterView";
     private static final long serialVersionUID = 1986595030057944078L;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

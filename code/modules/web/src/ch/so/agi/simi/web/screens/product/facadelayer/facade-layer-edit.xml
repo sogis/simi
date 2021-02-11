@@ -5,20 +5,13 @@
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
-                  class="ch.so.agi.simi.entity.product.non_dsv.FacadeLayer">
-            <view extends="_local">
-                <property name="pubScope" view="_minimal"/>
-                <property name="dataSetViews" view="_minimal">
-                    <property name="dataSetView" view="_minimal"/>
-                    <property name="sort"/>
-                    <property name="transparency"/>
-                    <property name="facadeLayer" view="_minimal"/>
-                </property>
-            </view>
+                  class="ch.so.agi.simi.entity.product.non_dsv.FacadeLayer" view="facadeLayer-edit">
             <loader/>
             <collection id="propertiesInFacadeDc" property="dataSetViews"/>
         </instance>
-        <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.product.datasetview.DataSetView">
+        <collection id="dataSetViewsDc"
+                    class="ch.so.agi.simi.entity.product.datasetview.DataSetView"
+                    view="facadeLayer-edit-dataSetViews">
             <loader id="dataSetViewsDl">
                 <query>
                     <![CDATA[select e from simiProduct_DataSetView e order by e.identifier]]>

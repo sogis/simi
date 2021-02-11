@@ -9,11 +9,13 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
-@Entity(name = "simiProduct_DataProduct")
+@Entity(name = DataProduct.NAME)
 @NamePattern("#concatName|identifier,title")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class DataProduct extends SimiStandardEntity {
+
+    public static final String NAME = "simiProduct_DataProduct";
     private static final long serialVersionUID = -3456773582487680912L;
 
     @NotNull

@@ -6,14 +6,17 @@ import ch.so.agi.simi.entity.data.TableField;
 import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;
+import javax.swing.text.View;
 import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMIDATA_VIEW_FIELD", uniqueConstraints = {
         @UniqueConstraint(name = "IDX_SIMI_VIEW_FIELD_UNQ_TABLE_FIELD_ID_TABLE_VIEW_ID", columnNames = {"TABLE_FIELD_ID", "TABLE_VIEW_ID"})
 })
-@Entity(name = "simiData_ViewField")
+@Entity(name = ViewField.NAME)
 @NamePattern("%s|alias")
 public class ViewField extends SimiStandardEntity implements Sortable {
+
+    public static final String NAME = "simiData_ViewField";
     private static final long serialVersionUID = -2665578122978329156L;
 
     @NotNull

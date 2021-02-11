@@ -5,23 +5,14 @@
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
-                  class="ch.so.agi.simi.entity.product.non_dsv.LayerGroup">
-            <view extends="_local">
-                <property name="pubScope" view="_minimal"/>
-                <property name="singleActors" view="_minimal">
-                    <property name="singleActor" view="_minimal">
-                        <property name="title"/>
-                    </property>
-                    <property name="sort"/>
-                    <property name="visible"/>
-                    <property name="transparency"/>
-                    <property name="productList" view="_minimal"/>
-                </property>
-            </view>
+                  class="ch.so.agi.simi.entity.product.non_dsv.LayerGroup"
+                  view="layerGroup-edit">
             <loader/>
             <collection id="propertiesInListDc" property="singleActors"/>
         </instance>
-        <collection id="singleActorsDc" class="ch.so.agi.simi.entity.product.non_dsv.SingleActor">
+        <collection id="singleActorsDc"
+                    class="ch.so.agi.simi.entity.product.non_dsv.SingleActor"
+                    view="layerGroup-edit-singleActors">
             <loader id="singleActorsDl">
                 <query>
                     <![CDATA[select e from simiProduct_SingleActor e order by e.identifier]]>

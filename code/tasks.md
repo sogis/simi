@@ -6,6 +6,16 @@
   * Major: Breaking Schema change
   * Minor: Breaking Config change
   * Revision: Fortlaufende Buildnummer
+* Screens Wegräumen
+  * _layer-group-choose.xml
+  * _data-set-view-browse.xml
+  * _data-product_pub-scope-browse.xml
+  * _data-product_pub-scope-edit.xml
+  * _map-browse.xml
+  * _single-actor-browse.xml
+  
+  
+  
 
 # Version 1.0
 

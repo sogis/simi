@@ -5,21 +5,13 @@
         focusComponent="form">
     <data>
         <instance id="viewFieldDc"
-                  class="ch.so.agi.simi.entity.product.datasetview.ViewField">
-            <view extends="_local">
-                <property name="tableField" view="_minimal">
-                    <property name="descriptionModel"/>
-                    <property name="descriptionOverride"/>
-                </property>
-                <property name="tableView" view="_minimal">
-                    <property name="postgresTable" view="_minimal"/>
-                </property>
-            </view>
+                  class="ch.so.agi.simi.entity.product.datasetview.ViewField"
+                  view="viewField-edit">
             <loader/>
         </instance>
         <collection id="tableFieldsDc"
                     class="ch.so.agi.simi.entity.data.TableField"
-                    view="_local">
+                    view="viewField-edit-tableFields">
             <loader id="tableFieldsDl">
                 <query>
                     <![CDATA[select e from simiData_TableField e]]>

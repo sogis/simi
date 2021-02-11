@@ -5,25 +5,13 @@
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
-                  class="ch.so.agi.simi.entity.product.datasetview.TableView">
-            <view extends="_local">
-                <property name="postgresTable" view="_minimal">
-                    <property name="descriptionModel"/>
-                </property>
-                <property name="pubScope" view="_minimal"/>
-                <property name="viewFields" view="_local">
-                    <property name="tableField" view="_minimal"/>
-                </property>
-                <property name="permissions" view="_minimal">
-                    <property name="level"/>
-                    <property name="role" view="_minimal"/>
-                </property>
-            </view>
+                  class="ch.so.agi.simi.entity.product.datasetview.TableView"
+                  view="tableView-edit">
             <loader/>
             <collection id="viewFieldsDc" property="viewFields"/>
             <collection id="permissionsDc" property="permissions"/>
         </instance>
-        <collection id="rolesDc" class="ch.so.agi.simi.entity.iam.Role">
+        <collection id="rolesDc" class="ch.so.agi.simi.entity.iam.Role" view="tableView-edit-roles">
             <loader id="rolesDl">
                 <query>
                     <![CDATA[select e from simiIAM_Role e order by e.name]]>
@@ -32,7 +20,7 @@
         </collection>
         <collection id="tableFieldsDc"
                     class="ch.so.agi.simi.entity.data.TableField"
-                    view="_local">
+                    view="tableView-edit-tableFields">
             <loader id="tableFieldsDl">
                 <query>
                     <![CDATA[select e from simiData_TableField e order by e.name]]>
@@ -45,10 +33,8 @@
             </loader>
         </collection>
         <collection id="pgTableDc"
-                    class="ch.so.agi.simi.entity.data.PostgresTable">
-            <view extends="_minimal">
-                <property name="descriptionModel"/>
-            </view>
+                    class="ch.so.agi.simi.entity.data.PostgresTable"
+                    view="tableView-edit-postgresTables">
             <loader id="pgTableDl">
                 <query>
                     <![CDATA[select e from simiData_PostgresTable e order by e]]>

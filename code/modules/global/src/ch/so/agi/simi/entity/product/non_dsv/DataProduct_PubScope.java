@@ -9,9 +9,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE")
-@Entity(name = "simiProduct_DataProduct_PubScope")
+@Entity(name = DataProduct_PubScope.NAME)
 @NamePattern("%s|displayText")
 public class DataProduct_PubScope extends SimiStandardEntity {
+
+    public static final String NAME = "simiProduct_DataProduct_PubScope";
     private static final long serialVersionUID = -1191099388059651336L;
 
     @NotNull

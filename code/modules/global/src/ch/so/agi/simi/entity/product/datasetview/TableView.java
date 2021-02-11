@@ -1,6 +1,7 @@
 package ch.so.agi.simi.entity.product.datasetview;
 
 import ch.so.agi.simi.entity.data.PostgresTable;
+import ch.so.agi.simi.entity.data.TableField;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
@@ -11,10 +12,12 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "SIMIDATA_TABLE_VIEW")
-@Entity(name = "simiData_TableView")
+@Entity(name = TableView.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("#concatName|identifier,title") //needed to define minimal view
 public class TableView extends DataSetView {
+
+    public static final String NAME = "simiData_TableView";
     private static final long serialVersionUID = -4901858225372396346L;
 
     @Column(name = "WHERE_CLAUSE", length = 200)

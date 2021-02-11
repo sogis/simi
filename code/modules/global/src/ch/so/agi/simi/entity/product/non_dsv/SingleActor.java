@@ -12,10 +12,12 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "SIMIPRODUCT_SINGLE_ACTOR")
-@Entity(name = "simiProduct_SingleActor")
+@Entity(name = SingleActor.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("#concatName|identifier,title") //needed to define minimal view
 public class SingleActor extends DataProduct {
+
+    public static final String NAME = "simiProduct_SingleActor";
     private static final long serialVersionUID = 7629032894155576081L;
 
     @Composition

@@ -6,6 +6,11 @@ import ch.so.agi.simi.entity.dependency.*;
 import ch.so.agi.simi.entity.iam.Group;
 import ch.so.agi.simi.entity.iam.Role;
 import ch.so.agi.simi.entity.iam.User;
+import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import ch.so.agi.simi.entity.product.datasetview.RasterView;
+import ch.so.agi.simi.entity.product.datasetview.TableView;
+import ch.so.agi.simi.entity.product.datasetview.ViewField;
+import ch.so.agi.simi.entity.product.non_dsv.*;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
@@ -237,7 +242,149 @@ class EntityLoadingTest {
         dataManager.loadList(context);
     }
 
+    @Test
+    void dataProduct_Browse_OK() {
+        LoadContext context = LoadContext.create(DataProduct.class)
+                .setQuery(queryFor(DataProduct.NAME))
+                .setView("dataProduct-browse");
 
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void dataProduct_PubScope_Fragment_OK() {
+        LoadContext context = LoadContext.create(DataProduct_PubScope.class)
+                .setQuery(queryFor(DataProduct_PubScope.NAME))
+                .setView("dataProduct-pubScope-fragment");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void facadeLayer_Edit_OK() {
+        LoadContext context = LoadContext.create(FacadeLayer.class)
+                .setQuery(queryFor(FacadeLayer.NAME))
+                .setView("facadeLayer-edit");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void facadeLayer_Edit_DataSetViews_OK() {
+        LoadContext context = LoadContext.create(DataSetView.class)
+                .setQuery(queryFor(DataSetView.NAME))
+                .setView("facadeLayer-edit-dataSetViews");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void layerGroup_Edit_OK() {
+        LoadContext context = LoadContext.create(LayerGroup.class)
+                .setQuery(queryFor(LayerGroup.NAME))
+                .setView("layerGroup-edit");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void layerGroup_Edit_SingleActors_OK() {
+        LoadContext context = LoadContext.create(SingleActor.class)
+                .setQuery(queryFor(SingleActor.NAME))
+                .setView("layerGroup-edit-singleActors");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void map_Edit_OK() {
+        LoadContext context = LoadContext.create(Map.class)
+                .setQuery(queryFor(Map.NAME))
+                .setView("map-edit");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void map_Edit_SingleActors_OK() {
+        LoadContext context = LoadContext.create(SingleActor.class)
+                .setQuery(queryFor(SingleActor.NAME))
+                .setView("map-edit-singleActors");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void rasterView_Edit_OK() {
+        LoadContext context = LoadContext.create(RasterView.class)
+                .setQuery(queryFor(RasterView.NAME))
+                .setView("rasterView-edit");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void rasterView_Edit_Rasters_OK() {
+        LoadContext context = LoadContext.create(RasterDS.class)
+                .setQuery(queryFor(RasterDS.NAME))
+                .setView("rasterView-edit-rasters");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void tableView_Edit_OK() {
+        LoadContext context = LoadContext.create(TableView.class)
+                .setQuery(queryFor(TableView.NAME))
+                .setView("tableView-edit");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void tableView_Edit_Roles_OK() {
+        LoadContext context = LoadContext.create(Role.class)
+                .setQuery(queryFor(Role.NAME))
+                .setView("tableView-edit-roles");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void tableView_Edit_TableFields_OK() {
+        LoadContext context = LoadContext.create(TableField.class)
+                .setQuery(queryFor(TableField.NAME))
+                .setView("tableView-edit-tableFields");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void tableView_Edit_PostgresTables_OK() {
+        LoadContext context = LoadContext.create(PostgresTable.class)
+                .setQuery(queryFor(PostgresTable.NAME))
+                .setView("tableView-edit-postgresTables");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void vieField_Edit_OK() {
+        LoadContext context = LoadContext.create(ViewField.class)
+                .setQuery(queryFor(ViewField.NAME))
+                .setView("viewField-edit");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void vieField_Edit_TableFields_OK() {
+        LoadContext context = LoadContext.create(TableField.class)
+                .setQuery(queryFor(TableField.NAME))
+                .setView("viewField-edit-tableFields");
+
+        dataManager.loadList(context);
+    }
 
     private static LoadContext.Query queryFor(String entityName){
         String queryStr = MessageFormat.format("select e from {0} e", entityName);
