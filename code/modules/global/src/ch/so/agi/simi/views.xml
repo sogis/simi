@@ -253,4 +253,5 @@
         </property>
     </view>
     <view entity="simiData_TableField" name="viewField-edit-tableFields" extends="_local"/>
+    <view entity="simiIAM_Role" name="dsv-editscreens-roles" extends="_minimal"/>
 </views>

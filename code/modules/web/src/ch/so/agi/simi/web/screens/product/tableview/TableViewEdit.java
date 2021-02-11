@@ -24,11 +24,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
     @Inject
     private CollectionPropertyContainer<ViewField> viewFieldsDc;
     @Inject
-    private CollectionPropertyContainer<Permission> permissionsDc;
-    @Inject
     private DataContext dataContext;
-    @Inject
-    private Table<Permission> permissionsTable;
     @Inject
     private CollectionLoader<TableField> tableFieldsDl;
     @Inject
@@ -63,17 +59,5 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
         // set focus on the new viewField
         viewFieldsTable.requestFocus(viewField, "sort");
-    }
-
-    @Subscribe("addPermissionBtn")
-    public void onAddPermissionBtnClick(Button.ClickEvent event) {
-        Permission permission = dataContext.create(Permission.class);
-        permission.setDataSetView(this.getEditedEntity());
-
-        // insert new permission to table
-        permissionsDc.getMutableItems().add(permission);
-
-        // set focust to the new permission
-        permissionsTable.requestFocus(permission, "role");
     }
 }

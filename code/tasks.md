@@ -13,6 +13,12 @@
   * _data-product_pub-scope-edit.xml
   * _map-browse.xml
   * _single-actor-browse.xml
+* Delete rules sicherstellen
+  * Erstellen der dummy Entities mittels PODAM
+  * Cascading deletes
+  * Wichtige delete denials
+  * Standartverhalten deny sicherstellen (am Beispiel db --> schema)
+  
   
   
   

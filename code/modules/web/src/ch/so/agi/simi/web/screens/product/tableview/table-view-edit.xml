@@ -130,24 +130,8 @@
                     </buttonsPanel>
                 </table>
             </groupBox>
-            <groupBox id="permissionsBox" caption="msg://ch.so.agi.simi.entity.product/DataSetView.permissions" collapsable="true">
-                <table id="permissionsTable" dataContainer="permissionsDc" width="100%" editable="true" multiselect="true">
-                    <actions>
-                        <action id="remove" type="remove">
-                            <properties>
-                                <property name="confirmation" value="false"/>
-                            </properties>
-                        </action>
-                    </actions>
-                    <columns>
-                        <column id="role" editable="true" optionsContainer="rolesDc" sort="ASCENDING"/>
-                        <column id="level" editable="true"/>
-                    </columns>
-                    <buttonsPanel>
-                        <button id="addPermissionBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
-                        <button action="permissionsTable.remove"/>
-                    </buttonsPanel>
-                </table>
+            <groupBox id="permissionsBox" caption="Berechtigungen" collapsable="true">
+                <fragment id="permissionsTable" screen="simi_RoleFragment"></fragment>
             </groupBox>
         </scrollBox>
         <hbox id="editActions" spacing="true">
