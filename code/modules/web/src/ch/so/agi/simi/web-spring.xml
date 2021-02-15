@@ -12,6 +12,7 @@
         <property name="remoteServices">
             <map>
                 <entry key="simi_DependencyService" value="ch.so.agi.simi.core.dependency.DependencyService"/>
+                <entry key="simi_CopyService" value="ch.so.agi.simi.core.copy.CopyService"/>
             </map>
         </property>
     </bean>
