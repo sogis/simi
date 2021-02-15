@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.data;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.product.datasetview.RasterView;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
@@ -14,9 +14,10 @@ import java.util.List;
 @Table(name = "SIMIDATA_RASTER_DS")
 @Entity(name = RasterDS.NAME)
 @NamePattern("%s [Raster]|path")
-public class RasterDS extends SimiStandardEntity {
+public class RasterDS extends SimiEntity {
 
     public static final String NAME = "simiData_RasterDS";
+
     private static final long serialVersionUID = -1371985729459673568L;
 
     @NotNull

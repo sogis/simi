@@ -1,9 +1,9 @@
 package ch.so.agi.simi.entity.data;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -15,7 +15,7 @@ import java.util.List;
 })
 @Entity(name = ModelSchema.NAME)
 @NamePattern("%s.%s|postgresDB,schemaName")
-public class ModelSchema extends SimiStandardEntity {
+public class ModelSchema extends SimiEntity {
     public static final String NAME = "simiData_ModelSchema";
 
     private static final long serialVersionUID = -2988394575142052644L;
@@ -29,10 +29,10 @@ public class ModelSchema extends SimiStandardEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_DB_ID")
+    @OnDeleteInverse(DeletePolicy.DENY)
     private PostgresDB postgresDB;
 
     @OneToMany(mappedBy = "modelSchema")
-    @OnDelete(DeletePolicy.CASCADE)
     @Composition
     private List<PostgresTable> postgresTables;
 

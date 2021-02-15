@@ -1,10 +1,10 @@
 package ch.so.agi.simi.entity.data;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.product.datasetview.ViewField;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -17,9 +17,10 @@ import java.util.List;
 })
 @Entity(name = TableField.NAME)
 @NamePattern("#getCaption|name,typeName,strLength")
-public class TableField extends SimiStandardEntity {
+public class TableField extends SimiEntity {
 
     public static final String NAME = "simiData_TableField";
+
     private static final long serialVersionUID = -1809352037109072642L;
 
     @NotNull
@@ -35,7 +36,6 @@ public class TableField extends SimiStandardEntity {
     private String descriptionOverride;
 
     @Composition
-    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "tableField")
     private List<ViewField> viewFields;
 
@@ -60,6 +60,7 @@ public class TableField extends SimiStandardEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_TABLE_ID")
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private PostgresTable postgresTable;
 
     public String getDescriptionOverride() {

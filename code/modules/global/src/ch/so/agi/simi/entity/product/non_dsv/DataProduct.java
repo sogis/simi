@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.product.non_dsv;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 
@@ -13,9 +13,10 @@ import java.time.LocalDateTime;
 @NamePattern("#concatName|identifier,title")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
-public class DataProduct extends SimiStandardEntity {
+public class DataProduct extends SimiEntity {
 
     public static final String NAME = "simiProduct_DataProduct";
+
     private static final long serialVersionUID = -3456773582487680912L;
 
     @NotNull
@@ -58,13 +59,11 @@ public class DataProduct extends SimiStandardEntity {
         return this.identifier + " | " + this.title + " | " +  typeAbbreviation() ;
     }
 
-    @Transient
     @MetaProperty
     public String getEntityName() { // For use in Tables, can be referenced as entityName
         return concatName();
     }
 
-    @Transient
     @MetaProperty
     public String getTypeAbbreviation() { // For use in Tables, can be referenced as typeAbbreviation
         return typeAbbreviation();

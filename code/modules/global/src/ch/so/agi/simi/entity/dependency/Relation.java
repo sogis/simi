@@ -1,7 +1,9 @@
 package ch.so.agi.simi.entity.dependency;
 
+import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.product.datasetview.DataSetView;
-import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
@@ -11,9 +13,10 @@ import javax.validation.constraints.NotNull;
         @UniqueConstraint(name = "IDX_SIMI_RELATION_UNQ", columnNames = {"RELATION_TYPE", "DEPENDENCY_ID", "DATA_SET_VIEW_ID"})
 })
 @Entity(name = Relation.NAME)
-public class Relation extends StandardEntity {
+public class Relation extends SimiEntity {
 
     public static final String NAME = "simiDependency_Relation";
+
     private static final long serialVersionUID = -7067104417294138445L;
 
     @NotNull
@@ -22,10 +25,12 @@ public class Relation extends StandardEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "DEPENDENCY_ID")
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private Dependency dependency;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "DATA_SET_VIEW_ID")
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private DataSetView dataSetView;
 
     public DataSetView getDataSetView() {

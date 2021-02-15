@@ -12,5 +12,6 @@ import javax.persistence.Table;
 @NamePattern("%s|tableName")
 public class ExternalTable extends TableDS {
     public static final String NAME = "simiData_ExternalTable";
+
     private static final long serialVersionUID = 318922531144053370L;
 }

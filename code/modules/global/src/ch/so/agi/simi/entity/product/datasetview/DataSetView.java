@@ -1,7 +1,5 @@
 package ch.so.agi.simi.entity.product.datasetview;
 
-import ch.so.agi.simi.entity.ccc.LocatorLayer;
-import ch.so.agi.simi.entity.ccc.NotifyLayer;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
 import ch.so.agi.simi.entity.product.non_dsv.SingleActor;
@@ -23,6 +21,7 @@ import java.util.List;
 public class DataSetView extends SingleActor {
 
     public static final String NAME = "simiProduct_DataSetView";
+
     private static final long serialVersionUID = 3720829701428961919L;
 
     @NotNull
@@ -30,19 +29,8 @@ public class DataSetView extends SingleActor {
     private Boolean rawDownload = true;
 
     @Composition
-    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "datasetSetView")
     private List<StyleAsset> styleAssets;
-
-    @Composition
-    @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "dataSetView")
-    private List<LocatorLayer> locatorLayers;
-
-    @Composition
-    @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "dataSetView")
-    private List<NotifyLayer> notifyLayers;
 
     @Lob
     @Column(name = "STYLE_SERVER")
@@ -114,22 +102,6 @@ public class DataSetView extends SingleActor {
 
     public void setStyleDesktopChanged(LocalDateTime styleDesktopChanged) {
         this.styleDesktopChanged = styleDesktopChanged;
-    }
-
-    public List<NotifyLayer> getNotifyLayers() {
-        return notifyLayers;
-    }
-
-    public void setNotifyLayers(List<NotifyLayer> notifyLayers) {
-        this.notifyLayers = notifyLayers;
-    }
-
-    public List<LocatorLayer> getLocatorLayers() {
-        return locatorLayers;
-    }
-
-    public void setLocatorLayers(List<LocatorLayer> locatorLayers) {
-        this.locatorLayers = locatorLayers;
     }
 
     public List<Permission> getPermissions() {

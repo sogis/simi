@@ -1,5 +1,8 @@
 package ch.so.agi.simi.entity.product.non_dsv;
 
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -17,11 +20,13 @@ public class PropertiesInList extends ChildLayerProperties {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_LIST_ID")
     @NotNull
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private ProductList productList;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "SINGLE_ACTOR_ID")
     @NotNull
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private SingleActor singleActor;
 
     public Boolean getVisible() {

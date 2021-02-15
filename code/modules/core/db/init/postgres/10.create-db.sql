@@ -1,13 +1,11 @@
 -- begin SIMIDATA_TABLE_FIELD
 create table SIMIDATA_TABLE_FIELD (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -30,13 +28,11 @@ create table SIMIDATA_TABLE_FIELD (
 -- begin SIMIDATA_POSTGRES_DB
 create table SIMIDATA_POSTGRES_DB (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -52,13 +48,11 @@ create table SIMIDATA_POSTGRES_DB (
 -- begin SIMIIAM_ROLE
 create table SIMIIAM_ROLE (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -74,13 +68,11 @@ create table SIMIIAM_ROLE (
 -- begin SIMIDATA_MODEL_SCHEMA
 create table SIMIDATA_MODEL_SCHEMA (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -97,13 +89,11 @@ create table SIMIDATA_MODEL_SCHEMA (
 -- begin SIMIDATA_TABLE_DS
 create table SIMIDATA_TABLE_DS (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -117,41 +107,14 @@ create table SIMIDATA_TABLE_DS (
     primary key (ID)
 )^
 -- end SIMIDATA_TABLE_DS
--- begin SIMICCC_CCC_CLIENT
-create table SIMICCC_CCC_CLIENT (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    EXT1 text,
-    EXT2 text,
-    EXT3 text,
-    EXT4 text,
-    EXT5 text,
-    --
-    KEY_ varchar(100) not null,
-    TITLE varchar(200) not null,
-    EDIT_GEOM_TYPE integer not null,
-    REMARKS text,
-    MAP_ID uuid not null,
-    --
-    primary key (ID)
-)^
--- end SIMICCC_CCC_CLIENT
 -- begin SIMIIAM_PERMISSION
 create table SIMIIAM_PERMISSION (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -168,13 +131,11 @@ create table SIMIIAM_PERMISSION (
 -- begin SIMI_STYLE_ASSET
 create table SIMI_STYLE_ASSET (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -192,13 +153,11 @@ create table SIMI_STYLE_ASSET (
 -- begin SIMIDATA_RASTER_DS
 create table SIMIDATA_RASTER_DS (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -212,40 +171,14 @@ create table SIMIDATA_RASTER_DS (
     primary key (ID)
 )^
 -- end SIMIDATA_RASTER_DS
--- begin SIMICCC_NOTIFY_LAYER
-create table SIMICCC_NOTIFY_LAYER (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    EXT1 text,
-    EXT2 text,
-    EXT3 text,
-    EXT4 text,
-    EXT5 text,
-    --
-    TITLE varchar(200) not null,
-    ATTRIBUTE_MAP text not null,
-    CCC_CLIENT_ID uuid not null,
-    DATA_SET_VIEW_ID uuid not null,
-    --
-    primary key (ID)
-)^
--- end SIMICCC_NOTIFY_LAYER
 -- begin SIMIIAM_IDENTITY
 create table SIMIIAM_IDENTITY (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -262,13 +195,11 @@ create table SIMIIAM_IDENTITY (
 -- begin SIMIPRODUCT_DATA_PRODUCT
 create table SIMIPRODUCT_DATA_PRODUCT (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -289,40 +220,14 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     primary key (ID)
 )^
 -- end SIMIPRODUCT_DATA_PRODUCT
--- begin SIMICCC_LOCATOR_LAYER
-create table SIMICCC_LOCATOR_LAYER (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    EXT1 text,
-    EXT2 text,
-    EXT3 text,
-    EXT4 text,
-    EXT5 text,
-    --
-    SORT_INDEX integer not null,
-    FILTER_ varchar(200) not null,
-    CCC_CLIENT_ID uuid not null,
-    DATA_SET_VIEW_ID uuid not null,
-    --
-    primary key (ID)
-)^
--- end SIMICCC_LOCATOR_LAYER
 -- begin SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE
 create table SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -346,13 +251,11 @@ create table SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE (
 -- begin SIMIDATA_VIEW_FIELD
 create table SIMIDATA_VIEW_FIELD (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -372,13 +275,11 @@ create table SIMIDATA_VIEW_FIELD (
 -- begin SIMIPRODUCT_PROPERTIES_IN_LIST
 create table SIMIPRODUCT_PROPERTIES_IN_LIST (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -397,13 +298,11 @@ create table SIMIPRODUCT_PROPERTIES_IN_LIST (
 -- begin SIMIPRODUCT_PROPERTIES_IN_FACADE
 create table SIMIPRODUCT_PROPERTIES_IN_FACADE (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,
@@ -566,13 +465,16 @@ create table SIMIIAM_ROLE_USER_LINK (
 -- begin SIMIDEPENDENCY_RELATION
 create table SIMIDEPENDENCY_RELATION (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
     --
     RELATION_TYPE varchar(50) not null,
     DEPENDENCY_ID uuid not null,
@@ -584,13 +486,11 @@ create table SIMIDEPENDENCY_RELATION (
 -- begin SIMIDEPENDENCY_DEPENDENCY
 create table SIMIDEPENDENCY_DEPENDENCY (
     ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
     UPDATE_TS timestamp,
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
     EXT1 text,
     EXT2 text,
     EXT3 text,

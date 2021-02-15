@@ -4,6 +4,7 @@ import ch.so.agi.simi.entity.product.datasetview.TableView;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import java.util.List;
 public class PostgresTable extends TableDS {
 
     public static final String NAME = "simiData_PostgresTable";
+
     private static final long serialVersionUID = -6324189221967537598L;
 
     @Column(name = "ID_FIELD_NAME", nullable = false, length = 100)
@@ -27,10 +29,10 @@ public class PostgresTable extends TableDS {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "MODEL_SCHEMA_ID")
+    @OnDeleteInverse(DeletePolicy.DENY)
     private ModelSchema modelSchema;
 
     @OneToMany(mappedBy = "postgresTable")
-    @OnDelete(DeletePolicy.CASCADE)
     @Composition
     private List<TableView> tableViews;
 

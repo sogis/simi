@@ -1,10 +1,8 @@
 package ch.so.agi.simi.entity.iam;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.annotation.OnDelete;
-import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,9 +11,10 @@ import java.util.List;
 @Table(name = "SIMIIAM_ROLE")
 @Entity(name = Role.NAME)
 @NamePattern("%s|name")
-public class Role extends SimiStandardEntity {
+public class Role extends SimiEntity {
 
     public static final String NAME = "simiIAM_Role";
+
     private static final long serialVersionUID = -1282147615227159232L;
 
     @NotNull
@@ -39,7 +38,6 @@ public class Role extends SimiStandardEntity {
     private List<User> users;
 
     @OneToMany(mappedBy = "role")
-    @OnDelete(DeletePolicy.CASCADE)
     @Composition
     private List<Permission> permissions;
 

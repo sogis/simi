@@ -13,6 +13,7 @@ import java.util.List;
 public class Group extends Identity {
 
     public static final String NAME = "simiIAM_Group";
+
     private static final long serialVersionUID = 109810719306418897L;
 
     @NotNull

@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.product.datasetview;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
@@ -9,13 +9,13 @@ import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMI_STYLE_ASSET")
 @Entity(name = "simi_StyleAsset")
-public class StyleAsset extends SimiStandardEntity {
+public class StyleAsset extends SimiEntity {
     private static final long serialVersionUID = 5535641619105786448L;
 
+    @JoinColumn(name = "DATASET_SET_VIEW_ID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @NotNull
     @OnDeleteInverse(DeletePolicy.CASCADE)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "DATASET_SET_VIEW_ID")
     private DataSetView datasetSetView;
 
     @NotNull

@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.product.non_dsv;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.Sortable;
 
 import javax.persistence.Column;
@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
-public class ChildLayerProperties extends SimiStandardEntity implements Sortable {
+public class ChildLayerProperties extends SimiEntity implements Sortable {
     private static final long serialVersionUID = 4170602148331630171L;
 
     @NotNull

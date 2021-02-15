@@ -1,10 +1,10 @@
 package ch.so.agi.simi.entity.product.datasetview;
 
 import ch.so.agi.simi.entity.data.PostgresTable;
-import ch.so.agi.simi.entity.data.TableField;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -18,6 +18,7 @@ import java.util.List;
 public class TableView extends DataSetView {
 
     public static final String NAME = "simiData_TableView";
+
     private static final long serialVersionUID = -4901858225372396346L;
 
     @Column(name = "WHERE_CLAUSE", length = 200)
@@ -45,6 +46,7 @@ public class TableView extends DataSetView {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_TABLE_ID")
+    @OnDeleteInverse(DeletePolicy.DENY)
     private PostgresTable postgresTable;
 
     public Integer getGeoEpsgCode() {

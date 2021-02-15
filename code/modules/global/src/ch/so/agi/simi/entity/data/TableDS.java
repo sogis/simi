@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.data;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamePattern("%s|tableName")
-public class TableDS extends SimiStandardEntity {
+public class TableDS extends SimiEntity {
     private static final long serialVersionUID = -2643498680251164635L;
 
     @Column(name = "TABLE_NAME", nullable = false, length = 100)

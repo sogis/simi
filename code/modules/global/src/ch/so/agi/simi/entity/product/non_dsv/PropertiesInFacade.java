@@ -1,6 +1,8 @@
 package ch.so.agi.simi.entity.product.non_dsv;
 
 import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,11 +17,13 @@ public class PropertiesInFacade extends ChildLayerProperties {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "DATA_SET_VIEW_ID")
     @NotNull
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private DataSetView dataSetView;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "FACADE_LAYER_ID")
     @NotNull
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private FacadeLayer facadeLayer;
 
     public FacadeLayer getFacadeLayer() {

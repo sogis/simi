@@ -1,7 +1,9 @@
 package ch.so.agi.simi.entity.iam;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,7 +12,7 @@ import javax.validation.constraints.NotNull;
         @UniqueConstraint(name = "IDX_SIMI_PERMISSION_UNQ_DATA_SET_VIEW_ID_ROLE_ID", columnNames = {"DATA_SET_VIEW_ID", "ROLE_ID"})
 })
 @Entity(name = "simiIAM_Permission")
-public class Permission extends SimiStandardEntity {
+public class Permission extends SimiEntity {
     private static final long serialVersionUID = -5062553741213113449L;
 
     @NotNull
@@ -20,11 +22,13 @@ public class Permission extends SimiStandardEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "DATA_SET_VIEW_ID")
     @NotNull
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private DataSetView dataSetView;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ROLE_ID")
     @NotNull
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private Role role;
 
     public Role getRole() {

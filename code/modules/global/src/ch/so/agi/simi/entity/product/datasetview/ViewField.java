@@ -1,12 +1,13 @@
 package ch.so.agi.simi.entity.product.datasetview;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.Sortable;
 import ch.so.agi.simi.entity.data.TableField;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
-import javax.swing.text.View;
 import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMIDATA_VIEW_FIELD", uniqueConstraints = {
@@ -14,9 +15,10 @@ import javax.validation.constraints.NotNull;
 })
 @Entity(name = ViewField.NAME)
 @NamePattern("%s|alias")
-public class ViewField extends SimiStandardEntity implements Sortable {
+public class ViewField extends SimiEntity implements Sortable {
 
     public static final String NAME = "simiData_ViewField";
+
     private static final long serialVersionUID = -2665578122978329156L;
 
     @NotNull
@@ -35,10 +37,12 @@ public class ViewField extends SimiStandardEntity implements Sortable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TABLE_FIELD_ID")
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private TableField tableField;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TABLE_VIEW_ID")
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private TableView tableView;
 
     public TableView getTableView() {

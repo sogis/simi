@@ -4,6 +4,7 @@ import ch.so.agi.simi.entity.product.datasetview.RasterView;
 import ch.so.agi.simi.entity.product.datasetview.TableView;
 import ch.so.agi.simi.entity.product.datasetview.DataSetView;
 import ch.so.agi.simi.entity.product.non_dsv.*;
+import com.haulmont.cuba.core.entity.BaseUuidEntity;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
@@ -56,18 +57,16 @@ public class CopyDataProductBean {
             dataProduct = copyDataProduct(RasterView.class, entityId, "copy-rasterView", commitContext, List.of(
                     RasterView::getPermissions,
                     RasterView::getFacadeLayers,
-                    RasterView::getProductLists,
-                    RasterView::getNotifyLayers,
-                    RasterView::getLocatorLayers));
+                    RasterView::getProductLists
+                    ));
 
         } else if (TableView.class.equals(entityClass)) {
             dataProduct = copyDataProduct(TableView.class, entityId, "copy-tableView", commitContext, List.of(
                     TableView::getPermissions,
                     TableView::getFacadeLayers,
                     TableView::getProductLists,
-                    TableView::getNotifyLayers,
-                    TableView::getLocatorLayers,
-                    TableView::getViewFields));
+                    TableView::getViewFields
+            ));
 
         } else if (FacadeLayer.class.equals(entityClass)) {
             FacadeLayer facadeLayer = copyDataProduct(FacadeLayer.class, entityId, "copy-facadeLayer", commitContext, List.of(FacadeLayer::getProductLists));
@@ -129,12 +128,12 @@ public class CopyDataProductBean {
      * @param <E> class of the DataProduct
      * @return A copy of the specified entity
      */
-    private <E extends DataProduct> E copyDataProduct(Class<E> entityClass, UUID entityId, String view, CommitContext commitContext, List<Function<E, List<? extends StandardEntity>>> CopyListProperties) {
+    private <E extends DataProduct> E copyDataProduct(Class<E> entityClass, UUID entityId, String view, CommitContext commitContext, List<Function<E, List<? extends BaseUuidEntity>>> CopyListProperties) {
         E loadedEntity = dataManager.load(entityClass).id(entityId).view(view).one();
         E copy = metadataTools.deepCopy(loadedEntity);
 
-        for (Function<E, List<? extends StandardEntity>> entities : CopyListProperties) {
-            for (StandardEntity entity : entities.apply(copy)) {
+        for (Function<E, List<? extends BaseUuidEntity>> entities : CopyListProperties) {
+            for (BaseUuidEntity entity : entities.apply(copy)) {
                 entity.setId(UUID.randomUUID());
                 commitContext.addInstanceToCommit(entity);
             }

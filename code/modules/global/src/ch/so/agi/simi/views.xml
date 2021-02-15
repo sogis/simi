@@ -9,12 +9,6 @@
         <property name="productLists" view="_local">
             <property name="productList" view="_minimal"/>
         </property>
-        <property name="locatorLayers" view="_local">
-            <property name="cccClient" view="_minimal"/>
-        </property>
-        <property name="notifyLayers" view="_local">
-            <property name="cccClient" view="_minimal"/>
-        </property>
         <property name="facadeLayers" view="_local">
             <property name="facadeLayer" view="_minimal"/>
         </property>
@@ -27,12 +21,6 @@
         <property name="pubScope" view="_minimal"/>
         <property name="productLists" view="_local">
             <property name="productList" view="_minimal"/>
-        </property>
-        <property name="locatorLayers" view="_local">
-            <property name="cccClient" view="_minimal"/>
-        </property>
-        <property name="notifyLayers" view="_local">
-            <property name="cccClient" view="_minimal"/>
         </property>
         <property name="facadeLayers" view="_local">
             <property name="facadeLayer" view="_minimal"/>

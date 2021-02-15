@@ -19,6 +19,16 @@
   * Wichtige delete denials
   * Standartverhalten deny sicherstellen (am Beispiel db --> schema)
   
+  in modelschema ...
+      @ManyToOne(fetch = FetchType.LAZY, optional = false)
+      @JoinColumn(name = "POSTGRES_DB_ID")
+      @OnDeleteInverse(DeletePolicy.DENY)
+      private PostgresDB postgresDB;
+      
+  in postgresdb
+      @OneToMany(mappedBy = "postgresDB")
+      private List<ModelSchema> modelSchemas;
+  
   
   
   

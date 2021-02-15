@@ -1,10 +1,8 @@
 package ch.so.agi.simi.entity.dependency;
 
-import ch.so.agi.simi.entity.SimiStandardEntity;
+import ch.so.agi.simi.entity.SimiEntity;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
-import com.haulmont.cuba.core.entity.annotation.OnDelete;
-import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,13 +12,13 @@ import java.util.List;
 @Entity(name = Dependency.NAME)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
-public class Dependency extends SimiStandardEntity {
+public class Dependency extends SimiEntity {
 
     public static final String NAME = "simiDependency_Dependency";
+
     private static final long serialVersionUID = -8171356992105401614L;
 
     @Composition
-    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "dependency")
     private List<Relation> relations;
 
@@ -56,7 +54,6 @@ public class Dependency extends SimiStandardEntity {
         this.name = name;
     }
 
-    @Transient
     @MetaProperty
     public String getTypeAbbreviation() { // For use in Tables, can be referenced as typeAbbreviation
         return typeAbbreviation();
@@ -66,7 +63,6 @@ public class Dependency extends SimiStandardEntity {
         return "WARNING: override missing.";
     }
 
-    @Transient
     @MetaProperty
     public String getSort() { // For use in Tables, can be referenced as typeAbbreviation
         return typeAbbreviation() + name;
