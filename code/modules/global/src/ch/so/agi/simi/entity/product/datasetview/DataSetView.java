@@ -1,5 +1,6 @@
 package ch.so.agi.simi.entity.product.datasetview;
 
+import ch.so.agi.simi.entity.dependency.Relation;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
 import ch.so.agi.simi.entity.product.non_dsv.SingleActor;
@@ -27,6 +28,10 @@ public class DataSetView extends SingleActor {
     @NotNull
     @Column(name = "RAW_DOWNLOAD", nullable = false)
     private Boolean rawDownload = true;
+
+    @Composition
+    @OneToMany(mappedBy = "dataSetView")
+    private List<Relation> relations;
 
     @Composition
     @OneToMany(mappedBy = "datasetSetView")
@@ -66,6 +71,14 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @Composition
     private List<Permission> permissions;
+
+    public List<Relation> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(List<Relation> relations) {
+        this.relations = relations;
+    }
 
     public DataSetView_SearchTypeEnum getSearchType() {
         return searchType == null ? null : DataSetView_SearchTypeEnum.fromId(searchType);

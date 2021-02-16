@@ -1,24 +1,20 @@
 package ch.so.agi.simi.core.copy;
 
 import ch.so.agi.simi.SimiTestContainer;
-import ch.so.agi.simi.entity.data.ModelSchema;
-import ch.so.agi.simi.entity.data.PostgresDB;
-import ch.so.agi.simi.entity.data.PostgresTable;
-import ch.so.agi.simi.entity.data.TableField;
+import ch.so.agi.simi.entity.data.*;
+import ch.so.agi.simi.entity.dependency.CCCIntegration;
 import ch.so.agi.simi.entity.dependency.Component;
 import ch.so.agi.simi.entity.dependency.Relation;
 import ch.so.agi.simi.entity.dependency.RelationType;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.iam.PermissionLevelEnum;
 import ch.so.agi.simi.entity.iam.Role;
-import ch.so.agi.simi.entity.product.datasetview.DataSetView;
-import ch.so.agi.simi.entity.product.datasetview.StyleAsset;
-import ch.so.agi.simi.entity.product.datasetview.TableView;
-import ch.so.agi.simi.entity.product.datasetview.ViewField;
+import ch.so.agi.simi.entity.product.datasetview.*;
 import ch.so.agi.simi.entity.product.non_dsv.*;
 import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;
+import com.haulmont.cuba.core.entity.BaseUuidEntity;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.testsupport.TestContainer;
@@ -28,49 +24,582 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+import static ch.so.agi.simi.core.copy.CopyServiceBean.*;
 import static org.junit.jupiter.api.Assertions.*;
 // See https://doc.cuba-platform.com/manual-7.2/integration_tests_mw.html
 
 class CopyServiceBeanTest {
 
-    private static final String TV_STRING = "ch.so.agi.inttest.tableview";
+    private static final String TV_DP_STRING = "ch.so.agi.inttest.tableview";
     private static final String TV_DB_STRING = "ch.so.agi.inttest.tableview.db";
     private static final String TV_SCHEMA_STRING = "ch.so.agi.inttest.tableview.schema";
     private static final String TV_TABLE_STRING = "ch.so.agi.inttest.tableview.table";
     private static final String TV_FL_STRING = "ch.so.agi.inttest.tableview.facadelayer";
-    private static final String TV_LG_STRING = "ch.so.agi.inttest.tableview.layergroup";
+    private static final String TV_PL_STRING = "ch.so.agi.inttest.tableview.layergroup";
     private static final String TV_ROLE_STRING = "ch.so.agi.inttest.tableview.role";
     private static final String TV_COMPONENT_STRING = "ch.so.agi.inttest.tableview.component";
+    private static final String TV_FIELD_ALIAS = "ch.so.agi.inttest.tableview.field.alias";
+    private static final int TV_SA_TRANSPARENCY = 88;
+
+    private static final String RV_DP_STRING = "ch.so.agi.inttest.rasterview";
+    private static final String RV_DS_PATH = "ch.so.agi.inttest.rasterview.dataset";
+    private static final String RV_FL_STRING = "ch.so.agi.inttest.rasterview.facadelayer";
+    private static final String RV_PL_STRING = "ch.so.agi.inttest.rasterview.layergroup";
+    private static final String RV_ROLE_STRING = "ch.so.agi.inttest.rasterview.role";
+    private static final String RV_COMPONENT_STRING = "ch.so.agi.inttest.rasterview.component";
+    private static final int RV_SA_TRANSPARENCY = 87;
+
+    private static final String FL_DP_STRING = "ch.so.agi.inttest.facadelayer";
+    private static final String FL_DSV_STRING = "ch.so.agi.inttest.facadelayer.datasetview";
+    private static final String FL_PL_STRING = "ch.so.agi.inttest.facadelayer.layergroup";
+    private static final int FL_SA_TRANSPARENCY = 86;
+
+    private static final String LG_DP_STRING = "ch.so.agi.inttest.layergroup";
+    private static final String LG_FL_STRING = "ch.so.agi.inttest.layergroup.facadelayer";
+
+    private static final String MAP_DP_STRING = "ch.so.agi.inttest.map";
+    private static final String MAP_FL_STRING = "ch.so.agi.inttest.map.facadelayer";
 
     @RegisterExtension
     static TestContainer container = SimiTestContainer.Common.INSTANCE;
+
     static DataManager dataManager;
+    static CopyService serviceBean;
+
 
     @BeforeAll
     static void beforeAll() {
+
         dataManager = AppBeans.get(DataManager.class);
+        serviceBean = AppBeans.get(CopyService.class);
     }
 
     @Test
-    void copy_TableView_AllPropsAndRefs_OK() {
-        perpareTvTestdata();
+    void copy_TableView_OK() throws Exception {
 
-        cleanupTvTestdata();
+        try {
+            cleanupTvTestdata();
+            UUID tvId = prepareTvTestdata();
+
+            UUID copyId = serviceBean.copyProduct(tvId);
+
+            TableView tv = dataManager.load(TableView.class).view(TV_VIEW_NAME).id(copyId).one();
+
+            assertTrue(tv.getIdentifier().contains(TV_DP_STRING), "Identifier of copy must start with identifier of the original");
+            assertEquals(TV_DP_STRING, tv.getGeomFieldName());
+            assertEquals(TV_DP_STRING, tv.getSearchFacet());
+            assertEquals(TV_SA_TRANSPARENCY, tv.getTransparency());
+
+            assertEquals(TV_PL_STRING, tv.getProductLists().get(0).getProductList().getIdentifier());
+            assertEquals(TV_FL_STRING, tv.getFacadeLayers().get(0).getFacadeLayer().getIdentifier());
+
+            assertEquals(TV_COMPONENT_STRING, tv.getRelations().get(0).getDependency().getName());
+            assertEquals(TV_ROLE_STRING, tv.getPermissions().get(0).getRole().getName());
+
+            assertEquals(TV_FIELD_ALIAS, tv.getViewFields().get(0).getAlias());
+        }
+        finally {
+            cleanupTvTestdata();
+        }
     }
 
-    private void cleanupTvTestdata(){
-        // tv löschen
-        // db löschen
-        // fl löschen
-        // lg löschen
+    @Test
+    void copy_RasterView_OK() throws Exception {
+
+        try {
+            cleanupRvTestdata();
+            UUID rvId = prepareRvTestdata();
+
+            UUID copyId = serviceBean.copyProduct(rvId);
+
+            RasterView rv = dataManager.load(RasterView.class).view(RV_VIEW_NAME).id(copyId).one();
+
+            assertTrue(rv.getIdentifier().contains(RV_DP_STRING), "Identifier of copy must start with identifier of the original");
+            assertEquals(RV_SA_TRANSPARENCY, rv.getTransparency());
+
+            assertEquals(RV_PL_STRING, rv.getProductLists().get(0).getProductList().getIdentifier());
+            assertEquals(RV_FL_STRING, rv.getFacadeLayers().get(0).getFacadeLayer().getIdentifier());
+
+            assertEquals(RV_COMPONENT_STRING, rv.getRelations().get(0).getDependency().getName());
+            assertEquals(RV_ROLE_STRING, rv.getPermissions().get(0).getRole().getName());
+        }
+        finally {
+            cleanupRvTestdata();
+        }
     }
 
-    private UUID perpareTvTestdata(){
+    @Test
+    void copy_FacadeLayer_OK() throws Exception {
+
+        try {
+            cleanupFlTestdata();
+            UUID flId = prepareFlTestdata();
+
+            UUID copyId = serviceBean.copyProduct(flId);
+
+            FacadeLayer fl = dataManager.load(FacadeLayer.class).view(FL_VIEW_NAME).id(copyId).one();
+
+            assertTrue(fl.getIdentifier().contains(FL_DP_STRING), "Identifier of copy must start with identifier of the original");
+            assertEquals(FL_SA_TRANSPARENCY, fl.getTransparency());
+
+            assertEquals(FL_PL_STRING, fl.getProductLists().get(0).getProductList().getIdentifier());
+            assertEquals(FL_DSV_STRING, fl.getDataSetViews().get(0).getDataSetView().getIdentifier());
+        }
+        finally {
+            cleanupFlTestdata();
+        }
+    }
+
+    @Test
+    void copy_LayerGroup_OK() throws Exception {
+
+        try {
+            cleanupLgTestdata();
+            UUID lgId = prepareLgTestdata();
+
+            UUID copyId = serviceBean.copyProduct(lgId);
+
+            LayerGroup lg = dataManager.load(LayerGroup.class).view(LG_VIEW_NAME).id(copyId).one();
+
+            assertTrue(lg.getIdentifier().contains(LG_DP_STRING), "Identifier of copy must start with identifier of the original");
+            
+            assertEquals(LG_FL_STRING, lg.getSingleActors().get(0).getSingleActor().getIdentifier());
+        }
+        finally {
+            cleanupLgTestdata();
+        }
+    }
+
+    @Test
+    void copy_Map_OK() throws Exception {
+
+        try {
+            cleanupMapTestdata();
+            UUID mapId = prepareMapTestdata();
+
+            UUID copyId = serviceBean.copyProduct(mapId);
+
+            Map map = dataManager.load(Map.class).view(MAP_VIEW_NAME).id(copyId).one();
+
+            assertTrue(map.getIdentifier().contains(MAP_DP_STRING), "Identifier of copy must start with identifier of the original");
+
+            assertEquals(MAP_FL_STRING, map.getSingleActors().get(0).getSingleActor().getIdentifier());
+        }
+        finally {
+            cleanupMapTestdata();
+        }
+    }
+
+    private void cleanupRvTestdata(){
 
         Persistence pers = container.persistence();
         UUID dsvId = null;
+
+        try (Transaction trans = pers.createTransaction()) {
+            EntityManager orm = pers.getEntityManager();
+
+            List<RasterView> rvs = dataManager.load(RasterView.class)
+                    .query("select e from simiData_RasterView e where e.identifier like :identifier")
+                    .parameter("identifier", RV_DP_STRING + "%")
+                    .view(RV_VIEW_NAME)
+                    .list();
+
+            RasterView curr = null;
+            for (RasterView rv : rvs){
+                curr = rv;
+                orm.remove(rv);
+            }
+
+            if(curr != null){ //original and copy share the same relationships --> remove only once
+                orm.remove( curr.getRasterDS() );
+
+                orm.remove( curr.getFacadeLayers().get(0).getFacadeLayer() );
+                orm.remove( curr.getProductLists().get(0).getProductList() );
+
+                orm.remove( curr.getPermissions().get(0).getRole() );
+                orm.remove( curr.getRelations().get(0).getDependency() );
+            }
+
+            trans.commit();
+        }
+    }
+
+    private void cleanupMapTestdata(){
+
+        Persistence pers = container.persistence();
+        UUID dsvId = null;
+
+        try (Transaction trans = pers.createTransaction()) {
+            EntityManager orm = pers.getEntityManager();
+
+            List<Map> maps = dataManager.load(Map.class)
+                    .query("select e from simiProduct_Map e where e.identifier like :identifier")
+                    .parameter("identifier", MAP_DP_STRING + "%")
+                    .view(MAP_VIEW_NAME)
+                    .list();
+
+            Map curr = null;
+            for (Map lg : maps){
+                curr = lg;
+                orm.remove(lg);
+            }
+
+            if(curr != null){ //original and copy share the same relationships --> remove only once
+                orm.remove( curr.getSingleActors().get(0).getSingleActor() );
+            }
+
+            trans.commit();
+        }
+    }
+
+    private void cleanupLgTestdata(){
+
+        Persistence pers = container.persistence();
+        UUID dsvId = null;
+
+        try (Transaction trans = pers.createTransaction()) {
+            EntityManager orm = pers.getEntityManager();
+
+            List<LayerGroup> lgs = dataManager.load(LayerGroup.class)
+                    .query("select e from simiProduct_LayerGroup e where e.identifier like :identifier")
+                    .parameter("identifier", LG_DP_STRING + "%")
+                    .view(LG_VIEW_NAME)
+                    .list();
+
+            LayerGroup curr = null;
+            for (LayerGroup lg : lgs){
+                curr = lg;
+                orm.remove(lg);
+            }
+
+            if(curr != null){ //original and copy share the same relationships --> remove only once
+                orm.remove( curr.getSingleActors().get(0).getSingleActor() );
+            }
+
+            trans.commit();
+        }
+    }
+
+    private void cleanupFlTestdata(){
+
+        Persistence pers = container.persistence();
+        UUID dsvId = null;
+
+        try (Transaction trans = pers.createTransaction()) {
+            EntityManager orm = pers.getEntityManager();
+
+            List<FacadeLayer> rvs = dataManager.load(FacadeLayer.class)
+                    .query("select e from simiProduct_FacadeLayer e where e.identifier like :identifier")
+                    .parameter("identifier", FL_DP_STRING + "%")
+                    .view(FL_VIEW_NAME)
+                    .list();
+
+            FacadeLayer curr = null;
+            for (FacadeLayer fl : rvs){
+                curr = fl;
+                orm.remove(fl);
+            }
+
+            if(curr != null){ //original and copy share the same relationships --> remove only once
+                orm.remove( curr.getDataSetViews().get(0).getDataSetView() );
+                orm.remove( curr.getProductLists().get(0).getProductList() );
+            }
+
+            //Remove Raster-DS
+            Optional<RasterDS> rds = dataManager.load(RasterDS.class)
+                    .query("select e from simiData_RasterDS e where e.path = :path")
+                    .parameter("path", FL_DP_STRING)
+                    .optional();
+            
+            if(rds.isPresent())
+                orm.remove( rds.get() );
+
+            trans.commit();
+        }
+    }
+
+    private void cleanupTvTestdata(){
+
+        Persistence pers = container.persistence();
+        UUID dsvId = null;
+
+        try (Transaction trans = pers.createTransaction()) {
+            EntityManager orm = pers.getEntityManager();
+
+            List<TableView> tvs = dataManager.load(TableView.class)
+                    .query("select e from simiData_TableView e where e.identifier like :identifier")
+                    .parameter("identifier", TV_DP_STRING + "%")
+                    .view(TV_VIEW_NAME)
+                    .list();
+
+            TableView curr = null;
+            for (TableView tv : tvs){
+                curr = tv;
+                orm.remove(tv);
+            }
+
+            if(curr != null){ //original and copy share the same relationships --> remove only once
+                orm.remove( curr.getPostgresTable() );
+                orm.remove( curr.getPostgresTable().getModelSchema() );
+                orm.remove( curr.getPostgresTable().getModelSchema().getPostgresDB() );
+
+                orm.remove( curr.getFacadeLayers().get(0).getFacadeLayer() );
+                orm.remove( curr.getProductLists().get(0).getProductList() );
+
+                orm.remove( curr.getPermissions().get(0).getRole() );
+                orm.remove( curr.getRelations().get(0).getDependency() );
+            }
+
+            trans.commit();
+        }
+    }
+
+    private UUID prepareRvTestdata(){
+
+        Persistence pers = container.persistence();
+        UUID rvId = null;
+
+        try (Transaction trans = pers.createTransaction()) {
+            EntityManager orm = pers.getEntityManager();
+
+            RasterDS rds = container.metadata().create(RasterDS.class);
+            rds.setPath(RV_DS_PATH);
+            orm.persist(rds);
+
+            // RasterView
+            RasterView rv = container.metadata().create(RasterView.class);
+            rvId = rv.getId();
+
+            rv.setTransparency(RV_SA_TRANSPARENCY);
+            rv.setIdentifier(RV_DP_STRING);
+
+            DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
+            rv.setPubScope(ps);
+            rv.setRasterDS(rds);
+
+            orm.persist(rv);
+
+            //Assets
+            StyleAsset sa = linkToStyleAsset(rv, RV_DP_STRING);
+            orm.persist(sa);
+
+            //PropertiesInFacade
+            BaseUuidEntity[] pifs = linkToTestFacadelayer(rv, ps, RV_FL_STRING);
+            orm.persist(pifs[0]); orm.persist(pifs[1]);
+
+            //PropertiesInList
+            BaseUuidEntity[] pils = linkToTestProductList(rv, ps, RV_PL_STRING);
+            orm.persist(pils[0]); orm.persist(pils[1]);
+
+            //Permissions
+            BaseUuidEntity[] perm = linkToPermissions(rv, RV_ROLE_STRING);
+            orm.persist(perm[0]); orm.persist(perm[1]);
+
+            //Dependencies
+            BaseUuidEntity[] dep = linkToDependencies(rv, RV_COMPONENT_STRING);
+            orm.persist(dep[0]); orm.persist(dep[1]);
+
+            trans.commit();
+        }
+
+        return rvId;
+    }
+
+    private UUID prepareLgTestdata(){
+
+        Persistence pers = container.persistence();
+        UUID lgId = null;
+
+        try (Transaction trans = pers.createTransaction()) {
+            EntityManager orm = pers.getEntityManager();
+
+            // LayerGroup
+            LayerGroup lg = container.metadata().create(LayerGroup.class);
+            lgId = lg.getId();
+
+            lg.setIdentifier(LG_DP_STRING);
+
+            DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
+            lg.setPubScope(ps);
+
+            orm.persist(lg);
+
+            //PropertiesInList
+            BaseUuidEntity[] pils = linkToTestFacadelayer(lg, ps, LG_FL_STRING);
+            orm.persist(pils[0]); orm.persist(pils[1]);
+
+            trans.commit();
+        }
+
+        return lgId;
+    }
+
+    private UUID prepareMapTestdata(){
+
+        Persistence pers = container.persistence();
+        UUID mapId = null;
+
+        try (Transaction trans = pers.createTransaction()) {
+            EntityManager orm = pers.getEntityManager();
+
+            // Map
+            Map map = container.metadata().create(Map.class);
+            mapId = map.getId();
+
+            map.setIdentifier(MAP_DP_STRING);
+            map.setWgcUrlValue("fuu");
+
+            DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
+            map.setPubScope(ps);
+
+            orm.persist(map);
+
+            //PropertiesInList
+            BaseUuidEntity[] pils = linkToTestFacadelayer(map, ps, MAP_FL_STRING);
+            orm.persist(pils[0]); orm.persist(pils[1]);
+
+            trans.commit();
+        }
+
+        return mapId;
+    }
+
+    private UUID prepareFlTestdata(){
+
+        Persistence pers = container.persistence();
+        UUID flId = null;
+
+        try (Transaction trans = pers.createTransaction()) {
+            EntityManager orm = pers.getEntityManager();
+            
+            // FacadeLayer
+            FacadeLayer fl = container.metadata().create(FacadeLayer.class);
+            flId = fl.getId();
+
+            fl.setTransparency(FL_SA_TRANSPARENCY);
+            fl.setIdentifier(FL_DP_STRING);
+
+            DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
+            fl.setPubScope(ps);
+
+            orm.persist(fl);
+
+            //PropertiesInFacade
+            BaseUuidEntity[] pifs = linkToTestDsv(fl, ps, FL_DSV_STRING);
+            orm.persist(pifs[0]); orm.persist(pifs[1]); orm.persist(pifs[2]);
+
+            //PropertiesInList
+            BaseUuidEntity[] pils = linkToTestProductList(fl, ps, FL_PL_STRING);
+            orm.persist(pils[0]); orm.persist(pils[1]);
+
+            trans.commit();
+        }
+
+        return flId;
+    }
+
+    private static BaseUuidEntity[] linkToDependencies(DataSetView ds, String dependencyName){
+        Component comp = container.metadata().create(Component.class);
+        comp.setName(dependencyName);
+
+        Relation rel = container.metadata().create(Relation.class);
+        rel.setRelationType(RelationType.DATA);
+        rel.setDependency(comp);
+        rel.setDataSetView(ds);
+
+        return new BaseUuidEntity[]{comp, rel};
+    }
+
+    private static BaseUuidEntity[] linkToPermissions(DataSetView ds, String roleName){
+        Role role = container.metadata().create(Role.class);
+        role.setName(roleName);
+
+        Permission perm = container.metadata().create(Permission.class);
+        perm.setLevel(PermissionLevelEnum.READ);
+        perm.setRole(role);
+        perm.setDataSetView(ds);
+
+        return new BaseUuidEntity[]{role, perm};
+    }
+
+    private static BaseUuidEntity[] linkToTestProductList(SingleActor sa, DataProduct_PubScope ps, String plIdentifier){
+        LayerGroup lg = container.metadata().create(LayerGroup.class);
+        lg.setIdentifier(plIdentifier);
+        lg.setPubScope(ps);
+
+        PropertiesInList pil = container.metadata().create(PropertiesInList.class);
+        pil.setProductList(lg);
+        pil.setSingleActor(sa);
+        pil.setSort(99);
+
+        return new BaseUuidEntity[]{lg, pil};
+    }
+
+
+    private static StyleAsset linkToStyleAsset(DataSetView ds, String assetFileName){
+        StyleAsset sa = container.metadata().create(StyleAsset.class);
+        sa.setFileContent(new byte[]{});
+        sa.setFileName(assetFileName);
+        sa.setDatasetSetView(ds);
+        LinkedList<StyleAsset> assets = new LinkedList<>();
+        assets.add(sa);
+        ds.setStyleAssets(assets);
+
+        return sa;
+    }
+
+    private static BaseUuidEntity[] linkToTestFacadelayer(ProductList pl, DataProduct_PubScope ps, String flIdentifier){
+        FacadeLayer fl = container.metadata().create(FacadeLayer.class);
+        fl.setIdentifier(flIdentifier);
+        fl.setPubScope(ps);
+
+        PropertiesInList pil = container.metadata().create(PropertiesInList.class);
+        pil.setProductList(pl);
+        pil.setSingleActor(fl);
+        pil.setSort(99);
+
+        return new BaseUuidEntity[]{fl, pil};
+    }
+
+    private static BaseUuidEntity[] linkToTestFacadelayer(DataSetView ds, DataProduct_PubScope ps, String flIdentifier){
+        FacadeLayer fl = container.metadata().create(FacadeLayer.class);
+        fl.setIdentifier(flIdentifier);
+        fl.setPubScope(ps);
+
+        PropertiesInFacade pif = container.metadata().create(PropertiesInFacade.class);
+        pif.setFacadeLayer(fl);
+        pif.setDataSetView(ds);
+        pif.setSort(99);
+
+        return new BaseUuidEntity[]{fl, pif};
+    }
+
+    private static BaseUuidEntity[] linkToTestDsv(FacadeLayer fl, DataProduct_PubScope ps, String dsvIdentifier){
+        
+        RasterDS rds = container.metadata().create(RasterDS.class);
+        rds.setPath(dsvIdentifier);
+        
+        RasterView dsv = container.metadata().create(RasterView.class);
+        dsv.setIdentifier(dsvIdentifier);
+        dsv.setPubScope(ps);
+        dsv.setRasterDS(rds);
+
+        PropertiesInFacade pif = container.metadata().create(PropertiesInFacade.class);
+        pif.setFacadeLayer(fl);
+        pif.setDataSetView(dsv);
+        pif.setSort(99);
+
+        return new BaseUuidEntity[]{rds, dsv, pif};
+    }
+
+    private UUID prepareTvTestdata(){
+
+        Persistence pers = container.persistence();
+        UUID tvId = null;
 
         try (Transaction trans = pers.createTransaction()) {
             EntityManager orm = pers.getEntityManager();
@@ -95,10 +624,12 @@ class CopyServiceBeanTest {
 
             // TableView
             TableView tv = container.metadata().create(TableView.class);
-            tv.setGeomFieldName(TV_STRING);
-            tv.setSearchFacet(TV_STRING);
-            tv.setTransparency(88);
-            tv.setIdentifier(TV_STRING);
+            tvId = tv.getId();
+
+            tv.setGeomFieldName(TV_DP_STRING);
+            tv.setSearchFacet(TV_DP_STRING);
+            tv.setTransparency(TV_SA_TRANSPARENCY);
+            tv.setIdentifier(TV_DP_STRING);
             tv.setPostgresTable(tbl);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
@@ -108,12 +639,13 @@ class CopyServiceBeanTest {
 
             //Fields
             TableField tf = container.metadata().create(TableField.class);
-            tf.setName(TV_STRING);
+            tf.setName(TV_DP_STRING);
             tf.setTypeName("bar");
             tf.setPostgresTable(tbl);
 
             ViewField vf = container.metadata().create(ViewField.class);
-            vf.setSort(88);
+            vf.setAlias(TV_FIELD_ALIAS);
+            vf.setSort(TV_SA_TRANSPARENCY);
             vf.setTableField(tf);
             vf.setTableView(tv);
             LinkedList<ViewField> fieldList = new LinkedList<>();
@@ -124,69 +656,28 @@ class CopyServiceBeanTest {
             orm.persist(vf);
 
             //Assets
-            StyleAsset sa = container.metadata().create(StyleAsset.class);
-            sa.setFileContent(new byte[]{});
-            sa.setFileName(TV_STRING);
-            sa.setDatasetSetView(tv);
-            LinkedList<StyleAsset> assets = new LinkedList<>();
-            assets.add(sa);
-            tv.setStyleAssets(assets);
-
+            StyleAsset sa = linkToStyleAsset(tv, TV_DP_STRING);
             orm.persist(sa);
 
             //PropertiesInFacade
-            FacadeLayer fl = container.metadata().create(FacadeLayer.class);
-            fl.setIdentifier(TV_FL_STRING);
-            fl.setPubScope(ps);
-
-            PropertiesInFacade pif = container.metadata().create(PropertiesInFacade.class);
-            pif.setFacadeLayer(fl);
-            pif.setDataSetView(tv);
-            pif.setSort(88);
-
-            orm.persist(fl);
-            orm.persist(pif);
+            BaseUuidEntity[] pifs = linkToTestFacadelayer(tv, ps, TV_FL_STRING);
+            orm.persist(pifs[0]); orm.persist(pifs[1]);
 
             //PropertiesInList
-            LayerGroup lg = container.metadata().create(LayerGroup.class);
-            lg.setIdentifier(TV_LG_STRING);
-            lg.setPubScope(ps);
-
-            PropertiesInList pil = container.metadata().create(PropertiesInList.class);
-            pil.setProductList(lg);
-            pil.setSingleActor(tv);
-            pil.setSort(88);
-
-            orm.persist(lg);
-            orm.persist(pil);
+            BaseUuidEntity[] pils = linkToTestProductList(tv, ps, TV_PL_STRING);
+            orm.persist(pils[0]); orm.persist(pils[1]);
 
             //Permissions
-            Role role = container.metadata().create(Role.class);
-            role.setName(TV_ROLE_STRING);
-
-            Permission perm = container.metadata().create(Permission.class);
-            perm.setLevel(PermissionLevelEnum.READ);
-            perm.setRole(role);
-            perm.setDataSetView(tv);
-
-            orm.persist(role);
-            orm.persist(perm);
+            BaseUuidEntity[] perm = linkToPermissions(tv, TV_ROLE_STRING);
+            orm.persist(perm[0]); orm.persist(perm[1]);
 
             //Dependencies
-            Component comp = container.metadata().create(Component.class);
-            comp.setName(TV_COMPONENT_STRING);
-
-            Relation rel = container.metadata().create(Relation.class);
-            rel.setRelationType(RelationType.DATA);
-            rel.setDependency(comp);
-            rel.setDataSetView(tv);
-
-            orm.persist(comp);
-            orm.persist(rel);
+            BaseUuidEntity[] dep = linkToDependencies(tv, TV_COMPONENT_STRING);
+            orm.persist(dep[0]); orm.persist(dep[1]);
 
             trans.commit();
         }
 
-        return dsvId;
+        return tvId;
     }
 }

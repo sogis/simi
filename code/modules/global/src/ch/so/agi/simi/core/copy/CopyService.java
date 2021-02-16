@@ -5,5 +5,5 @@ import java.util.UUID;
 public interface CopyService {
     String NAME = "simi_CopyService";
 
-    void copyProduct(UUID id);
+    UUID copyProduct(UUID id);
 }
