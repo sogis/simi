@@ -1,5 +1,6 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
+import ch.so.agi.simi.core.copy.CopyService;
 import ch.so.agi.simi.entity.product.datasetview.RasterView;
 import ch.so.agi.simi.entity.product.datasetview.TableView;
 import ch.so.agi.simi.entity.product.non_dsv.DataProduct;
@@ -13,10 +14,13 @@ import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
+import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
+import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
+import java.util.UUID;
 
 @UiController("simiProduct_DataProduct.browse")
 @UiDescriptor("data-product-browse.xml")
@@ -35,7 +39,7 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     @Inject
     private CollectionLoader<DataProduct> dataProductsDl;
     @Inject
-    private CopyDataProductBean copyDataProductBean;
+    private CopyService copyService;
     @Inject
     private FilterFragment filter;
 
@@ -81,16 +85,14 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
         DataProduct selectedItem = dataProductsTable.getSingleSelected();
 
         if (selectedItem != null) {
-            try {
-                copyDataProductBean.copyDataProduct(selectedItem.getClass(), selectedItem.getId());
+            copyService.copyProduct(selectedItem.getId());
 
-                filter.setFilter(selectedItem.getIdentifier());
+            /*
+            if(filter.getFilter() == null || filter.getFilter().length() == 0)
+                filter.setFilter(selectedItem.getIdentifier());*/
 
-                // reload dataContainer
-                dataProductsDl.load();
-            } catch (IllegalArgumentException e) {
-                notifications.create(Notifications.NotificationType.WARNING).withCaption(e.getLocalizedMessage()).show();
-            }
+            // reload dataContainer
+            dataProductsDl.load();
         }
     }
 

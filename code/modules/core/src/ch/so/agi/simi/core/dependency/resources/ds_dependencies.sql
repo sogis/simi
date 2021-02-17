@@ -34,9 +34,7 @@ ds_fl AS ( -- facadelayer für eine datasetview
 	FROM 
 		ds_dsv
 	JOIN 
-		simiproduct_properties_in_facade pif ON dsv_id = pif.data_set_view_id 
-	WHERE 
-		pif.delete_ts IS NULL 
+		simiproduct_properties_in_facade pif ON dsv_id = pif.data_set_view_id
 ),
 
 ds_pl AS ( -- productlist für eine datasetview. Productlist = Karte oder Layergruppe
@@ -58,9 +56,7 @@ ds_pl AS ( -- productlist für eine datasetview. Productlist = Karte oder Layerg
 	JOIN 
 		simiproduct_properties_in_list pil ON dsv_id = pil.single_actor_id 
 	LEFT JOIN 
-		simiproduct_map _map ON pil.product_list_id = _map.id 
-	WHERE 
-		pil.delete_ts IS NULL 
+		simiproduct_map _map ON pil.product_list_id = _map.id
 ),
 
 dp_union AS (
@@ -78,8 +74,6 @@ dataprod_cols AS ( -- notwendige informationen aller ungelöschten Datenprodukte
 		identifier
 	FROM 
 		simiproduct_data_product dp
-	WHERE
-		dp.delete_ts IS NULL
 ),
 
 dataprod AS (
@@ -115,12 +109,8 @@ ds_dsv_relation AS ( -- Alle Beziehungen eines DS via DSV auf eine Dependency
 		simidependency_relation rel ON ds_dsv.dsv_id = rel.data_set_view_id
 	JOIN 
 		simiproduct_data_product dp ON ds_dsv.dsv_id = dp.id 
-	WHERE 
-			rel.delete_ts IS NULL 
-		AND 
-			dp.delete_ts IS NULL
-		AND 
-			rel.relation_type NOT LIKE '%display%' -- "Verzeihender" Filter, falls die Nachführung vergessen geht...
+	WHERE
+        rel.relation_type NOT LIKE '%display%' -- "Verzeihender" Filter, falls die Nachführung vergessen geht...
 ),
 
 dependency_extprop AS (
@@ -150,8 +140,6 @@ dependency AS (
 		dependency_extprop ep ON dep.dtype = ep.dtype
 	JOIN 
 		ds_dsv_relation rel ON dep.id = rel.dep_id
-	WHERE 
-		dep.delete_ts IS NULL 
 ),
 
 -- ***********************************************************************************

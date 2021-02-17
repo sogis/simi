@@ -8,10 +8,10 @@ public class GretlSearchConfigForTest implements GretlSearchConfig {
     private String gitHubSearchUrl;
     private List<String> reposToSearch;
 
-    public GretlSearchConfigForTest(String gitHubSearchUrl, String repoToSearch){
+    public GretlSearchConfigForTest(String gitHubSearchUrl, String reposToSearch){
         this.gitHubSearchUrl = gitHubSearchUrl;
 
-        this.reposToSearch = new ArrayList<String>();
+        this.reposToSearch = reposToSearch;
         this.reposToSearch.add(repoToSearch);
     }
 
