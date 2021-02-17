@@ -7,20 +7,14 @@ import ch.so.agi.simi.entity.product.non_dsv.DataProduct;
 import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
 import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
 import ch.so.agi.simi.entity.product.non_dsv.Map;
-import ch.so.agi.simi.web.CopyDataProductBean;
-import ch.so.agi.simi.web.screens.FilterFragment;
 import com.haulmont.cuba.core.global.Metadata;
-import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
-import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
-import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
-import java.util.UUID;
 
 @UiController("simiProduct_DataProduct.browse")
 @UiDescriptor("data-product-browse.xml")
@@ -35,13 +29,10 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     @Inject
     private Metadata metadata;
     @Inject
-    private Notifications notifications;
-    @Inject
     private CollectionLoader<DataProduct> dataProductsDl;
     @Inject
     private CopyService copyService;
-    @Inject
-    private FilterFragment filter;
+
 
     @Subscribe("createBtn.createMap")
     protected void onCreateBtnCreateMap(Action.ActionPerformedEvent event) {
@@ -87,11 +78,6 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
         if (selectedItem != null) {
             copyService.copyProduct(selectedItem.getId());
 
-            /*
-            if(filter.getFilter() == null || filter.getFilter().length() == 0)
-                filter.setFilter(selectedItem.getIdentifier());*/
-
-            // reload dataContainer
             dataProductsDl.load();
         }
     }

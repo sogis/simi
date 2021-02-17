@@ -6,13 +6,11 @@ import java.util.List;
 public class GretlSearchConfigForTest implements GretlSearchConfig {
 
     private String gitHubSearchUrl;
-    private List<String> reposToSearch;
+    private String reposToSearch;
 
     public GretlSearchConfigForTest(String gitHubSearchUrl, String reposToSearch){
         this.gitHubSearchUrl = gitHubSearchUrl;
-
         this.reposToSearch = reposToSearch;
-        this.reposToSearch.add(repoToSearch);
     }
 
     @Override
@@ -21,7 +19,7 @@ public class GretlSearchConfigForTest implements GretlSearchConfig {
     }
 
     @Override
-    public List<String> getReposToSearch() {
+    public String getReposToSearch() {
         return reposToSearch;
     }
 }

@@ -13,13 +13,22 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: build.gradle rename
+      - name: Start db image
+        run: docker-compose up -d -V db
+        working-directory: ./code/docker
+      - name: Wait until db is up
+        run: docker-compose up -V --exit-code-from await-db await-db
+        working-directory: ./code/docker
+      - name: Build and test the java classes
+        run: ./gradlew build
+        working-directory: ./code
+      - name: "Merge build.gradle: 1. rename"
         run: mv build.gradle build1.gradle
         working-directory: ./code
-      - name: build.gradle merge
+      - name: "Merge build.gradle: 2. merge"
         run: cat build1.gradle build2.gradle > build.gradle
         working-directory: ./code
-      - name: Build image with Gradle
+      - name: Build docker image with Gradle
         run: ./gradlew imgTag
         working-directory: ./code
       - name: Start db image

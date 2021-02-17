@@ -18,7 +18,5 @@ public interface GretlSearchConfig extends Config {
     String getGitHubSearchBaseUrl();
 
     @Property("simi.gitSearch.repos")
-    @Factory(factory = StringListTypeFactory.class)
-    @Stringify(stringify = StringListStringify.class)
-    List<String> getReposToSearch();
+    String getReposToSearch();
 }

@@ -31,7 +31,7 @@ public class GretlSearch {
 
         List<DependencyInfo> diUnion = new LinkedList<>();
 
-        for(String repo : config.getReposToSearch()){
+        for(String repo : Props.toArray(config.getReposToSearch())){
 
             String qValue = MessageFormat.format(
                     "repo:{0} {1} {2}",
