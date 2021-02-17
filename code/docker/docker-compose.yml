@@ -7,6 +7,8 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=simi
       - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432" # for create db action
   await-db:
     image: postgis/postgis:11-2.5-alpine
     command: /var/lib/postgresql/data/await-db/await.sh
