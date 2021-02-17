@@ -1,4 +1,6 @@
-# Packages (Teilmodelle)
+# Dokumentation Metamodell
+
+## Teilmodelle
 
 ![Übersicht der Teilmodelle](puml/rendered/overview.png)
 

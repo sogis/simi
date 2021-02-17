@@ -1,0 +1,31 @@
+@startuml
+
+skinparam class {
+  BorderColor Black
+  BackgroundColor WhiteSmoke
+  BackgroundColor<<Class>> LightYellow
+  BorderColor<<Class>> Tomato
+}
+
+abstract class "ProductList" as pl
+class "FacadeLayer (FL)" as fl
+class "RasterDS" as rds
+
+package Kopierkontext {
+
+    class "PropertiesInFacade" as pif << (H, grey) Association Class >>
+    class "PropertiesInList" as pil << (H, grey) Association Class >>
+
+    class "StyleAsset" as sta
+    class "RasterView" as rv <<Class>>
+
+    rv "1" -- "*" sta
+    pil "*" -- "1" rv
+    pif "*" -- "1" rv
+}
+
+pl "1" -- "1..n" pil
+fl "1" -- "1..n" pif
+rv "1-n" --* "1" rds
+
+@enduml

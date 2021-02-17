@@ -19,6 +19,9 @@ jobs:
       - name: Wait until db is up
         run: docker-compose up -V --exit-code-from await-db await-db
         working-directory: ./code/docker
+      - name: create the simi schema
+        run: ./gradlew createDb
+        working-directory: ./code
       - name: Build and test the java classes
         run: ./gradlew build
         working-directory: ./code
@@ -28,15 +31,9 @@ jobs:
       - name: "Merge build.gradle: 2. merge"
         run: cat build1.gradle build2.gradle > build.gradle
         working-directory: ./code
-      - name: Build docker image with Gradle
+      - name: Build simi image with Gradle
         run: ./gradlew imgTag
         working-directory: ./code
-      - name: Start db image
-        run: docker-compose up -d -V db
-        working-directory: ./code/docker
-      - name: Wait until db is up
-        run: docker-compose up -V --exit-code-from await-db await-db
-        working-directory: ./code/docker
       - name: Start simi image
         run: docker-compose up -d -V simi
         working-directory: ./code/docker

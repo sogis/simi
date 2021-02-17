@@ -17,3 +17,42 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
 * Konfiguration der Suche in den GRETL-Repos (Anzeige der Abhängigkeiten):
   * **SIMI_GITSEARCH_URL:** Url, auf welche die Git-Suchen abgesetzt werden. Bsp: "https://api.github.com/search/code"
   * **SIMI_GITSEARCH_REPOS:** Liste aller zu durchsuchenden Git-Repos, mittels "|" getrennt. Bsp: "sogis/gretljobs|oereb/jobs"
+  
+## Kopieren von Data-Products
+
+Die im GUI harmlos erscheinende Kopierfunktion ist aufgrund der vielen zu berücksichtigenden Beziehungen
+ziemlich komplex.
+
+Die Klassen innerhalb des Kopierkontextes werden kopiert (dupliziert), die ausserhalb werden referenziert. 
+Nach dem Kopiervorgang zeigt also sowohl das Original wie auch die Kopie auf das gleiche ausserhalb des
+Kopierkontextes liegende Objekt.
+
+Hinweis: Die Vererbungen sind in den Diagrammen nicht abgebildet.
+
+### Tableview
+
+![Tableview Copy](simi_resources/copy-tableview.png)
+
+### Rasterview
+
+![Rasterview Copy](simi_resources/copy-rasterview.png)
+
+### FacadeLayer
+
+![Facadelayer Copy](simi_resources/copy-facadelayer.png)
+
+### Layergroup
+
+![Layergroup Copy](simi_resources/copy-layergroup.png)
+
+### Map
+
+![Map Copy](simi_resources/copy-map.png)
+
+
+
+
+
+
+
+

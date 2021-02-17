@@ -1,0 +1,19 @@
+@startuml
+skinparam class {
+  BorderColor Black
+  BackgroundColor WhiteSmoke
+  BackgroundColor<<Class>> LightYellow
+  BorderColor<<Class>> Tomato
+}
+
+abstract class "SingleActor" as sa
+
+package Kopierkontext {
+
+    class "Map" as pl <<Class>>
+    class "PropertiesInList" as pil << (H, grey) Association Class >>
+
+    pil "*" -left- "1" pl
+}
+sa "1" -left- "1..n" pil : "    "
+@enduml

@@ -1,37 +1,13 @@
 # Version 0.9
 
-* Fertigstellung der Abhängigkeitsanzeige
-* Integrationstest: Laden aller Daten gemäss der jeweiligen XML-View
-* Anpassung Versionierung auf Major.Minor.Revision
+* Done Fertigstellung der Abhängigkeitsanzeige
+* Done Integrationstest: Laden aller Daten gemäss der jeweiligen XML-View
+* Done Anpassung Versionierung auf Major.Minor.Revision
   * Major: Breaking Schema change
   * Minor: Breaking Config change
   * Revision: Fortlaufende Buildnummer
-* Screens Wegräumen
-  * _layer-group-choose.xml
-  * _data-set-view-browse.xml
-  * _data-product_pub-scope-browse.xml
-  * _data-product_pub-scope-edit.xml
-  * _map-browse.xml
-  * _single-actor-browse.xml
-* Delete rules sicherstellen
-  * Erstellen der dummy Entities mittels PODAM
-  * Cascading deletes
-  * Wichtige delete denials
-  * Standartverhalten deny sicherstellen (am Beispiel db --> schema)
-  
-  in modelschema ...
-      @ManyToOne(fetch = FetchType.LAZY, optional = false)
-      @JoinColumn(name = "POSTGRES_DB_ID")
-      @OnDeleteInverse(DeletePolicy.DENY)
-      private PostgresDB postgresDB;
-      
-  in postgresdb
-      @OneToMany(mappedBy = "postgresDB")
-      private List<ModelSchema> modelSchemas;
-  
-  
-  
-  
+* Jenkins-Integration erstellen (für Start der Config-Pipeline) 
+
 
 # Version 1.0
 
@@ -44,6 +20,14 @@
     * Db-Präfix simidata. 
     * Java-Package data.*
   * Entfernen der ext-Felder der Datenmigration    
+  * Nach Testing
+      * Screens Wegräumen
+        * _layer-group-choose.xml
+        * _data-set-view-browse.xml
+        * _data-product_pub-scope-browse.xml
+        * _data-product_pub-scope-edit.xml
+        * _map-browse.xml
+        * _single-actor-browse.xml
    
 # Version 1.x
 - Exception Messages: 

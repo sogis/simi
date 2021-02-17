@@ -1,0 +1,25 @@
+@startuml
+skinparam class {
+  BorderColor Black
+  BackgroundColor WhiteSmoke
+  BackgroundColor<<Class>> LightYellow
+  BorderColor<<Class>> Tomato
+}
+
+abstract class "ProductList" as pl
+class "DataSetView" as dsv
+
+package Kopierkontext {
+
+    class "FacadeLayer (FL)" as fl <<Class>>
+
+    class "PropertiesInFacade" as pif << (H, grey) Association Class >>
+    class "PropertiesInList" as pil << (H, grey) Association Class >>
+
+    fl "1" -- "1..n" pif
+    fl "1" -- "1..n" pil
+}
+
+pil "*" -- "1" pl
+pif "*" -- "1" dsv
+@enduml

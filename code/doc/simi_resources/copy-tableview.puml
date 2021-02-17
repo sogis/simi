@@ -1,0 +1,35 @@
+@startuml
+
+skinparam class {
+  BorderColor Black
+  BackgroundColor WhiteSmoke
+  BackgroundColor<<Class>> LightYellow
+  BorderColor<<Class>> Tomato
+}
+
+abstract class "ProductList" as pl
+class "FacadeLayer (FL)" as fl
+class "PostgresTable" as pt
+class "TableField" as tf
+
+package Kopierkontext {
+
+    class "PropertiesInFacade" as pif << (H, grey) Association Class >>
+    class "PropertiesInList" as pil << (H, grey) Association Class >>
+
+    class "StyleAsset" as sta
+    class "TableView" as tv <<Class>>
+    class "ViewField" as vf
+
+    tv "1" *-- "1..n" vf
+    tv "1" -- "*" sta
+    pil "*" -- "1" tv
+    pif "*" -- "1" tv
+}
+
+pl "1" -- "1..n" pil
+fl "1" -- "1..n" pif
+tv "1-n" --* "1" pt
+pt "1" *-- "0..*" tf
+vf "1..n" --* "1" tf
+@enduml

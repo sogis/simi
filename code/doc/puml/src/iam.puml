@@ -11,8 +11,9 @@ class "Permission" as perm
 ident <|-- grp
 ident <|-- usr
 
-perm "*" -right- "1" role
-role "*" -right- "*" ident
+perm "*" -- "1" role
+role "*" -- "*" usr
+role "*" -- "*" grp
 grp "*" -right- "*" usr
 }
 
