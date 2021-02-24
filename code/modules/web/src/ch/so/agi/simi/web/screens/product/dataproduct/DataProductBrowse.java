@@ -7,9 +7,14 @@ import ch.so.agi.simi.entity.product.non_dsv.DataProduct;
 import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
 import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
 import ch.so.agi.simi.entity.product.non_dsv.Map;
+import ch.so.agi.simi.web.beans.publish.JobRunner;
+import ch.so.agi.simi.web.beans.publish.PublishConfig;
+import com.haulmont.bali.util.ParamsMap;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
+import com.haulmont.cuba.gui.WebBrowserTools;
 import com.haulmont.cuba.gui.components.Action;
+import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
@@ -32,7 +37,12 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     private CollectionLoader<DataProduct> dataProductsDl;
     @Inject
     private CopyService copyService;
-
+    @Inject
+    private JobRunner runner;
+    @Inject
+    PublishConfig config;
+    @Inject
+    private WebBrowserTools webBrowserTools;
 
     @Subscribe("createBtn.createMap")
     protected void onCreateBtnCreateMap(Action.ActionPerformedEvent event) {
@@ -86,5 +96,18 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     private void dataProductsTableEditAfterCommitHandler(DataProduct dataProduct) {
         // reload dataContainer after entity was edited
         dataProductsDl.load();
+    }
+
+    @Subscribe("btnPublish")
+    public void onBtnPublishClick(Button.ClickEvent event) {
+        String jenkinsPageUrl = null;
+
+        boolean inTime = runner.runJob(config);
+        if(inTime)
+            jenkinsPageUrl = config.getJobBaseUrl() + "/lastBuild";
+        else
+            jenkinsPageUrl = config.getJobBaseUrl();
+
+        webBrowserTools.showWebPage(jenkinsPageUrl, ParamsMap.of("_target", "blank"));
     }
 }

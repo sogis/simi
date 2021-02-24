@@ -5,7 +5,7 @@ import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
 import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
 import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
 import ch.so.agi.simi.entity.product.non_dsv.PropertiesInList;
-import ch.so.agi.simi.web.SortBean;
+import ch.so.agi.simi.web.beans.sort.SortBean;
 import ch.so.agi.simi.web.beans.copy.UpdateFromOtherListsBean;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;

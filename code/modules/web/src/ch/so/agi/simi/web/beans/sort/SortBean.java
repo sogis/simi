@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web;
+package ch.so.agi.simi.web.beans.sort;
 
 import ch.so.agi.simi.entity.Sortable;
 import org.springframework.stereotype.Component;

@@ -14,9 +14,10 @@
 * Schema
   * Entfernen Publikationsfelder (DSV)
   * Verschieben der Suchfelder von DSV in TableView
+  * Verschieben Attributalias von DSV in DS
   * Ergänzung mit den fehlenden Feldern, gemäss Erkenntnissen aus Datenmigration und Erstellung der
   Konfigurations-Jsons.
-  * Aufräumen DataSetView-Klassen (TableView, ViewField, RasterView)
+  * Aufräumen DataSetView-Klassen (TableView, ViewField, RasterView, DataSetView)
     * Db-Präfix simidata. 
     * Java-Package data.*
   * Entfernen der ext-Felder der Datenmigration    

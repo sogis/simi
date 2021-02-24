@@ -1,4 +1,4 @@
-# Zu beachten: "databases" ist ein Postgresql cluster, welches die Datenbanken "simi" und "psotgres" umfasst:
+# Zu beachten: "databases" ist ein Postgresql cluster, welches die Datenbanken "simi" und "postgres" umfasst:
 # - "simi": Von der cuba-applikation "simi" genutzte und gemanagte metadatenbank.
 # - "postgres": Zieldatenbank für den Schemareader. Ist "Geo-Enabled" und enthält Beispieldatensätze.
 version: "3"
@@ -18,3 +18,11 @@ services:
       - "5432:5432"
     volumes:
       - "./gitignored/.pgdata_mig:/var/lib/postgresql/data/pgdata"
+  confpipe:
+    image: jenkins/jenkins:2.263.4-lts
+    ports:
+      - "8082:8080"
+    volumes:
+      - "jenkins_home:/var/jenkins_home"
+volumes:
+  jenkins_home:

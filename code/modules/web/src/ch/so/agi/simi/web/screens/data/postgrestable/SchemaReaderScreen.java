@@ -4,7 +4,7 @@ import ch.so.agi.simi.entity.data.PostgresDB;
 import ch.so.agi.simi.entity.data.schemareader.TableAndFieldInfo;
 import ch.so.agi.simi.entity.data.schemareader.TableListing;
 import ch.so.agi.simi.entity.data.schemareader.TableShortInfo;
-import ch.so.agi.simi.web.SchemaReaderBean;
+import ch.so.agi.simi.web.beans.schema.SchemaReaderBean;
 import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.*;

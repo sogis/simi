@@ -3,7 +3,7 @@ package ch.so.agi.simi.web.screens.product.map;
 import ch.so.agi.simi.entity.product.non_dsv.Map;
 import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
 import ch.so.agi.simi.entity.product.non_dsv.PropertiesInList;
-import ch.so.agi.simi.web.SortBean;
+import ch.so.agi.simi.web.beans.sort.SortBean;
 import ch.so.agi.simi.web.beans.copy.UpdateFromOtherListsBean;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Button;

@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web;
+package ch.so.agi.simi.web.beans.schema;
 
 import ch.so.agi.simi.web.config.SchemareaderConfig;
 import ch.so.agi.simi.entity.data.PostgresDB;

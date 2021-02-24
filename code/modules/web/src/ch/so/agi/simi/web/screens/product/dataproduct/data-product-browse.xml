@@ -57,6 +57,8 @@
                 <button id="editBtn" action="dataProductsTable.edit"/>
                 <button id="copyBtn" action="dataProductsTable.copy"/>
                 <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
+                <label id="spacer" width="300" value=" "/>
+                <button id="btnPublish" caption="Publizieren" stylename="primary" icon="EXCLAMATION"/>
             </buttonsPanel>
         </table>
         <fragment id="filter" screen="simi_FilterFragment">
