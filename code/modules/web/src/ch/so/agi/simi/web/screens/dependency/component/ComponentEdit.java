@@ -1,10 +1,9 @@
 package ch.so.agi.simi.web.screens.dependency.component;
 
-import ch.so.agi.simi.entity.dependency.Component;
-import ch.so.agi.simi.entity.dependency.Report;
+import ch.so.agi.simi.entity.extended.Component;
 import com.haulmont.cuba.gui.screen.*;
 
-@UiController("simiDependency_Component.edit")
+@UiController("simiExtended_Component.edit")
 @UiDescriptor("component-edit.xml")
 @EditedEntityContainer("componentDc")
 @LoadDataBeforeShow

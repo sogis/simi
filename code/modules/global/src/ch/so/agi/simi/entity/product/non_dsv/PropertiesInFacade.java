@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.product.non_dsv;
 
-import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import ch.so.agi.simi.entity.data.datasetview.DataSetView;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 

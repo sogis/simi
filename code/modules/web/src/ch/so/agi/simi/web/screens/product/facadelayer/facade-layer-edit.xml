@@ -14,7 +14,7 @@
                     view="facadeLayer-edit-dataSetViews">
             <loader id="dataSetViewsDl">
                 <query>
-                    <![CDATA[select e from simiProduct_DataSetView e order by e.identifier]]>
+                    <![CDATA[select e from simiData_DataSetView e order by e.identifier]]>
                 </query>
             </loader>
         </collection>

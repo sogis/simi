@@ -120,11 +120,11 @@
         <property name="users" view="_local"/>
         <property name="groups" view="_local"/>
     </view>
-    <view entity="simiDependency_Dependency" name="dependency-browse" extends="_minimal">
+    <view entity="simiExtended_Dependency" name="dependency-browse" extends="_minimal">
         <property name="name"/>
         <property name="typeAbbreviation"/>
     </view>
-    <view entity="simiDependency_CCCIntegration" name="ccc-edit" extends="_minimal">
+    <view entity="simiExtended_CCCIntegration" name="ccc-edit" extends="_minimal">
         <property name="relations" view="_minimal">
             <property name="relationType"/>
             <property name="dataSetView" view="_minimal"/>
@@ -135,7 +135,7 @@
         <property name="locatorLayers"/>
         <property name="notifyLayers"/>
     </view>
-    <view entity="simiDependency_Component" name="component-edit" extends="_minimal">
+    <view entity="simiExtended_Component" name="component-edit" extends="_minimal">
         <property name="relations" view="_minimal">
             <property name="relationType"/>
             <property name="dataSetView" view="_minimal"/>
@@ -143,7 +143,7 @@
         <property name="name"/>
         <property name="remarks"/>
     </view>
-    <view entity="simiDependency_FeatureInfo" name="featureInfo-edit" extends="_minimal">
+    <view entity="simiExtended_FeatureInfo" name="featureInfo-edit" extends="_minimal">
         <property name="relations" view="_minimal">
             <property name="relationType"/>
             <property name="dataSetView" view="_minimal"/>
@@ -154,7 +154,7 @@
         <property name="pyModuleName"/>
         <property name="sqlQuery"/>
     </view>
-    <view entity="simiDependency_Relation" name="relation-edit" extends="_minimal">
+    <view entity="simiExtended_Relation" name="relation-edit" extends="_minimal">
         <property name="dependency" view="_minimal">
             <property name="name"/>
             <property name="typeAbbreviation"/>
@@ -162,7 +162,7 @@
         <property name="dataSetView" view="_minimal"/>
         <property name="relationType"/>
     </view>
-    <view entity="simiDependency_Report" name="report-edit" extends="_minimal">
+    <view entity="simiExtended_Report" name="report-edit" extends="_minimal">
         <property name="relations" view="_minimal">
             <property name="relationType"/>
             <property name="dataSetView" view="_minimal"/>
@@ -185,7 +185,7 @@
             <property name="facadeLayer" view="_minimal"/>
         </property>
     </view>
-    <view entity="simiProduct_DataSetView" name="facadeLayer-edit-dataSetViews" extends="_local"/>
+    <view entity="simiData_DataSetView" name="facadeLayer-edit-dataSetViews" extends="_local"/>
     <view entity="simiProduct_LayerGroup" name="layerGroup-edit" extends="_local">
         <property name="pubScope" view="_minimal"/>
         <property name="singleActors" view="_minimal">

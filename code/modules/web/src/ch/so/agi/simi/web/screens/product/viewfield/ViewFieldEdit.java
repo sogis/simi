@@ -4,7 +4,7 @@ import ch.so.agi.simi.entity.data.TableField;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.product.datasetview.ViewField;
+import ch.so.agi.simi.entity.data.datasetview.ViewField;
 
 import javax.inject.Inject;
 

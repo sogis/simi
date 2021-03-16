@@ -1,7 +1,7 @@
 package ch.so.agi.simi.entity.data;
 
 import ch.so.agi.simi.entity.SimiEntity;
-import ch.so.agi.simi.entity.product.datasetview.ViewField;
+import ch.so.agi.simi.entity.data.datasetview.ViewField;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;

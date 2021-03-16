@@ -1,9 +1,9 @@
 package ch.so.agi.simi.web.screens.dependency.featureInfo;
 
-import ch.so.agi.simi.entity.dependency.Report;
+import ch.so.agi.simi.entity.extended.Report;
 import com.haulmont.cuba.gui.screen.*;
 
-@UiController("simiDependency_FeatureInfo.edit")
+@UiController("simiExtended_FeatureInfo.edit")
 @UiDescriptor("featureInfo-edit.xml")
 @EditedEntityContainer("featureInfoDc")
 @LoadDataBeforeShow

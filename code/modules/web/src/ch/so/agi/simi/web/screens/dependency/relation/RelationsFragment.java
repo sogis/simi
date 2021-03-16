@@ -1,9 +1,8 @@
 package ch.so.agi.simi.web.screens.dependency.relation;
 
-import ch.so.agi.simi.entity.dependency.Dependency;
-import ch.so.agi.simi.entity.dependency.Relation;
-import ch.so.agi.simi.entity.product.datasetview.DataSetView;
-import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
+import ch.so.agi.simi.entity.extended.Dependency;
+import ch.so.agi.simi.entity.extended.Relation;
+import ch.so.agi.simi.entity.data.datasetview.DataSetView;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionLoader;
@@ -13,7 +12,7 @@ import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
 
-@UiController("simiDependency_RelationsFragment")
+@UiController("simiExtended_RelationsFragment")
 @UiDescriptor("relations-fragment.xml")
 public class RelationsFragment extends ScreenFragment {
     @Inject

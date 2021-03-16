@@ -1,4 +1,4 @@
-package ch.so.agi.simi.entity.dependency;
+package ch.so.agi.simi.entity.extended;
 
 import com.haulmont.chile.core.datatypes.impl.EnumClass;
 

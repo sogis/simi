@@ -27,7 +27,7 @@
             </column>
         </form>
         <groupBox id="relationsBox" caption="Beziehungen">
-            <fragment id="relations" screen="simiDependency_RelationsFragment"/>
+            <fragment id="relations" screen="simiExtended_RelationsFragment"/>
         </groupBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>

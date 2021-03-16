@@ -14,9 +14,10 @@
 * Schema
   * Entfernen Publikationsfelder (DSV)
   * Verschieben der Suchfelder von DSV in TableView
-  * Verschieben Attributalias von DSV in DS
+  * Verschieben Attributalias und Sort von DSV in DS
   * Ergänzung mit den fehlenden Feldern, gemäss Erkenntnissen aus Datenmigration und Erstellung der
   Konfigurations-Jsons.
+  * In der Tabelle simidata_postgres_db muss noch  die service-URL der DB-Connection ergänzt werden (neues Attribut)
   * Aufräumen DataSetView-Klassen (TableView, ViewField, RasterView, DataSetView)
     * Db-Präfix simidata. 
     * Java-Package data.*

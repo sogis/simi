@@ -1,9 +1,9 @@
 package ch.so.agi.simi.web.screens.dependency.relation;
 
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.dependency.Relation;
+import ch.so.agi.simi.entity.extended.Relation;
 
-@UiController("simiDependency_Relation.edit")
+@UiController("simiExtended_Relation.edit")
 @UiDescriptor("relation-edit.xml")
 @EditedEntityContainer("relationDc")
 @LoadDataBeforeShow

@@ -1,4 +1,4 @@
-package ch.so.agi.simi.entity.dependency;
+package ch.so.agi.simi.entity.extended;
 
 import ch.so.agi.simi.entity.SimiEntity;
 import com.haulmont.chile.core.annotations.Composition;
@@ -8,13 +8,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMIDEPENDENCY_DEPENDENCY")
+@Table(name = "SIMIEXTENDED_DEPENDENCY")
 @Entity(name = Dependency.NAME)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 public class Dependency extends SimiEntity {
 
-    public static final String NAME = "simiDependency_Dependency";
+    public static final String NAME = "simiExtended_Dependency";
 
     private static final long serialVersionUID = -8171356992105401614L;
 

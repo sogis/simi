@@ -1,9 +1,9 @@
 package ch.so.agi.simi.web.screens.dependency.cccintegration;
 
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.dependency.CCCIntegration;
+import ch.so.agi.simi.entity.extended.CCCIntegration;
 
-@UiController("simiDependency_CCCIntegration.edit")
+@UiController("simiExtended_CCCIntegration.edit")
 @UiDescriptor("ccc-integration-edit.xml")
 @EditedEntityContainer("cCCIntegrationDc")
 @LoadDataBeforeShow

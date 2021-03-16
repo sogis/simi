@@ -1,7 +1,7 @@
 package ch.so.agi.simi.entity.data;
 
 import ch.so.agi.simi.entity.SimiEntity;
-import ch.so.agi.simi.entity.product.datasetview.RasterView;
+import ch.so.agi.simi.entity.data.datasetview.RasterView;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;

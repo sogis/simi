@@ -290,12 +290,12 @@ create table SIMIDEPENDENCY_DEPENDENCY (
     NAME varchar(100) not null,
     REMARKS text,
     --
-    -- from simiDependency_FeatureInfo
+    -- from simiExtended_FeatureInfo
     DISPLAY_TEMPLATE text,
     SQL_QUERY text,
     PY_MODULE_NAME varchar(100),
     --
-    -- from simiDependency_CCCIntegration
+    -- from simiExtended_CCCIntegration
     MAP_ID uuid,
     LOCATOR_LAYERS text,
     NOTIFY_LAYERS text,

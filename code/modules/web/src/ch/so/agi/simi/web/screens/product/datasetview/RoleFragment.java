@@ -2,7 +2,7 @@ package ch.so.agi.simi.web.screens.product.datasetview;
 
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.iam.Role;
-import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import ch.so.agi.simi.entity.data.datasetview.DataSetView;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionLoader;

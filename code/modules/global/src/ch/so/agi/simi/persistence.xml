@@ -14,27 +14,27 @@
         <class>ch.so.agi.simi.entity.product.non_dsv.SingleActor</class>
         <class>ch.so.agi.simi.entity.product.non_dsv.ChildLayerProperties</class>
         <class>ch.so.agi.simi.entity.product.non_dsv.PropertiesInList</class>
-        <class>ch.so.agi.simi.entity.product.datasetview.DataSetView</class>
+        <class>ch.so.agi.simi.entity.data.datasetview.DataSetView</class>
         <class>ch.so.agi.simi.entity.product.non_dsv.FacadeLayer</class>
-        <class>ch.so.agi.simi.entity.product.datasetview.TableView</class>
+        <class>ch.so.agi.simi.entity.data.datasetview.TableView</class>
         <class>ch.so.agi.simi.entity.data.TableDS</class>
         <class>ch.so.agi.simi.entity.data.PostgresTable</class>
         <class>ch.so.agi.simi.entity.data.ModelSchema</class>
         <class>ch.so.agi.simi.entity.data.PostgresDB</class>
         <class>ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade</class>
-        <class>ch.so.agi.simi.entity.product.datasetview.RasterView</class>
+        <class>ch.so.agi.simi.entity.data.datasetview.RasterView</class>
         <class>ch.so.agi.simi.entity.data.RasterDS</class>
         <class>ch.so.agi.simi.entity.data.TableField</class>
-        <class>ch.so.agi.simi.entity.product.datasetview.ViewField</class>
+        <class>ch.so.agi.simi.entity.data.datasetview.ViewField</class>
         <class>ch.so.agi.simi.entity.data.ExternalTable</class>
         <class>ch.so.agi.simi.entity.SimiEntity</class>
         <class>ch.so.agi.simi.entity.iam.Permission</class>
-        <class>ch.so.agi.simi.entity.dependency.Component</class>
-        <class>ch.so.agi.simi.entity.product.datasetview.StyleAsset</class>
-        <class>ch.so.agi.simi.entity.dependency.Relation</class>
-        <class>ch.so.agi.simi.entity.dependency.Dependency</class>
-        <class>ch.so.agi.simi.entity.dependency.Report</class>
-        <class>ch.so.agi.simi.entity.dependency.FeatureInfo</class>
-        <class>ch.so.agi.simi.entity.dependency.CCCIntegration</class>
+        <class>ch.so.agi.simi.entity.extended.Component</class>
+        <class>ch.so.agi.simi.entity.data.datasetview.StyleAsset</class>
+        <class>ch.so.agi.simi.entity.extended.Relation</class>
+        <class>ch.so.agi.simi.entity.extended.Dependency</class>
+        <class>ch.so.agi.simi.entity.extended.Report</class>
+        <class>ch.so.agi.simi.entity.extended.FeatureInfo</class>
+        <class>ch.so.agi.simi.entity.extended.CCCIntegration</class>
     </persistence-unit>
 </persistence>

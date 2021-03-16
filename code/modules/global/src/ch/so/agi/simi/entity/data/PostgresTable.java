@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.data;
 
-import ch.so.agi.simi.entity.product.datasetview.TableView;
+import ch.so.agi.simi.entity.data.datasetview.TableView;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;

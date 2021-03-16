@@ -1,11 +1,11 @@
 package ch.so.agi.simi.core.copy;
 
-import ch.so.agi.simi.entity.dependency.Relation;
+import ch.so.agi.simi.entity.extended.Relation;
 import ch.so.agi.simi.entity.iam.Permission;
-import ch.so.agi.simi.entity.product.datasetview.DataSetView;
-import ch.so.agi.simi.entity.product.datasetview.RasterView;
-import ch.so.agi.simi.entity.product.datasetview.TableView;
-import ch.so.agi.simi.entity.product.datasetview.ViewField;
+import ch.so.agi.simi.entity.data.datasetview.DataSetView;
+import ch.so.agi.simi.entity.data.datasetview.RasterView;
+import ch.so.agi.simi.entity.data.datasetview.TableView;
+import ch.so.agi.simi.entity.data.datasetview.ViewField;
 import ch.so.agi.simi.entity.product.non_dsv.*;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;

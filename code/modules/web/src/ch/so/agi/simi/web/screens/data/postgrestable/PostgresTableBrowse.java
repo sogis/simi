@@ -1,7 +1,7 @@
 package ch.so.agi.simi.web.screens.data.postgrestable;
 
 import ch.so.agi.simi.entity.data.PostgresTable;
-import ch.so.agi.simi.entity.product.datasetview.TableView;
+import ch.so.agi.simi.entity.data.datasetview.TableView;
 import com.haulmont.cuba.core.global.MetadataTools;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.UiComponents;

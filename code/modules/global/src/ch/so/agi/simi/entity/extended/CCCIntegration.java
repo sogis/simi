@@ -1,4 +1,4 @@
-package ch.so.agi.simi.entity.dependency;
+package ch.so.agi.simi.entity.extended;
 
 import ch.so.agi.simi.entity.product.non_dsv.Map;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Entity(name = CCCIntegration.NAME)
 public class CCCIntegration extends Dependency {
 
-    public static final String NAME = "simiDependency_CCCIntegration";
+    public static final String NAME = "simiExtended_CCCIntegration";
 
     private static final long serialVersionUID = -7415262245786732300L;
 

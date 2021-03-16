@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.product.non_dsv;
 
-import ch.so.agi.simi.entity.dependency.CCCIntegration;
+import ch.so.agi.simi.entity.extended.CCCIntegration;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;

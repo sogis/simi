@@ -2,14 +2,13 @@ package ch.so.agi.simi.core.copy;
 
 import ch.so.agi.simi.SimiTestContainer;
 import ch.so.agi.simi.entity.data.*;
-import ch.so.agi.simi.entity.dependency.CCCIntegration;
-import ch.so.agi.simi.entity.dependency.Component;
-import ch.so.agi.simi.entity.dependency.Relation;
-import ch.so.agi.simi.entity.dependency.RelationType;
+import ch.so.agi.simi.entity.extended.Component;
+import ch.so.agi.simi.entity.extended.Relation;
+import ch.so.agi.simi.entity.extended.RelationType;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.iam.PermissionLevelEnum;
 import ch.so.agi.simi.entity.iam.Role;
-import ch.so.agi.simi.entity.product.datasetview.*;
+import ch.so.agi.simi.entity.data.datasetview.*;
 import ch.so.agi.simi.entity.product.non_dsv.*;
 import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;

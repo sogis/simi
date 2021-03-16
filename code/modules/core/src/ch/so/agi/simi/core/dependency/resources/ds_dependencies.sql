@@ -118,10 +118,10 @@ dependency_extprop AS (
 		* 
 	FROM (
 		VALUES 
-			('simiDependency_Component', 'Modul', 1),
-			('simiDependency_FeatureInfo', 'Spez. Featureinfo', 3),
-			('simiDependency_CCCIntegration', 'CCC-Integration', 6),
-			('simiDependency_Report', 'Report', 9)
+			('simiExtended_Component', 'Modul', 1),
+			('simiExtended_FeatureInfo', 'Spez. Featureinfo', 3),
+			('simiExtended_CCCIntegration', 'CCC-Integration', 6),
+			('simiExtended_Report', 'Report', 9)
 	) 
 	AS t (dtype, typename, sort)
 ),

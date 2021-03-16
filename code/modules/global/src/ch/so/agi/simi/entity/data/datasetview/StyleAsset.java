@@ -1,4 +1,4 @@
-package ch.so.agi.simi.entity.product.datasetview;
+package ch.so.agi.simi.entity.data.datasetview;
 
 import ch.so.agi.simi.entity.SimiEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
@@ -7,8 +7,8 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMI_STYLE_ASSET")
-@Entity(name = "simi_StyleAsset")
+@Table(name = "SIMIDATA_STYLEASSET")
+@Entity(name = "simiData_StyleAsset")
 public class StyleAsset extends SimiEntity {
     private static final long serialVersionUID = 5535641619105786448L;
 

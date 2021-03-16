@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.screens.dependency.browse;
 
-import ch.so.agi.simi.entity.dependency.*;
+import ch.so.agi.simi.entity.extended.*;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
@@ -9,7 +9,7 @@ import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
 
-@UiController("simiDependency_Dependency.browse")
+@UiController("simiExtended_Dependency.browse")
 @UiDescriptor("dependency-browse.xml")
 @LookupComponent("dependenciesTable")
 @LoadDataBeforeShow

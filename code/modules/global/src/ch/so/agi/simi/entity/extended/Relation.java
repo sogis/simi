@@ -1,7 +1,7 @@
-package ch.so.agi.simi.entity.dependency;
+package ch.so.agi.simi.entity.extended;
 
 import ch.so.agi.simi.entity.SimiEntity;
-import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import ch.so.agi.simi.entity.data.datasetview.DataSetView;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Entity(name = Relation.NAME)
 public class Relation extends SimiEntity {
 
-    public static final String NAME = "simiDependency_Relation";
+    public static final String NAME = "simiExtended_Relation";
 
     private static final long serialVersionUID = -7067104417294138445L;
 

@@ -6,7 +6,7 @@
         <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.product.datasetview.DataSetView">
             <loader id="dataSetViewsDl">
                 <query>
-                    <![CDATA[select e from simiProduct_DataSetView e order by e.identifier]]>
+                    <![CDATA[select e from simiData_DataSetView e order by e.identifier]]>
                 </query>
             </loader>
         </collection>

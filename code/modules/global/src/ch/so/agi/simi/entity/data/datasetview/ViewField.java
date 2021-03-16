@@ -1,4 +1,4 @@
-package ch.so.agi.simi.entity.product.datasetview;
+package ch.so.agi.simi.entity.data.datasetview;
 
 import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.Sortable;

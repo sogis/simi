@@ -1,9 +1,8 @@
 package ch.so.agi.simi.web.screens.product.tableview;
 
 import ch.so.agi.simi.entity.data.TableField;
-import ch.so.agi.simi.entity.product.datasetview.TableView;
-import ch.so.agi.simi.entity.product.datasetview.ViewField;
-import ch.so.agi.simi.entity.iam.Permission;
+import ch.so.agi.simi.entity.data.datasetview.TableView;
+import ch.so.agi.simi.entity.data.datasetview.ViewField;
 import ch.so.agi.simi.web.beans.sort.SortBean;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionLoader;

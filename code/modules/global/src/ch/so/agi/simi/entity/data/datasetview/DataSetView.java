@@ -1,6 +1,6 @@
-package ch.so.agi.simi.entity.product.datasetview;
+package ch.so.agi.simi.entity.data.datasetview;
 
-import ch.so.agi.simi.entity.dependency.Relation;
+import ch.so.agi.simi.entity.extended.Relation;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
 import ch.so.agi.simi.entity.product.non_dsv.SingleActor;
@@ -15,13 +15,13 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Table(name = "SIMIPRODUCT_DATA_SET_VIEW")
+@Table(name = "SIMIDATA_DATA_SET_VIEW")
 @Entity(name = DataSetView.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("#concatName|identifier,title") //needed to define minimal view
 public class DataSetView extends SingleActor {
 
-    public static final String NAME = "simiProduct_DataSetView";
+    public static final String NAME = "simiData_DataSetView";
 
     private static final long serialVersionUID = 3720829701428961919L;
 

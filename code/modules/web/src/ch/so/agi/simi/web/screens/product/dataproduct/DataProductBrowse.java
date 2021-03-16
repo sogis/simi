@@ -1,8 +1,8 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
 import ch.so.agi.simi.core.copy.CopyService;
-import ch.so.agi.simi.entity.product.datasetview.RasterView;
-import ch.so.agi.simi.entity.product.datasetview.TableView;
+import ch.so.agi.simi.entity.data.datasetview.RasterView;
+import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.product.non_dsv.DataProduct;
 import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
 import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;

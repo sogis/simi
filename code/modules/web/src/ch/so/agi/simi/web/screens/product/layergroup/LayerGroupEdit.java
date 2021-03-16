@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.screens.product.layergroup;
 
-import ch.so.agi.simi.entity.product.datasetview.DataSetView;
+import ch.so.agi.simi.entity.data.datasetview.DataSetView;
 import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
 import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
 import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
