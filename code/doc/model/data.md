@@ -28,11 +28,6 @@ Bemerkung: Im DB-Schema ist die DSV im Moment noch mit Präfix "simiproduct_" en
 |styleServerChanged|DateTime|n|Zeitpunkt der letzten syleServer änderung.|
 |styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
 |styleDesktopChanged|DateTime|n|Zeitpunkt der letzten syleDesktop änderung.|
-|searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
-|searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
-|searchFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieser DSV eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
-
-Siehe "DataSetView_SearchTypeEnum.java" bezüglich der in der Datenbank codierten searchType-Enumerationen. 
 
 #### Konstraints
 
@@ -81,11 +76,12 @@ Spalten (via AttributeList) wie auch auf die angebotenen Zeilen (mittels Where-C
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|whereClause|String(200)|n|Where-Clause zur Einschränkung der Anzahl Zeilen in der TableView.|
 |wgcEdit|boolean|j|Gibt an, ob die TableView im Web GIS Client editiert wird. Default: false|
-|geoFieldName|String(100)|n|Bei Tabellen mit mehreren Geometriespalten: Name der zu verwendenden Geometrie der TableView.|
-|geoType|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
-|geoEpsgCode|Integer|n|EPSG-Code des Koordinatensystems. In aller Regel 2056|
+|searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
+|searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
+|searchFilterWord|String(100)|(n)|Schlüsselwort, mit welchem die Sucheingabe auf die Objekte dieser DSV eingeschränkt wird. Zwingend, wenn die Suche aktiviert ist.|
+
+Siehe "TableView_SearchTypeEnum.java" bezüglich der in der Datenbank codierten searchType-Enumerationen. 
 
 ### Klasse ViewField
 
@@ -200,6 +196,7 @@ Postgres-Datenbank, in welcher das Schema (PostgresSchema) enthalten ist. Univer
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |dbName|String(100)|j|Name der Datenbank (auf dem Cluster). Name muss GDI-weit eindeutig sein.|
+|dbServiceUrl|String(255)|j|Name der Service für die DB-Connection. Muss GDI-weit eindeutig sein.|
 |defaultValue|Boolean|j|Default-DB in den SIMI-Auswahlfeldern.|
 
 #### Konstraints

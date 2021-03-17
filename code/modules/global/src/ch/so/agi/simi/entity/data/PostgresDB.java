@@ -23,7 +23,7 @@ public class PostgresDB extends SimiEntity {
     private String dbName;
 
     @NotNull
-    @Column(name = "DB_SERVICE_URL", nullable = false, unique = true)
+    @Column(name = "DB_SERVICE_URL", nullable = false, unique = true, length = 255)
     private String dbServiceUrl;
 
     @Column(name = "DEFAULT_VALUE", nullable = false)
