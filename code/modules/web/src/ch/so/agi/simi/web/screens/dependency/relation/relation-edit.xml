@@ -7,7 +7,7 @@
                   class="ch.so.agi.simi.entity.dependency.Relation" view="relation-edit">
             <loader/>
         </instance>
-        <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.product.datasetview.DataSetView">
+        <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.data.datasetview.DataSetView">
             <loader id="dataSetViewsDl">
                 <query>
                     <![CDATA[select e from simiData_DataSetView e order by e.identifier]]>

@@ -10,7 +10,7 @@
             <collection id="propertiesInFacadeDc" property="dataSetViews"/>
         </instance>
         <collection id="dataSetViewsDc"
-                    class="ch.so.agi.simi.entity.product.datasetview.DataSetView"
+                    class="ch.so.agi.simi.entity.data.datasetview.DataSetView"
                     view="facadeLayer-edit-dataSetViews">
             <loader id="dataSetViewsDl">
                 <query>

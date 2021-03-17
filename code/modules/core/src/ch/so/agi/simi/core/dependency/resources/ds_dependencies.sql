@@ -15,7 +15,7 @@ ds_dsv AS ( -- datasetviews für ein dataset
 		'View' AS typ,
 		1 AS sort
 	FROM 
-		simiproduct_data_set_view dsv
+		simidata_data_set_view dsv
 	LEFT JOIN 
 		simidata_raster_view rv ON dsv.id = rv.id
 	LEFT JOIN 
@@ -106,7 +106,7 @@ ds_dsv_relation AS ( -- Alle Beziehungen eines DS via DSV auf eine Dependency
 	FROM 
 		ds_dsv
 	JOIN 
-		simidependency_relation rel ON ds_dsv.dsv_id = rel.data_set_view_id
+		simiextended_relation rel ON ds_dsv.dsv_id = rel.data_set_view_id
 	JOIN 
 		simiproduct_data_product dp ON ds_dsv.dsv_id = dp.id 
 	WHERE
@@ -135,7 +135,7 @@ dependency AS (
 		sort AS subsort,
 		2 AS sort
 	FROM 
-		simidependency_dependency dep
+		simiextended_dependency dep
 	JOIN
 		dependency_extprop ep ON dep.dtype = ep.dtype
 	JOIN 

@@ -39,27 +39,6 @@ create table SIMIIAM_PERMISSION (
     primary key (ID)
 )^
 -- end SIMIIAM_PERMISSION
--- begin SIMIDEPENDENCY_RELATION
-create table SIMIDEPENDENCY_RELATION (
-    ID uuid,
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    VERSION integer not null,
-    EXT1 text,
-    EXT2 text,
-    EXT3 text,
-    EXT4 text,
-    EXT5 text,
-    --
-    RELATION_TYPE varchar(50) not null,
-    DEPENDENCY_ID uuid not null,
-    DATA_SET_VIEW_ID uuid not null,
-    --
-    primary key (ID)
-)^
--- end SIMIDEPENDENCY_RELATION
 -- begin SIMIDATA_TABLE_DS
 create table SIMIDATA_TABLE_DS (
     ID uuid,
@@ -156,28 +135,7 @@ create table SIMIDATA_TABLE_FIELD (
     primary key (ID)
 )^
 -- end SIMIDATA_TABLE_FIELD
--- begin SIMI_STYLE_ASSET
-create table SIMI_STYLE_ASSET (
-    ID uuid,
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    VERSION integer not null,
-    EXT1 text,
-    EXT2 text,
-    EXT3 text,
-    EXT4 text,
-    EXT5 text,
-    --
-    DATASET_SET_VIEW_ID uuid not null,
-    IS_FOR_SERVER boolean not null,
-    FILE_NAME varchar(255) not null,
-    FILE_CONTENT bytea not null,
-    --
-    primary key (ID)
-)^
--- end SIMI_STYLE_ASSET
+
 -- begin SIMIPRODUCT_DATA_PRODUCT
 create table SIMIPRODUCT_DATA_PRODUCT (
     ID uuid,
@@ -272,37 +230,6 @@ create table SIMIDATA_VIEW_FIELD (
     primary key (ID)
 )^
 -- end SIMIDATA_VIEW_FIELD
--- begin SIMIDEPENDENCY_DEPENDENCY
-create table SIMIDEPENDENCY_DEPENDENCY (
-    ID uuid,
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    VERSION integer not null,
-    EXT1 text,
-    EXT2 text,
-    EXT3 text,
-    EXT4 text,
-    EXT5 text,
-    DTYPE varchar(31),
-    --
-    NAME varchar(100) not null,
-    REMARKS text,
-    --
-    -- from simiExtended_FeatureInfo
-    DISPLAY_TEMPLATE text,
-    SQL_QUERY text,
-    PY_MODULE_NAME varchar(100),
-    --
-    -- from simiExtended_CCCIntegration
-    MAP_ID uuid,
-    LOCATOR_LAYERS text,
-    NOTIFY_LAYERS text,
-    --
-    primary key (ID)
-)^
--- end SIMIDEPENDENCY_DEPENDENCY
 -- begin SIMIDATA_MODEL_SCHEMA
 create table SIMIDATA_MODEL_SCHEMA (
     ID uuid,
@@ -435,22 +362,6 @@ create table SIMIPRODUCT_FACADE_LAYER (
     primary key (ID)
 )^
 -- end SIMIPRODUCT_FACADE_LAYER
--- begin SIMIPRODUCT_DATA_SET_VIEW
-create table SIMIPRODUCT_DATA_SET_VIEW (
-    ID uuid,
-    --
-    RAW_DOWNLOAD boolean not null,
-    STYLE_SERVER text,
-    STYLE_SERVER_UPLOADED timestamp,
-    STYLE_DESKTOP text,
-    STYLE_DESKTOP_UPLOADED timestamp,
-    SEARCH_TYPE varchar(50) not null,
-    SEARCH_FACET varchar(100),
-    SEARCH_FILTER_WORD varchar(100),
-    --
-    primary key (ID)
-)^
--- end SIMIPRODUCT_DATA_SET_VIEW
 -- begin SIMIPRODUCT_LAYER_GROUP
 create table SIMIPRODUCT_LAYER_GROUP (
     ID uuid,
@@ -512,3 +423,93 @@ create table SIMIIAM_ROLE_USER_LINK (
     primary key (USER_ID, ROLE_ID)
 )^
 -- end SIMIIAM_ROLE_USER_LINK
+-- begin SIMIDATA_STYLEASSET
+create table SIMIDATA_STYLEASSET (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    DATASET_SET_VIEW_ID uuid not null,
+    IS_FOR_SERVER boolean not null,
+    FILE_NAME varchar(255) not null,
+    FILE_CONTENT bytea not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_STYLEASSET
+-- begin SIMIEXTENDED_DEPENDENCY
+create table SIMIEXTENDED_DEPENDENCY (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    DTYPE varchar(31),
+    --
+    NAME varchar(100) not null,
+    REMARKS text,
+    --
+    -- from simiExtended_CCCIntegration
+    MAP_ID uuid,
+    LOCATOR_LAYERS text,
+    NOTIFY_LAYERS text,
+    --
+    -- from simiExtended_FeatureInfo
+    DISPLAY_TEMPLATE text,
+    SQL_QUERY text,
+    PY_MODULE_NAME varchar(100),
+    --
+    primary key (ID)
+)^
+-- end SIMIEXTENDED_DEPENDENCY
+-- begin SIMIDATA_DATA_SET_VIEW
+create table SIMIDATA_DATA_SET_VIEW (
+    ID uuid,
+    --
+    RAW_DOWNLOAD boolean not null,
+    STYLE_SERVER text,
+    STYLE_SERVER_UPLOADED timestamp,
+    STYLE_DESKTOP text,
+    STYLE_DESKTOP_UPLOADED timestamp,
+    SEARCH_TYPE varchar(50) not null,
+    SEARCH_FACET varchar(100),
+    SEARCH_FILTER_WORD varchar(100),
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_DATA_SET_VIEW
+-- begin SIMIEXTENDED_RELATION
+create table SIMIEXTENDED_RELATION (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    RELATION_TYPE varchar(50) not null,
+    DEPENDENCY_ID uuid not null,
+    DATA_SET_VIEW_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIEXTENDED_RELATION

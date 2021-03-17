@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMIDEPENDENCY_RELATION", uniqueConstraints = {
+@Table(name = "SIMIEXTENDED_RELATION", uniqueConstraints = {
         @UniqueConstraint(name = "IDX_SIMI_RELATION_UNQ", columnNames = {"RELATION_TYPE", "DEPENDENCY_ID", "DATA_SET_VIEW_ID"})
 })
 @Entity(name = Relation.NAME)

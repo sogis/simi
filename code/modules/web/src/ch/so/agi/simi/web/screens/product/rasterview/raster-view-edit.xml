@@ -5,7 +5,7 @@
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
-                  class="ch.so.agi.simi.entity.product.datasetview.RasterView"
+                  class="ch.so.agi.simi.entity.data.datasetview.RasterView"
                   view="rasterView-edit">
             <loader/>
             <collection id="permissionsDc" property="permissions"/>

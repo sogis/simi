@@ -6,7 +6,7 @@
         messagesPack="ch.so.agi.simi.web.screens.product.datasetview">
     <data readOnly="true">
         <collection id="dataSetViewsDc"
-                    class="ch.so.agi.simi.entity.product.datasetview.DataSetView">
+                    class="ch.so.agi.simi.entity.data.datasetview.DataSetView">
             <view extends="_local">
                 <property name="pubScope" view="_minimal"/>
             </view>
