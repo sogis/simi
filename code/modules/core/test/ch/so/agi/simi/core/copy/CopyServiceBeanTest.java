@@ -9,7 +9,7 @@ import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.iam.PermissionLevelEnum;
 import ch.so.agi.simi.entity.iam.Role;
 import ch.so.agi.simi.entity.data.datasetview.*;
-import ch.so.agi.simi.entity.product.non_dsv.*;
+import ch.so.agi.simi.entity.product.*;
 import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;

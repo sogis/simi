@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
-import ch.so.agi.simi.entity.product.non_dsv.SingleActor;
+import ch.so.agi.simi.entity.product.SingleActor;
 import com.haulmont.cuba.gui.AppConfig;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.Button;

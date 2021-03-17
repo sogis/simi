@@ -5,7 +5,7 @@
         focusComponent="dataProductsTable">
     <data readOnly="true">
         <collection id="dataProductsDc"
-                    class="ch.so.agi.simi.entity.product.non_dsv.DataProduct" view="dataProduct-browse">
+                    class="ch.so.agi.simi.entity.product.DataProduct" view="dataProduct-browse">
             <loader id="dataProductsDl">
                 <query>
                     <![CDATA[select e from simiProduct_DataProduct e]]>

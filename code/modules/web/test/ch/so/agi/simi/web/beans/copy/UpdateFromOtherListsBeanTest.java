@@ -1,7 +1,7 @@
 package ch.so.agi.simi.web.beans.copy;
 
-import ch.so.agi.simi.entity.product.non_dsv.PropertiesInList;
-import ch.so.agi.simi.entity.product.non_dsv.SingleActor;
+import ch.so.agi.simi.entity.product.PropertiesInList;
+import ch.so.agi.simi.entity.product.SingleActor;
 import org.junit.jupiter.api.Test;
 
 import java.text.MessageFormat;

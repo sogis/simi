@@ -10,7 +10,7 @@ import ch.so.agi.simi.entity.data.datasetview.DataSetView;
 import ch.so.agi.simi.entity.data.datasetview.RasterView;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.data.datasetview.ViewField;
-import ch.so.agi.simi.entity.product.non_dsv.*;
+import ch.so.agi.simi.entity.product.*;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;

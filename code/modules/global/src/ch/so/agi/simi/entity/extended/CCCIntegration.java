@@ -1,6 +1,6 @@
 package ch.so.agi.simi.entity.extended;
 
-import ch.so.agi.simi.entity.product.non_dsv.Map;
+import ch.so.agi.simi.entity.product.Map;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;

@@ -158,8 +158,6 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     REMARKS text,
     SYNONYMS varchar(500),
     TITLE varchar(200),
-    RELEASED_AT timestamp,
-    RELEASED_THROUGH varchar(100),
     --
     primary key (ID)
 )^

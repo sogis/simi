@@ -1,9 +1,9 @@
 package ch.so.agi.simi.web.screens.product.facadelayer;
 
-import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
-import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
-import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
-import ch.so.agi.simi.entity.product.non_dsv.PropertiesInList;
+import ch.so.agi.simi.entity.product.FacadeLayer;
+import ch.so.agi.simi.entity.product.LayerGroup;
+import ch.so.agi.simi.entity.product.PropertiesInFacade;
+import ch.so.agi.simi.entity.product.PropertiesInList;
 import ch.so.agi.simi.web.beans.sort.SortBean;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
@@ -76,8 +76,6 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
         layerGroup.setRemarks(facadeLayer.getRemarks());
         layerGroup.setSynonyms(facadeLayer.getSynonyms());
         layerGroup.setTitle(facadeLayer.getTitle());
-        layerGroup.setReleasedAt(facadeLayer.getReleasedAt());
-        layerGroup.setReleasedThrough(facadeLayer.getReleasedThrough());
 
         if (facadeLayer.getDataSetViews() != null) {
             for (PropertiesInFacade propertiesInFacade : facadeLayer.getDataSetViews()) {

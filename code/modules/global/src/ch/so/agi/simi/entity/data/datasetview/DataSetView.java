@@ -2,8 +2,8 @@ package ch.so.agi.simi.entity.data.datasetview;
 
 import ch.so.agi.simi.entity.extended.Relation;
 import ch.so.agi.simi.entity.iam.Permission;
-import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
-import ch.so.agi.simi.entity.product.non_dsv.SingleActor;
+import ch.so.agi.simi.entity.product.PropertiesInFacade;
+import ch.so.agi.simi.entity.product.SingleActor;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;

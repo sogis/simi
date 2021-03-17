@@ -1,10 +1,10 @@
 package ch.so.agi.simi.web.screens.product.layergroup;
 
 import ch.so.agi.simi.entity.data.datasetview.DataSetView;
-import ch.so.agi.simi.entity.product.non_dsv.FacadeLayer;
-import ch.so.agi.simi.entity.product.non_dsv.LayerGroup;
-import ch.so.agi.simi.entity.product.non_dsv.PropertiesInFacade;
-import ch.so.agi.simi.entity.product.non_dsv.PropertiesInList;
+import ch.so.agi.simi.entity.product.FacadeLayer;
+import ch.so.agi.simi.entity.product.LayerGroup;
+import ch.so.agi.simi.entity.product.PropertiesInFacade;
+import ch.so.agi.simi.entity.product.PropertiesInList;
 import ch.so.agi.simi.web.beans.sort.SortBean;
 import ch.so.agi.simi.web.beans.copy.UpdateFromOtherListsBean;
 import com.haulmont.cuba.gui.Notifications;
@@ -94,8 +94,6 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
         facadeLayer.setRemarks(layerGroup.getRemarks());
         facadeLayer.setSynonyms(layerGroup.getSynonyms());
         facadeLayer.setTitle(layerGroup.getTitle());
-        facadeLayer.setReleasedAt(layerGroup.getReleasedAt());
-        facadeLayer.setReleasedThrough(layerGroup.getReleasedThrough());
 
         if (layerGroup.getSingleActors() != null) {
             for (PropertiesInList propertiesInList : layerGroup.getSingleActors()) {

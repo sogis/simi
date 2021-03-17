@@ -35,7 +35,7 @@
             <property name="dependency" view="_minimal"/>
         </property>
     </view>
-    <view name="copy-facadeLayer" class="ch.so.agi.simi.entity.product.non_dsv.FacadeLayer" extends="_local">
+    <view name="copy-facadeLayer" class="ch.so.agi.simi.entity.product.FacadeLayer" extends="_local">
         <property name="dataSetViews" view="_local">
             <property name="dataSetView" view="_minimal"/>
         </property>
@@ -44,13 +44,13 @@
             <property name="productList" view="_minimal"/>
         </property>
     </view>
-    <view name="copy-layerGroup" class="ch.so.agi.simi.entity.product.non_dsv.LayerGroup" extends="_local">
+    <view name="copy-layerGroup" class="ch.so.agi.simi.entity.product.LayerGroup" extends="_local">
         <property name="pubScope" view="_minimal"/>
         <property name="singleActors" view="_local">
             <property name="singleActor" view="_minimal"/>
         </property>
     </view>
-    <view name="copy-map" class="ch.so.agi.simi.entity.product.non_dsv.Map" extends="_local">
+    <view name="copy-map" class="ch.so.agi.simi.entity.product.Map" extends="_local">
         <property name="pubScope" view="_minimal"/>
         <property name="singleActors" view="_local">
             <property name="singleActor" view="_minimal"/>
