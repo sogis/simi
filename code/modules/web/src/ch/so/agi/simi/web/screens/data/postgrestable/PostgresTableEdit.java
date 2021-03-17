@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.screens.data.postgrestable;
 
-import ch.so.agi.simi.entity.data.ModelSchema;
+import ch.so.agi.simi.entity.data.DataTheme;
 import ch.so.agi.simi.entity.data.PostgresDB;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
@@ -53,9 +53,9 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
                     }
                 })
                 .build();
-        readFromServiceScreen.setSchema(Optional.of(postgresTable).map(PostgresTable::getModelSchema).map(ModelSchema::getSchemaName).orElse(null));
+        readFromServiceScreen.setSchema(Optional.of(postgresTable).map(PostgresTable::getDataTheme).map(DataTheme::getSchemaName).orElse(null));
         readFromServiceScreen.setTable(postgresTable.getTableName());
-        readFromServiceScreen.setPostgresDB(Optional.of(postgresTable).map(PostgresTable::getModelSchema).map(ModelSchema::getPostgresDB).orElse(null));
+        readFromServiceScreen.setPostgresDB(Optional.of(postgresTable).map(PostgresTable::getDataTheme).map(DataTheme::getPostgresDB).orElse(null));
         readFromServiceScreen.show();
     }
 
@@ -76,13 +76,13 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
         TableInfo tableInfo = tableAndFieldInfo.getTableInfo();
 
         // tableInfo
-        postgresTable.setModelSchema(dataManager.load(ModelSchema.class)
+        postgresTable.setDataTheme(dataManager.load(DataTheme.class)
                 .query("e.schemaName like :name and e.postgresDB = :db")
                 .parameter("name", tableInfo.getSchemaName())
                 .parameter("db", postgresDB)
                 .optional()
                 .orElseGet(() -> {
-                    ModelSchema schema = dataContext.create(ModelSchema.class);
+                    DataTheme schema = dataContext.create(DataTheme.class);
                     schema.setPostgresDB(postgresDB);
                     schema.setSchemaName(tableInfo.getSchemaName());
 

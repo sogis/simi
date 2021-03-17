@@ -15,7 +15,7 @@
                                 <c:where>e.tableName like :term</c:where>
                             </c:jpql>
                             <c:jpql>
-                                <c:where>e.modelSchema.schemaName like :term</c:where>
+                                <c:where>e.dataTheme.schemaName like :term</c:where>
                             </c:jpql>
                         </or>
                     </condition>

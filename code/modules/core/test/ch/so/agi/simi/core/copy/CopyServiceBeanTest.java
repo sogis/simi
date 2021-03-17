@@ -343,8 +343,8 @@ class CopyServiceBeanTest {
 
             if(curr != null){ //original and copy share the same relationships --> remove only once
                 orm.remove( curr.getPostgresTable() );
-                orm.remove( curr.getPostgresTable().getModelSchema() );
-                orm.remove( curr.getPostgresTable().getModelSchema().getPostgresDB() );
+                orm.remove( curr.getPostgresTable().getDataTheme() );
+                orm.remove( curr.getPostgresTable().getDataTheme().getPostgresDB() );
 
                 orm.remove( curr.getFacadeLayers().get(0).getFacadeLayer() );
                 orm.remove( curr.getProductLists().get(0).getProductList() );
@@ -606,19 +606,20 @@ class CopyServiceBeanTest {
             //PostgresTable
             PostgresDB db = container.metadata().create(PostgresDB.class);
             db.setDbName(TV_DB_STRING);
+            db.setDbServiceUrl(TV_DB_STRING);
 
-            ModelSchema ms = container.metadata().create(ModelSchema.class);
-            ms.setSchemaName(TV_SCHEMA_STRING);
-            ms.setPostgresDB(db);
+            DataTheme dt = container.metadata().create(DataTheme.class);
+            dt.setSchemaName(TV_SCHEMA_STRING);
+            dt.setPostgresDB(db);
 
             PostgresTable tbl = container.metadata().create(PostgresTable.class);
             tbl.setTableName(TV_TABLE_STRING);
             tbl.setIdFieldName("fuu");
             tbl.setCatSyncStamp(LocalDateTime.now());
-            tbl.setModelSchema(ms);
+            tbl.setDataTheme(dt);
 
             orm.persist(db);
-            orm.persist(ms);
+            orm.persist(dt);
             orm.persist(tbl);
 
             // TableView

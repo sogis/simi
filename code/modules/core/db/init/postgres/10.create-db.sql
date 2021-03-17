@@ -229,27 +229,6 @@ create table SIMIDATA_VIEW_FIELD (
     primary key (ID)
 )^
 -- end SIMIDATA_VIEW_FIELD
--- begin SIMIDATA_MODEL_SCHEMA
-create table SIMIDATA_MODEL_SCHEMA (
-    ID uuid,
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    VERSION integer not null,
-    EXT1 text,
-    EXT2 text,
-    EXT3 text,
-    EXT4 text,
-    EXT5 text,
-    --
-    SCHEMA_NAME varchar(100) not null,
-    MODEL_NAME varchar(100),
-    POSTGRES_DB_ID uuid not null,
-    --
-    primary key (ID)
-)^
--- end SIMIDATA_MODEL_SCHEMA
 -- begin SIMIDATA_EXTERNAL_TABLE
 create table SIMIDATA_EXTERNAL_TABLE (
     ID uuid,
@@ -262,7 +241,7 @@ create table SIMIDATA_POSTGRES_TABLE (
     ID uuid,
     --
     ID_FIELD_NAME varchar(100) not null,
-    MODEL_SCHEMA_ID uuid not null,
+    DATA_THEME_ID uuid not null,
     DESCRIPTION_MODEL text,
     CAT_SYNC_STAMP timestamp not null,
     GEO_FIELD_NAME varchar(100),
@@ -512,3 +491,24 @@ create table SIMIEXTENDED_RELATION (
     primary key (ID)
 )^
 -- end SIMIEXTENDED_RELATION
+-- begin SIMIDATA_DATA_THEME
+create table SIMIDATA_DATA_THEME (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
+    --
+    SCHEMA_NAME varchar(100) not null,
+    MODEL_NAME varchar(100),
+    POSTGRES_DB_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIDATA_DATA_THEME

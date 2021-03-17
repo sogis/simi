@@ -6,7 +6,6 @@ import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
 @Entity(name = DataProduct.NAME)

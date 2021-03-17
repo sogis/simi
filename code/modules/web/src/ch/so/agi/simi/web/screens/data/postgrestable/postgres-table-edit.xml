@@ -20,7 +20,7 @@
             <column width="350px">
                 <textField id="idFieldNameField" property="idFieldName"/>
                 <textField id="tableNameField" property="tableName" editable="true"/>
-                <pickerField id="modelSchemaField" property="modelSchema" editable="true"/>
+                <pickerField id="modelSchemaField" property="dataTheme" editable="true"/>
                 <dateField id="catSyncStampField" property="catSyncStamp" editable="true"/>
                 <textField id="geoFieldNameField" property="geoFieldName" editable="true"/>
                 <textField id="geoTypeField" property="geoType" editable="true"/>

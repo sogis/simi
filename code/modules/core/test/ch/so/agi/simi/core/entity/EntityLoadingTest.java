@@ -53,18 +53,18 @@ class EntityLoadingTest {
 
     @Test
     void modelSchema_Browse_OK() {
-        LoadContext context = LoadContext.create(ModelSchema.class)
-                .setQuery(queryFor(ModelSchema.NAME))
-                .setView("modelSchema-browse");
+        LoadContext context = LoadContext.create(DataTheme.class)
+                .setQuery(queryFor(DataTheme.NAME))
+                .setView("dataTheme-browse");
 
         dataManager.loadList(context);
     }
 
     @Test
     void modelSchema_Edit_OK() {
-        LoadContext context = LoadContext.create(ModelSchema.class)
-                .setQuery(queryFor(ModelSchema.NAME))
-                .setView("modelSchema-edit");
+        LoadContext context = LoadContext.create(DataTheme.class)
+                .setQuery(queryFor(DataTheme.NAME))
+                .setView("dataTheme-edit");
 
         dataManager.loadList(context);
     }

@@ -22,7 +22,7 @@
                             )
                         )
                     from simiData_PostgresDB db
-                        join db.modelSchemas ms
+                        join db.dataThemes ms
                         join ms.postgresTables tbl
                         left join tbl.tableViews tv
                     ]]>

@@ -31,6 +31,21 @@
         * _data-product_pub-scope-edit.xml
         * _map-browse.xml
         * _single-actor-browse.xml
+        
+        
+# Schemareading Tests
+
+* Schema 
+  * DS anlegen. Erstellt alle noch nicht vorhandenen DS inklusive Attribute und weist ihnen default - Werte zu
+  * ModelSchema anlegen
+  * ModelSchema aktualisieren
+* PostgresTable
+  * Aktualisieren (Mit Kindern)
+* 
+
+Methode: DataTheme actualizeWithDbCat(String dbName, String schemaName, String[] tableNames)
+
+Bei bestehenden Änderungen: showUnsavedChangesDialog() oder so.  https://doc.cuba-platform.com/manual-7.2/screen_validation.html
    
 # Version 1.x
 - Exception Messages: 

@@ -31,7 +31,7 @@ public class PostgresDB extends SimiEntity {
     private Boolean defaultValue = false;
 
     @OneToMany(mappedBy = "postgresDB")
-    private List<ModelSchema> modelSchemas;
+    private List<DataTheme> dataThemes;
 
     public String getDbServiceUrl() {
         return dbServiceUrl;
@@ -41,12 +41,12 @@ public class PostgresDB extends SimiEntity {
         this.dbServiceUrl = dbServiceUrl;
     }
 
-    public List<ModelSchema> getModelSchemas() {
-        return modelSchemas;
+    public List<DataTheme> getDataThemes() {
+        return dataThemes;
     }
 
-    public void setModelSchemas(List<ModelSchema> modelSchemas) {
-        this.modelSchemas = modelSchemas;
+    public void setDataThemes(List<DataTheme> dataThemes) {
+        this.dataThemes = dataThemes;
     }
 
     public Boolean getDefaultValue() {

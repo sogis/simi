@@ -10,13 +10,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Table(name = "SIMIDATA_MODEL_SCHEMA", uniqueConstraints = {
+@Table(name = "SIMIDATA_DATA_THEME", uniqueConstraints = {
         @UniqueConstraint(name = "IDX_SIMIDATA_MODEL_SCHEMA_UNQ_SCHEMA_NAME_POSTGRES_DB_ID", columnNames = {"SCHEMA_NAME", "POSTGRES_DB_ID"})
 })
-@Entity(name = ModelSchema.NAME)
+@Entity(name = DataTheme.NAME)
 @NamePattern("%s.%s|postgresDB,schemaName")
-public class ModelSchema extends SimiEntity {
-    public static final String NAME = "simiData_ModelSchema";
+public class DataTheme extends SimiEntity {
+    public static final String NAME = "simiData_DataTheme";
 
     private static final long serialVersionUID = -2988394575142052644L;
 
@@ -32,7 +32,7 @@ public class ModelSchema extends SimiEntity {
     @OnDeleteInverse(DeletePolicy.DENY)
     private PostgresDB postgresDB;
 
-    @OneToMany(mappedBy = "modelSchema")
+    @OneToMany(mappedBy = "dataTheme")
     @Composition
     private List<PostgresTable> postgresTables;
 

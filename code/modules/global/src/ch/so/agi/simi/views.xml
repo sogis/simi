@@ -63,23 +63,23 @@
         <property name="transparency"/>
     </view>
     <view entity="simiData_PostgresTable" name="dependencyService-fullTableName">
-        <property name="modelSchema">
+        <property name="dataTheme">
             <property name="schemaName"/>
         </property>
         <property name="tableName"/>
     </view>
     <view entity="simiData_PostgresDB" name="postgresDB-browse" extends="_local">
-        <property name="modelSchemas" view="_minimal"/>
+        <property name="dataThemes" view="_minimal"/>
     </view>
     <view entity="simiData_PostgresDB" name="postgresDB-edit" extends="_local"/>
-    <view entity="simiData_ModelSchema" name="modelSchema-browse" extends="_local">
+    <view entity="simiData_DataTheme" name="dataTheme-browse" extends="_local">
         <property name="postgresDB" view="_minimal"/>
     </view>
-    <view entity="simiData_ModelSchema" name="modelSchema-edit" extends="_local">
+    <view entity="simiData_DataTheme" name="dataTheme-edit" extends="_local">
         <property name="postgresDB" view="_minimal"/>
     </view>
     <view entity="simiData_PostgresTable" name="postgresTable-browse" extends="_local">
-        <property name="modelSchema" view="_minimal">
+        <property name="dataTheme" view="_minimal">
             <property name="schemaName"/>
             <property name="postgresDB" view="_minimal">
                 <property name="dbName"/>
@@ -88,7 +88,7 @@
         <property name="tableViews" view="_minimal"/>
     </view>
     <view entity="simiData_PostgresTable" name="postgresTable-edit" extends="_local">
-        <property name="modelSchema" view="_minimal">
+        <property name="dataTheme" view="_minimal">
         </property>
         <property name="tableFields" view="_local">
             <property name="viewFields" view="_minimal"/>

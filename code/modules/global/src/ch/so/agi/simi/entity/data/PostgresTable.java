@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "SIMIDATA_POSTGRES_TABLE")
 @Entity(name = PostgresTable.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("%s.%s|modelSchema,tableName")
+@NamePattern("%s.%s|dataTheme,tableName")
 public class PostgresTable extends TableDS {
 
     public static final String NAME = "simiData_PostgresTable";
@@ -28,9 +28,9 @@ public class PostgresTable extends TableDS {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "MODEL_SCHEMA_ID")
+    @JoinColumn(name = "DATA_THEME_ID")
     @OnDeleteInverse(DeletePolicy.DENY)
-    private ModelSchema modelSchema;
+    private DataTheme dataTheme;
 
     @OneToMany(mappedBy = "postgresTable")
     @Composition
@@ -75,12 +75,12 @@ public class PostgresTable extends TableDS {
         this.tableViews = tableViews;
     }
 
-    public ModelSchema getModelSchema() {
-        return modelSchema;
+    public DataTheme getDataTheme() {
+        return dataTheme;
     }
 
-    public void setModelSchema(ModelSchema modelSchema) {
-        this.modelSchema = modelSchema;
+    public void setDataTheme(DataTheme dataTheme) {
+        this.dataTheme = dataTheme;
     }
 
     public Integer getGeoEpsgCode() {
