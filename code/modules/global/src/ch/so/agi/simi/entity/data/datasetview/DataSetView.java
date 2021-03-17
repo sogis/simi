@@ -51,16 +51,6 @@ public class DataSetView extends SingleActor {
     @Column(name = "STYLE_DESKTOP_UPLOADED")
     private LocalDateTime styleDesktopChanged;
 
-    @NotNull
-    @Column(name = "SEARCH_TYPE", nullable = false)
-    private String searchType;
-
-    @Column(name = "SEARCH_FACET", length = 100)
-    private String searchFacet;
-
-    @Column(name = "SEARCH_FILTER_WORD", length = 100)
-    private String searchFilterWord;
-
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "dataSetView")
@@ -78,14 +68,6 @@ public class DataSetView extends SingleActor {
 
     public void setRelations(List<Relation> relations) {
         this.relations = relations;
-    }
-
-    public DataSetView_SearchTypeEnum getSearchType() {
-        return searchType == null ? null : DataSetView_SearchTypeEnum.fromId(searchType);
-    }
-
-    public void setSearchType(DataSetView_SearchTypeEnum searchType) {
-        this.searchType = searchType == null ? null : searchType.getId();
     }
 
     @Override
@@ -133,22 +115,6 @@ public class DataSetView extends SingleActor {
         this.facadeLayers = facadeLayers;
     }
 
-    public String getSearchFilterWord() {
-        return searchFilterWord;
-    }
-
-    public void setSearchFilterWord(String searchFilterWord) {
-        this.searchFilterWord = searchFilterWord;
-    }
-
-    public String getSearchFacet() {
-        return searchFacet;
-    }
-
-    public void setSearchFacet(String searchFacet) {
-        this.searchFacet = searchFacet;
-    }
-
     public String getStyleDesktop() {
         return styleDesktop;
     }
@@ -171,10 +137,5 @@ public class DataSetView extends SingleActor {
 
     public void setRawDownload(Boolean rawDownload) {
         this.rawDownload = rawDownload;
-    }
-
-    @PostConstruct
-    public void postConstruct() {
-        setSearchType(DataSetView_SearchTypeEnum.NO_SEARCH);
     }
 }

@@ -22,12 +22,24 @@ public class PostgresDB extends SimiEntity {
     @NotNull
     private String dbName;
 
+    @NotNull
+    @Column(name = "DB_SERVICE_URL", nullable = false, unique = true)
+    private String dbServiceUrl;
+
     @Column(name = "DEFAULT_VALUE", nullable = false)
     @NotNull
     private Boolean defaultValue = false;
 
     @OneToMany(mappedBy = "postgresDB")
     private List<ModelSchema> modelSchemas;
+
+    public String getDbServiceUrl() {
+        return dbServiceUrl;
+    }
+
+    public void setDbServiceUrl(String dbServiceUrl) {
+        this.dbServiceUrl = dbServiceUrl;
+    }
 
     public List<ModelSchema> getModelSchemas() {
         return modelSchemas;

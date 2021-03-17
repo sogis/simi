@@ -103,6 +103,7 @@ create table SIMIDATA_POSTGRES_DB (
     EXT5 text,
     --
     DB_NAME varchar(100) not null,
+    DB_SERVICE_URL varchar(255) not null,
     DEFAULT_VALUE boolean not null,
     --
     primary key (ID)
@@ -396,6 +397,9 @@ create table SIMIDATA_TABLE_VIEW (
     GEO_EPSG_CODE integer,
     WGC_EDIT boolean not null,
     POSTGRES_TABLE_ID uuid not null,
+    SEARCH_TYPE varchar(50) not null,
+    SEARCH_FACET varchar(100),
+    SEARCH_FILTER_WORD varchar(100),
     --
     primary key (ID)
 )^
@@ -483,9 +487,6 @@ create table SIMIDATA_DATA_SET_VIEW (
     STYLE_SERVER_UPLOADED timestamp,
     STYLE_DESKTOP text,
     STYLE_DESKTOP_UPLOADED timestamp,
-    SEARCH_TYPE varchar(50) not null,
-    SEARCH_FACET varchar(100),
-    SEARCH_FILTER_WORD varchar(100),
     --
     primary key (ID)
 )^

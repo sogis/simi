@@ -5,7 +5,7 @@ import com.haulmont.chile.core.datatypes.impl.EnumClass;
 import javax.annotation.Nullable;
 
 
-public enum DataSetView_SearchTypeEnum implements EnumClass<String> {
+public enum TableView_SearchTypeEnum implements EnumClass<String> {
 
     NO_SEARCH("1_no_search"),
     IF_LOADED("2_if_loaded"),
@@ -13,7 +13,7 @@ public enum DataSetView_SearchTypeEnum implements EnumClass<String> {
 
     private String id;
 
-    DataSetView_SearchTypeEnum(String value) {
+    TableView_SearchTypeEnum(String value) {
         this.id = value;
     }
 
@@ -22,8 +22,8 @@ public enum DataSetView_SearchTypeEnum implements EnumClass<String> {
     }
 
     @Nullable
-    public static DataSetView_SearchTypeEnum fromId(String id) {
-        for (DataSetView_SearchTypeEnum at : DataSetView_SearchTypeEnum.values()) {
+    public static TableView_SearchTypeEnum fromId(String id) {
+        for (TableView_SearchTypeEnum at : TableView_SearchTypeEnum.values()) {
             if (at.getId().equals(id)) {
                 return at;
             }

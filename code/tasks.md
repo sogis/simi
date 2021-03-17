@@ -12,13 +12,14 @@
 # Version 1.0
 
 * Schema
-  * Entfernen Publikationsfelder (DSV)
-  * Verschieben der Suchfelder von DSV in TableView
-  * Verschieben Attributalias und Sort von DSV in DS
+  * DONE Entfernen Publikationsfelder (releasedAt, releasedThrough)
+  * DONE Verschieben der Suchfelder von DSV in TableView
+  * Verschieben Attributalias, wmsFiInfo, displayProps4Json von ViewField nach TableField
+  * Externe WMS / WMTS erfassen
   * Ergänzung mit den fehlenden Feldern, gemäss Erkenntnissen aus Datenmigration und Erstellung der
   Konfigurations-Jsons.
-  * In der Tabelle simidata_postgres_db muss noch  die service-URL der DB-Connection ergänzt werden (neues Attribut)
-  * Aufräumen DataSetView-Klassen (TableView, ViewField, RasterView, DataSetView)
+  * DONE In der Tabelle simidata_postgres_db muss noch die service-URL der DB-Connection ergänzt werden (neues Attribut)
+  * DONE Aufräumen DataSetView-Klassen (TableView, ViewField, RasterView, DataSetView)
     * Db-Präfix simidata. 
     * Java-Package data.*
   * Entfernen der ext-Felder der Datenmigration    

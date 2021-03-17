@@ -7,6 +7,7 @@ import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -48,6 +49,40 @@ public class TableView extends DataSetView {
     @JoinColumn(name = "POSTGRES_TABLE_ID")
     @OnDeleteInverse(DeletePolicy.DENY)
     private PostgresTable postgresTable;
+
+    @NotNull
+    @Column(name = "SEARCH_TYPE", nullable = false)
+    private String searchType;
+
+    @Column(name = "SEARCH_FACET", length = 100)
+    private String searchFacet;
+
+    @Column(name = "SEARCH_FILTER_WORD", length = 100)
+    private String searchFilterWord;
+
+    public TableView_SearchTypeEnum getSearchType() {
+        return searchType == null ? null : TableView_SearchTypeEnum.fromId(searchType);
+    }
+
+    public void setSearchType(TableView_SearchTypeEnum searchType) {
+        this.searchType = searchType == null ? null : searchType.getId();
+    }
+
+    public String getSearchFilterWord() {
+        return searchFilterWord;
+    }
+
+    public void setSearchFilterWord(String searchFilterWord) {
+        this.searchFilterWord = searchFilterWord;
+    }
+
+    public String getSearchFacet() {
+        return searchFacet;
+    }
+
+    public void setSearchFacet(String searchFacet) {
+        this.searchFacet = searchFacet;
+    }
 
     public Integer getGeoEpsgCode() {
         return geoEpsgCode;
@@ -103,5 +138,10 @@ public class TableView extends DataSetView {
 
     public void setWhereClause(String whereClause) {
         this.whereClause = whereClause;
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        setSearchType(TableView_SearchTypeEnum.NO_SEARCH);
     }
 }
