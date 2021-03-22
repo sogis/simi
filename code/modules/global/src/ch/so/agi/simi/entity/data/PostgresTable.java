@@ -130,4 +130,20 @@ public class PostgresTable extends TableDS {
     public void setIdFieldName(String idFieldName) {
         this.idFieldName = idFieldName;
     }
+
+    public TableField findField(String fieldName){
+        if(fieldName == null || fieldName.length() == 0)
+            throw new IllegalArgumentException("fieldName must be non empty String");
+
+        TableField res = null;
+
+        for(TableField tf : tableFields){
+            if(fieldName.equalsIgnoreCase(tf.getName())){
+                res = tf;
+                break;
+            }
+        }
+
+        return res;
+    }
 }

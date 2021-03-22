@@ -67,4 +67,21 @@ public class DataTheme extends SimiEntity {
     public void setSchemaName(String schemaName) {
         this.schemaName = schemaName;
     }
+
+    public PostgresTable findTableByName(String name){
+
+        PostgresTable res = null;
+
+        if(name == null)
+            throw new IllegalArgumentException("name must not be null");
+
+        for(PostgresTable table : postgresTables){
+            if(name.equalsIgnoreCase(table.getTableName())){
+                res = table;
+                break;
+            }
+        }
+
+        return res;
+    }
 }

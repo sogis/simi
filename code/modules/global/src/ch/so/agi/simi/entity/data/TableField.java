@@ -63,6 +63,16 @@ public class TableField extends SimiEntity {
     @OnDeleteInverse(DeletePolicy.CASCADE)
     private PostgresTable postgresTable;
 
+    @Column(name = "ALIAS", length = 100)
+    private String alias;
+
+    @Column(name = "WMS_FI_FORMAT", length = 100)
+    private String wmsFiFormat;
+
+    @Lob
+    @Column(name = "DISPLAY_PROPS4_JSON")
+    private String displayProps4Json;
+
     public String getDescriptionOverride() {
         return descriptionOverride;
     }
@@ -141,6 +151,30 @@ public class TableField extends SimiEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDisplayProps4Json() {
+        return displayProps4Json;
+    }
+
+    public void setDisplayProps4Json(String displayProps4Json) {
+        this.displayProps4Json = displayProps4Json;
+    }
+
+    public String getWmsFiFormat() {
+        return wmsFiFormat;
+    }
+
+    public void setWmsFiFormat(String wmsFiFormat) {
+        this.wmsFiFormat = wmsFiFormat;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public String getCaption() {

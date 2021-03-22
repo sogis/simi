@@ -5,6 +5,7 @@ import com.haulmont.chile.core.annotations.MetaProperty;
 
 @MetaClass(name = "simiData_TableInfo")
 public class TableInfo extends TableShortInfo {
+
     private static final long serialVersionUID = -791139972778760579L;
 
     @MetaProperty

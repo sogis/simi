@@ -132,6 +132,9 @@ create table SIMIDATA_TABLE_FIELD (
     STR_LENGTH integer,
     CAT_SYNCED boolean not null,
     POSTGRES_TABLE_ID uuid not null,
+    ALIAS varchar(100),
+    WMS_FI_FORMAT varchar(100),
+    DISPLAY_PROPS4_JSON text,
     --
     primary key (ID)
 )^
@@ -220,11 +223,9 @@ create table SIMIDATA_VIEW_FIELD (
     EXT5 text,
     --
     SORT integer not null,
-    ALIAS varchar(100),
-    WMS_FI_FORMAT varchar(100),
-    DISPLAY_PROPS4_JSON text,
     TABLE_FIELD_ID uuid not null,
     TABLE_VIEW_ID uuid not null,
+    ALIAS varchar(100),
     --
     primary key (ID)
 )^

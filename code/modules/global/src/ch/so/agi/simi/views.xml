@@ -77,6 +77,24 @@
     </view>
     <view entity="simiData_DataTheme" name="dataTheme-edit" extends="_local">
         <property name="postgresDB" view="_minimal"/>
+        <property name="postgresTables" view="_minimal">
+            <property name="catSyncStamp"/>
+            <property name="idFieldName"/>
+            <property name="tableFields" view="_minimal">
+                <property name="descriptionModel"/>
+                <property name="mandatory"/>
+                <property name="regExPattern"/>
+                <property name="catSynced"/>
+                <property name="alias"/>
+                <property name="wmsFiFormat"/>
+                <property name="displayProps4Json"/>
+            </property>
+            <property name="descriptionModel"/>
+            <property name="geoFieldName"/>
+            <property name="geoType"/>
+            <property name="geoEpsgCode"/>
+            <property name="remarks"/>
+        </property>
     </view>
     <view entity="simiData_PostgresTable" name="postgresTable-browse" extends="_local">
         <property name="dataTheme" view="_minimal">

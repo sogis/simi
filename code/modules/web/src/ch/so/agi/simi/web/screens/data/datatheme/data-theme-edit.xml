@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="DB Schema"
+        focusComponent="form">
+    <data>
+        <instance id="modelSchemaDc"
+                  class="ch.so.agi.simi.entity.data.DataTheme" view="dataTheme-edit">
+            <loader/>
+            <collection id="tablesDc" property="postgresTables"/>
+        </instance>
+    </data>
+    <dialogMode height="80%"
+                width="80%"
+                modal="true"
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="pgTablesBox" spacing="true">
+        <form id="form" dataContainer="modelSchemaDc">
+            <column width="350px">
+                <textField id="schemaNameField" property="schemaName"/>
+                <pickerField id="postgresDBField" property="postgresDB">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+            </column>
+        </form>
+        <groupBox id="pgTablesBox" caption="Tabellen im Thema"
+                  expand="pgTablesTable">
+            <table id="pgTablesTable" dataContainer="tablesDc" width="100%" multiselect="true">
+                <actions>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="tableName"/>
+                    <column id="idFieldName"/>
+                    <column id="catSyncStamp"/>
+                </columns>
+                <buttonsPanel>
+                    <button id="btnUpdateAll" caption="Alle (neu) einlesen" stylename="danger" icon="BULK_EDIT_ACTION"/>
+                    <button action="pgTablesTable.edit"/>
+                    <button action="pgTablesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

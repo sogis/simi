@@ -25,16 +25,6 @@ public class ViewField extends SimiEntity implements Sortable {
     @Column(name = "SORT", nullable = false)
     private Integer sort = 0;
 
-    @Column(name = "ALIAS", length = 100)
-    private String alias;
-
-    @Column(name = "WMS_FI_FORMAT", length = 100)
-    private String wmsFiFormat;
-
-    @Lob
-    @Column(name = "DISPLAY_PROPS4_JSON")
-    private String displayProps4Json;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TABLE_FIELD_ID")
     @OnDeleteInverse(DeletePolicy.CASCADE)
@@ -44,6 +34,9 @@ public class ViewField extends SimiEntity implements Sortable {
     @JoinColumn(name = "TABLE_VIEW_ID")
     @OnDeleteInverse(DeletePolicy.CASCADE)
     private TableView tableView;
+
+    @Column(name = "ALIAS", length = 100)
+    private String alias;
 
     public TableView getTableView() {
         return tableView;
@@ -61,20 +54,12 @@ public class ViewField extends SimiEntity implements Sortable {
         this.tableField = tableField;
     }
 
-    public String getDisplayProps4Json() {
-        return displayProps4Json;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setDisplayProps4Json(String displayProps4Json) {
-        this.displayProps4Json = displayProps4Json;
-    }
-
-    public String getWmsFiFormat() {
-        return wmsFiFormat;
-    }
-
-    public void setWmsFiFormat(String wmsFiFormat) {
-        this.wmsFiFormat = wmsFiFormat;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public String getAlias() {
@@ -83,13 +68,5 @@ public class ViewField extends SimiEntity implements Sortable {
 
     public void setAlias(String alias) {
         this.alias = alias;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
     }
 }

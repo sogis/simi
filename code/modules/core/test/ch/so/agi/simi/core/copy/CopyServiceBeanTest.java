@@ -642,9 +642,9 @@ class CopyServiceBeanTest {
             tf.setName(TV_DP_STRING);
             tf.setTypeName("bar");
             tf.setPostgresTable(tbl);
+            tf.setAlias(TV_FIELD_ALIAS);
 
             ViewField vf = container.metadata().create(ViewField.class);
-            vf.setAlias(TV_FIELD_ALIAS);
             vf.setSort(TV_SA_TRANSPARENCY);
             vf.setTableField(tf);
             vf.setTableView(tv);
