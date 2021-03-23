@@ -1,7 +1,7 @@
 package ch.so.agi.simi.web.beans.datatheme;
 
-import ch.so.agi.simi.entity.data.schemareader.TableAndFieldInfo;
-import ch.so.agi.simi.entity.data.schemareader.TableListing;
+import ch.so.agi.simi.web.beans.datatheme.dto.TableAndFieldInfo;
+import ch.so.agi.simi.web.beans.datatheme.dto.TableListing;
 
 public interface SchemaReader {
     //$td umwandeln auf Info von genau einer Tabelle

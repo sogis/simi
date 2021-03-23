@@ -52,7 +52,7 @@ class EntityLoadingTest {
     }
 
     @Test
-    void modelSchema_Browse_OK() {
+    void dataTheme_Browse_OK() {
         LoadContext context = LoadContext.create(DataTheme.class)
                 .setQuery(queryFor(DataTheme.NAME))
                 .setView("dataTheme-browse");
@@ -61,7 +61,7 @@ class EntityLoadingTest {
     }
 
     @Test
-    void modelSchema_Edit_OK() {
+    void dataTheme_Edit_OK() {
         LoadContext context = LoadContext.create(DataTheme.class)
                 .setQuery(queryFor(DataTheme.NAME))
                 .setView("dataTheme-edit");

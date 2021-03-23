@@ -17,15 +17,17 @@
             <form id="form" dataContainer="tableFieldDc">
                 <column width="350px">
                     <textField id="nameField" property="name" editable="false"/>
+                    <textField id="aliasField" property="alias" editable="true"/>
+                    <textField id="wmsFiFormatField" property="wmsFiFormat" editable="true"/>
+                    <textArea id="displayProps4JsonField" property="displayProps4Json" editable="true" rows="5" rowspan="4"/>
                     <checkBox id="mandatoryField" property="mandatory" editable="false"/>
                     <textField id="typeNameField" property="typeName" editable="false"/>
                     <textField id="strLengthField" property="strLength" editable="false"/>
                     <checkBox id="catSyncedField" property="catSynced" editable="false"/>
-                    <textField id="regExPatternField" property="regExPattern"/>
                 </column>
                 <column width="350px">
-                    <textArea id="descriptionModelField" property="descriptionModel" rows="5" editable="false" rowspan="3"/>
-                    <textArea id="descriptionOverrideField" property="descriptionOverride" rows="5" rowspan="3"/>
+                    <textArea id="descriptionOverrideField" property="descriptionOverride" rows="8" rowspan="6"/>
+                    <textArea id="descriptionModelField" property="descriptionModel" rows="8" editable="false" rowspan="6"/>
                 </column>
             </form>
         </scrollBox>

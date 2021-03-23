@@ -14,7 +14,7 @@
 * Schema
   * DONE Entfernen Publikationsfelder (releasedAt, releasedThrough)
   * DONE Verschieben der Suchfelder von DSV in TableView
-  * Verschieben Attributalias, wmsFiInfo, displayProps4Json von ViewField nach TableField
+  * DONE Verschieben Attributalias, wmsFiInfo, displayProps4Json von ViewField nach TableField
   * Externe WMS / WMTS erfassen
   * Ergänzung mit den fehlenden Feldern, gemäss Erkenntnissen aus Datenmigration und Erstellung der
   Konfigurations-Jsons.
@@ -23,6 +23,8 @@
     * Db-Präfix simidata. 
     * Java-Package data.*
   * Entfernen der ext-Felder der Datenmigration    
+  * Entity-Loading tests entity-Zentrisch machen (eine Testmethode pro entity mit helper testViews(String[] viewnames))
+  * UK über FK's und UK über FK, Attribut?
   * Nach Testing
       * Screens Wegräumen
         * _layer-group-choose.xml

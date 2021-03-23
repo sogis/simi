@@ -24,9 +24,6 @@ public class DataTheme extends SimiEntity {
     @NotNull
     private String schemaName;
 
-    @Column(name = "MODEL_NAME", length = 100)
-    private String modelName;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_DB_ID")
     @OnDeleteInverse(DeletePolicy.DENY)
@@ -52,14 +49,6 @@ public class DataTheme extends SimiEntity {
         this.postgresDB = postgresDB;
     }
 
-    public String getModelName() {
-        return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
     public String getSchemaName() {
         return schemaName;
     }
@@ -69,11 +58,13 @@ public class DataTheme extends SimiEntity {
     }
 
     public PostgresTable findTableByName(String name){
-
-        PostgresTable res = null;
-
         if(name == null)
             throw new IllegalArgumentException("name must not be null");
+
+        if(postgresTables == null)
+            return null;
+
+        PostgresTable res = null;
 
         for(PostgresTable table : postgresTables){
             if(name.equalsIgnoreCase(table.getTableName())){

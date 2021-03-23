@@ -98,8 +98,6 @@ class CopyServiceBeanTest {
 
             assertEquals(TV_COMPONENT_STRING, tv.getRelations().get(0).getDependency().getName());
             assertEquals(TV_ROLE_STRING, tv.getPermissions().get(0).getRole().getName());
-
-            assertEquals(TV_FIELD_ALIAS, tv.getViewFields().get(0).getAlias());
         }
         finally {
             cleanupTvTestdata();

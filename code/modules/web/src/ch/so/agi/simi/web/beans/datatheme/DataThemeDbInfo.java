@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.beans.datatheme;
 
-import ch.so.agi.simi.entity.data.schemareader.TableAndFieldInfo;
+import ch.so.agi.simi.web.beans.datatheme.dto.TableAndFieldInfo;
 
 import java.util.HashMap;
 

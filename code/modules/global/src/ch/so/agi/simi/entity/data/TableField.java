@@ -16,7 +16,7 @@ import java.util.List;
         @UniqueConstraint(name = "IDX_SIMIDATA_TABLE_FIELD_UNQ_NAME_POSTGRES_TABLE_ID", columnNames = {"NAME", "POSTGRES_TABLE_ID"})
 })
 @Entity(name = TableField.NAME)
-@NamePattern("#getCaption|name,typeName,strLength")
+@NamePattern("#getCaption|name,alias")
 public class TableField extends SimiEntity {
 
     public static final String NAME = "simiData_TableField";
@@ -46,9 +46,6 @@ public class TableField extends SimiEntity {
     @NotNull
     @Column(name = "MANDATORY", nullable = false)
     private Boolean mandatory = false;
-
-    @Column(name = "REG_EX_PATTERN", length = 512)
-    private String regExPattern;
 
     @Column(name = "STR_LENGTH")
     @Positive
@@ -121,14 +118,6 @@ public class TableField extends SimiEntity {
         this.strLength = strLength;
     }
 
-    public String getRegExPattern() {
-        return regExPattern;
-    }
-
-    public void setRegExPattern(String regExPattern) {
-        this.regExPattern = regExPattern;
-    }
-
     public Boolean getMandatory() {
         return mandatory;
     }
@@ -178,6 +167,6 @@ public class TableField extends SimiEntity {
     }
 
     public String getCaption() {
-        return name + " " + typeName + (strLength == null ? "" : "(" + strLength + ")");
+        return name + " (" + alias + ")";
     }
 }

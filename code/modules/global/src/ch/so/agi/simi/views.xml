@@ -83,7 +83,6 @@
             <property name="tableFields" view="_minimal">
                 <property name="descriptionModel"/>
                 <property name="mandatory"/>
-                <property name="regExPattern"/>
                 <property name="catSynced"/>
                 <property name="alias"/>
                 <property name="wmsFiFormat"/>
@@ -272,4 +271,5 @@
     </view>
     <view entity="simiData_TableField" name="viewField-edit-tableFields" extends="_local"/>
     <view entity="simiIAM_Role" name="dsv-editscreens-roles" extends="_minimal"/>
+    <view entity="simiData_PostgresDB" name="dataTheme-edit-dbs" extends="_minimal"/>
 </views>

@@ -3,7 +3,6 @@ package ch.so.agi.simi.entity.data.datasetview;
 import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.Sortable;
 import ch.so.agi.simi.entity.data.TableField;
-import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
@@ -14,7 +13,6 @@ import javax.validation.constraints.NotNull;
         @UniqueConstraint(name = "IDX_SIMI_VIEW_FIELD_UNQ_TABLE_FIELD_ID_TABLE_VIEW_ID", columnNames = {"TABLE_FIELD_ID", "TABLE_VIEW_ID"})
 })
 @Entity(name = ViewField.NAME)
-@NamePattern("%s|alias")
 public class ViewField extends SimiEntity implements Sortable {
 
     public static final String NAME = "simiData_ViewField";
@@ -34,9 +32,6 @@ public class ViewField extends SimiEntity implements Sortable {
     @JoinColumn(name = "TABLE_VIEW_ID")
     @OnDeleteInverse(DeletePolicy.CASCADE)
     private TableView tableView;
-
-    @Column(name = "ALIAS", length = 100)
-    private String alias;
 
     public TableView getTableView() {
         return tableView;
@@ -62,11 +57,4 @@ public class ViewField extends SimiEntity implements Sortable {
         this.sort = sort;
     }
 
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
 }

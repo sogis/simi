@@ -35,11 +35,13 @@ public class DataThemeEdit extends StandardEditor<DataTheme> {
 
         DataTheme editedTheme = modelSchemaDc.getItem();
 
-        //tablesDc.getMutableItems().removeAll(editedTheme.getPostgresTables());
+        if(editedTheme.getPostgresTables() != null)
+            tablesDc.getMutableItems().removeAll(editedTheme.getPostgresTables());
 
         bean.actualizeWithDbCat(client, editedTheme);
 
-        //tablesDc.getMutableItems().addAll(editedTheme.getPostgresTables());
+        if(editedTheme.getPostgresTables() != null)
+            tablesDc.getMutableItems().addAll(editedTheme.getPostgresTables());
     }
     
 }

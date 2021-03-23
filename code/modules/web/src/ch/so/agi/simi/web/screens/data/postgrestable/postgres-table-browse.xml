@@ -32,8 +32,8 @@
                dataContainer="postgresTablesDc"
                multiselect="true">
             <actions>
-                <action id="create" type="create" caption="Neues Vektor DS"/>
-                <action id="createTableView" caption="Neue View für DS" icon="ADD_ACTION" trackSelection="true"/>
+                <action id="create" type="create" caption="Neue Tabelle"/>
+                <action id="createTableView" caption="Neue View für Tabelle" icon="ADD_ACTION" trackSelection="true"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove">
                     <properties>

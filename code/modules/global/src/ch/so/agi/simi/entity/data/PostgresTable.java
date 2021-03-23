@@ -135,6 +135,9 @@ public class PostgresTable extends TableDS {
         if(fieldName == null || fieldName.length() == 0)
             throw new IllegalArgumentException("fieldName must be non empty String");
 
+        if(tableFields == null)
+            return null;
+
         TableField res = null;
 
         for(TableField tf : tableFields){

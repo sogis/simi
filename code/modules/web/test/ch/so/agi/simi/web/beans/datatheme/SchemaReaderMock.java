@@ -1,11 +1,43 @@
 package ch.so.agi.simi.web.beans.datatheme;
 
-import ch.so.agi.simi.entity.data.schemareader.*;
+import ch.so.agi.simi.web.beans.datatheme.dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SchemaReaderMock implements SchemaReader {
+
+    @Override
+    public TableListing querySchemaMeta(String dbName, String schemaName){
+        TableListing res = null;
+
+        if(ThemeReaderBeanTest.TABLE_DELETED__SCHEMA.equals(schemaName)){
+            res = listingMock(schemaName, "current");
+        }
+        else if(ThemeReaderBeanTest.TABLE_UPDATED__SCHEMA.equals(schemaName)){
+            res = listingMock(schemaName, ThemeReaderBeanTest.TABLE_UPDATED__TABLE);
+        }
+        else if(ThemeReaderBeanTest.TABLE_NEW__SCHEMA.equals(schemaName)){
+            res = listingMock(schemaName, ThemeReaderBeanTest.TABLE_NEW__TABLE);
+        }
+        else if(ThemeReaderBeanTest.FIELD_DELETED__SCHEMA.equals(schemaName)){
+            res = listingMock(schemaName, ThemeReaderBeanTest.FIELD_DELETED__TABLE);
+        }
+        else if(ThemeReaderBeanTest.FIELD_UPDATED__SCHEMA.equals(schemaName)){
+            res = listingMock(schemaName, ThemeReaderBeanTest.FIELD_UPDATED__TABLE);
+        }
+        else if(ThemeReaderBeanTest.FIELD_NEW__SCHEMA.equals(schemaName)){
+            res = listingMock(schemaName, ThemeReaderBeanTest.FIELD_NEW__TABLE);
+        }
+        else if(ThemeReaderBeanTest.SCHEMA_READALL__SCHEMA.equals(schemaName)){
+            res = listingMock(schemaName, ThemeReaderBeanTest.SCHEMA_READALL__TABLE);
+        }
+        else if(ThemeReaderBeanTest.SCHEMA_EXISTING_KEPT__SCHEMA.equals(schemaName)){
+            res = listingMock(schemaName, ThemeReaderBeanTest.SCHEMA_EXISTING_KEPT__NEW_TABLE);
+        }
+
+        return res;
+    }
 
     @Override
     public TableAndFieldInfo queryTableMeta(String dbName, String schemaName, String tableName){
@@ -27,11 +59,17 @@ public class SchemaReaderMock implements SchemaReader {
         else if(ThemeReaderBeanTest.FIELD_UPDATED__SCHEMA.equals(schemaName)){
             res = tblAndFieldMock(schemaName, ThemeReaderBeanTest.FIELD_UPDATED__TABLE, ThemeReaderBeanTest.FIELD_UPDATED__FIELD);
         }
+        else if(ThemeReaderBeanTest.FIELD_NEW__SCHEMA.equals(schemaName)){
+            res = tblAndFieldMock(schemaName, ThemeReaderBeanTest.FIELD_NEW__TABLE, ThemeReaderBeanTest.FIELD_NEW__FIELD);
+        }
         else if(ThemeReaderBeanTest.SCHEMA_READALL__SCHEMA.equals(schemaName)){
             res = tblAndFieldMock(schemaName, ThemeReaderBeanTest.SCHEMA_READALL__TABLE, null);
             
             addAllTableProperties(res.getTableInfo());
             addAllFields(res.getFields());
+        }
+        else if(ThemeReaderBeanTest.SCHEMA_EXISTING_KEPT__SCHEMA.equals(schemaName)){
+            res = tblAndFieldMock(schemaName, ThemeReaderBeanTest.SCHEMA_EXISTING_KEPT__NEW_TABLE, "fuu_");
         }
 
         return res;
@@ -48,7 +86,7 @@ public class SchemaReaderMock implements SchemaReader {
         fields.add(g1);
 
         FieldInfo g2 = new FieldInfo();
-        g2.setName(ThemeReaderBeanTest.SCHEMA_READALL_FIELD_GEO1);
+        g2.setName(ThemeReaderBeanTest.SCHEMA_READALL_FIELD_GEO2);
         g2.setType(ThemeReaderBeanTest.SCHEMA_READALL__STRING);
         g2.setGeoFieldType(ThemeReaderBeanTest.SCHEMA_READALL__STRING);
         g2.setGeoFieldSrOrg("epsg");
@@ -74,32 +112,6 @@ public class SchemaReaderMock implements SchemaReader {
     private static void addAllTableProperties(TableInfo ti){
         ti.setDescription(ThemeReaderBeanTest.SCHEMA_READALL__STRING);
         ti.setPkField(ThemeReaderBeanTest.SCHEMA_READALL__STRING);
-    }
-
-    @Override
-    public TableListing querySchemaMeta(String dbName, String schemaName){
-        TableListing res = null;
-
-        if(ThemeReaderBeanTest.TABLE_DELETED__SCHEMA.equals(schemaName)){
-            res = listingMock(schemaName, "current");
-        }
-        else if(ThemeReaderBeanTest.TABLE_UPDATED__SCHEMA.equals(schemaName)){
-            res = listingMock(schemaName, ThemeReaderBeanTest.TABLE_UPDATED__TABLE);
-        }
-        else if(ThemeReaderBeanTest.TABLE_NEW__SCHEMA.equals(schemaName)){
-            res = listingMock(schemaName, ThemeReaderBeanTest.TABLE_NEW__TABLE);
-        }
-        else if(ThemeReaderBeanTest.FIELD_DELETED__SCHEMA.equals(schemaName)){
-            res = listingMock(schemaName, ThemeReaderBeanTest.FIELD_DELETED__TABLE);
-        }
-        else if(ThemeReaderBeanTest.FIELD_UPDATED__SCHEMA.equals(schemaName)){
-            res = listingMock(schemaName, ThemeReaderBeanTest.FIELD_UPDATED__TABLE);
-        }
-        else if(ThemeReaderBeanTest.SCHEMA_READALL__SCHEMA.equals(schemaName)){
-            res = listingMock(schemaName, ThemeReaderBeanTest.SCHEMA_READALL__TABLE);
-        }
-
-        return res;
     }
 
     private static TableListing listingMock(String schemaName, String tableName){

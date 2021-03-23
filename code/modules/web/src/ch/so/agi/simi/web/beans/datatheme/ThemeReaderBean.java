@@ -3,7 +3,7 @@ package ch.so.agi.simi.web.beans.datatheme;
 import ch.so.agi.simi.entity.data.DataTheme;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
-import ch.so.agi.simi.entity.data.schemareader.*;
+import ch.so.agi.simi.web.beans.datatheme.dto.*;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,28 +22,29 @@ public class ThemeReaderBean {
         String[] tableNames = readTableNames(reader, inOutTheme);
 
         for (String name : tableNames) {
-            actualizeWithDbCat(reader, inOutTheme, name);
+            PostgresTable inOutTable = inOutTheme.findTableByName(name);
+            if(inOutTable == null){
+                inOutTable = new PostgresTable();
+                inOutTable.setTableName(name);
+
+                if(inOutTheme.getPostgresTables() == null)
+                    inOutTheme.setPostgresTables(new ArrayList<>());
+
+                inOutTheme.getPostgresTables().add(inOutTable);
+                inOutTable.setDataTheme(inOutTheme);
+            }
+
+            actualizeWithDbCat(reader, inOutTable);
         }
     }
 
-    public void actualizeWithDbCat(SchemaReader reader, DataTheme inOutTheme, String tableName) {
+    public void actualizeWithDbCat(SchemaReader reader, PostgresTable inOutTable) {
 
         TableAndFieldInfo tfi = reader.queryTableMeta(
-                inOutTheme.getPostgresDB().getDbName(),
-                inOutTheme.getSchemaName(),
-                tableName
+                inOutTable.getDataTheme().getPostgresDB().getDbName(),
+                inOutTable.getDataTheme().getSchemaName(),
+                inOutTable.getTableName()
         );
-
-        PostgresTable inOutTable = inOutTheme.findTableByName(tableName);
-        if(inOutTable == null){
-            inOutTable = new PostgresTable();
-
-            if(inOutTheme.getPostgresTables() == null)
-                inOutTheme.setPostgresTables(new ArrayList<>());
-
-            inOutTheme.getPostgresTables().add(inOutTable);
-            inOutTable.setDataTheme(inOutTheme);
-        }
 
         updateTableInfo(inOutTable, tfi);
         updateFields(inOutTable, tfi);
@@ -133,8 +134,8 @@ public class ThemeReaderBean {
     private static String buildAliasFromName(String fieldName){
         String alias = fieldName.replace("_", " ");
 
-        String firstChar = String.valueOf(fieldName.charAt(0));
-        alias.replaceFirst(
+        String firstChar = fieldName.substring(0,1);
+        alias = alias.replaceFirst(
                 firstChar,
                 firstChar.toUpperCase()
         );
@@ -151,11 +152,13 @@ public class ThemeReaderBean {
                 theme.getSchemaName()
         );
 
-        for(TableShortInfo ti : tl.getTableViewList()){
-            if(ti.getTvName().toLowerCase().startsWith("t_ili2db"))
-                continue;
+        if(tl.getTableViewList() != null) {
+            for (TableShortInfo ti : tl.getTableViewList()) {
+                if (ti.getTvName().toLowerCase().startsWith("t_ili2db"))
+                    continue;
 
-            relevantTables.add(ti.getTvName());
+                relevantTables.add(ti.getTvName());
+            }
         }
 
         return relevantTables.toArray(new String[0]);

@@ -92,9 +92,6 @@ Sortierte Liste der Attribute mit Alias einer TableView.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |sort|int|j|Sortierung in WMS Featureinfo und WGC.|
-|alias|String(100)|n|Sprechende Bezeichnung des Attributes in WMS und WGC Featureinfo.|
-|wmsFiFormat|String(100)|n|Python Formattierungs-String, welcher die Formatierung des Attributes für WMS GetFeatureInfo steuert.|
-|displayProps4Json|Json|n|Definiert Alias, Reihenfolge, Wertformatierung für die Properties eines Json-Feldes.|
 
 #### Konstraints
 
@@ -147,13 +144,15 @@ Umfasst die Eigenschaften eines Attributs einer PostgresDS. Die Geometriespalten
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |name|String(100)|j|Name des Attributes in Postgres. Maximallänge in Postgres scheint 64 zu sein, darum String(100).|
+|alias|String(100)|n|Sprechende Bezeichnung des Attributes in WMS und WGC Featureinfo.|
 |typeName|String(100)|j|Name des Datentypes des Attributes.|
 |mandatory|boolean|j|Ist der Feldwert zwingend?|
-|regExPattern|String(512)|n|RegEx-Pattern. Wird von Dataservice bei Datenänderungen validiert.|
 |strLength|Integer|n|Länge des Stringtyps (Sofern die Länge limitiert ist).|
 |catSynced|boolean|j|Gibt an, ob das Attribut bei der letzten Katalogabfrage in der Datenbank vorhanden war.|
 |descriptionModel|String|j|Beschreibung des Attributs im INTERLIS-Modell.|
 |descriptionOverride|String|n|Übersteuerung der Beschreibung in SIMI (Wird bei "grösserer" Modelländerung in das Modell zurückgeschrieben.|
+|wmsFiFormat|String(100)|n|Python Formatierungs-String, welcher die Formatierung des Attributes für WMS GetFeatureInfo steuert.|
+|displayProps4Json|Json|n|Definiert Alias, Reihenfolge, Wertformatierung für die Properties eines Json-Feldes.|
 
 #### Konstraints
 
@@ -168,17 +167,19 @@ Bezüglich Auslesen des Kataloges mittels SchemaReader bei bestehenden Attribute
 #### Bemerkungen:
 * Die Namen der Attribute werden mittels Katalogabfrage aus Postgres gelesen.
 
-### Klasse ModelSchema
+### Klasse DataTheme
 
-Schema, welches mittels INTERLIS-Modell und ili2pg erzeugt wurde. Das Metamodell geht einer Beziehung 
-Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Schema hinterlegt werden.
+Datenthema, welches 1-n (Geo-)Tabellen umfasst. Synonym für das Schema, welches mittels INTERLIS-Modell
+und ili2pg erzeugt wurde. 
+
+Ausblick INTERLIS-Modell: Das Metamodell geht von einer Beziehung 
+Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Datenthema hinterlegt werden.
 
 #### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |schemaName|String(100)|j|Name des Schemas.|
-|modelName|String(100)|n|Name des INTERLIS-Modelles, mit welchem das Schema angelegt wurde.|
 
 #### Konstraints
 

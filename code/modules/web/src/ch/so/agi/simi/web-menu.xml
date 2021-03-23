@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <item screen="simiProduct_DataProduct.browse" caption="Produkte" insertBefore="administration"/>
-    <item id="simiData_PostgresTable.browse" screen="simiData_PostgresTable.browse" caption="Geo-Tabellen" insertBefore="administration"/>
+    <item id="simiData_PostgresTable.browse" screen="simiData_PostgresTable.browse" caption="Tabellen" insertBefore="administration"/>
     <item screen="simiData_TableDependency.list" caption="Abhängigkeits-Liste" insertBefore="administration"/>
     <menu id="application-simi-iam" caption="Benutzer - Verwaltung ..." expanded="false" insertBefore="administration">
         <item screen="simiIAM_User.browse" caption="Benutzer"/>
@@ -9,8 +9,8 @@
         <item screen="simiIAM_Role.browse" caption="Rollen"/>
     </menu>
     <menu id="application-simi-data" caption="Daten-Konfiguration ..." expanded="false" insertBefore="administration">
-        <item id="simiData_PostgresTable.browse_2" screen="simiData_PostgresTable.browse" caption="Geo-Tabellen"/>
-        <item screen="simiData_DataTheme.browse" caption="Schemas"/>
+        <item id="simiData_PostgresTable.browse_2" screen="simiData_PostgresTable.browse" caption="Tabellen"/>
+        <item screen="simiData_DataTheme.browse" caption="Datenthemen"/>
         <item screen="simiData_PostgresDB.browse" caption="Datenbanken"/>
         <item screen="simiData_RasterDS.browse" caption="Raster"/>
         <item screen="simiData_ExternalTable.browse" caption="Externe Tabellen"/>

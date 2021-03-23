@@ -31,6 +31,10 @@ public class ThemeReaderBeanTest {
     public static final String SCHEMA_READALL_FIELD_CHAR_BOUNDED = "charBounded";
     public static final String SCHEMA_READALL_FIELD_CHAR_MAX = "charMax";
 
+    public static final String SCHEMA_EXISTING_KEPT__SCHEMA = "schema_existing_kept_schema";
+    public static final String SCHEMA_EXISTING_KEPT__OLD_TABLE = "old_table";
+    public static final String SCHEMA_EXISTING_KEPT__NEW_TABLE = "new_table";
+
     public static final String TABLE_DELETED__SCHEMA = "table_deleted_schema";
     public static final String TABLE_DELETED__TABLE = "stale";
 
@@ -40,17 +44,17 @@ public class ThemeReaderBeanTest {
     public static final String TABLE_NEW__SCHEMA = "table_new_schema";
     public static final String TABLE_NEW__TABLE = "newtable";
 
-    public static final String FIELD_DELETED__SCHEMA = "table_deleted_schema";
+    public static final String FIELD_DELETED__SCHEMA = "field_deleted_schema";
     public static final String FIELD_DELETED__TABLE = "fieldtable";
     public static final String FIELD_DELETED__FIELD = "stale";
 
-    public static final String FIELD_UPDATED__SCHEMA = "table_updated_schema";
+    public static final String FIELD_UPDATED__SCHEMA = "field_updated_schema";
     public static final String FIELD_UPDATED__TABLE = "fieldtable";
     public static final String FIELD_UPDATED__FIELD = "updated";
 
-    public static final String FIELD_NEW__SCHEMA = "table_updated_schema";
+    public static final String FIELD_NEW__SCHEMA = "field_new_schema";
     public static final String FIELD_NEW__TABLE = "fieldtable";
-    public static final String FIELD_NEW__FIELD = "updated";
+    public static final String FIELD_NEW__FIELD = "newfield";
 
     @Test
     public void schema_ReadAllTableAndFieldProperties_OK(){
@@ -70,7 +74,7 @@ public class ThemeReaderBeanTest {
         Assertions.assertEquals(SCHEMA_READALL__STRING, table.getIdFieldName());
         Assertions.assertEquals(SCHEMA_READALL__STRING, table.getDescriptionModel());
         Assertions.assertEquals(SCHEMA_READALL__INTEGER, table.getGeoEpsgCode());
-        Assertions.assertEquals(SCHEMA_READALL_FIELD_GEO1, table.getGeoFieldName());
+        Assertions.assertEquals(SCHEMA_READALL_FIELD_GEO2, table.getGeoFieldName());
         Assertions.assertEquals(SCHEMA_READALL__STRING, table.getGeoType());
 
         for(TableField tf : table.getTableFields()){
@@ -79,10 +83,35 @@ public class ThemeReaderBeanTest {
             Assertions.assertEquals(SCHEMA_READALL__BOOLEAN, tf.getMandatory());
             Assertions.assertNotNull(tf.getAlias());
 
+            String aliasFirstChar = tf.getAlias().substring(0,1);
+            String nameFirstChar = tf.getName().substring(0,1);
+            Assertions.assertEquals(nameFirstChar.toUpperCase(), aliasFirstChar);
+
             if(SCHEMA_READALL_FIELD_CHAR_BOUNDED.equals(tf.getName())){
                 Assertions.assertEquals(SCHEMA_READALL__INTEGER, tf.getStrLength());
             }
         }
+    }
+
+    @Test
+    public void schema_ExistingTablesAreKept_OK(){
+        ThemeReaderBean bean = new ThemeReaderBean();
+
+        DataTheme theme = themeCreateMock();
+        PostgresTable stale = themeAddNewTable(theme);
+
+        theme.setSchemaName(SCHEMA_EXISTING_KEPT__SCHEMA);
+        stale.setTableName(SCHEMA_EXISTING_KEPT__OLD_TABLE);
+        stale.setCatSyncStamp(TIME_BEFORE);
+
+        bean.actualizeWithDbCat(READER_MOCK, theme);
+
+        //Assert that old and new tables are contained
+        PostgresTable oldTable = theme.findTableByName(SCHEMA_EXISTING_KEPT__OLD_TABLE);
+        Assertions.assertNotNull(oldTable);
+
+        PostgresTable newTable = theme.findTableByName(SCHEMA_EXISTING_KEPT__NEW_TABLE);
+        Assertions.assertNotNull(newTable);
     }
 
     @Test

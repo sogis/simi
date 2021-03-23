@@ -1,4 +1,4 @@
-package ch.so.agi.simi.entity.data.schemareader;
+package ch.so.agi.simi.web.beans.datatheme.dto;
 
 import com.haulmont.chile.core.annotations.MetaClass;
 import com.haulmont.chile.core.annotations.MetaProperty;

@@ -128,7 +128,6 @@ create table SIMIDATA_TABLE_FIELD (
     DESCRIPTION_OVERRIDE text,
     TYPE_NAME varchar(100) not null,
     MANDATORY boolean not null,
-    REG_EX_PATTERN varchar(512),
     STR_LENGTH integer,
     CAT_SYNCED boolean not null,
     POSTGRES_TABLE_ID uuid not null,
@@ -225,7 +224,6 @@ create table SIMIDATA_VIEW_FIELD (
     SORT integer not null,
     TABLE_FIELD_ID uuid not null,
     TABLE_VIEW_ID uuid not null,
-    ALIAS varchar(100),
     --
     primary key (ID)
 )^
@@ -507,7 +505,6 @@ create table SIMIDATA_DATA_THEME (
     EXT5 text,
     --
     SCHEMA_NAME varchar(100) not null,
-    MODEL_NAME varchar(100),
     POSTGRES_DB_ID uuid not null,
     --
     primary key (ID)
