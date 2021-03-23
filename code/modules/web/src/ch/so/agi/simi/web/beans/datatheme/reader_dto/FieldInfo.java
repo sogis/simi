@@ -1,35 +1,18 @@
-package ch.so.agi.simi.web.beans.datatheme.dto;
+package ch.so.agi.simi.web.beans.datatheme.reader_dto;
 
 import com.haulmont.chile.core.annotations.MetaClass;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.cuba.core.entity.BaseUuidEntity;
 
-@MetaClass(name = "simiData_FieldInfo")
-public class FieldInfo extends BaseUuidEntity {
-    private static final long serialVersionUID = -3395094517488093207L;
+public class FieldInfo {
 
-    @MetaProperty
     private String name;
-
-    @MetaProperty
     private Boolean mandatory;
-
-    @MetaProperty
     private String type;
-
-    @MetaProperty
     private Integer length;
-
-    @MetaProperty
     private String description;
-
-    @MetaProperty
     private String geoFieldType;
-
-    @MetaProperty
     private String geoFieldSrOrg;
-
-    @MetaProperty
     private Integer geoFieldSrId;
 
     public Integer getGeoFieldSrId() {

@@ -1,7 +1,7 @@
 package ch.so.agi.simi.web.beans.datatheme;
 
-import ch.so.agi.simi.web.beans.datatheme.dto.TableAndFieldInfo;
-import ch.so.agi.simi.web.beans.datatheme.dto.TableListing;
+import ch.so.agi.simi.web.beans.datatheme.reader_dto.TableAndFieldInfo;
+import ch.so.agi.simi.web.beans.datatheme.reader_dto.TableListing;
 import ch.so.agi.simi.web.config.SchemareaderConfig;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

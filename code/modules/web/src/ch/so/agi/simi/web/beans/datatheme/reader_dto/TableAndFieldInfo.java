@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.beans.datatheme.dto;
+package ch.so.agi.simi.web.beans.datatheme.reader_dto;
 
 import ch.so.agi.simi.entity.data.PostgresDB;
 import com.haulmont.chile.core.annotations.MetaClass;
@@ -9,19 +9,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @MetaClass(name = "simiData_TableAndFieldInfo")
-public class TableAndFieldInfo extends BaseUuidEntity {
-    private static final long serialVersionUID = 2702399623707997297L;
+public class TableAndFieldInfo {
 
-    @MetaProperty
     private TableInfo tableInfo;
-
-    @MetaProperty
     private List<FieldInfo> fields;
-
-    @MetaProperty
     private LocalDateTime catSyncStamp;
-
-    @MetaProperty
     private PostgresDB postgresDB;
 
     public PostgresDB getPostgresDB() {

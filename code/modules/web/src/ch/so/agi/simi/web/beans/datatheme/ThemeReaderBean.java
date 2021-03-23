@@ -3,7 +3,7 @@ package ch.so.agi.simi.web.beans.datatheme;
 import ch.so.agi.simi.entity.data.DataTheme;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
-import ch.so.agi.simi.web.beans.datatheme.dto.*;
+import ch.so.agi.simi.web.beans.datatheme.reader_dto.*;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

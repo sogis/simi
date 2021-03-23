@@ -1,17 +1,12 @@
-package ch.so.agi.simi.web.beans.datatheme.dto;
+package ch.so.agi.simi.web.beans.datatheme.reader_dto;
 
 import com.haulmont.chile.core.annotations.MetaClass;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.cuba.core.entity.BaseUuidEntity;
 
-@MetaClass(name = "simiData_TableShortInfo")
-public class TableShortInfo extends BaseUuidEntity {
-    private static final long serialVersionUID = 3386796722209366587L;
+public class TableShortInfo {
 
-    @MetaProperty
     private String schemaName;
-
-    @MetaProperty
     private String tvName;
 
     public String getSchemaName() {

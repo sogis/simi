@@ -25,6 +25,7 @@
   * Entfernen der ext-Felder der Datenmigration    
   * Entity-Loading tests entity-Zentrisch machen (eine Testmethode pro entity mit helper testViews(String[] viewnames))
   * UK über FK's und UK über FK, Attribut?
+  * Bei Anlegen Datatheme und im gleichen Schritt Auslesen der DB --> Exception
   * Nach Testing
       * Screens Wegräumen
         * _layer-group-choose.xml

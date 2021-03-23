@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.beans.datatheme;
 
-import ch.so.agi.simi.web.beans.datatheme.dto.*;
+import ch.so.agi.simi.web.beans.datatheme.reader_dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
