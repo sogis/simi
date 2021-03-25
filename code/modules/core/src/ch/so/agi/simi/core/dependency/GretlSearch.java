@@ -1,6 +1,6 @@
 package ch.so.agi.simi.core.dependency;
 
-import ch.so.agi.simi.util.Props;
+import ch.so.agi.simi.util.properties.PropsUtil;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.MessageFormat;
@@ -31,7 +31,7 @@ public class GretlSearch {
 
         List<DependencyInfo> diUnion = new LinkedList<>();
 
-        for(String repo : Props.toArray(config.getReposToSearch())){
+        for(String repo : PropsUtil.toArray(config.getReposToSearch())){
 
             String qValue = MessageFormat.format(
                     "repo:{0} {1} {2}",

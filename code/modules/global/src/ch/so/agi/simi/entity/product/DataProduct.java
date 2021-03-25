@@ -38,7 +38,7 @@ public class DataProduct extends SimiEntity {
     @Column(name = "REMARKS")
     private String remarks;
 
-    @Column(name = "SYNONYMS", length = 500)
+    @Column(name = "SYNONYMS", length = 800)
     private String synonyms;
 
     @Column(name = "TITLE", length = 200)

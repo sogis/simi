@@ -6,7 +6,7 @@
   * Major: Breaking Schema change
   * Minor: Breaking Config change
   * Revision: Fortlaufende Buildnummer
-* Jenkins-Integration erstellen (für Start der Config-Pipeline) 
+* Done Jenkins-Integration erstellen (für Start der Config-Pipeline) 
 
 
 # Version 1.0
@@ -23,7 +23,6 @@
     * Db-Präfix simidata. 
     * Java-Package data.*
   * Entfernen der ext-Felder der Datenmigration    
-  * Entity-Loading tests entity-Zentrisch machen (eine Testmethode pro entity mit helper testViews(String[] viewnames))
   * UK über FK's und UK über FK, Attribut?
   * Bei Anlegen Datatheme und im gleichen Schritt Auslesen der DB --> Exception
   * Nach Testing
@@ -34,6 +33,10 @@
         * _data-product_pub-scope-edit.xml
         * _map-browse.xml
         * _single-actor-browse.xml
+        
+        
+# Version 1.x
+  * Entity-Loading tests entity-Zentrisch machen (eine Testmethode pro entity mit helper testViews(String[] viewnames))
         
         
 # Schemareading Tests

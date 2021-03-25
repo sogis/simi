@@ -159,7 +159,7 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     PUB_SCOPE_ID uuid not null,
     KEYWORDS varchar(500),
     REMARKS text,
-    SYNONYMS varchar(500),
+    SYNONYMS varchar(800),
     TITLE varchar(200),
     --
     primary key (ID)

@@ -2,13 +2,6 @@
 <metadata xmlns="http://schemas.haulmont.com/cuba/metadata.xsd">
 
     <metadata-model root-package="ch.so.agi.simi" namespace="simi">
-        <class>ch.so.agi.simi.web.beans.datatheme.reader_dto.TableShortInfo</class>
-        <class>ch.so.agi.simi.web.beans.datatheme.reader_dto.TableListing</class>
-        <class>ch.so.agi.simi.web.beans.datatheme.reader_dto.FieldInfo</class>
-        <class>ch.so.agi.simi.web.beans.datatheme.reader_dto.TableInfo</class>
-        <class>ch.so.agi.simi.web.beans.datatheme.reader_dto.TableAndFieldInfo</class>
-        <class>ch.so.agi.simi.web.screens.dependency.DisplayString</class>
-        <class>ch.so.agi.simi.viewmodel.IdValue</class>
         <class>ch.so.agi.simi.core.dependency.DependencyInfo</class>
     </metadata-model>
 

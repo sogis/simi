@@ -1,12 +1,14 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
 import ch.so.agi.simi.core.copy.CopyService;
+import ch.so.agi.simi.core.props.PropertiesConfiguredService;
 import ch.so.agi.simi.entity.data.datasetview.RasterView;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.product.DataProduct;
 import ch.so.agi.simi.entity.product.FacadeLayer;
 import ch.so.agi.simi.entity.product.LayerGroup;
 import ch.so.agi.simi.entity.product.Map;
+import ch.so.agi.simi.util.properties.SimiProperty;
 import ch.so.agi.simi.web.beans.publish.JobRunner;
 import ch.so.agi.simi.web.beans.publish.PublishConfig;
 import com.haulmont.bali.util.ParamsMap;
@@ -28,6 +30,9 @@ import javax.inject.Inject;
 public class DataProductBrowse extends StandardLookup<DataProduct> {
 
     @Inject
+    private PropertiesConfiguredService service;
+
+    @Inject
     private ScreenBuilders screenBuilders;
     @Inject
     private Table<DataProduct> dataProductsTable;
@@ -43,6 +48,12 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     PublishConfig config;
     @Inject
     private WebBrowserTools webBrowserTools;
+
+    @Subscribe("checkBtn")
+    public void onCheckBtnClick(Button.ClickEvent event) {
+        SimiProperty.addValuesForModule(true);
+        service.assertAllPropertiesConfigured(SimiProperty.getProps());
+    }
 
     @Subscribe("createBtn.createMap")
     protected void onCreateBtnCreateMap(Action.ActionPerformedEvent event) {

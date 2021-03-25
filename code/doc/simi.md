@@ -12,6 +12,15 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
   * **CUBA_DATASOURCE_DBNAME:** Name der Datenbank. Bsp: "simi"
   * **CUBA_DATASOURCE_HOST:** Name des Hosts des Postgres-Clusters. Bsp: "localhost"
   * **CUBA_DATASOURCE_PORT:** Nummer des Ports des Postgres-Clusters. Bsp: 5432
+* Konfiguration der Verbindung auf den LDAP-Server:
+  * **CUBA_WEB_LDAP_ENABLED:** LDAP Authentifizierung aktiv? Bsp: TRUE / FALSE
+  * **CUBA_WEB_LDAP_URLS:** LDAP URL. Bsp: LDAP://192_168_1_1:389
+  * **CUBA_WEB_LDAP_BASE:** Distinguished Name, auf welchen gebunden wird. Bsp: OU=EMPLOYEES,DC=MYCOMPANY,DC=COM
+  * **CUBA_WEB_LDAP_USER:** Benutzer, mit welchem verbunden wird. Bsp: CN=SYSTEM USER,OU=EMPLOYEES,DC=MYCOMPANY,DC=COM
+  * **CUBA_WEB_LDAP_PASSWORD:** Passwort, mit welchem verbunden wird. Bsp: SYSTEM_USER_PASSWORD
+  * **CUBA_WEB_REQUIRE_PASSWORD_FOR_NEW_USERS:** Muss bei LDAP Auth auf false gesetzt sein, damit kein "Kuba Passwort" für
+  den Benutzer gesetzt wird.
+  * **CUBA_WEB_LDAP_USER_LOGIN_FIELD:** Name des Attributes im LDAP-Verzeichnis, welches gegen den Login-Namen verglichen wird.
 * Konfiguration der URL des Schemareaders:
   * **SIMI_SCHEMAREADER_URL:** Url, auf welcher der Schemareader erreichbar ist. Bsp: "http://localhost/schemareader"
 * Konfiguration der Suche in den GRETL-Repos (Anzeige der Abhängigkeiten):

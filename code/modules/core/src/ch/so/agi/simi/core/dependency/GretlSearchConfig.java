@@ -4,12 +4,6 @@ import com.haulmont.cuba.core.config.Config;
 import com.haulmont.cuba.core.config.Property;
 import com.haulmont.cuba.core.config.Source;
 import com.haulmont.cuba.core.config.SourceType;
-import com.haulmont.cuba.core.config.type.Factory;
-import com.haulmont.cuba.core.config.type.StringListStringify;
-import com.haulmont.cuba.core.config.type.StringListTypeFactory;
-import com.haulmont.cuba.core.config.type.Stringify;
-
-import java.util.List;
 
 @Source(type = SourceType.APP)
 public interface GretlSearchConfig extends Config {
