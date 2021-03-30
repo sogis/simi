@@ -29,6 +29,7 @@ public class SimiProperty implements Comparable, Serializable {
         SimiProperty.add("cuba.web.ldap.password", true, CubaModule.WEB, false);
         SimiProperty.add("cuba.web.ldap.userLoginField", true, CubaModule.WEB);
         SimiProperty.add("cuba.web.requirePasswordForNewUsers", true, CubaModule.WEB);
+        SimiProperty.add("cuba.web.standardAuthenticationUsers", false, CubaModule.WEB);
 
         SimiProperty.add("simi.gitSearch.url", true, CubaModule.CORE);
         SimiProperty.add("simi.gitSearch.repos", true, CubaModule.CORE);
@@ -37,6 +38,7 @@ public class SimiProperty implements Comparable, Serializable {
         SimiProperty.add("cuba.dataSource.password", true, CubaModule.CORE, false);
         SimiProperty.add("cuba.dataSource.dbName", true, CubaModule.CORE);
         SimiProperty.add("cuba.dataSource.host", true, CubaModule.CORE);
+        SimiProperty.add("cuba.dataSource.port", false, CubaModule.CORE);
     }
 
     private String name;

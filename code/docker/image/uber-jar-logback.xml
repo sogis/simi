@@ -12,13 +12,13 @@
         </encoder>
     </appender>
 
-    <root level="info">
+    <root level="warn">
         <appender-ref ref="Console"/>
     </root>
 
     <!-- Begin CUBA -->
 
-    <logger name="com.haulmont.cuba" level="INFO"/>
+    <logger name="com.haulmont.cuba" level="warn"/>
 
     <!--
 
@@ -77,5 +77,11 @@
     <logger name="com.haulmont.cuba.gui.logging.UIPerformanceLogger" level="OFF"/>
 
     <!-- End Perf4J  -->
+
+    <!-- Begin SIMI  -->
+
+    <logger name="ch.so.agi.simi" level="INFO"/>
+
+    <!-- End SIMI  -->
 
 </configuration>
