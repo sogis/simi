@@ -11,14 +11,15 @@ public class PropertiesConfiguredServiceBean implements PropertiesConfiguredServ
 
     @Inject
     private PropertiesConfiguredProps conf;
-    
+
     @Override
     public void assertAllPropertiesConfigured(SortedSet<SimiProperty> props){
+
         SimiProperty.setProps(props);
         SimiProperty.addValuesForModule(false);
-        
+
         boolean allMandatoriesPresent = SimiProperty.assertConfigComplete();
-        
+
         if(!allMandatoriesPresent && conf.isShutdownOnIncomplete())
             throw new RuntimeException("Configuration parameters are missing. See log for details");
     }

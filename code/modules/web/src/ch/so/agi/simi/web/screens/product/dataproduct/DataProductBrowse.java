@@ -49,12 +49,6 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     @Inject
     private WebBrowserTools webBrowserTools;
 
-    @Subscribe("checkBtn")
-    public void onCheckBtnClick(Button.ClickEvent event) {
-        SimiProperty.addValuesForModule(true);
-        service.assertAllPropertiesConfigured(SimiProperty.getProps());
-    }
-
     @Subscribe("createBtn.createMap")
     protected void onCreateBtnCreateMap(Action.ActionPerformedEvent event) {
         Map map = metadata.create(Map.class);

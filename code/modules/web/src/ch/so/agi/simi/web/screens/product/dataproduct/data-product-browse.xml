@@ -57,7 +57,6 @@
                 <button id="editBtn" action="dataProductsTable.edit"/>
                 <button id="copyBtn" action="dataProductsTable.copy"/>
                 <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
-                <button id="checkBtn" caption="CheckProps" stylename="danger"/>
                 <label id="spacer" width="300" value=" "/>
                 <button id="btnPublish" caption="Publizieren" stylename="primary" icon="EXCLAMATION"/>
             </buttonsPanel>
