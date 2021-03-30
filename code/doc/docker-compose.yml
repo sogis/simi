@@ -13,13 +13,16 @@ services:
       - CUBA_DATASOURCE_PORT=5432
       - CUBA_WEB_LDAP_ENABLED=TRUE
       - CUBA_WEB_LDAP_URLS=ldap.forumsys.com
-      - CUBA_WEB_LDAP_BASE=ou=scientists,dc=example,dc=com
-      - CUBA_WEB_LDAP_USER=cn=read-only-admin,dc=example,dc=com
+      - CUBA_WEB_LDAP_BASE="ou=scientists,dc=example,dc=com"
+      - CUBA_WEB_LDAP_USER="cn=read-only-admin,dc=example,dc=com"
+      - CUBA_WEB_LDAP_PASSWORD="cn=read-only-admin,dc=example,dc=com"
       - CUBA_WEB_REQUIRE_PASSWORD_FOR_NEW_USERS=FALSE
       - CUBA_WEB_LDAP_USER_LOGIN_FIELD=uid
       - SIMI_SCHEMAREADER_URL=http://localhost:8081
       - SIMI_GITSEARCH_URL=https://api.github.com/search/code
       - SIMI_GITSEARCH_REPOS=sogis/gretljobs|oereb/jobs
+      - SIMI_CONFIG_SHUTDOWN_ON_INCOMPLETE=FALSE
+      -
     ports:
       - "8080:8080"
     network_mode: "host"
