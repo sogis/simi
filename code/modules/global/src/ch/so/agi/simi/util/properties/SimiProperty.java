@@ -15,30 +15,38 @@ public class SimiProperty implements Comparable, Serializable {
     private static SortedSet<SimiProperty> props = null;
 
     static {
-        SimiProperty.add("simi.schemaReader.url", true, CubaModule.WEB);
-        SimiProperty.add("cuba.web.loginDialogDefaultUser", false, CubaModule.WEB);
-        SimiProperty.add("cuba.web.loginDialogDefaultPassword", false, CubaModule.WEB, false);
-        SimiProperty.add("cuba.web.productionMode", false, CubaModule.WEB);
-        SimiProperty.add("simi.publishJob.baseUrl", true, CubaModule.WEB);
-        SimiProperty.add("simi.publishJob.pollTimeout", true, CubaModule.WEB);
-        SimiProperty.add("simi.publishJob.secToken", true, CubaModule.WEB, false);
+        // Web module properties
         SimiProperty.add("cuba.web.ldap.enabled", true, CubaModule.WEB);
         SimiProperty.add("cuba.web.ldap.urls", true, CubaModule.WEB);
         SimiProperty.add("cuba.web.ldap.base", true, CubaModule.WEB);
         SimiProperty.add("cuba.web.ldap.user", true, CubaModule.WEB);
         SimiProperty.add("cuba.web.ldap.password", true, CubaModule.WEB, false);
         SimiProperty.add("cuba.web.ldap.userLoginField", true, CubaModule.WEB);
+
+        SimiProperty.add("cuba.web.loginDialogDefaultUser", false, CubaModule.WEB);
+        SimiProperty.add("cuba.web.loginDialogDefaultPassword", false, CubaModule.WEB, false);
+        SimiProperty.add("cuba.web.productionMode", false, CubaModule.WEB);
         SimiProperty.add("cuba.web.requirePasswordForNewUsers", true, CubaModule.WEB);
         SimiProperty.add("cuba.web.standardAuthenticationUsers", false, CubaModule.WEB);
 
-        SimiProperty.add("simi.gitSearch.url", true, CubaModule.CORE);
-        SimiProperty.add("simi.gitSearch.repos", true, CubaModule.CORE);
-        SimiProperty.add("simi.config.shutdownOnIncomplete", false, CubaModule.CORE);
-        SimiProperty.add("cuba.dataSource.username", true, CubaModule.CORE);
-        SimiProperty.add("cuba.dataSource.password", true, CubaModule.CORE, false);
+        SimiProperty.add("simi.publishJob.baseUrl", true, CubaModule.WEB);
+        SimiProperty.add("simi.publishJob.pollTimeout", true, CubaModule.WEB);
+        SimiProperty.add("simi.publishJob.secToken", true, CubaModule.WEB, false);
+
+        SimiProperty.add("simi.schemaReader.url", true, CubaModule.WEB);
+
+        // Core module properties
         SimiProperty.add("cuba.dataSource.dbName", true, CubaModule.CORE);
         SimiProperty.add("cuba.dataSource.host", true, CubaModule.CORE);
         SimiProperty.add("cuba.dataSource.port", false, CubaModule.CORE);
+
+        SimiProperty.add("cuba.dataSource.username", true, CubaModule.CORE);
+        SimiProperty.add("cuba.dataSource.password", true, CubaModule.CORE, false);
+
+        SimiProperty.add("simi.config.stopOnIncomplete", false, CubaModule.CORE);
+
+        SimiProperty.add("simi.gitSearch.url", true, CubaModule.CORE);
+        SimiProperty.add("simi.gitSearch.repos", true, CubaModule.CORE);
     }
 
     private String name;

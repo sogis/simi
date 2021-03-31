@@ -4,7 +4,7 @@
 version: "3.7"
 services:
   simi:
-    image: sogis/simi:0.9.46
+    image: sogis/simi:0.9.47
     environment:
       - CUBA_DATASOURCE_USERNAME=postgres
       - CUBA_DATASOURCE_PASSWORD=postgres
@@ -12,15 +12,15 @@ services:
       - CUBA_DATASOURCE_HOST=localhost
       - CUBA_DATASOURCE_PORT=5432
       - CUBA_WEB_LDAP_ENABLED=true
-      - CUBA_WEB_LDAP_URLS=ldap.forumsys.com
+      - CUBA_WEB_LDAP_URLS=ldap://ldap.forumsys.com
       - CUBA_WEB_LDAP_BASE=ou=scientists,dc=example,dc=com
       - CUBA_WEB_LDAP_USER=cn=read-only-admin,dc=example,dc=com
-      - CUBA_WEB_LDAP_PASSWORD=cn=read-only-admin,dc=example,dc=com
+      - CUBA_WEB_LDAP_PASSWORD=password
       - CUBA_WEB_LDAP_USERLOGINFIELD=uid
       - CUBA_WEB_REQUIREPASSWORDFORNEWUSERS=false
       - CUBA_WEB_STANDARDAUTHENTICATIONUSERS=admin
       - CUBA_WEB_PRODUCTIONMODE=true
-      - SIMI_CONFIG_SHUTDOWNONINCOMPLETE=false
+      - SIMI_CONFIG_STOPONINCOMPLETE=false
       - SIMI_GITSEARCH_URL=https://api.github.com/search/code
       - SIMI_GITSEARCH_REPOS=sogis/gretljobs|oereb/jobs
       - SIMI_PUBLISHJOB_BASEURL=fuu

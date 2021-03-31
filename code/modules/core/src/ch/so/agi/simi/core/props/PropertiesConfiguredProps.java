@@ -9,7 +9,7 @@ import com.haulmont.cuba.core.config.defaults.Default;
 @Source(type = SourceType.APP)
 public interface PropertiesConfiguredProps extends Config {
 
-    @Property("simi.config.shutdownOnIncomplete")
+    @Property("simi.config.stopOnIncomplete")
     @Default("TRUE")
-    boolean isShutdownOnIncomplete();
+    boolean stopOnIncomplete();
 }

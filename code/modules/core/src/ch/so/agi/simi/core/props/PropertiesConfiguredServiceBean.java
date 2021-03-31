@@ -20,7 +20,7 @@ public class PropertiesConfiguredServiceBean implements PropertiesConfiguredServ
 
         boolean allMandatoriesPresent = SimiProperty.assertConfigComplete();
 
-        if(!allMandatoriesPresent && conf.isShutdownOnIncomplete())
+        if(!allMandatoriesPresent && conf.stopOnIncomplete())
             throw new RuntimeException("Configuration parameters are missing. See log for details");
     }
 
