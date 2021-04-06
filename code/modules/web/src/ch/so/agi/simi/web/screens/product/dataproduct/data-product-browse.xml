@@ -52,6 +52,7 @@
                         <action id="createTableView" caption="View erstellen"/>
                         <action id="createMap" caption="Karte erstellen"/>
                         <action id="createRasterView" caption="Raster View erstellen"/>
+                        <action id="createExtLayer" caption="Ext. WM(T)S erstellen"/>
                     </actions>
                 </popupButton>
                 <button id="editBtn" action="dataProductsTable.edit"/>

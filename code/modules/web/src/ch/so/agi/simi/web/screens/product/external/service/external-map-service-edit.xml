@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="Externer WM(T)S Dienst"
+        focusComponent="form">
+    <data>
+        <instance id="externalMapServiceDc"
+                  class="ch.so.agi.simi.entity.product.ExternalMapService"
+                  view="externalMapService-edit">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="80%"
+                width="80%"
+                modal="true"
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="externalMapServiceDc">
+            <column width="350px">
+                <textField id="urlField" property="url"/>
+                <lookupField id="serviceTypeField" property="serviceType"/>
+                <textArea id="remarksField" property="remarks" rows="5"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

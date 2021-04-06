@@ -272,4 +272,18 @@
     <view entity="simiData_TableField" name="viewField-edit-tableFields" extends="_local"/>
     <view entity="simiIAM_Role" name="dsv-editscreens-roles" extends="_minimal"/>
     <view entity="simiData_PostgresDB" name="dataTheme-edit-dbs" extends="_minimal"/>
+    <view entity="simiProduct_ExternalMapService" name="externalMapService-browse" extends="_minimal"/>
+    <view entity="simiProduct_ExternalMapService" name="externalMapService-edit" extends="_local"/>
+    <view entity="simiProduct_ExternalMapLayers" name="externalMapLayers-edit" extends="_minimal">
+        <property name="service" view="_minimal">
+            <property name="serviceTypeString"/>
+        </property>
+        <property name="description"/>
+        <property name="pubScope" view="_minimal"/>
+        <property name="keywords"/>
+        <property name="remarks"/>
+        <property name="synonyms"/>
+        <property name="identifierList"/>
+    </view>
+    <view entity="simiProduct_ExternalMapService" name="externalMapLayers-edit-services" extends="_minimal"/>
 </views>

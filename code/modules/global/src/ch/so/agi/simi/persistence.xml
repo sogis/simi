@@ -36,5 +36,7 @@
         <class>ch.so.agi.simi.entity.extended.Report</class>
         <class>ch.so.agi.simi.entity.extended.FeatureInfo</class>
         <class>ch.so.agi.simi.entity.extended.CCCIntegration</class>
+        <class>ch.so.agi.simi.entity.product.ExternalMapLayers</class>
+        <class>ch.so.agi.simi.entity.product.ExternalMapService</class>
     </persistence-unit>
 </persistence>

@@ -10,8 +10,8 @@ package Product {
   abstract class "SingleActor (SA)" as sa
   class "FacadeLayer (FL)" as fl
   abstract class "DataSetView (DSV)" as dsv << package data >>
-  abstract class "ExtLayer" as el
-  abstract class "WmsLayer" as wl
+  class "ExternalMapLayers" as el
+  class "ExternalMapService" as es
 
   class "PropertiesInFacade::CLP" as pif << (H, grey) Association Class >>
   class "PropertiesInList::CLP" as pil << (H, grey) Association Class >>
@@ -27,8 +27,6 @@ package Product {
   sa <|-- fl
   sa <|-- el
 
-  el <|-- wl
-
   pl "1" -right- "1..n" pil : "      "
   pil "*" -right- "1" sa : "      "
 
@@ -36,5 +34,7 @@ package Product {
 
   fl "1" -- "1..n" pif : "      "
   pif "*" -up- "1" dsv : "      "
+
+  el "1-n" -- "1" es
 }
 @enduml

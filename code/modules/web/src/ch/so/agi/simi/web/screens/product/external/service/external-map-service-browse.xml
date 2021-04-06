@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="Externe WM(T)S Dienste"
+        focusComponent="externalMapServicesTable">
+    <data readOnly="true">
+        <collection id="externalMapServicesDc"
+                    class="ch.so.agi.simi.entity.product.ExternalMapService"
+                    view="externalMapService-browse">
+            <loader id="externalMapServicesDl">
+                <query>
+                    <![CDATA[select e from simiProduct_ExternalMapService e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="externalMapServicesTable"
+            spacing="true">
+        <table id="externalMapServicesTable"
+               width="100%"
+               dataContainer="externalMapServicesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="url" sort="ASCENDING" caption="URL"/>
+                <column id="serviceTypeString" caption="Typ"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="externalMapServicesTable.create"/>
+                <button id="editBtn" action="externalMapServicesTable.edit"/>
+                <button id="removeBtn" action="externalMapServicesTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

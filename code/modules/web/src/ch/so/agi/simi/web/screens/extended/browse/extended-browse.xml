@@ -5,7 +5,7 @@
         focusComponent="dependenciesTable">
     <data readOnly="true">
         <collection id="dependenciesDc"
-                    class="ch.so.agi.simi.entity.dependency.Dependency" view="dependency-browse">
+                    class="ch.so.agi.simi.entity.extended.Dependency" view="dependency-browse">
             <loader id="dependenciesDl">
                 <query>
                     <![CDATA[select e from simiExtended_Dependency e]]>

@@ -4,10 +4,7 @@ import ch.so.agi.simi.core.copy.CopyService;
 import ch.so.agi.simi.core.props.PropertiesConfiguredService;
 import ch.so.agi.simi.entity.data.datasetview.RasterView;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
-import ch.so.agi.simi.entity.product.DataProduct;
-import ch.so.agi.simi.entity.product.FacadeLayer;
-import ch.so.agi.simi.entity.product.LayerGroup;
-import ch.so.agi.simi.entity.product.Map;
+import ch.so.agi.simi.entity.product.*;
 import ch.so.agi.simi.util.properties.SimiProperty;
 import ch.so.agi.simi.web.beans.publish.JobRunner;
 import ch.so.agi.simi.web.beans.publish.PublishConfig;
@@ -76,6 +73,12 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     @Subscribe("createBtn.createRasterView")
     protected void onCreateBtnCreateRasterView(Action.ActionPerformedEvent event) {
         RasterView rv = metadata.create(RasterView.class);
+        showCreateEditorForDataProduct(rv);
+    }
+
+    @Subscribe("createBtn.createExtLayer")
+    protected void onCreateBtnCreateExtLayer(Action.ActionPerformedEvent event) {
+        ExternalMapLayers rv = metadata.create(ExternalMapLayers.class);
         showCreateEditorForDataProduct(rv);
     }
 

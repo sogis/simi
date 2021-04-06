@@ -510,3 +510,31 @@ create table SIMIDATA_DATA_THEME (
     primary key (ID)
 )^
 -- end SIMIDATA_DATA_THEME
+-- begin SIMI_EXTERNAL_MAP_SERVICE
+create table SIMI_EXTERNAL_MAP_SERVICE (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    SERVICE_TYPE varchar(50) not null,
+    URL varchar(255) not null,
+    REMARKS text,
+    --
+    primary key (ID)
+)^
+-- end SIMI_EXTERNAL_MAP_SERVICE
+-- begin SIMIPRODUCT_EXTERNAL_MAP_LAYERS
+create table SIMIPRODUCT_EXTERNAL_MAP_LAYERS (
+    ID uuid,
+    --
+    IDENTIFIER_LIST varchar(500) not null,
+    SERVICE_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIPRODUCT_EXTERNAL_MAP_LAYERS

@@ -140,10 +140,10 @@ Attribute siehe Strukt "ChildLayerProperties"
 
 UK über die FK's.
 
-### Klasse ExtLayer
+### Klasse ExternalMapLayers
 
-Externe Ebene, welche analog zu den internen Ebenen gesucht und in WGC und QGIS-Desktop geladen werden kann.
-Laden in QGIS-Desktop mittels SO-Locator. 
+1-n externe WMS oder WMTS Ebenen, welche im Web GIS Client und im SO-Locator wie interne Ebenen gesucht 
+und geladen werden können.
 
 Definition "Extern": Die Rohdaten der Ebene sind nicht als DataProduct erfasst. Gründe für nicht erfasste Rohdaten:
 * Stammt aus Dienst eines Servers ausserhalb des Kantons Solothurn.
@@ -151,36 +151,21 @@ Definition "Extern": Die Rohdaten der Ebene sind nicht als DataProduct erfasst. 
 
 #### Attributbeschreibung
 
-Keine eigenen Attribute
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|identifierList|String(1000)|j|Liste der Identifier der externen Ebenen (Komma getrennt).|
 
-### Klasse WmsLayer
+### Klasse ExternalMapService
 
-Externe WMS-Ebene.
+Externer WM(T)S Service, von welchem 1-n Ebenen im WGC oder SO-Locator gesucht und geladen werden können. 
 
 #### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|capabilitiesUrl|String(200)|j|URL für die "GetCapabilities" Abfrage des externen WMS.|
-|layerList|String(1000)|j|Json-Array der Identifier der abzufragenden externen WMS-Layer.|
-
-#### Konstraints
-
-UK über wmsURL und identifier. 
-
-### Klasse WmtsLayer
-
-Als Ebene eingebundener externer WMTS.
-
-#### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|capabilitiesUrl|String(200)|j|URL für die "GetCapabilities" Abfrage des externen WMTS.|
-
-#### Konstraints
-
-UK über wmsURL und identifier. 
+|serviceType|enum(String)|j|Typ des Service: \[WMS\] oder \[WMTS\]|
+|url|String(255)|j|URL des Service. Falls WMTS die URL der GetCapabilities-Abfrage.|
+|remarks|String|n|Interne Bemerkungen.|
 
 ## Klasse PropertiesInList
 

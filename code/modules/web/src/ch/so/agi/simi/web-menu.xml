@@ -17,6 +17,7 @@
     </menu>
     <menu id="application-simi-others" caption="Weitere ..." expanded="false" insertBefore="administration">
         <item screen="simiExtended_Dependency.browse" caption="Abhängigkeiten pflegen"/>
+        <item screen="simiProduct_ExternalMapService.browse" caption="Externe WM(T)S Dienste"/>
         <item screen="simiProduct_DataProduct_PubScope.browse" caption="Pub Scopes"/>
     </menu>
 </menu-config>
