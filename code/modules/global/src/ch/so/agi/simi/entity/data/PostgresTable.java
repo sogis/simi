@@ -12,7 +12,9 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Table(name = "SIMIDATA_POSTGRES_TABLE")
+@Table(name = "SIMIDATA_POSTGRES_TABLE", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_SIMI_POSTGRES_TABLE_UNQ", columnNames = {"DATA_THEME_ID", "TABLE_NAME"})
+})
 @Entity(name = PostgresTable.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("%s.%s|dataTheme,tableName")
@@ -58,6 +60,30 @@ public class PostgresTable extends TableDS {
 
     @Column(name = "GEO_EPSG_CODE")
     private Integer geoEpsgCode;
+
+    @Column(name = "TABLE_NAME", nullable = false, length = 100)
+    @NotNull
+    private String tableName;
+
+    @Lob
+    @Column(name = "REMARKS")
+    private String remarks;
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
 
     public List<TableField> getTableFields() {
         return tableFields;

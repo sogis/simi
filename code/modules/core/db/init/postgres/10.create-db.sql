@@ -246,6 +246,8 @@ create table SIMIDATA_POSTGRES_TABLE (
     GEO_FIELD_NAME varchar(100),
     GEO_TYPE varchar(100),
     GEO_EPSG_CODE integer,
+    TABLE_NAME varchar(100) not null,
+    REMARKS text,
     --
     primary key (ID)
 )^
@@ -510,8 +512,19 @@ create table SIMIDATA_DATA_THEME (
     primary key (ID)
 )^
 -- end SIMIDATA_DATA_THEME
--- begin SIMI_EXTERNAL_MAP_SERVICE
-create table SIMI_EXTERNAL_MAP_SERVICE (
+
+-- begin SIMIPRODUCT_EXTERNAL_MAP_LAYERS
+create table SIMIPRODUCT_EXTERNAL_MAP_LAYERS (
+    ID uuid,
+    --
+    IDENTIFIER_LIST varchar(500) not null,
+    SERVICE_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIPRODUCT_EXTERNAL_MAP_LAYERS
+-- begin SIMIPRODUCT_EXTERNAL_MAP_SERVICE
+create table SIMIPRODUCT_EXTERNAL_MAP_SERVICE (
     ID uuid,
     VERSION integer not null,
     CREATE_TS timestamp,
@@ -527,14 +540,4 @@ create table SIMI_EXTERNAL_MAP_SERVICE (
     --
     primary key (ID)
 )^
--- end SIMI_EXTERNAL_MAP_SERVICE
--- begin SIMIPRODUCT_EXTERNAL_MAP_LAYERS
-create table SIMIPRODUCT_EXTERNAL_MAP_LAYERS (
-    ID uuid,
-    --
-    IDENTIFIER_LIST varchar(500) not null,
-    SERVICE_ID uuid not null,
-    --
-    primary key (ID)
-)^
--- end SIMIPRODUCT_EXTERNAL_MAP_LAYERS
+-- end SIMIPRODUCT_EXTERNAL_MAP_SERVICE

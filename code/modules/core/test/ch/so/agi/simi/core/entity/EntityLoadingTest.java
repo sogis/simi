@@ -367,7 +367,7 @@ class EntityLoadingTest {
     }
 
     @Test
-    void vieField_Edit_OK() {
+    void viewField_Edit_OK() {
         LoadContext context = LoadContext.create(ViewField.class)
                 .setQuery(queryFor(ViewField.NAME))
                 .setView("viewField-edit");
@@ -376,10 +376,46 @@ class EntityLoadingTest {
     }
 
     @Test
-    void vieField_Edit_TableFields_OK() {
+    void viewField_Edit_TableFields_OK() {
         LoadContext context = LoadContext.create(TableField.class)
                 .setQuery(queryFor(TableField.NAME))
                 .setView("viewField-edit-tableFields");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void externalMapService_Edit_OK() {
+        LoadContext context = LoadContext.create(ExternalMapService.class)
+                .setQuery(queryFor(ExternalMapService.NAME))
+                .setView("externalMapService-edit");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void externalMapService_Browse_OK() {
+        LoadContext context = LoadContext.create(ExternalMapService.class)
+                .setQuery(queryFor(ExternalMapService.NAME))
+                .setView("externalMapService-browse");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void externalMapService_Layers_Edit_OK() {
+        LoadContext context = LoadContext.create(ExternalMapService.class)
+                .setQuery(queryFor(ExternalMapService.NAME))
+                .setView("externalMapLayers-edit-services");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
+    void externalMapLayers_Edit_OK() {
+        LoadContext context = LoadContext.create(ExternalMapLayers.class)
+                .setQuery(queryFor(ExternalMapLayers.NAME))
+                .setView("externalMapLayers-edit");
 
         dataManager.loadList(context);
     }

@@ -10,7 +10,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMI_EXTERNAL_MAP_SERVICE")
+@Table(name = "SIMIPRODUCT_EXTERNAL_MAP_SERVICE")
 @Entity(name = ExternalMapService.NAME)
 @NamePattern("#concatName|url, serviceType")
 public class ExternalMapService extends StandardEntity {

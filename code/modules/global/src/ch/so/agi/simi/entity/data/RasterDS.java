@@ -21,7 +21,7 @@ public class RasterDS extends SimiEntity {
     private static final long serialVersionUID = -1371985729459673568L;
 
     @NotNull
-    @Column(name = "PATH", nullable = false, length = 200)
+    @Column(name = "PATH", nullable = false, unique = true, length = 200)
     private String path;
 
     @Lob
