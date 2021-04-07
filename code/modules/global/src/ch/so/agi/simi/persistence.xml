@@ -17,7 +17,6 @@
         <class>ch.so.agi.simi.entity.data.datasetview.DataSetView</class>
         <class>ch.so.agi.simi.entity.product.FacadeLayer</class>
         <class>ch.so.agi.simi.entity.data.datasetview.TableView</class>
-        <class>ch.so.agi.simi.entity.data.TableDS</class>
         <class>ch.so.agi.simi.entity.data.PostgresTable</class>
         <class>ch.so.agi.simi.entity.data.DataTheme</class>
         <class>ch.so.agi.simi.entity.data.PostgresDB</class>
@@ -26,7 +25,6 @@
         <class>ch.so.agi.simi.entity.data.RasterDS</class>
         <class>ch.so.agi.simi.entity.data.TableField</class>
         <class>ch.so.agi.simi.entity.data.datasetview.ViewField</class>
-        <class>ch.so.agi.simi.entity.data.ExternalTable</class>
         <class>ch.so.agi.simi.entity.SimiEntity</class>
         <class>ch.so.agi.simi.entity.iam.Permission</class>
         <class>ch.so.agi.simi.entity.extended.Component</class>

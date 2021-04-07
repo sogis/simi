@@ -13,7 +13,6 @@
         <item screen="simiData_DataTheme.browse" caption="Datenthemen"/>
         <item screen="simiData_PostgresDB.browse" caption="Datenbanken"/>
         <item screen="simiData_RasterDS.browse" caption="Raster"/>
-        <item screen="simiData_ExternalTable.browse" caption="Externe Tabellen"/>
     </menu>
     <menu id="application-simi-others" caption="Weitere ..." expanded="false" insertBefore="administration">
         <item screen="simiExtended_Dependency.browse" caption="Abhängigkeiten pflegen"/>

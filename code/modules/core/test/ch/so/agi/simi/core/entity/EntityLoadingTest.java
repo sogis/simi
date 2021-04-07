@@ -96,23 +96,6 @@ class EntityLoadingTest {
         dataManager.loadList(context);
     }
 
-    @Test
-    void externalTable_Browse_OK() {
-        LoadContext context = LoadContext.create(ExternalTable.class)
-                .setQuery(queryFor(ExternalTable.NAME))
-                .setView("externalTable-browse");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void externalTable_Edit_OK() {
-        LoadContext context = LoadContext.create(ExternalTable.class)
-                .setQuery(queryFor(ExternalTable.NAME))
-                .setView("externalTable-edit");
-
-        dataManager.loadList(context);
-    }
 
     @Test
     void rasterDs_Browse_OK() {

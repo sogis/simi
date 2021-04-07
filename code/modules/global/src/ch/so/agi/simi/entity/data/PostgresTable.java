@@ -1,5 +1,6 @@
 package ch.so.agi.simi.entity.data;
 
+import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
@@ -18,7 +19,7 @@ import java.util.List;
 @Entity(name = PostgresTable.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("%s.%s|dataTheme,tableName")
-public class PostgresTable extends TableDS {
+public class PostgresTable extends SimiEntity {
 
     public static final String NAME = "simiData_PostgresTable";
 

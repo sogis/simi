@@ -228,16 +228,19 @@ create table SIMIDATA_VIEW_FIELD (
     primary key (ID)
 )^
 -- end SIMIDATA_VIEW_FIELD
--- begin SIMIDATA_EXTERNAL_TABLE
-create table SIMIDATA_EXTERNAL_TABLE (
-    ID uuid,
-    --
-    primary key (ID)
-)^
--- end SIMIDATA_EXTERNAL_TABLE
 -- begin SIMIDATA_POSTGRES_TABLE
 create table SIMIDATA_POSTGRES_TABLE (
     ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    EXT1 text,
+    EXT2 text,
+    EXT3 text,
+    EXT4 text,
+    EXT5 text,
     --
     ID_FIELD_NAME varchar(100) not null,
     DATA_THEME_ID uuid not null,

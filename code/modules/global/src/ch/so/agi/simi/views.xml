@@ -112,8 +112,6 @@
         </property>
     </view>
     <view entity="simiData_TableField" name="tableField-edit" extends="_local"/>
-    <view entity="simiData_ExternalTable" name="externalTable-browse" extends="_local"/>
-    <view entity="simiData_ExternalTable" name="externalTable-edit" extends="_local"/>
     <view entity="simiData_RasterDS" name="rasterDs_browse" extends="_local">
         <property name="rasterViews" view="_minimal">
             <property name="identifier"/>
