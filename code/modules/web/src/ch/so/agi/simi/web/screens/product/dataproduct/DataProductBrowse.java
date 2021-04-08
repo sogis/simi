@@ -1,11 +1,10 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
 import ch.so.agi.simi.core.copy.CopyService;
-import ch.so.agi.simi.core.props.PropertiesConfiguredService;
+import ch.so.agi.simi.core.props.PropertiesCheckerService;
 import ch.so.agi.simi.entity.data.datasetview.RasterView;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.product.*;
-import ch.so.agi.simi.util.properties.SimiProperty;
 import ch.so.agi.simi.web.beans.publish.JobRunner;
 import ch.so.agi.simi.web.beans.publish.PublishConfig;
 import com.haulmont.bali.util.ParamsMap;
@@ -27,7 +26,7 @@ import javax.inject.Inject;
 public class DataProductBrowse extends StandardLookup<DataProduct> {
 
     @Inject
-    private PropertiesConfiguredService service;
+    private PropertiesCheckerService service;
 
     @Inject
     private ScreenBuilders screenBuilders;

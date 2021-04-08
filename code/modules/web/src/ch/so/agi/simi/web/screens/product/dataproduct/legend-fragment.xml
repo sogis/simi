@@ -2,6 +2,7 @@
 <fragment xmlns="http://schemas.haulmont.com/cuba/screen/fragment.xsd">
     <layout>
         <hbox spacing="false" >
+            <!-- Übersteuern der caption des upload button ist nicht einfach möglich -> fallback auf upload, download -->
             <button id="legendDownloadBtn" caption="Download"/>
             <hbox width="10"/>
             <upload id="legendUploadBtn" fileStoragePutMode="MANUAL" permittedExtensions=".png"/>

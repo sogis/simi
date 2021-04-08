@@ -8,7 +8,7 @@
                     class="ch.so.agi.simi.entity.data.PostgresTable" view="postgresTable-browse">
             <loader id="postgresTablesDl">
                 <query>
-                    <![CDATA[select e from simiData_PostgresTable e]]>
+                    <![CDATA[select e from simiData_PostgresTable e order by e.dataTheme.postgresDB.dbName, e.dataTheme.schemaName, e.tableName ]]>
                     <condition>
                         <or>
                             <c:jpql>
@@ -44,8 +44,8 @@
             </actions>
             <columns>
                 <column id="instanceName" caption="Kennung"/>
-                <column id="catSyncStamp"/>
                 <column id="tableViews" caption="TableViews"/>
+                <column id="catSyncStamp"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

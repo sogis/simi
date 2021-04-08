@@ -13,8 +13,8 @@
             <map>
                 <entry key="simi_DependencyService" value="ch.so.agi.simi.core.dependency.DependencyService"/>
                 <entry key="simi_CopyService" value="ch.so.agi.simi.core.copy.CopyService"/>
-                <entry key="simi_PropertiesConfiguredService"
-                       value="ch.so.agi.simi.core.props.PropertiesConfiguredService"/>
+                <entry key="simi_PropertiesCheckerService"
+                       value="ch.so.agi.simi.core.props.PropertiesCheckerService"/>
             </map>
         </property>
     </bean>

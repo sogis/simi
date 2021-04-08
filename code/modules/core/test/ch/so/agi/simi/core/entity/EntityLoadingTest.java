@@ -70,6 +70,15 @@ class EntityLoadingTest {
     }
 
     @Test
+    void dataTheme_PostgresTable_Edit_OK() {
+        LoadContext context = LoadContext.create(DataTheme.class)
+                .setQuery(queryFor(DataTheme.NAME))
+                .setView("postgresTable-edit-themes");
+
+        dataManager.loadList(context);
+    }
+
+    @Test
     void postgresTable_Browse_OK() {
         LoadContext context = LoadContext.create(PostgresTable.class)
                 .setQuery(queryFor(PostgresTable.NAME))

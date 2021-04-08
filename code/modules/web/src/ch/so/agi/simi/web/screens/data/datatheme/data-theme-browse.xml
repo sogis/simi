@@ -33,7 +33,7 @@
                 </action>
             </actions>
             <columns>
-                <column id="schemaName"/>
+                <column id="schemaName" sort="ASCENDING"/>
                 <column id="postgresDB"/>
             </columns>
             <rowsCount/>

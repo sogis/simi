@@ -121,4 +121,10 @@ alter table SIMIPRODUCT_DATA_SET_VIEW add column SEARCH_TYPE varchar(50) ^
 update SIMIPRODUCT_DATA_SET_VIEW set SEARCH_TYPE = '1_no_search' where SEARCH_TYPE is null ;
 alter table SIMIPRODUCT_DATA_SET_VIEW alter column SEARCH_TYPE set not null ;
 ```
+
+# Issues
+
+## State of code-generated entities
+
+### Entities are not displayed in form
     

@@ -1,11 +1,10 @@
 package ch.so.agi.simi.listeners;
 
-import ch.so.agi.simi.core.props.PropertiesConfiguredService;
+import ch.so.agi.simi.core.props.PropertiesCheckerService;
 import ch.so.agi.simi.util.properties.SimiProperty;
 import com.haulmont.cuba.core.sys.AppContext;
 import com.haulmont.cuba.core.sys.SecurityContext;
 import com.haulmont.cuba.core.sys.events.AppContextStartedEvent;
-import com.haulmont.cuba.core.sys.servlet.events.ServletContextInitializedEvent;
 import com.haulmont.cuba.security.auth.AuthenticationDetails;
 import com.haulmont.cuba.security.global.UserSession;
 import com.haulmont.cuba.web.security.AnonymousUserCredentials;
@@ -27,7 +26,7 @@ public class AppLifecycleEventListener {
     private AnonymousLoginProvider loginProvider;
 
     @Inject
-    private PropertiesConfiguredService service;
+    private PropertiesCheckerService service;
 
     @EventListener
     public void applicationContextStarted(AppContextStartedEvent event) {

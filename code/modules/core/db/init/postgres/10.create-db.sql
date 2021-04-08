@@ -39,27 +39,6 @@ create table SIMIIAM_PERMISSION (
     primary key (ID)
 )^
 -- end SIMIIAM_PERMISSION
--- begin SIMIDATA_TABLE_DS
-create table SIMIDATA_TABLE_DS (
-    ID uuid,
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    VERSION integer not null,
-    EXT1 text,
-    EXT2 text,
-    EXT3 text,
-    EXT4 text,
-    EXT5 text,
-    DTYPE varchar(31),
-    --
-    TABLE_NAME varchar(100) not null,
-    REMARKS text,
-    --
-    primary key (ID)
-)^
--- end SIMIDATA_TABLE_DS
 -- begin SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE
 create table SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE (
     ID uuid,
@@ -374,11 +353,6 @@ create table SIMIDATA_RASTER_VIEW (
 create table SIMIDATA_TABLE_VIEW (
     ID uuid,
     --
-    WHERE_CLAUSE varchar(200),
-    GEOM_FIELD_NAME varchar(100),
-    GEO_TYPE varchar(100),
-    GEO_EPSG_CODE integer,
-    WGC_EDIT boolean not null,
     POSTGRES_TABLE_ID uuid not null,
     SEARCH_TYPE varchar(50) not null,
     SEARCH_FACET varchar(100),

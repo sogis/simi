@@ -284,4 +284,5 @@
         <property name="identifierList"/>
     </view>
     <view entity="simiProduct_ExternalMapService" name="externalMapLayers-edit-services" extends="_minimal"/>
+    <view entity="simiData_DataTheme" name="postgresTable-edit-themes" extends="_minimal"/>
 </views>

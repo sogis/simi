@@ -43,7 +43,7 @@ public class SimiProperty implements Comparable, Serializable {
         SimiProperty.add("cuba.dataSource.username", true, CubaModule.CORE);
         SimiProperty.add("cuba.dataSource.password", true, CubaModule.CORE, false);
 
-        SimiProperty.add("simi.config.stopOnIncomplete", false, CubaModule.CORE);
+        //SimiProperty.add("simi.config.stopOnIncomplete", false, CubaModule.CORE);
 
         SimiProperty.add("simi.gitSearch.url", true, CubaModule.CORE);
         SimiProperty.add("simi.gitSearch.repos", true, CubaModule.CORE);
@@ -64,6 +64,13 @@ public class SimiProperty implements Comparable, Serializable {
 
     private void readValue(){
         value = AppContext.getProperty(name);
+    }
+
+    private String envName(){
+        if(name == null)
+            return null;
+
+        return name.toUpperCase().replaceAll("\\.", "_");
     }
 
     @Override
@@ -114,17 +121,17 @@ public class SimiProperty implements Comparable, Serializable {
         for(SimiProperty p : props){
             if(p.value != null && p.value.length() > 0){
                 if(p.showInLog)
-                    log.info("{}: [{}]", p.name, p.value);
+                    log.info("'{}': [{}]", p.envName(), p.value);
                 else
-                    log.info("{}: [Secret value with {} digits]", p.name, p.value.length());
+                    log.info("'{}': [Secret value with {} digits]", p.envName(), p.value.length());
             }
             else {
                 if(p.mandatory) {
-                    log.error("ERROR {}: [-MANDATORY BUT NOT CONFIGURED-]", p.name);
+                    log.error("'{}': [-MANDATORY BUT NOT CONFIGURED-]", p.envName());
                     missingMandatoryValues = true;
                 }
                 else
-                    log.info("{}: [-NOT CONFIGURED-]", p.name);
+                    log.info("'{}': [-NOT CONFIGURED-]", p.envName());
             }
         }
 

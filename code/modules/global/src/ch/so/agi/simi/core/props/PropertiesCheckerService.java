@@ -4,8 +4,8 @@ import ch.so.agi.simi.util.properties.SimiProperty;
 
 import java.util.SortedSet;
 
-public interface PropertiesConfiguredService {
-    String NAME = "simi_PropertiesConfiguredService";
+public interface PropertiesCheckerService {
+    String NAME = "simi_PropertiesCheckerService";
 
     void assertAllPropertiesConfigured(SortedSet<SimiProperty> props);
 }

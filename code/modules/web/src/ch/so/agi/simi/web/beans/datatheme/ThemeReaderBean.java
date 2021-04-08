@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Component(ThemeReaderBean.NAME)
 public class ThemeReaderBean {
@@ -38,7 +40,7 @@ public class ThemeReaderBean {
         }
     }
 
-    public void actualizeWithDbCat(SchemaReader reader, PostgresTable inOutTable) {
+    public List<TableField> actualizeWithDbCat(SchemaReader reader, PostgresTable inOutTable) {
 
         TableAndFieldInfo tfi = reader.queryTableMeta(
                 inOutTable.getDataTheme().getPostgresDB().getDbName(),
@@ -47,19 +49,18 @@ public class ThemeReaderBean {
         );
 
         updateTableInfo(inOutTable, tfi);
-        updateFields(inOutTable, tfi);
+        List<TableField> inPlaceUpdated = updateFields(inOutTable, tfi);
+
+        return inPlaceUpdated;
     }
 
     private static void updateTableInfo(PostgresTable inOutTable, TableAndFieldInfo tfi){
+
         TableInfo ti = tfi.getTableInfo();
 
         inOutTable.setTableName(ti.getTvName());
         inOutTable.setDescriptionModel(ti.getDescription());
         inOutTable.setIdFieldName(ti.getPkField());
-
-        if(inOutTable.getIdFieldName() == null || inOutTable.getIdFieldName().length() == 0) //$td remove after working ui
-            inOutTable.setIdFieldName("dummy");
-        
         inOutTable.setCatSyncStamp(LocalDateTime.now());
 
         int count = 0;
@@ -88,7 +89,9 @@ public class ThemeReaderBean {
         }
     }
 
-    private static void updateFields(PostgresTable inOutTable, TableAndFieldInfo tfi){
+    private static List<TableField> updateFields(PostgresTable inOutTable, TableAndFieldInfo tfi){
+
+        ArrayList<TableField> updated = new ArrayList<>(); // preexisting FieldInfos
 
         if(inOutTable.getTableFields() == null){
             inOutTable.setTableFields(new ArrayList<>());
@@ -104,6 +107,7 @@ public class ThemeReaderBean {
             if(tf != null && areEqualFields(tf, fi)) {
                 tf.setCatSynced(true);
                 tf.setDescriptionModel(fi.getDescription());
+                updated.add(tf);
             }
             else if (fi.getGeoFieldType() == null || fi.getGeoFieldType().length() == 0) {
                 TableField nf = new TableField();
@@ -119,6 +123,8 @@ public class ThemeReaderBean {
                 inOutTable.getTableFields().add(nf);
             }
         }
+
+        return updated;
     }
 
     private static boolean areEqualFields(TableField tf, FieldInfo  fi){ //only compares field props. Assumes that tables are equal
