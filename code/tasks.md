@@ -106,8 +106,7 @@ Signatur:
 * Aufhebung "Externe Tabelle und diesbezügliche Vererbungsstruktur" TableDS <- ExternalTable und TableDS <- PostgresTable
   * Attribute von TableDS in PostgresTable gezügelt
 * geo* Felder aus TableView gelöscht (Sind Teil von PostgresTable)
-* boolean wgcEdit aus TableView gelöscht
-* Ergänzung 
+* boolean wgcEdit aus TableView gelöscht 
 
 # Findings zu Erstversion der Datenmigration
 * Karten haben keine Kinder
