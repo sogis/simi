@@ -1,9 +1,11 @@
 package ch.so.agi.simi.entity;
 
-import com.haulmont.cuba.core.entity.*;
+import com.haulmont.cuba.core.entity.BaseUuidEntity;
+import com.haulmont.cuba.core.entity.Creatable;
+import com.haulmont.cuba.core.entity.Updatable;
+import com.haulmont.cuba.core.entity.Versioned;
 
 import javax.persistence.Column;
-import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import java.util.Date;
@@ -28,6 +30,7 @@ public class SimiEntity extends BaseUuidEntity implements Versioned, Updatable, 
     @Column(name = "VERSION", nullable = false)
     private Integer version;
 
+    /*
     @Lob
     @Column(name = "EXT1")
     private String ext1;
@@ -87,6 +90,8 @@ public class SimiEntity extends BaseUuidEntity implements Versioned, Updatable, 
     public void setExt1(String ext1) {
         this.ext1 = ext1;
     }
+
+     */
 
     @Override
     public Integer getVersion() {
