@@ -38,13 +38,12 @@
                             <property name="styleChangedProperty" value="styleServerChanged"/>
                         </properties>
                     </fragment>
-                    <hbox spacing="true" caption="Publikation">
+                    <hbox spacing="false" caption="Publikation">
                         <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment">
                             <properties>
                                 <property name="filterProperty" value="forDSV"/>
                             </properties>
                         </fragment>
-                        <hbox width="10"/>
                         <checkBox id="rawDownloadField" align="MIDDLE_CENTER" property="rawDownload" caption="Rohdaten pub?"/>
                     </hbox>
                 </column>
@@ -69,9 +68,6 @@
                                 <property name="singleActorDc" ref="dataProductDc"/>
                             </properties>
                         </fragment>
-                        <lookupField id="searchTypeField" property="searchType"/>
-                        <textField id="searchFacetField" property="searchFacet"/>
-                        <textField id="searchFilterWordField" property="searchFilterWord"/>
                     </column>
                     <column width="450px">
                         <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>

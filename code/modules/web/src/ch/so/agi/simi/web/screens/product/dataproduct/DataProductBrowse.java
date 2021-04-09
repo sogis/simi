@@ -77,7 +77,7 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
 
     @Subscribe("createBtn.createExtLayer")
     protected void onCreateBtnCreateExtLayer(Action.ActionPerformedEvent event) {
-        ExternalMapLayers rv = metadata.create(ExternalMapLayers.class);
+        ExternalMapLayer rv = metadata.create(ExternalMapLayer.class);
         showCreateEditorForDataProduct(rv);
     }
 

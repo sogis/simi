@@ -9,16 +9,16 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMIPRODUCT_EXTERNAL_MAP_LAYERS")
-@Entity(name = ExternalMapLayers.NAME)
+@Entity(name = ExternalMapLayer.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-public class ExternalMapLayers extends SingleActor {
+public class ExternalMapLayer extends SingleActor {
     public static final String NAME = "simiProduct_ExternalMapLayers";
 
     private static final long serialVersionUID = 640051427821660156L;
 
     @NotNull
-    @Column(name = "IDENTIFIER_LIST", nullable = false, length = 500)
-    private String identifierList;
+    @Column(name = "IDENTIFIER_LIST", nullable = false)
+    private String externalIdentifier;
 
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "clear"})
     @NotNull
@@ -40,11 +40,11 @@ public class ExternalMapLayers extends SingleActor {
         this.service = service;
     }
 
-    public String getIdentifierList() {
-        return identifierList;
+    public String getExternalIdentifier() {
+        return externalIdentifier;
     }
 
-    public void setIdentifierList(String identifierList) {
-        this.identifierList = identifierList;
+    public void setExternalIdentifier(String externalIdentifier) {
+        this.externalIdentifier = externalIdentifier;
     }
 }

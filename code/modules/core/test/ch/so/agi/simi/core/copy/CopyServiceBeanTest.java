@@ -45,7 +45,6 @@ class CopyServiceBeanTest {
     private static final int TV_SA_TRANSPARENCY = 88;
 
     private static final String RV_DP_STRING = "ch.so.agi.inttest.rasterview";
-    private static final String RV_DS_PATH = "ch.so.agi.inttest.rasterview.dataset";
     private static final String RV_FL_STRING = "ch.so.agi.inttest.rasterview.facadelayer";
     private static final String RV_PL_STRING = "ch.so.agi.inttest.rasterview.layergroup";
     private static final String RV_ROLE_STRING = "ch.so.agi.inttest.rasterview.role";
@@ -89,7 +88,6 @@ class CopyServiceBeanTest {
             TableView tv = dataManager.load(TableView.class).view(TV_VIEW_NAME).id(copyId).one();
 
             assertTrue(tv.getIdentifier().contains(TV_DP_STRING), "Identifier of copy must start with identifier of the original");
-            assertEquals(TV_DP_STRING, tv.getGeomFieldName());
             assertEquals(TV_DP_STRING, tv.getSearchFacet());
             assertEquals(TV_SA_TRANSPARENCY, tv.getTransparency());
 
@@ -364,7 +362,7 @@ class CopyServiceBeanTest {
             EntityManager orm = pers.getEntityManager();
 
             RasterDS rds = container.metadata().create(RasterDS.class);
-            rds.setPath(RV_DS_PATH);
+            rds.setPath(UUID.randomUUID().toString());
             orm.persist(rds);
 
             // RasterView
@@ -578,7 +576,7 @@ class CopyServiceBeanTest {
     private static BaseUuidEntity[] linkToTestDsv(FacadeLayer fl, DataProduct_PubScope ps, String dsvIdentifier){
         
         RasterDS rds = container.metadata().create(RasterDS.class);
-        rds.setPath(dsvIdentifier);
+        rds.setPath(UUID.randomUUID().toString());
         
         RasterView dsv = container.metadata().create(RasterView.class);
         dsv.setIdentifier(dsvIdentifier);
@@ -615,6 +613,7 @@ class CopyServiceBeanTest {
             tbl.setIdFieldName("fuu");
             tbl.setCatSyncStamp(LocalDateTime.now());
             tbl.setDataTheme(dt);
+            tbl.setGeoFieldName(TV_TABLE_STRING);
 
             orm.persist(db);
             orm.persist(dt);
@@ -624,7 +623,6 @@ class CopyServiceBeanTest {
             TableView tv = container.metadata().create(TableView.class);
             tvId = tv.getId();
 
-            tv.setGeomFieldName(TV_DP_STRING);
             tv.setSearchFacet(TV_DP_STRING);
             tv.setTransparency(TV_SA_TRANSPARENCY);
             tv.setIdentifier(TV_DP_STRING);

@@ -17,9 +17,9 @@
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="externalMapServiceDc">
             <column width="350px">
-                <textField id="urlField" property="url"/>
-                <lookupField id="serviceTypeField" property="serviceType"/>
-                <textArea id="remarksField" property="remarks" rows="5"/>
+                <textField id="urlField" property="url" caption="URL"/>
+                <lookupField id="serviceTypeField" property="serviceType" caption="Typ"/>
+                <textArea id="remarksField" property="remarks" rows="5" caption="Bemerkungen"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

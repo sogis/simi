@@ -14,32 +14,5 @@ import javax.inject.Inject;
 @EditedEntityContainer("dataProductDc")
 @LoadDataBeforeShow
 public class RasterViewEdit extends StandardEditor<RasterView> {
-    /*
-    @Inject
-    private CollectionPropertyContainer<Permission> permissionsDc;
 
-     */
-    @Inject
-    private DataContext dataContext;
-    @Inject
-    private InstanceContainer<RasterView> dataProductDc;
-    @Inject
-    private Messages messages;
-    @Inject
-    private TextField<String> searchFilterWordField;
-    /*
-    @Inject
-    private Table<Permission> permissionsTable;
-
-    @Subscribe("addPermissionBtn")
-    public void onAddPermissionBtnClick(Button.ClickEvent event) {
-        Permission permission = dataContext.create(Permission.class);
-        permission.setDataSetView(this.getEditedEntity());
-
-        permissionsDc.getMutableItems().add(permission);
-
-        permissionsTable.requestFocus(permission, "role");
-    }
-
-     */
 }

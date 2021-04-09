@@ -102,6 +102,13 @@ Signatur:
   Am einfachsten indem der Alias nicht gesetzt ist.
 * DataSetView_SearchTypeEnum geändert von int auf string
 
+# Schema-Änderungen auf V 1.0.x
+* Aufhebung "Externe Tabelle und diesbezügliche Vererbungsstruktur" TableDS <- ExternalTable und TableDS <- PostgresTable
+  * Attribute von TableDS in PostgresTable gezügelt
+* geo* Felder aus TableView gelöscht (Sind Teil von PostgresTable)
+* boolean wgcEdit aus TableView gelöscht
+* Ergänzung 
+
 # Findings zu Erstversion der Datenmigration
 * Karten haben keine Kinder
 * Publikationstyp muss noch aus "In WMS verfügbar" abgeleitet werden

@@ -4,6 +4,18 @@ Webapplikation zur Pflege der Metainformationen der GDI-SO (**S**patial **I**nfr
 
 Die Doku des Metamodells ist hier zuhause: [Doku des Metamodelles](metamodel.md)
 
+## Schema für SIMI und Cuba anlegen
+
+Dies erfolgt mittels vier Datenbankskripten:
+* Mit [platform_schema/create-db.sql](platform_schema/create-db.sql) werden die Tabellen des Cuba Frameworks angelegt.
+* Mit den *.create-db.sql im Ordner <https://github.com/simi-so/simi/tree/master/code/modules/core/db/init/postgres> 
+  die SIMI-Tabellen, Indexes, ...
+  
+ZU BEACHTEN: Das Framework verwendet als Abschlusszeichen eines SQL Befehls "^" und nicht ";".
+
+Damit man sich nicht darum kümmern kann auch wie hier beschrieben vorgegangen werden:
+<https://doc.cuba-platform.com/manual-latest/db_update_in_prod_cmdline.html>
+
 ## Konfigurieren und Starten
 
 Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:

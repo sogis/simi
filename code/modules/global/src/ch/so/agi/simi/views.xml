@@ -272,7 +272,7 @@
     <view entity="simiData_PostgresDB" name="dataTheme-edit-dbs" extends="_minimal"/>
     <view entity="simiProduct_ExternalMapService" name="externalMapService-browse" extends="_minimal"/>
     <view entity="simiProduct_ExternalMapService" name="externalMapService-edit" extends="_local"/>
-    <view entity="simiProduct_ExternalMapLayers" name="externalMapLayers-edit" extends="_minimal">
+    <view entity="simiProduct_ExternalMapLayers" name="externalMapLayer-edit" extends="_minimal">
         <property name="service" view="_minimal">
             <property name="serviceTypeString"/>
         </property>
@@ -281,7 +281,8 @@
         <property name="keywords"/>
         <property name="remarks"/>
         <property name="synonyms"/>
-        <property name="identifierList"/>
+        <property name="externalIdentifier"/>
+        <property name="transparency"/>
     </view>
     <view entity="simiProduct_ExternalMapService" name="externalMapLayers-edit-services" extends="_minimal"/>
     <view entity="simiData_DataTheme" name="postgresTable-edit-themes" extends="_minimal"/>

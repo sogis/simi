@@ -404,10 +404,10 @@ class EntityLoadingTest {
     }
 
     @Test
-    void externalMapLayers_Edit_OK() {
-        LoadContext context = LoadContext.create(ExternalMapLayers.class)
-                .setQuery(queryFor(ExternalMapLayers.NAME))
-                .setView("externalMapLayers-edit");
+    void externalMapLayer_Edit_OK() {
+        LoadContext context = LoadContext.create(ExternalMapLayer.class)
+                .setQuery(queryFor(ExternalMapLayer.NAME))
+                .setView("externalMapLayer-edit");
 
         dataManager.loadList(context);
     }
