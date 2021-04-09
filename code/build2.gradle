@@ -54,7 +54,7 @@ task pushImg(type:Exec, dependsOn: pushImgLatest) {
 }
 
 String getVersion(){
-    return "0.9." + getBuildNumber()
+    return "1.0." + getBuildNumber()
 }
 
 String getBuildNumber() {
