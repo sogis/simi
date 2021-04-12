@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://mapEdit.caption"
+        caption="mainMsg://map.caption.edit"
         focusComponent="form"
         messagesPack="ch.so.agi.simi.web.screens.product.map">
     <data>
@@ -56,15 +56,16 @@
                 </actions>
                 <columns>
                     <column id="singleActor" editable="true" optionsContainer="singleActorsDc" caption="Kindebene" captionProperty="entityName"/>
-                    <column id="visible" editable="true"/>
-                    <column id="transparency" editable="true"/>
-                    <column id="sort" editable="true" sort="ASCENDING"/>
+                    <column id="visible" editable="true" width="170"/>
+                    <column id="sort" editable="true" sort="ASCENDING" width="170"/>
                 </columns>
                 <buttonsPanel>
                     <button id="btnPilAddSingleActor" caption="Kindebene verknüpfen" icon="ADD_ACTION" primary="true"/>
-                    <button id="btnPilAddSingleActorsFromLayerGroup" caption="Aus Gruppe übernehmen ..." icon="ADD_ACTION"/>
-                    <button id="btnPilExclude" action="propertiesInListTable.exclude"/>
-                    <button id="btnPilSortAction" caption="Sortieren" icon="SORT"/>
+                    <button id="btnPilExclude" action="propertiesInListTable.exclude" stylename="danger"/>
+                    <label id="spacer" width="100"/>
+                    <button id="btnPilAddSingleActorsFromLayerGroup" caption="Aus Gruppe übernehmen ..." icon="ADD_ACTION" stylename="friendly"/>
+                    <label id="spacer2" width="100"/>
+                    <button id="btnPilSortAction" caption="Sortieren" icon="SORT" stylename="friendly"/>
                 </buttonsPanel>
             </table>
         </groupBox>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Geo-Tabellen"
+        caption="mainMsg://postgrestable.caption.browse"
         focusComponent="postgresTablesTable">
     <data readOnly="true">
         <collection id="postgresTablesDc"
@@ -44,16 +44,16 @@
             </actions>
             <columns>
                 <column id="instanceName" caption="Kennung"/>
-                <column id="tableViews" caption="TableViews"/>
+                <column id="tableViews" caption="View(s) der Tabelle"/>
                 <column id="catSyncStamp"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="postgresTablesTable.create"/>
-                <button id="editBtn" action="postgresTablesTable.edit"/>
+                <button id="createBtn" action="postgresTablesTable.create" stylename="primary"/>
+                <button id="editBtn" action="postgresTablesTable.edit" stylename="primary"/>
                 <button id="removeBtn" action="postgresTablesTable.remove" stylename="danger"/>
-                <button id="createTableViewBtn" action="postgresTablesTable.createTableView"/>
+                <button id="createTableViewBtn" action="postgresTablesTable.createTableView" stylename="friendly"/>
             </buttonsPanel>
         </table>
         <fragment screen="simi_FilterFragment">

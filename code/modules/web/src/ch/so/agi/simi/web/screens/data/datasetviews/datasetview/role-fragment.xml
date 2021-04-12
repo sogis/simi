@@ -26,7 +26,7 @@
         </columns>
         <buttonsPanel>
             <button id="addPermissionBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
-            <button action="permissionsTable.remove"/>
+            <button action="permissionsTable.remove" stylename="danger"/>
         </buttonsPanel>
     </table>
 </layout>

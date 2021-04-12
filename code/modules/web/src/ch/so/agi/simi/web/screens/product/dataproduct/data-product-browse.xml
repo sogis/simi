@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Produkte - Browse"
+        caption="mainMsg://dataproduct.caption.browse"
         focusComponent="dataProductsTable">
     <data readOnly="true">
         <collection id="dataProductsDc"
@@ -45,21 +45,21 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <popupButton id="createBtn" caption="Erstellen" stylename="friendly" icon="ADD_ACTION">
+                <popupButton id="createBtn" caption="Erstellen" stylename="primary" icon="ADD_ACTION">
                     <actions>
-                        <action id="createLayerGroup" caption="Gruppe erstellen"/>
-                        <action id="createFacadeLayer" caption="Fassade erstellen"/>
-                        <action id="createTableView" caption="View erstellen"/>
-                        <action id="createMap" caption="Karte erstellen"/>
-                        <action id="createRasterView" caption="Raster View erstellen"/>
-                        <action id="createExtLayer" caption="Ext. WM(T)S erstellen"/>
+                        <action id="createTableView" caption="mainMsg://tableview.caption.edit"/>
+                        <action id="createLayerGroup" caption="mainMsg://layergroup.caption.edit"/>
+                        <action id="createFacadeLayer" caption="mainMsg://facadelayer.caption.edit"/>
+                        <action id="createMap" caption="mainMsg://map.caption.edit"/>
+                        <action id="createRasterView" caption="mainMsg://rasterview.caption.edit"/>
+                        <action id="createExtLayer" caption="mainMsg://extlayer.caption.edit"/>
                     </actions>
                 </popupButton>
-                <button id="editBtn" action="dataProductsTable.edit"/>
-                <button id="copyBtn" action="dataProductsTable.copy"/>
+                <button id="editBtn" action="dataProductsTable.edit" stylename="primary"/>
+                <button id="copyBtn" action="dataProductsTable.copy" stylename="friendly"/>
                 <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
-                <label id="spacer" width="300" value=" "/>
-                <button id="btnPublish" caption="Publizieren" stylename="primary" icon="EXCLAMATION"/>
+                <label id="spacer" width="100" value=" "/>
+                <button id="btnPublish" caption="Publizieren" stylename="friendly" icon="EXCLAMATION"/>
             </buttonsPanel>
         </table>
         <fragment id="filter" screen="simi_FilterFragment">

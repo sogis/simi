@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Raster DS - Edit"
+        caption="mainMsg://rasterds.caption.edit"
         focusComponent="form">
     <data>
         <instance id="rasterDSDc"

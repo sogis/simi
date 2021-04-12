@@ -174,7 +174,6 @@ public class UpdateFromOtherListsBean {
         // local properties
         toPil.setVisible(fromPil.getVisible().booleanValue());
         toPil.setSort(fromPil.getSort().intValue());
-        toPil.setTransparency(fromPil.getTransparency().intValue());
 
         // reference to the single actor child layer
         toPil.setSingleActor(fromPil.getSingleActor());

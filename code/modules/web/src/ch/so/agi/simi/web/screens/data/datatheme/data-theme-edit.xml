@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Datenthema"
+        caption="mainMsg://datatheme.caption.edit"
         focusComponent="form">
     <data>
         <instance id="modelSchemaDc"
@@ -40,12 +40,12 @@
                 <columns>
                     <column id="tableName" editable="true" sort="ASCENDING"/>
                     <column id="idFieldName" editable="true"/>
-                    <column id="catSyncStamp"/>
+                    <column id="catSyncStamp" width="100px"/>
                 </columns>
                 <buttonsPanel>
                     <button id="btnReadAll" caption="Aus Quell-DB einlesen" stylename="danger" icon="BULK_EDIT_ACTION"/>
-                    <button action="pgTablesTable.edit"/>
-                    <button action="pgTablesTable.remove"/>
+                    <button action="pgTablesTable.edit" stylename="primary"/>
+                    <button action="pgTablesTable.remove" stylename="danger"/>
                 </buttonsPanel>
             </table>
         </groupBox>

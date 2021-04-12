@@ -60,7 +60,6 @@
         <property name="visible"/>
         <property name="singleActor" view="_minimal"/>
         <property name="sort"/>
-        <property name="transparency"/>
     </view>
     <view entity="simiData_PostgresTable" name="dependencyService-fullTableName">
         <property name="dataTheme">

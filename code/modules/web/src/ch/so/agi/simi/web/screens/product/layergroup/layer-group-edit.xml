@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Layergruppe - Edit"
+        caption="mainMsg://layergroup.caption.edit"
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
@@ -58,21 +58,23 @@
                 <columns>
                     <column id="singleActor" editable="true" optionsContainer="singleActorsDc" captionProperty="entityName"/>
                     <column id="visible" editable="true"/>
-                    <column id="transparency" editable="true"/>
                     <column id="sort" editable="true" sort="ASCENDING"/>
                 </columns>
                 <buttonsPanel>
                     <button id="btnPilAdd" icon="ADD_ACTION" caption="Kindebene verknüpfen" primary="true"/>
-                    <button id="btnPilAddSingleActorsFromLayerGroup" caption="Aus Gruppe übernehmen ..." icon="ADD_ACTION"/>
-                    <button id="btnPilUnlink" action="propertiesInListTable.unlink"/>
-                    <button id="btnPilSort" caption="sortieren" icon="SORT"/>
+                    <button id="btnPilUnlink" action="propertiesInListTable.unlink" stylename="danger"/>
+                    <label id="spacer" width="100"/>
+                    <button id="btnPilAddSingleActorsFromLayerGroup" caption="Aus Gruppe übernehmen ..." icon="ADD_ACTION" stylename="friendly"/>
+                    <label id="spacer2" width="100"/>
+                    <button id="btnPilSort" caption="sortieren" icon="SORT" stylename="friendly"/>
                 </buttonsPanel>
             </table>
         </groupBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
-            <button id="btnConvertToFacadeLayer" action="convertToFacadeLayer"/>
             <button action="windowClose"/>
+            <label id="spacer3" width="100"/>
+            <button id="btnConvertToFacadeLayer" action="convertToFacadeLayer" stylename="danger"/>
         </hbox>
     </layout>
 </window>

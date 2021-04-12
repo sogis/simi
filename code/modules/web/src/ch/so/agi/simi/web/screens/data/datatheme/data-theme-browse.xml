@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Datenthemen"
+        caption="mainMsg://datatheme.caption.browse"
         focusComponent="modelSchemasTable">
     <data readOnly="true">
         <collection id="modelSchemasDc"
@@ -26,9 +26,7 @@
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove">
                     <properties>
-                        <property name="confirmationMessage"
-                                  value="Alle zugehörigen Postgres Tabellen und TableViews werden ebenfalls gelöscht. Sind Sie sicher, dass sie die ausgewählten Modell Schemas löschen möchten?"/>
-                        <property name="confirmationTitle" value="Löschen bestätigen"/>
+                        <property name="confirmation" value="false"/>
                     </properties>
                 </action>
             </actions>
@@ -39,8 +37,8 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="modelSchemasTable.create"/>
-                <button id="editBtn" action="modelSchemasTable.edit"/>
+                <button id="createBtn" action="modelSchemasTable.create" stylename="primary"/>
+                <button id="editBtn" action="modelSchemasTable.edit" stylename="primary"/>
                 <button id="removeBtn" action="modelSchemasTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>

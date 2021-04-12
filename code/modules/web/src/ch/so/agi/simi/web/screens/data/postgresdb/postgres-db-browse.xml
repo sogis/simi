@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Datenbanken"
+        caption="mainMsg://postgresdb.caption.browse"
         focusComponent="postgresDBsTable">
     <data readOnly="true">
         <collection id="postgresDBsDc"
@@ -28,13 +28,12 @@
             </actions>
             <columns>
                 <column id="dbName"/>
-                <column id="defaultValue"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="postgresDBsTable.create"/>
-                <button id="editBtn" action="postgresDBsTable.edit"/>
+                <button id="createBtn" action="postgresDBsTable.create" stylename="primary"/>
+                <button id="editBtn" action="postgresDBsTable.edit" stylename="primary"/>
                 <button id="removeBtn" action="postgresDBsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>

@@ -101,7 +101,6 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
                 dataContext.remove(propertiesInList);
 
                 propertiesInFacade.setSort(propertiesInList.getSort());
-                propertiesInFacade.setTransparency(propertiesInList.getTransparency());
                 propertiesInFacade.setFacadeLayer(facadeLayer);
                 propertiesInFacade.setDataSetView((DataSetView) propertiesInList.getSingleActor());
             }

@@ -83,7 +83,6 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
                 dataContext.remove(propertiesInFacade);
 
                 propertiesInList.setSort(propertiesInFacade.getSort());
-                propertiesInList.setTransparency(propertiesInFacade.getTransparency());
                 propertiesInList.setProductList(layerGroup);
                 propertiesInList.setSingleActor(propertiesInFacade.getDataSetView());
             }

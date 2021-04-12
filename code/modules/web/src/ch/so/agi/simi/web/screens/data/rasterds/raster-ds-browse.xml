@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Raster DS - Browse"
+        caption="mainMsg://rasterds.caption.browse"
         focusComponent="rasterDsesTable">
     <data readOnly="true">
         <collection id="rasterDsesDc"
@@ -9,6 +9,11 @@
             <loader id="rasterDsesDl">
                 <query>
                     <![CDATA[select e from simiData_RasterDS e]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>e.path like :term</c:where>
+                        </c:jpql>
+                    </condition>
                 </query>
             </loader>
         </collection>
@@ -28,17 +33,21 @@
             </actions>
             <columns>
                 <column id="path"/>
-                <column id="remarks"/>
-                <column id="description"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="rasterDsesTable.create"/>
-                <button id="editBtn" action="rasterDsesTable.edit"/>
+                <button id="createBtn" action="rasterDsesTable.create" stylename="primary"/>
+                <button id="editBtn" action="rasterDsesTable.edit" stylename="primary"/>
                 <button id="removeBtn" action="rasterDsesTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
+        <fragment screen="simi_FilterFragment">
+            <properties>
+                <property name="dataLoader" ref="rasterDsesDl"/>
+                <property name="inputPrompt" value="Filtern nach Raster-Pfad"/>
+            </properties>
+        </fragment>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

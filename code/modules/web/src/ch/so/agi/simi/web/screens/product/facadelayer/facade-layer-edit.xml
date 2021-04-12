@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Facadelayer - Edit"
+        caption="mainMsg://facadelayer.caption.edit"
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
@@ -72,20 +72,21 @@
                 </actions>
                 <columns>
                     <column id="dataSetView" editable="true" optionsContainer="dataSetViewsDc" captionProperty="entityName"/>
-                    <column id="transparency" editable="true" width="160"/>
-                    <column id="sort" editable="true" sort="ASCENDING" width="100"/>
+                    <column id="sort" editable="true" sort="ASCENDING" width="170"/>
                 </columns>
                 <buttonsPanel>
                     <button id="btnPifAddDataSetView" caption="View verknüpfen" icon="ADD_ACTION" primary="true"/>
-                    <button id="btnPifExclude" action="propertiesInFacadeTable.unlink"/>
-                    <button id="btnPifSort" caption="sortieren" icon="SORT"/>
+                    <button id="btnPifExclude" action="propertiesInFacadeTable.unlink" stylename="danger"/>
+                    <label id="spacer" width="100"/>
+                    <button id="btnPifSort" caption="sortieren" icon="SORT" stylename="friendly"/>
                 </buttonsPanel>
             </table>
         </groupBox>
         <hbox id="editActions" spacing="true">
-            <button action="windowCommitAndClose" align="TOP_LEFT"/>
-            <button id="btnConvertToLayerGroup" action="convertToLayerGroup"/>
+            <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
+            <label id="spacer2" width="100"/>
+            <button id="btnConvertToLayerGroup" action="convertToLayerGroup" stylename="danger"/>
         </hbox>
     </layout>
 </window>

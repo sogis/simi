@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Raster View - Edit"
+        caption="mainMsg://rasterview.caption.edit"
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
@@ -68,11 +68,11 @@
                                 <property name="singleActorDc" ref="dataProductDc"/>
                             </properties>
                         </fragment>
+                        <textArea id="synonymsField" property="synonyms" rows="3" rowspan="2"/>
                     </column>
                     <column width="450px">
                         <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
-                        <textArea id="keywordsField" property="keywords" rows="5" rowspan="3"/>
-                        <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
+                        <textArea id="keywordsField" property="keywords" rows="3" rowspan="2"/>
                     </column>
                 </form>
             </groupBox>

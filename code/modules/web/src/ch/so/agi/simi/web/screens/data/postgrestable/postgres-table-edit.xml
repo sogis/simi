@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Tabelle"
+        caption="mainMsg://postgrestable.caption.edit"
         focusComponent="form">
     <data>
         <instance id="postgresTableDc"
@@ -54,8 +54,8 @@
                     <column id="viewFieldsCount" caption="# Verwendungen in DSV"/>
                 </columns>
                 <buttonsPanel>
-                    <button action="tableFieldsTable.edit"/>
-                    <button action="tableFieldsTable.remove"/>
+                    <button action="tableFieldsTable.edit" stylename="primary"/>
+                    <button action="tableFieldsTable.remove" stylename="danger"/>
                 </buttonsPanel>
             </table>
         </groupBox>

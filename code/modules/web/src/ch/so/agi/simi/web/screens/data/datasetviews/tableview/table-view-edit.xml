@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="View - Edit"
+        caption="mainMsg://tableview.caption.edit"
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
@@ -102,7 +102,7 @@
                     </column>
                 </form>
             </groupBox>
-            <groupBox id="viewFieldsBox" caption="Attribute" spacing="true" collapsable="true">
+            <groupBox id="viewFieldsBox" caption="Attribut-Verknüpfung" spacing="true" collapsable="true">
                 <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" editable="true" multiselect="true">
                     <actions>
                         <action id="edit" type="edit"/>
@@ -119,9 +119,9 @@
                     </columns>
                     <buttonsPanel>
                         <button id="addViewFieldBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
-                        <button action="viewFieldsTable.edit"/>
-                        <button action="viewFieldsTable.remove"/>
-                        <button id="btnSortAction" action="viewFieldsTable.sortAction" icon="SORT"/>
+                        <button action="viewFieldsTable.remove" stylename="danger"/>
+                        <label id="spacer" width="100" value=" "/>
+                        <button id="btnSortAction" action="viewFieldsTable.sortAction" icon="SORT" stylename="friendly"/>
                     </buttonsPanel>
                 </table>
             </groupBox>
