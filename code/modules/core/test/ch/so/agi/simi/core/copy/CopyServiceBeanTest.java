@@ -446,7 +446,6 @@ class CopyServiceBeanTest {
             mapId = map.getId();
 
             map.setIdentifier(MAP_DP_STRING);
-            map.setWgcUrlValue("fuu");
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             map.setPubScope(ps);

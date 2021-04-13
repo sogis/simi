@@ -42,7 +42,6 @@ der übergeordneten Gruppe von Ebenen.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |sort|int|j|Sortierindex der Ebene innerhalb der ProductList.|
-|transparency|int|n|Transparenz der Kindebene innerhalb der Gruppierung. Überschreibt den Transparenzwert der Kindebene.|
 
 ## Rund um Klasse "ProductList"
 
@@ -70,11 +69,6 @@ mit welcher in der Karte noch nicht vorhandene SA's einer LG beigefügt werden k
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |background|boolean|j|Gibt an, ob es sich um eine Hintergrundkarte handelt oder nicht.|
-|wgcUrlValue|String(50)|j|Kürzel der Karte im Aufruf des WGC.|
-
-#### Konstraints
-
-wgcUrlValue ist unique.
 
 ### Klasse LayerGroup (LG)
 
@@ -176,7 +170,6 @@ Attributierte Verknüpfungstabelle der m:n Beziehung zwischen PL und SA.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |sort|int|j|Sortierindex der Ebene innerhalb der ProductList.|
-|transparency|int|j|Transparenz der Ebene in Prozent. Default: 0 (nicht transparent).|
 |visible|boolean|j|Ist die Ebene in der ProductList per default sichtbar oder nicht? Default: Ja.|
 
 ### Konstraints
@@ -290,7 +283,6 @@ Konstanter Präfix im mapViewerConfig.json ist folglich immer **resources.qwc2_t
 |sublayers.title|Dataproduct.title||
 |sublayers.visibility|PropertiesInList.visible||
 |sublayers.queryable|globals.wgc.*||
-|sublayers.opacity|PropertiesInList.transparency||
 |sublayers.bbox|globals.wgc.bbox||
 |expanded|Wert immer = "true"||
 |drawingOrder|PropertiesInList.sort||

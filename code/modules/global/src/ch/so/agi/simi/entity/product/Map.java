@@ -22,10 +22,6 @@ public class Map extends ProductList {
     @Column(name = "BACKGROUND", nullable = false)
     private Boolean background = false;
 
-    @NotNull
-    @Column(name = "WGC_URL_VALUE", nullable = false, length = 50)
-    private String wgcUrlValue = "dummy";
-
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @OnDelete(DeletePolicy.DENY)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "map")
@@ -42,14 +38,6 @@ public class Map extends ProductList {
     @Override
     protected String typeAbbreviation(){
         return "Karte";
-    }
-
-    public String getWgcUrlValue() {
-        return wgcUrlValue;
-    }
-
-    public void setWgcUrlValue(String wgcUrlValue) {
-        this.wgcUrlValue = wgcUrlValue;
     }
 
     public Boolean getBackground() {

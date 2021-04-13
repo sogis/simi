@@ -284,7 +284,6 @@ create table SIMIPRODUCT_PROPERTIES_IN_LIST (
     CREATED_BY varchar(50),
     VERSION integer not null,
     SORT integer not null,
-    TRANSPARENCY integer,
     --
     VISIBLE boolean not null,
     PRODUCT_LIST_ID uuid not null,
@@ -302,7 +301,6 @@ create table SIMIPRODUCT_PROPERTIES_IN_FACADE (
     CREATED_BY varchar(50),
     VERSION integer not null,
     SORT integer not null,
-    TRANSPARENCY integer,
     --
     DATA_SET_VIEW_ID uuid not null,
     FACADE_LAYER_ID uuid not null,
@@ -389,7 +387,6 @@ create table SIMIPRODUCT_MAP (
     ID uuid,
     --
     BACKGROUND boolean not null,
-    WGC_URL_VALUE varchar(50) not null,
     --
     primary key (ID)
 )^
