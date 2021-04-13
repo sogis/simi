@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Externe WM(T)S Dienste"
+        caption="mainMsg://extservice.caption.browse"
         focusComponent="externalMapServicesTable">
     <data readOnly="true">
         <collection id="externalMapServicesDc"
@@ -20,7 +20,8 @@
             spacing="true">
         <table id="externalMapServicesTable"
                width="100%"
-               dataContainer="externalMapServicesDc">
+               dataContainer="externalMapServicesDc"
+               settingsEnabled="false">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -33,9 +34,9 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="externalMapServicesTable.create"/>
-                <button id="editBtn" action="externalMapServicesTable.edit"/>
-                <button id="removeBtn" action="externalMapServicesTable.remove"/>
+                <button id="createBtn" action="externalMapServicesTable.create" stylename="primary"/>
+                <button id="editBtn" action="externalMapServicesTable.edit" stylename="primary"/>
+                <button id="removeBtn" action="externalMapServicesTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <hbox id="lookupActions" spacing="true" visible="false">

@@ -42,7 +42,7 @@
         </form>
         <groupBox id="tableFieldsBox" caption="Tabellenspalten"
                   expand="tableFieldsTable">
-            <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" multiselect="true" editable="true">
+            <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" multiselect="true" editable="true" settingsEnabled="false">
                 <actions>
                     <action id="edit" type="edit"/>
                     <action id="remove" type="remove"/>
@@ -50,8 +50,8 @@
                 <columns>
                     <column id="name" sort="ASCENDING"/>
                     <column id="alias" editable="true"/>
-                    <column id="catSynced"/>
-                    <column id="viewFieldsCount" caption="# Verwendungen in DSV"/>
+                    <column id="catSynced" width="180"/>
+                    <column id="viewFieldsCount" caption="# Verwendungen in DSV" width="180"/>
                 </columns>
                 <buttonsPanel>
                     <button action="tableFieldsTable.edit" stylename="primary"/>

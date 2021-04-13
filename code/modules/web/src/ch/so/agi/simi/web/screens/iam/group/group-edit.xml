@@ -23,7 +23,7 @@
             </column>
         </form>
         <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Group.users">
-            <table id="usersTable" dataContainer="usersDc" width="100%" height="100%" multiselect="true">
+            <table id="usersTable" dataContainer="usersDc" width="100%" height="100%" multiselect="true" settingsEnabled="false">
                 <actions>
                     <action id="add" type="add"/>
                     <action id="exclude" type="exclude"/>
@@ -34,8 +34,8 @@
                     <column id="firstname"/>
                 </columns>
                 <buttonsPanel>
-                    <button action="usersTable.add" stylename="friendly"/>
-                    <button action="usersTable.exclude"/>
+                    <button action="usersTable.add" stylename="primary"/>
+                    <button action="usersTable.exclude" stylename="danger"/>
                 </buttonsPanel>
             </table>
         </groupBox>

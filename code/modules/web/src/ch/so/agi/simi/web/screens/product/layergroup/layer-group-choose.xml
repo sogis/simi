@@ -31,7 +31,8 @@
         <table id="layerGroupsTable"
                width="100%"
                dataContainer="layerGroupsDc"
-               multiselect="true">
+               multiselect="true"
+               settingsEnabled="false">
             <columns>
                 <column id="identifier" sort="ASCENDING"/>
                 <column id="title"/>

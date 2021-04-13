@@ -42,12 +42,17 @@
             </column>
             <column width="350px">
                 <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
-                <textArea id="keywordsField" property="keywords" rows="5" rowspan="3"/>
-                <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
+                <textArea id="keywordsField" property="keywords" rows="3" rowspan="2"/>
+                <textArea id="synonymsField" property="synonyms" rows="3" rowspan="2"/>
             </column>
         </form>
         <groupBox id="propertiesInListBox" caption="Enthaltene Facadelayer und DSV">
-            <table id="propertiesInListTable" dataContainer="propertiesInListDc" width="100%" editable="true" multiselect="true">
+            <table id="propertiesInListTable"
+                   dataContainer="propertiesInListDc"
+                   width="100%"
+                   editable="true"
+                   multiselect="true"
+                   settingsEnabled="false">
                 <actions>
                     <action id="unlink" type="remove" caption="Verknüpfung löschen">
                         <properties>
@@ -57,8 +62,8 @@
                 </actions>
                 <columns>
                     <column id="singleActor" editable="true" optionsContainer="singleActorsDc" captionProperty="entityName"/>
-                    <column id="visible" editable="true"/>
-                    <column id="sort" editable="true" sort="ASCENDING"/>
+                    <column id="visible" editable="true" width="170"/>
+                    <column id="sort" editable="true" sort="ASCENDING" width="170"/>
                 </columns>
                 <buttonsPanel>
                     <button id="btnPilAdd" icon="ADD_ACTION" caption="Kindebene verknüpfen" primary="true"/>

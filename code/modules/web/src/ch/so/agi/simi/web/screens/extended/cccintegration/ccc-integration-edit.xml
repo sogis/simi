@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="CCC-Integration - edit"
+        caption="mainMsg://cccintegration.caption.edit"
         focusComponent="form">
     <data>
         <instance id="cCCIntegrationDc"
-                  class="ch.so.agi.simi.entity.dependency.CCCIntegration" view="ccc-edit">
+                  class="ch.so.agi.simi.entity.extended.CCCIntegration" view="ccc-edit">
             <loader/>
             <collection id="relationsDc" property="relations"/>
         </instance>
@@ -26,14 +26,14 @@
             <column width="450px">
                 <textField id="nameField" caption="Name" property="name"/>
                 <lookupField id="map" caption="Karte" optionsContainer="mapsDc" captionProperty="entityName"/>
-                <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5"/>
+                <sourceCodeEditor id="locatorLayersField" caption="Locator-Konfig (Json)" property="locatorLayers" showGutter="true" height="300"/>
             </column>
             <column width="450px">
-                <sourceCodeEditor id="locatorLayersField" caption="Locator-Konfig (Json)" property="locatorLayers" rowspan="10" showGutter="true"/>
-                <sourceCodeEditor id="notifyLayersField" caption="Rückaufruf-Konfig (Json)" property="notifyLayers" rowspan="10" showGutter="true"/>
+                <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="4" rowspan="2"/>
+                <sourceCodeEditor id="notifyLayersField" caption="Rückaufruf-Konfig (Json)" property="notifyLayers" showGutter="true" height="300"/>
             </column>
         </form>
-        <groupBox id="relationsBox" caption="Beziehungen">
+        <groupBox id="relationsBox" caption="mainMsg://dependency.caption.related_dsv">
             <fragment id="relations" screen="simiExtended_RelationsFragment"/>
         </groupBox>
         <hbox id="editActions" spacing="true">

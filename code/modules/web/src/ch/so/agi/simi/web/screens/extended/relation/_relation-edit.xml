@@ -4,7 +4,7 @@
         focusComponent="form">
     <data>
         <instance id="relationDc"
-                  class="ch.so.agi.simi.entity.dependency.Relation" view="relation-edit">
+                  class="ch.so.agi.simi.entity.extended.Relation" view="relation-edit">
             <loader/>
         </instance>
         <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.data.datasetview.DataSetView">

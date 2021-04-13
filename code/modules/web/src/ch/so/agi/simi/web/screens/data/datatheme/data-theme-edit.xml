@@ -32,7 +32,7 @@
         </form>
         <groupBox id="pgTablesBox" caption="Tabellen im Thema"
                   expand="pgTablesTable">
-            <table id="pgTablesTable" dataContainer="tablesDc" width="100%" multiselect="true" editable="true">
+            <table id="pgTablesTable" dataContainer="tablesDc" width="100%" multiselect="true" editable="true" settingsEnabled="false">
                 <actions>
                     <action id="edit" type="edit"/>
                     <action id="remove" type="remove"/>
@@ -40,7 +40,7 @@
                 <columns>
                     <column id="tableName" editable="true" sort="ASCENDING"/>
                     <column id="idFieldName" editable="true"/>
-                    <column id="catSyncStamp" width="100px"/>
+                    <column id="catSyncStamp" width="180"/>
                 </columns>
                 <buttonsPanel>
                     <button id="btnReadAll" caption="Aus Quell-DB einlesen" stylename="danger" icon="BULK_EDIT_ACTION"/>

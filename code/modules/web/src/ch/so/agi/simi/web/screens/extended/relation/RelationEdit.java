@@ -4,7 +4,7 @@ import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.extended.Relation;
 
 @UiController("simiExtended_Relation.edit")
-@UiDescriptor("relation-edit.xml")
+@UiDescriptor("_relation-edit.xml")
 @EditedEntityContainer("relationDc")
 @LoadDataBeforeShow
 public class RelationEdit extends StandardEditor<Relation> {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Featureinfo - Edit"
+        caption="mainMsg://spez_info.caption.edit"
         focusComponent="form">
     <data>
         <instance id="featureInfoDc"
-                  class="ch.so.agi.simi.entity.dependency.FeatureInfo" view="featureInfo-edit">
+                  class="ch.so.agi.simi.entity.extended.FeatureInfo" view="featureInfo-edit">
             <loader/>
             <collection id="relationsDc" property="relations"/>
         </instance>
@@ -18,15 +18,15 @@
         <form id="form" dataContainer="featureInfoDc">
             <column width="450px">
                 <textField id="nameField" caption="Name" property="name"/>
-                <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5"/>
-                <sourceCodeEditor id="displayTemplate" caption="Anzeige-Template" property="displayTemplate" showGutter="true" rowspan="10"/>
+                <textField id="pyModuleNameField" caption="Python Modulname" property="pyModuleName"/>
+                <sourceCodeEditor id="displayTemplate" caption="Anzeige-Template" property="displayTemplate" showGutter="true" height="300"/>
             </column>
             <column width="450px">
-                <textField id="pyModuleNameField" caption="Python Modulname" property="pyModuleName"/>
-                <sourceCodeEditor id="sqlQueryField" caption="SQL Abfrage" property="sqlQuery" showGutter="true" rowspan="10"/>
+                <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5" rowspan="2"/>
+                <sourceCodeEditor id="sqlQueryField" caption="SQL Abfrage" property="sqlQuery" showGutter="true" height="300"/>
             </column>
         </form>
-        <groupBox id="relationsBox" caption="Beziehungen">
+        <groupBox id="relationsBox" caption="mainMsg://dependency.caption.related_dsv">
             <fragment id="relations" screen="simiExtended_RelationsFragment"/>
         </groupBox>
         <hbox id="editActions" spacing="true">

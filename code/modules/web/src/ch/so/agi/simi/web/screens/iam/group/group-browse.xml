@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Gruppen - Browse"
+        caption="mainMsg://group.caption.browse"
         focusComponent="groupsTable">
     <data readOnly="true">
         <collection id="groupsDc"
@@ -27,7 +27,8 @@
         <table id="groupsTable"
                width="100%"
                multiselect="true"
-               dataContainer="groupsDc">
+               dataContainer="groupsDc"
+               settingsEnabled="false">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -39,8 +40,8 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="groupsTable.create"/>
-                <button id="editBtn" action="groupsTable.edit"/>
+                <button id="createBtn" action="groupsTable.create" stylename="primary"/>
+                <button id="editBtn" action="groupsTable.edit" stylename="primary"/>
                 <button id="removeBtn" action="groupsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>

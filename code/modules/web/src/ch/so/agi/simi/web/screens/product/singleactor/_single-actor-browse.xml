@@ -25,7 +25,8 @@
         <table id="singleActorsTable"
                width="100%"
                dataContainer="singleActorsDc"
-               multiselect="true">
+               multiselect="true"
+               settingsEnabled="false">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>

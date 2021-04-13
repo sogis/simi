@@ -4,9 +4,9 @@
     <item id="simiData_PostgresTable.browse" screen="simiData_PostgresTable.browse" caption="mainMsg://postgrestable.caption.browse" insertBefore="administration"/>
     <item screen="simiData_TableDependency.list" caption="Abhängigkeits-Liste" insertBefore="administration"/>
     <menu id="application-simi-iam" caption="Benutzer - Verwaltung ..." expanded="false" insertBefore="administration">
-        <item screen="simiIAM_User.browse" caption="Benutzer"/>
-        <item screen="simiIAM_Group.browse" caption="Gruppen"/>
-        <item screen="simiIAM_Role.browse" caption="Rollen"/>
+        <item screen="simiIAM_User.browse" caption="mainMsg://user.caption.browse"/>
+        <item screen="simiIAM_Group.browse" caption="mainMsg://group.caption.browse"/>
+        <item screen="simiIAM_Role.browse" caption="mainMsg://role.caption.browse"/>
     </menu>
     <menu id="application-simi-data" caption="Daten-Konfiguration ..." expanded="false" insertBefore="administration">
         <item id="simiData_PostgresTable.browse_2" screen="simiData_PostgresTable.browse" caption="mainMsg://postgrestable.caption.browse"/>
@@ -15,8 +15,8 @@
         <item screen="simiData_RasterDS.browse" caption="mainMsg://rasterds.caption.browse"/>
     </menu>
     <menu id="application-simi-others" caption="Weitere ..." expanded="false" insertBefore="administration">
-        <item screen="simiExtended_Dependency.browse" caption="Abhängigkeiten pflegen"/>
-        <item screen="simiProduct_ExternalMapService.browse" caption="Externe WM(T)S Dienste"/>
+        <item screen="simiExtended_Dependency.browse" caption="mainMsg://dependency.caption.browse"/>
+        <item screen="simiProduct_ExternalMapService.browse" caption="mainMsg://extservice.caption.browse"/>
         <item screen="simiProduct_DataProduct_PubScope.browse" caption="Pub Scopes"/>
     </menu>
 </menu-config>

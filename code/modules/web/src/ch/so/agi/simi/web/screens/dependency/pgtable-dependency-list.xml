@@ -43,11 +43,12 @@
         <hbox spacing="true">
             <lookupField id="tableLookup" optionsContainer="tablesDc"
                          captionProperty="repr" width="800px"/>
-            <button id="btnListDependencies" caption="Abfragen" stylename="primary"/>
+            <button id="btnListDependencies" caption="Abfragen" stylename="friendly"/>
         </hbox>
         <table id="dependenciesTable"
                width="100%"
-               dataContainer="dependenciesDc">
+               dataContainer="dependenciesDc"
+               settingsEnabled="false">
             <actions>
                 <action id="excel" caption="Als Excel exportieren" icon="icons/excel.png" type="excel">
                     <properties>
@@ -63,7 +64,7 @@
             </columns>
         </table>
         <buttonsPanel>
-            <button action="dependenciesTable.excel"></button>
+            <button action="dependenciesTable.excel" stylename="friendly"></button>
         </buttonsPanel>
     </layout>
 </window>

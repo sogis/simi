@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Rollen - Browse"
+        caption="mainMsg://role.caption.browse"
         focusComponent="rolesTable">
     <data readOnly="true">
         <collection id="rolesDc"
@@ -27,7 +27,8 @@
         <table id="rolesTable"
                width="100%"
                multiselect="true"
-               dataContainer="rolesDc">
+               dataContainer="rolesDc"
+               settingsEnabled="false">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -39,8 +40,8 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="rolesTable.create"/>
-                <button id="editBtn" action="rolesTable.edit"/>
+                <button id="createBtn" action="rolesTable.create" stylename="primary"/>
+                <button id="editBtn" action="rolesTable.edit" stylename="primary"/>
                 <button id="removeBtn" action="rolesTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>

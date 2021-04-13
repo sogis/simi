@@ -25,7 +25,8 @@
         <table id="dataSetViewsTable"
                width="100%"
                dataContainer="dataSetViewsDc"
-               multiselect="true">
+               multiselect="true"
+               settingsEnabled="false">
             <actions>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>

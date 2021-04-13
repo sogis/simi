@@ -30,7 +30,8 @@
         <table id="postgresTablesTable"
                width="100%"
                dataContainer="postgresTablesDc"
-               multiselect="true">
+               multiselect="true"
+               settingsEnabled="false">
             <actions>
                 <action id="create" type="create" caption="Neue Tabelle"/>
                 <action id="createTableView" caption="Neue View für Tabelle" icon="ADD_ACTION" trackSelection="true"/>
@@ -45,7 +46,7 @@
             <columns>
                 <column id="instanceName" caption="Kennung"/>
                 <column id="tableViews" caption="View(s) der Tabelle"/>
-                <column id="catSyncStamp"/>
+                <column id="catSyncStamp" width="200"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

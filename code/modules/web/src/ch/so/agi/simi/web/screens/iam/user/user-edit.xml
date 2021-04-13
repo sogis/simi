@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Benutzer - Edit"
+        caption="mainMsg://user.caption.edit"
         focusComponent="form">
     <data>
         <instance id="userDc"
@@ -23,8 +23,8 @@
                 <textArea id="remarksField" property="remarks" rows="5"/>
             </column>
         </form>
-        <groupBox id="groupsBox" caption="msg://ch.so.agi.simi.entity.iam/User.groups">
-            <table id="groupsTable" dataContainer="groupsDc" width="100%" height="100%" multiselect="true">
+        <groupBox id="groupsBox" caption="Gruppen des Benutzers">
+            <table id="groupsTable" dataContainer="groupsDc" width="100%" height="100%" multiselect="true" settingsEnabled="false">
                 <actions>
                     <action id="add" type="add"/>
                     <action id="exclude" type="exclude"/>
@@ -33,8 +33,8 @@
                     <column id="identifier"/>
                 </columns>
                 <buttonsPanel>
-                    <button action="groupsTable.add" stylename="friendly"/>
-                    <button action="groupsTable.exclude"/>
+                    <button action="groupsTable.add" stylename="primary"/>
+                    <button action="groupsTable.exclude" stylename="danger"/>
                 </buttonsPanel>
             </table>
         </groupBox>

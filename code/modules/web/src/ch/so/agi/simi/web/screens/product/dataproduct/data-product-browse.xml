@@ -30,7 +30,8 @@
         <table id="dataProductsTable"
                width="100%"
                multiselect="true"
-               dataContainer="dataProductsDc">
+               dataContainer="dataProductsDc"
+               settingsEnabled="false">
             <actions>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
@@ -39,8 +40,8 @@
             <columns>
                 <column id="identifier" sort="ASCENDING"/>
                 <column id="title"/>
-                <column id="pubScope"/>
-                <column id="typeAbbreviation"/>
+                <column id="pubScope" width="150"/>
+                <column id="typeAbbreviation" width="120"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

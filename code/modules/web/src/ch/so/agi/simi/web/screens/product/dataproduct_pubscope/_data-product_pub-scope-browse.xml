@@ -21,7 +21,8 @@
         <table id="dataProduct_PubScopesTable"
                width="100%"
                multiselect="true"
-               dataContainer="dataProduct_PubScopesDc">
+               dataContainer="dataProduct_PubScopesDc"
+               settingsEnabled="false">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>

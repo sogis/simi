@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="Abhängigkeiten"
+        caption="mainMsg://dependency.caption.browse"
         focusComponent="dependenciesTable">
     <data readOnly="true">
         <collection id="dependenciesDc"
@@ -24,29 +24,30 @@
             spacing="true" expand="dependenciesTable">
         <table id="dependenciesTable"
                width="100%"
-               dataContainer="dependenciesDc">
+               dataContainer="dependenciesDc"
+               settingsEnabled="false">
             <actions>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="typeAbbreviation" caption="Typ"/>
-                <column id="name" caption="Name"/>
-                <column id="sort" visible="false" sort="ASCENDING"/>
+                <column id="typeAbbreviation" width="150"/>
+                <column id="name"/>
+                <column id="sort" visible="false" sort="ASCENDING"/><!-- Sortierung via metaproperty -->
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <popupButton id="createBtn" caption="Erstellen" stylename="friendly" icon="ADD_ACTION">
+                <popupButton id="createBtn" caption="Erstellen" stylename="primary" icon="ADD_ACTION">
                     <actions>
-                        <action id="createComponent" caption="Modul erstellen"/>
-                        <action id="createFeatureinfo" caption="Spez. FeatureInfo erstellen"/>
-                        <action id="createReport" caption="Report erstellen"/>
-                        <action id="createCCC" caption="CCCIntegration erstellen"/>
+                        <action id="createComponent" caption="mainMsg://component.caption.edit"/>
+                        <action id="createFeatureinfo" caption="mainMsg://spez_info.caption.edit"/>
+                        <action id="createReport" caption="mainMsg://report.caption.edit"/>
+                        <action id="createCCC" caption="mainMsg://cccintegration.caption.edit"/>
                     </actions>
                 </popupButton>
-                <button id="editBtn" action="dependenciesTable.edit"/>
-                <button id="removeBtn" action="dependenciesTable.remove"/>
+                <button id="editBtn" action="dependenciesTable.edit" stylename="primary"/>
+                <button id="removeBtn" action="dependenciesTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>
         <fragment id="filter" screen="simi_FilterFragment">

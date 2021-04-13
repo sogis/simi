@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <fragment xmlns="http://schemas.haulmont.com/cuba/screen/fragment.xsd">
     <data>
-        <instance id="relationsDc" class="ch.so.agi.simi.entity.dependency.Relation"
+        <instance id="relationsDc" class="ch.so.agi.simi.entity.extended.Relation"
                   provided="true"/>
         <collection id="dataSetViewsDc" class="ch.so.agi.simi.entity.data.datasetview.DataSetView">
             <loader id="dataSetViewsDl">
@@ -12,21 +12,21 @@
         </collection>
     </data>
     <layout>
-        <table id="relationsTable" dataContainer="relationsDc" width="100%" height="100%" editable="true">
+        <table id="relationsTable" dataContainer="relationsDc" width="100%" height="100%" editable="true" settingsEnabled="false">
             <actions>
-                <action id="unlink" caption="Verknüpfung löschen" type="remove">
+                <action id="unlink" type="remove">
                     <properties>
                         <property name="confirmation" value="false"/>
                     </properties>
                 </action>
             </actions>
             <columns>
+                <column id="relationType" caption="Beziehungstyp" sort="ASCENDING" editable="true" width="200"/>
                 <column id="dataSetView" editable="true" caption="View" optionsContainer="dataSetViewsDc"/>
-                <column id="relationType" caption="Beziehungstyp" sort="ASCENDING" editable="true"/>
             </columns>
             <buttonsPanel>
-                <button id="btnAddRelation" caption="View verknüpfen" icon="ADD_ACTION" primary="true"/>
-                <button action="relationsTable.unlink"/>
+                <button id="btnAddRelation" icon="ADD_ACTION" caption="Verknüpfung erstellen" primary="true"/>
+                <button action="relationsTable.unlink" caption="Verknüpfung löschen" stylename="danger"/>
             </buttonsPanel>
         </table>
     </layout>

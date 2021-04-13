@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Modulabhängigkeit"
+        caption="mainMsg://component.caption.edit"
         focusComponent="form">
     <data>
         <instance id="componentDc"
-                  class="ch.so.agi.simi.entity.dependency.Component" view="component-edit">
+                  class="ch.so.agi.simi.entity.extended.Component" view="component-edit">
             <loader/>
             <collection id="relationsDc" property="relations"/>
         </instance>
@@ -21,7 +21,7 @@
                 <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5"/>
             </column>
         </form>
-        <groupBox id="relationsBox" caption="Beziehungen">
+        <groupBox id="relationsBox" caption="mainMsg://dependency.caption.related_dsv">
             <fragment id="relations" screen="simiExtended_RelationsFragment"/>
         </groupBox>
         <hbox id="editActions" spacing="true">

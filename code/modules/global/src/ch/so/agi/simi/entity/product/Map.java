@@ -24,7 +24,8 @@ public class Map extends ProductList {
 
     @NotNull
     @Column(name = "WGC_URL_VALUE", nullable = false, length = 50)
-    private String wgcUrlValue;
+    private String wgcUrlValue = "dummy";
+
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @OnDelete(DeletePolicy.DENY)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "map")

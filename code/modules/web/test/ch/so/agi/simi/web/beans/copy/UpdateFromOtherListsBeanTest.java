@@ -59,11 +59,11 @@ public class UpdateFromOtherListsBeanTest {
         List<PropertiesInList> candLayers = new LinkedList<>();
 
         UUID id = UUID.randomUUID();
-        int trans = 11;
+        int sort = 11;
         List<PropertiesInList> otherChildLayers = new LinkedList<>();
 
-        PropertiesInList link1 = buildPil(id, trans);
-        PropertiesInList link2 = buildPil(id, trans);
+        PropertiesInList link1 = buildPil(id, sort);
+        PropertiesInList link2 = buildPil(id, sort);
 
         otherChildLayers.add(link1);
         otherChildLayers.add(link2);
@@ -150,28 +150,27 @@ public class UpdateFromOtherListsBeanTest {
                 UUID otherId = otherChild.getSingleActor().getId();
 
                 if(candidateId.equals(otherId)){
-                    if(candidateChild.getTransparency().intValue() == otherChild.getTransparency().intValue())
-                        found = true;
+                    found = true;
+                    break;
                 }
             }
 
             assertTrue(found, MessageFormat.format(
-                    "Child with transparency {0} not found",
-                    otherChild.getTransparency())
+                    "Child with id {0} not found",
+                    otherChild.getId())
             );
         }
     }
 
 
-    private static PropertiesInList buildPil(UUID childLayerUuid, int trans){
+    private static PropertiesInList buildPil(UUID childLayerUuid, int sort){
         PropertiesInList pil = new PropertiesInList();
         SingleActor sa = new SingleActor();
         sa.setId(childLayerUuid);
-        pil.setTransparency(trans);
         pil.setSingleActor(sa);
 
         pil.setVisible(true);
-        pil.setSort(0);
+        pil.setSort(sort);
 
         return pil;
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="Rollen - Edit"
+        caption="mainMsg://role.caption.browse"
         focusComponent="form">
     <data>
         <instance id="roleDc"
@@ -24,7 +24,7 @@
         </form>
         <split id="splitPanel" orientation="vertical" width="100%">
             <groupBox id="groupsBox" caption="msg://ch.so.agi.simi.entity.iam/Role.groups" height="100%">
-                <table id="groupsTable" dataContainer="groupsDc" width="100%" height="100%" multiselect="true">
+                <table id="groupsTable" dataContainer="groupsDc" width="100%" height="100%" multiselect="true" settingsEnabled="false">
                     <actions>
                         <action id="add" type="add"/>
                         <action id="exclude" type="exclude"/>
@@ -33,13 +33,13 @@
                         <column id="identifier"/>
                     </columns>
                     <buttonsPanel>
-                        <button action="groupsTable.add" stylename="friendly"/>
-                        <button action="groupsTable.exclude"/>
+                        <button action="groupsTable.add" stylename="primary"/>
+                        <button action="groupsTable.exclude" stylename="danger"/>
                     </buttonsPanel>
                 </table>
             </groupBox>
             <groupBox id="usersBox" caption="msg://ch.so.agi.simi.entity.iam/Role.users" height="100%">
-                <table id="usersTable" dataContainer="usersDc" width="100%" height="100%" multiselect="true">
+                <table id="usersTable" dataContainer="usersDc" width="100%" height="100%" multiselect="true" settingsEnabled="false">
                     <actions>
                         <action id="add" type="add"/>
                         <action id="exclude" type="exclude"/>
@@ -48,8 +48,8 @@
                         <column id="instanceName" caption="Benutzer"/>
                     </columns>
                     <buttonsPanel>
-                        <button action="usersTable.add" stylename="friendly"/>
-                        <button action="usersTable.exclude"/>
+                        <button action="usersTable.add" stylename="primary"/>
+                        <button action="usersTable.exclude" stylename="danger"/>
                     </buttonsPanel>
                 </table>
             </groupBox>

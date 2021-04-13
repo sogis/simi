@@ -12,7 +12,7 @@
     </collection>
 </data>
 <layout>
-    <table id="permissionsTable" dataContainer="permissionsDc" width="100%" editable="true" multiselect="true">
+    <table id="permissionsTable" dataContainer="permissionsDc" width="100%" editable="true" multiselect="true" settingsEnabled="false">
         <actions>
             <action id="remove" type="remove">
                 <properties>
@@ -22,7 +22,7 @@
         </actions>
         <columns>
             <column id="role" editable="true" optionsContainer="rolesDc" sort="ASCENDING"/>
-            <column id="level" editable="true"/>
+            <column id="level" editable="true" width="150"/>
         </columns>
         <buttonsPanel>
             <button id="addPermissionBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>

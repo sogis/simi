@@ -103,7 +103,7 @@
                 </form>
             </groupBox>
             <groupBox id="viewFieldsBox" caption="Attribut-Verknüpfung" spacing="true" collapsable="true">
-                <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" editable="true" multiselect="true">
+                <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" editable="true" multiselect="true" settingsEnabled="false">
                     <actions>
                         <action id="edit" type="edit"/>
                         <action id="remove" type="remove">
@@ -115,7 +115,7 @@
                     </actions>
                     <columns>
                         <column id="tableField" editable="true" optionsContainer="tableFieldsDc"/>
-                        <column id="sort" editable="true" sort="ASCENDING"/>
+                        <column id="sort" editable="true" sort="ASCENDING" width="150"/>
                     </columns>
                     <buttonsPanel>
                         <button id="addViewFieldBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
