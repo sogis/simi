@@ -195,7 +195,6 @@
         <property name="dataSetViews" view="_minimal">
             <property name="dataSetView" view="_minimal"/>
             <property name="sort"/>
-            <property name="transparency"/>
             <property name="facadeLayer" view="_minimal"/>
         </property>
     </view>
@@ -208,7 +207,6 @@
             </property>
             <property name="sort"/>
             <property name="visible"/>
-            <property name="transparency"/>
             <property name="productList" view="_minimal"/>
         </property>
     </view>
@@ -221,7 +219,6 @@
             </property>
             <property name="sort"/>
             <property name="visible"/>
-            <property name="transparency"/>
         </property>
     </view>
     <view entity="simiProduct_SingleActor" name="map-edit-singleActors" extends="_local"/>

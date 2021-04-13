@@ -17,20 +17,6 @@ public class ChildLayerProperties extends SimiEntity implements Sortable {
     @Column(name = "SORT", nullable = false)
     private Integer sort;
 
-    @NotNull
-    @Column(name = "TRANSPARENCY")
-    @Max(100)
-    @Min(0)
-    private Integer transparency = 0;
-
-    public Integer getTransparency() {
-        return transparency;
-    }
-
-    public void setTransparency(Integer transparency) {
-        this.transparency = transparency;
-    }
-
     public Integer getSort() {
         return sort;
     }

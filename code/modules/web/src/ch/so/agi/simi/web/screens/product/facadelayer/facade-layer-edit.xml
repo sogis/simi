@@ -46,13 +46,12 @@
         <groupBox caption="Weitere Eigenschaften" collapsable="true" collapsed="true">
             <form dataContainer="dataProductDc">
                 <column width="350px">
-                    <textField id="transparencyField" property="transparency"/>
                     <fragment id="custLegend" screen="simi_LegendFragment" caption="Spez. Legende">
                         <properties>
                             <property name="singleActorDc" ref="dataProductDc"/>
                         </properties>
                     </fragment>
-                    <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
+                    <textArea id="descriptionField" property="description" rows="5" rowspan="4"/>
                 </column>
                 <column width="350px">
                     <textArea id="keywordsField" property="keywords" rows="5" rowspan="2"/>
