@@ -43,9 +43,8 @@ public class DataThemeEdit extends StandardEditor<DataTheme> {
         DataTheme editedTheme = modelSchemaDc.getItem();
 
         boolean noRemaining = editedTheme.getPostgresTables() == null || editedTheme.getPostgresTables().size() == 0;
-        boolean canRead = noRemaining && !hasUnsavedChanges();
-
-        if(!canRead){
+        //boolean canRead = noRemaining;// && !hasUnsavedChanges();
+        if(noRemaining){
 
             // bug? dialogs.createMessageDialog() zeigt speicherknopf - siehe https://www.cuba-platform.com/discuss/t/create-message-dialog-shows-save-button/15057
             dialogs.createOptionDialog()
@@ -54,7 +53,6 @@ public class DataThemeEdit extends StandardEditor<DataTheme> {
                     .withContentMode(ContentMode.HTML)
                     .withActions(new DialogAction(DialogAction.Type.CANCEL))
                     .show();
-
 
             return;
         }

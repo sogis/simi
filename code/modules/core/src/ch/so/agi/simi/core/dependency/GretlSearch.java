@@ -12,14 +12,22 @@ public class GretlSearch {
 
     private String schemaName;
     private String tableName;
-    private GretlSearchConfig config;
+
+    private String confUrl;
+    private String[] confRepos;
 
     private RestTemplate restTemplate = new RestTemplate();
 
     private GretlSearch(String schemaName, String tableName, GretlSearchConfig config){
         this.schemaName = schemaName;
         this.tableName = tableName;
-        this.config = config;
+
+        resolveConfig(config);
+    }
+
+    private void resolveConfig(GretlSearchConfig config){
+        this.confUrl = config.getGitHubSearchBaseUrl();
+        this.confRepos = PropsUtil.toArray(config.getReposToSearch());
     }
 
     public static List<DependencyInfo> queryGretlDependencies(String[] qualTableName, GretlSearchConfig config){
@@ -31,7 +39,7 @@ public class GretlSearch {
 
         List<DependencyInfo> diUnion = new LinkedList<>();
 
-        for(String repo : PropsUtil.toArray(config.getReposToSearch())){
+        for(String repo : confRepos){
 
             String qValue = MessageFormat.format(
                     "repo:{0} {1} {2}",
@@ -43,7 +51,7 @@ public class GretlSearch {
             HashMap<String, String> params = new HashMap<>();
             params.put("q", "\'" + qValue + "\'");
 
-            GretlSearchResult res = restTemplate.getForObject(config.getGitHubSearchBaseUrl() + "?q={q}", GretlSearchResult.class, params);
+            GretlSearchResult res = restTemplate.getForObject(confUrl + "?q={q}", GretlSearchResult.class, params);
 
             if(res != null)
                 appendToDiList(diUnion, res.getItems());
