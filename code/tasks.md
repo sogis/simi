@@ -9,89 +9,16 @@
 * Done Jenkins-Integration erstellen (für Start der Config-Pipeline) 
 
 
-# Version 1.0
+# Version 1.1.x
 
-* Schema
-  * DONE Entfernen Publikationsfelder (releasedAt, releasedThrough)
-  * DONE Verschieben der Suchfelder von DSV in TableView
-  * DONE Verschieben Attributalias, wmsFiInfo, displayProps4Json von ViewField nach TableField
-  * Externe WMS / WMTS erfassen
-  * Ergänzung mit den fehlenden Feldern, gemäss Erkenntnissen aus Datenmigration und Erstellung der
-  Konfigurations-Jsons.
-  * DONE In der Tabelle simidata_postgres_db muss noch die service-URL der DB-Connection ergänzt werden (neues Attribut)
-  * DONE Aufräumen DataSetView-Klassen (TableView, ViewField, RasterView, DataSetView)
-    * Db-Präfix simidata. 
-    * Java-Package data.*
-  * Entfernen der ext-Felder der Datenmigration    
-  * UK über FK's und UK über FK, Attribut?
-  * Bei Anlegen Datatheme und im gleichen Schritt Auslesen der DB --> Exception
-  * Nach Testing
-      * Screens Wegräumen
-        * _layer-group-choose.xml
-        * _data-set-view-browse.xml
-        * _data-product_pub-scope-browse.xml
-        * _data-product_pub-scope-edit.xml
-        * _map-browse.xml
-        * _single-actor-browse.xml
-        
-        
-# Version 1.x
-  * Entity-Loading tests entity-Zentrisch machen (eine Testmethode pro entity mit helper testViews(String[] viewnames))
-        
-        
-# Schemareading Tests
-
-* Schema 
-  * DS anlegen. Erstellt alle noch nicht vorhandenen DS inklusive Attribute und weist ihnen default - Werte zu
-  * ModelSchema anlegen
-  * ModelSchema aktualisieren
-* PostgresTable
-  * Aktualisieren (Mit Kindern)
-* 
-
-Methode: DataTheme actualizeWithDbCat(String dbName, String schemaName, String[] tableNames)
-
-Bei bestehenden Änderungen: showUnsavedChangesDialog() oder so.  https://doc.cuba-platform.com/manual-7.2/screen_validation.html
-   
-# Version 1.x
-- Exception Messages: 
-  - Entweder hardcodiert englisch oder in *.properties deutsch
-  - Ersatz der Konkatenierungen durch Verwendung von MessageFormat.format(). (Für Nachricht-Strings mit Parametern)
-  - In ganzer codebasis suchen nach "Exception(", damit sollten die meisten Fälle gefunden werden.
-
-# Refactor
-
-## Jederzeit
-
-* Grooming der Screens
-  * Tabellen
-    * Settings disable
-    * Spaltenweiten
-    * Row-Header für edit-Rows (falls verfügbar)
-  * Publikations-Datum, ... raus
-  
-## Nach Vorliegen der migrierten Daten
-
-* Ablauf mit Schemaauslesen prüfen.
-
-
-# Neu
-
-## Middleware-Service "Dependencies"
-
-Signatur:
-* Input:
-  * UUID des postgrestable
-  * (Abhängigkeitstypen)
-    * Alle
-    * Nur Daten
-    * Nur Produkte
-* Output
-  * Abhängigkeitstyp (Produkt, Datenfluss, Komponente, Weitere (CCC, ...))
-  * Typ-Sort (Sortindex des Typs)
-  * Informationen zum abhängigen Objekt
-    * Name - Voll qualifiziert
-    * Bezug zu Tabelle - "Tabelle in dieser Datei des GRETL-Jobs gefunden"
+* Nach Pilotierung:
+  * Screens Wegräumen
+    * _layer-group-choose.xml
+    * _data-set-view-browse.xml
+    * _data-product_pub-scope-browse.xml
+    * _data-product_pub-scope-edit.xml
+    * _map-browse.xml
+    * _single-actor-browse.xml
     
 # Aenderungen gegenüber Migrationsversion
 * bytea für Customlegenden in SingleActor
@@ -102,7 +29,7 @@ Signatur:
   Am einfachsten indem der Alias nicht gesetzt ist.
 * DataSetView_SearchTypeEnum geändert von int auf string
 
-# Schema-Änderungen auf V 1.0.x
+# Schema-Änderungen auf V 1.1.x
 * Aufhebung "Externe Tabelle und diesbezügliche Vererbungsstruktur" TableDS <- ExternalTable und TableDS <- PostgresTable
   * Attribute von TableDS in PostgresTable gezügelt
 * geo* Felder aus TableView gelöscht (Sind Teil von PostgresTable)
