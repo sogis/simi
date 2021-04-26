@@ -31,7 +31,7 @@ public class SimiEntity extends BaseUuidEntity implements Versioned, Updatable, 
     @Column(name = "VERSION", nullable = false)
     private Integer version;
 
-    /**/
+    /*
 
     @Lob
     @Column(name = "EXT1")
@@ -93,7 +93,7 @@ public class SimiEntity extends BaseUuidEntity implements Versioned, Updatable, 
         this.ext1 = ext1;
     }
 
-    /**/
+    */
 
     @Override
     public Integer getVersion() {
