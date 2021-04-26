@@ -19,7 +19,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
+import java.lang.reflect.Field;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 // See https://doc.cuba-platform.com/manual-7.2/integration_tests_mw.html
 
 class EntityLoadingTest {
@@ -34,380 +36,273 @@ class EntityLoadingTest {
     }
 
     @Test
-    void postgresDb_Browse_OK() {
-        LoadContext context = LoadContext.create(PostgresDB.class)
-                .setQuery(queryFor(PostgresDB.NAME))
-                .setView("postgresDB-browse");
-
-        dataManager.loadList(context);
+    void postgresDb_OK() {
+        loadEntityViews(
+                PostgresDB.class,
+                new String[]{
+                    "postgresDB-browse",
+                    "postgresDB-edit"
+                });
     }
 
     @Test
-    void postgresDb_Edit_OK() {
-        LoadContext context = LoadContext.create(PostgresDB.class)
-                .setQuery(queryFor(PostgresDB.NAME))
-                .setView("postgresDB-edit");
-
-        dataManager.loadList(context);
+    void dataTheme_OK() {
+        loadEntityViews(
+                DataTheme.class,
+                new String[]{
+                        "dataTheme-browse",
+                        "dataTheme-edit",
+                        "postgresTable-edit-themes"
+                });
     }
 
     @Test
-    void dataTheme_Browse_OK() {
-        LoadContext context = LoadContext.create(DataTheme.class)
-                .setQuery(queryFor(DataTheme.NAME))
-                .setView("dataTheme-browse");
-
-        dataManager.loadList(context);
+    void postgresTable_OK() {
+        loadEntityViews(
+                PostgresTable.class,
+                new String[]{
+                        "postgresTable-browse",
+                        "postgresTable-edit",
+                        "tableView-edit-postgresTables"
+                });
     }
 
     @Test
-    void dataTheme_Edit_OK() {
-        LoadContext context = LoadContext.create(DataTheme.class)
-                .setQuery(queryFor(DataTheme.NAME))
-                .setView("dataTheme-edit");
-
-        dataManager.loadList(context);
+    void tableField_OK() {
+        loadEntityViews(
+                TableField.class,
+                new String[]{
+                        "tableField-edit",
+                        "tableView-edit-tableFields",
+                        "viewField-edit-tableFields"
+                });
     }
 
     @Test
-    void dataTheme_PostgresTable_Edit_OK() {
-        LoadContext context = LoadContext.create(DataTheme.class)
-                .setQuery(queryFor(DataTheme.NAME))
-                .setView("postgresTable-edit-themes");
-
-        dataManager.loadList(context);
+    void group_OK() {
+        loadEntityViews(
+                Group.class,
+                new String[]{
+                        "group-browse",
+                        "group-edit"
+                });
     }
 
     @Test
-    void postgresTable_Browse_OK() {
-        LoadContext context = LoadContext.create(PostgresTable.class)
-                .setQuery(queryFor(PostgresTable.NAME))
-                .setView("postgresTable-browse");
-
-        dataManager.loadList(context);
+    void user_OK() {
+        loadEntityViews(
+                User.class,
+                new String[]{
+                        "user-browse",
+                        "user-edit"
+                });
     }
 
     @Test
-    void postgresTable_Edit_OK() {
-        LoadContext context = LoadContext.create(PostgresTable.class)
-                .setQuery(queryFor(PostgresTable.NAME))
-                .setView("postgresTable-edit");
-
-        dataManager.loadList(context);
+    void role_OK() {
+        loadEntityViews(
+                Role.class,
+                new String[]{
+                        "role-browse",
+                        "role-edit",
+                        "tableView-edit-roles"
+                });
     }
 
     @Test
-    void tableField_Edit_OK() {
-        LoadContext context = LoadContext.create(TableField.class)
-                .setQuery(queryFor(TableField.NAME))
-                .setView("tableField-edit");
-
-        dataManager.loadList(context);
-    }
-
-
-    @Test
-    void rasterDs_Browse_OK() {
-        LoadContext context = LoadContext.create(RasterDS.class)
-                .setQuery(queryFor(RasterDS.NAME))
-                .setView("rasterDs_browse");
-
-        dataManager.loadList(context);
+    void dependency_OK() {
+        loadEntityView(
+                Dependency.class,
+                "dependency-browse"
+        );
     }
 
     @Test
-    void rasterDs_Edit_OK() {
-        LoadContext context = LoadContext.create(RasterDS.class)
-                .setQuery(queryFor(RasterDS.NAME))
-                .setView("rasterDs-edit");
-
-        dataManager.loadList(context);
+    void ccc_OK() {
+        loadEntityView(
+                CCCIntegration.class,
+                "ccc-edit"
+        );
     }
 
     @Test
-    void group_Browse_OK() {
-        LoadContext context = LoadContext.create(Group.class)
-                .setQuery(queryFor(Group.NAME))
-                .setView("group_browse");
-
-        dataManager.loadList(context);
+    void component_OK() {
+        loadEntityView(
+                Component.class,
+                "component-edit"
+                );
     }
 
     @Test
-    void group_Edit_OK() {
-        LoadContext context = LoadContext.create(Group.class)
-                .setQuery(queryFor(Group.NAME))
-                .setView("group-edit");
-
-        dataManager.loadList(context);
+    void featureInfo_OK() {
+        loadEntityView(
+                FeatureInfo.class,
+               "featureInfo-edit"
+                );
     }
 
     @Test
-    void user_Browse_OK() {
-        LoadContext context = LoadContext.create(User.class)
-                .setQuery(queryFor(User.NAME))
-                .setView("user-browse");
-
-        dataManager.loadList(context);
+    void relation_OK() {
+        loadEntityView(
+                Relation.class,
+                "relation-edit"
+        );
     }
 
     @Test
-    void user_Edit_OK() {
-        LoadContext context = LoadContext.create(User.class)
-                .setQuery(queryFor(User.NAME))
-                .setView("user-edit");
-
-        dataManager.loadList(context);
+    void report_OK() {
+        loadEntityView(
+                Report.class,
+                "report-edit"
+        );
     }
 
     @Test
-    void role_Browse_OK() {
-        LoadContext context = LoadContext.create(Role.class)
-                .setQuery(queryFor(Role.NAME))
-                .setView("role-browse");
-
-        dataManager.loadList(context);
+    void dataProduct_OK() {
+        loadEntityView(
+                DataProduct.class,
+                "dataProduct-browse"
+        );
     }
 
     @Test
-    void role_Edit_OK() {
-        LoadContext context = LoadContext.create(Role.class)
-                .setQuery(queryFor(Role.NAME))
-                .setView("role-edit");
-
-        dataManager.loadList(context);
+    void dataProduct_PubScope_OK() {
+        loadEntityView(
+                DataProduct_PubScope.class,
+                "dataProduct-pubScope-fragment"
+        );
     }
 
     @Test
-    void dependency_Browse_OK() {
-        LoadContext context = LoadContext.create(Dependency.class)
-                .setQuery(queryFor(Dependency.NAME))
-                .setView("dependency-browse");
-
-        dataManager.loadList(context);
+    void facadeLayer_OK() {
+        loadEntityView(
+                FacadeLayer.class,
+                "facadeLayer-edit"
+        );
     }
 
     @Test
-    void ccc_Edit_OK() {
-        LoadContext context = LoadContext.create(CCCIntegration.class)
-                .setQuery(queryFor(CCCIntegration.NAME))
-                .setView("ccc-edit");
-
-        dataManager.loadList(context);
+    void dataSetView_OK() {
+        loadEntityView(
+                DataSetView.class,
+                "facadeLayer-edit-dataSetViews"
+        );
     }
 
     @Test
-    void component_Edit_OK() {
-        LoadContext context = LoadContext.create(Component.class)
-                .setQuery(queryFor(Component.NAME))
-                .setView("component-edit");
-
-        dataManager.loadList(context);
+    void singleActor_OK() {
+        loadEntityViews(
+                SingleActor.class,
+                new String[]{
+                        "map-edit-singleActors",
+                        "layerGroup-edit-singleActors"
+                });
     }
 
     @Test
-    void featureInfo_Edit_OK() {
-        LoadContext context = LoadContext.create(FeatureInfo.class)
-                .setQuery(queryFor(FeatureInfo.NAME))
-                .setView("featureInfo-edit");
-
-        dataManager.loadList(context);
+    void layerGroup_OK() {
+        loadEntityView(
+                LayerGroup.class,
+                "layerGroup-edit"
+        );
     }
 
     @Test
-    void relation_Edit_OK() {
-        LoadContext context = LoadContext.create(Relation.class)
-                .setQuery(queryFor(Relation.NAME))
-                .setView("relation-edit");
-
-        dataManager.loadList(context);
+    void map_OK() {
+        loadEntityView(
+                Map.class,
+                "map-edit"
+        );
     }
 
     @Test
-    void report_Edit_OK() {
-        LoadContext context = LoadContext.create(Report.class)
-                .setQuery(queryFor(Report.NAME))
-                .setView("report-edit");
-
-        dataManager.loadList(context);
+    void rasterDs_OK() {
+        loadEntityViews(
+                RasterDS.class,
+                new String[]{
+                        "rasterDs-browse",
+                        "rasterDs-edit",
+                        "rasterView-edit-rasters"
+                });
     }
 
     @Test
-    void dataProduct_Browse_OK() {
-        LoadContext context = LoadContext.create(DataProduct.class)
-                .setQuery(queryFor(DataProduct.NAME))
-                .setView("dataProduct-browse");
-
-        dataManager.loadList(context);
+    void rasterView_OK() {
+        loadEntityView(
+                RasterView.class,
+                "rasterView-edit"
+        );
     }
 
     @Test
-    void dataProduct_PubScope_Fragment_OK() {
-        LoadContext context = LoadContext.create(DataProduct_PubScope.class)
-                .setQuery(queryFor(DataProduct_PubScope.NAME))
-                .setView("dataProduct-pubScope-fragment");
-
-        dataManager.loadList(context);
+    void tableView_OK() {
+        loadEntityView(
+                TableView.class,
+                "tableView-edit"
+        );
     }
 
     @Test
-    void facadeLayer_Edit_OK() {
-        LoadContext context = LoadContext.create(FacadeLayer.class)
-                .setQuery(queryFor(FacadeLayer.NAME))
-                .setView("facadeLayer-edit");
-
-        dataManager.loadList(context);
+    void viewField_OK() {
+        loadEntityView(
+                ViewField.class,
+                "viewField-edit"
+        );
     }
 
     @Test
-    void facadeLayer_Edit_DataSetViews_OK() {
-        LoadContext context = LoadContext.create(DataSetView.class)
-                .setQuery(queryFor(DataSetView.NAME))
-                .setView("facadeLayer-edit-dataSetViews");
-
-        dataManager.loadList(context);
+    void externalMapService_OK() {
+        loadEntityViews(
+                ExternalMapService.class,
+                new String[]{
+                        "externalMapService-edit",
+                        "externalMapService-browse",
+                        "externalMapLayers-edit-services"
+                });
     }
 
     @Test
-    void layerGroup_Edit_OK() {
-        LoadContext context = LoadContext.create(LayerGroup.class)
-                .setQuery(queryFor(LayerGroup.NAME))
-                .setView("layerGroup-edit");
-
-        dataManager.loadList(context);
+    void externalMapLayer_OK() {
+        loadEntityView(
+                ExternalMapLayer.class,
+                "externalMapLayer-edit"
+        );
     }
 
-    @Test
-    void layerGroup_Edit_SingleActors_OK() {
-        LoadContext context = LoadContext.create(SingleActor.class)
-                .setQuery(queryFor(SingleActor.NAME))
-                .setView("layerGroup-edit-singleActors");
+    private void loadEntityViews(Class entityClass, String[] viewNames){
 
-        dataManager.loadList(context);
+        ArrayList<ViewLoadException> ex = new ArrayList<>();
+
+        for(String viewName : viewNames){
+            try {
+                loadEntityView(entityClass, viewName);
+            }
+            catch(Exception e){
+                ex.add(new ViewLoadException(viewName, e));
+            }
+        }
+
+        if(ex.size() > 0)
+            throw new EntityLoadException(ex);
     }
 
-    @Test
-    void map_Edit_OK() {
-        LoadContext context = LoadContext.create(Map.class)
-                .setQuery(queryFor(Map.NAME))
-                .setView("map-edit");
+    private void loadEntityView(Class entityClass, String viewName){
 
-        dataManager.loadList(context);
-    }
+        String entityName = null;
+        try{
+            Field nameField = entityClass.getField("NAME");
+            if(nameField == null)
+                throw new RuntimeException("Entity class has no NAME field declared");
 
-    @Test
-    void map_Edit_SingleActors_OK() {
-        LoadContext context = LoadContext.create(SingleActor.class)
-                .setQuery(queryFor(SingleActor.NAME))
-                .setView("map-edit-singleActors");
+            entityName = nameField.get(null).toString();
+        }
+        catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
 
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void rasterView_Edit_OK() {
-        LoadContext context = LoadContext.create(RasterView.class)
-                .setQuery(queryFor(RasterView.NAME))
-                .setView("rasterView-edit");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void rasterView_Edit_Rasters_OK() {
-        LoadContext context = LoadContext.create(RasterDS.class)
-                .setQuery(queryFor(RasterDS.NAME))
-                .setView("rasterView-edit-rasters");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void tableView_Edit_OK() {
-        LoadContext context = LoadContext.create(TableView.class)
-                .setQuery(queryFor(TableView.NAME))
-                .setView("tableView-edit");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void tableView_Edit_Roles_OK() {
-        LoadContext context = LoadContext.create(Role.class)
-                .setQuery(queryFor(Role.NAME))
-                .setView("tableView-edit-roles");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void tableView_Edit_TableFields_OK() {
-        LoadContext context = LoadContext.create(TableField.class)
-                .setQuery(queryFor(TableField.NAME))
-                .setView("tableView-edit-tableFields");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void tableView_Edit_PostgresTables_OK() {
-        LoadContext context = LoadContext.create(PostgresTable.class)
-                .setQuery(queryFor(PostgresTable.NAME))
-                .setView("tableView-edit-postgresTables");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void viewField_Edit_OK() {
-        LoadContext context = LoadContext.create(ViewField.class)
-                .setQuery(queryFor(ViewField.NAME))
-                .setView("viewField-edit");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void viewField_Edit_TableFields_OK() {
-        LoadContext context = LoadContext.create(TableField.class)
-                .setQuery(queryFor(TableField.NAME))
-                .setView("viewField-edit-tableFields");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void externalMapService_Edit_OK() {
-        LoadContext context = LoadContext.create(ExternalMapService.class)
-                .setQuery(queryFor(ExternalMapService.NAME))
-                .setView("externalMapService-edit");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void externalMapService_Browse_OK() {
-        LoadContext context = LoadContext.create(ExternalMapService.class)
-                .setQuery(queryFor(ExternalMapService.NAME))
-                .setView("externalMapService-browse");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void externalMapService_Layers_Edit_OK() {
-        LoadContext context = LoadContext.create(ExternalMapService.class)
-                .setQuery(queryFor(ExternalMapService.NAME))
-                .setView("externalMapLayers-edit-services");
-
-        dataManager.loadList(context);
-    }
-
-    @Test
-    void externalMapLayer_Edit_OK() {
-        LoadContext context = LoadContext.create(ExternalMapLayer.class)
-                .setQuery(queryFor(ExternalMapLayer.NAME))
-                .setView("externalMapLayer-edit");
+        LoadContext context = LoadContext.create(entityClass)
+                .setQuery(queryFor(entityName))
+                .setView(viewName);
 
         dataManager.loadList(context);
     }

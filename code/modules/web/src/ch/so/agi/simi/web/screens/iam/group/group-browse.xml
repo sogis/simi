@@ -5,7 +5,7 @@
         focusComponent="groupsTable">
     <data readOnly="true">
         <collection id="groupsDc"
-                    class="ch.so.agi.simi.entity.iam.Group" view="group_browse">
+                    class="ch.so.agi.simi.entity.iam.Group" view="group-browse">
             <loader id="groupsDl">
                 <query>
                     <![CDATA[select e from simiIAM_Group e]]>

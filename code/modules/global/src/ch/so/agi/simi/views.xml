@@ -111,13 +111,13 @@
         </property>
     </view>
     <view entity="simiData_TableField" name="tableField-edit" extends="_local"/>
-    <view entity="simiData_RasterDS" name="rasterDs_browse" extends="_local">
+    <view entity="simiData_RasterDS" name="rasterDs-browse" extends="_local">
         <property name="rasterViews" view="_minimal">
             <property name="identifier"/>
         </property>
     </view>
     <view entity="simiData_RasterDS" name="rasterDs-edit" extends="_local"/>
-    <view entity="simiIAM_Group" name="group_browse" extends="_local">
+    <view entity="simiIAM_Group" name="group-browse" extends="_local">
         <property name="users" view="_minimal"/>
     </view>
     <view entity="simiIAM_Group" name="group-edit" extends="_local">
