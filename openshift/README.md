@@ -61,12 +61,23 @@ stringData:
 ```
 
 Deploy in Test environment
+
+Login from inside the network of canton of Solothurn with
+
+```
+oc login https://ocp-console.so.ch
+```
+
+Credentials are the same as for Desktop 2016
+
+Then execute the following command:
+
 ```
 oc process -f simi_schemareader.yaml \
   --param-file=simi_schemareader.env \
-  | oc apply -f -
+  | oc apply -n gdi-test -f -
 
 oc process -f simi.yaml \
   --param-file=simi-test.env \
-  | oc apply -f -
+  | oc apply -n gdi-test -f -
 ```
