@@ -64,6 +64,8 @@ Deploy in Test environment
 
 Login from inside the network of canton of Solothurn with
 
+(Installation oc-tool => https://github.com/sogis/dok/blob/dok/dok_betrieb/Documents/openshift/openshift.md#administration-der-applikationen-in-openshift)
+
 ```
 oc login https://ocp-console.so.ch
 ```
