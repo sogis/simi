@@ -23,9 +23,8 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
 * **Konfiguration der Verbindung auf die Meta-DB:**
   * CUBA_DATASOURCE_USERNAME: Benutzername der DB-Connection. Bsp: "postgres"
   * CUBA_DATASOURCE_PASSWORD: Passwort der DB-Connection. Bsp: "postgres"
-  * CUBA_DATASOURCE_DBNAME: Name der Datenbank. Bsp: "simi"
-  * CUBA_DATASOURCE_HOST: Name des Hosts des Postgres-Clusters. Bsp: "localhost"
-  * CUBA_DATASOURCE_PORT: Nummer des Ports des Postgres-Clusters. Bsp: 5432
+  * CUBA_DATASOURCE_JDBCURL: Jdbc Url für das Verbinden auf die DB (inklusive Info welches Schema). Bsp: jdbc:postgresql://localhost:5432/simi?currentSchema=simi.   
+    Bemerkung: Host, Port, ... sollen nicht mehr separat angegeben werden, da in der jdbc URL enthalten.
 * **Konfiguration der Authentifizierung (LDAP, ...):**
   * CUBA_WEB_LDAP_ENABLED: LDAP Authentifizierung aktiv? Bsp: TRUE / FALSE
   * CUBA_WEB_LDAP_URLS: LDAP URL. Bsp: LDAP://192_168_1_1:389

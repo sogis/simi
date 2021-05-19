@@ -8,9 +8,7 @@ services:
     environment:
       - CUBA_DATASOURCE_USERNAME=postgres
       - CUBA_DATASOURCE_PASSWORD=postgres
-      - CUBA_DATASOURCE_DBNAME=simi
-      - CUBA_DATASOURCE_HOST=localhost
-      - CUBA_DATASOURCE_PORT=5432
+      - CUBA_DATASOURCE_JDBCURL=jdbc:postgresql://localhost:5432/simi?currentSchema=simi
       - CUBA_WEB_LDAP_ENABLED=true
       - CUBA_WEB_LDAP_URLS=ldap://ldap.forumsys.com
       - CUBA_WEB_LDAP_BASE=ou=scientists,dc=example,dc=com
