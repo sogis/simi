@@ -1,3 +1,4 @@
+SET search_path TO simi;
 -- begin SIMIIAM_ROLE
 create table SIMIIAM_ROLE (
     ID uuid,
@@ -11,7 +12,7 @@ create table SIMIIAM_ROLE (
     REMARKS text,
     --
     primary key (ID)
-)^
+);
 -- end SIMIIAM_ROLE
 -- begin SIMIIAM_PERMISSION
 create table SIMIIAM_PERMISSION (
@@ -27,7 +28,7 @@ create table SIMIIAM_PERMISSION (
     ROLE_ID uuid not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIIAM_PERMISSION
 -- begin SIMIEXTENDED_RELATION
 create table SIMIEXTENDED_RELATION (
@@ -43,7 +44,7 @@ create table SIMIEXTENDED_RELATION (
     DATA_SET_VIEW_ID uuid not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIEXTENDED_RELATION
 -- begin SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE
 create table SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE (
@@ -66,7 +67,7 @@ create table SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE (
     SORT integer not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE
 -- begin SIMIDATA_VIEW_FIELD
 create table SIMIDATA_VIEW_FIELD (
@@ -82,7 +83,7 @@ create table SIMIDATA_VIEW_FIELD (
     TABLE_VIEW_ID uuid not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_VIEW_FIELD
 -- begin SIMIDATA_STYLEASSET
 create table SIMIDATA_STYLEASSET (
@@ -99,7 +100,7 @@ create table SIMIDATA_STYLEASSET (
     FILE_CONTENT bytea not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_STYLEASSET
 -- begin SIMIDATA_POSTGRES_TABLE
 create table SIMIDATA_POSTGRES_TABLE (
@@ -121,7 +122,7 @@ create table SIMIDATA_POSTGRES_TABLE (
     REMARKS text,
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_POSTGRES_TABLE
 -- begin SIMIDATA_POSTGRES_DB
 create table SIMIDATA_POSTGRES_DB (
@@ -137,7 +138,7 @@ create table SIMIDATA_POSTGRES_DB (
     DEFAULT_VALUE boolean not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_POSTGRES_DB
 -- begin SIMIDATA_TABLE_FIELD
 create table SIMIDATA_TABLE_FIELD (
@@ -161,7 +162,7 @@ create table SIMIDATA_TABLE_FIELD (
     DISPLAY_PROPS4_JSON text,
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_TABLE_FIELD
 -- begin SIMIIAM_IDENTITY
 create table SIMIIAM_IDENTITY (
@@ -177,7 +178,7 @@ create table SIMIIAM_IDENTITY (
     REMARKS text,
     --
     primary key (ID)
-)^
+);
 -- end SIMIIAM_IDENTITY
 -- begin SIMIDATA_RASTER_DS
 create table SIMIDATA_RASTER_DS (
@@ -193,7 +194,7 @@ create table SIMIDATA_RASTER_DS (
     DESCRIPTION text,
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_RASTER_DS
 -- begin SIMIPRODUCT_DATA_PRODUCT
 create table SIMIPRODUCT_DATA_PRODUCT (
@@ -214,7 +215,7 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     TITLE varchar(200),
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_DATA_PRODUCT
 -- begin SIMIEXTENDED_DEPENDENCY
 create table SIMIEXTENDED_DEPENDENCY (
@@ -240,7 +241,7 @@ create table SIMIEXTENDED_DEPENDENCY (
     PY_MODULE_NAME varchar(100),
     --
     primary key (ID)
-)^
+);
 -- end SIMIEXTENDED_DEPENDENCY
 -- begin SIMIDATA_DATA_THEME
 create table SIMIDATA_DATA_THEME (
@@ -255,7 +256,7 @@ create table SIMIDATA_DATA_THEME (
     POSTGRES_DB_ID uuid not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_DATA_THEME
 -- begin SIMIPRODUCT_EXTERNAL_MAP_SERVICE
 create table SIMIPRODUCT_EXTERNAL_MAP_SERVICE (
@@ -273,7 +274,7 @@ create table SIMIPRODUCT_EXTERNAL_MAP_SERVICE (
     REMARKS text,
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_EXTERNAL_MAP_SERVICE
 -- begin SIMIPRODUCT_PROPERTIES_IN_LIST
 create table SIMIPRODUCT_PROPERTIES_IN_LIST (
@@ -290,7 +291,7 @@ create table SIMIPRODUCT_PROPERTIES_IN_LIST (
     SINGLE_ACTOR_ID uuid not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_PROPERTIES_IN_LIST
 -- begin SIMIPRODUCT_PROPERTIES_IN_FACADE
 create table SIMIPRODUCT_PROPERTIES_IN_FACADE (
@@ -306,7 +307,7 @@ create table SIMIPRODUCT_PROPERTIES_IN_FACADE (
     FACADE_LAYER_ID uuid not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_PROPERTIES_IN_FACADE
 -- begin SIMIIAM_USER
 create table SIMIIAM_USER (
@@ -316,7 +317,7 @@ create table SIMIIAM_USER (
     LASTNAME varchar(100) not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIIAM_USER
 -- begin SIMIIAM_GROUP
 create table SIMIIAM_GROUP (
@@ -325,7 +326,7 @@ create table SIMIIAM_GROUP (
     PUB_AS_USER boolean not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIIAM_GROUP
 -- begin SIMIPRODUCT_SINGLE_ACTOR
 create table SIMIPRODUCT_SINGLE_ACTOR (
@@ -336,21 +337,21 @@ create table SIMIPRODUCT_SINGLE_ACTOR (
     CUSTOM_LEGEND_SUFFIX varchar(100),
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_SINGLE_ACTOR
 -- begin SIMIPRODUCT_PRODUCT_LIST
 create table SIMIPRODUCT_PRODUCT_LIST (
     ID uuid,
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_PRODUCT_LIST
 -- begin SIMIPRODUCT_FACADE_LAYER
 create table SIMIPRODUCT_FACADE_LAYER (
     ID uuid,
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_FACADE_LAYER
 -- begin SIMIDATA_DATA_SET_VIEW
 create table SIMIDATA_DATA_SET_VIEW (
@@ -363,7 +364,7 @@ create table SIMIDATA_DATA_SET_VIEW (
     STYLE_DESKTOP_UPLOADED timestamp,
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_DATA_SET_VIEW
 -- begin SIMIPRODUCT_EXTERNAL_MAP_LAYERS
 create table SIMIPRODUCT_EXTERNAL_MAP_LAYERS (
@@ -373,14 +374,14 @@ create table SIMIPRODUCT_EXTERNAL_MAP_LAYERS (
     SERVICE_ID uuid not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_EXTERNAL_MAP_LAYERS
 -- begin SIMIPRODUCT_LAYER_GROUP
 create table SIMIPRODUCT_LAYER_GROUP (
     ID uuid,
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_LAYER_GROUP
 -- begin SIMIPRODUCT_MAP
 create table SIMIPRODUCT_MAP (
@@ -389,7 +390,7 @@ create table SIMIPRODUCT_MAP (
     BACKGROUND boolean not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIPRODUCT_MAP
 -- begin SIMIDATA_RASTER_VIEW
 create table SIMIDATA_RASTER_VIEW (
@@ -398,7 +399,7 @@ create table SIMIDATA_RASTER_VIEW (
     RASTER_DS_ID uuid not null,
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_RASTER_VIEW
 -- begin SIMIDATA_TABLE_VIEW
 create table SIMIDATA_TABLE_VIEW (
@@ -410,26 +411,26 @@ create table SIMIDATA_TABLE_VIEW (
     SEARCH_FILTER_WORD varchar(100),
     --
     primary key (ID)
-)^
+);
 -- end SIMIDATA_TABLE_VIEW
 -- begin SIMIIAM_GROUP_USER_LINK
 create table SIMIIAM_GROUP_USER_LINK (
     GROUP_ID uuid,
     USER_ID uuid,
     primary key (GROUP_ID, USER_ID)
-)^
+);
 -- end SIMIIAM_GROUP_USER_LINK
 -- begin SIMIIAM_ROLE_GROUP_LINK
 create table SIMIIAM_ROLE_GROUP_LINK (
     GROUP_ID uuid,
     ROLE_ID uuid,
     primary key (GROUP_ID, ROLE_ID)
-)^
+);
 -- end SIMIIAM_ROLE_GROUP_LINK
 -- begin SIMIIAM_ROLE_USER_LINK
 create table SIMIIAM_ROLE_USER_LINK (
     USER_ID uuid,
     ROLE_ID uuid,
     primary key (USER_ID, ROLE_ID)
-)^
+);
 -- end SIMIIAM_ROLE_USER_LINK
