@@ -25,9 +25,7 @@ type: Opaque
 stringData:
   CUBA_DATASOURCE_USERNAME: xy
   CUBA_DATASOURCE_PASSWORD: xy
-  CUBA_DATASOURCE_DBNAME: xy
-  CUBA_DATASOURCE_PORT: xy
-  CUBA_DATASOURCE_HOST: xy  
+  CUBA_DATASOURCE_JDBCURL: xy
 ```
 
 simi-ldap-credentials.yaml
