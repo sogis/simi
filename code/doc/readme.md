@@ -50,6 +50,27 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
 * **Weitere...**
   * SIMI_CONFIG_STOPONINCOMPLETE: Falls "true" fährt simi bei fehlenden Konfigurationsparametern nicht hoch.
   
+## Setzen des Loglevels
+
+Der Loglevel kann bequem mittels der vom Framework zur Verfügung gestellten Admin-Masken zur Laufzeit geändert werden.
+
+Falls eine Fragestellung vor der Verfügbarkeit der Admin-Masken analysiert werden muss, kann der Loglevel in der
+Datei **\[repo root\]/code/docker/image/uber-jar-logback.xml** wie folgend beschrieben angepasst werden:
+
+Anpassung des levels, welcher überhaupt auf die Konsole geschrieben wird:
+
+    <root level="debug">
+        <appender-ref ref="Console"/>
+    </root>
+
+Anpassung des log-levels für das Cuba-Framework:
+
+    <logger name="com.haulmont.cuba" level="DEBUG"/>
+    
+Anpassung des log-levels für Simi:
+
+    <logger name="ch.so.agi.simi" level="DEBUG"/>
+  
 ## Kopieren von Data-Products
 
 Die im GUI harmlos erscheinende Kopierfunktion ist aufgrund der vielen zu berücksichtigenden Beziehungen
