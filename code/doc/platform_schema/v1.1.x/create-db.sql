@@ -1,3 +1,5 @@
+SET search_path TO simi;
+
 create table SYS_SERVER (
     ID uuid not null,
     CREATE_TS timestamp,
@@ -10,9 +12,9 @@ create table SYS_SERVER (
     DATA text,
     --
     primary key (ID)
-)^
+);
 
-create unique index IDX_SYS_SERVER_UNIQ_NAME on SYS_SERVER (NAME)^
+create unique index IDX_SYS_SERVER_UNIQ_NAME on SYS_SERVER (NAME);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -28,9 +30,9 @@ create table SYS_CONFIG (
     VALUE_ text not null,
     --
     primary key (ID)
-)^
+);
 
-create unique index IDX_SYS_CONFIG_UNIQ_NAME on SYS_CONFIG (NAME)^
+create unique index IDX_SYS_CONFIG_UNIQ_NAME on SYS_CONFIG (NAME);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +53,7 @@ create table SYS_FILE (
     CREATE_DATE timestamp,
     --
     primary key (ID)
-)^
+);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +66,7 @@ create table SYS_LOCK_CONFIG (
     TIMEOUT_SEC integer,
     --
     primary key (ID)
-)^
+);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -83,9 +85,9 @@ create table SYS_ENTITY_STATISTICS (
     LOOKUP_SCREEN_THRESHOLD integer,
     --
     primary key (ID)
-)^
+);
 
-create unique index IDX_SYS_ENTITY_STATISTICS_UNIQ_NAME on SYS_ENTITY_STATISTICS (NAME)^
+create unique index IDX_SYS_ENTITY_STATISTICS_UNIQ_NAME on SYS_ENTITY_STATISTICS (NAME);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -123,7 +125,7 @@ create table SYS_SCHEDULED_TASK (
     SCHEDULING_TYPE varchar(1) default 'P',
     --
     primary key (ID)
-)^
+);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -141,10 +143,10 @@ create table SYS_SCHEDULED_EXECUTION (
     --
     primary key (ID),
     constraint SYS_SCHEDULED_EXECUTION_TASK foreign key (TASK_ID) references SYS_SCHEDULED_TASK(ID)
-)^
+);
 
-create index IDX_SYS_SCHEDULED_EXECUTION_TASK_START_TIME  on SYS_SCHEDULED_EXECUTION (TASK_ID, START_TIME)^
-create index IDX_SYS_SCHEDULED_EXECUTION_TASK_FINISH_TIME on SYS_SCHEDULED_EXECUTION (TASK_ID, FINISH_TIME)^
+create index IDX_SYS_SCHEDULED_EXECUTION_TASK_START_TIME  on SYS_SCHEDULED_EXECUTION (TASK_ID, START_TIME);
+create index IDX_SYS_SCHEDULED_EXECUTION_TASK_FINISH_TIME on SYS_SCHEDULED_EXECUTION (TASK_ID, FINISH_TIME);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -167,11 +169,11 @@ create table SEC_ROLE (
     SECURITY_SCOPE varchar(255),
     --
     primary key (ID)
-)^
+);
 
-create unique index IDX_SEC_ROLE_UNIQ_NAME on SEC_ROLE (NAME) where DELETE_TS is null and SYS_TENANT_ID is null^
+create unique index IDX_SEC_ROLE_UNIQ_NAME on SEC_ROLE (NAME) where DELETE_TS is null and SYS_TENANT_ID is null;
 create unique index IDX_SEC_ROLE_UNIQ_NAME_SYS_TENANT_ID_NN on SEC_ROLE (NAME, SYS_TENANT_ID)
-    where DELETE_TS is null and SYS_TENANT_ID is not null^
+    where DELETE_TS is null and SYS_TENANT_ID is not null;
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -191,10 +193,10 @@ create table SEC_GROUP (
     --
     primary key (ID),
     constraint SEC_GROUP_PARENT foreign key (PARENT_ID) references SEC_GROUP(ID)
-)^
-create unique index IDX_SEC_GROUP_UNIQ_NAME on SEC_GROUP (NAME) where DELETE_TS is null and SYS_TENANT_ID is null^
+);
+create unique index IDX_SEC_GROUP_UNIQ_NAME on SEC_GROUP (NAME) where DELETE_TS is null and SYS_TENANT_ID is null;
 create unique index IDX_SEC_GROUP_UNIQ_NAME_SYS_TENANT_ID_NN on SEC_GROUP (NAME, SYS_TENANT_ID)
-    where DELETE_TS is null and SYS_TENANT_ID is not null^
+    where DELETE_TS is null and SYS_TENANT_ID is not null;
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -211,7 +213,7 @@ create table SEC_GROUP_HIERARCHY (
     primary key (ID),
     constraint SEC_GROUP_HIERARCHY_GROUP foreign key (GROUP_ID) references SEC_GROUP(ID),
     constraint SEC_GROUP_HIERARCHY_PARENT foreign key (PARENT_ID) references SEC_GROUP(ID)
-)^
+);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -247,11 +249,11 @@ create table SEC_USER (
     --
     primary key (ID),
     constraint SEC_USER_GROUP foreign key (GROUP_ID) references SEC_GROUP(ID)
-)^
+);
 
-create unique index IDX_SEC_USER_UNIQ_LOGIN on SEC_USER (LOGIN_LC) where DELETE_TS is null and SYS_TENANT_ID is null^
+create unique index IDX_SEC_USER_UNIQ_LOGIN on SEC_USER (LOGIN_LC) where DELETE_TS is null and SYS_TENANT_ID is null;
 create unique index IDX_SEC_USER_UNIQ_LOGIN_SYS_TENANT_ID_NN on SEC_USER (LOGIN_LC, SYS_TENANT_ID)
-    where DELETE_TS is null and SYS_TENANT_ID is not null^
+    where DELETE_TS is null and SYS_TENANT_ID is not null;
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -272,9 +274,9 @@ create table SEC_USER_ROLE (
     primary key (ID),
     constraint SEC_USER_ROLE_PROFILE foreign key (USER_ID) references SEC_USER(ID),
     constraint SEC_USER_ROLE_ROLE foreign key (ROLE_ID) references SEC_ROLE(ID)
-)^
+);
 
-create unique index IDX_SEC_USER_ROLE_UNIQ_ROLE on SEC_USER_ROLE (USER_ID, ROLE_ID) where DELETE_TS is null^
+create unique index IDX_SEC_USER_ROLE_UNIQ_ROLE on SEC_USER_ROLE (USER_ID, ROLE_ID) where DELETE_TS is null;
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -295,9 +297,9 @@ create table SEC_PERMISSION (
     --
     primary key (ID),
     constraint SEC_PERMISSION_ROLE foreign key (ROLE_ID) references SEC_ROLE(ID)
-)^
+);
 
-create unique index IDX_SEC_PERMISSION_UNIQUE on SEC_PERMISSION (ROLE_ID, PERMISSION_TYPE, TARGET) where DELETE_TS is null^
+create unique index IDX_SEC_PERMISSION_UNIQUE on SEC_PERMISSION (ROLE_ID, PERMISSION_TYPE, TARGET) where DELETE_TS is null;
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -325,9 +327,9 @@ create table SEC_CONSTRAINT (
     --
     primary key (ID),
     constraint SEC_CONSTRAINT_GROUP foreign key (GROUP_ID) references SEC_GROUP(ID)
-)^
+);
 
-create index IDX_SEC_CONSTRAINT_GROUP on SEC_CONSTRAINT (GROUP_ID)^
+create index IDX_SEC_CONSTRAINT_GROUP on SEC_CONSTRAINT (GROUP_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -346,11 +348,11 @@ create table SEC_LOCALIZED_CONSTRAINT_MSG (
     VALUES_ text,
     --
     primary key (ID)
-)^
+);
 
 create unique index IDX_SEC_LOC_CNSTRNT_MSG_UNIQUE
     on SEC_LOCALIZED_CONSTRAINT_MSG (ENTITY_NAME, OPERATION_TYPE)
-    where DELETE_TS is null^
+    where DELETE_TS is null;
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -372,9 +374,9 @@ create table SEC_SESSION_ATTR (
     --
     primary key (ID),
     constraint SEC_SESSION_ATTR_GROUP foreign key (GROUP_ID) references SEC_GROUP(ID)
-)^
+);
 
-create index IDX_SEC_SESSION_ATTR_GROUP on SEC_SESSION_ATTR (GROUP_ID)^
+create index IDX_SEC_SESSION_ATTR_GROUP on SEC_SESSION_ATTR (GROUP_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -391,7 +393,7 @@ create table SEC_USER_SETTING (
     primary key (ID),
     constraint SEC_USER_SETTING_USER foreign key (USER_ID) references SEC_USER(ID),
     constraint SEC_USER_SETTING_UNIQ unique (USER_ID, NAME, CLIENT_TYPE)
-)^
+);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -414,9 +416,9 @@ create table SEC_USER_SUBSTITUTION (
     primary key (ID),
     constraint FK_SEC_USER_SUBSTITUTION_USER foreign key (USER_ID) references SEC_USER(ID),
     constraint FK_SEC_USER_SUBSTITUTION_SUBSTITUTED_USER foreign key (SUBSTITUTED_USER_ID) references SEC_USER(ID)
-)^
+);
 
-create index IDX_SEC_USER_SUBSTITUTION_USER on SEC_USER_SUBSTITUTION (USER_ID)^
+create index IDX_SEC_USER_SUBSTITUTION_USER on SEC_USER_SUBSTITUTION (USER_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -431,7 +433,7 @@ create table SEC_LOGGED_ENTITY (
     --
     primary key (ID),
     constraint SEC_LOGGED_ENTITY_UNIQ_NAME unique (NAME)
-)^
+);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -446,9 +448,9 @@ create table SEC_LOGGED_ATTR (
     primary key (ID),
     constraint FK_SEC_LOGGED_ATTR_ENTITY foreign key (ENTITY_ID) references SEC_LOGGED_ENTITY(ID),
     constraint SEC_LOGGED_ATTR_UNIQ_NAME unique (ENTITY_ID, NAME)
-)^
+);
 
-create index IDX_SEC_LOGGED_ATTR_ENTITY on SEC_LOGGED_ATTR (ENTITY_ID)^
+create index IDX_SEC_LOGGED_ATTR_ENTITY on SEC_LOGGED_ATTR (ENTITY_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -471,12 +473,12 @@ create table SEC_ENTITY_LOG (
     --
     primary key (ID),
     constraint FK_SEC_ENTITY_LOG_USER foreign key (USER_ID) references SEC_USER(ID)
-)^
+);
 
-create index IDX_SEC_ENTITY_LOG_ENTITY_ID on SEC_ENTITY_LOG (ENTITY_ID)^
-create index IDX_SEC_ENTITY_LOG_SENTITY_ID on SEC_ENTITY_LOG (STRING_ENTITY_ID)^
-create index IDX_SEC_ENTITY_LOG_IENTITY_ID on SEC_ENTITY_LOG (INT_ENTITY_ID)^
-create index IDX_SEC_ENTITY_LOG_LENTITY_ID on SEC_ENTITY_LOG (LONG_ENTITY_ID)^
+create index IDX_SEC_ENTITY_LOG_ENTITY_ID on SEC_ENTITY_LOG (ENTITY_ID);
+create index IDX_SEC_ENTITY_LOG_SENTITY_ID on SEC_ENTITY_LOG (STRING_ENTITY_ID);
+create index IDX_SEC_ENTITY_LOG_IENTITY_ID on SEC_ENTITY_LOG (INT_ENTITY_ID);
+create index IDX_SEC_ENTITY_LOG_LENTITY_ID on SEC_ENTITY_LOG (LONG_ENTITY_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -500,9 +502,9 @@ create table SEC_FILTER (
     --
     primary key (ID),
     constraint FK_SEC_FILTER_USER foreign key (USER_ID) references SEC_USER(ID)
-)^
+);
 
-create index IDX_SEC_FILTER_COMPONENT_USER on SEC_FILTER (COMPONENT, USER_ID)^
+create index IDX_SEC_FILTER_COMPONENT_USER on SEC_FILTER (COMPONENT, USER_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -525,7 +527,7 @@ create table SYS_FOLDER (
     --
     primary key (ID),
     constraint FK_SYS_FOLDER_PARENT foreign key (PARENT_ID) references SYS_FOLDER(ID)
-)^
+);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -539,7 +541,7 @@ create table SYS_APP_FOLDER (
     --
     primary key (FOLDER_ID),
     constraint FK_SYS_APP_FOLDER_FOLDER foreign key (FOLDER_ID) references SYS_FOLDER(ID)
-)^
+);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -559,9 +561,9 @@ create table SEC_PRESENTATION (
     --
     primary key (ID),
     constraint SEC_PRESENTATION_USER foreign key (USER_ID) references SEC_USER(ID)
-)^
+);
 
-create index IDX_SEC_PRESENTATION_COMPONENT_USER on SEC_PRESENTATION (COMPONENT, USER_ID)^
+create index IDX_SEC_PRESENTATION_COMPONENT_USER on SEC_PRESENTATION (COMPONENT, USER_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -581,9 +583,9 @@ create table SEC_SEARCH_FOLDER (
     constraint FK_SEC_SEARCH_FOLDER_PRESENTATION foreign key (PRESENTATION_ID)
         references SEC_PRESENTATION(ID)
         on delete set null
-)^
+);
 
-create index IDX_SEC_SEARCH_FOLDER_USER on SEC_SEARCH_FOLDER (USER_ID)^
+create index IDX_SEC_SEARCH_FOLDER_USER on SEC_SEARCH_FOLDER (USER_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -602,9 +604,9 @@ create table SYS_FTS_QUEUE (
     FAKE boolean,
 
     primary key (ID)
-)^
+);
 
-create index IDX_SYS_FTS_QUEUE_IDXHOST_CRTS on SYS_FTS_QUEUE (INDEXING_HOST, CREATE_TS)^
+create index IDX_SYS_FTS_QUEUE_IDXHOST_CRTS on SYS_FTS_QUEUE (INDEXING_HOST, CREATE_TS);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -626,14 +628,14 @@ create table SEC_SCREEN_HISTORY (
     primary key (ID),
     constraint FK_SEC_HISTORY_USER foreign key (USER_ID) references SEC_USER (ID),
     constraint FK_SEC_HISTORY_SUBSTITUTED_USER foreign key (SUBSTITUTED_USER_ID) references SEC_USER (ID)
-)^
+);
 
-create index IDX_SEC_SCREEN_HISTORY_USER on SEC_SCREEN_HISTORY (USER_ID)^
-create index IDX_SEC_SCREEN_HIST_SUB_USER on SEC_SCREEN_HISTORY (SUBSTITUTED_USER_ID)^
-create index IDX_SEC_SCREEN_HISTORY_ENTITY_ID on SEC_SCREEN_HISTORY (ENTITY_ID)^
-create index IDX_SEC_SCREEN_HISTORY_SENTITY_ID on SEC_SCREEN_HISTORY (STRING_ENTITY_ID)^
-create index IDX_SEC_SCREEN_HISTORY_IENTITY_ID on SEC_SCREEN_HISTORY (INT_ENTITY_ID)^
-create index IDX_SEC_SCREEN_HISTORY_LENTITY_ID on SEC_SCREEN_HISTORY (LONG_ENTITY_ID)^
+create index IDX_SEC_SCREEN_HISTORY_USER on SEC_SCREEN_HISTORY (USER_ID);
+create index IDX_SEC_SCREEN_HIST_SUB_USER on SEC_SCREEN_HISTORY (SUBSTITUTED_USER_ID);
+create index IDX_SEC_SCREEN_HISTORY_ENTITY_ID on SEC_SCREEN_HISTORY (ENTITY_ID);
+create index IDX_SEC_SCREEN_HISTORY_SENTITY_ID on SEC_SCREEN_HISTORY (STRING_ENTITY_ID);
+create index IDX_SEC_SCREEN_HISTORY_IENTITY_ID on SEC_SCREEN_HISTORY (INT_ENTITY_ID);
+create index IDX_SEC_SCREEN_HISTORY_LENTITY_ID on SEC_SCREEN_HISTORY (LONG_ENTITY_ID);
 
 
 ------------------------------------------------------------------------------------------------------------
@@ -667,13 +669,13 @@ create table SYS_SENDING_MESSAGE (
     --
     primary key (ID),
     constraint FK_SYS_SENDING_MESSAGE_CONTENT_FILE foreign key (CONTENT_TEXT_FILE_ID) references SYS_FILE(ID)
-)^
+);
 
-create index IDX_SYS_SENDING_MESSAGE_STATUS on SYS_SENDING_MESSAGE (STATUS)^
+create index IDX_SYS_SENDING_MESSAGE_STATUS on SYS_SENDING_MESSAGE (STATUS);
 
-create index IDX_SYS_SENDING_MESSAGE_DATE_SENT on SYS_SENDING_MESSAGE (DATE_SENT)^
+create index IDX_SYS_SENDING_MESSAGE_DATE_SENT on SYS_SENDING_MESSAGE (DATE_SENT);
 
-create index IDX_SYS_SENDING_MESSAGE_UPDATE_TS on SYS_SENDING_MESSAGE (UPDATE_TS)^
+create index IDX_SYS_SENDING_MESSAGE_UPDATE_TS on SYS_SENDING_MESSAGE (UPDATE_TS);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -699,9 +701,9 @@ create table SYS_SENDING_ATTACHMENT (
     primary key (ID),
     constraint FK_SYS_SENDING_ATTACHMENT_SENDING_MESSAGE foreign key (MESSAGE_ID) references SYS_SENDING_MESSAGE (ID),
     constraint FK_SYS_SENDING_ATTACHMENT_CONTENT_FILE foreign key (CONTENT_FILE_ID) references SYS_FILE (ID)
-)^
+);
 
-create index SYS_SENDING_ATTACHMENT_MESSAGE_IDX on SYS_SENDING_ATTACHMENT (MESSAGE_ID)^
+create index SYS_SENDING_ATTACHMENT_MESSAGE_IDX on SYS_SENDING_ATTACHMENT (MESSAGE_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -723,12 +725,12 @@ create table SYS_ENTITY_SNAPSHOT (
     --
 	  primary key (ID),
     constraint FK_SYS_ENTITY_SNAPSHOT_AUTHOR_ID foreign key (AUTHOR_ID) references SEC_USER(ID)
-)^
+);
 
-create index IDX_SYS_ENTITY_SNAPSHOT_ENTITY_ID on SYS_ENTITY_SNAPSHOT (ENTITY_ID)^
-create index IDX_SYS_ENTITY_SNAPSHOT_SENTITY_ID on SYS_ENTITY_SNAPSHOT (STRING_ENTITY_ID)^
-create index IDX_SYS_ENTITY_SNAPSHOT_IENTITY_ID on SYS_ENTITY_SNAPSHOT (INT_ENTITY_ID)^
-create index IDX_SYS_ENTITY_SNAPSHOT_LENTITY_ID on SYS_ENTITY_SNAPSHOT (LONG_ENTITY_ID)^
+create index IDX_SYS_ENTITY_SNAPSHOT_ENTITY_ID on SYS_ENTITY_SNAPSHOT (ENTITY_ID);
+create index IDX_SYS_ENTITY_SNAPSHOT_SENTITY_ID on SYS_ENTITY_SNAPSHOT (STRING_ENTITY_ID);
+create index IDX_SYS_ENTITY_SNAPSHOT_IENTITY_ID on SYS_ENTITY_SNAPSHOT (INT_ENTITY_ID);
+create index IDX_SYS_ENTITY_SNAPSHOT_LENTITY_ID on SYS_ENTITY_SNAPSHOT (LONG_ENTITY_ID);
 
 -------------------------------------------------------------------------------------------------------------
 
@@ -750,9 +752,9 @@ create table SYS_CATEGORY (
     LOCALE_NAMES varchar(1000),
     --
     primary key (ID)
-)^
+);
 
-create unique index IDX_SYS_CATEGORY_UNIQ_NAME_ENTITY_TYPE on SYS_CATEGORY (NAME, ENTITY_TYPE) where DELETE_TS is null^
+create unique index IDX_SYS_CATEGORY_UNIQ_NAME_ENTITY_TYPE on SYS_CATEGORY (NAME, ENTITY_TYPE) where DELETE_TS is null;
 
 -------------------------------------------------------------------------------------------------------------
 
@@ -804,9 +806,9 @@ create table SYS_CATEGORY_ATTR (
     --
     primary key (ID),
     constraint SYS_CATEGORY_ATTR_CATEGORY_ID foreign key (CATEGORY_ID) references SYS_CATEGORY(ID)
-)^
+);
 
-create index IDX_SYS_CATEGORY_ATTR_CATEGORY on SYS_CATEGORY_ATTR (CATEGORY_ID)^
+create index IDX_SYS_CATEGORY_ATTR_CATEGORY on SYS_CATEGORY_ATTR (CATEGORY_ID);
 create unique index IDX_CAT_ATTR_ENT_TYPE_AND_CODE on SYS_CATEGORY_ATTR (CATEGORY_ENTITY_TYPE, CODE) where DELETE_TS is null;
 -------------------------------------------------------------------------------------------------------------
 
@@ -842,12 +844,12 @@ create table SYS_ATTR_VALUE (
     primary key (ID),
     constraint SYS_ATTR_VALUE_CATEGORY_ATTR_ID foreign key (CATEGORY_ATTR_ID) references SYS_CATEGORY_ATTR(ID),
     constraint SYS_ATTR_VALUE_ATTR_VALUE_PARENT_ID foreign key (PARENT_ID) references SYS_ATTR_VALUE(ID)
-)^
+);
 
-create index IDX_SYS_ATTR_VALUE_ENTITY on SYS_ATTR_VALUE (ENTITY_ID)^
-create index IDX_SYS_ATTR_VALUE_SENTITY on SYS_ATTR_VALUE(STRING_ENTITY_ID)^
-create index IDX_SYS_ATTR_VALUE_IENTITY on SYS_ATTR_VALUE(INT_ENTITY_ID)^
-create index IDX_SYS_ATTR_VALUE_LENTITY on SYS_ATTR_VALUE(LONG_ENTITY_ID)^
+create index IDX_SYS_ATTR_VALUE_ENTITY on SYS_ATTR_VALUE (ENTITY_ID);
+create index IDX_SYS_ATTR_VALUE_SENTITY on SYS_ATTR_VALUE(STRING_ENTITY_ID);
+create index IDX_SYS_ATTR_VALUE_IENTITY on SYS_ATTR_VALUE(INT_ENTITY_ID);
+create index IDX_SYS_ATTR_VALUE_LENTITY on SYS_ATTR_VALUE(LONG_ENTITY_ID);
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -867,12 +869,12 @@ create table SYS_JMX_INSTANCE (
     PASSWORD varchar(255) not null,
     --
     primary key (ID)
-)^
+);
 
 ------------------------------------------------------------------------------------------------------------
 
 create sequence SYS_QUERY_RESULT_SEQ
-^
+;
 
 create table SYS_QUERY_RESULT (
     ID bigint not null default nextval('SYS_QUERY_RESULT_SEQ'),
@@ -883,14 +885,14 @@ create table SYS_QUERY_RESULT (
     INT_ENTITY_ID integer,
     LONG_ENTITY_ID bigint,
 	primary key (ID)
-)^
+);
 
-create index IDX_SYS_QUERY_RESULT_ENTITY_SESSION_KEY on SYS_QUERY_RESULT (ENTITY_ID, SESSION_ID, QUERY_KEY)^
-create index IDX_SYS_QUERY_RESULT_SENTITY_SESSION_KEY on SYS_QUERY_RESULT (STRING_ENTITY_ID, SESSION_ID, QUERY_KEY)^
-create index IDX_SYS_QUERY_RESULT_IENTITY_SESSION_KEY on SYS_QUERY_RESULT (INT_ENTITY_ID, SESSION_ID, QUERY_KEY)^
-create index IDX_SYS_QUERY_RESULT_LENTITY_SESSION_KEY on SYS_QUERY_RESULT (LONG_ENTITY_ID, SESSION_ID, QUERY_KEY)^
+create index IDX_SYS_QUERY_RESULT_ENTITY_SESSION_KEY on SYS_QUERY_RESULT (ENTITY_ID, SESSION_ID, QUERY_KEY);
+create index IDX_SYS_QUERY_RESULT_SENTITY_SESSION_KEY on SYS_QUERY_RESULT (STRING_ENTITY_ID, SESSION_ID, QUERY_KEY);
+create index IDX_SYS_QUERY_RESULT_IENTITY_SESSION_KEY on SYS_QUERY_RESULT (INT_ENTITY_ID, SESSION_ID, QUERY_KEY);
+create index IDX_SYS_QUERY_RESULT_LENTITY_SESSION_KEY on SYS_QUERY_RESULT (LONG_ENTITY_ID, SESSION_ID, QUERY_KEY);
 
-create index IDX_SYS_QUERY_RESULT_SESSION_KEY on SYS_QUERY_RESULT (SESSION_ID, QUERY_KEY)^
+create index IDX_SYS_QUERY_RESULT_SESSION_KEY on SYS_QUERY_RESULT (SESSION_ID, QUERY_KEY);
 
 --------------------------------------------------------------------------------------------------------------
 
@@ -905,9 +907,9 @@ create table SEC_REMEMBER_ME (
     --
     primary key (ID),
     constraint FK_SEC_REMEMBER_ME_USER foreign key (USER_ID) references SEC_USER(ID)
-)^
-create index IDX_SEC_REMEMBER_ME_USER on SEC_REMEMBER_ME(USER_ID)^
-create index IDX_SEC_REMEMBER_ME_TOKEN on SEC_REMEMBER_ME(TOKEN)^
+);
+create index IDX_SEC_REMEMBER_ME_USER on SEC_REMEMBER_ME(USER_ID);
+create index IDX_SEC_REMEMBER_ME_TOKEN on SEC_REMEMBER_ME(TOKEN);
 
 --------------------------------------------------------------------------------------------------------------
 
@@ -935,14 +937,14 @@ create table SEC_SESSION_LOG (
     SERVER_ID varchar(128),
     --
     primary key (ID)
-)^
+);
 
-alter table SEC_SESSION_LOG add constraint FK_SEC_SESSION_LOG_USER foreign key (USER_ID) references SEC_USER(ID)^
-create index IDX_SEC_SESSION_LOG_USER on SEC_SESSION_LOG (USER_ID)^
-alter table SEC_SESSION_LOG add constraint FK_SEC_SESSION_LOG_SUBUSER foreign key (SUBSTITUTED_USER_ID) references SEC_USER(ID)^
-create index IDX_SEC_SESSION_LOG_SUBUSER on SEC_SESSION_LOG (SUBSTITUTED_USER_ID)^
-create index IDX_SEC_SESSION_LOG_SESSION on SEC_SESSION_LOG (SESSION_ID)^
-create index IDX_SESSION_LOG_STARTED_TS on SEC_SESSION_LOG (STARTED_TS DESC)^
+alter table SEC_SESSION_LOG add constraint FK_SEC_SESSION_LOG_USER foreign key (USER_ID) references SEC_USER(ID);
+create index IDX_SEC_SESSION_LOG_USER on SEC_SESSION_LOG (USER_ID);
+alter table SEC_SESSION_LOG add constraint FK_SEC_SESSION_LOG_SUBUSER foreign key (SUBSTITUTED_USER_ID) references SEC_USER(ID);
+create index IDX_SEC_SESSION_LOG_SUBUSER on SEC_SESSION_LOG (SUBSTITUTED_USER_ID);
+create index IDX_SEC_SESSION_LOG_SESSION on SEC_SESSION_LOG (SESSION_ID);
+create index IDX_SESSION_LOG_STARTED_TS on SEC_SESSION_LOG (STARTED_TS DESC);
 
 --------------------------------------------------------------------------------------------------------------
 
@@ -950,26 +952,26 @@ create index IDX_SESSION_LOG_STARTED_TS on SEC_SESSION_LOG (STARTED_TS DESC)^
 -- Do not use it in application. At runtime, all UUID identifiers are generated by the middleware.
 create or replace function newid() returns uuid
 as 'select md5(random()::text || clock_timestamp()::text)::uuid'
-language sql^
+language sql;
 
 --------------------------------------------------------------------------------------------------------------
 
 insert into SEC_GROUP (ID, CREATE_TS, VERSION, NAME, PARENT_ID)
-values ('0fa2b1a5-1d68-4d69-9fbd-dff348347f93', now(), 0, 'Company', null)^
+values ('0fa2b1a5-1d68-4d69-9fbd-dff348347f93', now(), 0, 'Company', null);
 
 insert into SEC_USER (ID, CREATE_TS, VERSION, LOGIN, LOGIN_LC, PASSWORD, PASSWORD_ENCRYPTION, NAME, GROUP_ID, ACTIVE)
 values ('60885987-1b61-4247-94c7-dff348347f93', now(), 0, 'admin', 'admin',
 '$2a$10$vQx8b8B7jzZ0rQmtuK4YDOKp7nkmUCFjPx6DMT.voPtetNHFOsaOu', 'bcrypt',
-'Administrator', '0fa2b1a5-1d68-4d69-9fbd-dff348347f93', true)^
+'Administrator', '0fa2b1a5-1d68-4d69-9fbd-dff348347f93', true);
 
 insert into SEC_USER (ID, CREATE_TS, VERSION, LOGIN, LOGIN_LC, PASSWORD, NAME, GROUP_ID, ACTIVE)
 values ('a405db59-e674-4f63-8afe-269dda788fe8', now(), 0, 'anonymous', 'anonymous', null,
-'Anonymous', '0fa2b1a5-1d68-4d69-9fbd-dff348347f93', true)^
+'Anonymous', '0fa2b1a5-1d68-4d69-9fbd-dff348347f93', true);
 
 insert into SEC_USER_ROLE (ID, CREATE_TS, VERSION, USER_ID, ROLE_NAME)
-values ('6736effb-9dfc-4430-973a-69868606b09c', current_timestamp, 0, '60885987-1b61-4247-94c7-dff348347f93', 'system-full-access')^
+values ('6736effb-9dfc-4430-973a-69868606b09c', current_timestamp, 0, '60885987-1b61-4247-94c7-dff348347f93', 'system-full-access');
 
 insert into SEC_FILTER (ID, CREATE_TS, CREATED_BY, VERSION, COMPONENT, NAME, XML, USER_ID, GLOBAL_DEFAULT)
 values ('b61d18cb-e79a-46f3-b16d-eaf4aebb10dd', now(), 'admin', 0, '[sec$User.browse].genericFilter', 'Search by role',
   '<?xml version="1.0" encoding="UTF-8"?><filter><and><c name="UrMxpkfMGn" class="com.haulmont.cuba.security.entity.Role" type="CUSTOM" locCaption="Role" entityAlias="u" join="join u.userRoles ur">ur.role.id = :component$genericFilter.UrMxpkfMGn32565<param name="component$genericFilter.UrMxpkfMGn32565">NULL</param></c></and></filter>',
-  '60885987-1b61-4247-94c7-dff348347f93', false)^
+  '60885987-1b61-4247-94c7-dff348347f93', false);
