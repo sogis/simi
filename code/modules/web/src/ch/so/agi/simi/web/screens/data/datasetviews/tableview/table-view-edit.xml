@@ -105,7 +105,6 @@
             <groupBox id="viewFieldsBox" caption="Attribut-Verknüpfung" spacing="true" collapsable="true">
                 <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" editable="true" multiselect="true" settingsEnabled="false">
                     <actions>
-                        <action id="edit" type="edit"/>
                         <action id="remove" type="remove">
                             <properties>
                                 <property name="confirmation" value="false"/>
