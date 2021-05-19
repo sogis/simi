@@ -12,13 +12,13 @@
         </encoder>
     </appender>
 
-    <root level="warn">
+    <root level="debug">
         <appender-ref ref="Console"/>
     </root>
 
     <!-- Begin CUBA -->
 
-    <logger name="com.haulmont.cuba" level="warn"/>
+    <logger name="com.haulmont.cuba" level="DEBUG"/>
 
     <!--
 
@@ -80,7 +80,7 @@
 
     <!-- Begin SIMI  -->
 
-    <logger name="ch.so.agi.simi" level="INFO"/>
+    <logger name="ch.so.agi.simi" level="DEBUG"/>
 
     <!-- End SIMI  -->
 
