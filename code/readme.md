@@ -22,6 +22,10 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
   * Konsequent Anzeige von "\[NULL\]" oder ähnlich bei Attributen, die null sind.
 
   ## Mögliche Erweiterungen / Anpassungen V 1.2
+  
+  ### Zwingende Schemaanpassungen
+  * IAM User: Entfernen von Name und Vorname. Diese wurden mit 1.1.x von mandatory auf optional gestellt.
+    * Rahmenbedingung: Beibehalten der Vererbungsstruktur Identity, Group, User wegen der Beziehungen. 
 
   ### Externe WMS / WMTS
 

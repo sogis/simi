@@ -5,6 +5,7 @@ import ch.so.agi.simi.entity.data.TableField;
 import ch.so.agi.simi.web.beans.datatheme.SchemaReaderClientBean;
 import ch.so.agi.simi.web.beans.datatheme.ThemeReaderBean;
 import com.haulmont.cuba.gui.Dialogs;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Component;
 import com.haulmont.cuba.gui.components.Table;
@@ -34,11 +35,21 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
     private SchemaReaderClientBean client;
     @Inject
     DataContext context;
+    @Inject
+    private Notifications notifications;
 
     @Subscribe("readFromServiceBtn")
     public void onReadFromServiceBtnClick(Button.ClickEvent event) {
         PostgresTable table = postgresTableDc.getItem();
-        List<TableField> inPlaceUpdated = bean.actualizeWithDbCat(client, table);
+        //List<TableField> inPlaceUpdated = bean.actualizeWithDbCat(client, table);
+        bean.actualizeWithDbCat(client, table);
+
+        context.merge(table.getTableFields());
+
+        notifications.create()
+                .withCaption("Attributanzeige")
+                .withDescription("Workaround für die Anzeige der importierten Attribute: Speichern, Formular schliessen und dann wieder öffnen.")
+                .show();
 
         /*
         Questions:
