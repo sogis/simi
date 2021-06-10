@@ -12,7 +12,7 @@
                     <condition>
                         <or>
                             <c:jpql>
-                                <c:where>e.name like :term</c:where>
+                                <c:where>lower(e.name) like :term</c:where>
                             </c:jpql>
                         </or>
                     </condition>

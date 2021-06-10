@@ -12,10 +12,10 @@
                     <condition>
                         <or>
                             <c:jpql>
-                                <c:where>e.tableName like :term</c:where>
+                                <c:where>lower(e.tableName) like :term</c:where>
                             </c:jpql>
                             <c:jpql>
-                                <c:where>e.dataTheme.schemaName like :term</c:where>
+                                <c:where>lower(e.dataTheme.schemaName) like :term</c:where>
                             </c:jpql>
                         </or>
                     </condition>

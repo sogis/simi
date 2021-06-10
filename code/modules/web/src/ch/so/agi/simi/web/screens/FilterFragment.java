@@ -70,7 +70,7 @@ public class FilterFragment<T extends Entity<T>> extends ScreenFragment {
             if(term.length() > 0) {
                 validWhereClause = true;
 
-                term = '%' + term + '%';
+                term = '%' + term.toLowerCase() + '%';
             }
         }
 
