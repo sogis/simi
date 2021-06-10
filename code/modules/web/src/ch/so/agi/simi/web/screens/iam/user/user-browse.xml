@@ -15,10 +15,7 @@
                                 <c:where>e.identifier like :term</c:where>
                             </c:jpql>
                             <c:jpql>
-                                <c:where>e.firstname like :term</c:where>
-                            </c:jpql>
-                            <c:jpql>
-                                <c:where>e.lastname like :term</c:where>
+                                <c:where>e.remarks like :term</c:where>
                             </c:jpql>
                         </or>
                     </condition>
@@ -42,8 +39,7 @@
             </actions>
             <columns>
                 <column id="identifier"/>
-                <column id="firstname"/>
-                <column id="lastname"/>
+                <column id="remarks"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
@@ -56,7 +52,7 @@
         <fragment screen="simi_FilterFragment">
             <properties>
                 <property name="dataLoader" ref="usersDl"/>
-                <property name="inputPrompt" value="Filtern nach Kennung, Vorname oder Nachname"/>
+                <property name="inputPrompt" value="Filtern nach Kennung oder Bemerkungen"/>
             </properties>
         </fragment>
         <hbox id="lookupActions" spacing="true" visible="false">

@@ -18,8 +18,6 @@
         <form id="form" dataContainer="userDc">
             <column width="350px">
                 <textField id="identifierField" property="identifier"/>
-                <textField id="firstnameField" property="firstname"/>
-                <textField id="lastnameField" property="lastname"/>
                 <textArea id="remarksField" property="remarks" rows="5"/>
             </column>
         </form>

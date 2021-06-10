@@ -4,12 +4,11 @@
 version: "3.7"
 services:
   simi:
-    image: sogis/simi:1.1.65
+    image: sogis/simi:1.1.68
     environment:
       - CUBA_DATASOURCE_USERNAME=postgres
       - CUBA_DATASOURCE_PASSWORD=postgres
       - CUBA_DATASOURCE_JDBCURL=jdbc:postgresql://localhost:5432/simi?currentSchema=simi
-      - CUBA_
       - CUBA_WEB_LDAP_ENABLED=true
       - CUBA_WEB_LDAP_URLS=ldap://ldap.forumsys.com
       - CUBA_WEB_LDAP_BASE=ou=scientists,dc=example,dc=com

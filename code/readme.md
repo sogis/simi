@@ -17,3 +17,24 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
 * Konfiguration der Suche in den GRETL-Repos (Anzeige der Abhängigkeiten):
   * **SIMI_GITSEARCH_URL:** Url, auf welche die Git-Suchen abgesetzt werden. Bsp: "https://api.github.com/search/code"
   * **SIMI_GITSEARCH_REPOS:** Liste aller zu durchsuchenden Git-Repos, mittels "," getrennt. Bsp: "sogis/gretljobs,oereb/jobs"
+  
+  ## Kleine Verbesserungen V 1.1.x
+  * Konsequent Anzeige von "\[NULL\]" oder ähnlich bei Attributen, die null sind.
+
+  ## Mögliche Erweiterungen / Anpassungen V 1.2
+
+  ### Externe WMS / WMTS
+
+  * Gruppierungs-Limitationen aus Frühlingsrelease auflösen
+  * Notwendige Eigenschaften in Metamodell vollständig abbilden
+  * Prüfen, ob die extern verfügbaren Eigenschaften (Titel, Beschreibung, ...) im Rahmen der Pipeline zur Laufzeit abgeholt werden sollen
+
+  ### Print
+
+  * Konzeptionellen Entscheid für heutige Lösung nachvollziehen
+  * Der Print-WMS umfasst ca. 5% mehr Ebenen wie der publizierte (=105%). Macht das so Sinn, oder sollte der Print nur die 5 zusätzlichen Prozent umfassen?
+  * Zusammenhang mit Last und Antwortzeiten beachten
+
+  ### Transparenz
+
+  * Überschreibung der Transparenz der Einzelebenen eines Facadelayers? (In PropertiesInFacade)

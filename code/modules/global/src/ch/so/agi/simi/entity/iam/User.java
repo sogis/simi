@@ -3,7 +3,6 @@ package ch.so.agi.simi.entity.iam;
 import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "SIMIIAM_USER")
@@ -13,14 +12,13 @@ import java.util.List;
 public class User extends Identity {
 
     public static final String NAME = "simiIAM_User";
+
     private static final long serialVersionUID = -2918662812811270888L;
 
-    @NotNull
-    @Column(name = "FIRSTNAME", nullable = false, length = 100)
+    @Column(name = "FIRSTNAME", length = 100)
     private String firstname;
 
-    @NotNull
-    @Column(name = "LASTNAME", nullable = false, length = 100)
+    @Column(name = "LASTNAME", length = 100)
     private String lastname;
 
     @JoinTable(name = "SIMIIAM_GROUP_USER_LINK",
