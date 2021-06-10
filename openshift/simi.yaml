@@ -63,8 +63,6 @@ objects:
             value: secret
           - name: SIMI_SCHEMAREADER_URL
             value: ${SIMI_SCHEMAREADER_URL}
-          - name: CUBA_AUTOMATICDATABASEUPDATE
-            value: "false"
           - name: CUBA_WEB_LDAP_ENABLED
             value: "true"
           readinessProbe:
