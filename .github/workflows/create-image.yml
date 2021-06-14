@@ -15,34 +15,34 @@ jobs:
           java-version: 11
       - name: Start db image
         run: docker-compose up -d -V db
-        working-directory: ./code/docker
+        working-directory: ./webapp/docker
       - name: Wait until db is up
         run: docker-compose up -V --exit-code-from await-db await-db
-        working-directory: ./code/docker
+        working-directory: ./webapp/docker
       - name: create the simi schema
         run: ./gradlew createDb
-        working-directory: ./code
+        working-directory: ./webapp
       - name: Build and test the java classes
         run: ./gradlew build
-        working-directory: ./code
+        working-directory: ./webapp
       - name: "Merge build.gradle: 1. rename"
         run: mv build.gradle build1.gradle
-        working-directory: ./code
+        working-directory: ./webapp
       - name: "Merge build.gradle: 2. merge"
         run: cat build1.gradle build2.gradle > build.gradle
-        working-directory: ./code
+        working-directory: ./webapp
       - name: Build simi image with Gradle
         run: ./gradlew imgTag
-        working-directory: ./code
+        working-directory: ./webapp
       - name: Start simi image
         run: docker-compose up -d -V simi
-        working-directory: ./code/docker
+        working-directory: ./webapp/docker
       - name: middle tier - check health
         run: ./await.sh http://localhost:8080/app-core/remoting/health
-        working-directory: ./code/docker/await-url
+        working-directory: ./webapp/docker/await-url
       - name: client tier - check health
         run: ./await.sh http://localhost:8080/app/dispatch/health
-        working-directory: ./code/docker/await-url
+        working-directory: ./webapp/docker/await-url
       - name: docker login
         env:
           SIMI_DOCKER_USER: ${{ secrets.SIMI_DOCKER_USER }}
@@ -50,4 +50,4 @@ jobs:
         run: echo "$SIMI_DOCKER_PASS" | docker login -u "$SIMI_DOCKER_USER" --password-stdin
       - name: Push image with Gradle
         run: ./gradlew pushImg
-        working-directory: ./code
+        working-directory: ./webapp
