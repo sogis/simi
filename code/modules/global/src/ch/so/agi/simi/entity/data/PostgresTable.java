@@ -17,7 +17,6 @@ import java.util.List;
         @UniqueConstraint(name = "IDX_SIMI_POSTGRES_TABLE_UNQ", columnNames = {"DATA_THEME_ID", "TABLE_NAME"})
 })
 @Entity(name = PostgresTable.NAME)
-@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamePattern("%s.%s|dataTheme,tableName")
 public class PostgresTable extends SimiEntity {
 

@@ -4,6 +4,8 @@ import ch.so.agi.simi.entity.data.DataTheme;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
 import ch.so.agi.simi.web.beans.datatheme.reader_dto.*;
+import ch.so.agi.simi.web.beans.datatheme.reader_dto.update_dto.FieldSyncState;
+import ch.so.agi.simi.web.beans.datatheme.reader_dto.update_dto.SyncedField;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +42,7 @@ public class ThemeReaderBean {
         }
     }
 
-    public List<TableField> actualizeWithDbCat(SchemaReader reader, PostgresTable inOutTable) {
+    public List<SyncedField> actualizeWithDbCat(SchemaReader reader, PostgresTable inOutTable) {
 
         TableAndFieldInfo tfi = reader.queryTableMeta(
                 inOutTable.getDataTheme().getPostgresDB().getDbName(),
@@ -49,9 +51,9 @@ public class ThemeReaderBean {
         );
 
         updateTableInfo(inOutTable, tfi);
-        List<TableField> inPlaceUpdated = updateFields(inOutTable, tfi);
+        List<SyncedField> syncedFields = updateFields(inOutTable, tfi);
 
-        return inPlaceUpdated;
+        return syncedFields;
     }
 
     private static void updateTableInfo(PostgresTable inOutTable, TableAndFieldInfo tfi){
@@ -89,9 +91,9 @@ public class ThemeReaderBean {
         }
     }
 
-    private static List<TableField> updateFields(PostgresTable inOutTable, TableAndFieldInfo tfi){
+    private static List<SyncedField> updateFields(PostgresTable inOutTable, TableAndFieldInfo tfi){
 
-        ArrayList<TableField> updated = new ArrayList<>(); // preexisting FieldInfos
+        ArrayList<SyncedField> synced = new ArrayList<>(); // preexisting FieldInfos
 
         if(inOutTable.getTableFields() == null){
             inOutTable.setTableFields(new ArrayList<>());
@@ -107,7 +109,7 @@ public class ThemeReaderBean {
             if(tf != null && areEqualFields(tf, fi)) {
                 tf.setCatSynced(true);
                 tf.setDescriptionModel(fi.getDescription());
-                updated.add(tf);
+                synced.add(new SyncedField(tf, FieldSyncState.POSSIBLY_ACTUALIZED));
             }
             else if (fi.getGeoFieldType() == null || fi.getGeoFieldType().length() == 0) {
                 TableField nf = new TableField();
@@ -121,10 +123,18 @@ public class ThemeReaderBean {
 
                 nf.setPostgresTable(inOutTable);
                 inOutTable.getTableFields().add(nf);
+                synced.add(new SyncedField(nf, FieldSyncState.NEW));
             }
         }
 
-        return updated;
+        // all still having catsynced = false are stale
+        for(TableField tf : inOutTable.getTableFields()) {
+            if(!tf.getCatSynced()){
+                synced.add(new SyncedField(tf, FieldSyncState.STALE));
+            }
+        }
+
+        return synced;
     }
 
     private static boolean areEqualFields(TableField tf, FieldInfo  fi){ //only compares field props. Assumes that tables are equal
