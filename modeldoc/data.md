@@ -1,6 +1,6 @@
 # Data
 
-![Data](../puml/rendered/data.png)
+![Data](resources/data/data.png)
 
 Stellt die Klassen des Datenkonfigurationsteils dar
 * Tabellarische Daten aus Postgres/PostGIS mit und ohne Geometrie

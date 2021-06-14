@@ -4,7 +4,7 @@ Das IAM ist neu ausschliesslich Datenbezogen. Es gibt keine Anwendungsfälle, we
 auf die Daten zurückführen liessen. Entsprechend werden die Berechtigungen einzig bezüglich der DataSetView 
 gesetzt.
 
-![IAM](../puml/rendered/iam.png)
+![IAM](resources/iam/iam.png)
 
 ## Modell-Konstraints
 

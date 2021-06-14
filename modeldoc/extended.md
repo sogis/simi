@@ -1,6 +1,6 @@
 # Extended
 
-![Extended](../puml/rendered/extended.png)
+![Extended](resources/extended/extended.png)
 
 Enthält die erweiterten Konfigurationen zu einer DSV:
 * Component: Komponenten (Applikationen) innerhalb und ausserhalb der GDI, welche Informationen von der DSV beziehen.

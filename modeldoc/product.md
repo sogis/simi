@@ -2,7 +2,7 @@
 
 Bildet alle möglichen Arten von Kartenebenen und deren Beziehung untereinander ab.
 
-![Product](../puml/rendered/product.png)
+![Product](resources/product/product.png)
 
 ## Klasse DataProduct (DP)
 
