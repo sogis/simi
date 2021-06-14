@@ -4,6 +4,11 @@
 
 Umfasst in Metamodell und Funktionalität den für die Ablösung des AGDI notwendigen Umfang.
 
+Neben der Konsolidierung der Redundanzen und der "Webgis-zentrischen" Modellierung wurde auch bewusst auf Aspekte im Modell verzichtet:
+* Integration der Report-Templates bringt zuwenig Nutzen. Simi kennt die Reports nur noch zwecks Access-Management (permission.json)
+* Contacts.  Werden nirgends in der GDI genutzt
+* Datenfluss-Doku: Wurde in AGDI nicht genutzt - abgelöst mittels Durchsuchen der GRETL-Repos via Github Search API.
+
 ## V 1.1
 
 Erste Version von SIMI, mit welcher produktiv gearbeitet wird.  
