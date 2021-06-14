@@ -19,6 +19,14 @@ Letzte Modelländerungen:
   
 ### Mögliche Verbesserungen
   * Konsequent Anzeige von "\[NULL\]" oder ähnlich bei Attributen, die null sind.
+  * Nach Pilotierung:
+    * Screens Wegräumen
+      * _layer-group-choose.xml
+      * _data-set-view-browse.xml
+      * _data-product_pub-scope-browse.xml
+      * _data-product_pub-scope-edit.xml
+      * _map-browse.xml
+      * _single-actor-browse.xml
 
 ## V 1.2
 

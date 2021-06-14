@@ -21,7 +21,7 @@ Auslöser für Versions-Inkrementierungen:
 Als Nummer der revision wird automatisch die "Build-Nummer" der github action übernommen. 
 Major und minor werden bewusst von der Entwicklung gesetzt.
 
-[Notizen zu den vergangenen und kommenden Versionen](versions.md)
+[Notizen zu den vergangenen und kommenden Versionen](doc/versions.md)
 
 ### Umgebungsvariablen
 

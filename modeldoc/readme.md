@@ -2,14 +2,14 @@
 
 ## Teilmodelle
 
-![Übersicht der Teilmodelle](puml/rendered/overview.png)
+![Übersicht der Teilmodelle](resources/overview.png)
 
-* **Product [[Link]](model/product.md):** Enthält die Klassen für die Konfiguration der aus Data abgeleiteten Produkte. 
-* **Data [[Link]](model/data.md):** Enthält die Klassen für die Beschreibung der von der GDI genutzten 
+* **Product [[Link]](product.md):** Enthält die Klassen für die Konfiguration der aus Data abgeleiteten Produkte. 
+* **Data [[Link]](data.md):** Enthält die Klassen für die Beschreibung der von der GDI genutzten 
 Datenquellen (GIS-Tabellen, Raster, ...).
-* **IAM [[Link]](model/iam.md):** Klassen zur Konfiguration des Identity und 
+* **IAM [[Link]](iam.md):** Klassen zur Konfiguration des Identity und 
 Access Management (Benutzer, Gruppen, Rollen, ...).
-* **Extended [[Link]](model/extended.md):** Erweiterte Konfiguration zu einem DSV (Featureinfo, Report, Abhängigkeiten, ...).
+* **Extended [[Link]](extended.md):** Erweiterte Konfiguration zu einem DSV (Featureinfo, Report, Abhängigkeiten, ...).
 
 ## Konstraints
 
