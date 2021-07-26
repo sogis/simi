@@ -17,7 +17,7 @@ import java.util.List;
         @UniqueConstraint(name = "IDX_SIMI_POSTGRES_TABLE_UNQ", columnNames = {"DATA_THEME_ID", "TABLE_NAME"})
 })
 @Entity(name = PostgresTable.NAME)
-@NamePattern("%s.%s|dataTheme,tableName")
+@NamePattern("#concatName|dataTheme,tableName")
 public class PostgresTable extends SimiEntity {
 
     public static final String NAME = "simiData_PostgresTable";
@@ -68,6 +68,10 @@ public class PostgresTable extends SimiEntity {
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
+
+    public String concatName(){
+        return this.getDataTheme().concatName() + " | " + this.getTableName() ;
+    }
 
     public String getRemarks() {
         return remarks;
