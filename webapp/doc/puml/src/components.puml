@@ -1,0 +1,64 @@
+@startuml
+package "Metadata" {
+    package "Transformers" {
+        [JsonTrafo] as jt
+        [QgsTrafo] as qt
+        [qgsContent.json] as qj
+
+        jt --> qj
+        qj -up-> qt
+    }
+
+    package "Config" {
+        [Json Files] as json
+        [Qgs File] as qgs
+    }
+
+    package "SIMI" {
+        [GUI] as gui
+        [Entities] as class
+        () "REST GRETL" as gi
+
+        gui --> class
+        gi - class
+    }
+
+    package "Magic-Button (Jenkins)" {
+      [API / WGC Deployment] as pipe
+      () "Jenkins" as pi
+      pi - pipe
+    }
+
+    database "Meta-DB" {
+        [Meta-Tables] as mdb
+    }
+
+    together {
+      [Schema-Reader] as sr
+      () "REST GET" as sri
+      sr - sri
+    }
+    gui -left-> sri
+
+    class --> mdb : jdbc
+    jt --> mdb : db con
+
+    jt --> json
+    qt --> qgs
+}
+
+database "Geo-DB" {
+    [Catalog] as cat
+}
+sr --> cat : db con
+
+gui --> pi
+pipe --> jt
+pipe --> qt
+
+[GRETL] as gretl
+gretl --> gi
+
+gretl -[hidden]-> gui
+qj -[hidden]-> json
+@enduml
