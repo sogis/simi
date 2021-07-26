@@ -73,9 +73,12 @@ public class ThemeReaderBeanTest {
         Assertions.assertEquals(theme, table.getDataTheme());
         Assertions.assertEquals(SCHEMA_READALL__STRING, table.getIdFieldName());
         Assertions.assertEquals(SCHEMA_READALL__STRING, table.getDescriptionModel());
-        Assertions.assertEquals(SCHEMA_READALL__INTEGER, table.getGeoEpsgCode());
-        Assertions.assertEquals(SCHEMA_READALL_FIELD_GEO2, table.getGeoFieldName());
-        Assertions.assertEquals(SCHEMA_READALL__STRING, table.getGeoType());
+
+        //Getestet wird der Fall mit zwei Geometriefeldern --> Entsprechend konkatenieren
+        String epsgCodeStr = String.join("000", new String[]{Integer.toString(SCHEMA_READALL__INTEGER), Integer.toString(SCHEMA_READALL__INTEGER)});
+        Assertions.assertEquals(Integer.parseInt(epsgCodeStr), table.getGeoEpsgCode());
+        Assertions.assertEquals(String.join(", ", new String[]{SCHEMA_READALL_FIELD_GEO1, SCHEMA_READALL_FIELD_GEO2}), table.getGeoFieldName());
+        Assertions.assertEquals(String.join(", ", new String[]{SCHEMA_READALL__STRING, SCHEMA_READALL__STRING}), table.getGeoType());
 
         for(TableField tf : table.getTableFields()){
             Assertions.assertEquals(SCHEMA_READALL__STRING, tf.getDescriptionModel());

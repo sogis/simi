@@ -65,15 +65,17 @@ public class ThemeReaderBean {
         inOutTable.setIdFieldName(ti.getPkField());
         inOutTable.setCatSyncStamp(LocalDateTime.now());
 
-        int count = 0;
+        ArrayList<String> geoFieldTypes = new ArrayList<>();
+        ArrayList<String> geoFieldNames = new ArrayList<>();
+        ArrayList<String> geoEpsgCodes = new ArrayList<>();
+
         for (FieldInfo fi : tfi.getFields()){
             String geoFieldType = fi.getGeoFieldType();
 
             if(geoFieldType != null && geoFieldType.length() > 0){
-                count++;
-                inOutTable.setGeoType(geoFieldType);
-                inOutTable.setGeoFieldName(fi.getName());
-                inOutTable.setGeoEpsgCode(fi.getGeoFieldSrId());
+                geoFieldTypes.add(geoFieldType);
+                geoFieldNames.add(fi.getName());
+                geoEpsgCodes.add(fi.getGeoFieldSrId().toString());
 
                 if(!"epsg".equalsIgnoreCase(fi.getGeoFieldSrOrg())) {
                     throw new RuntimeException(
@@ -86,8 +88,14 @@ public class ThemeReaderBean {
             }
         }
 
-        if(count > 1){
-            log.warn("Table or View {} has multiple geometry fields. Using {}", inOutTable.getTableName(), inOutTable.getGeoFieldName());
+        if(geoFieldTypes.size() > 0){
+            inOutTable.setGeoType(String.join(", ", geoFieldTypes));
+            inOutTable.setGeoFieldName(String.join(", ", geoFieldNames));
+            inOutTable.setGeoEpsgCode(Integer.parseInt(String.join("000", geoEpsgCodes)));
+        }
+
+        if(geoFieldTypes.size() > 1){
+            log.warn("Table or View {} has multiple geometry fields. Concatenated all options into the fields", inOutTable.getTableName());
         }
     }
 
