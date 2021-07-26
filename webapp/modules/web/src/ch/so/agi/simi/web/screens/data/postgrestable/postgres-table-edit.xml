@@ -24,22 +24,22 @@
                 forceDialog="true"
                 resizable="true"/>
     <layout expand="tableFieldsBox" spacing="true">
+        <button id="readFromServiceBtn" caption="Aus Quell-DB einlesen" stylename="danger" icon="BULK_EDIT_ACTION"/>
         <form id="form" dataContainer="postgresTableDc">
             <column width="350px">
                 <lookupField id="dataThemeField" dataContainer="postgresTableDc" property="dataTheme" optionsContainer="dataThemeDc"/>
                 <textField id="tableNameField" property="tableName" editable="true"/>
-                <textArea id="remarksField" property="remarks" rows="8" rowspan="5"/>
+                <dateField id="catSyncStampField" property="catSyncStamp" editable="false" tabIndex="-1"/>
+                <textField id="idFieldNameField" property="idFieldName" icon="BULK_EDIT_ACTION" />
+                <textField id="geoFieldNameField" property="geoFieldName" icon="BULK_EDIT_ACTION"/>
+                <textField id="geoTypeField" property="geoType" icon="BULK_EDIT_ACTION"/>
+                <textField id="geoEpsgCodeField" property="geoEpsgCode" icon="BULK_EDIT_ACTION"/>
             </column>
             <column width="350px">
-                <dateField id="catSyncStampField" property="catSyncStamp" editable="false" tabIndex="-1"/>
-                <textField id="idFieldNameField" property="idFieldName" />
-                <textField id="geoFieldNameField" property="geoFieldName"/>
-                <textField id="geoTypeField" property="geoType"/>
-                <textField id="geoEpsgCodeField" property="geoEpsgCode"/>
-                <textArea id="descriptionModelField" property="descriptionModel" rows="3" rowspan="2"/>
+                <textArea id="remarksField" property="remarks" rows="7" rowspan="4"/>
+                <textArea id="descriptionModelField" property="descriptionModel" icon="BULK_EDIT_ACTION" editable="false" rows="5" rowspan="3"/>
             </column>
         </form>
-        <button id="readFromServiceBtn" caption="Metainf. aus Quell-DB auslesen" stylename="danger" icon="BULK_EDIT_ACTION"/>
         <groupBox id="tableFieldsBox" caption="Tabellenspalten"
                   expand="tableFieldsTable">
             <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" multiselect="true" editable="true" settingsEnabled="false">
