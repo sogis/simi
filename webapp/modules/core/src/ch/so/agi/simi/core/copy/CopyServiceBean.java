@@ -36,21 +36,21 @@ public class CopyServiceBean implements CopyService {
 
         DataProduct dp = dataManager.load(DataProduct.class).id(id).one();
 
-        UUID copy = null;
+        UUID copyId = null;
         if(dp instanceof TableView)
-            copy = copyTableView(dp.getId());
+            copyId = copyTableView(dp.getId());
         else if(dp instanceof RasterView)
-            copy = copyRasterView(dp.getId());
+            copyId = copyRasterView(dp.getId());
         else if(dp instanceof FacadeLayer)
-            copy = copyFacadeLayer(dp.getId());
+            copyId = copyFacadeLayer(dp.getId());
         else if(dp instanceof LayerGroup)
-            copy = copyLayerGroup(dp.getId());
+            copyId = copyLayerGroup(dp.getId());
         else if(dp instanceof Map)
-            copy = copyMap(dp.getId());
+            copyId = copyMap(dp.getId());
         else
             throw new RuntimeException("not implemented");
 
-        return copy;
+        return copyId;
     }
 
     private UUID copyFacadeLayer(UUID id){
@@ -119,9 +119,6 @@ public class CopyServiceBean implements CopyService {
 
         setLocalProps(rv, changed);
         
-        setPifDsvIds(rv, changed);
-        setPilSaIds(rv, changed);
-        
         setPermIds(rv, changed);
         
         setRelIds(rv, changed);
@@ -169,7 +166,6 @@ public class CopyServiceBean implements CopyService {
         EntitySet changed = new EntitySet();
 
         setLocalProps(fl, changed);
-        setPilSaIds(fl, changed);
         setPifFlIds(fl, changed);
 
         return changed;
@@ -180,9 +176,6 @@ public class CopyServiceBean implements CopyService {
         EntitySet changed = new EntitySet();
 
         setLocalProps(tv, changed);
-
-        setPifDsvIds(tv, changed);
-        setPilSaIds(tv, changed);
 
         setPermIds(tv, changed);
 

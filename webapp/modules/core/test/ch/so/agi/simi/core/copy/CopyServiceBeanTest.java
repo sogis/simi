@@ -37,23 +37,18 @@ class CopyServiceBeanTest {
     private static final String TV_DB_STRING = "ch.so.agi.inttest.tableview.db";
     private static final String TV_SCHEMA_STRING = "ch.so.agi.inttest.tableview.schema";
     private static final String TV_TABLE_STRING = "ch.so.agi.inttest.tableview.table";
-    private static final String TV_FL_STRING = "ch.so.agi.inttest.tableview.facadelayer";
-    private static final String TV_PL_STRING = "ch.so.agi.inttest.tableview.layergroup";
     private static final String TV_ROLE_STRING = "ch.so.agi.inttest.tableview.role";
     private static final String TV_COMPONENT_STRING = "ch.so.agi.inttest.tableview.component";
     private static final String TV_FIELD_ALIAS = "ch.so.agi.inttest.tableview.field.alias";
     private static final int TV_SA_TRANSPARENCY = 88;
 
     private static final String RV_DP_STRING = "ch.so.agi.inttest.rasterview";
-    private static final String RV_FL_STRING = "ch.so.agi.inttest.rasterview.facadelayer";
-    private static final String RV_PL_STRING = "ch.so.agi.inttest.rasterview.layergroup";
     private static final String RV_ROLE_STRING = "ch.so.agi.inttest.rasterview.role";
     private static final String RV_COMPONENT_STRING = "ch.so.agi.inttest.rasterview.component";
     private static final int RV_SA_TRANSPARENCY = 87;
 
     private static final String FL_DP_STRING = "ch.so.agi.inttest.facadelayer";
     private static final String FL_DSV_STRING = "ch.so.agi.inttest.facadelayer.datasetview";
-    private static final String FL_PL_STRING = "ch.so.agi.inttest.facadelayer.layergroup";
     private static final int FL_SA_TRANSPARENCY = 86;
 
     private static final String LG_DP_STRING = "ch.so.agi.inttest.layergroup";
@@ -91,9 +86,6 @@ class CopyServiceBeanTest {
             assertEquals(TV_DP_STRING, tv.getSearchFacet());
             assertEquals(TV_SA_TRANSPARENCY, tv.getTransparency());
 
-            assertEquals(TV_PL_STRING, tv.getProductLists().get(0).getProductList().getIdentifier());
-            assertEquals(TV_FL_STRING, tv.getFacadeLayers().get(0).getFacadeLayer().getIdentifier());
-
             assertEquals(TV_COMPONENT_STRING, tv.getRelations().get(0).getDependency().getName());
             assertEquals(TV_ROLE_STRING, tv.getPermissions().get(0).getRole().getName());
         }
@@ -116,8 +108,8 @@ class CopyServiceBeanTest {
             assertTrue(rv.getIdentifier().contains(RV_DP_STRING), "Identifier of copy must start with identifier of the original");
             assertEquals(RV_SA_TRANSPARENCY, rv.getTransparency());
 
-            assertEquals(RV_PL_STRING, rv.getProductLists().get(0).getProductList().getIdentifier());
-            assertEquals(RV_FL_STRING, rv.getFacadeLayers().get(0).getFacadeLayer().getIdentifier());
+            //assertEquals(RV_PL_STRING, rv.getProductLists().get(0).getProductList().getIdentifier());
+            //assertEquals(RV_FL_STRING, rv.getFacadeLayers().get(0).getFacadeLayer().getIdentifier());
 
             assertEquals(RV_COMPONENT_STRING, rv.getRelations().get(0).getDependency().getName());
             assertEquals(RV_ROLE_STRING, rv.getPermissions().get(0).getRole().getName());
@@ -141,7 +133,6 @@ class CopyServiceBeanTest {
             assertTrue(fl.getIdentifier().contains(FL_DP_STRING), "Identifier of copy must start with identifier of the original");
             assertEquals(FL_SA_TRANSPARENCY, fl.getTransparency());
 
-            assertEquals(FL_PL_STRING, fl.getProductLists().get(0).getProductList().getIdentifier());
             assertEquals(FL_DSV_STRING, fl.getDataSetViews().get(0).getDataSetView().getIdentifier());
         }
         finally {
@@ -211,9 +202,6 @@ class CopyServiceBeanTest {
 
             if(curr != null){ //original and copy share the same relationships --> remove only once
                 orm.remove( curr.getRasterDS() );
-
-                orm.remove( curr.getFacadeLayers().get(0).getFacadeLayer() );
-                orm.remove( curr.getProductLists().get(0).getProductList() );
 
                 orm.remove( curr.getPermissions().get(0).getRole() );
                 orm.remove( curr.getRelations().get(0).getDependency() );
@@ -301,7 +289,6 @@ class CopyServiceBeanTest {
 
             if(curr != null){ //original and copy share the same relationships --> remove only once
                 orm.remove( curr.getDataSetViews().get(0).getDataSetView() );
-                orm.remove( curr.getProductLists().get(0).getProductList() );
             }
 
             //Remove Raster-DS
@@ -342,9 +329,6 @@ class CopyServiceBeanTest {
                 orm.remove( curr.getPostgresTable().getDataTheme() );
                 orm.remove( curr.getPostgresTable().getDataTheme().getPostgresDB() );
 
-                orm.remove( curr.getFacadeLayers().get(0).getFacadeLayer() );
-                orm.remove( curr.getProductLists().get(0).getProductList() );
-
                 orm.remove( curr.getPermissions().get(0).getRole() );
                 orm.remove( curr.getRelations().get(0).getDependency() );
             }
@@ -381,14 +365,6 @@ class CopyServiceBeanTest {
             //Assets
             StyleAsset sa = linkToStyleAsset(rv, RV_DP_STRING);
             orm.persist(sa);
-
-            //PropertiesInFacade
-            BaseUuidEntity[] pifs = linkToTestFacadelayer(rv, ps, RV_FL_STRING);
-            orm.persist(pifs[0]); orm.persist(pifs[1]);
-
-            //PropertiesInList
-            BaseUuidEntity[] pils = linkToTestProductList(rv, ps, RV_PL_STRING);
-            orm.persist(pils[0]); orm.persist(pils[1]);
 
             //Permissions
             BaseUuidEntity[] perm = linkToPermissions(rv, RV_ROLE_STRING);
@@ -486,10 +462,6 @@ class CopyServiceBeanTest {
             BaseUuidEntity[] pifs = linkToTestDsv(fl, ps, FL_DSV_STRING);
             orm.persist(pifs[0]); orm.persist(pifs[1]); orm.persist(pifs[2]);
 
-            //PropertiesInList
-            BaseUuidEntity[] pils = linkToTestProductList(fl, ps, FL_PL_STRING);
-            orm.persist(pils[0]); orm.persist(pils[1]);
-
             trans.commit();
         }
 
@@ -520,20 +492,6 @@ class CopyServiceBeanTest {
         return new BaseUuidEntity[]{role, perm};
     }
 
-    private static BaseUuidEntity[] linkToTestProductList(SingleActor sa, DataProduct_PubScope ps, String plIdentifier){
-        LayerGroup lg = container.metadata().create(LayerGroup.class);
-        lg.setIdentifier(plIdentifier);
-        lg.setPubScope(ps);
-
-        PropertiesInList pil = container.metadata().create(PropertiesInList.class);
-        pil.setProductList(lg);
-        pil.setSingleActor(sa);
-        pil.setSort(99);
-
-        return new BaseUuidEntity[]{lg, pil};
-    }
-
-
     private static StyleAsset linkToStyleAsset(DataSetView ds, String assetFileName){
         StyleAsset sa = container.metadata().create(StyleAsset.class);
         sa.setFileContent(new byte[]{});
@@ -557,19 +515,6 @@ class CopyServiceBeanTest {
         pil.setSort(99);
 
         return new BaseUuidEntity[]{fl, pil};
-    }
-
-    private static BaseUuidEntity[] linkToTestFacadelayer(DataSetView ds, DataProduct_PubScope ps, String flIdentifier){
-        FacadeLayer fl = container.metadata().create(FacadeLayer.class);
-        fl.setIdentifier(flIdentifier);
-        fl.setPubScope(ps);
-
-        PropertiesInFacade pif = container.metadata().create(PropertiesInFacade.class);
-        pif.setFacadeLayer(fl);
-        pif.setDataSetView(ds);
-        pif.setSort(99);
-
-        return new BaseUuidEntity[]{fl, pif};
     }
 
     private static BaseUuidEntity[] linkToTestDsv(FacadeLayer fl, DataProduct_PubScope ps, String dsvIdentifier){
@@ -653,14 +598,6 @@ class CopyServiceBeanTest {
             //Assets
             StyleAsset sa = linkToStyleAsset(tv, TV_DP_STRING);
             orm.persist(sa);
-
-            //PropertiesInFacade
-            BaseUuidEntity[] pifs = linkToTestFacadelayer(tv, ps, TV_FL_STRING);
-            orm.persist(pifs[0]); orm.persist(pifs[1]);
-
-            //PropertiesInList
-            BaseUuidEntity[] pils = linkToTestProductList(tv, ps, TV_PL_STRING);
-            orm.persist(pils[0]); orm.persist(pils[1]);
 
             //Permissions
             BaseUuidEntity[] perm = linkToPermissions(tv, TV_ROLE_STRING);

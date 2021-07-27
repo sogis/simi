@@ -6,12 +6,6 @@
         </property>
         <property name="rasterDS" view="_minimal"/>
         <property name="pubScope" view="_minimal"/>
-        <property name="productLists" view="_local">
-            <property name="productList" view="_minimal"/>
-        </property>
-        <property name="facadeLayers" view="_local">
-            <property name="facadeLayer" view="_minimal"/>
-        </property>
         <property name="relations" view="_local">
             <property name="dependency" view="_minimal"/>
         </property>
@@ -22,12 +16,6 @@
         </property>
         <property name="postgresTable" view="_minimal"/>
         <property name="pubScope" view="_minimal"/>
-        <property name="productLists" view="_local">
-            <property name="productList" view="_minimal"/>
-        </property>
-        <property name="facadeLayers" view="_local">
-            <property name="facadeLayer" view="_minimal"/>
-        </property>
         <property name="permissions" view="_local">
             <property name="role" view="_minimal"/>
         </property>
@@ -40,9 +28,6 @@
             <property name="dataSetView" view="_minimal"/>
         </property>
         <property name="pubScope" view="_minimal"/>
-        <property name="productLists" view="_local">
-            <property name="productList" view="_minimal"/>
-        </property>
     </view>
     <view name="copy-layerGroup" class="ch.so.agi.simi.entity.product.LayerGroup" extends="_local">
         <property name="pubScope" view="_minimal"/>
