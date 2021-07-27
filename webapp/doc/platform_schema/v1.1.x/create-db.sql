@@ -36,6 +36,17 @@ create unique index IDX_SYS_CONFIG_UNIQ_NAME on SYS_CONFIG (NAME);
 
 ------------------------------------------------------------------------------------------------------------
 
+CREATE TABLE simi.sys_db_changelog
+(
+    script_name character varying(300) COLLATE pg_catalog."default" NOT NULL,
+    create_ts timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    is_init integer DEFAULT 0,
+    CONSTRAINT sys_db_changelog_pkey PRIMARY KEY (script_name)
+)
+create unique index
+
+------------------------------------------------------------------------------------------------------------
+
 create table SYS_FILE (
     ID uuid not null,
     CREATE_TS timestamp,
