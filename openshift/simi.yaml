@@ -65,6 +65,8 @@ objects:
             value: ${SIMI_SCHEMAREADER_URL}
           - name: CUBA_WEB_LDAP_ENABLED
             value: "true"
+          - name: CUBA_AUTOMATICDATABASEUPDATE
+            value: "false"
           readinessProbe:
             failureThreshold: 3
             httpGet:
