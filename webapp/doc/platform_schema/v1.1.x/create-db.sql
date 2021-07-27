@@ -42,8 +42,7 @@ CREATE TABLE simi.sys_db_changelog
     create_ts timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     is_init integer DEFAULT 0,
     CONSTRAINT sys_db_changelog_pkey PRIMARY KEY (script_name)
-)
-create unique index
+);
 
 ------------------------------------------------------------------------------------------------------------
 
