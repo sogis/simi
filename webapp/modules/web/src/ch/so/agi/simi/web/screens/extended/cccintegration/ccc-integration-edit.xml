@@ -25,7 +25,7 @@
         <form id="form" dataContainer="cCCIntegrationDc">
             <column width="450px">
                 <textField id="nameField" caption="Name" property="name"/>
-                <lookupField id="map" caption="Karte" optionsContainer="mapsDc" captionProperty="entityName"/>
+                <lookupField id="mapField" caption="Karte" dataContainer="cCCIntegrationDc" optionsContainer="mapsDc" property="map"/>
                 <sourceCodeEditor id="locatorLayersField" caption="Locator-Konfig (Json)" property="locatorLayers" showGutter="true" height="300"/>
             </column>
             <column width="450px">

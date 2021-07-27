@@ -18,9 +18,9 @@ public class CCCIntegration extends Dependency {
 
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "clear"})
     @OnDeleteInverse(DeletePolicy.DENY)
-    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MAP_ID")
     @NotNull
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     private Map map;
 
     @Lob
