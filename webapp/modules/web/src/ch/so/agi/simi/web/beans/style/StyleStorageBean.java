@@ -99,8 +99,12 @@ public class StyleStorageBean {
     }
 
     private static byte[] qmlToBytes(String qmlXml){
-        ByteBuffer buf = StandardCharsets.UTF_8.encode(qmlXml);
-        return buf.array();
+        byte[] bytes = null;
+
+        if(qmlXml != null)
+            bytes = qmlXml.getBytes(StandardCharsets.UTF_8);
+
+        return bytes;
     }
 
     private static void assertQmlMaxVersion(String qmlContent, int[] maxQmlVersion){
