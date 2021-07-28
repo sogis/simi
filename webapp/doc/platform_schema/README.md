@@ -41,10 +41,12 @@ psql -h dbhost -c 'set role admin;' -f postscript.sql simi
 The migration takes place locally on your own computer.It is expected that you already have a database running and that you have imported the Config-DB-Dump there (DB-name config, schema gdi_knoten and iam)  
 
 The environment variables for GRETL must be set as follows: 
+```
 dbUriConfig=jdbc:postgresql://IP:PORT/config 
 dbUserConfig=USER
 dbPwdConfig=PASSWORD
 => The same for dbUriSimi
+```
 
 1. Run the Script mig_trafo/ddl/create_all_tables.sql All tables are created in the public schema.
 2. If you have to clean the public schema, you can run the script mig_trafo/ddl/delete_all_tables.sql and then again the create_all_tables.sql.  
