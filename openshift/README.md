@@ -2,6 +2,8 @@
 
 ## Install or update in Openshift
 
+Before deploying Simi in Openshift you have to setup the simi database. Further information => https://github.com/simi-so/simi/blob/master/webapp/doc/platform_schema/README.md
+
 Checkout or pull this repository
 
 Create the following two secret YAML files locally, in a directory outside the checked out Git repository. Replace the xy placeholders with the appropriate values.
