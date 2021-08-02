@@ -62,11 +62,9 @@ objects:
           - name: SIMI_PUBLISHJOB_SECTOKEN
             value: secret
           - name: SIMI_SCHEMAREADER_URL
-            value: ${SIMI_SCHEMAREADER_URL}
+            value: http://${SIMI_SCHEMAREADER_URL}
           - name: CUBA_WEB_LDAP_ENABLED
             value: "true"
-          - name: CUBA_AUTOMATICDATABASEUPDATE
-            value: "false"
           readinessProbe:
             failureThreshold: 3
             httpGet:
