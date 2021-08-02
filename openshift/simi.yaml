@@ -54,7 +54,7 @@ objects:
           - name: SIMI_GITSEARCH_URL
             value: https://api.github.com/search/code
           - name: SIMI_GITSEARCH_REPOS
-            value: sogis/gretljobs|oereb/jobs
+            value: sogis/gretljobs,oereb/jobs
           - name: SIMI_PUBLISHJOB_BASEURL
             value: fuu
           - name: SIMI_PUBLISHJOB_POLLTIMEOUT

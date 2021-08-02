@@ -1,6 +1,8 @@
 package ch.so.agi.simi.core.dependency;
 
 import ch.so.agi.simi.util.properties.PropsUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.MessageFormat;
@@ -9,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class GretlSearch {
+
+    private static Logger log = LoggerFactory.getLogger(GretlSearch.class);
 
     private String schemaName;
     private String tableName;
@@ -47,6 +51,8 @@ public class GretlSearch {
                     schemaName,
                     tableName
             );
+
+            log.debug("github search query for repo {}: {}", repo, qValue);
 
             HashMap<String, String> params = new HashMap<>();
             params.put("q", "\'" + qValue + "\'");

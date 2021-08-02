@@ -2,7 +2,10 @@ name: Simi - Build docker image
 
 on:
   push:
-    branches: master
+    branches: 
+      - master
+    paths:
+      - 'webapp/**'
 
 jobs:
   buildImage:

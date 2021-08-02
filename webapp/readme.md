@@ -45,7 +45,8 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
   * CUBA_WEB_STANDARDAUTHENTICATIONUSERS: Komma getrennte Liste der Benutzer, welche trotz aktiviertem LDAP-Login mittels Standard 
   (cuba) Login authentifiziert werden. 
 * **Konfiguration der URL des Schemareaders:**
-  * SIMI_SCHEMAREADER_URL: Url, auf welcher der Schemareader erreichbar ist. Bsp: "http://localhost/schemareader"
+  * SIMI_SCHEMAREADER_URL: Url, auf welcher der Schemareader erreichbar ist. Bsp: "http://localhost/schemareader"   
+    **Hinweis:** Die Namen der Datenbanken in der SIMI-DB müssen mit dbs.key in der Schemareader-Konfig übereinstimmen.
 * **Konfiguration des Publikations Jenkins-Jobs:**   
   * SIMI_PUBLISHJOB_BASEURL: Basis-URL des Jobs im Jenkins, welcher die Konfiguration publiziert
   * SIMI_PUBLISHJOB_POLLTIMEOUT: Timeout des Pollings auf den gestarteten Job \[ms\]. Grund: Neue Jobs landen bei 
@@ -53,7 +54,7 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
   * SIMI_PUBLISHJOB_SECTOKEN: Security-Token, mit welchem Jenkins das Starten des Jobs erlaubt. 
 * **Konfiguration der Suche in den GRETL-Repos (Anzeige der Abhängigkeiten):**
   * SIMI_GITSEARCH_URL: Url, auf welche die Git-Suchen abgesetzt werden. Bsp: "https://api.github.com/search/code"
-  * SIMI_GITSEARCH_REPOS: Liste aller zu durchsuchenden Git-Repos, mittels "|" getrennt. Bsp: "sogis/gretljobs|oereb/jobs"
+  * SIMI_GITSEARCH_REPOS: Liste aller zu durchsuchenden Git-Repos, mittels "," getrennt. Bsp: "sogis/gretljobs,oereb/jobs"
 * **Weitere...**
   * SIMI_CONFIG_STOPONINCOMPLETE: Falls "true" fährt simi bei fehlenden Konfigurationsparametern nicht hoch.
 
