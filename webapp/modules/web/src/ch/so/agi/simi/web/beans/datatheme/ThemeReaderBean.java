@@ -91,11 +91,12 @@ public class ThemeReaderBean {
         if(geoFieldTypes.size() > 0){
             inOutTable.setGeoType(String.join(", ", geoFieldTypes));
             inOutTable.setGeoFieldName(String.join(", ", geoFieldNames));
-            inOutTable.setGeoEpsgCode(-999);
+            inOutTable.setGeoEpsgCode(geoEpsgCodes.get(0));
         }
 
         if(geoFieldTypes.size() > 1){
             log.warn("Table or View {} has multiple geometry fields. Concatenated options into the fields", inOutTable.getTableName());
+            inOutTable.setGeoEpsgCode(null);
         }
     }
 

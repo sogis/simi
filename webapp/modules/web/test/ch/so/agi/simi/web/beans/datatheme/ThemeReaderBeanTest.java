@@ -75,8 +75,7 @@ public class ThemeReaderBeanTest {
         Assertions.assertEquals(SCHEMA_READALL__STRING, table.getDescriptionModel());
 
         //Getestet wird der Fall mit zwei Geometriefeldern --> Entsprechend konkatenieren
-        String epsgCodeStr = String.join("000", new String[]{Integer.toString(SCHEMA_READALL__INTEGER), Integer.toString(SCHEMA_READALL__INTEGER)});
-        Assertions.assertEquals(Integer.parseInt(epsgCodeStr), table.getGeoEpsgCode());
+        Assertions.assertNull(table.getGeoEpsgCode()); //muss bei mehreren geometrien null sein
         Assertions.assertEquals(String.join(", ", new String[]{SCHEMA_READALL_FIELD_GEO1, SCHEMA_READALL_FIELD_GEO2}), table.getGeoFieldName());
         Assertions.assertEquals(String.join(", ", new String[]{SCHEMA_READALL__STRING, SCHEMA_READALL__STRING}), table.getGeoType());
 
