@@ -230,7 +230,7 @@ create table SIMIEXTENDED_DEPENDENCY (
     REMARKS text,
     --
     -- from simiExtended_CCCIntegration
-    MAP_ID uuid,
+    MAP_ID uuid not null,
     LOCATOR_LAYERS text,
     NOTIFY_LAYERS text,
     --

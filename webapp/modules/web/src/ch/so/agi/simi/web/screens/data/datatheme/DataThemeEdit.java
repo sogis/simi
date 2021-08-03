@@ -35,6 +35,9 @@ public class DataThemeEdit extends StandardEditor<DataTheme> {
     private SchemaReaderClientBean client;
 
     @Inject
+    DataContext context;
+
+    @Inject
     private Dialogs dialogs;
 
     @Subscribe("btnReadAll")
@@ -42,11 +45,10 @@ public class DataThemeEdit extends StandardEditor<DataTheme> {
 
         DataTheme editedTheme = modelSchemaDc.getItem();
 
-        boolean noRemaining = editedTheme.getPostgresTables() == null || editedTheme.getPostgresTables().size() == 0;
-        //boolean canRead = noRemaining;// && !hasUnsavedChanges();
-        if(noRemaining){
+        boolean hasSavedTableConfigs = editedTheme.getPostgresTables() != null && editedTheme.getPostgresTables().size() > 0;
 
-            // bug? dialogs.createMessageDialog() zeigt speicherknopf - siehe https://www.cuba-platform.com/discuss/t/create-message-dialog-shows-save-button/15057
+        if(hasSavedTableConfigs){
+
             dialogs.createOptionDialog()
                     .withCaption("Einlesen bedingt leere Tabellen-Liste")
                     .withMessage("Bitte die registrierten Tabellen vor dem Einlesen aus Simi löschen<p>Ablauf:<br>1. Registrierte Tabellen löschen<br>2. Löschungen durch speichern persistieren<br>3. Tabellen des Themas einlesen")
@@ -59,8 +61,9 @@ public class DataThemeEdit extends StandardEditor<DataTheme> {
 
         bean.actualizeWithDbCat(client, editedTheme);
 
-        if(editedTheme.getPostgresTables() != null)
+        if(editedTheme.getPostgresTables() != null) {
             tablesDc.getMutableItems().addAll(editedTheme.getPostgresTables());
+            context.merge(editedTheme.getPostgresTables());
+        }
     }
-    
 }
