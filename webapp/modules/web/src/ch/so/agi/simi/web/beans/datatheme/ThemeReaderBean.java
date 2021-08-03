@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,7 +68,7 @@ public class ThemeReaderBean {
 
         ArrayList<String> geoFieldTypes = new ArrayList<>();
         ArrayList<String> geoFieldNames = new ArrayList<>();
-        ArrayList<Integer> geoEpsgCodes = new ArrayList<>();
+        HashSet<Integer> geoEpsgCodes = new HashSet<>();
 
         for (FieldInfo fi : tfi.getFields()){
             String geoFieldType = fi.getGeoFieldType();
@@ -91,12 +92,11 @@ public class ThemeReaderBean {
         if(geoFieldTypes.size() > 0){
             inOutTable.setGeoType(String.join(", ", geoFieldTypes));
             inOutTable.setGeoFieldName(String.join(", ", geoFieldNames));
-            inOutTable.setGeoEpsgCode(geoEpsgCodes.get(0));
-        }
 
-        if(geoFieldTypes.size() > 1){
-            log.warn("Table or View {} has multiple geometry fields. Concatenated options into the fields", inOutTable.getTableName());
-            inOutTable.setGeoEpsgCode(null);
+            if(geoEpsgCodes.size() == 1)
+                inOutTable.setGeoEpsgCode(geoEpsgCodes.stream().findFirst().get());
+            else
+                inOutTable.setGeoEpsgCode(null);
         }
     }
 
