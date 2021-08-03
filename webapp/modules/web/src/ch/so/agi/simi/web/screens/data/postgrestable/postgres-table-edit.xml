@@ -42,7 +42,13 @@
         </form>
         <groupBox id="tableFieldsBox" caption="Tabellenspalten"
                   expand="tableFieldsTable">
-            <table id="tableFieldsTable" dataContainer="tableFieldsDc" width="100%" multiselect="true" editable="true" settingsEnabled="false">
+            <table id="tableFieldsTable"
+                   dataContainer="tableFieldsDc"
+                   width="100%"
+                   height="100%"
+                   multiselect="true"
+                   editable="true"
+                   settingsEnabled="false">
                 <actions>
                     <action id="edit" type="edit"/>
                     <action id="remove" type="remove">

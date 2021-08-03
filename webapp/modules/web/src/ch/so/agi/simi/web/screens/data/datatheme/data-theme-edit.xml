@@ -32,7 +32,13 @@
         </form>
         <groupBox id="pgTablesBox" caption="Tabellen im Thema"
                   expand="pgTablesTable">
-            <table id="pgTablesTable" dataContainer="tablesDc" width="100%" multiselect="true" editable="true" settingsEnabled="false">
+            <table id="pgTablesTable"
+                   dataContainer="tablesDc"
+                   width="100%"
+                   height="100%"
+                   multiselect="true"
+                   editable="true"
+                   settingsEnabled="false">
                 <actions>
                     <action id="edit" type="edit"/>
                     <action id="remove" type="remove"/>

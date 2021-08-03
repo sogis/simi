@@ -103,7 +103,13 @@
                 </form>
             </groupBox>
             <groupBox id="viewFieldsBox" caption="Attribut-Verknüpfung" spacing="true" collapsable="true">
-                <table id="viewFieldsTable" dataContainer="viewFieldsDc" width="100%" editable="true" multiselect="true" settingsEnabled="false">
+                <table id="viewFieldsTable"
+                       dataContainer="viewFieldsDc"
+                       width="100%"
+                       height="100%"
+                       editable="true"
+                       multiselect="true"
+                       settingsEnabled="false">
                     <actions>
                         <action id="remove" type="remove">
                             <properties>

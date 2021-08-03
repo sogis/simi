@@ -50,6 +50,7 @@
             <table id="propertiesInListTable"
                    dataContainer="propertiesInListDc"
                    width="100%"
+                   height="100%"
                    editable="true"
                    multiselect="true"
                    settingsEnabled="false">
