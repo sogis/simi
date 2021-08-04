@@ -60,8 +60,9 @@
                 <columns>
                     <column id="name" sort="ASCENDING"/>
                     <column id="alias" editable="true"/>
-                    <column id="catSynced" width="180"/>
-                    <column id="viewFieldsCount" caption="# Verwend. in DSV" width="180"/>
+                    <column id="typeName" width="150"/>
+                    <column id="catSynced" width="100"/>
+                    <column id="viewFieldsCount" caption="Anz. Ref." width="100"/>
                 </columns>
                 <buttonsPanel>
                     <button action="tableFieldsTable.edit" stylename="primary"/>

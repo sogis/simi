@@ -120,7 +120,7 @@ public class ThemeReaderBean {
                 tf.setDescriptionModel(fi.getDescription());
                 synced.add(new SyncedField(tf, FieldSyncState.POSSIBLY_ACTUALIZED));
             }
-            else if (fi.getGeoFieldType() == null || fi.getGeoFieldType().length() == 0) {
+            else if (fi.getGeoFieldType() == null || fi.getGeoFieldType().length() == 0) { // Feld ist nicht die Geometrie
                 TableField nf = new TableField();
                 nf.setCatSynced(true);
                 nf.setDescriptionModel(fi.getDescription());
