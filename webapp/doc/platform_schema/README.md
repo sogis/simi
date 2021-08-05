@@ -36,6 +36,9 @@ Afterwards the table rights must eventually be corrected with
 psql -h dbhost -c 'set role admin;' -f postscript.sql simi
 ```
 
+Install necessary solr and trafo Views (https://github.com/sogis/pipelines/tree/simi-branch/api_webgisclient/sql2json/views#create-views-in-simi-db).
+
+
 ## Data migration
 
 The migration takes place locally on your own computer.It is expected that you already have a database running and that you have imported the Config-DB-Dump there (DB-name config, schema gdi_knoten and iam)  
