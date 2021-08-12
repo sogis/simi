@@ -14,16 +14,18 @@
                 modal="true"
                 forceDialog="true"
                 resizable="true"/>
-    <layout expand="relationsBox" spacing="true">
-        <form id="form" dataContainer="componentDc">
-            <column width="350px">
-                <textField id="nameField" caption="Name" property="name"/>
-                <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5"/>
-            </column>
-        </form>
-        <groupBox id="relationsBox" caption="mainMsg://dependency.caption.related_dsv">
-            <fragment id="relations" screen="simiExtended_RelationsFragment"/>
-        </groupBox>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="componentDc">
+                <column width="350px">
+                    <textField id="nameField" caption="Name" property="name"/>
+                    <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5"/>
+                </column>
+            </form>
+            <groupBox id="relationsBox" caption="mainMsg://dependency.caption.related_dsv">
+                <fragment id="relations" screen="simiExtended_RelationsFragment"/>
+            </groupBox>
+        </scrollBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

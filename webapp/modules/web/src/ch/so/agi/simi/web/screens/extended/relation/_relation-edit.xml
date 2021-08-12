@@ -26,6 +26,7 @@
                 <lookupField caption="Beziehungstyp" id="relationTypeField" property="relationType" captionProperty=""/>
             </column>
         </form>
+
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
