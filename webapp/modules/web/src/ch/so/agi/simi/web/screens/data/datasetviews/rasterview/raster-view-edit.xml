@@ -38,13 +38,13 @@
                             <property name="styleChangedProperty" value="styleServerChanged"/>
                         </properties>
                     </fragment>
-                    <hbox spacing="false" caption="Publikation">
+                    <hbox spacing="true" caption="Publikation">
                         <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment">
                             <properties>
                                 <property name="filterProperty" value="forDSV"/>
                             </properties>
                         </fragment>
-                        <checkBox id="rawDownloadField" align="MIDDLE_CENTER" property="rawDownload" caption="Rohdaten pub?"/>
+                        <checkBox id="rawDownloadField" align="MIDDLE_CENTER" dataContainer="dataProductDc" property="rawDownload" caption="Rohdaten pub?"/>
                     </hbox>
                 </column>
                 <column width="450px">
