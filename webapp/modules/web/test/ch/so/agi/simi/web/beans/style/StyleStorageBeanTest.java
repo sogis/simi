@@ -103,6 +103,18 @@ public class StyleStorageBeanTest {
     }
 
     @Test
+    public void uploadZip_InvalidAssetFileName_Exception(){
+
+        StyleStorageBean trafo = new StyleStorageBean();
+
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            trafo.transformFileToFields(
+                    createZipFileContent(new String[]{"füü.png", "bar.qml", "buz.png"}, 100),
+                    QGIS_DEFAULT_VERSION);
+        });
+    }
+
+    @Test
     public void downloadWithoutAssets_IsQmlFile(){
 
         StyleStorageBean trafo = new StyleStorageBean();

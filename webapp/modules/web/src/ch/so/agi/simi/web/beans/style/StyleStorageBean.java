@@ -74,7 +74,8 @@ public class StyleStorageBean {
                 if(zipEntry.getName().endsWith("qml")){
                     qml = entryBytes;
                 }
-                else { // zip
+                else { // assets
+                    assertValidFilename(zipEntry.getName());
                     assets.put(zipEntry.getName(), entryBytes);
                 }
 
@@ -88,6 +89,18 @@ public class StyleStorageBean {
         }
 
         return new StyleStorageBean.ZipContent(qml, assets);
+    }
+
+    private static void assertValidFilename(String fileName){
+
+        if(fileName == null)
+            fileName = "";
+
+        String regEx = "^[A-Za-z0-9_.]{1,255}$";
+        boolean valid = fileName.matches(regEx);
+
+        if(!valid)
+            throw new RuntimeException("Filename {0} contains illegal characters. Allowed: 'A-Z', 'a-z', '0-9', '_', '.'");
     }
 
     private static String qmlToXmlString(byte[] data, int[] maxQmlVersion){
