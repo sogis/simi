@@ -36,14 +36,9 @@ public class SimiProperty implements Comparable, Serializable {
         SimiProperty.add("simi.schemaReader.url", true, CubaModule.WEB);
 
         // Core module properties
-        SimiProperty.add("cuba.dataSource.dbName", true, CubaModule.CORE);
-        SimiProperty.add("cuba.dataSource.host", true, CubaModule.CORE);
-        SimiProperty.add("cuba.dataSource.port", false, CubaModule.CORE);
-
+        SimiProperty.add("cuba.dataSource.jdbcUrl", true, CubaModule.CORE);
         SimiProperty.add("cuba.dataSource.username", true, CubaModule.CORE);
         SimiProperty.add("cuba.dataSource.password", true, CubaModule.CORE, false);
-
-        //SimiProperty.add("simi.config.stopOnIncomplete", false, CubaModule.CORE);
 
         SimiProperty.add("simi.gitSearch.url", true, CubaModule.CORE);
         SimiProperty.add("simi.gitSearch.repos", true, CubaModule.CORE);
