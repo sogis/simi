@@ -14,8 +14,10 @@ task buildUberJar(type: CubaUberJarBuilding) {
     logbackConfigurationFile = 'docker/image/uber-jar-logback.xml'
     singleJar = true
     appProperties = [
-            'cuba.automaticDatabaseUpdate': false,
-            'cuba.web.loginDialogDefaultUser':'gradle'
+            'cuba.automaticDatabaseUpdate':false,
+            'cuba.web.loginDialogDefaultUser':'<disabled>',
+            'cuba.web.loginDialogDefaultPassword':'<disabled>',
+            'cuba.web.productionMode':true
     ]
 }
 
