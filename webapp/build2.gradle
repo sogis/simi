@@ -13,7 +13,10 @@ the docker image.
 task buildUberJar(type: CubaUberJarBuilding) {
     logbackConfigurationFile = 'docker/image/uber-jar-logback.xml'
     singleJar = true
-    appProperties = ['cuba.automaticDatabaseUpdate': false]
+    appProperties = [
+            'cuba.automaticDatabaseUpdate': false,
+            'cuba.web.loginDialogDefaultUser':'gradle'
+    ]
 }
 
 task copyJar(type: Copy, dependsOn: buildUberJar){
