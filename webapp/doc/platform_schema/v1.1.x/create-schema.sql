@@ -8,7 +8,7 @@ CREATE ROLE simi_write WITH
   NOCREATEROLE
   NOREPLICATION;
 
-GRANT simi_write TO sogis_service;
+GRANT simi_write TO simi;
 
 CREATE SCHEMA simi
     AUTHORIZATION admin;
