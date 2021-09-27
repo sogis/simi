@@ -108,6 +108,7 @@ public class StyleStorageBean {
 
         assertQmlMaxVersion(qml, maxQmlVersion);
 
+
         return qml;
     }
 

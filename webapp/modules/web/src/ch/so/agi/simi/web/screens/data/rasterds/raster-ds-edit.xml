@@ -11,10 +11,11 @@
     <dialogMode height="AUTO"
                 width="AUTO"
                 modal="true"
-                forceDialog="true"/>
+                forceDialog="true"
+                resizable="true"/>
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="rasterDSDc">
-            <column width="350px">
+            <column width="800px">
                 <textField id="pathField" property="path"/>
                 <textArea id="remarksField" property="remarks" rows="5"/>
                 <textArea id="descriptionField" property="description" rows="5"/>

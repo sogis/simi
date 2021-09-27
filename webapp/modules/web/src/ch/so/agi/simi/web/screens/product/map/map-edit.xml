@@ -35,13 +35,16 @@
                         <property name="filterProperty" value="forMap"/>
                     </properties>
                 </fragment>
-                <checkBox id="backgroundField" property="background"/>
-                <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
+                <!--<checkBox id="backgroundField" property="background"/>-->
             </column>
             <column width="450px">
-                <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
-                <textArea id="keywordsField" property="keywords" rows="3" rowspan="2"/>
-                <textArea id="synonymsField" property="synonyms" rows="3" rowspan="2"/>
+                <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
+                <!--
+<textArea id="descriptionField" property="description" rows="10" rowspan="3"/>
+
+<textArea id="keywordsField" property="keywords" rows="3" rowspan="2"/>
+<textArea id="synonymsField" property="synonyms" rows="3" rowspan="2"/>
+-->
             </column>
         </form>
         <groupBox id="propertiesInListBox" caption="Layer" expand="propertiesInListTable">

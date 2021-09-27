@@ -68,7 +68,11 @@ mit welcher in der Karte noch nicht vorhandene SA's einer LG beigefügt werden k
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|background|boolean|j|Gibt an, ob es sich um eine Hintergrundkarte handelt oder nicht.|
+|background|boolean|j|DEPRECATED: Gibt an, ob es sich um eine Hintergrundkarte handelt oder nicht.|
+
+DEPRECATED: Die drei Hintergrundkarten der GDI werden als normale facadelayer abgebildet und im SQL-Code der 
+Pipeline über ihre Identifier (ch.so. ...) identifiziert. --> Backgroud-Flag ist überflüssig, Map enthält 
+ausschliesslich Vordergrundkarten.
 
 ### Klasse LayerGroup (LG)
 
@@ -101,6 +105,9 @@ erscheinen beispielsweise nicht als WMS-Ebene und werden in der TOC des Web GIS 
 
 Der customLegendSuffix wird aus dem Namen der hochgeladenen Datei extrahiert und nicht harmonisiert.
 Beispiel: Jpeg-Dateien können als suffix jpeg oder jpg enthalten sein.
+
+Die Transparenz der Facadelayer ist aufgrund eines alten Workarounds nicht im Regler im Web GIS Client
+TOC steuerbar. Das Attribut transparency also für Facadelayer nicht aktiv.
 
 ### Klasse FacadeLayer (FL)
 
@@ -175,142 +182,3 @@ Attributierte Verknüpfungstabelle der m:n Beziehung zwischen PL und SA.
 ### Konstraints
 
 UK über die FK's.
-
-# Beispiele
-
-## Zusammenfassen von Geometrietypen in Facadelayer
-
-Beipielsweise in der Archäologie werden kleine Denkmäler als Punktgeometrie, grosse als Polygon geführt.
-
-### DataSetView
-
-|id|identifier|in_wms|in_wgc|
-|---|---|---|---|
-|s1|ch.so.ada.denkmal.punkt|false|false|
-|s1|ch.so.ada.denkmal.polygon|false|false|
-
-### FacadeLayer
-
-|id|identifier|in_wms|in_wgc|
-|---|---|---|---|
-|f1|ch.so.ada.denkmal|true|true|
-
-### PropertiesInFacade
-
-|id_facadelayer|id_datasetview|sort|
-|---|---|---|
-|f1|s1|10|
-|f1|s2|5|
-
-Keine Einträge in LayerList und PropertiesInList.
-
-## Layergruppe (Productlist)
-
-Zusammenfassung von Haltestellen und Netz zu Layergruppe öV.
-
-### SingleActor
-
-|id|identifier|in_wms|in_wgc|
-|---|---|---|---|
-|s1|ch.so.avt.oev.haltestellen|true|true|
-|s2|ch.so.avt.oev.netz|false|false|
-
-### LayerList
-
-|id|identifier|in_wms|in_wgc|
-|---|---|---|---|
-|l1|ch.so.avt.oev|true|true|
-
-### PropertiesInList
-
-|id_productlist|id_singleactor|sort|
-|---|---|---|
-|l1|s1|10|
-|l1|s2|5|
-
-## Layergruppe mit externem WMS
-
-Gruppierung des KBS mit dem KBS-WMS von Geodienste.ch
-
-### DataSetView
-
-|id|identifier|in_wms|in_wgc|
-|---|---|---|---|
-|s1|ch.so.afu.kbs|true|true|
-
-### ExtWmsLayer
-
-|id|identifier|wms_url|in_wgc|
-|---|---|---|---|
-|w1|ch.kkgeo.kbs|https://geodienste.ch/db/kataster_belasteter_standorte_v1_4_0/deu?SERVICE=WMS&REQUEST=GetMap&LAYERS=kbs|true|
-
-### LayerList
-
-|id|identifier|in_wms|in_wgc|
-|---|---|---|---|
-|l1|ch.kbs|true|true|
-
-### PropertiesInList
-
-|id_productlist|id_singleactor|sort|
-|---|---|---|
-|l1|s1|10|
-|l1|w1|5|
-
-## Mapping auf den Inhalt von mapViewerConfig.json
-
-Aufgrund der enthaltenen Informationen empfielt es sich, die variablen Informationen in ein Rumpf-Json hineinzugenerieren.
-Variabel sind einzig die angebotenen Karten (und die darin enthaltenen Ebenen). 
-
-Konstanter Präfix im mapViewerConfig.json ist folglich immer **resources.qwc2_themes.themes.items**
-
-|cccConfig.json|simi|Bemerkungen|
-|---|---|---|
-|id|Map.identifier||
-|name|Map.identifier||
-|title|Map.title||
-|wms_name|globals.wms.name||
-|url|globals.wms.url|Scheint nur der Pfad-Teil der URL zu sein|
-|attribution.title|globals.wgc.*||
-|attribution.OnlineResource|globals.wgc.*||
-|keywords|globals.wgc.*||
-|mapCrs|globals.wgc.crs|Beispielwert für EPSG-Code 2056: "EPSG:2056"|
-|bbox|globals.wgc.bbox|Kann heute im AGDI konfiguriert werden|
-|initialBbox|globals.wgc.bbox|Kann heute im AGDI konfiguriert werden|
-|---|---|---|
-|**DataSetView...**|||
-|sublayers.name|Dataproduct.identifier||
-|sublayers.title|Dataproduct.title||
-|sublayers.visibility|PropertiesInList.visible||
-|sublayers.queryable|globals.wgc.*||
-|sublayers.bbox|globals.wgc.bbox||
-|expanded|Wert immer = "true"||
-|drawingOrder|PropertiesInList.sort||
-|backgroundLayers|globals.wgc.backgroundLayers||
-|print|globals.wgc.print||
-|printLabelConfig|globals.wgc.printLabelConfig||
-|searchProviders[0]|globals.wgc.searchCoordinates||
-|searchProviders[1]|?|Für den Karteninhalt relevante Suchen? (= globale und spezifische Suchen)|
-|editConfig|SingleActor.wgcEdit|Konfiguration für das Editieren im WGC. Wird in Config für jede Map wiederholt...?|
-|---|---|---|
-|**FacadeLayer...**|||
-|Beispiele fehlen in aktueller Konfiguration...|||
-
-# Ausblick Datenbezug
-
-## Default-View
-
-Fragestellung der "Defaultview" zwecks Zusammenbringen der Datenbezüge über Services und Dateien.
-
-Bemerkungen zu der Default-View (Attribut defaultView=true):
-* SIMI verhindert das Setzen einer WhereClause (Klasse TableView).
-* In der Regel umfasst die DefaultView alle Attribute des DS. Mögliche Ausnahme: Klasse mit zugriffsgeschütztem Attribut. 
-
-## 
-
-
-
-
-
-
-

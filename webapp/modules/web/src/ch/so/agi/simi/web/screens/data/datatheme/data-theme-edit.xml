@@ -44,12 +44,12 @@
                     <action id="remove" type="remove"/>
                 </actions>
                 <columns>
-                    <column id="tableName" editable="true" sort="ASCENDING"/>
+                    <column id="tableName" editable="false" sort="ASCENDING"/>
                     <column id="idFieldName" editable="true"/>
                     <column id="catSyncStamp" width="180"/>
                 </columns>
                 <buttonsPanel>
-                    <button id="btnReadAll" caption="Aus Quell-DB einlesen" stylename="danger" icon="BULK_EDIT_ACTION"/>
+                    <!--<button id="btnReadAll" caption="Aus Quell-DB einlesen" stylename="danger" icon="BULK_EDIT_ACTION"/>-->
                     <button action="pgTablesTable.edit" stylename="primary"/>
                     <button action="pgTablesTable.remove" stylename="danger"/>
                 </buttonsPanel>

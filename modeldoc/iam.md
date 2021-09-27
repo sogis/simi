@@ -4,6 +4,10 @@ Das IAM ist neu ausschliesslich Datenbezogen. Es gibt keine Anwendungsfälle, we
 auf die Daten zurückführen liessen. Entsprechend werden die Berechtigungen einzig bezüglich der DataSetView 
 gesetzt.
 
+Die Berechtigungen für Gruppierungen von DataSetViews
+(Layergruppen, Facadelayer, Reports, ...) werden
+dynamisch aus den enthaltenen DataSetViews abgeleitet.
+
 ![IAM](resources/iam/iam.png)
 
 ## Modell-Konstraints

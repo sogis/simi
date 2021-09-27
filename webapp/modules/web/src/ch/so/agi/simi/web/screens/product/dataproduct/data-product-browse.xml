@@ -17,6 +17,9 @@
                             <c:jpql>
                                 <c:where>lower(e.title) like :term</c:where>
                             </c:jpql>
+                            <c:jpql>
+                                <c:where>lower(e.type) like :term</c:where>
+                            </c:jpql>
                         </or>
                     </condition>
                 </query>

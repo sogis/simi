@@ -4,12 +4,12 @@ import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -39,7 +39,6 @@ public class PostgresTable extends SimiEntity {
     private List<TableView> tableViews;
 
     @Composition
-    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "postgresTable")
     @OrderBy("name")
     private List<TableField> tableFields;
@@ -53,6 +52,7 @@ public class PostgresTable extends SimiEntity {
     private LocalDateTime catSyncStamp;
 
     @Column(name = "GEO_FIELD_NAME", length = 100)
+    @Pattern(message = "fuu", regexp = "bar")
     private String geoFieldName;
 
     @Column(name = "GEO_TYPE", length = 100)
