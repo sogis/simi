@@ -12,7 +12,7 @@ Create the following two secret YAML files locally, in a directory outside the c
 
 Then, in each environment (test, integration, production).
 ```
-oc create -f FILENAME
+oc apply -f FILENAME
 ```
 
 simi-db-credentials.yaml
