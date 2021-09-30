@@ -105,6 +105,7 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
         dataProductsDl.load();
     }
 
+    /*
     @Subscribe("btnPublish")
     public void onBtnPublishClick(Button.ClickEvent event) {
         String jenkinsPageUrl = null;
@@ -117,4 +118,5 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
 
         webBrowserTools.showWebPage(jenkinsPageUrl, ParamsMap.of("_target", "blank"));
     }
+     */
 }

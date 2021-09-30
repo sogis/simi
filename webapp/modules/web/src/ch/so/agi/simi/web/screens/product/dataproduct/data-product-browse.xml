@@ -63,7 +63,7 @@
                 <button id="copyBtn" action="dataProductsTable.copy" stylename="friendly"/>
                 <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
                 <label id="spacer" width="100" value=" "/>
-                <button id="btnPublish" caption="Publizieren" stylename="friendly" icon="EXCLAMATION"/>
+                <!--<button id="btnPublish" caption="Publizieren" stylename="friendly" icon="EXCLAMATION"/>-->
             </buttonsPanel>
         </table>
         <fragment id="filter" screen="simi_FilterFragment">
