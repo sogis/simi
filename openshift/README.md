@@ -76,7 +76,7 @@ Then execute the following command:
 
 ```
 oc process -f simi_schemareader.yaml \
-  --param-file=simi_schemareader.env \
+  --param-file=simi_schemareader-test.env \
   | oc apply -n gdi-test -f -
 
 oc process -f simi.yaml \
