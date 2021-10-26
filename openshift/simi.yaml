@@ -120,8 +120,9 @@ objects:
     name: ${APPNAME}
   spec:
     host: ${HOSTNAME}
-    port:
-      targetPort: 80-tcp
+    tls:
+      termination: edge
+      insecureEdgeTerminationPolicy: Redirect
     to:
       kind: Service
       name: ${APPNAME}
