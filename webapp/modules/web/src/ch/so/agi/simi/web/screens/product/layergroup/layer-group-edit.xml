@@ -25,9 +25,6 @@
                 modal="true"
                 forceDialog="true"
                 resizable="true"/>
-    <actions>
-        <action id="convertToFacadeLayer" caption="In FacadeLayer umwandeln" icon="EXCHANGE"/>
-    </actions>
     <layout expand="propertiesInListBox" spacing="true">
         <form id="form" dataContainer="dataProductDc">
             <column width="350px">
@@ -80,7 +77,6 @@
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
             <label id="spacer3" width="100"/>
-            <button id="btnConvertToFacadeLayer" action="convertToFacadeLayer" stylename="danger"/>
         </hbox>
     </layout>
 </window>

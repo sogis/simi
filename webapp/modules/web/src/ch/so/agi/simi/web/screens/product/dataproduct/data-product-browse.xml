@@ -17,9 +17,6 @@
                             <c:jpql>
                                 <c:where>lower(e.title) like :term</c:where>
                             </c:jpql>
-                            <c:jpql>
-                                <c:where>lower(e.type) like :term</c:where>
-                            </c:jpql>
                         </or>
                     </condition>
                 </query>
@@ -61,9 +58,17 @@
                 </popupButton>
                 <button id="editBtn" action="dataProductsTable.edit" stylename="primary"/>
                 <button id="copyBtn" action="dataProductsTable.copy" stylename="friendly"/>
+
                 <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
-                <label id="spacer" width="100" value=" "/>
-                <!--<button id="btnPublish" caption="Publizieren" stylename="friendly" icon="EXCLAMATION"/>-->
+                <popupButton id="morphBtn" caption="Umwandeln" stylename="danger">
+                    <actions>
+                        <action id="morphToFacadeLayer" caption="-> Facade"/>
+                        <action id="morphToLayerGroup" caption="-> Gruppe"/>
+                        <action id="morphToMap" caption="-> Karte"/>
+                    </actions>
+                </popupButton>
+                <!--<label id="spacer" width="100" value=" "/>
+                <button id="btnPublish" caption="Publizieren" stylename="friendly" icon="EXCLAMATION"/>-->
             </buttonsPanel>
         </table>
         <fragment id="filter" screen="simi_FilterFragment">

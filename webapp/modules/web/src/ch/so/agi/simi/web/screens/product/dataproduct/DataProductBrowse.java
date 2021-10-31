@@ -1,6 +1,8 @@
 package ch.so.agi.simi.web.screens.product.dataproduct;
 
 import ch.so.agi.simi.core.copy.CopyService;
+import ch.so.agi.simi.core.morph.MorphProductService;
+import ch.so.agi.simi.core.morph.ProdType;
 import ch.so.agi.simi.core.props.PropertiesCheckerService;
 import ch.so.agi.simi.entity.data.datasetview.RasterView;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
@@ -12,6 +14,7 @@ import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.WebBrowserTools;
 import com.haulmont.cuba.gui.components.Action;
+import com.haulmont.cuba.gui.components.ActionsAwareDialogFacet;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionLoader;
@@ -39,11 +42,8 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
     @Inject
     private CopyService copyService;
     @Inject
-    private JobRunner runner;
-    @Inject
-    PublishConfig config;
-    @Inject
-    private WebBrowserTools webBrowserTools;
+    private MorphProductService morphService;
+
 
     @Subscribe("createBtn.createMap")
     protected void onCreateBtnCreateMap(Action.ActionPerformedEvent event) {
@@ -105,7 +105,59 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
         dataProductsDl.load();
     }
 
+
+    @Subscribe("morphBtn.morphToFacadeLayer")
+    protected void onMorphBtnMorphToFacadeLayer(Action.ActionPerformedEvent event) {
+        morph(ProdType.FACADELAYER);
+    }
+
+    @Subscribe("morphBtn.morphToLayerGroup")
+    protected void onMorphBtnMorphToLayerGroup(Action.ActionPerformedEvent event) {
+        morph(ProdType.LAYERGROUP);
+    }
+
+    @Subscribe("morphBtn.morphToMap")
+    protected void onMorphBtnMorphToMap(Action.ActionPerformedEvent event) {
+        morph(ProdType.MAP);
+    }
+
+    private void morph(ProdType toType){
+        DataProduct selectedItem = dataProductsTable.getSingleSelected();
+
+        if (selectedItem == null)
+            return;
+
+        ProdType fromType = null;
+        if(selectedItem instanceof FacadeLayer)
+            fromType = ProdType.FACADELAYER;
+        else if (selectedItem instanceof LayerGroup)
+            fromType= ProdType.LAYERGROUP;
+        else if (selectedItem instanceof Map)
+            fromType= ProdType.MAP;
+
+        morphService.morphProduct(selectedItem.getId(), fromType, toType);
+
+        dataProductsDl.load();
+    }
+
     /*
+      <popupButton id="morphBtn" caption="Umwandeln" stylename="friendly">
+                    <actions>
+                        <action id="morphToFacadeLayer" caption="-> Facade"/>
+                        <action id="morphToLayerGroup" caption="-> Gruppe"/>
+                        <action id="morphToMap" caption="-> Karte"/>
+     */
+
+
+    /*
+        @Inject
+    private JobRunner runner;
+    @Inject
+    PublishConfig config;
+    @Inject
+    private WebBrowserTools webBrowserTools;
+
+
     @Subscribe("btnPublish")
     public void onBtnPublishClick(Button.ClickEvent event) {
         String jenkinsPageUrl = null;

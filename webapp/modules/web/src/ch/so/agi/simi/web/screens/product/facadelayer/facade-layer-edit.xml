@@ -24,9 +24,6 @@
                 modal="true"
                 forceDialog="true"
                 resizable="true"/>
-    <actions>
-        <action id="convertToLayerGroup" caption="In LayerGroup umwandeln" icon="EXCHANGE"/>
-    </actions>
     <layout expand="dataSetViewsBox" spacing="true">
         <form id="form" dataContainer="dataProductDc">
             <column width="350px">
@@ -89,7 +86,6 @@
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
             <label id="spacer2" width="100"/>
-            <button id="btnConvertToLayerGroup" action="convertToLayerGroup" stylename="danger"/>
         </hbox>
     </layout>
 </window>

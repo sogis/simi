@@ -15,6 +15,7 @@
                 <entry key="simi_CopyService" value="ch.so.agi.simi.core.copy.CopyService"/>
                 <entry key="simi_PropertiesCheckerService"
                        value="ch.so.agi.simi.core.props.PropertiesCheckerService"/>
+                <entry key="simi_MorphProductService" value="ch.so.agi.simi.core.morph.MorphProductService"/>
             </map>
         </property>
     </bean>

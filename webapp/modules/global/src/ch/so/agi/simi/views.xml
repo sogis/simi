@@ -272,4 +272,27 @@
     </view>
     <view entity="simiProduct_ExternalMapService" name="externalMapLayers-edit-services" extends="_minimal"/>
     <view entity="simiData_DataTheme" name="postgresTable-edit-themes" extends="_minimal"/>
+    <view entity="simiProduct_FacadeLayer" name="morph-FacadeLayer" extends="_local">
+        <property name="dataSetViews" view="_minimal">
+            <property name="dataSetView" view="_minimal"/>
+            <property name="sort"/>
+        </property>
+        <property name="pubScope" view="_minimal"/>
+    </view>
+    <view entity="simiProduct_LayerGroup" name="morph-LayerGroup" extends="_local">
+        <property name="pubScope" view="_minimal"/>
+        <property name="singleActors" view="_minimal">
+            <property name="visible"/>
+            <property name="singleActor" view="_minimal"/>
+            <property name="sort"/>
+        </property>
+    </view>
+    <view entity="simiProduct_Map" name="morph-Map" extends="_local">
+        <property name="pubScope" view="_minimal"/>
+        <property name="singleActors" view="_minimal">
+            <property name="visible"/>
+            <property name="singleActor" view="_minimal"/>
+            <property name="sort"/>
+        </property>
+    </view>
 </views>
