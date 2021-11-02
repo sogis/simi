@@ -47,7 +47,8 @@ task imgTag(type:Exec, dependsOn: imgBuild) {
 
     commandLine 'docker', 'tag',
             "sogis/simi:$fullVersion",
-            "sogis/simi:$version"
+            "sogis/simi:$version",
+            "sogis/simi:latest" // Lokal für die Integrationstests genutzt - wird nicht auf hub.docker übertragen
 }
 
 task pushImgShortVersion(type:Exec) {
