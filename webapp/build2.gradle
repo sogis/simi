@@ -50,9 +50,19 @@ task imgTag(type:Exec, dependsOn: imgBuild) {
             "sogis/simi:$version"
 }
 
-task pushImg(type:Exec, dependsOn: pushImgLatest) {
-    def version = getVersion(true)
+task pushImgShortVersion(type:Exec) {
+    def version = getVersion(false)
     commandLine 'docker', 'push', "sogis/simi:$version"
+}
+
+task pushImgFullVersion(type:Exec) {
+    def version = getVersion(false)
+    commandLine 'docker', 'push', "sogis/simi:$version"
+}
+
+task pushImgTags() {
+    dependsOn pushImgShortVersion
+    dependsOn pushImgFullVersion
 }
 
 String getVersion(boolean useFullVersion){

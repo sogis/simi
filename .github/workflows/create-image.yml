@@ -52,5 +52,5 @@ jobs:
           SIMI_DOCKER_PASS: ${{ secrets.SIMI_DOCKER_PASS }}
         run: echo "$SIMI_DOCKER_PASS" | docker login -u "$SIMI_DOCKER_USER" --password-stdin
       - name: Push image with Gradle
-        run: ./gradlew pushImg
+        run: ./gradlew pushImgTags
         working-directory: ./webapp
