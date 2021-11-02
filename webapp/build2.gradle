@@ -28,7 +28,7 @@ task copyJar(type: Copy, dependsOn: buildUberJar){
 
 task imgBuild(type:Exec, dependsOn: copyJar) {
     def githash = getCheckedOutGitCommitHash()
-    def version = getVersion()
+    def version = getVersion(true)
     def build_timestamp = getTimestamp()
 
     workingDir "$projectDir/docker/image"
@@ -42,24 +42,26 @@ task imgBuild(type:Exec, dependsOn: copyJar) {
 }
 
 task imgTag(type:Exec, dependsOn: imgBuild) {
-    def version = getVersion()
+    def version = getVersion(false)
+    def fullVersion = getVersion(true)
 
     commandLine 'docker', 'tag',
-            "sogis/simi:$version",
-            "sogis/simi:latest"
-}
-
-task pushImgLatest(type:Exec) {
-    commandLine 'docker', 'push', "sogis/simi:latest"
+            "sogis/simi:$fullVersion",
+            "sogis/simi:$version"
 }
 
 task pushImg(type:Exec, dependsOn: pushImgLatest) {
-    def version = getVersion()
+    def version = getVersion(true)
     commandLine 'docker', 'push', "sogis/simi:$version"
 }
 
-String getVersion(){
-    return "1.1." + getBuildNumber()
+String getVersion(boolean useFullVersion){
+    String version = "1.1"   
+
+    if(useFullVersion)
+        version = version + "." + getBuildNumber()
+
+    return version
 }
 
 String getBuildNumber() {
