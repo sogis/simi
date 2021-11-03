@@ -1,4 +1,4 @@
-.30 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="mainMsg://dataproduct.caption.browse"
@@ -62,9 +62,9 @@
                 <button id="removeBtn" action="dataProductsTable.remove" stylename="danger"/>
                 <popupButton id="morphBtn" caption="Umwandeln" stylename="danger">
                     <actions>
-                        <action id="morphToFacadeLayer" caption="-> Facade"/>
-                        <action id="morphToLayerGroup" caption="-> Gruppe"/>
-                        <action id="morphToMap" caption="-> Karte"/>
+                        <action id="morphToFacadeLayer" caption="-> Facade-Layer"/>
+                        <action id="morphToLayerGroup" caption="-> Layer-Group"/>
+                        <action id="morphToMap" caption="-> Vordergrundkarte"/>
                     </actions>
                 </popupButton>
                 <!--<label id="spacer" width="100" value=" "/>

@@ -29,41 +29,24 @@ task copyJar(type: Copy, dependsOn: buildUberJar){
 task imgBuild(type:Exec, dependsOn: copyJar) {
     def githash = getCheckedOutGitCommitHash()
     def version = getVersion(true)
+    def shortVersion = getVersion(false)
     def build_timestamp = getTimestamp()
 
     workingDir "$projectDir/docker/image"
     commandLine 'docker', 'build',
             '--no-cache', '--force-rm',
             '-t', "sogis/simi:$version",
+            '-t', "sogis/simi:$shortVersion",
+            '-t', "sogis/simi:latest",
             '--label', "simi.created=$build_timestamp",
             '--label', "simi.git_commit=$githash",
             '--label', "simi.version=$version",
             '-f', 'Dockerfile',  '.'
 }
 
-task imgTag(type:Exec, dependsOn: imgBuild) {
-    def version = getVersion(false)
-    def fullVersion = getVersion(true)
-
-    commandLine 'docker', 'tag',
-            "sogis/simi:$fullVersion",
-            "sogis/simi:$version",
-            "sogis/simi:latest" // Lokal für die Integrationstests genutzt - wird nicht auf hub.docker übertragen
-}
-
-task pushImgShortVersion(type:Exec) {
-    def version = getVersion(false)
-    commandLine 'docker', 'push', "sogis/simi:$version"
-}
-
-task pushImgFullVersion(type:Exec) {
-    def version = getVersion(false)
-    commandLine 'docker', 'push', "sogis/simi:$version"
-}
-
-task pushImgTags() {
-    dependsOn pushImgShortVersion
-    dependsOn pushImgFullVersion
+task pushImg(type:Exec) {
+    def version = getVersion(true)
+    commandLine 'docker', 'push', '--all-tags', "sogis/simi:$version"
 }
 
 String getVersion(boolean useFullVersion){

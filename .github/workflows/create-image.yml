@@ -35,7 +35,7 @@ jobs:
         run: cat build1.gradle build2.gradle > build.gradle
         working-directory: ./webapp
       - name: Build simi image with Gradle
-        run: ./gradlew imgTag
+        run: ./gradlew imgBuild
         working-directory: ./webapp
       - name: Start simi image
         run: docker-compose up -d -V simi
@@ -52,5 +52,5 @@ jobs:
           SIMI_DOCKER_PASS: ${{ secrets.SIMI_DOCKER_PASS }}
         run: echo "$SIMI_DOCKER_PASS" | docker login -u "$SIMI_DOCKER_USER" --password-stdin
       - name: Push image with Gradle
-        run: ./gradlew pushImgTags
+        run: ./gradlew pushImg
         working-directory: ./webapp
