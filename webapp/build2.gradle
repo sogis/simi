@@ -45,8 +45,7 @@ task imgBuild(type:Exec, dependsOn: copyJar) {
 }
 
 task pushImg(type:Exec) {
-    def version = getVersion(true)
-    commandLine 'docker', 'push', '--all-tags', "sogis/simi:$version"
+    commandLine 'docker', 'image', 'push', '--all-tags', "sogis/simi"
 }
 
 String getVersion(boolean useFullVersion){
