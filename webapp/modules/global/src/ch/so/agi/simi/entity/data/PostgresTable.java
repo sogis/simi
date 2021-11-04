@@ -52,7 +52,6 @@ public class PostgresTable extends SimiEntity {
     private LocalDateTime catSyncStamp;
 
     @Column(name = "GEO_FIELD_NAME", length = 100)
-    @Pattern(message = "fuu", regexp = "bar")
     private String geoFieldName;
 
     @Column(name = "GEO_TYPE", length = 100)
