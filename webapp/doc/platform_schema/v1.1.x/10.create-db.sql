@@ -313,8 +313,8 @@ create table SIMIPRODUCT_PROPERTIES_IN_FACADE (
 create table SIMIIAM_USER (
     ID uuid,
     --
-    FIRSTNAME varchar(100) not null,
-    LASTNAME varchar(100) not null,
+    FIRSTNAME varchar(100),
+    LASTNAME varchar(100),
     --
     primary key (ID)
 );
