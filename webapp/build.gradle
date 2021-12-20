@@ -31,7 +31,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'ch.so.agi.simi'
-        //version = '0.9'
+        version = getVersion(true)
         isSnapshot = false
     }
 }
@@ -195,3 +195,21 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
     }
 }
 restart.finalizedBy start
+
+String getVersion(boolean useFullVersion){
+    String version = "1.1"
+
+    if(useFullVersion)
+        version = version + "." + getBuildNumber()
+
+    return version
+}
+
+String getBuildNumber() {
+    String val = System.getenv('GITHUB_RUN_NUMBER')
+
+    if(val == null)
+        val = 'localbuild'
+
+    return val
+}
