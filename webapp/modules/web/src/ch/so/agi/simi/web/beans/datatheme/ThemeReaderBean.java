@@ -43,6 +43,13 @@ public class ThemeReaderBean {
         }
     }
 
+    /**
+     * Aktualisiert die Eigenschaften und zugeordneten Attribute der Entity inOutTable aufgrund der Katalogdaten der Quell-Datenbank.
+     * Siehe Erläuterungen in /dok_extensions
+     * @param reader Client-Proxy des SchemaReader-Service.
+     * @param inOutTable PostgresTable-Entity, deren Eigenschaften und Attribute aus dem Katalog aktualisiert werden.
+     * @return Liste
+     */
     public List<SyncedField> actualizeWithDbCat(SchemaReader reader, PostgresTable inOutTable) {
 
         TableAndFieldInfo tfi = reader.queryTableMeta(

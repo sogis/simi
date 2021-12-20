@@ -48,24 +48,6 @@ task pushImg(type:Exec) {
     commandLine 'docker', 'image', 'push', '--all-tags', "sogis/simi"
 }
 
-String getVersion(boolean useFullVersion){
-    String version = "1.1"   
-
-    if(useFullVersion)
-        version = version + "." + getBuildNumber()
-
-    return version
-}
-
-String getBuildNumber() {
-    String val = System.getenv('GITHUB_RUN_NUMBER')
-
-    if(val == null)
-        val = 'localbuild'
-
-    return val
-}
-
 def getCheckedOutGitCommitHash() {
     'git log -1 --pretty=%H'.execute().text.trim()
 }

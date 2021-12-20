@@ -87,8 +87,8 @@ Bemerkung: Es bestehen funktionale Einheiten der GDI mit eigenem (redundantem) B
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|lastname|String(100)|j|DEPRECATED: Nachname des Benutzers.|
-|firstname|String(100)|j|DEPRECATED: Vorname des Benutzers.|
+|lastname|String(100)|n|DEPRECATED: Nachname des Benutzers.|
+|firstname|String(100)|n|DEPRECATED: Vorname des Benutzers.|
 
 
 
