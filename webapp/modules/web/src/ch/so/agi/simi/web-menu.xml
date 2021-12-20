@@ -17,6 +17,5 @@
         <item screen="simiData_TableDependency.list" caption="mainMsg://tabledependency.caption"/>
         <item screen="simiExtended_Dependency.browse" caption="mainMsg://dependency.caption.browse"/>
         <item screen="simiProduct_ExternalMapService.browse" caption="mainMsg://extservice.caption.browse"/>
-        <item screen="simiProduct_DataProduct_PubScope.browse" caption="Pub Scopes"/>
     </menu>
 </menu-config>

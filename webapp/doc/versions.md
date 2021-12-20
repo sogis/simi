@@ -16,17 +16,10 @@ Letzte Modelländerungen:
 
 * Alias, ... wird einmal für jede Tabelle, und nicht für jede TableView modelliert (Auflösung Redundanz)
 * IAM User: Name und Vorname sind für 1.x überflüssig --> Wurden in Modell auf optional gesetzt
-  
-### Mögliche Verbesserungen
-  * Konsequent Anzeige von "\[NULL\]" oder ähnlich bei Attributen, die null sind.
-  * Nach Pilotierung:
-    * Screens Wegräumen
-      * _layer-group-choose.xml
-      * _data-set-view-browse.xml
-      * _data-product_pub-scope-browse.xml
-      * _data-product_pub-scope-edit.xml
-      * _map-browse.xml
-      * _single-actor-browse.xml
+
+### V 1.1.x
+
+* DSV Kopieren: Verhalten bezüglich der Relations verifizieren und dokumentieren
 
 ## V 1.2
 

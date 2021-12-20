@@ -58,27 +58,6 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
                 .withPosition(Notifications.Position.BOTTOM_CENTER)
                 .withDescription("Einlesen der Metainformationen abgeschlossen")
                 .show();
-
-        /*
-        Questions:
-        - Must I deal with the "commit state" of the entites (inserted, updated, deleted)?
-        - How can I refresh the generic ui table without modifying the "commit state"?
-
-        if(table.getTableFields() != null)
-            tableFieldsDc.getMutableItems().removeAll(table.getTableFields());
-
-        List<TableField> inPlaceUpdated = bean.actualizeWithDbCat(client, table);
-
-
-        if(inPlaceUpdated != null) {
-            for (TableField tf : inPlaceUpdated) {
-                context.setModified(tf, true);
-            }
-        }
-
-        if(table.getTableFields() != null)
-            tableFieldsDc.getMutableItems().addAll(table.getTableFields());
-        */
     }
 
     @Install(to = "tableFieldsTable.viewFieldsCount", subject = "columnGenerator")
