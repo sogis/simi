@@ -29,9 +29,17 @@ public class SimiProperty implements Comparable, Serializable {
         SimiProperty.add("cuba.web.requirePasswordForNewUsers", true, CubaModule.WEB);
         SimiProperty.add("cuba.web.standardAuthenticationUsers", false, CubaModule.WEB);
 
+        /* Bis auf Weiteres nur einfaches url open hardcodiert
         SimiProperty.add("simi.publishJob.baseUrl", true, CubaModule.WEB);
         SimiProperty.add("simi.publishJob.pollTimeout", true, CubaModule.WEB);
         SimiProperty.add("simi.publishJob.secToken", true, CubaModule.WEB, false);
+        
+        * **Konfiguration des Publikations Jenkins-Jobs:**   
+        * SIMI_PUBLISHJOB_BASEURL: Basis-URL des Jobs im Jenkins, welcher die Konfiguration publiziert
+        * SIMI_PUBLISHJOB_POLLTIMEOUT: Timeout des Pollings auf den gestarteten Job \[ms\]. Grund: Neue Jobs landen bei 
+        Jenkins zuerst in der Queue und werden erst nach einer Weile (lastabhängig) abgearbeitet.  
+        * SIMI_PUBLISHJOB_SECTOKEN: Security-Token, mit welchem Jenkins das Starten des Jobs erlaubt. 
+        */
 
         SimiProperty.add("simi.schemaReader.url", true, CubaModule.WEB);
 

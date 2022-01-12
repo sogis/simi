@@ -39,5 +39,3 @@ jdbc:postgresql://localhost:5432/postgres
 ```
 http://localhost:8081/geodb?schema=tiger
 ```
-
-Details siehe auch [docker-compose.yml](docker-compose.yml)

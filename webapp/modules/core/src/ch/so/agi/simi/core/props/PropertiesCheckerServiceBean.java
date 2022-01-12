@@ -35,9 +35,8 @@ public class PropertiesCheckerServiceBean implements PropertiesCheckerService {
         if(!allMandatoriesPresent && conf.stopOnIncomplete())
             throw new RuntimeException("Configuration parameters are missing. See log for details");
 
-         */
-
-
+        SIMI_CONFIG_STOPONINCOMPLETE: Falls "true" fährt simi bei fehlenden Konfigurationsparametern nicht hoch.
+        */
     }
 
 }

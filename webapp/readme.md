@@ -4,26 +4,41 @@ Webapplikation zur Pflege der Metainformationen der GDI-SO (**S**patial **I**nfr
 
 ## Konfigurieren und Starten des Docker-Image
 
-### Ablage
-
 Die SIMI-Images liegen auf Docker-Hub: <https://hub.docker.com/r/sogis/simi>
 
-### Versionierung (Image Tags)
+Der Grossteil der Funktionalitäten benötigt einzig einen DB-Connect auf die Meta-DB. Für diese sind die Umgebungsvariablen ```CUBA_DATASOURCE_*``` zu setzen sowie ```CUBA_AUTOMATICDATABASEUPDATE=true```, damit das (leere) Schema mit den notwendigen Tabellen initialisiert wird. 
+
+**ZU BEACHTEN** Das Framework kann beim Starten nur im Schema public automatisch die Tabellen anlegen. Zu schnellen Ausprobieren also im Schema "public" arbeiten.
+
+Siehe [doc/docker-compose.yml](doc/docker-compose.yml) als Beispiel einer Minimal-Konfiguration.
+
+## Log-Output des konfigurierten Environment
+
+Variablen können im Framework an verschiedensten Stellen konfiguriert werden (ENV, *.properties, Sys-Tabellen, ...). Damit schnell erkennbar wird, welche Variable zur laufzeit wie konfiguriert ist, werden die Werte beim Startup (verschlüsselt) in Log-Output geschrieben.
+
+    ...
+    ... - SIMI Configration values 
+    ...----------------------------------------------------
+    ... - 'CUBA_DATASOURCE_JDBCURL': [jdbc:postgresql://localhost:5432/postgres?currentSchema=public]
+    ... - 'CUBA_DATASOURCE_PASSWORD': [Secret value with 8 digits]
+    ... - 'CUBA_DATASOURCE_USERNAME': [postgres]
+    ...
+
+
+## Versionierung (Image Tags)
 
 Die Versionierung folgt dem Pattern **\[major\].\[minor\].\[revision\]**
 
 Auslöser für Versions-Inkrementierungen:
 
 * **major:** Umfangreiche Erweiterung des Metamodells und / oder der Funktionalität
-* **minor:** Breaking Change des Metamodells für die Trafos. Beispiel: Löschung Tabellen-Spalte
+* **minor:** Breaking Change des Metamodells für die Trafos oder Änderung der notwendigen ENV-Variablen. 
 * **revision:** (Kleinere) funktionale Anpassung
 
 Als Nummer der revision wird automatisch die "Build-Nummer" der github action übernommen. 
 Major und minor werden bewusst von der Entwicklung gesetzt.
 
-[Notizen zu den vergangenen und kommenden Versionen](doc/versions.md)
-
-### Umgebungsvariablen
+## Umgebungsvariablen
 
 Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
 
@@ -47,18 +62,41 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
 * **Konfiguration der URL des Schemareaders:**
   * SIMI_SCHEMAREADER_URL: Url, auf welcher der Schemareader erreichbar ist. Bsp: "http://localhost/schemareader"   
     **Hinweis:** Die Namen der Datenbanken in der SIMI-DB müssen mit dbs.key in der Schemareader-Konfig übereinstimmen.
-* **Konfiguration des Publikations Jenkins-Jobs:**   
-  * SIMI_PUBLISHJOB_BASEURL: Basis-URL des Jobs im Jenkins, welcher die Konfiguration publiziert
-  * SIMI_PUBLISHJOB_POLLTIMEOUT: Timeout des Pollings auf den gestarteten Job \[ms\]. Grund: Neue Jobs landen bei 
-  Jenkins zuerst in der Queue und werden erst nach einer Weile (lastabhängig) abgearbeitet.  
-  * SIMI_PUBLISHJOB_SECTOKEN: Security-Token, mit welchem Jenkins das Starten des Jobs erlaubt. 
 * **Konfiguration der Suche in den GRETL-Repos (Anzeige der Abhängigkeiten):**
   * SIMI_GITSEARCH_URL: Url, auf welche die Git-Suchen abgesetzt werden. Bsp: "https://api.github.com/search/code"
   * SIMI_GITSEARCH_REPOS: Liste aller zu durchsuchenden Git-Repos, mittels "," getrennt. Bsp: "sogis/gretljobs,oereb/jobs"
-* **Weitere...**
-  * SIMI_CONFIG_STOPONINCOMPLETE: Falls "true" fährt simi bei fehlenden Konfigurationsparametern nicht hoch.
+
+## Setzen des Loglevels
+
+Der Loglevel kann bequem mittels der vom Framework zur Verfügung gestellten Admin-Masken zur Laufzeit geändert werden.
+
+Falls eine Fragestellung vor der Verfügbarkeit der Admin-Masken analysiert werden muss, kann der Loglevel in der
+Datei **\[repo root\]/webapp/docker/image/uber-jar-logback.xml** wie folgend beschrieben angepasst werden (Bedingt neuen Build des Image):
+
+Anpassung des levels, welcher überhaupt auf die Konsole geschrieben wird:
+
+    <root level="debug">
+        <appender-ref ref="Console"/>
+    </root>
+
+Anpassung des log-levels für das Cuba-Framework:
+
+    <logger name="com.haulmont.cuba" level="DEBUG"/>
+    
+Anpassung des log-levels für Simi:
+
+    <logger name="ch.so.agi.simi" level="DEBUG"/>
+
+## Erzeugen / Aktualisieren des Datenbankschemas
+
+Siehe Ordner [schema](./schema)
 
 ## Entwicklungs-Dokumentation
 
 Beschreibung der Inhalte der Unterordner von /webapp sowie des Custom-Codes siehe [Entwicklungs-Dokumentation](doc/development.md)
+
+## Benutzer-Dokumentation
+
+Diese ist im Dok-Repo zuhause: [Benutzer-Dokumentation](https://github.com/sogis/dok/blob/dok/dok_div_anleitungen/Documents/simi/simi_anleitung.md)
+
 

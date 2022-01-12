@@ -28,6 +28,7 @@ Letzte Modelländerungen:
 #### Zwingende Schemaanpassungen
 * IAM User: Entfernen von Name und Vorname. Diese wurden mit 1.1.x von mandatory auf optional gestellt.
   * Rahmenbedingung: Beibehalten der Vererbungsstruktur Identity, Group, User wegen der Beziehungen. 
+* Number Attribut fehlt heute precision / scale
 
 #### Externe WMS / WMTS
 
