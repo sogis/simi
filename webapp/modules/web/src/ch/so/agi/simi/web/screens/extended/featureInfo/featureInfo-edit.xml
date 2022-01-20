@@ -23,7 +23,7 @@
                     <sourceCodeEditor id="displayTemplate" caption="Anzeige-Template" property="displayTemplate" showGutter="true" height="300"/>
                 </column>
                 <column width="450px">
-                    <textArea id="remarksField" caption="Bemerkungen" property="remarks" rows="5" rowspan="2"/>
+                    <textArea id="remarksField" property="remarks" rows="5" rowspan="2"/>
                     <sourceCodeEditor id="sqlQueryField" caption="SQL Abfrage" property="sqlQuery" showGutter="true" height="300"/>
                 </column>
             </form>
