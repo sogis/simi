@@ -1,5 +1,26 @@
 -- SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE
 
+/*
+Zentrale Steuerungstabelle bezüglich der Publikation der verschiedenen Dataproducts.
+
+Zu beachten: Die UUID '55bdf0dd-d997-c537-f95b-7e641dc515df' der zu löschenden Dataproducts wird
+in den sql's zur Erzeugung der config.json direkt referenziert. MUSS ALSO STABIL BLEIBEN.
+
+FOR_* steuert, ob die entsprechende Zeile der Steuerungstabelle im SIMI für das DataProduct angeboten wird.
+Sprich, ob der Display-Text in der Combobox im SIMI-GUI zur Auswahl erscheint oder nicht.
+
+PUB_TO_WMS steuert, ob ein SingleActor im WMS auf dem "root-level" publiziert wird.
+
+PUB_TO_WGC: Ist aktuell (Februar 2022) gleichbedeutend mit "Ebene erscheint in der Suche"
+Ausblick: Im Rahmen von "EXT WM(T)S Serverless" umformen in WGC_SEARCH_VISIBLE. 
+PUB_TO_LOCATOR umformen in LOCATOR_SEARCH_VISIBLE. 
+Die Unterscheidung nach Client ist notwendig wegen der "Hintergrundkarten"
+
+DEFAULT_VALUE: Steuerung der SIMI-Combobox bei neuen Dataproducts
+SORT: Reihenfolge in der SIMI-Combobox
+
+OVERALL_STATE: Vorgesehen für einfache queries in den SQLs der Json-Erzeugung. Aktuell nicht verwendet (Februar 2022)
+*/
 insert into SIMIPRODUCT_DATA_PRODUCT_PUB_SCOPE
     (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DISPLAY_TEXT, OVERALL_STATE, DEFAULT_VALUE, FOR_DSV, FOR_GROUP, FOR_MAP, PUB_TO_WMS, PUB_TO_WGC, PUB_TO_LOCATOR, SORT)
 values
