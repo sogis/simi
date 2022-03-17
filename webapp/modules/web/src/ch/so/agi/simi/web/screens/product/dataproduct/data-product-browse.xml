@@ -36,6 +36,12 @@
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
                 <action id="copy" icon="COPY" caption="Kopieren" trackSelection="true"/>
+                <action id="excel" caption="Als Excel exportieren" icon="icons/excel.png" type="excel">
+                    <properties>
+                        <property name="fileName" value="produkte"/>
+                        <property name="exportAggregation" value="false"/>
+                    </properties>
+                </action>
             </actions>
             <columns>
                 <column id="identifier" sort="ASCENDING"/>
@@ -67,8 +73,8 @@
                         <action id="morphToMap" caption="-> Vordergrundkarte"/>
                     </actions>
                 </popupButton>
-                <!--<label id="spacer" width="100" value=" "/>
-                <button id="btnPublish" caption="Publizieren" stylename="friendly" icon="EXCLAMATION"/>-->
+                <label id="spacer" width="100" value=" "/>
+                <button action="dataProductsTable.excel" stylename="friendly"/>
             </buttonsPanel>
         </table>
         <fragment id="filter" screen="simi_FilterFragment">
