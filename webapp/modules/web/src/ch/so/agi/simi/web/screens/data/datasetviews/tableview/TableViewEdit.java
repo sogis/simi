@@ -1,5 +1,6 @@
 package ch.so.agi.simi.web.screens.data.datasetviews.tableview;
 
+import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.data.datasetview.ViewField;
@@ -31,6 +32,29 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
+        loadTableFields();
+    }
+
+    @Subscribe("postgresTableField")
+    public void onPostgresTableFieldValueChange(HasValue.ValueChangeEvent<PostgresTable> event) {
+        if(!event.isUserOriginated())
+            return;
+
+        if(viewFieldsDc.getMutableItems() == null)
+            return;
+
+        for(ViewField f : viewFieldsDc.getMutableItems()){
+            dataContext.remove(f);
+        }
+        viewFieldsDc.getMutableItems().clear();
+
+        loadTableFields();
+    }
+
+    private void loadTableFields(){
+        if(this.getEditedEntity() == null || this.getEditedEntity().getPostgresTable() == null)
+            return;
+
         tableFieldsDl.setParameter("table", this.getEditedEntity().getPostgresTable());
         tableFieldsDl.load();
     }

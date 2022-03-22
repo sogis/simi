@@ -1,5 +1,53 @@
 # Entwicklungs-Dokumentation
 
+## Abhängigkeiten
+
+Abhängig von der Anpassung bestehen die folgenden Abhängigkeiten:
+
+* Auf eine Datenbank mit korrektem Schema. Diese Abhängigkeit besteht immer, falls die Tabellen für SIMI fehlen,    
+  werden diese automatisch beim Start des Cuba-Applikationsserver angelegt (Falls cuba.automaticDatabaseUpdate = true)
+* Auf eine Datenbank mit "realistischen" Daten. Diese als Dump von der Integration/Produktion beziehen.
+* Auf den Schemareader, welcher die Tabelleninformationen aus den Geodatenbanken ausliest.
+  * Zu Entwicklungszwecken kann als Datenbank ein offizielles Postgis-Iamge verwendet werden. Dieses enthält im   
+    Schema **"tiger"** Test-Geodaten. Das [docker-compose.yml](../devenv/docker-compose.yml) der Entwicklungsumgebung   
+    startet einen Schemareader, welcher für den Datenbank-Identifier **"geodb"** auf die Postgis-Datenbank zeigt.
+    
+(Geo-)Tabellen im Schema "tiger" (für Postgis-Image 11-2.5-alpine):
+
+* addr
+* addrfeat
+* bg
+* county
+* county_lookup
+* countysub_lookup
+* cousub
+* direction_lookup
+* edges
+* faces
+* featnames
+* geocode_settings
+* geocode_settings_default
+* loader_lookuptables
+* loader_platform
+* loader_variables
+* pagc_gaz
+* pagc_lex
+* pagc_rules
+* place
+* place_lookup
+* secondary_unit_lookup
+* state
+* state_lookup
+* street_type_lookup
+* tabblock
+* tract
+* zcta5
+* zip_lookup
+* zip_lookup_all
+* zip_lookup_base
+* zip_state
+* zip_state_loc 
+
 ## Entwicklungsablauf
 
 Folgend in kurzen Sätzen ein typischer Entwicklungsablauf für eine funktionale Anpassung mit kleinem Impact (Es wird nur die Revision inkrementiert, von Beispielsweise V 1.1.34 auf V 1.1.35)
