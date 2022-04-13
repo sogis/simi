@@ -49,10 +49,12 @@ configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'cuba')
 
     dependencies {
-            testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
-            testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
-            testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')  
-        }
+        testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
+        testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
+        testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
+
+        compile('com.fasterxml.jackson.core:jackson-databind:2.11.2')
+    }
 
     task sourceJar(type: Jar) {
         from file('src')
@@ -95,8 +97,6 @@ configure(coreModule) {
         compileOnly(servletApi)
         jdbc(postgres)
         testRuntime(postgres)
-
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
     }
 
     task cleanConf(description: 'Cleans up conf directory', type: Delete) {

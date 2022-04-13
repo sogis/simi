@@ -1,10 +1,12 @@
 package ch.so.agi.simi.entity.extended;
 
 import ch.so.agi.simi.entity.product.Map;
+import ch.so.agi.simi.global.validation.JsonField;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.core.global.validation.groups.UiComponentChecks;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -23,11 +25,13 @@ public class CCCIntegration extends Dependency {
     @NotNull
     private Map map;
 
+    @JsonField(groups = {UiComponentChecks.class})
     @Lob
     @Column(name = "LOCATOR_LAYERS")
     @NotNull
     private String locatorLayers;
 
+    @JsonField(groups = {UiComponentChecks.class})
     @Lob
     @Column(name = "NOTIFY_LAYERS")
     @NotNull
