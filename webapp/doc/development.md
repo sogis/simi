@@ -67,6 +67,18 @@ Folgend in kurzen Sätzen ein typischer Entwicklungsablauf für eine funktionale
   * Von openshift das image auf test, int, prod deployt
 * Nach ca. 30 Minuten verifizieren, dass neue Revision ausgerollt ist (z.B. mittels geo-i.so.ch/simi --> Menu SIMI Admin --> About --> Version)
 
+### Dump aus Integration restoren
+
+Periodisch macht es Sinn, die aktuellen Daten aus der Integration zu übernehmen.
+
+Vorgehen:
+
+* Dump lokal nehmen (Siehe dazu dok "Datenbanken")
+* Dump restoren, ohne Übernahme von Ownern, Rollen, ...   
+  ```pg_restore -d postgresql://postgres:postgres@localhost/simi -c -x -O simi_geodb-i.rootso.org.dmp```
+* Anmelden mit dem Admin-Passwort "aus Dump"
+  * Admin-Passwort überschreiben
+
 ## Abdeckung mit automatisierten Tests
 
 Der Umfang der automatisierten Tests ist angepasst auf den Typ der entwickelten Funktionaliät. Standardfunktionalitäten des Frameworks wie Browse und Edit-Screens sind mit wenig Tests abgedeckt, während Beispielsweise bei Implementationen von SIMI-spezifischen Funktionen (Package ch.so.agi.simi.core.*) viel in Tests investiert wird. 
@@ -87,6 +99,7 @@ Die wichtigsten Packages von SIMI innerhalb Core Module:
 Innerhalb Global Module: 
 
 * **ch.so.agi.simi.entity**: Enthält die Entities. Gegliedert nach den Teilmodellen (data, product, ...) des Metamodelles
+
 
 Innerhalb Web Module:
 
