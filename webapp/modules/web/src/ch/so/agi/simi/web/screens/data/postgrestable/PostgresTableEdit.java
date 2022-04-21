@@ -15,8 +15,10 @@ import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
+import jdk.internal.joptsimple.internal.Strings;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @UiController("simiData_PostgresTable.edit")
@@ -42,17 +44,32 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
 
     @Subscribe("readFromServiceBtn")
     public void onReadFromServiceBtnClick(Button.ClickEvent event) {
+
         PostgresTable table = postgresTableDc.getItem();
+
+        boolean nameNullOrEmpty = table.getTableName() == null || table.getTableName().isEmpty();
+        if(table.getDataTheme() == null || nameNullOrEmpty){
+            notifications.create()
+                    .withPosition(Notifications.Position.MIDDLE_CENTER)
+                    .withDescription("Datenthema und Tabellenname muss vor dem Auslesen gesetzt werden.")
+                    .show();
+
+            return;
+        }
 
         List<SyncedField> synced = bean.actualizeWithDbCat(client, table);
 
-        context.merge(table.getTableFields());
+        List<TableField> uiExposedFields = tableFieldsDc.getMutableItems();
 
-        for (SyncedField f : synced) {
-            if (f.getSyncState() == FieldSyncState.NEW) {
-                tableFieldsDc.getMutableItems().add(f.getTableField());
-            }
+        uiExposedFields.clear();
+
+        List<TableField> mergedList = new ArrayList<>();
+        for(SyncedField sf : synced){
+            TableField merged = context.merge(sf.getTableField());
+            mergedList.add(merged);
         }
+
+        uiExposedFields.addAll(mergedList);
 
         notifications.create()
                 .withPosition(Notifications.Position.BOTTOM_CENTER)
