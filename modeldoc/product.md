@@ -141,10 +141,10 @@ Attribute siehe Strukt "ChildLayerProperties"
 
 UK über die FK's.
 
-### Klasse ExternalMapLayers
+### Klasse ExternalWmsLayers
 
-1-n externe WMS oder WMTS Ebenen, welche im Web GIS Client und im SO-Locator wie interne Ebenen gesucht 
-und geladen werden können.
+Externe WMS Ebene, welche im Web GIS Client und im SO-Locator wie interne Ebenen gesucht 
+und geladen werden kann.
 
 Definition "Extern": Die Rohdaten der Ebene sind nicht als DataProduct erfasst. Gründe für nicht erfasste Rohdaten:
 * Stammt aus Dienst eines Servers ausserhalb des Kantons Solothurn.
@@ -154,9 +154,9 @@ Definition "Extern": Die Rohdaten der Ebene sind nicht als DataProduct erfasst. 
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|identifierList|String(1000)|j|Liste der Identifier der externen Ebenen (Komma getrennt).|
+|externalIdentifier|String(1000)|j|Identifier der Ebene im referenzierten ext. WMS-Service.|
 
-### Klasse ExternalMapService
+### Klasse ExternalWmsService
 
 Externer WM(T)S Service, von welchem 1-n Ebenen im WGC oder SO-Locator gesucht und geladen werden können. 
 
@@ -164,7 +164,7 @@ Externer WM(T)S Service, von welchem 1-n Ebenen im WGC oder SO-Locator gesucht u
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|serviceType|enum(String)|j|Typ des Service: \[WMS\] oder \[WMTS\]|
+|featureInfoFormat|enum(String)|j|Formatanforderung des FeatureInfo-Request an den WMS (text/plain, ...). "fi_unavailable" Falls der Server kein FeatureInfo kann.|
 |url|String(255)|j|URL des Service. Falls WMTS die URL der GetCapabilities-Abfrage.|
 |remarks|String|n|Interne Bemerkungen.|
 

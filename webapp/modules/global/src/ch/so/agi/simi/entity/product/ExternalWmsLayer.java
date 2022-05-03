@@ -17,7 +17,7 @@ public class ExternalWmsLayer extends SingleActor {
     private static final long serialVersionUID = 640051427821660156L;
 
     @NotNull
-    @Column(name = "IDENTIFIER_LIST", nullable = false)
+    @Column(name = "EXT_IDENTIFIER", nullable = false)
     private String externalIdentifier;
 
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "clear"})
