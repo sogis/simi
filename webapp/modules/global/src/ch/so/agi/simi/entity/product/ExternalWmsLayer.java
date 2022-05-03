@@ -8,11 +8,11 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "SIMIPRODUCT_EXTERNAL_MAP_LAYERS")
-@Entity(name = ExternalMapLayer.NAME)
+@Table(name = "SIMIPRODUCT_EXTERNAL_WMS_LAYERS")
+@Entity(name = ExternalWmsLayer.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-public class ExternalMapLayer extends SingleActor {
-    public static final String NAME = "simiProduct_ExternalMapLayers";
+public class ExternalWmsLayer extends SingleActor {
+    public static final String NAME = "simiProduct_ExternalWmsLayers";
 
     private static final long serialVersionUID = 640051427821660156L;
 
@@ -25,18 +25,18 @@ public class ExternalMapLayer extends SingleActor {
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "SERVICE_ID")
-    private ExternalMapService service;
+    private ExternalWmsService service;
 
     @Override
     protected String typeAbbreviation(){
-        return "Ext. Layers";
+        return "Ext. WMS-Layers";
     }
 
-    public ExternalMapService getService() {
+    public ExternalWmsService getService() {
         return service;
     }
 
-    public void setService(ExternalMapService service) {
+    public void setService(ExternalWmsService service) {
         this.service = service;
     }
 

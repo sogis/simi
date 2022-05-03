@@ -4,7 +4,6 @@ import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
 import ch.so.agi.simi.web.beans.datatheme.SchemaReaderClientBean;
 import ch.so.agi.simi.web.beans.datatheme.ThemeReaderBean;
-import ch.so.agi.simi.web.beans.datatheme.reader_dto.update_dto.FieldSyncState;
 import ch.so.agi.simi.web.beans.datatheme.reader_dto.update_dto.SyncedField;
 import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.Notifications;
@@ -15,7 +14,6 @@ import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
-import jdk.internal.joptsimple.internal.Strings;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

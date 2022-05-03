@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="mainMsg://extlayer.caption.edit"
+        caption="Externe WMS Ebene"
         focusComponent="form">
     <data>
         <instance id="dataProductDc"
-                  class="ch.so.agi.simi.entity.product.ExternalMapLayer"
-                  view="externalMapLayer-edit">
+                  class="ch.so.agi.simi.entity.product.ExternalWmsLayer"
+                  view="externalWmsLayer-edit">
             <loader/>
         </instance>
         <collection id="servicesDc"
-                    class="ch.so.agi.simi.entity.product.ExternalMapService"
-                    view="externalMapLayers-edit-services">
+                    class="ch.so.agi.simi.entity.product.ExternalWmsService"
+                    view="externalWmsLayers-edit-services">
             <loader id="servicesDl">
                 <query>
-                    <![CDATA[select e from simiProduct_ExternalMapService e]]>
+                    <![CDATA[select e from simiProduct_ExternalWmsService e]]>
                 </query>
             </loader>
         </collection>

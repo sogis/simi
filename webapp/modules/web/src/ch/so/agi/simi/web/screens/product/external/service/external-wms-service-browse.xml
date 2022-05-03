@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="mainMsg://extservice.caption.browse"
+        caption="Externer WMS Dienst"
         focusComponent="externalMapServicesTable">
     <data readOnly="true">
         <collection id="externalMapServicesDc"
-                    class="ch.so.agi.simi.entity.product.ExternalMapService"
-                    view="externalMapService-browse">
+                    class="ch.so.agi.simi.entity.product.ExternalWmsService"
+                    view="externalWmsService-browse">
             <loader id="externalMapServicesDl">
                 <query>
-                    <![CDATA[select e from simiProduct_ExternalMapService e]]>
+                    <![CDATA[select e from simiProduct_ExternalWmsService e]]>
                 </query>
             </loader>
         </collection>
@@ -29,7 +29,6 @@
             </actions>
             <columns>
                 <column id="url" sort="ASCENDING" caption="URL"/>
-                <column id="serviceTypeString" caption="Typ"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

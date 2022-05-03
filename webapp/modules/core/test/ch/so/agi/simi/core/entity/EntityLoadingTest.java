@@ -251,21 +251,21 @@ class EntityLoadingTest {
     }
 
     @Test
-    void externalMapService_OK() {
+    void externalWmsService_OK() {
         loadEntityViews(
-                ExternalMapService.class,
+                ExternalWmsService.class,
                 new String[]{
-                        "externalMapService-edit",
-                        "externalMapService-browse",
-                        "externalMapLayers-edit-services"
+                        "externalWmsService-edit",
+                        "externalWmsService-browse",
+                        "externalWmsLayers-edit-services"
                 });
     }
 
     @Test
     void externalMapLayer_OK() {
         loadEntityView(
-                ExternalMapLayer.class,
-                "externalMapLayer-edit"
+                ExternalWmsLayer.class,
+                "externalWmsLayer-edit"
         );
     }
 

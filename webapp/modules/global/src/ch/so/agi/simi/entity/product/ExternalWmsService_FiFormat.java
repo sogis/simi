@@ -5,14 +5,15 @@ import com.haulmont.chile.core.datatypes.impl.EnumClass;
 import javax.annotation.Nullable;
 
 
-public enum ExternalMapService_Type implements EnumClass<String> {
+public enum ExternalWmsService_FiFormat implements EnumClass<String> {
 
-    WMS("WMS"),
-    WMTS("WMTS");
+    GML("application/vnd.ogc.gml"),
+    TEXT("text/plain"),
+    FI_UNAVAILABLE("fi_unavailable");
 
     private String id;
 
-    ExternalMapService_Type(String value) {
+    ExternalWmsService_FiFormat(String value) {
         this.id = value;
     }
 
@@ -21,8 +22,8 @@ public enum ExternalMapService_Type implements EnumClass<String> {
     }
 
     @Nullable
-    public static ExternalMapService_Type fromId(String id) {
-        for (ExternalMapService_Type at : ExternalMapService_Type.values()) {
+    public static ExternalWmsService_FiFormat fromId(String id) {
+        for (ExternalWmsService_FiFormat at : ExternalWmsService_FiFormat.values()) {
             if (at.getId().equals(id)) {
                 return at;
             }

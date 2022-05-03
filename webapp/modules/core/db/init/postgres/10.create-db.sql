@@ -257,24 +257,6 @@ create table SIMIDATA_DATA_THEME (
     primary key (ID)
 )^
 -- end SIMIDATA_DATA_THEME
--- begin SIMIPRODUCT_EXTERNAL_MAP_SERVICE
-create table SIMIPRODUCT_EXTERNAL_MAP_SERVICE (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    --
-    SERVICE_TYPE varchar(50) not null,
-    URL varchar(255) not null,
-    REMARKS text,
-    --
-    primary key (ID)
-)^
--- end SIMIPRODUCT_EXTERNAL_MAP_SERVICE
 -- begin SIMIPRODUCT_PROPERTIES_IN_LIST
 create table SIMIPRODUCT_PROPERTIES_IN_LIST (
     ID uuid,
@@ -365,16 +347,6 @@ create table SIMIDATA_DATA_SET_VIEW (
     primary key (ID)
 )^
 -- end SIMIDATA_DATA_SET_VIEW
--- begin SIMIPRODUCT_EXTERNAL_MAP_LAYERS
-create table SIMIPRODUCT_EXTERNAL_MAP_LAYERS (
-    ID uuid,
-    --
-    IDENTIFIER_LIST varchar(255) not null,
-    SERVICE_ID uuid not null,
-    --
-    primary key (ID)
-)^
--- end SIMIPRODUCT_EXTERNAL_MAP_LAYERS
 -- begin SIMIPRODUCT_LAYER_GROUP
 create table SIMIPRODUCT_LAYER_GROUP (
     ID uuid,
@@ -433,3 +405,29 @@ create table SIMIIAM_ROLE_USER_LINK (
     primary key (USER_ID, ROLE_ID)
 )^
 -- end SIMIIAM_ROLE_USER_LINK
+-- begin SIMIPRODUCT_EXTERNAL_WMS_LAYERS
+create table SIMIPRODUCT_EXTERNAL_WMS_LAYERS (
+    ID uuid,
+    --
+    IDENTIFIER_LIST varchar(255) not null,
+    SERVICE_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMIPRODUCT_EXTERNAL_WMS_LAYERS
+-- begin SIMIPRODUCT_EXTERNAL_WMS_SERVICE
+create table SIMIPRODUCT_EXTERNAL_WMS_SERVICE (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    --
+    URL varchar(255) not null,
+    FEATURE_INFO_FORMAT varchar(50) not null,
+    REMARKS text,
+    --
+    primary key (ID)
+)^
+-- end SIMIPRODUCT_EXTERNAL_WMS_SERVICE

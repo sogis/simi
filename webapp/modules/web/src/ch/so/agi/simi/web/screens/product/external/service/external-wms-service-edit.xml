@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="mainMsg://extservice.caption.edit"
+        caption="Externer WMS Dienst"
         focusComponent="form">
     <data>
-        <instance id="externalMapServiceDc"
-                  class="ch.so.agi.simi.entity.product.ExternalMapService"
-                  view="externalMapService-edit">
+        <instance id="externalWmsServiceDc"
+                  class="ch.so.agi.simi.entity.product.ExternalWmsService"
+                  view="externalWmsService-edit">
             <loader/>
         </instance>
     </data>
@@ -15,10 +15,10 @@
                 forceDialog="true"
                 resizable="true"/>
     <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="externalMapServiceDc">
+        <form id="form" dataContainer="externalWmsServiceDc">
             <column width="350px">
                 <textField id="urlField" property="url" caption="URL"/>
-                <lookupField id="serviceTypeField" property="serviceType" caption="Typ"/>
+                <lookupField id="fiFormatField" property="featureInfoFormat" caption="FI Format"/>
                 <textArea id="remarksField" property="remarks" rows="5" caption="Bemerkungen"/>
             </column>
         </form>

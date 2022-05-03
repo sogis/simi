@@ -17,7 +17,7 @@
     <menu id="grp_others" caption="Weitere ...">
         <item screen="simiData_TableDependency.list" caption="mainMsg://tabledependency.caption"/>
         <item screen="simiExtended_Dependency.browse" caption="mainMsg://dependency.caption.browse"/>
-        <item screen="simiProduct_ExternalMapService.browse" caption="mainMsg://extservice.caption.browse"/>
+        <item screen="simiProduct_ExternalWmsService.browse" caption="mainMsg://extwms.caption.browse"/>
         <item class="ch.so.agi.simi.web.menu.UrlOpen" id="urlopen_handbook" description="https://github.com/sogis/dok/blob/dok/dok_div_anleitungen/Documents/simi/simi_anleitung.md"
               caption="Handbuch (Link)"/>
     </menu>

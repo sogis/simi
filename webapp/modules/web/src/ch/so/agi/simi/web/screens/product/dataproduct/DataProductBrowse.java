@@ -7,15 +7,9 @@ import ch.so.agi.simi.core.props.PropertiesCheckerService;
 import ch.so.agi.simi.entity.data.datasetview.RasterView;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.product.*;
-import ch.so.agi.simi.web.beans.publish.JobRunner;
-import ch.so.agi.simi.web.beans.publish.PublishConfig;
-import com.haulmont.bali.util.ParamsMap;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
-import com.haulmont.cuba.gui.WebBrowserTools;
 import com.haulmont.cuba.gui.components.Action;
-import com.haulmont.cuba.gui.components.ActionsAwareDialogFacet;
-import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
@@ -77,7 +71,7 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
 
     @Subscribe("createBtn.createExtLayer")
     protected void onCreateBtnCreateExtLayer(Action.ActionPerformedEvent event) {
-        ExternalMapLayer rv = metadata.create(ExternalMapLayer.class);
+        ExternalWmsLayer rv = metadata.create(ExternalWmsLayer.class);
         showCreateEditorForDataProduct(rv);
     }
 
