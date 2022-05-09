@@ -4,6 +4,7 @@
 
 ![Übersicht der Teilmodelle](resources/overview.png)
 
+* **Theme [[Link]](theme.md):** Enthält die Klassen für die Themenbereitstellung.
 * **Product [[Link]](product.md):** Enthält die Klassen für die Konfiguration der aus Data abgeleiteten Produkte. 
 * **Data [[Link]](data.md):** Enthält die Klassen für die Beschreibung der von der GDI genutzten 
 Datenquellen (GIS-Tabellen, Raster, ...).
