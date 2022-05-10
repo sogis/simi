@@ -1,12 +1,9 @@
 @startuml
 package Theme {
 
+  abstract class "DataSetView" as dsv << package data >>
   class "Theme\nPublication" as tp
   class "Theme" as th
-  class "FileType" as ft 
-  
-  abstract class "DataSetView" as dsv << package data >>
-  abstract class "DataProduct" as dp << package product >>
   
   package Organisation {
     class "OrgUnit" as ou
@@ -26,7 +23,7 @@ package Theme {
   }
   
   package DataCoverage {
-    class "Extent" as ex
+    class "Extent (b2)" as ex
     class "Published\nExtent" as pe
     class "DataCoverage" as dc
     
@@ -37,12 +34,20 @@ package Theme {
   th "*" -- "1" dc
   th "1" -- "*" tp
   th "*" -- "1" ou : "fach"
-  th "0..1" .. "*" dp : "Darstellungen (b1)"
-  tp "0..1" -- "1-n" dsv
-  tp "*" -- "*" ft
+  tp "0..1" -- "1-n" dsv : "(b1)"
 }
-
 legend
-  b1: Offen ob Herleitung oder geführte Beziehung
+  b1 - Constraints: 
+  - Kein Gemisch Vector - "Non Vector"
+  - Vector nur aus einem Schema
+  - Keine DSV mit Filter-View
+  
+  b2:
+  - Geometrie als wkb in bytea
+  - IUD via GRETL von Edit-DB
+  - Hat Attribut DataCoverage (group identifier) zweck IUD
+  
+  DSV oder DS? --> IAM klären bei geschützten tp
+  By the way: Constraint zur Konsistenz der Attribut-Zuweisungen?
 end legend
 @enduml
