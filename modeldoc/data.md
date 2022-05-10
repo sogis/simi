@@ -102,38 +102,24 @@ UK über FK's.
 "wmsFiFormat" und "displayProps4Json" sind nur aktiv, wenn für die Ebene keine separate FeatureInfo-Konfiguration
  erstellt wurde (Teilmodell Featureinfo).
  
-### Klasse TableDS
-
-Tabelle einer Datenbank der GDI oder eine externe mit Bezug zur GDI
-
-#### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|tableName|String(100)|j|Name der Tabelle oder View in der Datenbank|
-|remarks|String|n|Interne Bemerkungen zur Tabelle.|
- 
-### Klasse ExternalTable
-
-Tabelle einer externen Datenbank, aus welcher die GDI liest oder schreibt (GRETL).
-
-#### Attributbeschreibung
-
-Keine eigenen Attribute.
- 
 ### Klasse PostgresTable
 
-GDI Postgres-Tabelle oder -View.
+GDI Postgres-Tabelle. In Sonderfällen "in Tandem" mit einer SQL-View.
 
 #### Attributbeschreibung
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
+|tableName|String(100)|j|Name der Tabelle in der Datenbank|
+|viewName|String(100)|n|Falls vorhanden: Name der SQL-View|
+|viewIsRowFilter|Boolean|j|Filtert die View Zeilen heraus? Default: Nein|
 |idFieldName|String(100)|j|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
-|descriptionModel|String|j|Beschreibung Klasse im INTERLIS-Modell.|
+|descriptionModel|String|n|Beschreibung Klasse im INTERLIS-Modell.|
+|descriptionOverride|String|n|Überschreibung der Klassenbeschreibung.|
 |catSyncStamp|DateTime|j|Zeitpunkt des letzten Abgleiches mit dem effektiven Schema der Geodatenbank.|
 |geoFieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
 |geoType|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
 |geoEpsgCode|Integer|n|EPSG-Code des Koordinatensystems. In aller Regel 2056|
+|remarks|String|n|Interne Bemerkungen zur Tabelle.|
 
 ### Klasse TableField
 
@@ -167,10 +153,10 @@ Bezüglich Auslesen des Kataloges mittels SchemaReader bei bestehenden Attribute
 #### Bemerkungen:
 * Die Namen der Attribute werden mittels Katalogabfrage aus Postgres gelesen.
 
-### Klasse DataTheme
+### Klasse Schema
 
-Datenthema, welches 1-n (Geo-)Tabellen umfasst. Synonym für das Schema, welches mittels INTERLIS-Modell
-und ili2pg erzeugt wurde. 
+Schema, welches 1-n (Geo-)Tabellen eines Themas umfasst. Mittels INTERLIS-Modell
+und ili2pg erzeugt. 
 
 Ausblick INTERLIS-Modell: Das Metamodell geht von einer Beziehung 
 Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Datenthema hinterlegt werden.
@@ -180,6 +166,8 @@ Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Daten
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |schemaName|String(100)|j|Name des Schemas.|
+|modelName|String(100)|j|Name des INTERLIS-Modells der öffentlichen Daten.|
+
 
 #### Konstraints
 

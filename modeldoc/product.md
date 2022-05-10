@@ -26,7 +26,7 @@ Beispiele:
 |remarks|String|n|Interne Bemerkungen.|
 |synonyms|String(200)|n|Synonyme für das DataProduct.|
 |title|String(200)|n|Angezeigter Titel (Bezeichnung) des Dataproduct. Falls null in Erstellungsphase wird identifier verwendet.|
-|description|String|n|Beschreibung|
+|description|String(1000)|n|Beschreibung. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
 
 ### Konstraints
 
