@@ -4,11 +4,10 @@ package Metamodel {
   [Data] as data
   [IAM] as iam
   [Extended] as ext
-  [Theme] as th
 }
+
 
 prod --> data
 iam --> data
 ext --> data
-th --> data
 @enduml

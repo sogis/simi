@@ -129,8 +129,7 @@ GDI Postgres-Tabelle oder -View.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |idFieldName|String(100)|j|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
-|descriptionModel|String|n|Beschreibung Klasse im INTERLIS-Modell.|
-|descriptionOverride|String|n|Überschreibung der Klassenbeschreibung.|
+|descriptionModel|String|j|Beschreibung Klasse im INTERLIS-Modell.|
 |catSyncStamp|DateTime|j|Zeitpunkt des letzten Abgleiches mit dem effektiven Schema der Geodatenbank.|
 |geoFieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
 |geoType|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
