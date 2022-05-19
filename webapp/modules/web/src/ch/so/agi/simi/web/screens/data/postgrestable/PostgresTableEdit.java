@@ -5,30 +5,22 @@ import ch.so.agi.simi.entity.data.TableField;
 import ch.so.agi.simi.web.beans.datatheme.SchemaReaderClientBean;
 import ch.so.agi.simi.web.beans.datatheme.ThemeReaderBean;
 import ch.so.agi.simi.web.beans.datatheme.reader_dto.update_dto.SyncedField;
-import com.haulmont.cuba.core.entity.Entity;
-import com.haulmont.cuba.core.global.CommitContext;
-import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.Notifications;
-import com.haulmont.cuba.gui.components.Button;
-import com.haulmont.cuba.gui.components.Component;
-import com.haulmont.cuba.gui.components.Table;
-import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
-import com.haulmont.cuba.gui.model.DataContext;
-import com.haulmont.cuba.gui.model.InstanceContainer;
+import com.haulmont.cuba.gui.ScreenBuilders;
+import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.gui.model.*;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @UiController("simiData_PostgresTable.edit")
 @UiDescriptor("postgres-table-edit.xml")
 @EditedEntityContainer("postgresTableDc")
 @LoadDataBeforeShow
 public class PostgresTableEdit extends StandardEditor<PostgresTable> {
-
     @Inject
     private InstanceContainer<PostgresTable> postgresTableDc;
     @Inject
@@ -44,7 +36,8 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
     @Inject
     private Notifications notifications;
     @Inject
-    DataManager dataManager;
+    private ScreenBuilders screenBuilders;
+
 
     @Subscribe("readFromServiceBtn")
     public void onReadFromServiceBtnClick(Button.ClickEvent event) {
@@ -55,6 +48,7 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
         if(table.getDataTheme() == null || nameNullOrEmpty){
             notifications.create()
                     .withPosition(Notifications.Position.MIDDLE_CENTER)
+                    .withCaption("Einlesen nicht möglich")
                     .withDescription("Datenthema und Tabellenname muss vor dem Auslesen gesetzt werden.")
                     .show();
 
@@ -77,7 +71,7 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
 
         notifications.create()
                 .withPosition(Notifications.Position.BOTTOM_CENTER)
-                .withDescription("Einlesen der Metainformationen abgeschlossen")
+                .withCaption("Einlesen der Metainformationen abgeschlossen")
                 .show();
     }
 
@@ -95,47 +89,20 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
     @Subscribe
     public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
         if (!tableFieldsDc.getItems().stream().allMatch(TableField::getCatSynced)) {
-            dialogs.createMessageDialog().withMessage("Dialog kann nicht geschlossen werden weil nicht alle Tabellenfelder synchronisiert sind. \nNicht synchronisierte Felder müssen gelöscht werden.").show();
+            dialogs.createMessageDialog()
+                    .withCaption("Speichern nicht möglich.")
+                    .withMessage("Nicht synchronisierte Felder müssen gelöscht werden.")
+                    .show();
             event.preventCommit();
-            return;
         }
-        /*
-        if (!tableFieldsDc.getItems().stream().allMatch(TableField::getCatSynced)) {
-            dialogs.createMessageDialog().withMessage("Dialog kann nicht geschlossen werden weil nicht alle Tabellenfelder synchronisiert sind. \nNicht synchronisierte Felder müssen gelöscht werden.").show();
-            event.preventCommit();
-            return;
-        }
-
-        //Exec deletes first to prevent uk violation for fields keeping their name but changing their datatype
-        commitDeletes();
-
-        Reihenfolge zum verhindern von UK-Violation
-        - Maske öffnen
-        - Einlesen
-        - Merken, welche Attribute obsolet sind (in der geo-db nicht mehr vorkommen)
-        - Maske ohne Speichern schliessen
-        - Maske öffnen
-        - obsolete Attribute löschen
-        - Maske mit Speichern schliessen
-        - Maske öffnen
-        - Einlesen
-        - (Aliase setzen, ...)
-        - Maske mit Speichern schliessen
-
-         */
     }
 
-    private void commitDeletes(){
-        Set<Entity> deletes = context.getRemoved();
-        if(deletes == null || deletes.size() == 0)
-            return;
-
-        CommitContext delCon = new CommitContext();
-        for(Entity e : deletes){
-            context.evict(e);
-            delCon.addInstanceToRemove(e);
-        }
-
-        dataManager.commit(delCon);
+    @Subscribe("reloadFromDb")
+    public void onReloadFromDbClick(Button.ClickEvent event) {
+        screenBuilders.editor(PostgresTable.class, this)
+                .editEntity(this.getEditedEntity())
+                .build()
+                .show();
+        this.closeWithDiscard();
     }
 }

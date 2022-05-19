@@ -30,6 +30,9 @@ import java.util.Optional;
 @UiDescriptor("style-fragment.xml")
 public class StyleFragment extends ScreenFragment {
 
+    private static final int[] QGIS_SERVER_MAXVERSION = new int[]{2,18};
+    private static final int[] QGIS_DESKTOP_MAXVERSION = new int[]{3,16};
+
     private InstanceContainer<DataSetView> dataSetViewDc;
 
     private String styleProperty;
@@ -57,7 +60,13 @@ public class StyleFragment extends ScreenFragment {
                 StyleStorageBean.FileContentType.forFileName(styleUploadBtn.getFileName())
         );
 
-        StyleDbContent dbContent = styleStorageBean.transformFileToFields(styleFileContent, new int[]{2,18});
+        int[] version = null;
+        if(isServerStyle())
+            version = QGIS_SERVER_MAXVERSION;
+        else
+            version = QGIS_DESKTOP_MAXVERSION;
+
+        StyleDbContent dbContent = styleStorageBean.transformFileToFields(styleFileContent, version);
 
         DataSetView dataSetView = dataSetViewDc.getItem();
         dataSetView.setValue(styleProperty, dbContent.getQmlContent());
