@@ -9,14 +9,12 @@ package "agi_data_coverage (Edit-DB)" {
 
 package "DataCoverage (SIMI)" {
   class "SubArea" as sa
-  class "SubAreaImport" as si
   class "Published\nSubArea" as pa
   
   pa "*" -- "0..1" sa
 }
 
-tf .right.> si : Datensynchronisation
-si .right.> sa
+tf .right.> sa : Datensynchronisation
 
 
 legend
@@ -26,10 +24,11 @@ legend
   - Identifikatoren müssen übereinstimmen
   
   Ablauf Datensynchronisation:
-  - db2db Teilflaeche --> SubAreaImport
-  - update SubArea "where exists in SubAreaImport"
-  - insert SubArea "where not exists in SubAreaImport"
-  - soft delete SubArea "where not exists in SubAreaImport, DataCoverage
+  - db2db Teilflaeche --> SubArea mit Flag "imported"
+  - update SubArea where exists in "imported", "existing"
+  - insert SubArea where exists in "imported", not in "existing"
+  - soft delete SubArea where exists in "existing", not in "imported"
+  - hard delete alle mit Flag "imported"
 end legend
 
 @enduml

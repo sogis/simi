@@ -179,23 +179,7 @@ Unterorganisation innerhalb eines Amts. Der Einfachheit halber wird nur eine Hie
 
 UK auf name und FK zum Amt (Wird nur bei kleinem Aufwand umgesetzt)
 
-## Klasse DataCoverage
-
-Datenabdeckungs-Ebene für 1-n Themen. Aus der Ebene gehen zwei Informationen hervor:
-* Gibt es Gebiete im Kanton ohne Daten (Datenlücken)?
-* Sind die Daten für den Bezug im mehrere Stücke aufgeteilt? Und wenn ja: In welche Teilflächen (Polygone)?
-
-### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|identifier|String(100)|j|Eindeutige Kennung der Datenabdeckungs-Ebene|
-
-### Konstraints
-
-UK auf identifier
-
-## Klasse PublishedArea
+## Klasse PublishedSubArea
 
 Mit dem "LastPublished date" wird in dieser Klasse gespeichert, wann ein Teilgebiet einer Themenpublikation das letzte mal publiziert wurde. LastPublished wird für Vektordaten via GRETL-Publisher geschrieben.
 
@@ -230,7 +214,7 @@ Wird mittels GRETL-Job aus dem Schema "agi_data_coverage" (Modell SO_AGI_Meta_Da
 
 UK über identifier, coverageIdent
 
-# Ablauf der Datensynchronisation
+# TODO: Update - Ablauf der Datensynchronisation
 
 ## db2db Teilflaeche --> SubAreaImport
 
