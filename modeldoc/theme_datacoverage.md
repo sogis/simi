@@ -1,8 +1,60 @@
-# Theme
+# DataCoverage (Theme)
 
-Bildet die Themen und Themenbereitstellungen ab (Datenbezug)
+Dokumentiert die Klassen des Package DataCoverage (SIMI) und die Zusammenhänge zum Modell "SO_AGI_Meta_Datenabdeckung_YYYYMMDD".
 
-![Theme](resources/theme/theme.png)
+![DataCoverage](resources/theme/datacoverage.png)
+
+## Klasse DataCoverage
+
+Datenabdeckungs-Ebene für 1-n Themen. Aus der Ebene gehen zwei Informationen hervor:
+* Gibt es Gebiete im Kanton ohne Daten (Datenlücken)?
+* Sind die Daten für den Bezug im mehrere Stücke aufgeteilt? Und wenn ja: In welche Teilflächen (Polygone)?
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|identifier|String(100)|j|Eindeutige Kennung der Datenabdeckungs-Ebene|
+
+### Konstraints
+
+UK auf identifier
+
+## Klasse PublishedArea
+
+Mit dem "LastPublished date" wird in dieser Klasse gespeichert, wann ein Teilgebiet einer Themenpublikation das letzte mal publiziert wurde. LastPublished wird für Vektordaten via GRETL-Publisher geschrieben.
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|lastPublished|Date|n|Letzte (aktuellste) Publikation dieses Teils der ThemenBereitstellung. Optional, da für Vektoren vom Publisher (später) gesetzt.|
+
+### Konstraints
+
+UK über die FK
+
+## Klasse Area
+
+Fläche eines Teilgebietes des Kanton Solothurn. Alle 1-n Teilgebiete der gleichen Datenabdeckung bilden zusammen ein AREA-Datensatz, welcher 
+die Datenabdeckung innerhalb des Kt. Solothurn dokumentiert.
+
+Wird mittels GRETL-Job aus dem Schema "agi_meta_coverage" (Modell SO_AGI_Meta_Datenabdeckung_YYYMMMDD) gepflegt (Bulk InsUpdDel).
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|identifier|String(100)|j|Eindeutige Kennung des Teilgebiets|
+|coverageIdent|String(100)|j|Kennung der Datenabdeckung des Teilgebiets|
+|coverageRevision|Integer|j|Revision (Version) der Datenabdeckung. Für GRETL Bulk InsUpdDel benötigt.|
+|geomWkb|byte[]|j|Polygon-Geometrie des Teilgebietes als WKB|
+|title|String(255)|n|Sprechender Titel des Teilgebiets|
+
+### Konstraints
+
+UK über identifier, coverageIdent, coverageRevision, 
+
 
 ## Bemerkung zu den Attributbeschreibungen
 
@@ -126,3 +178,72 @@ Unterorganisation innerhalb eines Amts. Der Einfachheit halber wird nur eine Hie
 ### Konstraints
 
 UK auf name und FK zum Amt (Wird nur bei kleinem Aufwand umgesetzt)
+
+## Klasse DataCoverage
+
+Datenabdeckungs-Ebene für 1-n Themen. Aus der Ebene gehen zwei Informationen hervor:
+* Gibt es Gebiete im Kanton ohne Daten (Datenlücken)?
+* Sind die Daten für den Bezug im mehrere Stücke aufgeteilt? Und wenn ja: In welche Teilflächen (Polygone)?
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|identifier|String(100)|j|Eindeutige Kennung der Datenabdeckungs-Ebene|
+
+### Konstraints
+
+UK auf identifier
+
+## Klasse PublishedArea
+
+Mit dem "LastPublished date" wird in dieser Klasse gespeichert, wann ein Teilgebiet einer Themenpublikation das letzte mal publiziert wurde. LastPublished wird für Vektordaten via GRETL-Publisher geschrieben.
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|lastPublished|Date|n|Letzte (aktuellste) Publikation dieses Teils der ThemenBereitstellung. Optional, da für Vektoren vom Publisher (später) gesetzt.|
+
+### Konstraints
+
+UK über die FK
+
+## Klasse SubArea
+
+Fläche eines Teilgebietes des Kanton Solothurn. Alle 1-n Teilgebiete der gleichen Datenabdeckung bilden zusammen ein AREA-Datensatz, welcher 
+die Datenabdeckung innerhalb des Kt. Solothurn dokumentiert.
+
+Wird mittels GRETL-Job aus dem Schema "agi_data_coverage" (Modell SO_AGI_Meta_Datenabdeckung_YYYMMMDD) gepflegt (Bulk InsUpdDel).
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|identifier|String(100)|j|Eindeutige Kennung des Teilgebiets.|
+|coverageIdent|String(100)|j|Kennung der Datenabdeckung des Teilgebiets.|
+|geomWkb|byte[]|j|Polygon-Geometrie des Teilgebietes als WKB.|
+|title|String(255)|n|Sprechender Titel des Teilgebiets.|
+|deleted|DateTime|n|Gesetzt, falls die SubArea auf der Edit-Db nicht mehr vorkommt.|
+
+### Konstraints
+
+UK über identifier, coverageIdent
+
+# Ablauf der Datensynchronisation
+
+## db2db Teilflaeche --> SubAreaImport
+
+Delete und bulk Insert mittels db2db Task
+
+## Update SubArea "where exists in SubAreaImport"
+
+Update der SubArea-Eigenschaften (Geometrie, Titel) mit Inner Join auf Identifier, coverageIdent
+
+## Insert SubArea "where not exists in SubAreaImport, but DataCoverage exists"
+
+Insert neuer SubAreas, falls DataCoverage in SIMI enthalten, SubArea mit entsprechendem Identifier aber nicht.
+
+## Soft delete SubArea "where not exists in SubAreaImport, DataCoverage
+
+Setzen des Lösch-TimeStamp für in SIMI bestehende, aber auf der EDIT-DB nicht mehr vorkommende SubArea (Teilflaechen)

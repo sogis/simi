@@ -1,0 +1,59 @@
+INTERLIS 2.3;
+/**
+*!! Erfassungsmodell für die Dokumentation der Datenabdeckung der 
+*!! Themen des Datenbezugs.
+*!!------------------------------------------------------------------------------ 
+*!! Version    | wer | Änderung 
+*!!------------------------------------------------------------------------------ 
+*!! 2022-05-02 | Oliver Jeker  | Erstfassung 
+*!!==============================================================================
+*/
+
+!!@ technicalContact=mailto:agi@bd.so.ch
+MODEL SO_AGI_Meta_Datenabdeckung_20220502 (de)
+AT "http://www.geo.so.ch/models/AGI"
+VERSION "2018-02-02"  =
+  IMPORTS GeometryCHLV95_V1;
+
+  TOPIC Abdeckung =
+    OID AS INTERLIS.UUIDOID;
+
+    /** Teilgebietsfläche (SubArea) einer Datenabdeckung ()
+     */
+    CLASS Teilgebiet =
+      /** Fläche des Teilgebietes
+       */
+      Polygon : MANDATORY GeometryCHLV95_V1.Surface;
+
+      /** Innerhalb der Datenabdeckungs-Klasse eindeutiger Identifier der Flaeche.
+       *  Für ein Teilgebiet vom Typ Gemeinde beispielsweise die BFS-Nummer.
+       */
+      Identifier : MANDATORY TEXT*100;
+
+      /** Sprechende Bezeichnung des Gebietes
+       */
+      Bezeichnung : TEXT*255;
+
+    END Teilgebiet
+
+    /** Eine Datenabdeckung (DataCoverage) besteht aus 1-n Teilgebieten.
+     *  Am häufigsten ist die Abdeckung "ganzer_Kanton", bestehend aus 
+     *  dem einen Teilgebiet "Kanton Solothurn".
+     *  Falls die Daten in mehreren Teilen bezogen werden (AV, 
+     *  Nutzungsplanung, Lidar, ...), besteht die Datenabdeckung aus
+     *  mehreren Teilgebieten.
+     */
+    CLASS Datenabdeckung =
+      /** Eindeutige Bezeichnung der Datenabdeckung
+       */
+      Identifier : MANDATORY TEXT*100;
+
+      /** Interne Bemerkungen
+       */
+      Bemerkungen : MTEXT*1000;
+
+    END Datenabdeckung
+
+  END Abdeckung;
+
+END SO_AGI_Meta_Datenabdeckung_20220502.

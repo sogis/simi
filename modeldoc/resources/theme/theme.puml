@@ -14,6 +14,9 @@ package Theme {
       AGI ist als tech. 
       OrgUnit aller Themes
       hier auch erfasst.
+      Link wird für jede
+      ThemePub implizit
+      gesetzt.
     end note
     
     class "Agency" as ag
@@ -25,16 +28,16 @@ package Theme {
     ou <|-- so
   }
   
-  package DataCoverage {
-    class "Extent" as ex
-    class "Published\nExtent" as pe
-    class "DataCoverage" as dc
-    
-    tp "1" -- "1..n" pe
-    pe "*" -- "0..1" ex
+  class "Published\nSubArea" as pa
+  
+  package "Master: Edit-DB" {
+    class "SubArea" as sa
+    class "SubAreaImport"
   }
   
-  th "*" -- "1" dc
+  tp "1" -- "1..n" pa
+  pa "*" -- "0..1" sa
+  
   th "1" -- "*" tp
   th "*" -- "1" ou : "fach"
   th "0..1" .. "*" dp : "Darstellungen (b1)"
@@ -43,6 +46,6 @@ package Theme {
 }
 
 legend
-  b1: Offen ob Herleitung oder geführte Beziehung
+  b1: Offen ob bei Quelle=Db Herleitung oder geführte Beziehung
 end legend
-@enduml
+@endumldc

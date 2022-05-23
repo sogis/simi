@@ -1,0 +1,35 @@
+@startuml
+
+package "agi_data_coverage (Edit-DB)" {
+  class "Datenabdeckung" as da
+  class "Teilflaeche" as tf
+  
+  da "1" -- "1..n" tf
+}
+
+package "DataCoverage (SIMI)" {
+  class "SubArea" as sa
+  class "SubAreaImport" as si
+  class "Published\nSubArea" as pa
+  
+  pa "*" -- "0..1" sa
+}
+
+tf .right.> si : Datensynchronisation
+si .right.> sa
+
+
+legend
+  Master: 
+  - Edit-Db für Geometrie und Beziehung
+  - SIMI für den Rest
+  - Identifikatoren müssen übereinstimmen
+  
+  Ablauf Datensynchronisation:
+  - db2db Teilflaeche --> SubAreaImport
+  - update SubArea "where exists in SubAreaImport"
+  - insert SubArea "where not exists in SubAreaImport"
+  - soft delete SubArea "where not exists in SubAreaImport, DataCoverage
+end legend
+
+@enduml
