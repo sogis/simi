@@ -8,6 +8,8 @@ Bildet die Themen und Themenbereitstellungen ab (Datenbezug)
 
 ### Unter-Package "SubArea"
 
+Die Geometrien werden mittels GRETL-Job in die SIMI-DB integriert.
+
 Dokumentation siehe [hier](theme_subarea.md)
 
 ### Attributbeschreibungen
@@ -30,6 +32,7 @@ Für die Steuerung der GDI macht es keinen Unterschied, ob ein Thema ein Einzelt
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |identifier|String(100)|j|Eindeutiger Identifier des Theme (ch.so.\[Amt\].\[Thema\]).|
+|coverageIdent|String(100)|j|Identifier der Datenabdeckung (DataCoverage) dieses Themas.|
 |title|String(200)|j|Angezeigter Titel des Themas.|
 |description|String(1000)|j|Kurze fachliche Bescheibung des Themas. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
 |remarks|String|n|Interne Bemerkungen.|
@@ -52,7 +55,7 @@ Oder als Quelle von komplexen Weiterverarbeitungen genutzt werden, in welchen di
 |---|---|---|---|
 |type|Enum|j|Typ der Publikation: vecSimple, vecRelational, nonVec, other. Bei vec* werden die verfügbaren Dateitypen automatisch hergeleitet.|
 |typeSuffixOverride|String(50)|(n)|Explizit gesetzter Suffix für den identifier. Bsp. **kommunal** für kommunale Nutzungsplanung.|
-|_typeSuffix|String(50)|j|Aus den type* Attributen hergeleiteter Suffix (readonly)|
+|_typeSuffix|String(50)|j|Aus den type* Attributen hergeleiteter Suffix (Hilfsattribut, readonly)|
 
 ### Konstraints
 
@@ -73,7 +76,7 @@ beim Format jeweils immer "zip" steht.
 
 ### Konstraints
 
-UK auf mimeType
+Separate UK auf mimeType, name, kuerzel
 
 ## Klasse DataSetView
 
@@ -88,7 +91,7 @@ Siehe [DataSetView](data.md#klasse-datasetview-dsv) in Teilmodell "Data".
 
 ## Klasse OrgUnit
 
-Organisationseinheit, welche zu den Themen-Bereitstellungen fachlich oder technisch auskunft geben können.
+Organisationseinheit, welche zu den Themen-Bereitstellungen fachlich oder technisch Auskunft geben kann.
 
 Da die technische Auskunft immer durch das AGI erfolgt, wird nur die Beziehung für die fachliche Auskunft ausmodelliert.
 
