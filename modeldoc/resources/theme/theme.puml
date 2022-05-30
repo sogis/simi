@@ -28,15 +28,14 @@ package Theme {
     ou <|-- so
   }
   
-  class "Published\nSubArea" as pa
-  
-  package "Master: Edit-DB" {
+  package "SubArea" {
     class "SubArea" as sa
-    class "SubAreaImport"
+    class "Published\nSubArea" as pa
+    
+    pa "*" -- "0..1" sa
   }
   
   tp "1" -- "1..n" pa
-  pa "*" -- "0..1" sa
   
   th "1" -- "*" tp
   th "*" -- "1" ou : "fach"

@@ -4,7 +4,13 @@ Bildet die Themen und Themenbereitstellungen ab (Datenbezug)
 
 ![Theme](resources/theme/theme.png)
 
-## Bemerkung zu den Attributbeschreibungen
+## Bemerkungen 
+
+### Unter-Package "SubArea"
+
+Dokumentation siehe [hier](theme_subarea.md)
+
+### Attributbeschreibungen
 
 Ggf. werden die Beschreibungen mit den Tags $meta $port versehen, damit nachvollzogen werden kann, zu welchen Zwecken ein Attribut geführt wird. Falls weder $meta noch $port angegeben --> Attribut dient "nur" der internen Dokumentation.
 
