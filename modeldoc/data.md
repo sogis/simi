@@ -76,6 +76,8 @@ Spalten (via AttributeList) wie auch auf die angebotenen Zeilen (mittels Where-C
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
+|viewIsRowFilter|Boolean|j|True, falls eine View konfiguriert ist, und diese Zeilen der Tabelle wegfiltert. Default: false|
+|dbViewName|Sting(100)|n|Name der Db-View, über welche auf die Daten zugegriffen wird.|
 |wgcEdit|boolean|j|Gibt an, ob die TableView im Web GIS Client editiert wird. Default: false|
 |searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
 |searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
@@ -110,8 +112,6 @@ GDI Postgres-Tabelle. In Sonderfällen "in Tandem" mit einer SQL-View.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |tableName|String(100)|j|Name der Tabelle in der Datenbank|
-|viewName|String(100)|n|Falls vorhanden: Name der SQL-View|
-|viewIsRowFilter|Boolean|j|Filtert die View Zeilen heraus? Default: Nein|
 |idFieldName|String(100)|j|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
 |descriptionModel|String|n|Beschreibung Klasse im INTERLIS-Modell.|
 |descriptionOverride|String|n|Überschreibung der Klassenbeschreibung.|

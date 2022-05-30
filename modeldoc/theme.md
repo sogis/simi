@@ -18,31 +18,32 @@ Ggf. werden die Beschreibungen mit den Tags $meta $port versehen, damit nachvoll
 
 ## Klasse Theme
 
-Aufgrund der fachlichen (nicht technischen) Auseinandersetzung definiertes Thema, für welches Geodaten für den Bezug bereitgestellt werden. Bei Vektordaten gilt meist: Umfang des Publikations-Modelles = Datenumfang eines Themas.
+Aufgrund der fachlichen (nicht technischen) Auseinandersetzung definiertes Thema, für welches Geodaten für den Bezug bereitgestellt werden. Der Nachführungsprozess bestimmt die Zugehörigkeit der Tabellen, ... zu einem Thema.   
+Bei Vektordaten gilt meist: Umfang des Publikations-Modelles = Datenumfang eines Themas. 
 
 Im Datenschatz von Solothurn bestehen zwei Haupt-Typen von Themen:
 
-* **Typ Einzelthema:** Thematisch eng umrissenes fachlich begründetes Thema. Beispiel: Bienenstandorte
-* **Typ Themengruppe:** "Superthema", welches mehrere fachlich eng umrissene Einzelthemen zusammenfasst. Meist mit dem Hintergrund eines gemeinsamen Nachführungs- / Bewilligungsablaufes. Beispiele: AV, Nutzungsplanung
+* **Typ Einzelthema:** Thematisch eng umrissenes fachlich begründetes Thema. Beispiel: Bienenstandorte.
+* **Typ Themengruppe:** "Superthema", welches mehrere fachlich eng umrissene Einzelthemen zusammenfasst. Meist mit dem Hintergrund eines gemeinsamen Nachführungs- / Bewilligungsablaufes. Beispiele: AV, Nutzungsplanung.
 
-Für die Steuerung der GDI macht es keinen Unterschied, ob ein Thema ein Einzelthema oder eine Themengruppe ist, darum sind Einzelthema, Themengruppe nicht ausmodelliert.
+Für die Steuerung der GDI macht es keinen Unterschied, ob ein Thema ein Einzelthema oder eine Themengruppe ist, darum sind die Subklassen Einzelthema und Themengruppe nicht ausmodelliert.
 
 ### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|identifier|String(100)|j|Eindeutiger Identifier des Theme (ch.so.\[Amt\].\[Thema\]).|
+|identifier|String(100)|j|Eindeutiger Identifier des Themas (ch.so.\[Amt\].\[Thema\]).|
 |coverageIdent|String(100)|j|Identifier der Datenabdeckung (DataCoverage) dieses Themas.|
 |title|String(200)|j|Angezeigter Titel des Themas.|
 |description|String(1000)|j|Kurze fachliche Bescheibung des Themas. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
 |remarks|String|n|Interne Bemerkungen.|
-|keywords|String(200)|n|Stichworte. Können auch thematische Überbegriffe sein. Als Json-Array formatiert.|
-|synonyms|String(200)|n|Synonyme, sprich alternative treffende Titel für das Thema. Als Json-Array formatiert.|
+|keywords|String(500)|n|Stichworte. Können auch thematische Überbegriffe sein. Als Json-Array formatiert.|
+|synonyms|String(500)|n|Synonyme, sprich alternative treffende Titel für das Thema. Als Json-Array formatiert.|
 |remarks|String|n|Interne Bemerkungen.|
 
 ### Konstraints
 
-UK auf identifier
+UK auf identifier.
 
 ## Klasse ThemePublication
 
@@ -54,12 +55,23 @@ Oder als Quelle von komplexen Weiterverarbeitungen genutzt werden, in welchen di
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |type|Enum|j|Typ der Publikation: vecSimple, vecRelational, nonVec, other. Bei vec* werden die verfügbaren Dateitypen automatisch hergeleitet.|
+
 |typeSuffixOverride|String(50)|(n)|Explizit gesetzter Suffix für den identifier. Bsp. **kommunal** für kommunale Nutzungsplanung.|
-|_typeSuffix|String(50)|j|Aus den type* Attributen hergeleiteter Suffix (Hilfsattribut, readonly)|
+|_typeSuffix|String(50)|j|Aus den type* Attributen hergeleiteter Suffix des Identifiers (Hilfsattribut, readonly)|
 
 ### Konstraints
 
-UK über _typeSuffix, "FK auf Thema"
+UK über _typeSuffix, "FK auf Thema".
+
+Soft-Konstraint "OnBeforeSave":   
+Die "Unit of Work" beim Editieren umfasst die der ThemePublication korrekt zugeordneten DataSetViews. Regeln (E - Error, W - Warning):
+
+* Die verlinkten DSV basieren nicht auf einer Rowfilter-View (E).
+
+Aufgrund Aufwand/Ertrag verworfen:
+
+* Jede Modellklasse ist mit genau einem DSV beschrieben (E).
+* Die im DSV verlinkten Attribute entsprechen genau dem Klassenumfang des Modells (E).
 
 ## Klasse FileType
 
@@ -72,11 +84,11 @@ beim Format jeweils immer "zip" steht.
 |---|---|---|---|
 |mimeType|String(255)|j|Mime-Type des Dateityps. Attribut ist auch der identifier für die automatische Zuordnung der "Vektor-Gebrauchsformate".|
 |name|String(100)|j|Sprechender Name des Dateityps.|
-|kuerzel|String(50)|j|$td.|
+|kuerzel|String(50)|j|Suffix für Dateien dieses Typs für die Benennung des entsprechenden ZIP (xtf, itf, shp, gpkg, ...).|
 
 ### Konstraints
 
-Separate UK auf mimeType, name, kuerzel
+Separate UK auf mimeType, name, kuerzel.
 
 ## Klasse DataSetView
 
@@ -97,11 +109,11 @@ Da die technische Auskunft immer durch das AGI erfolgt, wird nur die Beziehung f
 
 ### Attributbeschreibung
 
-Keine Attribute
+Keine Attribute.
 
 ## Klasse Agency
 
-Informationen zum Amt (AfU, ARP, AGI, ...). Punktuell ist der Klassenüberbegriff "Amt" nicht ganz zutreffend (Beispielsweise bei Daten der Solothurnischen Gebäudeversicherung).
+Informationen zum Amt (AfU, ARP, AGI, ...). Hinweis: Punktuell ist der Klassenüberbegriff "Amt" nicht ganz zutreffend (Beispielsweise bei Daten der Solothurnischen Gebäudeversicherung).
 
 ### Attributbeschreibung
 
@@ -116,22 +128,22 @@ Informationen zum Amt (AfU, ARP, AGI, ...). Punktuell ist der Klassenüberbegrif
 
 ### Konstraints
 
-UK auf name   
-UK auf kuerzelAmt
+UK auf name.   
+UK auf kuerzelAmt.
 
 ## Klasse SubOrg
 
-Unterorganisation innerhalb eines Amts. Der Einfachheit halber wird nur eine Hierarchiestufe ausmodelliert (Es gibt keine SubSubOrg). Beispiel für die Erfassung eines Fachbereiches als SubOrg: "Fachbereich Altlasten (Abteilung Boden)"
+Unterorganisation innerhalb eines Amts. Der Einfachheit halber wird nur eine Hierarchiestufe ausmodelliert (Es gibt keine SubSubOrg). Beispiel für die Erfassung eines Fachbereiches als SubOrg: "Fachbereich Altlasten (Abteilung Boden)".
 
 ### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|name|String(100)|j|Name der Unterorganisation. Bsp: "Abteilung Boden"|
+|name|String(100)|j|Name der Unterorganisation. Bsp: "Abteilung Boden".|
 |url|String(100)|n|URL der Homepage des Amts.|
-|telefon|String(20)|n|Kennung und Vorwahl innerhalb CH: 032 212 66 77|
-|email|String(50)|n|Email-Adresse des Amtes|
+|telefon|String(20)|n|Kennung und Vorwahl innerhalb CH: 032 212 66 77.|
+|email|String(50)|n|Email-Adresse des Amtes.|
 
 ### Konstraints
 
-UK auf name und FK zum Amt (Wird nur bei kleinem Aufwand umgesetzt)
+UK auf name und FK zum Amt (Wird nur bei kleinem Aufwand umgesetzt).

@@ -1,22 +1,23 @@
 # SubArea (Theme)
 
-Dokumentiert die Klassen des Package Theme.SubArea (SIMI) und die Zusammenhänge zum Modell "SO_AGI_Meta_Datenabdeckung_YYYYMMDD" im Schema agi_data_coverage auf der Edit-DB.
+Dokumentiert die Klassen des Package Theme.SubArea (SIMI) und die Zusammenhänge zum Modell "SO_AGI_Meta_Datenabdeckung_YYYYMMDD". Das Modell ist im Schema agi_data_coverage auf der Edit-DB implementiert.
 
 ![DataCoverage](resources/theme/subarea.png)
 
 ## Klasse PublishedSubArea
 
-Mit dem "LastPublished date" wird in dieser Klasse gespeichert, wann ein Teilgebiet einer Themenpublikation das letzte Mal publiziert wurde. LastPublished wird für Vektordaten via GRETL-Publisher geschrieben.
+Mit dem "published" Timestamp wird in dieser Klasse gespeichert, wann ein Teilgebiet einer Themenpublikation das letzte Mal publiziert wurde. "published" wird für Vektordaten via GRETL-Publisher geschrieben.
 
 ### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|lastPublished|DateTime|j|Letzte (aktuellste) Publikation dieses Teils der ThemenBereitstellung.|
+|published|DateTime|j|Letzte (aktuellste) Publikation dieses Teils der ThemenBereitstellung.|
+|prevPublished|DateTime|j|Vorletzte Publikation dieses Teils der ThemenBereitstellung.|
 
 ### Konstraints
 
-UK über die FK
+UK über die FK.
 
 ## Klasse SubArea
 
@@ -33,22 +34,22 @@ Wird mittels GRETL-Job aus dem Schema "agi_data_coverage" (Modell SO_AGI_Meta_Da
 |coverageIdent|String(100)|j|Kennung der Datenabdeckung des Teilgebiets.|
 |geomWkb|byte[]|j|Polygon-Geometrie des Teilgebietes als WKB.|
 |title|String(255)|n|Sprechender Titel des Teilgebiets.|
-|version|DateTime|n|Timestamp der Version. Notwendig für den GRETL Aktualisierungs-Job|
+|updated|DateTime|n|Timestamp der letzten Ausführung des GRETL-Jobs.|
 
 ### Konstraints
 
-UK über identifier, coverageIdent, version
+UK über identifier, coverageIdent, updated
 
 # Ablauf der Datensynchronisation
 
-* db2db mit version = null
+* db2db mit updated = null
 * Update der bestehende Beziehungen von PublishedSubArea auf die neu importierten SubArea
-* Alle Subareas löschen: `where version is not null`
-* Version für neu importierte setzen: `version = now()`
+* Alle Subareas löschen: `where updated is not null`
+* Version für neu importierte setzen: `updated = now()`
 
 # Ablauf bei PUT-Aufruf durch Publisher
 
-## Publisher sendet Aktualisierung
+## 1. Publisher sendet Aktualisierung
 
     {
       "dataIdent": "ch.so.afu.gewaesserschutz",
@@ -56,9 +57,9 @@ UK über identifier, coverageIdent, version
       "partIdentifiers": ["224", "225"]
     }
 
-## Aktualisierung PublishedSubArea
+## 2. Aktualisierung PublishedSubArea
 
 * Falls PublishedSubArea bereits vorhanden:
-  * Dieses Aktualisieren (Timestamp)
+  * Dieses Aktualisieren (Timestamp).
 * Sonst:
-  * Neues PublishedSubArea erstellen
+  * Neues PublishedSubArea erstellen.
