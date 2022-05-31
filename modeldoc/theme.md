@@ -8,13 +8,35 @@ Bildet die Themen und Themenbereitstellungen ab (Datenbezug)
 
 ### Unter-Package "SubArea"
 
-Die Geometrien werden mittels GRETL-Job in die SIMI-DB integriert.
+Die Geometrien werden mittels GRETL-Job in die SIMI-DB kopiert.
 
 Dokumentation siehe [hier](theme_subarea.md)
 
 ### Attributbeschreibungen
 
 Ggf. werden die Beschreibungen mit den Tags $meta $port versehen, damit nachvollzogen werden kann, zu welchen Zwecken ein Attribut geführt wird. Falls weder $meta noch $port angegeben --> Attribut dient "nur" der internen Dokumentation.
+
+### Modellierungsvarianten ILI-Modell -> Klasse -> Attribut
+
+* Ueber DSV (Dokumentierte Version):
+  * Vorteile:
+    * Den Benutzern im AGI vertraut
+    * Durchgängig gleich für alle Datentypen (Vektor, Raster, ...)
+    * Konsistent bezüglich Keywords, Synonyms
+    * (Verknüpfung zu den Rollen besteht bereits für allfälligen Bezug von zugriffsgeschützten Dateien)
+  * Nachteile:
+    * "Identifier-Inflation": Beispielsweise ch.so.agi.gebaeude.adressen_bezug für Bezug und ch.so.agi.gebaeude.adressen_view für WGC, WMS
+    * Erfassungsfehler möglich, da ohne Validierung Konf <> Modell. Impact ausschliesslich auf die Dokumentation.
+      * Erfassung kann nach Bedarf unterstützt werden --> $td Abklären t_ili2db_attrname, t_ili2db_inheritance.
+* Ueber PostgresTable (Alternativ - Nicht ausmodelliert):
+  * Beschreibung: 
+    * Im Theme werden die Modelle eingetragen. Die geschützten Attribute in der PostgresTable markiert.
+    * Vorteile:
+      * "Konfiguration näher im Keller"
+    * Nachteile:
+      * Keywords, Synonyms
+      * Unterschiedliche Konfigurationsart bezüglich der Attribute
+      * Andere Konfiguration Vec, Non-Vec
 
 ## Klasse Theme
 
