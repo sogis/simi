@@ -20,7 +20,7 @@ Beispiele:
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|identifier|String(100)|j|Eindeutiger hierarchischer Identifier des DataProduct (ch.so.fuu.bar).|
+|ident*|String(100)|j|Siehe Kapitel Identifier|
 |pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](../metamodel.md#ebenenpublikation-in-dataproduct).|
 |keywords|String(200)|n|Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|
@@ -28,9 +28,27 @@ Beispiele:
 |title|String(200)|n|Angezeigter Titel (Bezeichnung) des Dataproduct. Falls null in Erstellungsphase wird identifier verwendet.|
 |description|String(1000)|n|Beschreibung. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
 
+### Identifier
+
+Der Identifier der Themenbereitstellung soll neu die Basis sein für die DataProduct-Identifier. Im Attribut identPart wird neu meist nur noch der Suffix zum Identifier der Themenbereitstellung erfasst.
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
+|identThemeLess|Boolean|j|Ja falls in identPart ein themenunabhängiger vollständiger Identifier erfasst ist. Default: Nein|
+|_identUnique|String(100)|j|Zusammengesetzter eindeutiger identifier. Idee bei Teilidentifier: \[ThemePub-UUID\].Teil-Identifier|
+
+Eventuell wird die Implementierung leicht abweichen, damit alle Anforderungen einfach erfüllt werden können. Anforderungen:
+
+* Auf der Datenbank unique
+* Einfach:
+  * Auswahl DProd
+  * Browse-Screens
+  * Rename Themenbereitstellung
+
 ### Konstraints
 
-Feld "identifier" ist GDI-weit eindeutig.
+Feld "_identUnique" ist GDI-weit eindeutig.
 
 ## Interface ChildLayerProperties
 

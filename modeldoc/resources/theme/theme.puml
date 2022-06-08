@@ -5,7 +5,6 @@ package Theme {
   class "Theme" as th
   class "FileType" as ft 
   
-  abstract class "DataSetView" as dsv << package data >>
   abstract class "DataProduct" as dp << package product >>
   
   package Organisation {
@@ -39,12 +38,11 @@ package Theme {
   
   th "1" -- "*" tp
   th "*" -- "1" ou : "fach"
-  th "0..1" .. "*" dp : "Darstellungen (b1)"
-  tp "0..1" -- "1-n" dsv
+  tp "0..1" -- "1-n" dp : (b1)
   tp "*" -- "*" ft
 }
 
 legend
-  b1: Offen ob bei Quelle=Db Herleitung oder geführte Beziehung
+  b1: DSV sind immer einer ThemePub zuzuweisen --> SoftwareConstraint
 end legend
 @endumldc
