@@ -77,7 +77,6 @@ Oder als Quelle von komplexen Weiterverarbeitungen genutzt werden, in welchen di
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |type|Enum|j|Typ der Publikation: vecSimple, vecRelational, nonVec, other. Bei vec* werden die verfügbaren Dateitypen automatisch hergeleitet.|
-
 |typeSuffixOverride|String(50)|(n)|Explizit gesetzter Suffix für den identifier. Bsp. **kommunal** für kommunale Nutzungsplanung.|
 |_typeSuffix|String(50)|j|Aus den type* Attributen hergeleiteter Suffix des Identifiers (Hilfsattribut, readonly)|
 
