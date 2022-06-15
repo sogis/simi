@@ -24,17 +24,17 @@ Bemerkung: Im DB-Schema ist die DSV im Moment noch mit Präfix "simiproduct_" en
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
+|isFileDownloadDSV|boolean|j|Ist das DSV der "Konfigurationsträger" für den Datenbezug?. Default: False|
 |styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
 |styleServerChanged|DateTime|n|Zeitpunkt der letzten syleServer änderung.|
 |styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
 |styleDesktopChanged|DateTime|n|Zeitpunkt der letzten syleDesktop änderung.|
 
+
 #### Konstraints
 
 UK auf den FK zur DataSetView.   
 styleServer und styleDesktop: QML in korrekter Version hochgeladen?
-
-DSV darf nicht gelöscht werden, sofern es in einem FacadeLayer vorkommt.
 
 ### Klasse StyleAsset
 
@@ -94,6 +94,7 @@ Sortierte Liste der Attribute mit Alias einer TableView.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |sort|int|j|Sortierung in WMS Featureinfo und WGC.|
+|serviceExposed|boolean|j|Gibt an, ob ein Attribut in den Diensten (DataService, WMS, ..) oder sichtbar ist, oder nur im Datenbezug.|
 
 #### Konstraints
 

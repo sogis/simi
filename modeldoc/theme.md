@@ -69,30 +69,22 @@ UK auf identifier.
 
 ## Klasse ThemePublication
 
-Konkrete Bereitstellung(en) eines Themas für einen Nutzungszweck. Beispiel Thema Verkehrszählung: Dessen Daten können lesend eingebunden werden -> Publikation ch.so.avt.verkehrszaelstellen.
-Oder als Quelle von komplexen Weiterverarbeitungen genutzt werden, in welchen die relationale Gliederung von Vorteil ist --> Publikation ch.so.avt.verkehrszaelstellen.edit.
+Konkrete Bereitstellung(en) eines Themas für einen Nutzungszweck. Beispiel Thema Verkehrszählung:
+
+* Nutzungszweck lesend / darstellend: Bezug von ch.so.avt.verkehrszaelstellen (Strukturiert nach Pub-Modell).
+* Nutzungszweck "komplexe Weiterverarbeitung", in welcher die relationale Gliederung von Vorteil ist: Bezug von ch.so.avt.verkehrszaelstellen.struct (Strukturiert nach Edit-Modell).
 
 ### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |type|Enum|j|Typ der Publikation: vecSimple, vecRelational, nonVec, other. Bei vec* werden die verfügbaren Dateitypen automatisch hergeleitet.|
-|typeSuffixOverride|String(50)|(n)|Explizit gesetzter Suffix für den identifier. Bsp. **kommunal** für kommunale Nutzungsplanung.|
+|typeSuffixOverride|String(50)|(n)|Explizit gesetzter Suffix für den identifier. Bsp. **kommunal** für kommunale Nutzungsplanung. Resultierender Identifier: ch.so.arp.nutzungsplanung.kommunal|
 |_typeSuffix|String(50)|j|Aus den type* Attributen hergeleiteter Suffix des Identifiers (Hilfsattribut, readonly)|
 
 ### Konstraints
 
 UK über _typeSuffix, "FK auf Thema".
-
-Soft-Konstraint "OnBeforeSave":   
-Die "Unit of Work" beim Editieren umfasst die der ThemePublication korrekt zugeordneten DataSetViews. Regeln (E - Error, W - Warning):
-
-* Die verlinkten DSV basieren nicht auf einer Rowfilter-View (E).
-
-Aufgrund Aufwand/Ertrag verworfen:
-
-* Jede Modellklasse ist mit genau einem DSV beschrieben (E).
-* Die im DSV verlinkten Attribute entsprechen genau dem Klassenumfang des Modells (E).
 
 ## Klasse FileType
 

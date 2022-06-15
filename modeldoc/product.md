@@ -30,38 +30,22 @@ Beispiele:
 
 ### Identifier
 
-Der Identifier der Themenbereitstellung soll die Basis sein für die DataProduct-Identifier. Im Attribut identPart wird neu meist nur noch der Suffix zum Identifier der Themenbereitstellung erfasst.
+Der Identifier der Themenbereitstellung ist die Basis der DataProduct-Identifier. Im Attribut identPart wird neu meist nur noch der Suffix zum Identifier der Themenbereitstellung erfasst.
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
-|identThemeLess|Boolean|j|Ja falls in identPart ein themenunabhängiger vollständiger Identifier erfasst ist. Default: Nein|
 |_identUnique|String(100)|j|Zusammengesetzter eindeutiger identifier. Idee bei Teilidentifier: \[ThemePub-UUID\].Teil-Identifier|
 
-#### Default-Dataproduct
+### Representatives DataProduct für eine ThemePublication
 
-Es gibt einige Themen, welche durch ein bereits existierendes DataProduct darstellerisch sehr gut repräsentiert werden. Das DataProduct ist damit das "Default-Dataproduct" für das Thema.
+Häufig gibt es unter allen DP ein "spezielles", welches eine ThemePublication am treffendsten darstellt. Für das representative DP ist "identPart" = NULL. Der resultierende Identifier ist damit identisch mit dem Identifier der ThemePublication.
 
-Eigenschaften:
-* "identPart" ist NULL
-* "identThemeLess" ist "falsch"
-* Bei Vektordaten: Daten liegen auf der Pub-DB
+### Themenübergreifende DP
 
-#### Fragen:
+Vereinzelt gibt es themenübergreifende FacadeLayer und Layergruppen, welche nicht "mehrheitlich" einem Thema zugewiesen werden können.
 
-* Nebeneinander oder Verschmolzen?
-* "Default"-DataProduct nachvollziehbar und richtig?
-* Mehrere Default-DP's pro Thema ist "overkill", oder?
-
-**Notizen**
-
-Eventuell wird die Implementierung leicht abweichen, damit alle Anforderungen einfach erfüllt werden können. Anforderungen:
-
-* Auf der Datenbank unique
-* Einfach:
-  * Auswahl DProd
-  * Browse-Screens
-  * Rename Themenbereitstellung
+Diese haben damit konsequenterweise keine Beziehung zu einer ThemePublication (FK = NULL). Das Attribut identPart enthält den vollen Identifier (Beispielsweise ch.so.afu.bohrungen).
 
 ### Konstraints
 
