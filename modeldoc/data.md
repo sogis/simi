@@ -69,15 +69,14 @@ Tabelle "DataSet" zusammengefasst werden.
 
 ### Klasse TableView
 
-Aus einer Datenbank-Tabelle oder -View abgeleitete "Soft View" mit Filtermöglichkeit sowohl auf die angebotenen
-Spalten (via AttributeList) wie auch auf die angebotenen Zeilen (mittels Where-Clause).
+Auf einer Datenbank-Tabelle basierende "Soft View" mit Filtermöglichkeit sowohl auf die angebotenen
+Spalten (via AttributeList) wie auch auf die angebotenen Zeilen (mittels Filter DB-View).
 
 #### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|viewIsRowFilter|Boolean|j|True, falls eine View konfiguriert ist, und diese Zeilen der Tabelle wegfiltert. Default: false|
-|dbViewName|Sting(100)|n|Name der Db-View, über welche auf die Daten zugegriffen wird.|
+|rowFilterViewName|Sting(100)|n|Name der Db-View, über welche ein Subset der Records der Tabelle selektiert wird. Die View verändert weder Umfang noch Datentyp der Tabellenspalten.|
 |wgcEdit|boolean|j|Gibt an, ob die TableView im Web GIS Client editiert wird. Default: false|
 |searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
 |searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
@@ -107,7 +106,7 @@ UK über FK's.
  
 ### Klasse PostgresTable
 
-GDI Postgres-Tabelle. In Sonderfällen "in Tandem" mit einer SQL-View.
+GDI Postgres-Tabelle.
 
 #### Attributbeschreibung
 |Name|Typ|Z|Beschreibung|

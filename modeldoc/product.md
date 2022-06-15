@@ -20,22 +20,18 @@ Beispiele:
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|ident*|String(100)|j|Siehe Kapitel Identifier|
+|identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
 |pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](../metamodel.md#ebenenpublikation-in-dataproduct).|
 |keywords|String(200)|n|Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|
 |synonyms|String(200)|n|Synonyme für das DataProduct.|
 |title|String(200)|n|Angezeigter Titel (Bezeichnung) des Dataproduct. Falls null in Erstellungsphase wird identifier verwendet.|
 |description|String(1000)|n|Beschreibung. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
+|_identUnique|String(100)|j|Zusammengesetzter eindeutiger identifier. Idee: \[ThemePub-UUID\].identPart|
 
-### Identifier
+### Identifier (Attribut identPart)
 
-Der Identifier der Themenbereitstellung ist die Basis der DataProduct-Identifier. Im Attribut identPart wird neu meist nur noch der Suffix zum Identifier der Themenbereitstellung erfasst.
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
-|_identUnique|String(100)|j|Zusammengesetzter eindeutiger identifier. Idee bei Teilidentifier: \[ThemePub-UUID\].Teil-Identifier|
+Der Identifier der Themenbereitstellung ist die Basis der DataProduct-Identifier. Im Attribut "identPart" wird neu meist nur noch der Suffix zum Identifier der Themenbereitstellung erfasst. Der gesamte Identifier für das DataProdukt leitet sich aus der Beziehung zur ThemePublication und dem "identPart"-Attribut ab.
 
 ### Representatives DataProduct für eine ThemePublication
 
