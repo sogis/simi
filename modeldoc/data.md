@@ -113,6 +113,7 @@ GDI Postgres-Tabelle.
 |---|---|---|---|
 |tableName|String(100)|j|Name der Tabelle in der Datenbank|
 |idFieldName|String(100)|j|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
+|title|String(100)|n|Titel der Tabelle (Alias)|
 |descriptionModel|String|n|Beschreibung Klasse im INTERLIS-Modell.|
 |descriptionOverride|String|n|Überschreibung der Klassenbeschreibung.|
 |catSyncStamp|DateTime|j|Zeitpunkt des letzten Abgleiches mit dem effektiven Schema der Geodatenbank.|
