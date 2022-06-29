@@ -112,6 +112,7 @@ GDI Postgres-Tabelle.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |tableName|String(100)|j|Name der Tabelle in der Datenbank|
+|tableIsView|Boolean|j|True, falls die Quelle eine DB-View ist (meist false). Wird aufgrund der Antwort des Schemareader gesetzt.|
 |idFieldName|String(100)|j|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
 |title|String(100)|n|Titel der Tabelle (Alias)|
 |descriptionModel|String|n|Beschreibung Klasse im INTERLIS-Modell.|
