@@ -6,16 +6,11 @@ package data {
 
     package tabular {
         class "TableView" as tv
-        class "TableDS" as tds
         class "PostgresTable" as pt
-        class "ExternalTable" as et
         class "PostgresDB" as pdb
         class "TableField" as tf
         class "ViewField" as vf
         class "DataTheme" as dt
-
-        tds <|-- pt
-        tds <|-- et
 
         tv "1-n" --* "1" pt
 
