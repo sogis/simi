@@ -20,17 +20,32 @@ Beispiele:
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|identifier|String(100)|j|Eindeutiger hierarchischer Identifier des DataProduct (ch.so.fuu.bar).|
+|identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
 |pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](../metamodel.md#ebenenpublikation-in-dataproduct).|
 |keywords|String(200)|n|Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|
 |synonyms|String(200)|n|Synonyme für das DataProduct.|
 |title|String(200)|n|Angezeigter Titel (Bezeichnung) des Dataproduct. Falls null in Erstellungsphase wird identifier verwendet.|
-|description|String|n|Beschreibung|
+|description|String(1000)|n|Beschreibung. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
+|_identUnique|String(100)|j|Zusammengesetzter eindeutiger identifier. Idee: \[ThemePub-UUID\].identPart|
+
+### Identifier (Attribut identPart)
+
+Der Identifier der Themenbereitstellung ist die Basis der DataProduct-Identifier. Im Attribut "identPart" wird neu meist nur noch der Suffix zum Identifier der Themenbereitstellung erfasst. Der gesamte Identifier für das DataProdukt leitet sich aus der Beziehung zur ThemePublication und dem "identPart"-Attribut ab.
+
+### Representatives DataProduct für eine ThemePublication
+
+Häufig gibt es unter allen DP ein "spezielles", welches eine ThemePublication am treffendsten darstellt. Für das representative DP ist "identPart" = NULL. Der resultierende Identifier ist damit identisch mit dem Identifier der ThemePublication.
+
+### Themenübergreifende DP
+
+Vereinzelt gibt es themenübergreifende FacadeLayer und Layergruppen, welche nicht "mehrheitlich" einem Thema zugewiesen werden können.
+
+Diese haben damit konsequenterweise keine Beziehung zu einer ThemePublication (FK = NULL). Das Attribut identPart enthält den vollen Identifier (Beispielsweise ch.so.afu.bohrungen).
 
 ### Konstraints
 
-Feld "identifier" ist GDI-weit eindeutig.
+Feld "_identUnique" ist GDI-weit eindeutig.
 
 ## Interface ChildLayerProperties
 

@@ -1,0 +1,22 @@
+@startuml
+
+package "agi_data_coverage (Edit-DB)" {
+  class "Datenabdeckung" as da
+  class "Teilflaeche" as tf
+  
+  da "1" -- "1..n" tf
+}
+
+package "Theme.SubArea (SIMI)" {
+  class "SubArea" as sa
+  class "Published\nSubArea" as pa
+  
+  pa "*" -- "1" sa
+}
+
+class "Theme\nPublication" as tp
+
+tf .right.> sa : GRETL
+tp "1" -- "*" pa
+
+@enduml

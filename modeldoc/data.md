@@ -24,17 +24,17 @@ Bemerkung: Im DB-Schema ist die DSV im Moment noch mit Präfix "simiproduct_" en
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |rawDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
+|isFileDownloadDSV|boolean|j|Ist das DSV der "Konfigurationsträger" für den Datenbezug?. Default: False|
 |styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
 |styleServerChanged|DateTime|n|Zeitpunkt der letzten syleServer änderung.|
 |styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
 |styleDesktopChanged|DateTime|n|Zeitpunkt der letzten syleDesktop änderung.|
 
+
 #### Konstraints
 
 UK auf den FK zur DataSetView.   
 styleServer und styleDesktop: QML in korrekter Version hochgeladen?
-
-DSV darf nicht gelöscht werden, sofern es in einem FacadeLayer vorkommt.
 
 ### Klasse StyleAsset
 
@@ -69,13 +69,14 @@ Tabelle "DataSet" zusammengefasst werden.
 
 ### Klasse TableView
 
-Aus einer Datenbank-Tabelle oder -View abgeleitete "Soft View" mit Filtermöglichkeit sowohl auf die angebotenen
-Spalten (via AttributeList) wie auch auf die angebotenen Zeilen (mittels Where-Clause).
+Auf einer Datenbank-Tabelle basierende "Soft View" mit Filtermöglichkeit sowohl auf die angebotenen
+Spalten (via AttributeList) wie auch auf die angebotenen Zeilen (mittels Filter DB-View).
 
 #### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
+|rowFilterViewName|Sting(100)|n|Name der Db-View, über welche ein Subset der Records der Tabelle selektiert wird. Die View verändert weder Umfang noch Datentyp der Tabellenspalten.|
 |wgcEdit|boolean|j|Gibt an, ob die TableView im Web GIS Client editiert wird. Default: false|
 |searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
 |searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
@@ -92,6 +93,7 @@ Sortierte Liste der Attribute mit Alias einer TableView.
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |sort|int|j|Sortierung in WMS Featureinfo und WGC.|
+|serviceExposed|boolean|j|Gibt an, ob ein Attribut in den Diensten (DataService, WMS, ..) oder sichtbar ist, oder nur im Datenbezug.|
 
 #### Konstraints
 
@@ -102,38 +104,24 @@ UK über FK's.
 "wmsFiFormat" und "displayProps4Json" sind nur aktiv, wenn für die Ebene keine separate FeatureInfo-Konfiguration
  erstellt wurde (Teilmodell Featureinfo).
  
-### Klasse TableDS
-
-Tabelle einer Datenbank der GDI oder eine externe mit Bezug zur GDI
-
-#### Attributbeschreibung
-
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|tableName|String(100)|j|Name der Tabelle oder View in der Datenbank|
-|remarks|String|n|Interne Bemerkungen zur Tabelle.|
- 
-### Klasse ExternalTable
-
-Tabelle einer externen Datenbank, aus welcher die GDI liest oder schreibt (GRETL).
-
-#### Attributbeschreibung
-
-Keine eigenen Attribute.
- 
 ### Klasse PostgresTable
 
-GDI Postgres-Tabelle oder -View.
+GDI Postgres-Tabelle.
 
 #### Attributbeschreibung
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
+|tableName|String(100)|j|Name der Tabelle in der Datenbank|
+|tableIsView|Boolean|j|True, falls die Quelle eine DB-View ist (meist false). Wird aufgrund der Antwort des Schemareader gesetzt.|
 |idFieldName|String(100)|j|Name des Unique-Attributs für QGIS Server u. Desktop. Ist meistens die tid.|
-|descriptionModel|String|j|Beschreibung Klasse im INTERLIS-Modell.|
+|title|String(100)|n|Titel der Tabelle (Alias)|
+|descriptionModel|String|n|Beschreibung Klasse im INTERLIS-Modell.|
+|descriptionOverride|String|n|Überschreibung der Klassenbeschreibung.|
 |catSyncStamp|DateTime|j|Zeitpunkt des letzten Abgleiches mit dem effektiven Schema der Geodatenbank.|
 |geoFieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
 |geoType|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
 |geoEpsgCode|Integer|n|EPSG-Code des Koordinatensystems. In aller Regel 2056|
+|remarks|String|n|Interne Bemerkungen zur Tabelle.|
 
 ### Klasse TableField
 
@@ -167,10 +155,10 @@ Bezüglich Auslesen des Kataloges mittels SchemaReader bei bestehenden Attribute
 #### Bemerkungen:
 * Die Namen der Attribute werden mittels Katalogabfrage aus Postgres gelesen.
 
-### Klasse DataTheme
+### Klasse Schema
 
-Datenthema, welches 1-n (Geo-)Tabellen umfasst. Synonym für das Schema, welches mittels INTERLIS-Modell
-und ili2pg erzeugt wurde. 
+Schema, welches 1-n (Geo-)Tabellen eines Themas umfasst. Mittels INTERLIS-Modell
+und ili2pg erzeugt. 
 
 Ausblick INTERLIS-Modell: Das Metamodell geht von einer Beziehung 
 Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Datenthema hinterlegt werden.
@@ -180,6 +168,8 @@ Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Daten
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |schemaName|String(100)|j|Name des Schemas.|
+|modelName|String(100)|j|Name des INTERLIS-Modells der öffentlichen Daten.|
+
 
 #### Konstraints
 
