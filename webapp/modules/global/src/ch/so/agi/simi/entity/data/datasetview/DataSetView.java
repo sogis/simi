@@ -9,7 +9,6 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -26,8 +25,12 @@ public class DataSetView extends SingleActor {
     private static final long serialVersionUID = 3720829701428961919L;
 
     @NotNull
-    @Column(name = "RAW_DOWNLOAD", nullable = false)
-    private Boolean rawDownload = true;
+    @Column(name = "SERVICE_DOWNLOAD", nullable = false)
+    private Boolean serviceDownload = false;
+
+    @NotNull
+    @Column(name = "IS_FILE_DOWNLOAD_DSV", nullable = false)
+    private Boolean isFileDownloadDSV = false;
 
     @Composition
     @OneToMany(mappedBy = "dataSetView")
@@ -61,6 +64,14 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @Composition
     private List<Permission> permissions;
+
+    public Boolean getIsFileDownloadDSV() {
+        return isFileDownloadDSV;
+    }
+
+    public void setIsFileDownloadDSV(Boolean isFileDownloadDSV) {
+        this.isFileDownloadDSV = isFileDownloadDSV;
+    }
 
     public List<Relation> getRelations() {
         return relations;
@@ -131,11 +142,11 @@ public class DataSetView extends SingleActor {
         this.styleServer = styleServer;
     }
 
-    public Boolean getRawDownload() {
-        return rawDownload;
+    public Boolean getServiceDownload() {
+        return serviceDownload;
     }
 
-    public void setRawDownload(Boolean rawDownload) {
-        this.rawDownload = rawDownload;
+    public void setServiceDownload(Boolean serviceDownload) {
+        this.serviceDownload = serviceDownload;
     }
 }

@@ -1,0 +1,5 @@
+--je
+update SIMIDATA_DATA_SET_VIEW set SERVICE_DOWNLOAD = RAW_DOWNLOAD__U67670 ^
+--end je
+
+alter table SIMIDATA_DATA_SET_VIEW drop column RAW_DOWNLOAD__U67670 cascade ;

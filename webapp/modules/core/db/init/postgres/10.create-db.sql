@@ -78,6 +78,7 @@ create table SIMIDATA_VIEW_FIELD (
     VERSION integer not null,
     --
     SORT integer not null,
+    WGC_EXPOSED boolean not null,
     TABLE_FIELD_ID uuid not null,
     TABLE_VIEW_ID uuid not null,
     --
@@ -327,7 +328,8 @@ create table SIMIPRODUCT_FACADE_LAYER (
 create table SIMIDATA_DATA_SET_VIEW (
     ID uuid,
     --
-    RAW_DOWNLOAD boolean not null,
+    SERVICE_DOWNLOAD boolean not null,
+    IS_FILE_DOWNLOAD_DSV boolean not null,
     STYLE_SERVER text,
     STYLE_SERVER_UPLOADED timestamp,
     STYLE_DESKTOP text,
@@ -366,6 +368,7 @@ create table SIMIDATA_TABLE_VIEW (
     ID uuid,
     --
     POSTGRES_TABLE_ID uuid not null,
+    ROW_FILTER_VIEW_NAME varchar(100),
     SEARCH_TYPE varchar(50) not null,
     SEARCH_FACET varchar(100),
     SEARCH_FILTER_WORD varchar(100),

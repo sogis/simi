@@ -3,7 +3,6 @@ package ch.so.agi.simi.entity.data.datasetview;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
@@ -23,7 +22,6 @@ public class TableView extends DataSetView {
     private static final long serialVersionUID = -4901858225372396346L;
 
     @Composition
-    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "tableView")
     @OrderBy("sort")
     private List<ViewField> viewFields;
@@ -34,6 +32,9 @@ public class TableView extends DataSetView {
     @OnDeleteInverse(DeletePolicy.DENY)
     private PostgresTable postgresTable;
 
+    @Column(name = "ROW_FILTER_VIEW_NAME", length = 100)
+    private String rowFilterViewName;
+
     @NotNull
     @Column(name = "SEARCH_TYPE", nullable = false)
     private String searchType;
@@ -43,6 +44,14 @@ public class TableView extends DataSetView {
 
     @Column(name = "SEARCH_FILTER_WORD", length = 100)
     private String searchFilterWord;
+
+    public String getRowFilterViewName() {
+        return rowFilterViewName;
+    }
+
+    public void setRowFilterViewName(String rowFilterViewName) {
+        this.rowFilterViewName = rowFilterViewName;
+    }
 
     public TableView_SearchTypeEnum getSearchType() {
         return searchType == null ? null : TableView_SearchTypeEnum.fromId(searchType);

@@ -23,6 +23,10 @@ public class ViewField extends SimiEntity implements Sortable {
     @Column(name = "SORT", nullable = false)
     private Integer sort = 0;
 
+    @NotNull
+    @Column(name = "WGC_EXPOSED", nullable = false)
+    private Boolean wgcExposed = true;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TABLE_FIELD_ID")
     @OnDeleteInverse(DeletePolicy.CASCADE)
@@ -32,6 +36,14 @@ public class ViewField extends SimiEntity implements Sortable {
     @JoinColumn(name = "TABLE_VIEW_ID")
     @OnDeleteInverse(DeletePolicy.CASCADE)
     private TableView tableView;
+
+    public Boolean getWgcExposed() {
+        return wgcExposed;
+    }
+
+    public void setWgcExposed(Boolean wgcExposed) {
+        this.wgcExposed = wgcExposed;
+    }
 
     public TableView getTableView() {
         return tableView;
