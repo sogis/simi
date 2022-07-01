@@ -17,4 +17,4 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - "./gitignored/pgdata_int_20220414:/var/lib/postgresql/data/pgdata"
+      - "./gitignored/pgdata_simi_v2:/var/lib/postgresql/data/pgdata"
