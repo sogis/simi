@@ -52,6 +52,7 @@
             <form id="form" dataContainer="dataProductDc">
                 <column width="450px">
                     <textField id="identifierField" property="identifier"/>
+                    <textField id="rowFilterViewNameField" property="rowFilterViewName"/>
                     <textField id="titleField" property="title"/>
                     <fragment id="styleServerField" screen="simi_StyleFragment" caption="msg://ch.so.agi.simi.entity.product/DataSetView.styleServer">
                         <properties>
@@ -66,7 +67,8 @@
                                 <property name="filterProperty" value="forDSV"/>
                             </properties>
                         </fragment>
-                        <checkBox id="rawDownloadField" align="MIDDLE_CENTER" dataContainer="dataProductDc" property="serviceDownload" caption="WFS/Dataservice"/>
+                        <checkBox id="serviceDownloadField" align="MIDDLE_CENTER" dataContainer="dataProductDc" property="serviceDownload" caption="WFS/Dataservice?"/>
+                        <checkBox id="isFileDownloadDSVField" align="MIDDLE_CENTER" dataContainer="dataProductDc" property="isFileDownloadDSV" caption="Ist Download-DSV?"/>
                     </hbox>
                 </column>
                 <column width="450px">
@@ -120,6 +122,7 @@
                     </actions>
                     <columns>
                         <column id="tableField" editable="true" optionsContainer="tableFieldsDc"/>
+                        <column id="wgcExposed" editable="true"/>
                         <column id="sort" editable="true" sort="ASCENDING" width="150"/>
                     </columns>
                     <buttonsPanel>

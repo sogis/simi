@@ -7,19 +7,13 @@ import java.util.List;
 
 @Table(name = "SIMIIAM_USER")
 @Entity(name = User.NAME)
-@NamePattern("%s (%s %s)|identifier,firstname,lastname")
+@NamePattern("%s ( )|identifier")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class User extends Identity {
 
     public static final String NAME = "simiIAM_User";
 
     private static final long serialVersionUID = -2918662812811270888L;
-
-    @Column(name = "FIRSTNAME", length = 100)
-    private String firstname;
-
-    @Column(name = "LASTNAME", length = 100)
-    private String lastname;
 
     @JoinTable(name = "SIMIIAM_GROUP_USER_LINK",
             joinColumns = @JoinColumn(name = "USER_ID"),
@@ -49,19 +43,4 @@ public class User extends Identity {
         this.groups = groups;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 }

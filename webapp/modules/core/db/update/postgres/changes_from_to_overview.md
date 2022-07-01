@@ -14,3 +14,10 @@ Bemerkung: Das Framework macht
 |Migration DbSchema nach DbSchema|01C|
 |PostgresTable: Attributanpassung für V2|01D|
 |DSV und Attribute: Anpassungen V2|01E|
+|User: Vor- und Nachname entfernt|01F|
+
+## 4. Juli 2022
+
+|Änderung|Ordner|
+|---|---|
+|DSV: Stichworte und Synonyme|?|

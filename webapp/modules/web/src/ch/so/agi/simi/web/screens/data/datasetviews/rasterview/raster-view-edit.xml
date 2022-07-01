@@ -44,7 +44,8 @@
                                 <property name="filterProperty" value="forDSV"/>
                             </properties>
                         </fragment>
-                        <checkBox id="rawDownloadField" align="MIDDLE_CENTER" dataContainer="dataProductDc" property="serviceDownload" caption="Rohdaten pub?"/>
+                        <checkBox id="serviceDownloadField" align="MIDDLE_CENTER" dataContainer="dataProductDc" property="serviceDownload" caption="In Daten-Diensten?"/>
+                        <checkBox id="isFileDownloadDSVField" align="MIDDLE_CENTER" dataContainer="dataProductDc" property="isFileDownloadDSV" caption="Ist Download-DSV?"/>
                     </hbox>
                 </column>
                 <column width="450px">
