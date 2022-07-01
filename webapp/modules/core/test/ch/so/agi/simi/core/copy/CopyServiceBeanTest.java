@@ -326,8 +326,8 @@ class CopyServiceBeanTest {
 
             if(curr != null){ //original and copy share the same relationships --> remove only once
                 orm.remove( curr.getPostgresTable() );
-                orm.remove( curr.getPostgresTable().getDataTheme() );
-                orm.remove( curr.getPostgresTable().getDataTheme().getPostgresDB() );
+                orm.remove( curr.getPostgresTable().getDbSchema() );
+                orm.remove( curr.getPostgresTable().getDbSchema().getPostgresDB() );
 
                 orm.remove( curr.getPermissions().get(0).getRole() );
                 orm.remove( curr.getRelations().get(0).getDependency() );
@@ -556,7 +556,7 @@ class CopyServiceBeanTest {
             tbl.setTableName(TV_TABLE_STRING);
             tbl.setIdFieldName("fuu");
             tbl.setCatSyncStamp(LocalDateTime.now());
-            tbl.setDataTheme(dt);
+            tbl.setDbSchema(dt);
             tbl.setGeoFieldName(TV_TABLE_STRING);
 
             orm.persist(db);

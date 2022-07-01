@@ -112,7 +112,7 @@ public class PostgresTable extends SimiEntity {
     }
 
     public String concatName(){
-        return this.getDataTheme().concatName() + " | " + this.getTableName() ;
+        return this.getDbSchema().concatName() + " | " + this.getTableName() ;
     }
 
     public String getRemarks() {

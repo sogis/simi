@@ -11,5 +11,5 @@ Bemerkung: Das Framework macht
 |---|---|
 |Split DbName in Identifier und Titel|01A|
 |Erstellen DbSchema|01B|
-|Migration DataTheme nach DbSchema|01C|
+|Migration DbSchema nach DbSchema|01C|
 |PostgresTable: Attributanpassung für V2|01D|

@@ -1,9 +1,7 @@
-package ch.so.agi.simi.web.beans.datatheme.reader_dto;
+package ch.so.agi.simi.web.beans.dbSchema.reader_dto;
 
 import ch.so.agi.simi.entity.data.PostgresDB;
 import com.haulmont.chile.core.annotations.MetaClass;
-import com.haulmont.chile.core.annotations.MetaProperty;
-import com.haulmont.cuba.core.entity.BaseUuidEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;

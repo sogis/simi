@@ -1,7 +1,7 @@
-package ch.so.agi.simi.web.beans.datatheme;
+package ch.so.agi.simi.web.beans.dbSchema;
 
-import ch.so.agi.simi.web.beans.datatheme.reader_dto.TableAndFieldInfo;
-import ch.so.agi.simi.web.beans.datatheme.reader_dto.TableListing;
+import ch.so.agi.simi.web.beans.dbSchema.reader_dto.TableAndFieldInfo;
+import ch.so.agi.simi.web.beans.dbSchema.reader_dto.TableListing;
 
 public interface SchemaReader {
     TableAndFieldInfo queryTableMeta(String dbName, String schemaName, String tableName);

@@ -1,11 +1,11 @@
-package ch.so.agi.simi.web.beans.datatheme;
+package ch.so.agi.simi.web.beans.dbSchema;
 
 import ch.so.agi.simi.entity.data.DbSchema;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
-import ch.so.agi.simi.web.beans.datatheme.reader_dto.*;
-import ch.so.agi.simi.web.beans.datatheme.reader_dto.update_dto.FieldSyncState;
-import ch.so.agi.simi.web.beans.datatheme.reader_dto.update_dto.SyncedField;
+import ch.so.agi.simi.web.beans.dbSchema.reader_dto.*;
+import ch.so.agi.simi.web.beans.dbSchema.reader_dto.update_dto.FieldSyncState;
+import ch.so.agi.simi.web.beans.dbSchema.reader_dto.update_dto.SyncedField;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class ThemeReaderBean {
                     inOutTheme.setPostgresTables(new ArrayList<>());
 
                 inOutTheme.getPostgresTables().add(inOutTable);
-                inOutTable.setDataTheme(inOutTheme);
+                inOutTable.setDbSchema(inOutTheme);
             }
 
             actualizeWithDbCat(reader, inOutTable);
@@ -52,8 +52,8 @@ public class ThemeReaderBean {
     public List<SyncedField> actualizeWithDbCat(SchemaReader reader, PostgresTable inOutTable) {
 
         TableAndFieldInfo tfi = reader.queryTableMeta(
-                inOutTable.getDataTheme().getPostgresDB().getDbIdentifier(),
-                inOutTable.getDataTheme().getSchemaName(),
+                inOutTable.getDbSchema().getPostgresDB().getIdentifier(),
+                inOutTable.getDbSchema().getSchemaName(),
                 inOutTable.getTableName()
         );
 
@@ -179,7 +179,7 @@ public class ThemeReaderBean {
         ArrayList<String> relevantTables = new ArrayList<>();
 
         TableListing tl = reader.querySchemaMeta(
-                theme.getPostgresDB().getDbIdentifier(),
+                theme.getPostgresDB().getIdentifier(),
                 theme.getSchemaName()
         );
 

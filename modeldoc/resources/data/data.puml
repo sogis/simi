@@ -10,17 +10,17 @@ package data {
         class "PostgresDB" as pdb
         class "TableField" as tf
         class "ViewField" as vf
-        class "DataTheme" as dt
+        class "DbSchema" as ds
 
         tv "1-n" --* "1" pt
 
-        pt "*" --* "1" dt
+        pt "*" --* "1" ds
         pt "1" *-- "0..*" tf
 
         tv "1" *-- "1..n" vf
         vf "1..n" --* "1" tf
 
-        dt "1..*" -- "1" pdb
+        ds "1..*" -- "1" pdb
     }
 
     package "raster"{

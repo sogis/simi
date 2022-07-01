@@ -16,7 +16,7 @@ import java.util.List;
 @Entity(name = DbSchema.NAME)
 @NamePattern("#concatName|postgresDB,schemaName")
 public class DbSchema extends SimiEntity {
-    public static final String NAME = "simiData_DataTheme";
+    public static final String NAME = "simiData_DbSchema";
 
     private static final long serialVersionUID = 6262709342238523498L;
 
@@ -29,7 +29,7 @@ public class DbSchema extends SimiEntity {
     @OnDeleteInverse(DeletePolicy.DENY)
     private PostgresDB postgresDB;
 
-    @OneToMany(mappedBy = "dataTheme")
+    @OneToMany(mappedBy = "dbSchema")
     @Composition
     private List<PostgresTable> postgresTables;
 

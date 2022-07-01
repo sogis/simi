@@ -15,7 +15,8 @@
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="postgresDBDc">
             <column width="350px">
-                <textField id="dbNameField" property="dbIdentifier"/>
+                <textField id="titleField" property="title"/>
+                <textField id="identField" property="identifier"/>
                 <textField id="dbServiceUrlField" property="dbServiceUrl"/>
                 <checkBox id="defaultValueField" property="defaultValue"/>
             </column>

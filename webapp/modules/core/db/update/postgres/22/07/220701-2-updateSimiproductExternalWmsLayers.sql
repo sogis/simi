@@ -1,0 +1,2 @@
+alter table SIMIPRODUCT_EXTERNAL_WMS_LAYERS rename column feature_info_format to feature_info_format__u83596 ;
+alter table SIMIPRODUCT_EXTERNAL_WMS_LAYERS alter column feature_info_format__u83596 drop not null ;

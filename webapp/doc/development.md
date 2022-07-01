@@ -79,7 +79,7 @@ Vorgehen:
   ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --schema-only gitignored/simi_t_v1.2.dmp```
   * Daten:   
   ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --data-only --disable-triggers gitignored/simi_t_v1.2.dmp```  
-* Anmelden mit dem Admin-Passwort "aus Dump"
+* Anmelden mit dem Admin-Passwort "aus Dump" (Siehe Passwort-Manager)
   * Admin-Passwort überschreiben
 
 ## Abdeckung mit automatisierten Tests
@@ -106,7 +106,7 @@ Innerhalb Global Module:
 
 Innerhalb Web Module:
 
-* **ch.so.agi.simi.web.beans**: Enthält "clientseitige", in Beans gekapselte Funktionalitäten. Beispielsweise das Laden der Tabelleninformationen mittels Schemareader (Package ch.so.agi.simi.web.beans.datatheme)
+* **ch.so.agi.simi.web.beans**: Enthält "clientseitige", in Beans gekapselte Funktionalitäten. Beispielsweise das Laden der Tabelleninformationen mittels Schemareader (Package ch.so.agi.simi.web.beans.dbSchema)
 * **ch.so.agi.simi.web.screens**: Enthält die Definitionen der Browse- und Editscreens (GUI). Gegliedert nach den Teilmodellen (data, product, ...) des Metamodelles.
 
 ## Kopieren von Data-Products (Package ch.so.agi.simi.core.copy)

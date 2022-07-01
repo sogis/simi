@@ -2,9 +2,9 @@ package ch.so.agi.simi.web.screens.data.postgrestable;
 
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
-import ch.so.agi.simi.web.beans.datatheme.SchemaReaderClientBean;
-import ch.so.agi.simi.web.beans.datatheme.ThemeReaderBean;
-import ch.so.agi.simi.web.beans.datatheme.reader_dto.update_dto.SyncedField;
+import ch.so.agi.simi.web.beans.dbSchema.SchemaReaderClientBean;
+import ch.so.agi.simi.web.beans.dbSchema.ThemeReaderBean;
+import ch.so.agi.simi.web.beans.dbSchema.reader_dto.update_dto.SyncedField;
 import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.Button;
@@ -46,7 +46,7 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
         PostgresTable table = postgresTableDc.getItem();
 
         boolean nameNullOrEmpty = table.getTableName() == null || table.getTableName().isEmpty();
-        if(table.getDataTheme() == null || nameNullOrEmpty){
+        if(table.getDbSchema() == null || nameNullOrEmpty){
             notifications.create()
                     .withPosition(Notifications.Position.MIDDLE_CENTER)
                     .withDescription("Datenthema und Tabellenname muss vor dem Auslesen gesetzt werden.")

@@ -1,7 +1,7 @@
 @startuml
 package data {
 
-    abstract class "DataTheme (DT)" as dt << Datenbezug >>
+    abstract class "DbSchema (DT)" as dt << Datenbezug >>
 
     package tabular {
         class "TableView" as tv

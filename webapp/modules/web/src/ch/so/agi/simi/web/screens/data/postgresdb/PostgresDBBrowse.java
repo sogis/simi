@@ -26,7 +26,7 @@ public class PostgresDBBrowse extends StandardLookup<PostgresDB> {
     public void onPostgresDBsTableRemove(Action.ActionPerformedEvent event) {
         postgresDBsTableRemove.setConfirmation(false);
 
-        if (postgresDBsTable.getLookupSelectedItems().stream().allMatch(postgresDB -> postgresDB.getDataThemes().isEmpty())) {
+        if (postgresDBsTable.getLookupSelectedItems().stream().allMatch(postgresDB -> postgresDB.getDbSchemas().isEmpty())) {
             postgresDBsTableRemove.execute();
         } else {
             dialogs.createMessageDialog(Dialogs.MessageType.WARNING)

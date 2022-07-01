@@ -1,8 +1,4 @@
-package ch.so.agi.simi.web.beans.datatheme.reader_dto;
-
-import com.haulmont.chile.core.annotations.MetaClass;
-import com.haulmont.chile.core.annotations.MetaProperty;
-import com.haulmont.cuba.core.entity.BaseUuidEntity;
+package ch.so.agi.simi.web.beans.dbSchema.reader_dto;
 
 import java.util.List;
 

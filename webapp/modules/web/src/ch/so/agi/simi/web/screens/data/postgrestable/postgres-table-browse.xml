@@ -8,7 +8,7 @@
                     class="ch.so.agi.simi.entity.data.PostgresTable" view="postgresTable-browse">
             <loader id="postgresTablesDl">
                 <query>
-                    <![CDATA[select e from simiData_PostgresTable e order by e.dbSchema.postgresDB.dbName, e.dbSchema.schemaName, e.tableName ]]>
+                    <![CDATA[select e from simiData_PostgresTable e order by e.dbSchema.postgresDB.title, e.dbSchema.schemaName, e.tableName ]]>
                     <condition>
                         <or>
                             <c:jpql>

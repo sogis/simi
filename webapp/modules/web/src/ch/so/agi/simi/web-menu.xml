@@ -5,7 +5,7 @@
     <menu id="grp_data" caption="Daten-Konfiguration ...">
         <item screen="simiData_PostgresTable.browse" id="simiData_PostgresTable.browse_2"
               caption="mainMsg://postgrestable.caption.browse"/>
-        <item screen="simiData_DataTheme.browse" caption="mainMsg://datatheme.caption.browse"/>
+        <item screen="simiData_DbSchema.browse" caption="mainMsg://dbschema.caption.browse"/>
         <item screen="simiData_PostgresDB.browse" caption="mainMsg://postgresdb.caption.browse"/>
         <item screen="simiData_RasterDS.browse" caption="mainMsg://rasterds.caption.browse"/>
     </menu>

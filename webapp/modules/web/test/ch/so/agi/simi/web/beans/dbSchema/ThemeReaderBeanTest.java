@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.beans.datatheme;
+package ch.so.agi.simi.web.beans.dbSchema;
 
 import ch.so.agi.simi.entity.data.DbSchema;
 import ch.so.agi.simi.entity.data.PostgresDB;
@@ -69,7 +69,7 @@ public class ThemeReaderBeanTest {
         PostgresTable table = theme.findTableByName(SCHEMA_READALL__TABLE);
         Assertions.assertNotNull(table);
 
-        Assertions.assertEquals(theme, table.getDataTheme());
+        Assertions.assertEquals(theme, table.getDbSchema());
         Assertions.assertEquals(SCHEMA_READALL__STRING, table.getIdFieldName());
         Assertions.assertEquals(SCHEMA_READALL__STRING, table.getDescriptionModel());
 
@@ -248,7 +248,7 @@ public class ThemeReaderBeanTest {
             theme.setPostgresTables(new ArrayList<>());
 
         theme.getPostgresTables().add(tbl);
-        tbl.setDataTheme(theme);
+        tbl.setDbSchema(theme);
 
         //Add default TableField
         TableField tf = new TableField();

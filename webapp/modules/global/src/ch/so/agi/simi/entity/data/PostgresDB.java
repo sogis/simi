@@ -1,6 +1,7 @@
 package ch.so.agi.simi.entity.data;
 
 import ch.so.agi.simi.entity.SimiEntity;
+import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Table(name = "SIMIDATA_POSTGRES_DB")
 @Entity(name = PostgresDB.NAME)
+@NamePattern("%s|title")
 public class PostgresDB extends SimiEntity {
     private static final long serialVersionUID = 5599910294180509457L;
 
@@ -19,6 +21,9 @@ public class PostgresDB extends SimiEntity {
     @NotNull
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
     private String identifier;
+
+    @OneToMany(mappedBy = "postgresDB")
+    private List<DbSchema> dbSchemas;
 
     @NotNull
     @Column(name = "TITLE", nullable = false, unique = true, length = 100)
@@ -32,8 +37,13 @@ public class PostgresDB extends SimiEntity {
     @NotNull
     private Boolean defaultValue = false;
 
-    @OneToMany(mappedBy = "postgresDB")
-    private List<DataTheme> dataThemes;
+    public List<DbSchema> getDbSchemas() {
+        return dbSchemas;
+    }
+
+    public void setDbSchemas(List<DbSchema> dbSchemas) {
+        this.dbSchemas = dbSchemas;
+    }
 
     public String getTitle() {
         return title;
@@ -57,14 +67,6 @@ public class PostgresDB extends SimiEntity {
 
     public void setDbServiceUrl(String dbServiceUrl) {
         this.dbServiceUrl = dbServiceUrl;
-    }
-
-    public List<DataTheme> getDataThemes() {
-        return dataThemes;
-    }
-
-    public void setDataThemes(List<DataTheme> dataThemes) {
-        this.dataThemes = dataThemes;
     }
 
     public Boolean getDefaultValue() {

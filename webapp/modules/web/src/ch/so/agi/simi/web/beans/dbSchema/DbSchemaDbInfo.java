@@ -1,14 +1,14 @@
-package ch.so.agi.simi.web.beans.datatheme;
+package ch.so.agi.simi.web.beans.dbSchema;
 
-import ch.so.agi.simi.web.beans.datatheme.reader_dto.TableAndFieldInfo;
+import ch.so.agi.simi.web.beans.dbSchema.reader_dto.TableAndFieldInfo;
 
 import java.util.HashMap;
 
-public class DataThemeDbInfo {
+public class DbSchemaDbInfo {
 
     private HashMap<String, TableAndFieldInfo> tables;
 
-    DataThemeDbInfo(HashMap<String, TableAndFieldInfo> tables){
+    DbSchemaDbInfo(HashMap<String, TableAndFieldInfo> tables){
         this.tables = tables;
     }
 

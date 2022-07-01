@@ -19,7 +19,7 @@ public class TableNameQuery {
             throw new TableNotFoundException("No table found with id " + dataSetId);
 
         return new String[]{
-                tableInfo.get().getDataTheme().getSchemaName(),
+                tableInfo.get().getDbSchema().getSchemaName(),
                 tableInfo.get().getTableName()
         };
     }

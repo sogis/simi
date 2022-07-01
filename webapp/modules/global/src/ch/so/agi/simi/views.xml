@@ -52,14 +52,12 @@
         </property>
         <property name="tableName"/>
     </view>
-    <view entity="simiData_PostgresDB" name="postgresDB-browse" extends="_local">
-        <property name="dbSchemas" view="_minimal"/>
-    </view>
+    <view entity="simiData_PostgresDB" name="postgresDB-browse" extends="_local"/>
     <view entity="simiData_PostgresDB" name="postgresDB-edit" extends="_local"/>
-    <view entity="simiData_DataTheme" name="dbSchema-browse" extends="_local">
+    <view entity="simiData_DbSchema" name="dbSchema-browse" extends="_local">
         <property name="postgresDB" view="_minimal"/>
     </view>
-    <view entity="simiData_DataTheme" name="dbSchema-edit" extends="_local">
+    <view entity="simiData_DbSchema" name="dbSchema-edit" extends="_local">
         <property name="postgresDB" view="_minimal"/>
         <property name="postgresTables" view="_minimal">
             <property name="catSyncStamp"/>
@@ -83,7 +81,7 @@
         <property name="dbSchema" view="_minimal">
             <property name="schemaName"/>
             <property name="postgresDB" view="_minimal">
-                <property name="dbIdentifier"/>
+                <property name="identifier"/>
             </property>
         </property>
         <property name="tableViews" view="_minimal"/>
@@ -269,7 +267,7 @@
         <property name="transparency"/>
     </view>
     <view entity="simiProduct_ExternalWmsService" name="externalWmsLayers-edit-services" extends="_minimal"/>
-    <view entity="simiData_DataTheme" name="postgresTable-edit-themes" extends="_minimal"/>
+    <view entity="simiData_DbSchema" name="postgresTable-edit-themes" extends="_minimal"/>
     <view entity="simiProduct_FacadeLayer" name="morph-FacadeLayer" extends="_local">
         <property name="dataSetViews" view="_minimal">
             <property name="dataSetView" view="_minimal"/>

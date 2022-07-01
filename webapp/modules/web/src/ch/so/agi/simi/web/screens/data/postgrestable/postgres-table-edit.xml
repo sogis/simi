@@ -13,7 +13,7 @@
                     view="postgresTable-edit-themes">
             <loader id="dbDl">
                 <query>
-                    <![CDATA[select e from simiData_DataTheme e order by e]]>
+                    <![CDATA[select e from simiData_DbSchema e order by e]]>
                 </query>
             </loader>
         </collection>
@@ -30,14 +30,17 @@
                 <lookupField id="dataThemeField" dataContainer="postgresTableDc" property="dbSchema" optionsContainer="dataThemeDc"/>
                 <textField id="tableNameField" property="tableName" editable="true"/>
                 <dateField id="catSyncStampField" property="catSyncStamp" editable="false" tabIndex="-1"/>
+                <checkBox id="tableIsViewField" property="tableIsView" editable="false" tabIndex="-1" icon="BULK_EDIT_ACTION"/>
+                <textField id="titleField" property="title" editable="true"/>
                 <textField id="idFieldNameField" property="idFieldName" icon="BULK_EDIT_ACTION" />
                 <textField id="geoFieldNameField" property="geoFieldName" icon="BULK_EDIT_ACTION"/>
                 <textField id="geoTypeField" property="geoType" icon="BULK_EDIT_ACTION"/>
                 <textField id="geoEpsgCodeField" property="geoEpsgCode" icon="BULK_EDIT_ACTION"/>
             </column>
             <column width="350px">
-                <textArea id="remarksField" property="remarks" rows="7" rowspan="4"/>
+                <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
                 <textArea id="descriptionModelField" property="descriptionModel" icon="BULK_EDIT_ACTION" editable="false" rows="5" rowspan="3"/>
+                <textArea id="descriptionOverrideField" property="descriptionOverride" editable="true" rows="5" rowspan="3"/>
             </column>
         </form>
         <groupBox id="tableFieldsBox" caption="Tabellenspalten"

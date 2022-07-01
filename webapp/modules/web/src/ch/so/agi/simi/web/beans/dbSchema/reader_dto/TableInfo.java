@@ -1,7 +1,4 @@
-package ch.so.agi.simi.web.beans.datatheme.reader_dto;
-
-import com.haulmont.chile.core.annotations.MetaClass;
-import com.haulmont.chile.core.annotations.MetaProperty;
+package ch.so.agi.simi.web.beans.dbSchema.reader_dto;
 
 public class TableInfo extends TableShortInfo {
 
