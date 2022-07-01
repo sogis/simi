@@ -160,9 +160,6 @@ Bezüglich Auslesen des Kataloges mittels SchemaReader bei bestehenden Attribute
 Schema, welches 1-n (Geo-)Tabellen eines Themas umfasst. Mittels INTERLIS-Modell
 und ili2pg erzeugt. 
 
-Ausblick INTERLIS-Modell: Das Metamodell geht von einer Beziehung 
-Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Datenthema hinterlegt werden.
-
 #### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|

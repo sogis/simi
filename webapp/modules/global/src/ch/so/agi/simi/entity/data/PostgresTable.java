@@ -9,15 +9,14 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "SIMIDATA_POSTGRES_TABLE", uniqueConstraints = {
-        @UniqueConstraint(name = "IDX_SIMI_POSTGRES_TABLE_UNQ", columnNames = {"DATA_THEME_ID", "TABLE_NAME"})
+        @UniqueConstraint(name = "IDX_SIMI_POSTGRES_TABLE_UNQ", columnNames = {"TABLE_NAME"})
 })
 @Entity(name = PostgresTable.NAME)
-@NamePattern("#concatName|dataTheme,tableName")
+@NamePattern("#concatName|tableName")
 public class PostgresTable extends SimiEntity {
 
     public static final String NAME = "simiData_PostgresTable";
@@ -30,9 +29,9 @@ public class PostgresTable extends SimiEntity {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "DATA_THEME_ID")
+    @JoinColumn(name = "DB_SCHEMA_ID")
     @OnDeleteInverse(DeletePolicy.DENY)
-    private DataTheme dataTheme;
+    private DbSchema dbSchema;
 
     @OneToMany(mappedBy = "postgresTable")
     @Composition
@@ -68,6 +67,14 @@ public class PostgresTable extends SimiEntity {
     @Column(name = "REMARKS")
     private String remarks;
 
+    public DbSchema getDbSchema() {
+        return dbSchema;
+    }
+
+    public void setDbSchema(DbSchema dbSchema) {
+        this.dbSchema = dbSchema;
+    }
+
     public String concatName(){
         return this.getDataTheme().concatName() + " | " + this.getTableName() ;
     }
@@ -102,14 +109,6 @@ public class PostgresTable extends SimiEntity {
 
     public void setTableViews(List<TableView> tableViews) {
         this.tableViews = tableViews;
-    }
-
-    public DataTheme getDataTheme() {
-        return dataTheme;
-    }
-
-    public void setDataTheme(DataTheme dataTheme) {
-        this.dataTheme = dataTheme;
     }
 
     public Integer getGeoEpsgCode() {
