@@ -18,7 +18,7 @@
         <class>ch.so.agi.simi.entity.product.FacadeLayer</class>
         <class>ch.so.agi.simi.entity.data.datasetview.TableView</class>
         <class>ch.so.agi.simi.entity.data.PostgresTable</class>
-        <class>ch.so.agi.simi.entity.data.DataTheme</class>
+        <class>ch.so.agi.simi.entity.data.DbSchema</class>
         <class>ch.so.agi.simi.entity.data.PostgresDB</class>
         <class>ch.so.agi.simi.entity.product.PropertiesInFacade</class>
         <class>ch.so.agi.simi.entity.data.datasetview.RasterView</class>

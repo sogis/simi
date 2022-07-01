@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.beans.datatheme;
 
-import ch.so.agi.simi.entity.data.DataTheme;
+import ch.so.agi.simi.entity.data.DbSchema;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
 import ch.so.agi.simi.web.beans.datatheme.reader_dto.*;
@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 @Component(ThemeReaderBean.NAME)
 public class ThemeReaderBean {
@@ -23,7 +22,7 @@ public class ThemeReaderBean {
 
     public static Logger log = LoggerFactory.getLogger(ThemeReaderBean.class);
 
-    public void actualizeWithDbCat(SchemaReader reader, DataTheme inOutTheme) {
+    public void actualizeWithDbCat(SchemaReader reader, DbSchema inOutTheme) {
         String[] tableNames = readTableNames(reader, inOutTheme);
 
         for (String name : tableNames) {
@@ -53,7 +52,7 @@ public class ThemeReaderBean {
     public List<SyncedField> actualizeWithDbCat(SchemaReader reader, PostgresTable inOutTable) {
 
         TableAndFieldInfo tfi = reader.queryTableMeta(
-                inOutTable.getDataTheme().getPostgresDB().getDbName(),
+                inOutTable.getDataTheme().getPostgresDB().getDbIdentifier(),
                 inOutTable.getDataTheme().getSchemaName(),
                 inOutTable.getTableName()
         );
@@ -175,12 +174,12 @@ public class ThemeReaderBean {
         return alias;
     }
 
-    private static String[] readTableNames(SchemaReader reader, DataTheme theme) {
+    private static String[] readTableNames(SchemaReader reader, DbSchema theme) {
 
         ArrayList<String> relevantTables = new ArrayList<>();
 
         TableListing tl = reader.querySchemaMeta(
-                theme.getPostgresDB().getDbName(),
+                theme.getPostgresDB().getDbIdentifier(),
                 theme.getSchemaName()
         );
 

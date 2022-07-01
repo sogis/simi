@@ -1,10 +1,9 @@
 package ch.so.agi.simi.web.beans.datatheme;
 
-import ch.so.agi.simi.entity.data.DataTheme;
+import ch.so.agi.simi.entity.data.DbSchema;
 import ch.so.agi.simi.entity.data.PostgresDB;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -60,7 +59,7 @@ public class ThemeReaderBeanTest {
     public void schema_ReadAllTableAndFieldProperties_OK(){
         ThemeReaderBean bean = new ThemeReaderBean();
 
-        DataTheme theme = themeCreateMock();
+        DbSchema theme = themeCreateMock();
         PostgresTable stale = themeAddNewTable(theme);
 
         theme.setSchemaName(SCHEMA_READALL__SCHEMA);
@@ -99,7 +98,7 @@ public class ThemeReaderBeanTest {
     public void schema_ExistingTablesAreKept_OK(){
         ThemeReaderBean bean = new ThemeReaderBean();
 
-        DataTheme theme = themeCreateMock();
+        DbSchema theme = themeCreateMock();
         PostgresTable stale = themeAddNewTable(theme);
 
         theme.setSchemaName(SCHEMA_EXISTING_KEPT__SCHEMA);
@@ -120,7 +119,7 @@ public class ThemeReaderBeanTest {
     public void table_DeletedKeepOldTimeStamp_OK(){
         ThemeReaderBean bean = new ThemeReaderBean();
 
-        DataTheme theme = themeCreateMock();
+        DbSchema theme = themeCreateMock();
         PostgresTable stale = themeAddNewTable(theme);
 
         theme.setSchemaName(TABLE_DELETED__SCHEMA);
@@ -140,7 +139,7 @@ public class ThemeReaderBeanTest {
     public void table_ExistingAreUpdatedInPlace_OK(){
         ThemeReaderBean bean = new ThemeReaderBean();
 
-        DataTheme theme = themeCreateMock();
+        DbSchema theme = themeCreateMock();
         PostgresTable beforeAct = themeAddNewTable(theme);
 
         theme.setSchemaName(TABLE_UPDATED__SCHEMA);
@@ -159,7 +158,7 @@ public class ThemeReaderBeanTest {
     public void table_NewOnesAreAdded_OK(){
         ThemeReaderBean bean = new ThemeReaderBean();
 
-        DataTheme theme = themeCreateMock();
+        DbSchema theme = themeCreateMock();
         PostgresTable existing = themeAddNewTable(theme);
 
         theme.setSchemaName(TABLE_NEW__SCHEMA);
@@ -178,7 +177,7 @@ public class ThemeReaderBeanTest {
     public void field_DeletedGetStaleMark_OK(){
         ThemeReaderBean bean = new ThemeReaderBean();
 
-        DataTheme theme = themeCreateMock();
+        DbSchema theme = themeCreateMock();
         PostgresTable existing = themeAddNewTable(theme);
 
         theme.setSchemaName(FIELD_DELETED__SCHEMA);
@@ -200,7 +199,7 @@ public class ThemeReaderBeanTest {
     public void field_ExistingAreUpdatedInPlace_OK(){
         ThemeReaderBean bean = new ThemeReaderBean();
 
-        DataTheme theme = themeCreateMock();
+        DbSchema theme = themeCreateMock();
         PostgresTable existing = themeAddNewTable(theme);
 
         theme.setSchemaName(FIELD_UPDATED__SCHEMA);
@@ -225,7 +224,7 @@ public class ThemeReaderBeanTest {
     public void field_NewOnesAreAdded_OK(){
         ThemeReaderBean bean = new ThemeReaderBean();
 
-        DataTheme theme = themeCreateMock();
+        DbSchema theme = themeCreateMock();
         PostgresTable existing = themeAddNewTable(theme);
 
         theme.setSchemaName(FIELD_NEW__SCHEMA);
@@ -242,7 +241,7 @@ public class ThemeReaderBeanTest {
         Assertions.assertTrue(newField.getCatSynced());
     }
 
-    private static PostgresTable themeAddNewTable(DataTheme theme){
+    private static PostgresTable themeAddNewTable(DbSchema theme){
         PostgresTable tbl = new PostgresTable();
 
         if(theme.getPostgresTables() == null)
@@ -264,11 +263,11 @@ public class ThemeReaderBeanTest {
         return tbl;
     }
 
-    private static DataTheme themeCreateMock(){
+    private static DbSchema themeCreateMock(){
         PostgresDB db = new PostgresDB();
-        db.setDbName("mydb");
+        db.setDbIdentifier("mydb");
 
-        DataTheme theme = new DataTheme();
+        DbSchema theme = new DbSchema();
         theme.setPostgresDB(db);
 
         return theme;

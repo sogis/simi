@@ -5,7 +5,7 @@
         focusComponent="modelSchemasTable">
     <data readOnly="true">
         <collection id="modelSchemasDc"
-                    class="ch.so.agi.simi.entity.data.DataTheme" view="dataTheme-browse">
+                    class="ch.so.agi.simi.entity.data.DbSchema" view="dbSchema-browse">
             <loader id="modelSchemasDl">
                 <query>
                     <![CDATA[select e from simiData_DataTheme e]]>

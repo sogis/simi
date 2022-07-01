@@ -1,7 +1,6 @@
 package ch.so.agi.simi.entity.data;
 
 import ch.so.agi.simi.entity.SimiEntity;
-import com.haulmont.chile.core.annotations.NamePattern;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,15 +11,18 @@ import java.util.List;
 
 @Table(name = "SIMIDATA_POSTGRES_DB")
 @Entity(name = PostgresDB.NAME)
-@NamePattern("%s|dbName")
 public class PostgresDB extends SimiEntity {
     private static final long serialVersionUID = 5599910294180509457L;
 
     public static final String NAME = "simiData_PostgresDB";
 
-    @Column(name = "DB_NAME", nullable = false, unique = true, length = 100)
     @NotNull
-    private String dbName;
+    @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
+    private String identifier;
+
+    @NotNull
+    @Column(name = "TITLE", nullable = false, unique = true, length = 100)
+    private String title;
 
     @NotNull
     @Column(name = "DB_SERVICE_URL", nullable = false, unique = true)
@@ -32,6 +34,22 @@ public class PostgresDB extends SimiEntity {
 
     @OneToMany(mappedBy = "postgresDB")
     private List<DataTheme> dataThemes;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
     public String getDbServiceUrl() {
         return dbServiceUrl;
@@ -57,11 +75,4 @@ public class PostgresDB extends SimiEntity {
         this.defaultValue = defaultValue;
     }
 
-    public String getDbName() {
-        return dbName;
-    }
-
-    public void setDbName(String dbName) {
-        this.dbName = dbName;
-    }
 }

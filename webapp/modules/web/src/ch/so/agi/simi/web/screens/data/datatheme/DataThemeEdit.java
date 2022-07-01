@@ -1,6 +1,6 @@
 package ch.so.agi.simi.web.screens.data.datatheme;
 
-import ch.so.agi.simi.entity.data.DataTheme;
+import ch.so.agi.simi.entity.data.DbSchema;
 import com.haulmont.cuba.gui.screen.*;
 
 /*
@@ -24,7 +24,7 @@ import javax.inject.Inject;
 @UiDescriptor("data-theme-edit.xml")
 @EditedEntityContainer("modelSchemaDc")
 @LoadDataBeforeShow
-public class DataThemeEdit extends StandardEditor<DataTheme> {
+public class DataThemeEdit extends StandardEditor<DbSchema> {
         /*
     @Inject
     private ThemeReaderBean bean;

@@ -48,7 +48,7 @@ class EntityLoadingTest {
     @Test
     void dataTheme_OK() {
         loadEntityViews(
-                DataTheme.class,
+                DbSchema.class,
                 new String[]{
                         "dataTheme-browse",
                         "dataTheme-edit",

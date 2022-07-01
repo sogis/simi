@@ -132,7 +132,8 @@ create table SIMIDATA_POSTGRES_DB (
     CREATED_BY varchar(50),
     VERSION integer not null,
     --
-    DB_NAME varchar(100) not null,
+    IDENTIFIER varchar(100) not null,
+    TITLE varchar(100) not null,
     DB_SERVICE_URL varchar(255) not null,
     DEFAULT_VALUE boolean not null,
     --
@@ -242,21 +243,6 @@ create table SIMIEXTENDED_DEPENDENCY (
     primary key (ID)
 )^
 -- end SIMIEXTENDED_DEPENDENCY
--- begin SIMIDATA_DATA_THEME
-create table SIMIDATA_DATA_THEME (
-    ID uuid,
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    VERSION integer not null,
-    --
-    SCHEMA_NAME varchar(100) not null,
-    POSTGRES_DB_ID uuid not null,
-    --
-    primary key (ID)
-)^
--- end SIMIDATA_DATA_THEME
 -- begin SIMIPRODUCT_PROPERTIES_IN_LIST
 create table SIMIPRODUCT_PROPERTIES_IN_LIST (
     ID uuid,

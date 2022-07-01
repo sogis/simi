@@ -9,7 +9,7 @@
             <collection id="tableFieldsDc" property="tableFields"/>
         </instance>
         <collection id="dataThemeDc"
-                    class="ch.so.agi.simi.entity.data.DataTheme"
+                    class="ch.so.agi.simi.entity.data.DbSchema"
                     view="postgresTable-edit-themes">
             <loader id="dbDl">
                 <query>
@@ -27,7 +27,7 @@
         <button id="readFromServiceBtn" caption="Aus Quell-DB einlesen" stylename="danger" icon="BULK_EDIT_ACTION"/>
         <form id="form" dataContainer="postgresTableDc">
             <column width="350px">
-                <lookupField id="dataThemeField" dataContainer="postgresTableDc" property="dataTheme" optionsContainer="dataThemeDc"/>
+                <lookupField id="dataThemeField" dataContainer="postgresTableDc" property="dbSchema" optionsContainer="dataThemeDc"/>
                 <textField id="tableNameField" property="tableName" editable="true"/>
                 <dateField id="catSyncStampField" property="catSyncStamp" editable="false" tabIndex="-1"/>
                 <textField id="idFieldNameField" property="idFieldName" icon="BULK_EDIT_ACTION" />

@@ -155,7 +155,7 @@ Bezüglich Auslesen des Kataloges mittels SchemaReader bei bestehenden Attribute
 #### Bemerkungen:
 * Die Namen der Attribute werden mittels Katalogabfrage aus Postgres gelesen.
 
-### Klasse Schema
+### Klasse DbSchema
 
 Schema, welches 1-n (Geo-)Tabellen eines Themas umfasst. Mittels INTERLIS-Modell
 und ili2pg erzeugt. 
@@ -168,8 +168,6 @@ Schema 1 : 0..1 Modell aus. Es kann also maximal ein "Gebrauchsmodell" pro Daten
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |schemaName|String(100)|j|Name des Schemas.|
-|modelName|String(100)|j|Name des INTERLIS-Modells der öffentlichen Daten.|
-
 
 #### Konstraints
 
@@ -186,13 +184,14 @@ Postgres-Datenbank, in welcher das Schema (PostgresSchema) enthalten ist. Univer
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|dbName|String(100)|j|Name der Datenbank (auf dem Cluster). Name muss GDI-weit eindeutig sein.|
+|dbTitle|String(100)|j|Sprechender Name der Datenbank (z.B: Edit-DB). Für die Anzeige der DB in den Masken|
+|dbIdentifier|String(100)|j|Technischer Name der Datenbank (auf dem Cluster). Link mit der Konfiguration des Schema-Reader|
 |dbServiceUrl|String(255)|j|Name der Service für die DB-Connection. Muss GDI-weit eindeutig sein.|
 |defaultValue|Boolean|j|Default-DB in den SIMI-Auswahlfeldern.|
 
 #### Konstraints
 
-UK über dbName.
+UK auf dbTitle, dbIdentifier.
 
 ## Klassen in Teilmodell "raster"
 

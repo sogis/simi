@@ -28,7 +28,7 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="dbName"/>
+                <column id="dbIdentifier"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

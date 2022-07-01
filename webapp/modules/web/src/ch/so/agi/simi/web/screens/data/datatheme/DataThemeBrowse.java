@@ -1,11 +1,11 @@
 package ch.so.agi.simi.web.screens.data.datatheme;
 
+import ch.so.agi.simi.entity.data.DbSchema;
 import com.haulmont.cuba.gui.screen.*;
-import ch.so.agi.simi.entity.data.DataTheme;
 
 @UiController("simiData_DataTheme.browse")
 @UiDescriptor("data-theme-browse.xml")
 @LookupComponent("modelSchemasTable")
 @LoadDataBeforeShow
-public class DataThemeBrowse extends StandardLookup<DataTheme> {
+public class DataThemeBrowse extends StandardLookup<DbSchema> {
 }

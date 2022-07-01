@@ -545,10 +545,10 @@ class CopyServiceBeanTest {
 
             //PostgresTable
             PostgresDB db = container.metadata().create(PostgresDB.class);
-            db.setDbName(TV_DB_STRING);
+            db.setDbIdentifier(TV_DB_STRING);
             db.setDbServiceUrl(TV_DB_STRING);
 
-            DataTheme dt = container.metadata().create(DataTheme.class);
+            DbSchema dt = container.metadata().create(DbSchema.class);
             dt.setSchemaName(TV_SCHEMA_STRING);
             dt.setPostgresDB(db);
 
