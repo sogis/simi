@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "SIMIDATA_POSTGRES_TABLE", uniqueConstraints = {
-        @UniqueConstraint(name = "IDX_SIMI_POSTGRES_TABLE_UNQ", columnNames = {"TABLE_NAME"})
+        @UniqueConstraint(name = "IDX_SIMI_POSTGRES_TABLE_UNQ", columnNames = {"TABLE_NAME", "DB_SCHEMA_ID"})
 })
 @Entity(name = PostgresTable.NAME)
 @NamePattern("#concatName|tableName")
@@ -26,6 +26,18 @@ public class PostgresTable extends SimiEntity {
     @Column(name = "ID_FIELD_NAME", nullable = false, length = 100)
     @NotNull
     private String idFieldName;
+
+    @NotNull
+    @Column(name = "TABLE_IS_VIEW", nullable = false)
+    private Boolean tableIsView = false;
+
+    @NotNull
+    @Column(name = "TITLE", nullable = false)
+    private String title;
+
+    @Lob
+    @Column(name = "DESCRIPTION_OVERRIDE")
+    private String descriptionOverride;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -66,6 +78,30 @@ public class PostgresTable extends SimiEntity {
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
+
+    public String getDescriptionOverride() {
+        return descriptionOverride;
+    }
+
+    public void setDescriptionOverride(String descriptionOverride) {
+        this.descriptionOverride = descriptionOverride;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Boolean getTableIsView() {
+        return tableIsView;
+    }
+
+    public void setTableIsView(Boolean tableIsView) {
+        this.tableIsView = tableIsView;
+    }
 
     public DbSchema getDbSchema() {
         return dbSchema;

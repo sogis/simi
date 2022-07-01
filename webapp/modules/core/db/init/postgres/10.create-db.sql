@@ -111,6 +111,9 @@ create table SIMIDATA_POSTGRES_TABLE (
     VERSION integer not null,
     --
     ID_FIELD_NAME varchar(100) not null,
+    TABLE_IS_VIEW boolean not null,
+    TITLE varchar(255) not null,
+    DESCRIPTION_OVERRIDE text,
     DB_SCHEMA_ID uuid not null,
     DESCRIPTION_MODEL text,
     CAT_SYNC_STAMP timestamp not null,

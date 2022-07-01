@@ -74,8 +74,11 @@ Periodisch macht es Sinn, die aktuellen Daten aus der Integration zu übernehmen
 Vorgehen:
 
 * Dump lokal nehmen (Siehe dazu dok "Datenbanken")
-* Dump restoren, ohne Übernahme von Ownern, Rollen, ...   
-  ```pg_restore -d postgresql://postgres:postgres@localhost/simi -c -x -O simi_geodb-i.rootso.org.dmp```
+* Dump restoren, ohne Übernahme von Ownern, Rollen, ... 
+  * Schema:   
+  ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --schema-only gitignored/simi_t_v1.2.dmp```
+  * Daten:   
+  ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --data-only --disable-triggers gitignored/simi_t_v1.2.dmp```  
 * Anmelden mit dem Admin-Passwort "aus Dump"
   * Admin-Passwort überschreiben
 
