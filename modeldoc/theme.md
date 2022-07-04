@@ -107,10 +107,9 @@ Informationen zum Amt (AfU, ARP, AGI, ...). Hinweis: Punktuell ist der Klassenü
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |name|String(100)|j|Name des Amts. Bsp: "Amt für Geoinformation"|
-|kuerzelAmt|String(10)|j|Kürzel für das Amt (AfU, ARP, ...).|
-|kuerzelStufe|String(10)|j|Kürzel für die Stufe. Default: Amt.|
-|url|String(100)|j|URL der Homepage des Amts.|
-|telefon|String(20)|j|Kennung und Vorwahl innerhalb CH: 032 212 66 77|
+|abbreviation|String(10)|j|Kürzel für das Amt (AfU, ARP, ...).|
+|url|String(255)|j|URL der Homepage des Amts.|
+|phone|String(20)|j|Kennung und Vorwahl innerhalb CH: 032 212 66 77|
 |email|String(50)|j|Email-Adresse des Amtes|
 
 ### Konstraints
@@ -127,9 +126,9 @@ Unterorganisation innerhalb eines Amts. Der Einfachheit halber wird nur eine Hie
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |name|String(100)|j|Name der Unterorganisation. Bsp: "Abteilung Boden".|
-|url|String(100)|n|URL der Homepage des Amts.|
-|telefon|String(20)|n|Kennung und Vorwahl innerhalb CH: 032 212 66 77.|
-|email|String(50)|n|Email-Adresse des Amtes.|
+|url|String(255)|n|URL der Homepage des Amts.|
+|phone|String(20)|n|Kennung und Vorwahl innerhalb CH: 032 212 66 77.|
+|email|String(50)|n|Email-Adresse der Untereinheit.|
 
 ### Konstraints
 

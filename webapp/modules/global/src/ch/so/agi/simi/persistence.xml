@@ -37,5 +37,8 @@
         <class>ch.so.agi.simi.entity.product.ExternalWmsLayer</class>
         <class>ch.so.agi.simi.entity.product.ExternalWmsService</class>
         <class>ch.so.agi.simi.entity.product.ThermGroup</class>
+        <class>ch.so.agi.simi.entity.theme.org.OrgUnit</class>
+        <class>ch.so.agi.simi.entity.theme.org.Agency</class>
+        <class>ch.so.agi.simi.entity.theme.org.SubOrg</class>
     </persistence-unit>
 </persistence>

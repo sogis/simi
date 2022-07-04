@@ -453,3 +453,42 @@ create table SIMIPRODUCT_THERM_GROUP (
     primary key (ID)
 )^
 -- end SIMIPRODUCT_THERM_GROUP
+-- begin SIMITHEME_ORG_UNIT
+create table SIMITHEME_ORG_UNIT (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    DTYPE varchar(31),
+    --
+    NAME varchar(100) not null,
+    --
+    primary key (ID)
+)^
+-- end SIMITHEME_ORG_UNIT
+-- begin SIMITHEME_AGENCY
+create table SIMITHEME_AGENCY (
+    ID uuid,
+    --
+    ABBREVIATION varchar(10) not null,
+    URL varchar(255) not null,
+    PHONE varchar(20) not null,
+    EMAIL varchar(50) not null,
+    --
+    primary key (ID)
+)^
+-- end SIMITHEME_AGENCY
+-- begin SIMITHEME_SUB_ORG
+create table SIMITHEME_SUB_ORG (
+    ID uuid,
+    --
+    URL varchar(255),
+    PHONE varchar(20),
+    EMAIL varchar(50),
+    AGENCY_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMITHEME_SUB_ORG

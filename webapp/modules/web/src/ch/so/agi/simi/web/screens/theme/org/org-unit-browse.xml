@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://orgunit.browse"
+        focusComponent="orgUnitsTable">
+    <data readOnly="true">
+        <collection id="orgUnitsDc"
+                    class="ch.so.agi.simi.entity.theme.org.OrgUnit"
+                    view="orgUnit-browse">
+            <loader id="orgUnitsDl">
+                <query>
+                    <![CDATA[select e from simiTheme_OrgUnit e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orgUnitsTable"
+            spacing="true">
+        <table id="orgUnitsTable"
+               width="100%"
+               dataContainer="orgUnitsDc">
+            <actions>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createAgencyBtn" stylename="primary" caption="Amt erstellen (Organisation)"/>
+                <button id="createSubOrgBtn" stylename="primary" caption="Unter-Organisation erstellen"/>
+                <button id="editBtn" action="orgUnitsTable.edit" stylename="primary"/>
+                <button id="removeBtn" action="orgUnitsTable.remove" stylename="danger"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

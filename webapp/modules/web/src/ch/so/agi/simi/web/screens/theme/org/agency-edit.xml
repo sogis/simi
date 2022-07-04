@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://agency.edit"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.theme.org">
+    <data>
+        <instance id="agencyDc"
+                  class="ch.so.agi.simi.entity.theme.org.Agency"
+                  view="agency-edit">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="agencyDc">
+            <column width="450px">
+                <textField id="nameField" property="name"/>
+                <textField id="abbreviationField" property="abbreviation"/>
+                <textField id="urlField" property="url"/>
+                <textField id="phoneField" property="phone"/>
+                <textField id="emailField" property="email"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

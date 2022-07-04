@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://subOrgEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.theme.org">
+    <data>
+        <instance id="subOrgDc"
+                  class="ch.so.agi.simi.entity.theme.org.SubOrg"
+                  view="subOrg-edit">
+            <loader/>
+        </instance>
+        <collection id="agencyDc"
+                    class="ch.so.agi.simi.entity.theme.org.Agency"
+                    view="subOrg-agency-lookup">
+            <loader id="agencyDl">
+                <query>
+                    <![CDATA[select e from simiTheme_Agency e ORDER BY e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="subOrgDc">
+            <column width="450px">
+                <lookupField id="agencyField" dataContainer="subOrgDc" property="agency" optionsContainer="agencyDc"/>
+                <textField id="nameField" property="name"/>
+                <textField id="urlField" property="url"/>
+                <textField id="phoneField" property="phone"/>
+                <textField id="emailField" property="email"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

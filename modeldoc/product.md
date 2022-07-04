@@ -21,6 +21,7 @@ Beispiele:
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
+|hasFullIdent|Boolean|j|Ist in identPart ist der komplette Identifier enthalten? Beispielsweise themenübergreifende Datenprodukte|
 |pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](../metamodel.md#ebenenpublikation-in-dataproduct).|
 |keywords|String(200)|n|Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|

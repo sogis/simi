@@ -9,6 +9,9 @@
         <item screen="simiData_PostgresDB.browse" caption="mainMsg://postgresdb.caption.browse"/>
         <item screen="simiData_RasterDS.browse" caption="mainMsg://rasterds.caption.browse"/>
     </menu>
+    <menu id="grp_theme" caption="Themen - Verwaltung ...">
+        <item screen="simiTheme_OrgUnit.browse" caption="mainMsg://orgunit.browse"/>
+    </menu>
     <menu id="grp_iam" caption="Benutzer - Verwaltung ...">
         <item screen="simiIAM_User.browse" caption="mainMsg://user.caption.browse"/>
         <item screen="simiIAM_Group.browse" caption="mainMsg://group.caption.browse"/>
