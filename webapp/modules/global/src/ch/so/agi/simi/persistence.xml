@@ -36,5 +36,7 @@
         <class>ch.so.agi.simi.entity.extended.CCCIntegration</class>
         <class>ch.so.agi.simi.entity.product.ExternalWmsLayer</class>
         <class>ch.so.agi.simi.entity.product.ExternalWmsService</class>
+        <class>ch.so.agi.simi.entity.therms.Therm</class>
+        <class>ch.so.agi.simi.entity.therms.LinkedTherm</class>
     </persistence-unit>
 </persistence>

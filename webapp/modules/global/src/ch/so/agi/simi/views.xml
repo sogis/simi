@@ -222,6 +222,7 @@
     <view entity="simiData_TableView" name="tableView-edit" extends="_local">
         <property name="postgresTable" view="_minimal">
             <property name="descriptionModel"/>
+            <property name="dbSchema" view="_minimal"/>
         </property>
         <property name="pubScope" view="_minimal"/>
         <property name="viewFields" view="_local">
@@ -240,6 +241,7 @@
     <view entity="simiIAM_Role" name="tableView-edit-roles" extends="_local"/>
     <view entity="simiData_TableField" name="tableView-edit-tableFields" extends="_local"/>
     <view entity="simiData_PostgresTable" name="tableView-edit-postgresTables" extends="_minimal">
+        <property name="dbSchema" view="_minimal"/>
         <property name="descriptionModel"/>
     </view>
     <view entity="simiData_ViewField" name="viewField-edit" extends="_local">

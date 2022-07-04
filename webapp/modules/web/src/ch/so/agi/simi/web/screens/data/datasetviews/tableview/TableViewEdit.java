@@ -35,7 +35,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
         loadTableFields();
     }
 
-    @Subscribe("postgresTableField")
+/*    @Subscribe("postgresTableField")
     public void onPostgresTableFieldValueChange(HasValue.ValueChangeEvent<PostgresTable> event) {
         if(!event.isUserOriginated())
             return;
@@ -49,7 +49,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
         viewFieldsDc.getMutableItems().clear();
 
         loadTableFields();
-    }
+    }*/
 
     private void loadTableFields(){
         if(this.getEditedEntity() == null || this.getEditedEntity().getPostgresTable() == null)

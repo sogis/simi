@@ -52,7 +52,6 @@
             <form id="form" dataContainer="dataProductDc">
                 <column width="450px">
                     <textField id="identifierField" property="identifier"/>
-                    <textField id="rowFilterViewNameField" property="rowFilterViewName"/>
                     <textField id="titleField" property="title"/>
                     <fragment id="styleServerField" screen="simi_StyleFragment" caption="msg://ch.so.agi.simi.entity.product/DataSetView.styleServer">
                         <properties>
@@ -61,19 +60,22 @@
                             <property name="styleChangedProperty" value="styleServerChanged"/>
                         </properties>
                     </fragment>
-                    <hbox spacing="true" caption="Publikation">
+                    <groupBox caption="Publikation" collapsable="false" spacing="true" align="TOP_RIGHT">
                         <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment">
                             <properties>
                                 <property name="filterProperty" value="forDSV"/>
                             </properties>
                         </fragment>
-                        <checkBox id="serviceDownloadField" align="MIDDLE_CENTER" dataContainer="dataProductDc" property="serviceDownload" caption="WFS/Dataservice?"/>
-                        <checkBox id="isFileDownloadDSVField" align="MIDDLE_CENTER" dataContainer="dataProductDc" property="isFileDownloadDSV" caption="Ist Download-DSV?"/>
+                    <hbox spacing="true">
+                        <checkBox id="serviceDownloadField" dataContainer="dataProductDc" property="serviceDownload" caption="WFS/Dataservice?"/>
+                        <checkBox id="isFileDownloadDSVField" dataContainer="dataProductDc" property="isFileDownloadDSV" caption="Ist Download-DSV?"/>
                     </hbox>
+                    </groupBox>
                 </column>
                 <column width="450px">
                     <lookupField id="postgresTableField" dataContainer="dataProductDc" property="postgresTable" optionsContainer="pgTableDc"/>
-                    <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
+                    <textField id="rowFilterViewNameField" property="rowFilterViewName"/>
+                    <textArea id="remarksField" property="remarks" rows="7" rowspan="4"/>
                 </column>
             </form>
             <groupBox caption="Weitere Eigenschaften" collapsable="true" collapsed="true">
@@ -122,7 +124,7 @@
                     </actions>
                     <columns>
                         <column id="tableField" editable="true" optionsContainer="tableFieldsDc"/>
-                        <column id="wgcExposed" editable="true"/>
+                        <column id="wgcExposed" editable="true" width="120"/>
                         <column id="sort" editable="true" sort="ASCENDING" width="150"/>
                     </columns>
                     <buttonsPanel>
