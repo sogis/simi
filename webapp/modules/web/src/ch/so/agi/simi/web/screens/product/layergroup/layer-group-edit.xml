@@ -39,8 +39,8 @@
             </column>
             <column width="350px">
                 <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
-                <textArea id="keywordsField" property="keywords" rows="3" rowspan="2"/>
-                <textArea id="synonymsField" property="synonyms" rows="3" rowspan="2"/>
+                <textArea id="keywordsField" property="_keywords_deprecated" rows="3" rowspan="2"/>
+                <textArea id="synonymsField" property="synonymS" rows="3" rowspan="2"/>
             </column>
         </form>
         <groupBox id="propertiesInListBox" caption="Enthaltene Facadelayer und DSV">

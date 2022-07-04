@@ -31,15 +31,15 @@ public class DataProduct extends SimiEntity {
     @NotNull
     private DataProduct_PubScope pubScope;
 
-    @Column(name = "KEYWORDS", length = 500)
-    private String keywords;
+    @Column(name = "_KEYWORDS_DEPRECATED", length = 500)
+    private String _keywords_deprecated;
 
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
 
-    @Column(name = "SYNONYMS", length = 800)
-    private String synonyms;
+    @Column(name = "_SYNONYMS_DEPRECATED", length = 800)
+    private String _synonyms_deprecated;
 
     @Column(name = "TITLE", length = 200)
     private String title;
@@ -86,12 +86,12 @@ public class DataProduct extends SimiEntity {
         this.title = title;
     }
 
-    public String getSynonyms() {
-        return synonyms;
+    public String get_synonyms_deprecated() {
+        return _synonyms_deprecated;
     }
 
-    public void setSynonyms(String synonyms) {
-        this.synonyms = synonyms;
+    public void set_synonyms_deprecated(String _synonyms_deprecated) {
+        this._synonyms_deprecated = _synonyms_deprecated;
     }
 
     public String getRemarks() {
@@ -102,12 +102,12 @@ public class DataProduct extends SimiEntity {
         this.remarks = remarks;
     }
 
-    public String getKeywords() {
-        return keywords;
+    public String get_keywords_deprecated() {
+        return _keywords_deprecated;
     }
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
+    public void set_keywords_deprecated(String _keywords_deprecated) {
+        this._keywords_deprecated = _keywords_deprecated;
     }
 
     public String getIdentifier() {

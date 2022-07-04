@@ -258,7 +258,8 @@ class EntityLoadingTest {
                         "externalWmsService-edit",
                         "externalWmsService-browse",
                         "externalWmsLayers-edit-services"
-                });
+                }
+        );
     }
 
     @Test
@@ -266,6 +267,17 @@ class EntityLoadingTest {
         loadEntityView(
                 ExternalWmsLayer.class,
                 "externalWmsLayer-edit"
+        );
+    }
+
+    @Test
+    void thermGroup_OK() {
+        loadEntityViews(
+                ThermGroup.class,
+                new String[]{
+                        "thermGroup-edit",
+                        "thermGroup-browse"
+                }
         );
     }
 

@@ -88,9 +88,9 @@ public class MorphProductServiceBean implements MorphProductService {
     private static void copyDprodProperties(DataProduct fromDp, DataProduct toDp) {
         toDp.setIdentifier(fromDp.getIdentifier());
         toDp.setPubScope(fromDp.getPubScope());
-        toDp.setKeywords(fromDp.getKeywords());
+        toDp.set_keywords_deprecated(fromDp.get_keywords_deprecated());
         toDp.setRemarks(fromDp.getRemarks());
-        toDp.setSynonyms(fromDp.getSynonyms());
+        toDp.set_synonyms_deprecated(fromDp.get_synonyms_deprecated());
         toDp.setTitle(fromDp.getTitle());
     }
 

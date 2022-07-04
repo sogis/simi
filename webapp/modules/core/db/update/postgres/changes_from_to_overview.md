@@ -20,4 +20,5 @@ Bemerkung: Das Framework macht
 
 |Änderung|Ordner|
 |---|---|
-|DSV: Stichworte und Synonyme|?|
+|DSV: Stichworte und Synonyme in ThermGroup|02A|
+|Product: Stichworte und Synonyme in ThermGroup|02B|

@@ -4,9 +4,11 @@ import ch.so.agi.simi.entity.extended.Relation;
 import ch.so.agi.simi.entity.iam.Permission;
 import ch.so.agi.simi.entity.product.PropertiesInFacade;
 import ch.so.agi.simi.entity.product.SingleActor;
+import ch.so.agi.simi.entity.product.ThermGroup;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -27,6 +29,11 @@ public class DataSetView extends SingleActor {
     @NotNull
     @Column(name = "SERVICE_DOWNLOAD", nullable = false)
     private Boolean serviceDownload = false;
+
+    @OnDeleteInverse(DeletePolicy.DENY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "THERM_GROUP_ID")
+    private ThermGroup thermGroup;
 
     @NotNull
     @Column(name = "IS_FILE_DOWNLOAD_DSV", nullable = false)
@@ -64,6 +71,14 @@ public class DataSetView extends SingleActor {
     @OnDelete(DeletePolicy.CASCADE)
     @Composition
     private List<Permission> permissions;
+
+    public ThermGroup getThermGroup() {
+        return thermGroup;
+    }
+
+    public void setThermGroup(ThermGroup thermGroup) {
+        this.thermGroup = thermGroup;
+    }
 
     public Boolean getIsFileDownloadDSV() {
         return isFileDownloadDSV;

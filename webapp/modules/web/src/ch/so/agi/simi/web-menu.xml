@@ -8,8 +8,6 @@
         <item screen="simiData_DbSchema.browse" caption="mainMsg://dbschema.caption.browse"/>
         <item screen="simiData_PostgresDB.browse" caption="mainMsg://postgresdb.caption.browse"/>
         <item screen="simiData_RasterDS.browse" caption="mainMsg://rasterds.caption.browse"/>
-        <item screen="simi_LinkedTherm.browse" caption="mainMsg://menu_config.simi_LinkedTherm.browse"/>
-        <item screen="simi_Therm.browse" caption="mainMsg://menu_config.simi_Therm.browse"/>
     </menu>
     <menu id="grp_iam" caption="Benutzer - Verwaltung ...">
         <item screen="simiIAM_User.browse" caption="mainMsg://user.caption.browse"/>
@@ -17,6 +15,7 @@
         <item screen="simiIAM_Role.browse" caption="mainMsg://role.caption.browse"/>
     </menu>
     <menu id="grp_others" caption="Weitere ...">
+        <item screen="simiProduct_ThermGroup.browse" caption="mainMsg://therm.caption.browse"/>
         <item screen="simiData_TableDependency.list" caption="mainMsg://tabledependency.caption"/>
         <item screen="simiExtended_Dependency.browse" caption="mainMsg://dependency.caption.browse"/>
         <item screen="simiProduct_ExternalWmsService.browse" caption="mainMsg://extwms.caption.browse"/>

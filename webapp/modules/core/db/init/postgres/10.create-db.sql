@@ -211,11 +211,12 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     DTYPE varchar(31),
     --
     IDENTIFIER varchar(100) not null,
+    THERM_GROUP_ID uuid,
     DESCRIPTION text,
     PUB_SCOPE_ID uuid not null,
-    KEYWORDS varchar(500),
+    _KEYWORDS_DEPRECATED varchar(500),
     REMARKS text,
-    SYNONYMS varchar(800),
+    _SYNONYMS_DEPRECATED varchar(800),
     TITLE varchar(200),
     --
     primary key (ID)
@@ -326,6 +327,7 @@ create table SIMIDATA_DATA_SET_VIEW (
     ID uuid,
     --
     SERVICE_DOWNLOAD boolean not null,
+    THERM_GROUP_ID uuid,
     IS_FILE_DOWNLOAD_DSV boolean not null,
     STYLE_SERVER text,
     STYLE_SERVER_UPLOADED timestamp,
@@ -435,3 +437,19 @@ create table SIMIDATA_DB_SCHEMA (
     primary key (ID)
 )^
 -- end SIMIDATA_DB_SCHEMA
+-- begin SIMIPRODUCT_THERM_GROUP
+create table SIMIPRODUCT_THERM_GROUP (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    --
+    NAME varchar(255) not null,
+    KEYWORDS varchar(800),
+    SYNONYMS varchar(800),
+    --
+    primary key (ID)
+)^
+-- end SIMIPRODUCT_THERM_GROUP

@@ -51,8 +51,8 @@
                     <textArea id="descriptionField" property="description" rows="5" rowspan="4"/>
                 </column>
                 <column width="350px">
-                    <textArea id="keywordsField" property="keywords" rows="5" rowspan="2"/>
-                    <textArea id="synonymsField" property="synonyms" rows="5" rowspan="3"/>
+                    <textArea id="keywordsField" property="_keywords_deprecated" rows="5" rowspan="2"/>
+                    <textArea id="synonymsField" property="synonymS" rows="5" rowspan="3"/>
                 </column>
             </form>
         </groupBox>

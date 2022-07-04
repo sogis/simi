@@ -217,6 +217,7 @@
             <property name="fileContent"/>
             <property name="isForServer"/>
         </property>
+        <property name="thermGroup" view="_minimal"/>
     </view>
     <view entity="simiData_RasterDS" name="rasterView-edit-rasters" extends="_local"/>
     <view entity="simiData_TableView" name="tableView-edit" extends="_local">
@@ -237,6 +238,7 @@
             <property name="fileName"/>
             <property name="fileContent"/>
         </property>
+        <property name="thermGroup" view="_minimal"/>
     </view>
     <view entity="simiIAM_Role" name="tableView-edit-roles" extends="_local"/>
     <view entity="simiData_TableField" name="tableView-edit-tableFields" extends="_local"/>
@@ -262,9 +264,9 @@
         <property name="service" view="_minimal"/>
         <property name="description"/>
         <property name="pubScope" view="_minimal"/>
-        <property name="keywords"/>
+        <property name="_keywords_deprecated"/>
         <property name="remarks"/>
-        <property name="synonyms"/>
+        <property name="_synonyms_deprecated"/>
         <property name="externalIdentifier"/>
         <property name="transparency"/>
     </view>
@@ -293,4 +295,6 @@
             <property name="sort"/>
         </property>
     </view>
+    <view entity="simiProduct_ThermGroup" name="thermGroup-browse" extends="_minimal"/>
+    <view entity="simiProduct_ThermGroup" name="thermGroup-edit" extends="_local"/>
 </views>
