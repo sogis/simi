@@ -555,6 +555,7 @@ class CopyServiceBeanTest {
 
             PostgresTable tbl = container.metadata().create(PostgresTable.class);
             tbl.setTableName(TV_TABLE_STRING);
+            tbl.setTitle(TV_TABLE_STRING);
             tbl.setIdFieldName("fuu");
             tbl.setCatSyncStamp(LocalDateTime.now());
             tbl.setDbSchema(dt);

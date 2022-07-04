@@ -14,7 +14,9 @@
         <property name="viewFields" view="_local">
             <property name="tableField" view="_minimal"/>
         </property>
-        <property name="postgresTable" view="_minimal"/>
+        <property name="postgresTable" view="_minimal">
+            <property name="dbSchema" view="_minimal"/>
+        </property>
         <property name="pubScope" view="_minimal"/>
         <property name="permissions" view="_local">
             <property name="role" view="_minimal"/>
@@ -271,7 +273,7 @@
         <property name="transparency"/>
     </view>
     <view entity="simiProduct_ExternalWmsService" name="externalWmsLayers-edit-services" extends="_minimal"/>
-    <view entity="simiData_DbSchema" name="postgresTable-edit-themes" extends="_minimal"/>
+    <view entity="simiData_DbSchema" name="postgresTable-edit-dbSchemas" extends="_minimal"/>
     <view entity="simiProduct_FacadeLayer" name="morph-FacadeLayer" extends="_local">
         <property name="dataSetViews" view="_minimal">
             <property name="dataSetView" view="_minimal"/>

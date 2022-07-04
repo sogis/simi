@@ -11,6 +11,9 @@ import ch.so.agi.simi.entity.data.datasetview.RasterView;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.data.datasetview.ViewField;
 import ch.so.agi.simi.entity.product.*;
+import ch.so.agi.simi.entity.theme.org.Agency;
+import ch.so.agi.simi.entity.theme.org.OrgUnit;
+import ch.so.agi.simi.entity.theme.org.SubOrg;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
@@ -46,13 +49,13 @@ class EntityLoadingTest {
     }
 
     @Test
-    void dataTheme_OK() {
+    void dbSchema_OK() {
         loadEntityViews(
                 DbSchema.class,
                 new String[]{
-                        "dataTheme-browse",
-                        "dataTheme-edit",
-                        "postgresTable-edit-themes"
+                        "dbSchema-browse",
+                        "dbSchema-edit",
+                        "postgresTable-edit-dbSchemas"
                 });
     }
 
@@ -278,6 +281,30 @@ class EntityLoadingTest {
                         "thermGroup-edit",
                         "thermGroup-browse"
                 }
+        );
+    }
+
+    @Test
+    void org_OrgUnit_OK(){
+        loadEntityView(
+                OrgUnit.class,
+                "orgUnit-browse"
+        );
+    }
+
+    @Test
+    void org_Agency_OK(){
+        loadEntityViews(
+                Agency.class,
+                new String[]{"agency-edit","subOrg-agency-lookup"}
+        );
+    }
+
+    @Test
+    void org_SubOrg_OK(){
+        loadEntityView(
+                SubOrg.class,
+                "subOrg-edit"
         );
     }
 

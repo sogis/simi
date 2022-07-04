@@ -22,3 +22,9 @@ Bemerkung: Das Framework macht
 |---|---|
 |Product: Stichworte und Synonyme in ThermGroup|02B|
 |Theme: Organisation (Contact)|02D|
+
+## 6. Juli 2022
+
+|Änderung|Ordner|
+|---|---|
+|Theme: FileType|06A|

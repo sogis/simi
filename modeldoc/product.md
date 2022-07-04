@@ -23,9 +23,9 @@ Beispiele:
 |identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
 |hasFullIdent|Boolean|j|Ist in identPart ist der komplette Identifier enthalten? Beispielsweise themenübergreifende Datenprodukte|
 |pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](../metamodel.md#ebenenpublikation-in-dataproduct).|
-|keywords|String(200)|n|Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
+|keywords|String(200)|n|**DEPRECATED** Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|
-|synonyms|String(200)|n|Synonyme für das DataProduct.|
+|synonyms|String(200)|n|**DEPRECATED** Synonyme für das DataProduct.|
 |title|String(200)|n|Angezeigter Titel (Bezeichnung) des Dataproduct. Falls null in Erstellungsphase wird identifier verwendet.|
 |description|String(1000)|n|Beschreibung. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
 |_identUnique|String(100)|j|Zusammengesetzter eindeutiger identifier. Idee: \[ThemePub-UUID\].identPart|
@@ -198,3 +198,17 @@ Attributierte Verknüpfungstabelle der m:n Beziehung zwischen PL und SA.
 ### Konstraints
 
 UK über die FK's.
+
+## Klasse ThermGroup (Schlüsselwort-Gruppe)
+
+Definiert die Synonyme und Stichworte für einen "Kontext". Der Kontext wird mit dem Attribut "name" gekennzeichnet und kann ein Thema, eine Tabelle, ein DataSetView sein.
+
+Falls mit "name" ein ganzes Thema als Kontext erfasst ist, wird die ThermGroup jeder DSV im Thema zugewiesen.
+
+### Attributbeschreibung
+
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|name|String(255)|j|Kennung für den Kontext, für welchen die ThermGroup erstellt wurde (und gültig ist).<br>\[Thema\] (z.B: geologie)<br>\[Thema\].\[Tabelle\] (z.B: geologie.grundschicht)|
+|keywords|String(800)|n|Als Json-Array formattierter String aller Keywords dieser ThermGroup|
+|synonyms|String(800)|n|Als Json-Array formattierter String aller Synonyme dieser ThermGroup|

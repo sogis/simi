@@ -265,7 +265,7 @@ public class ThemeReaderBeanTest {
 
     private static DbSchema themeCreateMock(){
         PostgresDB db = new PostgresDB();
-        db.setDbIdentifier("mydb");
+        db.setIdentifier("mydb");
 
         DbSchema theme = new DbSchema();
         theme.setPostgresDB(db);
