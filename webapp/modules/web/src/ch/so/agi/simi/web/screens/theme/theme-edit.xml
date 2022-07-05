@@ -7,6 +7,7 @@
         <instance id="themeDc"
                   class="ch.so.agi.simi.entity.theme.Theme"
                   view="theme-edit">
+            <collection id="themePubDc" property="themePublications"/>
             <loader/>
         </instance>
         <collection id="dataOwnersDc" class="ch.so.agi.simi.entity.theme.org.OrgUnit" view="_minimal">
@@ -17,11 +18,14 @@
             </loader>
         </collection>
     </data>
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode height="80%"
+                width="80%"
+                modal="true"
+                forceDialog="true"
+                resizable="true"/>
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="themeDc">
-            <column width="450px">
+            <column width="350px">
                 <textField id="identifierField" property="identifier"/>
                 <lookupPickerField id="dataOwnerField" optionsContainer="dataOwnersDc" property="dataOwner">
                     <actions>
@@ -30,11 +34,41 @@
                     </actions>
                 </lookupPickerField>
                 <textField id="titleField" property="title"/>
-                <textField id="descriptionField" property="description"/>
                 <textField id="coverageIdentField" property="coverageIdent"/>
-                <textArea id="remarksField" property="remarks" rows="5"/>
+            </column>
+            <column width="350px">
+                <textArea id="descriptionField" property="description" rows="4" rowspan="3"/>
+                <textArea id="remarksField" property="remarks" rows="2" rowspan="2"/>
             </column>
         </form>
+        <groupBox id="themePubBox" caption="Themenbereitstellungen"
+                  expand="themePubTable">
+            <table id="themePubTable"
+                   dataContainer="themePubDc"
+                   width="100%"
+                   height="100%"
+                   multiselect="true"
+                   editable="false"
+                   settingsEnabled="false">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove">
+                        <properties>
+                            <property name="confirmation" value="false"/>
+                        </properties>
+                    </action>
+                </actions>
+                <columns>
+                    <column id="dynIdent" caption="Result. Identifier"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="themePubTable.create" stylename="primary"/>
+                    <button action="themePubTable.edit" stylename="primary"/>
+                    <button action="themePubTable.remove" stylename="danger"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>

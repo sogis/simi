@@ -17,7 +17,7 @@ eines Dataset (Darstellung / Attribute / Zeilenumfang) auf den entsprechenden Ei
 Keine Rendering-Information hat ein DSV vom Typ "externe WMS Ebene". Bei internen Raster- und Tabellarischen
 Daten ist das Styling als QML optional enthalten.
 
-Bemerkung: Im DB-Schema ist die DSV im Moment noch mit Präfix "simiproduct_" enthalten. $td
+Einer DataSetView verweist optional auf eine Schlüsselwort-Gruppe (ThermGroup). 
 
 #### Attributbeschreibung
 

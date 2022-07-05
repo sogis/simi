@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 @Table(name = "SIMITHEME_AGENCY")
 @Entity(name = "simiTheme_Agency")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("%s - %s|abbreviation,name")
 public class Agency extends OrgUnit {
     public static final String NAME = "simiTheme_Agency";
 

@@ -1,8 +1,13 @@
 package ch.so.agi.simi.entity.product;
 
 import ch.so.agi.simi.entity.SimiEntity;
+import ch.so.agi.simi.entity.theme.ThemePublication;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.Lookup;
+import com.haulmont.cuba.core.entity.annotation.LookupType;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,6 +26,13 @@ public class DataProduct extends SimiEntity {
     @NotNull
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
     private String identifier;
+
+    @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})
+    @NotNull
+    @OnDeleteInverse(DeletePolicy.DENY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "THEME_PUBLICATION_ID")
+    private ThemePublication themePublication;
 
     @Lob
     @Column(name = "DESCRIPTION")
@@ -43,6 +55,14 @@ public class DataProduct extends SimiEntity {
 
     @Column(name = "TITLE", length = 200)
     private String title;
+
+    public ThemePublication getThemePublication() {
+        return themePublication;
+    }
+
+    public void setThemePublication(ThemePublication themePublication) {
+        this.themePublication = themePublication;
+    }
 
     protected String typeAbbreviation(){
         return " WARNING: override missing.";

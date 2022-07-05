@@ -33,9 +33,6 @@ Für die Steuerung der GDI macht es keinen Unterschied, ob ein Thema ein Einzelt
 |title|String(200)|j|Angezeigter Titel des Themas.|
 |description|String(1000)|j|Kurze fachliche Bescheibung des Themas. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
 |remarks|String|n|Interne Bemerkungen.|
-|keywords|String(500)|n|Stichworte. Können auch thematische Überbegriffe sein. Als Json-Array formatiert.|
-|synonyms|String(500)|n|Synonyme, sprich alternative treffende Titel für das Thema. Als Json-Array formatiert.|
-|remarks|String|n|Interne Bemerkungen.|
 
 ### Konstraints
 
@@ -52,18 +49,19 @@ Konkrete Bereitstellung(en) eines Themas für einen Nutzungszweck. Beispiel Them
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|type|Enum|j|Typ der Publikation: vecSimple, vecRelational, nonVec, other. Bei vec* werden die verfügbaren Dateitypen automatisch hergeleitet.|
-|typeSuffixOverride|String(50)|(n)|Explizit gesetzter Suffix für den identifier. Bsp. **kommunal** für kommunale Nutzungsplanung. Resultierender Identifier: ch.so.arp.nutzungsplanung.kommunal|
-|_typeSuffix|String(50)|j|Aus den type* Attributen hergeleiteter Suffix des Identifiers (Hilfsattribut, readonly)|
+|dataClass|Enum|j|Typ der Publikation: vecSimple, vecRelational, nonVec, other. Bei vec* werden die verfügbaren Dateitypen automatisch hergeleitet.|
+|classSuffixOverride|String(50)|(n)|Explizit gesetzter Suffix für den identifier. Bsp. **kommunal** für kommunale Nutzungsplanung. Resultierender Identifier: ch.so.arp.nutzungsplanung.kommunal|
+|simiClassSuffix|String(50)|j|Aus den type* Attributen hergeleiteter Suffix des Identifiers (Hilfsattribut, readonly)|
 
 ### Konstraints
 
 UK über _typeSuffix, "FK auf Thema".
 
-## Klasse FileType
+## Klasse CustomFileType
 
-Informationen zu einem zum Download bereitgestellten Dateityp. Zip wird nicht erfasst, da immer als Ordner verwendet. Für die Benutzer nicht hilfreich, wenn
-beim Format jeweils immer "zip" steht.
+Enthält die Dateitypen des Datenbezugs für nicht über den Publisher bereitgestellte ThemenBereitstellungen (Raster, ...).
+
+Zip wird nicht erfasst, da dieses nur als Ordner dient und nicht Aussagekräftig ist.
 
 ### Attributbeschreibung
 

@@ -307,4 +307,14 @@
     <view entity="simiTheme_Agency" name="subOrg-agency-lookup" extends="_minimal">
         <property name="abbreviation"/>
     </view>
+    <view entity="simiTheme_Theme" name="theme-browse" extends="_minimal">
+        <property name="title"/>
+    </view>
+    <view entity="simiTheme_Theme" name="theme-edit" extends="_local">
+        <property name="dataOwner" view="_minimal"/>
+        <property name="themePublications" view="_minimal"/>
+    </view>
+    <view entity="simiTheme_ThemePublication" name="theme-edit-themePubs" extends="_local">
+        <property name="theme" view="_minimal"/>
+    </view>
 </views>

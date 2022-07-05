@@ -40,5 +40,8 @@
         <class>ch.so.agi.simi.entity.theme.org.OrgUnit</class>
         <class>ch.so.agi.simi.entity.theme.org.Agency</class>
         <class>ch.so.agi.simi.entity.theme.org.SubOrg</class>
+        <class>ch.so.agi.simi.entity.theme.CustomFileType</class>
+        <class>ch.so.agi.simi.entity.theme.Theme</class>
+        <class>ch.so.agi.simi.entity.theme.ThemePublication</class>
     </persistence-unit>
 </persistence>

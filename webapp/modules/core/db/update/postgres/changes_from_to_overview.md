@@ -23,8 +23,8 @@ Bemerkung: Das Framework macht
 |Product: Stichworte und Synonyme in ThermGroup|02B|
 |Theme: Organisation (Contact)|02D|
 
-## 6. Juli 2022
+## 5. Juli 2022
 
 |Änderung|Ordner|
 |---|---|
-|Theme: FileType|06A|
+|Theme: Alle weiteren Klassen ausser Package SubArea|05A|

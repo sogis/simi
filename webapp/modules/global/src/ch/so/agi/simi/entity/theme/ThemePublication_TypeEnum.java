@@ -5,13 +5,15 @@ import com.haulmont.chile.core.datatypes.impl.EnumClass;
 import javax.annotation.Nullable;
 
 
-public enum ThemePublicationType implements EnumClass<String> {
+public enum ThemePublication_TypeEnum implements EnumClass<String> {
 
-    ;
+    TABLE_SIMPLE("tableSimple"),
+    TABLE_RELATIONAL("tableRelational"),
+    NON_TABULAR("nonTabular");
 
     private String id;
 
-    ThemePublicationType(String value) {
+    ThemePublication_TypeEnum(String value) {
         this.id = value;
     }
 
@@ -20,8 +22,8 @@ public enum ThemePublicationType implements EnumClass<String> {
     }
 
     @Nullable
-    public static ThemePublicationType fromId(String id) {
-        for (ThemePublicationType at : ThemePublicationType.values()) {
+    public static ThemePublication_TypeEnum fromId(String id) {
+        for (ThemePublication_TypeEnum at : ThemePublication_TypeEnum.values()) {
             if (at.getId().equals(id)) {
                 return at;
             }

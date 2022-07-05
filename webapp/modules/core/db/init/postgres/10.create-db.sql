@@ -211,7 +211,7 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     DTYPE varchar(31),
     --
     IDENTIFIER varchar(100) not null,
-    THERM_GROUP_ID uuid,
+    THEME_PUBLICATION_ID uuid not null,
     DESCRIPTION text,
     PUB_SCOPE_ID uuid not null,
     _KEYWORDS_DEPRECATED varchar(500),
@@ -492,3 +492,62 @@ create table SIMITHEME_SUB_ORG (
     primary key (ID)
 )^
 -- end SIMITHEME_SUB_ORG
+-- begin SIMITHEME_FILE_TYPE
+create table SIMITHEME_FILE_TYPE (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    --
+    MIME_TYPE varchar(255) not null,
+    NAME varchar(100) not null,
+    KUERZEL varchar(50) not null,
+    --
+    primary key (ID)
+)^
+-- end SIMITHEME_FILE_TYPE
+-- begin SIMITHEME_THEME_PUBLICATION
+create table SIMITHEME_THEME_PUBLICATION (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    --
+    THEME_ID uuid not null,
+    DATA_CLASS varchar(50) not null,
+    CLASS_SUFFIX_OVERRIDE varchar(50),
+    SIMI_CLASS_SUFFIX varchar(255),
+    --
+    primary key (ID)
+)^
+-- end SIMITHEME_THEME_PUBLICATION
+-- begin SIMITHEME_THEME
+create table SIMITHEME_THEME (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    --
+    IDENTIFIER varchar(100) not null,
+    DATA_OWNER_ID uuid not null,
+    TITLE varchar(200) not null,
+    DESCRIPTION varchar(1000) not null,
+    COVERAGE_IDENT varchar(100) not null,
+    REMARKS text,
+    --
+    primary key (ID)
+)^
+-- end SIMITHEME_THEME
+-- begin SIMI_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK
+create table SIMI_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK (
+    THEME_PUBLICATION_ID uuid,
+    CUSTOM_FILE_TYPE_ID uuid,
+    primary key (THEME_PUBLICATION_ID, CUSTOM_FILE_TYPE_ID)
+)^
+-- end SIMI_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK
