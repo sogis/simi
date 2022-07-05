@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://themeBrowse.caption"
+        focusComponent="themesTable"
+        messagesPack="ch.so.agi.simi.web.screens.theme">
+    <data readOnly="true">
+        <collection id="themesDc"
+                    class="ch.so.agi.simi.entity.theme.Theme"
+                    view="theme-browse">
+            <loader id="themesDl">
+                <query>
+                    <![CDATA[select e from simiTheme_Theme e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="themesTable"
+            spacing="true">
+        <groupTable id="themesTable"
+                    width="100%"
+                    dataContainer="themesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="identifier"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="themesTable.create"/>
+                <button id="editBtn" action="themesTable.edit"/>
+                <button id="removeBtn" action="themesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

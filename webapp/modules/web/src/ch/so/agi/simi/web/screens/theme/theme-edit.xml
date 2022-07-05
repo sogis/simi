@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://themeEdit.caption"
+        focusComponent="form"
+        messagesPack="ch.so.agi.simi.web.screens.theme">
+    <data>
+        <instance id="themeDc"
+                  class="ch.so.agi.simi.entity.theme.Theme"
+                  view="theme-edit">
+            <loader/>
+        </instance>
+        <collection id="dataOwnersDc" class="ch.so.agi.simi.entity.theme.org.OrgUnit" view="_minimal">
+            <loader id="dataOwnersDl">
+                <query>
+                    <![CDATA[select e from simiTheme_OrgUnit e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="themeDc">
+            <column width="450px">
+                <textField id="identifierField" property="identifier"/>
+                <lookupPickerField id="dataOwnerField" optionsContainer="dataOwnersDc" property="dataOwner">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="open" type="picker_open"/>
+                    </actions>
+                </lookupPickerField>
+                <textField id="titleField" property="title"/>
+                <textField id="descriptionField" property="description"/>
+                <textField id="coverageIdentField" property="coverageIdent"/>
+                <textArea id="remarksField" property="remarks" rows="5"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
