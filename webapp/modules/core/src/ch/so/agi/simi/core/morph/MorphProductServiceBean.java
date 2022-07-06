@@ -39,7 +39,7 @@ public class MorphProductServiceBean implements MorphProductService {
             copyDprodProperties(fromDp, toDp);
             copyChildLinks(fromDp, toDp);
 
-            toDp.setIdentifier(fromDp.getIdentifier() + "-morph"); // Notwendig zur Vermeidung von UK verletzung.
+            toDp.setIdentPart(fromDp.getIdentPart() + "-morph"); // Notwendig zur Vermeidung von UK verletzung.
 
             CommitContext trans = new CommitContext();
             trans.addInstanceToCommit(toDp);
@@ -48,7 +48,7 @@ public class MorphProductServiceBean implements MorphProductService {
 
             dataManager.commit(trans);
 
-            updateIdentifier(toDp.getId(), fromDp.getIdentifier()); // Reset auf original identifier ohne "-morph"
+            updateIdentifier(toDp.getId(), fromDp.getIdentPart()); // Reset auf original identifier ohne "-morph"
         }
         catch(MorphException me){
             throw me;
@@ -81,12 +81,12 @@ public class MorphProductServiceBean implements MorphProductService {
 
     private void updateIdentifier(UUID dataProdId, String identifier){
         DataProduct dProd = dataManager.load(DataProduct.class).id(dataProdId).one();
-        dProd.setIdentifier(identifier);
+        dProd.setIdentPart(identifier);
         dataManager.commit(dProd);
     }
 
     private static void copyDprodProperties(DataProduct fromDp, DataProduct toDp) {
-        toDp.setIdentifier(fromDp.getIdentifier());
+        toDp.setIdentPart(fromDp.getIdentPart());
         toDp.setPubScope(fromDp.getPubScope());
         toDp.set_keywords_deprecated(fromDp.get_keywords_deprecated());
         toDp.setRemarks(fromDp.getRemarks());

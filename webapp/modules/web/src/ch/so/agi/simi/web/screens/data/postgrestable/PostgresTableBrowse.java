@@ -59,7 +59,7 @@ public class PostgresTableBrowse extends StandardLookup<PostgresTable> {
 
         postgresTable.getTableViews().forEach(tableView -> {
             LinkButton linkButton = uiComponents.create(LinkButton.class);
-            linkButton.setCaption(tableView.getIdentifier());
+            linkButton.setCaption(tableView.getDerivedIdentifier());
             linkButton.addClickListener(event -> editTableView(tableView));
             vBox.add(linkButton);
         });

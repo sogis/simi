@@ -25,8 +25,8 @@ public class Theme extends SimiEntity {
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
     private String identifier;
 
-    @Composition
     @OneToMany(mappedBy = "theme")
+    @Composition
     private List<ThemePublication> themePublications;
 
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})

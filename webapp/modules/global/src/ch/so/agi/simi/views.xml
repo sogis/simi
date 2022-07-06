@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view entity="simiTheme_ThemePublication" name="copy-dataProduct-themePub" extends="_minimal">
+        <property name="theme" view="_minimal">
+            <property name="dataOwner" view="_minimal"/>
+        </property>
+    </view>
     <view name="copy-rasterView" class="ch.so.agi.simi.entity.data.datasetview.RasterView" extends="_local">
         <property name="permissions" view="_local">
             <property name="role" view="_minimal"/>
@@ -9,6 +14,7 @@
         <property name="relations" view="_local">
             <property name="dependency" view="_minimal"/>
         </property>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view name="copy-tableView" class="ch.so.agi.simi.entity.data.datasetview.TableView" extends="_local">
         <property name="viewFields" view="_local">
@@ -24,18 +30,21 @@
         <property name="relations" view="_local">
             <property name="dependency" view="_minimal"/>
         </property>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view name="copy-facadeLayer" class="ch.so.agi.simi.entity.product.FacadeLayer" extends="_local">
         <property name="dataSetViews" view="_local">
             <property name="dataSetView" view="_minimal"/>
         </property>
         <property name="pubScope" view="_minimal"/>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view name="copy-layerGroup" class="ch.so.agi.simi.entity.product.LayerGroup" extends="_local">
         <property name="pubScope" view="_minimal"/>
         <property name="singleActors" view="_local">
             <property name="singleActor" view="_minimal"/>
         </property>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view name="copy-map" class="ch.so.agi.simi.entity.product.Map" extends="_local">
         <property name="pubScope" view="_minimal"/>
@@ -98,7 +107,7 @@
     <view entity="simiData_TableField" name="tableField-edit" extends="_local"/>
     <view entity="simiData_RasterDS" name="rasterDs-browse" extends="_local">
         <property name="rasterViews" view="_minimal">
-            <property name="identifier"/>
+            <property name="derivedIdentifier"/>
         </property>
     </view>
     <view entity="simiData_RasterDS" name="rasterDs-edit" extends="_local"/>
@@ -220,6 +229,7 @@
             <property name="isForServer"/>
         </property>
         <property name="thermGroup" view="_minimal"/>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiData_RasterDS" name="rasterView-edit-rasters" extends="_local"/>
     <view entity="simiData_TableView" name="tableView-edit" extends="_local">
@@ -300,6 +310,7 @@
     <view entity="simiProduct_ThermGroup" name="thermGroup-browse" extends="_minimal"/>
     <view entity="simiProduct_ThermGroup" name="thermGroup-edit" extends="_local"/>
     <view entity="simiTheme_OrgUnit" name="orgUnit-browse" extends="_local"/>
+    <view entity="simiTheme_OrgUnit" name="theme-edit-dataOwners" extends="_minimal"/>
     <view entity="simiTheme_Agency" name="agency-edit" extends="_local"/>
     <view entity="simiTheme_SubOrg" name="subOrg-edit" extends="_local">
         <property name="agency" view="_minimal"/>
@@ -317,4 +328,13 @@
     <view entity="simiTheme_ThemePublication" name="theme-edit-themePubs" extends="_local">
         <property name="theme" view="_minimal"/>
     </view>
+    <view entity="simiTheme_ThemePublication" name="dProdEditors-themePub-lookup" extends="_minimal">
+    </view>
+    <view entity="simiTheme_ThemePublication" name="themePublication-edit" extends="_local">
+        <property name="theme" view="_minimal"/>
+        <property name="customFileTypes" view="_minimal"/>
+        <property name="dataProducts" view="_minimal"/>
+    </view>
+    <view entity="simiTheme_Theme" name="themePublication-edit-theme" extends="_minimal"/>
+    <view entity="simiTheme_CustomFileType" name="customFileType-browse-edit" extends="_local"/>
 </views>

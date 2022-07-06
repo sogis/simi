@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "SIMIPRODUCT_LAYER_GROUP")
 @Entity(name = LayerGroup.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("#concatName|identifier,title") //needed to define minimal view
+@NamePattern("#concatName|derivedIdentifier,title") //needed to define minimal view
 public class LayerGroup extends ProductList {
 
     public static final String NAME = "simiProduct_LayerGroup";

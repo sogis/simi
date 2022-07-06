@@ -10,8 +10,9 @@
         <item screen="simiData_RasterDS.browse" caption="mainMsg://rasterds.caption.browse"/>
     </menu>
     <menu id="grp_theme" caption="Themen - Verwaltung ...">
-        <item screen="simiTheme_OrgUnit.browse" caption="mainMsg://orgunit.browse"/>
         <item screen="simiTheme_Theme.browse" caption="mainMsg://theme.caption.browse"/>
+        <item screen="simiTheme_OrgUnit.browse" caption="mainMsg://orgunit.browse"/>
+        <item screen="simiTheme_CustomFileType.browse" caption="mainMsg://customFileType.caption.browse"/>
     </menu>
     <menu id="grp_iam" caption="Benutzer - Verwaltung ...">
         <item screen="simiIAM_User.browse" caption="mainMsg://user.caption.browse"/>

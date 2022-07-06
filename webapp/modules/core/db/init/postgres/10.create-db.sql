@@ -210,7 +210,9 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     VERSION integer not null,
     DTYPE varchar(31),
     --
-    IDENTIFIER varchar(100) not null,
+    IDENT_PART varchar(100),
+    DERIVED_IDENTIFIER varchar(100) not null,
+    IDENT_IS_PARTIAL boolean not null,
     THEME_PUBLICATION_ID uuid not null,
     DESCRIPTION text,
     PUB_SCOPE_ID uuid not null,

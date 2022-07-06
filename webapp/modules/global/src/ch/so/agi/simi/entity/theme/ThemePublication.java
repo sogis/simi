@@ -1,6 +1,8 @@
 package ch.so.agi.simi.entity.theme;
 
 import ch.so.agi.simi.entity.SimiEntity;
+import ch.so.agi.simi.entity.product.DataProduct;
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
@@ -27,6 +29,10 @@ public class ThemePublication extends SimiEntity {
     @JoinColumn(name = "THEME_ID")
     private Theme theme;
 
+    @Composition
+    @OneToMany(mappedBy = "themePublication")
+    private List<DataProduct> dataProducts;
+
     @NotNull
     @Column(name = "DATA_CLASS", nullable = false)
     private String dataClass;
@@ -43,6 +49,14 @@ public class ThemePublication extends SimiEntity {
     @ManyToMany
     private List<CustomFileType> customFileTypes;
 
+    public List<DataProduct> getDataProducts() {
+        return dataProducts;
+    }
+
+    public void setDataProducts(List<DataProduct> dataProducts) {
+        this.dataProducts = dataProducts;
+    }
+
     public String deferFullIdent(){
         String res = theme.getIdentifier();
 
@@ -54,7 +68,7 @@ public class ThemePublication extends SimiEntity {
     }
 
     @MetaProperty
-    public String getDynIdent(){
+    public String getDerivedIdent(){
         return deferFullIdent();
     }
 

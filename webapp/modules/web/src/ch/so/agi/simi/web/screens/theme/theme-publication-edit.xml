@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="mainMsg://themePublication.caption.edit"
+        focusComponent="form">
+    <data>
+        <instance id="themePublicationDc"
+                  class="ch.so.agi.simi.entity.theme.ThemePublication"
+                  view="themePublication-edit">
+            <loader/>
+            <collection id="customFileTypesDc" property="customFileTypes"/>
+            <collection id="dataProductsDc" property="dataProducts"/>
+        </instance>
+        <collection id="themesDc" class="ch.so.agi.simi.entity.theme.Theme" view="themePublication-edit-theme">
+            <loader id="themesDl">
+                <query>
+                    <![CDATA[select e from simiTheme_Theme e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="80%"
+                width="80%"
+                modal="true"
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="tableScroll" spacing="true">
+            <form id="form" dataContainer="themePublicationDc">
+                <column width="350px">
+                    <lookupField id="dataClassField" property="dataClass"/>
+                    <textField id="classSuffixOverrideField" property="classSuffixOverride"/>
+                    <textField id="suffixField" property="getDerivedIdent" editable="false" caption="Resultierender Suffix"/>
+                </column>
+            </form>
+        <scrollBox id="tableScroll">
+            <groupBox id="dataProductsBox" caption="mainMsg://dataproduct.caption.browse">
+                <table id="dataProductsTable" dataContainer="dataProductsDc" width="100%">
+                    <columns>
+                        <column id="identifier"/>
+                        <column id="title"/>
+                    </columns>
+                </table>
+
+            </groupBox>
+            <groupBox id="customFileTypesBox" caption="msg://ch.so.agi.simi.entity.theme/ThemePublication.customFileTypes">
+                <table id="customFileTypesTable" dataContainer="customFileTypesDc" width="100%">
+                    <actions>
+                        <action id="add" type="add"/>
+                        <action id="exclude" type="exclude">
+                            <properties>
+                                <property name="confirmation" value="false"/>
+                            </properties>
+                        </action>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                        <column id="mimeType"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="customFileTypesTable.add" stylename="primary"/>
+                        <button action="customFileTypesTable.exclude"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+</scrollBox>
+            <hbox id="editActions" spacing="true">
+                <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                <button id="closeBtn" action="windowClose"/>
+            </hbox>
+    </layout>
+</window>

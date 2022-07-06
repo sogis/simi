@@ -10,13 +10,20 @@ import ch.so.agi.simi.entity.iam.PermissionLevelEnum;
 import ch.so.agi.simi.entity.iam.Role;
 import ch.so.agi.simi.entity.data.datasetview.*;
 import ch.so.agi.simi.entity.product.*;
+import ch.so.agi.simi.entity.theme.Theme;
+import ch.so.agi.simi.entity.theme.ThemePublication;
+import ch.so.agi.simi.entity.theme.ThemePublication_TypeEnum;
+import ch.so.agi.simi.entity.theme.org.Agency;
 import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.core.entity.BaseUuidEntity;
 import com.haulmont.cuba.core.global.AppBeans;
+import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.testsupport.TestContainer;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -26,6 +33,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.Callable;
 
 import static ch.so.agi.simi.core.copy.CopyServiceBean.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,18 +65,77 @@ class CopyServiceBeanTest {
     private static final String MAP_DP_STRING = "ch.so.agi.inttest.map";
     private static final String MAP_FL_STRING = "ch.so.agi.inttest.map.facadelayer";
 
+    private static final String THEMEPUB_CLASS_SUFFIX_OVERRIDE = "ch.so.agi.inttest.themePub";
+
     @RegisterExtension
     static TestContainer container = SimiTestContainer.Common.INSTANCE;
 
     static DataManager dataManager;
     static CopyService serviceBean;
 
+    static ThemePublication themePubForTest;
 
     @BeforeAll
     static void beforeAll() {
 
         dataManager = AppBeans.get(DataManager.class);
         serviceBean = AppBeans.get(CopyService.class);
+
+        themePubForTest = createThemePub();
+    }
+
+    private static ThemePublication createThemePub(){
+        removeThemePubs();
+
+        Agency a = container.metadata().create(Agency.class);
+        a.setName("copytest");
+        a.setAbbreviation("test");
+        a.setEmail("email");
+        a.setPhone("phone");
+        a.setUrl("url");
+
+        Theme t = container.metadata().create(Theme.class);
+        t.setIdentifier("copytest");
+        t.setCoverageIdent("covIdent");
+        t.setTitle("title");
+        t.setDescription("desc");
+        t.setDataOwner(a);
+
+        ThemePublication p = container.metadata().create(ThemePublication.class);
+        p.setDataClass(ThemePublication_TypeEnum.TABLE_SIMPLE);
+        p.setTheme(t);
+        p.setClassSuffixOverride(THEMEPUB_CLASS_SUFFIX_OVERRIDE);
+
+        CommitContext c = new CommitContext();
+        c.addInstanceToCommit(a);
+        c.addInstanceToCommit(t);
+        c.addInstanceToCommit(p);
+
+        dataManager.commit(c);
+
+        return p;
+    }
+
+    @AfterAll
+    static void afterAll() {
+        removeThemePubs();
+    }
+
+    private static void removeThemePubs(){
+        String viewName = "copy-dataProduct-themePub";
+        Optional<ThemePublication> ot = dataManager.load(ThemePublication.class)
+                .query("select e from simiTheme_ThemePublication e where e.classSuffixOverride like :para")
+                .parameter("para", THEMEPUB_CLASS_SUFFIX_OVERRIDE)
+                .view(viewName)
+                .optional();
+
+        if(!ot.isPresent())
+            return;
+
+        ThemePublication t = ot.get();
+
+        dataManager.remove(t.getTheme());
+        dataManager.remove(t.getTheme().getDataOwner());
     }
 
     @Test
@@ -82,7 +149,7 @@ class CopyServiceBeanTest {
 
             TableView tv = dataManager.load(TableView.class).view(TV_VIEW_NAME).id(copyId).one();
 
-            assertTrue(tv.getIdentifier().contains(TV_DP_STRING), "Identifier of copy must start with identifier of the original");
+            assertTrue(tv.getDerivedIdentifier().contains(TV_DP_STRING), "Identifier of copy must start with identifier of the original");
             assertEquals(TV_DP_STRING, tv.getSearchFacet());
             assertEquals(TV_SA_TRANSPARENCY, tv.getTransparency());
 
@@ -99,17 +166,18 @@ class CopyServiceBeanTest {
 
         try {
             cleanupRvTestdata();
+
             UUID rvId = prepareRvTestdata();
 
             UUID copyId = serviceBean.copyProduct(rvId);
 
             RasterView rv = dataManager.load(RasterView.class).view(RV_VIEW_NAME).id(copyId).one();
 
-            assertTrue(rv.getIdentifier().contains(RV_DP_STRING), "Identifier of copy must start with identifier of the original");
+            assertTrue(rv.getDerivedIdentifier().contains(RV_DP_STRING), "Identifier of copy must start with identifier of the original");
             assertEquals(RV_SA_TRANSPARENCY, rv.getTransparency());
 
-            //assertEquals(RV_PL_STRING, rv.getProductLists().get(0).getProductList().getIdentifier());
-            //assertEquals(RV_FL_STRING, rv.getFacadeLayers().get(0).getFacadeLayer().getIdentifier());
+            //assertEquals(RV_PL_STRING, rv.getProductLists().get(0).getProductList().getDerivedIdentifier());
+            //assertEquals(RV_FL_STRING, rv.getFacadeLayers().get(0).getFacadeLayer().getDerivedIdentifier());
 
             assertEquals(RV_COMPONENT_STRING, rv.getRelations().get(0).getDependency().getName());
             assertEquals(RV_ROLE_STRING, rv.getPermissions().get(0).getRole().getName());
@@ -130,10 +198,10 @@ class CopyServiceBeanTest {
 
             FacadeLayer fl = dataManager.load(FacadeLayer.class).view(FL_VIEW_NAME).id(copyId).one();
 
-            assertTrue(fl.getIdentifier().contains(FL_DP_STRING), "Identifier of copy must start with identifier of the original");
+            assertTrue(fl.getDerivedIdentifier().contains(FL_DP_STRING), "Identifier of copy must start with identifier of the original");
             assertEquals(FL_SA_TRANSPARENCY, fl.getTransparency());
 
-            assertEquals(FL_DSV_STRING, fl.getDataSetViews().get(0).getDataSetView().getIdentifier());
+            assertEquals(FL_DSV_STRING, fl.getDataSetViews().get(0).getDataSetView().getDerivedIdentifier());
         }
         finally {
             cleanupFlTestdata();
@@ -151,9 +219,9 @@ class CopyServiceBeanTest {
 
             LayerGroup lg = dataManager.load(LayerGroup.class).view(LG_VIEW_NAME).id(copyId).one();
 
-            assertTrue(lg.getIdentifier().contains(LG_DP_STRING), "Identifier of copy must start with identifier of the original");
+            assertTrue(lg.getDerivedIdentifier().contains(LG_DP_STRING), "Identifier of copy must start with identifier of the original");
             
-            assertEquals(LG_FL_STRING, lg.getSingleActors().get(0).getSingleActor().getIdentifier());
+            assertEquals(LG_FL_STRING, lg.getSingleActors().get(0).getSingleActor().getDerivedIdentifier());
         }
         finally {
             cleanupLgTestdata();
@@ -171,9 +239,9 @@ class CopyServiceBeanTest {
 
             Map map = dataManager.load(Map.class).view(MAP_VIEW_NAME).id(copyId).one();
 
-            assertTrue(map.getIdentifier().contains(MAP_DP_STRING), "Identifier of copy must start with identifier of the original");
+            assertTrue(map.getDerivedIdentifier().contains(MAP_DP_STRING), "Identifier of copy must start with identifier of the original");
 
-            assertEquals(MAP_FL_STRING, map.getSingleActors().get(0).getSingleActor().getIdentifier());
+            assertEquals(MAP_FL_STRING, map.getSingleActors().get(0).getSingleActor().getDerivedIdentifier());
         }
         finally {
             cleanupMapTestdata();
@@ -201,6 +269,7 @@ class CopyServiceBeanTest {
             }
 
             if(curr != null){ //original and copy share the same relationships --> remove only once
+
                 orm.remove( curr.getRasterDS() );
 
                 orm.remove( curr.getPermissions().get(0).getRole() );
@@ -354,11 +423,13 @@ class CopyServiceBeanTest {
             rvId = rv.getId();
 
             rv.setTransparency(RV_SA_TRANSPARENCY);
-            rv.setIdentifier(RV_DP_STRING);
+            rv.setDerivedIdentifier(RV_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             rv.setPubScope(ps);
             rv.setRasterDS(rds);
+
+            rv.setThemePublication(themePubForTest);
 
             orm.persist(rv);
 
@@ -392,7 +463,7 @@ class CopyServiceBeanTest {
             LayerGroup lg = container.metadata().create(LayerGroup.class);
             lgId = lg.getId();
 
-            lg.setIdentifier(LG_DP_STRING);
+            lg.setDerivedIdentifier(LG_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             lg.setPubScope(ps);
@@ -421,7 +492,7 @@ class CopyServiceBeanTest {
             Map map = container.metadata().create(Map.class);
             mapId = map.getId();
 
-            map.setIdentifier(MAP_DP_STRING);
+            map.setDerivedIdentifier(MAP_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             map.setPubScope(ps);
@@ -451,7 +522,7 @@ class CopyServiceBeanTest {
             flId = fl.getId();
 
             fl.setTransparency(FL_SA_TRANSPARENCY);
-            fl.setIdentifier(FL_DP_STRING);
+            fl.setDerivedIdentifier(FL_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             fl.setPubScope(ps);
@@ -506,7 +577,7 @@ class CopyServiceBeanTest {
 
     private static BaseUuidEntity[] linkToTestFacadelayer(ProductList pl, DataProduct_PubScope ps, String flIdentifier){
         FacadeLayer fl = container.metadata().create(FacadeLayer.class);
-        fl.setIdentifier(flIdentifier);
+        fl.setDerivedIdentifier(flIdentifier);
         fl.setPubScope(ps);
 
         PropertiesInList pil = container.metadata().create(PropertiesInList.class);
@@ -523,7 +594,7 @@ class CopyServiceBeanTest {
         rds.setPath(UUID.randomUUID().toString());
         
         RasterView dsv = container.metadata().create(RasterView.class);
-        dsv.setIdentifier(dsvIdentifier);
+        dsv.setDerivedIdentifier(dsvIdentifier);
         dsv.setPubScope(ps);
         dsv.setRasterDS(rds);
 
@@ -571,7 +642,7 @@ class CopyServiceBeanTest {
 
             tv.setSearchFacet(TV_DP_STRING);
             tv.setTransparency(TV_SA_TRANSPARENCY);
-            tv.setIdentifier(TV_DP_STRING);
+            tv.setDerivedIdentifier(TV_DP_STRING);
             tv.setPostgresTable(tbl);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();

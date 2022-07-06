@@ -36,7 +36,11 @@
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="remove" type="remove">
+                    <properties>
+                        <property name="confirmation" value="false"/>
+                    </properties>
+                </action>
             </actions>
             <columns>
                 <column id="identifier"/>

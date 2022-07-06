@@ -28,3 +28,9 @@ Bemerkung: Das Framework macht
 |Änderung|Ordner|
 |---|---|
 |Theme: Alle weiteren Klassen ausser Package SubArea|05A|
+
+## 6. Juli 2022
+
+|Änderung|Ordner|
+|---|---|
+|DataProduct: Anpassung Identifier|06B|

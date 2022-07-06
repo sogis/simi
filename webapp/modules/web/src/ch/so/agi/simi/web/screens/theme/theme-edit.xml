@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://themeEdit.caption"
-        focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.theme">
+        caption="mainMsg://theme.caption.edit"
+        focusComponent="form">
     <data>
         <instance id="themeDc"
                   class="ch.so.agi.simi.entity.theme.Theme"
@@ -10,7 +9,7 @@
             <collection id="themePubDc" property="themePublications"/>
             <loader/>
         </instance>
-        <collection id="dataOwnersDc" class="ch.so.agi.simi.entity.theme.org.OrgUnit" view="_minimal">
+        <collection id="dataOwnersDc" class="ch.so.agi.simi.entity.theme.org.OrgUnit" view="theme-edit-dataOwners">
             <loader id="dataOwnersDl">
                 <query>
                     <![CDATA[select e from simiTheme_OrgUnit e]]>
@@ -23,7 +22,7 @@
                 modal="true"
                 forceDialog="true"
                 resizable="true"/>
-    <layout expand="editActions" spacing="true">
+    <layout expand="themePubBox" spacing="true">
         <form id="form" dataContainer="themeDc">
             <column width="350px">
                 <textField id="identifierField" property="identifier"/>
@@ -41,7 +40,7 @@
                 <textArea id="remarksField" property="remarks" rows="2" rowspan="2"/>
             </column>
         </form>
-        <groupBox id="themePubBox" caption="Themenbereitstellungen"
+        <groupBox id="themePubBox" caption="mainMsg://themePublication.caption.browse"
                   expand="themePubTable">
             <table id="themePubTable"
                    dataContainer="themePubDc"
@@ -60,7 +59,7 @@
                     </action>
                 </actions>
                 <columns>
-                    <column id="dynIdent" caption="Result. Identifier"/>
+                    <column id="getDerivedIdent" caption="Result. Identifier"/>
                 </columns>
                 <buttonsPanel>
                     <button action="themePubTable.create" stylename="primary"/>

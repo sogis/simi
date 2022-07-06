@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "SIMIDATA_TABLE_VIEW")
 @Entity(name = TableView.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("#concatName|identifier,title") //needed to define minimal view
+@NamePattern("#concatName|derivedIdentifier,title") //needed to define minimal view
 public class TableView extends DataSetView {
 
     public static final String NAME = "simiData_TableView";

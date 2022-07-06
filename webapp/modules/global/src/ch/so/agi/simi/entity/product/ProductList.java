@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "SIMIPRODUCT_PRODUCT_LIST")
 @Entity(name = "simiProduct_ProductList")
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("#concatName|identifier,title")
+@NamePattern("#concatName|derivedIdentifier,title")
 public class ProductList extends DataProduct {
     private static final long serialVersionUID = 7189309667378680986L;
 

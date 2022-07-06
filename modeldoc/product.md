@@ -21,14 +21,14 @@ Beispiele:
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
-|hasFullIdent|Boolean|j|Ist in identPart ist der komplette Identifier enthalten? Beispielsweise themenübergreifende Datenprodukte|
+|identIsPartial|Boolean|j|Ist nur der Suffix-Teil des Identifiers erfasst? |
 |pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](../metamodel.md#ebenenpublikation-in-dataproduct).|
 |keywords|String(200)|n|**DEPRECATED** Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|
 |synonyms|String(200)|n|**DEPRECATED** Synonyme für das DataProduct.|
 |title|String(200)|n|Angezeigter Titel (Bezeichnung) des Dataproduct. Falls null in Erstellungsphase wird identifier verwendet.|
 |description|String(1000)|n|Beschreibung. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
-|_identUnique|String(100)|j|Zusammengesetzter eindeutiger identifier. Idee: \[ThemePub-UUID\].identPart|
+|derivedIdent|String(100)|j|Zusammengesetzter identifier für Filtern in SIMI, ...|
 
 ### Identifier (Attribut identPart)
 

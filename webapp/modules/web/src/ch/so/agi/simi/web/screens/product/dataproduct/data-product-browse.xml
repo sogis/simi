@@ -44,7 +44,7 @@
                 </action>
             </actions>
             <columns>
-                <column id="identifier" sort="ASCENDING"/>
+                <column id="identPart" sort="ASCENDING"/>
                 <column id="title"/>
                 <column id="pubScope" width="150"/>
                 <column id="typeAbbreviation" width="120"/>

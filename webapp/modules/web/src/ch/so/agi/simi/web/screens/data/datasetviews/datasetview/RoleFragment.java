@@ -39,7 +39,7 @@ public class RoleFragment extends ScreenFragment {
         // insert new permission to table
         permissionsDc.getMutableItems().add(permission);
 
-        // set focust to the new permission
+        // set focus to the new permission
         permissionsTable.requestFocus(permission, "role");
     }
 }

@@ -40,7 +40,7 @@ public class LegendFragment extends ScreenFragment {
 
         AppConfig.createExportDisplay(null).show(
                 new ByteArrayDataProvider(data),
-                sa.getIdentifier() + "." + suffix
+                sa.getDerivedIdentifier() + "." + suffix
         );
     }
 

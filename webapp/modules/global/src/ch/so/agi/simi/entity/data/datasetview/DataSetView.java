@@ -19,7 +19,7 @@ import java.util.List;
 @Table(name = "SIMIDATA_DATA_SET_VIEW")
 @Entity(name = DataSetView.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("#concatName|identifier,title") //needed to define minimal view
+@NamePattern("#concatName|derivedIdentifier,title") //needed to define minimal view
 public class DataSetView extends SingleActor {
 
     public static final String NAME = "simiData_DataSetView";

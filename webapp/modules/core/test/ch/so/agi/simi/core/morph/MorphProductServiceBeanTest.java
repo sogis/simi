@@ -69,7 +69,7 @@ class MorphProductServiceBeanTest {
         deletable = dataManager.load(DataProduct_PubScope.class).id(UUID.fromString("55bdf0dd-d997-c537-f95b-7e641dc515df")).one();
 
         linkDs = new DataSetView();
-        linkDs.setIdentifier(LINK_DS_IDENT);
+        linkDs.setIdentPart(LINK_DS_IDENT);
         linkDs.setPubScope(deletable);
 
         dataManager.commit(linkDs);
@@ -88,8 +88,8 @@ class MorphProductServiceBeanTest {
             identPrefix = IDENT_PREFIX_ALLTESTS;
 
         List<DataProduct> testEntities = dataManager.load(DataProduct.class)
-                .query("e.identifier like :identifier")
-                .parameter("identifier", identPrefix + "%")
+                .query("e.identPart like :param")
+                .parameter("param", identPrefix + "%")
                 .list();
 
         if(testEntities == null || testEntities.size() == 0)
@@ -184,7 +184,7 @@ class MorphProductServiceBeanTest {
 
     private UUID createTestFl(){
         FacadeLayer fl = new FacadeLayer();
-        fl.setIdentifier(FL_IDENT);
+        fl.setDerivedIdentifier(FL_IDENT);
         fl.setPubScope(deletable);
 
         PropertiesInFacade pif = new PropertiesInFacade();
@@ -220,7 +220,7 @@ class MorphProductServiceBeanTest {
 
     private UUID createTestLg(){
         LayerGroup lg = new LayerGroup();
-        lg.setIdentifier(LG_IDENT);
+        lg.setDerivedIdentifier(LG_IDENT);
         lg.setPubScope(deletable);
 
         LinkedList<PropertiesInList> pilList = createListWithOnePil(lg);
@@ -237,7 +237,7 @@ class MorphProductServiceBeanTest {
 
     private UUID createTestMap(){
         Map map = new Map();
-        map.setIdentifier(MAP_IDENT);
+        map.setDerivedIdentifier(MAP_IDENT);
         map.setPubScope(deletable);
 
         LinkedList<PropertiesInList> pilList = createListWithOnePil(map);

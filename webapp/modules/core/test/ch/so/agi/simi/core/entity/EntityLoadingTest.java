@@ -11,6 +11,9 @@ import ch.so.agi.simi.entity.data.datasetview.RasterView;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.data.datasetview.ViewField;
 import ch.so.agi.simi.entity.product.*;
+import ch.so.agi.simi.entity.theme.CustomFileType;
+import ch.so.agi.simi.entity.theme.Theme;
+import ch.so.agi.simi.entity.theme.ThemePublication;
 import ch.so.agi.simi.entity.theme.org.Agency;
 import ch.so.agi.simi.entity.theme.org.OrgUnit;
 import ch.so.agi.simi.entity.theme.org.SubOrg;
@@ -286,17 +289,21 @@ class EntityLoadingTest {
 
     @Test
     void org_OrgUnit_OK(){
-        loadEntityView(
-                OrgUnit.class,
+        loadEntityViews(
+            OrgUnit.class,
+            new String[]{
+                "theme-edit-dataOwners",
                 "orgUnit-browse"
+            }
         );
     }
 
     @Test
     void org_Agency_OK(){
         loadEntityViews(
-                Agency.class,
-                new String[]{"agency-edit","subOrg-agency-lookup"}
+            Agency.class,
+            new String[]{"agency-edit",
+                    "subOrg-agency-lookup"}
         );
     }
 
@@ -306,6 +313,30 @@ class EntityLoadingTest {
                 SubOrg.class,
                 "subOrg-edit"
         );
+    }
+
+    @Test
+    void theme_Theme_OK(){
+        loadEntityViews(
+            Theme.class,
+            new String[]{
+                "theme-browse",
+                "theme-edit",
+                "themePublication-edit-theme"
+            }
+        );
+    }
+
+    @Test
+    void theme_ThemePublication_OK(){
+        loadEntityView(ThemePublication.class, "themePublication-edit");
+    }
+
+    @Test
+    void theme_CustomFileType_OK(){
+        loadEntityView(
+                CustomFileType.class,
+                "customFileType-browse-edit");
     }
 
     private void loadEntityViews(Class entityClass, String[] viewNames){

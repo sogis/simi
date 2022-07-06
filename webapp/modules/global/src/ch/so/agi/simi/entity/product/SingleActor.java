@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "SIMIPRODUCT_SINGLE_ACTOR")
 @Entity(name = SingleActor.NAME)
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-@NamePattern("#concatName|identifier,title") //needed to define minimal view
+@NamePattern("#concatName|derivedIdentifier,title") //needed to define minimal view
 public class SingleActor extends DataProduct {
 
     public static final String NAME = "simiProduct_SingleActor";

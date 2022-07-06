@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
 @Entity(name = DataProduct.NAME)
-@NamePattern("#concatName|identifier,title")
+@NamePattern("#concatName|title")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class DataProduct extends SimiEntity {
@@ -23,9 +23,16 @@ public class DataProduct extends SimiEntity {
 
     private static final long serialVersionUID = -3456773582487680912L;
 
+    @Column(name = "IDENT_PART", length = 100)
+    private String identPart;
+
     @NotNull
-    @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
-    private String identifier;
+    @Column(name = "DERIVED_IDENTIFIER", nullable = false, unique = true, length = 100)
+    private String derivedIdentifier;
+
+    @NotNull
+    @Column(name = "IDENT_IS_PARTIAL", nullable = false)
+    private Boolean identIsPartial = false;
 
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})
     @NotNull
@@ -56,6 +63,30 @@ public class DataProduct extends SimiEntity {
     @Column(name = "TITLE", length = 200)
     private String title;
 
+    public Boolean getIdentIsPartial() {
+        return identIsPartial;
+    }
+
+    public void setIdentIsPartial(Boolean identIsPartial) {
+        this.identIsPartial = identIsPartial;
+    }
+
+    public String getDerivedIdentifier() {
+        return derivedIdentifier;
+    }
+
+    public void setDerivedIdentifier(String derivedIdentifier) {
+        this.derivedIdentifier = derivedIdentifier;
+    }
+
+    public String getIdentPart() {
+        return identPart;
+    }
+
+    public void setIdentPart(String identPart) {
+        this.identPart = identPart;
+    }
+
     public ThemePublication getThemePublication() {
         return themePublication;
     }
@@ -69,7 +100,7 @@ public class DataProduct extends SimiEntity {
     }
 
     public String concatName(){
-        return this.identifier + " | " + this.title + " | " +  typeAbbreviation() ;
+        return this.derivedIdentifier + " | " + this.title + " | " +  typeAbbreviation() ;
     }
 
     @MetaProperty
@@ -130,11 +161,4 @@ public class DataProduct extends SimiEntity {
         this._keywords_deprecated = _keywords_deprecated;
     }
 
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
 }

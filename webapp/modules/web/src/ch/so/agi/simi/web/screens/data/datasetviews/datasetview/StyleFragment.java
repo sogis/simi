@@ -116,7 +116,7 @@ public class StyleFragment extends ScreenFragment {
 
     private String buildStyleFileName(String fileSuffix){
 
-        String fileName =  dataSetViewDc.getItem().getIdentifier();
+        String fileName =  dataSetViewDc.getItem().getDerivedIdentifier();
 
         if(!isServerStyle())
             fileName += "__desktop";
