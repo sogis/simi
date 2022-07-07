@@ -5,6 +5,7 @@ import ch.so.agi.simi.entity.data.TableField;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.data.datasetview.ViewField;
 import ch.so.agi.simi.web.beans.sort.SortBean;
+import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
@@ -29,6 +30,14 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private CollectionLoader<TableField> tableFieldsDl;
     @Inject
     private SortBean sortBean;
+    @Inject
+    private DataManager dataManager;
+
+    @Subscribe
+    public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
+        this.getEditedEntity().updateDerivedIdentifier(dataManager);
+    }
+    
 
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {

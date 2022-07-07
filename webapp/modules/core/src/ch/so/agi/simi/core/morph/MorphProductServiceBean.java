@@ -39,7 +39,7 @@ public class MorphProductServiceBean implements MorphProductService {
             copyDprodProperties(fromDp, toDp);
             copyChildLinks(fromDp, toDp);
 
-            toDp.setIdentPart(fromDp.getIdentPart() + "-morph"); // Notwendig zur Vermeidung von UK verletzung.
+            toDp.setDerivedIdentifier(fromDp.getDerivedIdentifier() + "-morph"); // Notwendig zur Vermeidung von UK verletzung.
 
             CommitContext trans = new CommitContext();
             trans.addInstanceToCommit(toDp);
@@ -87,6 +87,8 @@ public class MorphProductServiceBean implements MorphProductService {
 
     private static void copyDprodProperties(DataProduct fromDp, DataProduct toDp) {
         toDp.setIdentPart(fromDp.getIdentPart());
+        toDp.setIdentIsPartial(fromDp.getIdentIsPartial());
+        toDp.setDerivedIdentifier(fromDp.getDerivedIdentifier());
         toDp.setPubScope(fromDp.getPubScope());
         toDp.set_keywords_deprecated(fromDp.get_keywords_deprecated());
         toDp.setRemarks(fromDp.getRemarks());

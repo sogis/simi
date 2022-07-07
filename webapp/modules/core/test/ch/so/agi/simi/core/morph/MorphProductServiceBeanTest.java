@@ -26,6 +26,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
+import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,6 +71,7 @@ class MorphProductServiceBeanTest {
 
         linkDs = new DataSetView();
         linkDs.setIdentPart(LINK_DS_IDENT);
+        linkDs.setDerivedIdentifier(LINK_DS_IDENT);
         linkDs.setPubScope(deletable);
 
         dataManager.commit(linkDs);
@@ -88,7 +90,7 @@ class MorphProductServiceBeanTest {
             identPrefix = IDENT_PREFIX_ALLTESTS;
 
         List<DataProduct> testEntities = dataManager.load(DataProduct.class)
-                .query("e.identPart like :param")
+                .query("e.derivedIdentifier like :param")
                 .parameter("param", identPrefix + "%")
                 .list();
 
@@ -181,10 +183,10 @@ class MorphProductServiceBeanTest {
         }
     }
 
-
     private UUID createTestFl(){
         FacadeLayer fl = new FacadeLayer();
-        fl.setDerivedIdentifier(FL_IDENT);
+        setIdentFields(fl, FL_IDENT);
+
         fl.setPubScope(deletable);
 
         PropertiesInFacade pif = new PropertiesInFacade();
@@ -205,6 +207,11 @@ class MorphProductServiceBeanTest {
         return fl.getId();
     }
 
+    private static void setIdentFields(DataProduct dp, String ident){
+        dp.setDerivedIdentifier(ident);
+        dp.setIdentPart(ident);
+    }
+
     private static LinkedList<PropertiesInList> createListWithOnePil(ProductList pl) {
         PropertiesInList pil = new PropertiesInList();
         pil.setSingleActor(loadLinkDs());
@@ -220,7 +227,8 @@ class MorphProductServiceBeanTest {
 
     private UUID createTestLg(){
         LayerGroup lg = new LayerGroup();
-        lg.setDerivedIdentifier(LG_IDENT);
+        setIdentFields(lg, LG_IDENT);
+
         lg.setPubScope(deletable);
 
         LinkedList<PropertiesInList> pilList = createListWithOnePil(lg);
@@ -237,7 +245,7 @@ class MorphProductServiceBeanTest {
 
     private UUID createTestMap(){
         Map map = new Map();
-        map.setDerivedIdentifier(MAP_IDENT);
+        setIdentFields(map, MAP_IDENT);
         map.setPubScope(deletable);
 
         LinkedList<PropertiesInList> pilList = createListWithOnePil(map);

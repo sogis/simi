@@ -49,7 +49,7 @@
                 <column width="450px">
                     <lookupField id="themePubField" dataContainer="dataProductDc" property="themePublication" optionsContainer="themePubsDc"/>
                     <textField id="identPartField" property="identPart" />
-                    <checkBox id="dd" property="identIsPartial" caption="Teil-Ident?"/>
+                    <checkBox id="identIsPartialBox" property="identIsPartial" caption="Teil-Ident?"/>
                     <textField id="titleField" property="title"/>
                     <fragment id="styleServerField" screen="simi_StyleFragment" caption="Darstellung Server">
                         <properties>

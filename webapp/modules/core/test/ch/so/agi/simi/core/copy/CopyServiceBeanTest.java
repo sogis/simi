@@ -423,7 +423,7 @@ class CopyServiceBeanTest {
             rvId = rv.getId();
 
             rv.setTransparency(RV_SA_TRANSPARENCY);
-            rv.setDerivedIdentifier(RV_DP_STRING);
+            setIdentFields(rv, RV_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             rv.setPubScope(ps);
@@ -463,7 +463,7 @@ class CopyServiceBeanTest {
             LayerGroup lg = container.metadata().create(LayerGroup.class);
             lgId = lg.getId();
 
-            lg.setDerivedIdentifier(LG_DP_STRING);
+            setIdentFields(lg, LG_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             lg.setPubScope(ps);
@@ -492,7 +492,7 @@ class CopyServiceBeanTest {
             Map map = container.metadata().create(Map.class);
             mapId = map.getId();
 
-            map.setDerivedIdentifier(MAP_DP_STRING);
+            setIdentFields(map, MAP_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             map.setPubScope(ps);
@@ -522,7 +522,8 @@ class CopyServiceBeanTest {
             flId = fl.getId();
 
             fl.setTransparency(FL_SA_TRANSPARENCY);
-            fl.setDerivedIdentifier(FL_DP_STRING);
+
+            setIdentFields(fl, FL_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             fl.setPubScope(ps);
@@ -537,6 +538,12 @@ class CopyServiceBeanTest {
         }
 
         return flId;
+    }
+
+    private static void setIdentFields(DataProduct dp, String ident){
+        dp.setDerivedIdentifier(ident);
+        dp.setIdentPart(ident);
+        dp.setIdentIsPartial(false);
     }
 
     private static BaseUuidEntity[] linkToDependencies(DataSetView ds, String dependencyName){
@@ -577,7 +584,8 @@ class CopyServiceBeanTest {
 
     private static BaseUuidEntity[] linkToTestFacadelayer(ProductList pl, DataProduct_PubScope ps, String flIdentifier){
         FacadeLayer fl = container.metadata().create(FacadeLayer.class);
-        fl.setDerivedIdentifier(flIdentifier);
+
+        setIdentFields(fl, flIdentifier);
         fl.setPubScope(ps);
 
         PropertiesInList pil = container.metadata().create(PropertiesInList.class);
@@ -594,7 +602,7 @@ class CopyServiceBeanTest {
         rds.setPath(UUID.randomUUID().toString());
         
         RasterView dsv = container.metadata().create(RasterView.class);
-        dsv.setDerivedIdentifier(dsvIdentifier);
+        setIdentFields(dsv, dsvIdentifier);
         dsv.setPubScope(ps);
         dsv.setRasterDS(rds);
 
@@ -642,7 +650,7 @@ class CopyServiceBeanTest {
 
             tv.setSearchFacet(TV_DP_STRING);
             tv.setTransparency(TV_SA_TRANSPARENCY);
-            tv.setDerivedIdentifier(TV_DP_STRING);
+            setIdentFields(tv, TV_DP_STRING);
             tv.setPostgresTable(tbl);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();

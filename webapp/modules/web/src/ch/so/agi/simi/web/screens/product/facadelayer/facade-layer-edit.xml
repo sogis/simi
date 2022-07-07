@@ -14,7 +14,16 @@
                     view="facadeLayer-edit-dataSetViews">
             <loader id="dataSetViewsDl">
                 <query>
-                    <![CDATA[select e from simiData_DataSetView e order by e.identifier]]>
+                    <![CDATA[select e from simiData_DataSetView e order by e.derivedIdentifier]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="themePubsDc"
+                    class="ch.so.agi.simi.entity.theme.ThemePublication"
+                    view="dProdEditors-themePub-lookup">
+            <loader id="themePubsDl">
+                <query>
+                    <![CDATA[select e from simiTheme_ThemePublication e ORDER BY e]]>
                 </query>
             </loader>
         </collection>
@@ -27,17 +36,18 @@
     <layout expand="dataSetViewsBox" spacing="true">
         <form id="form" dataContainer="dataProductDc">
             <column width="350px">
-                <textField id="identifierField" property="identifier"/>
+                <lookupField id="themePubField" dataContainer="dataProductDc" property="themePublication" optionsContainer="themePubsDc"/>
+                <textField id="identPartField" property="identPart" />
+                <checkBox id="identIsPartialBox" property="identIsPartial" caption="Teil-Ident?"/>
                 <textField id="titleField" property="title"/>
                 <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment" caption="msg://ch.so.agi.simi.entity.product/DataProduct.pubScope">
                     <properties>
                         <property name="filterProperty" value="forDSV"/>
                     </properties>
                 </fragment>
-
             </column>
             <column width="350px">
-                <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
+                <textArea id="remarksField" property="remarks" rows="7" rowspan="5"/>
             </column>
         </form>
         <groupBox caption="Weitere Eigenschaften" collapsable="true" collapsed="true">
@@ -49,10 +59,6 @@
                         </properties>
                     </fragment>
                     <textArea id="descriptionField" property="description" rows="5" rowspan="4"/>
-                </column>
-                <column width="350px">
-                    <textArea id="keywordsField" property="_keywords_deprecated" rows="5" rowspan="2"/>
-                    <textArea id="synonymsField" property="_synonyms_deprecated" rows="5" rowspan="3"/>
                 </column>
             </form>
         </groupBox>

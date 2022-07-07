@@ -12,7 +12,7 @@
                     <condition>
                         <or>
                             <c:jpql>
-                                <c:where>lower(e.identifier) like :term</c:where>
+                                <c:where>lower(e.derivedIdentifier) like :term</c:where>
                             </c:jpql>
                             <c:jpql>
                                 <c:where>lower(e.title) like :term</c:where>
@@ -44,7 +44,7 @@
                 </action>
             </actions>
             <columns>
-                <column id="identPart" sort="ASCENDING"/>
+                <column id="derivedIdentifier" sort="ASCENDING"/>
                 <column id="title"/>
                 <column id="pubScope" width="150"/>
                 <column id="typeAbbreviation" width="120"/>

@@ -5,6 +5,7 @@ import ch.so.agi.simi.entity.product.LayerGroup;
 import ch.so.agi.simi.entity.product.PropertiesInFacade;
 import ch.so.agi.simi.entity.product.PropertiesInList;
 import ch.so.agi.simi.web.beans.sort.SortBean;
+import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
@@ -20,6 +21,7 @@ import java.util.List;
 @EditedEntityContainer("dataProductDc")
 @LoadDataBeforeShow
 public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
+
     @Inject
     private ScreenBuilders screenBuilders;
     @Inject
@@ -28,6 +30,8 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
     private Table<PropertiesInFacade> propertiesInFacadeTable;
     @Inject
     private DataContext dataContext;
+    @Inject
+    private DataManager manager;
     @Inject
     private SortBean sortBean;
 
@@ -52,5 +56,10 @@ public class FacadeLayerEdit extends StandardEditor<FacadeLayer> {
 
         //add modified instances to the commit list
         event.getModifiedInstances().addAll(entities);
+    }
+
+    @Subscribe
+    public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
+        this.getEditedEntity().updateDerivedIdentifier(manager);
     }
 }

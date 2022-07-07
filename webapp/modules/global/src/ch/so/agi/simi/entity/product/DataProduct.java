@@ -7,6 +7,8 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
+import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -161,4 +163,35 @@ public class DataProduct extends SimiEntity {
         this._keywords_deprecated = _keywords_deprecated;
     }
 
+    public String deriveIdentifier(ThemePublication tp){
+        String res = null;
+
+        if(identIsPartial)
+            res = tp.deferFullIdent() + "." + identPart;
+        else
+            res = identPart;
+
+        return res;
+    }
+
+    public void updateDerivedIdentifier(DataManager manager){
+        ThemePublication pub = manager.load(ThemePublication.class).
+                view("dProd-before-persist").
+                id(this.getThemePublication().getId())
+                .one();
+
+        String derived = null;
+
+        if(identIsPartial){
+            if(identPart != null)
+                derived = pub.deferFullIdent() + "." + identPart;
+            else
+                derived = pub.deferFullIdent();
+        }
+        else {
+            derived = identPart;
+        }
+
+        this.setDerivedIdentifier(derived);
+    }
 }

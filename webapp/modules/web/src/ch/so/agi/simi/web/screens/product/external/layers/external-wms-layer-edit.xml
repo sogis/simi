@@ -17,6 +17,15 @@
                 </query>
             </loader>
         </collection>
+        <collection id="themePubsDc"
+                    class="ch.so.agi.simi.entity.theme.ThemePublication"
+                    view="dProdEditors-themePub-lookup">
+            <loader id="themePubsDl">
+                <query>
+                    <![CDATA[select e from simiTheme_ThemePublication e ORDER BY e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="80%"
                 width="80%"
@@ -26,8 +35,9 @@
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="dataProductDc">
             <column width="450px">
-                <lookupField id="serviceField" dataContainer="dataProductDc" property="service" optionsContainer="servicesDc"/>
-                <textField id="identifierField" property="identifier" caption="Kennung GDI"/>
+                <lookupField id="themePubField" dataContainer="dataProductDc" property="themePublication" optionsContainer="themePubsDc"/>
+                <textField id="identPartField" property="identPart" />
+                <checkBox id="identIsPartialBox" property="identIsPartial" caption="Teil-Ident?"/>
                 <textField id="titleField" property="title" caption="Titel GDI"/>
                 <textField id="identifierListField" property="externalIdentifier" caption="Kennung extern" />
                 <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment" caption="Publikation">
@@ -36,12 +46,11 @@
                     </properties>
                 </fragment>
                 <textField id="transparencyField" property="transparency"/>
-                <textArea id="remarksField" property="remarks" rows="5" rowspan="4"/>
             </column>
             <column width="450px">
+                <lookupField id="serviceField" dataContainer="dataProductDc" property="service" optionsContainer="servicesDc"/>
+                <textArea id="remarksField" property="remarks" rows="5" rowspan="4"/>
                 <textArea id="descriptionField" property="description" rows="7" rowspan="5"/>
-                <textArea id="keywordsField" property="_keywords_deprecated" rows="3" rowspan="2"/>
-                <textArea id="synonymsField" property="synonymS" rows="3" rowspan="2"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

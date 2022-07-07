@@ -7,6 +7,7 @@ import ch.so.agi.simi.entity.product.PropertiesInFacade;
 import ch.so.agi.simi.entity.product.PropertiesInList;
 import ch.so.agi.simi.web.beans.sort.SortBean;
 import ch.so.agi.simi.web.beans.copy.UpdateFromOtherListsBean;
+import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
@@ -41,6 +42,13 @@ public class LayerGroupEdit extends StandardEditor<LayerGroup> {
     private SortBean sortBean;
     @Inject
     private UpdateFromOtherListsBean listUpdateBean;
+    @Inject
+    DataManager dataManager;
+
+    @Subscribe
+    public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
+        this.getEditedEntity().updateDerivedIdentifier(dataManager);
+    }
 
     @Subscribe("btnPilAdd")
     public void onBtnPilAddClick(Button.ClickEvent event) {

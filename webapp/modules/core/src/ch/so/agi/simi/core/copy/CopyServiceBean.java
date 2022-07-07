@@ -192,6 +192,7 @@ public class CopyServiceBean implements CopyService {
     private static void setLocalProps(DataProduct dp, EntitySet inOutCommitList){
         dp.setId(UUID.randomUUID());
         dp.setIdentPart(dp.getIdentPart() + "-kopie"); //Bindestrich, damit bei sortierter Anzeige nahe beim Original
+        dp.setDerivedIdentifier(dp.getDerivedIdentifier() + "-kopie");
 
         if(dp.getTitle() != null)
             dp.setTitle(dp.getTitle() + " - Kopie");
