@@ -11,7 +11,7 @@
         <collection id="mapsDc" class="ch.so.agi.simi.entity.product.Map">
             <loader id="mapsDl">
                 <query>
-                    <![CDATA[select e from simiProduct_Map e order by e.identifier]]>
+                    <![CDATA[select e from simiProduct_Map e order by e.derivedIdentifier]]>
                 </query>
             </loader>
         </collection>

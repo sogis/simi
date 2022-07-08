@@ -1,21 +1,10 @@
 package ch.so.agi.simi.core.morph;
 
 import ch.so.agi.simi.SimiTestContainer;
-import ch.so.agi.simi.core.copy.CopyService;
-import ch.so.agi.simi.entity.data.*;
+import ch.so.agi.simi.core.test.Util;
 import ch.so.agi.simi.entity.data.datasetview.*;
-import ch.so.agi.simi.entity.extended.Component;
-import ch.so.agi.simi.entity.extended.Relation;
-import ch.so.agi.simi.entity.extended.RelationType;
-import ch.so.agi.simi.entity.iam.Permission;
-import ch.so.agi.simi.entity.iam.PermissionLevelEnum;
-import ch.so.agi.simi.entity.iam.Role;
 import ch.so.agi.simi.entity.product.*;
-import com.haulmont.cuba.core.EntityManager;
-import com.haulmont.cuba.core.Persistence;
-import com.haulmont.cuba.core.Transaction;
-import com.haulmont.cuba.core.entity.BaseUuidEntity;
-import com.haulmont.cuba.core.entity.contracts.Id;
+import ch.so.agi.simi.entity.theme.ThemePublication;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
@@ -26,14 +15,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import javax.xml.crypto.Data;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-import static ch.so.agi.simi.core.copy.CopyServiceBean.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 // See https://doc.cuba-platform.com/manual-7.2/integration_tests_mw.html
@@ -58,21 +43,24 @@ class MorphProductServiceBeanTest {
     static DataSetView linkDs;
     static DataProduct_PubScope deletable;
 
+    static ThemePublication themePubForTest;
+
 
     @BeforeAll
     static void beforeAll() {
-
         dataManager = AppBeans.get(DataManager.class);
         serviceBean = AppBeans.get(MorphProductService.class);
 
         removeMorphTestEntities(false); // Falls von unsauberen vorhergehendem run übriggebliebene existieren ...
 
         deletable = dataManager.load(DataProduct_PubScope.class).id(UUID.fromString("55bdf0dd-d997-c537-f95b-7e641dc515df")).one();
+        themePubForTest = Util.createThemePub(container, dataManager);
 
         linkDs = new DataSetView();
         linkDs.setIdentPart(LINK_DS_IDENT);
         linkDs.setDerivedIdentifier(LINK_DS_IDENT);
         linkDs.setPubScope(deletable);
+        linkDs.setThemePublication(themePubForTest);
 
         dataManager.commit(linkDs);
     }
@@ -80,6 +68,7 @@ class MorphProductServiceBeanTest {
     @AfterAll
     static void afterAll() {
         removeMorphTestEntities(false);
+        Util.removeThemePubs(dataManager);
     }
 
     private static void removeMorphTestEntities(boolean singleTestEntitiesOnly){
@@ -185,7 +174,7 @@ class MorphProductServiceBeanTest {
 
     private UUID createTestFl(){
         FacadeLayer fl = new FacadeLayer();
-        setIdentFields(fl, FL_IDENT);
+        setDProdFields(fl, FL_IDENT);
 
         fl.setPubScope(deletable);
 
@@ -207,9 +196,11 @@ class MorphProductServiceBeanTest {
         return fl.getId();
     }
 
-    private static void setIdentFields(DataProduct dp, String ident){
+    private static void setDProdFields(DataProduct dp, String ident){
         dp.setDerivedIdentifier(ident);
         dp.setIdentPart(ident);
+        dp.setIdentIsPartial(false);
+        dp.setThemePublication(themePubForTest);
     }
 
     private static LinkedList<PropertiesInList> createListWithOnePil(ProductList pl) {
@@ -227,7 +218,7 @@ class MorphProductServiceBeanTest {
 
     private UUID createTestLg(){
         LayerGroup lg = new LayerGroup();
-        setIdentFields(lg, LG_IDENT);
+        setDProdFields(lg, LG_IDENT);
 
         lg.setPubScope(deletable);
 
@@ -245,7 +236,7 @@ class MorphProductServiceBeanTest {
 
     private UUID createTestMap(){
         Map map = new Map();
-        setIdentFields(map, MAP_IDENT);
+        setDProdFields(map, MAP_IDENT);
         map.setPubScope(deletable);
 
         LinkedList<PropertiesInList> pilList = createListWithOnePil(map);
@@ -262,7 +253,7 @@ class MorphProductServiceBeanTest {
 
     private static DataSetView loadLinkDs(){
         return dataManager.load(DataSetView.class)
-                .query("e.identifier = :identifier")
+                .query("e.derivedIdentifier = :identifier")
                 .parameter("identifier", LINK_DS_IDENT)
                 .one();
     }

@@ -86,6 +86,7 @@ public class MorphProductServiceBean implements MorphProductService {
     }
 
     private static void copyDprodProperties(DataProduct fromDp, DataProduct toDp) {
+        toDp.setThemePublication(fromDp.getThemePublication());
         toDp.setIdentPart(fromDp.getIdentPart());
         toDp.setIdentIsPartial(fromDp.getIdentIsPartial());
         toDp.setDerivedIdentifier(fromDp.getDerivedIdentifier());

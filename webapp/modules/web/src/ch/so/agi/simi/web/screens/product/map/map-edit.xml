@@ -15,7 +15,7 @@
                     view="map-edit-singleActors">
             <loader id="singleActorsDl">
                 <query>
-                    <![CDATA[select e from simiProduct_SingleActor e order by e.identifier]]>
+                    <![CDATA[select e from simiProduct_SingleActor e order by e.derivedIdentifier]]>
                 </query>
             </loader>
         </collection>

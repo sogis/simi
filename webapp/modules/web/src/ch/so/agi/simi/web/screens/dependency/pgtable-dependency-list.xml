@@ -17,7 +17,7 @@
                             ' | Db: ',
                             db.dbName,
                             coalesce(
-                                concat(' (', tv.identifier, ')'),
+                                concat(' (', tv.derivedIdentifier, ')'),
                                 ''
                             )
                         )

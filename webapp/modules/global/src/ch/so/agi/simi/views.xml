@@ -51,6 +51,7 @@
         <property name="singleActors" view="_local">
             <property name="singleActor" view="_minimal"/>
         </property>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiProduct_PropertiesInList" name="updateFromOtherListsBean-view" extends="_minimal">
         <property name="visible"/>
@@ -295,6 +296,7 @@
             <property name="sort"/>
         </property>
         <property name="pubScope" view="_minimal"/>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiProduct_LayerGroup" name="morph-LayerGroup" extends="_local">
         <property name="pubScope" view="_minimal"/>
@@ -303,6 +305,7 @@
             <property name="singleActor" view="_minimal"/>
             <property name="sort"/>
         </property>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiProduct_Map" name="morph-Map" extends="_local">
         <property name="pubScope" view="_minimal"/>
@@ -311,6 +314,7 @@
             <property name="singleActor" view="_minimal"/>
             <property name="sort"/>
         </property>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiProduct_ThermGroup" name="thermGroup-browse" extends="_minimal"/>
     <view entity="simiProduct_ThermGroup" name="thermGroup-edit" extends="_local"/>

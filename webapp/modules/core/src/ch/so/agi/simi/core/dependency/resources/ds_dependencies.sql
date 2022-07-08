@@ -71,7 +71,7 @@ dataprod_cols AS ( -- notwendige informationen aller ungelöschten Datenprodukte
   SELECT
     id,
     title,
-    identifier
+    derived_identifier
   FROM
     simiproduct_data_product dp
 ),
@@ -80,10 +80,10 @@ dataprod AS (
   SELECT
     ds_id,
     concat(dp_union.typ, ' (Produkt)') AS dep_typ,
-    concat(dp.identifier, ' | ', dp.title) AS dep_name,
+    concat(dp.derived_identifier, ' | ', dp.title) AS dep_name,
     CASE
       WHEN dsv_id = dp_id THEN 'Ist View des Dataset'
-      ELSE concat('Dataset ist via View "', dsv.identifier, '" in ', dp_union.typ, ' enthalten.')
+      ELSE concat('Dataset ist via View "', dsv.derived_identifier, '" in ', dp_union.typ, ' enthalten.')
     END AS dep_relation,
     sort AS subsort,
     1 AS sort
@@ -101,7 +101,7 @@ ds_dsv_relation AS ( -- Alle Beziehungen eines DS via DSV auf eine Dependency
   SELECT
     ds_id,
     dsv_id,
-    dp.identifier AS dsv_identifier,
+    dp.derived_identifier AS dsv_derived_identifier,
     rel.dependency_id AS dep_id
   FROM
     ds_dsv
@@ -131,7 +131,7 @@ dependency AS (
     ds_id,
     "name" AS dep_name,
     concat(typename, ' (Abhängigkeit)') AS dep_typ,
-    concat('Dataset ist via View "', rel.dsv_identifier, '" in ', typename, ' enthalten.') AS dep_relation,
+    concat('Dataset ist via View "', rel.dsv_derived_identifier, '" in ', typename, ' enthalten.') AS dep_relation,
     sort AS subsort,
     2 AS sort
   FROM
@@ -147,9 +147,9 @@ dependency AS (
 obj_search AS (
   SELECT
     tbl.id AS ds_id,
-    concat(dp.identifier, ' (Suche)') AS dep_name,
+    concat(dp.derived_identifier, ' (Suche)') AS dep_name,
     'Suchkonfiguration' AS dep_typ,
-    concat('Dataset ist via View "', dp.identifier, '" in Suche enthalten') AS dep_relation,
+    concat('Dataset ist via View "', dp.derived_identifier, '" in Suche enthalten') AS dep_relation,
     1 AS subsort,
     3 AS sort
   FROM

@@ -36,6 +36,7 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 
 import static ch.so.agi.simi.core.copy.CopyServiceBean.*;
+import ch.so.agi.simi.core.test.Util;
 import static org.junit.jupiter.api.Assertions.*;
 // See https://doc.cuba-platform.com/manual-7.2/integration_tests_mw.html
 
@@ -65,8 +66,6 @@ class CopyServiceBeanTest {
     private static final String MAP_DP_STRING = "ch.so.agi.inttest.map";
     private static final String MAP_FL_STRING = "ch.so.agi.inttest.map.facadelayer";
 
-    private static final String THEMEPUB_CLASS_SUFFIX_OVERRIDE = "ch.so.agi.inttest.themePub";
-
     @RegisterExtension
     static TestContainer container = SimiTestContainer.Common.INSTANCE;
 
@@ -81,62 +80,16 @@ class CopyServiceBeanTest {
         dataManager = AppBeans.get(DataManager.class);
         serviceBean = AppBeans.get(CopyService.class);
 
-        themePubForTest = createThemePub();
+        themePubForTest = Util.createThemePub(container, dataManager);
     }
 
-    private static ThemePublication createThemePub(){
-        removeThemePubs();
-
-        Agency a = container.metadata().create(Agency.class);
-        a.setName("copytest");
-        a.setAbbreviation("test");
-        a.setEmail("email");
-        a.setPhone("phone");
-        a.setUrl("url");
-
-        Theme t = container.metadata().create(Theme.class);
-        t.setIdentifier("copytest");
-        t.setCoverageIdent("covIdent");
-        t.setTitle("title");
-        t.setDescription("desc");
-        t.setDataOwner(a);
-
-        ThemePublication p = container.metadata().create(ThemePublication.class);
-        p.setDataClass(ThemePublication_TypeEnum.TABLE_SIMPLE);
-        p.setTheme(t);
-        p.setClassSuffixOverride(THEMEPUB_CLASS_SUFFIX_OVERRIDE);
-
-        CommitContext c = new CommitContext();
-        c.addInstanceToCommit(a);
-        c.addInstanceToCommit(t);
-        c.addInstanceToCommit(p);
-
-        dataManager.commit(c);
-
-        return p;
-    }
 
     @AfterAll
     static void afterAll() {
-        removeThemePubs();
+        Util.removeThemePubs(dataManager);
     }
 
-    private static void removeThemePubs(){
-        String viewName = "copy-dataProduct-themePub";
-        Optional<ThemePublication> ot = dataManager.load(ThemePublication.class)
-                .query("select e from simiTheme_ThemePublication e where e.classSuffixOverride like :para")
-                .parameter("para", THEMEPUB_CLASS_SUFFIX_OVERRIDE)
-                .view(viewName)
-                .optional();
 
-        if(!ot.isPresent())
-            return;
-
-        ThemePublication t = ot.get();
-
-        dataManager.remove(t.getTheme());
-        dataManager.remove(t.getTheme().getDataOwner());
-    }
 
     @Test
     void copy_TableView_OK() throws Exception {
@@ -257,7 +210,7 @@ class CopyServiceBeanTest {
             EntityManager orm = pers.getEntityManager();
 
             List<RasterView> rvs = dataManager.load(RasterView.class)
-                    .query("select e from simiData_RasterView e where e.identifier like :identifier")
+                    .query("select e from simiData_RasterView e where e.derivedIdentifier like :identifier")
                     .parameter("identifier", RV_DP_STRING + "%")
                     .view(RV_VIEW_NAME)
                     .list();
@@ -289,7 +242,7 @@ class CopyServiceBeanTest {
             EntityManager orm = pers.getEntityManager();
 
             List<Map> maps = dataManager.load(Map.class)
-                    .query("select e from simiProduct_Map e where e.identifier like :identifier")
+                    .query("select e from simiProduct_Map e where e.derivedIdentifier like :identifier")
                     .parameter("identifier", MAP_DP_STRING + "%")
                     .view(MAP_VIEW_NAME)
                     .list();
@@ -317,7 +270,7 @@ class CopyServiceBeanTest {
             EntityManager orm = pers.getEntityManager();
 
             List<LayerGroup> lgs = dataManager.load(LayerGroup.class)
-                    .query("select e from simiProduct_LayerGroup e where e.identifier like :identifier")
+                    .query("select e from simiProduct_LayerGroup e where e.derivedIdentifier like :identifier")
                     .parameter("identifier", LG_DP_STRING + "%")
                     .view(LG_VIEW_NAME)
                     .list();
@@ -345,7 +298,7 @@ class CopyServiceBeanTest {
             EntityManager orm = pers.getEntityManager();
 
             List<FacadeLayer> rvs = dataManager.load(FacadeLayer.class)
-                    .query("select e from simiProduct_FacadeLayer e where e.identifier like :identifier")
+                    .query("select e from simiProduct_FacadeLayer e where e.derivedIdentifier like :identifier")
                     .parameter("identifier", FL_DP_STRING + "%")
                     .view(FL_VIEW_NAME)
                     .list();
@@ -382,7 +335,7 @@ class CopyServiceBeanTest {
             EntityManager orm = pers.getEntityManager();
 
             List<TableView> tvs = dataManager.load(TableView.class)
-                    .query("select e from simiData_TableView e where e.identifier like :identifier")
+                    .query("select e from simiData_TableView e where e.derivedIdentifier like :identifier")
                     .parameter("identifier", TV_DP_STRING + "%")
                     .view(TV_VIEW_NAME)
                     .list();
@@ -423,7 +376,7 @@ class CopyServiceBeanTest {
             rvId = rv.getId();
 
             rv.setTransparency(RV_SA_TRANSPARENCY);
-            setIdentFields(rv, RV_DP_STRING);
+            setDprodFields(rv, RV_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             rv.setPubScope(ps);
@@ -463,7 +416,7 @@ class CopyServiceBeanTest {
             LayerGroup lg = container.metadata().create(LayerGroup.class);
             lgId = lg.getId();
 
-            setIdentFields(lg, LG_DP_STRING);
+            setDprodFields(lg, LG_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             lg.setPubScope(ps);
@@ -492,7 +445,7 @@ class CopyServiceBeanTest {
             Map map = container.metadata().create(Map.class);
             mapId = map.getId();
 
-            setIdentFields(map, MAP_DP_STRING);
+            setDprodFields(map, MAP_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             map.setPubScope(ps);
@@ -523,7 +476,7 @@ class CopyServiceBeanTest {
 
             fl.setTransparency(FL_SA_TRANSPARENCY);
 
-            setIdentFields(fl, FL_DP_STRING);
+            setDprodFields(fl, FL_DP_STRING);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
             fl.setPubScope(ps);
@@ -540,10 +493,12 @@ class CopyServiceBeanTest {
         return flId;
     }
 
-    private static void setIdentFields(DataProduct dp, String ident){
+    private static void setDprodFields(DataProduct dp, String ident){
         dp.setDerivedIdentifier(ident);
         dp.setIdentPart(ident);
         dp.setIdentIsPartial(false);
+
+        dp.setThemePublication(themePubForTest);
     }
 
     private static BaseUuidEntity[] linkToDependencies(DataSetView ds, String dependencyName){
@@ -585,7 +540,7 @@ class CopyServiceBeanTest {
     private static BaseUuidEntity[] linkToTestFacadelayer(ProductList pl, DataProduct_PubScope ps, String flIdentifier){
         FacadeLayer fl = container.metadata().create(FacadeLayer.class);
 
-        setIdentFields(fl, flIdentifier);
+        setDprodFields(fl, flIdentifier);
         fl.setPubScope(ps);
 
         PropertiesInList pil = container.metadata().create(PropertiesInList.class);
@@ -602,7 +557,7 @@ class CopyServiceBeanTest {
         rds.setPath(UUID.randomUUID().toString());
         
         RasterView dsv = container.metadata().create(RasterView.class);
-        setIdentFields(dsv, dsvIdentifier);
+        setDprodFields(dsv, dsvIdentifier);
         dsv.setPubScope(ps);
         dsv.setRasterDS(rds);
 
@@ -650,7 +605,7 @@ class CopyServiceBeanTest {
 
             tv.setSearchFacet(TV_DP_STRING);
             tv.setTransparency(TV_SA_TRANSPARENCY);
-            setIdentFields(tv, TV_DP_STRING);
+            setDprodFields(tv, TV_DP_STRING);
             tv.setPostgresTable(tbl);
 
             DataProduct_PubScope ps = dataManager.load(DataProduct_PubScope.class).one();
