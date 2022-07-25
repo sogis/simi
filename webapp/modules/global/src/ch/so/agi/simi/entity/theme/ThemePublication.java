@@ -44,6 +44,9 @@ public class ThemePublication extends SimiEntity {
     @Column(name = "CLASS_SUFFIX_OVERRIDE", length = 50)
     private String classSuffixOverride;
 
+    @Column(name = "TITLE_OVERRIDE", length = 200)
+    private String titleOverride;
+
     @Column(name = "SIMI_CLASS_SUFFIX")
     private String simiClassSuffix;
 
@@ -52,6 +55,14 @@ public class ThemePublication extends SimiEntity {
             inverseJoinColumns = @JoinColumn(name = "CUSTOM_FILE_TYPE_ID"))
     @ManyToMany
     private List<CustomFileType> customFileTypes;
+
+    public String getTitleOverride() {
+        return titleOverride;
+    }
+
+    public void setTitleOverride(String titleOverride) {
+        this.titleOverride = titleOverride;
+    }
 
     public String getCoverageIdent() {
         return coverageIdent;

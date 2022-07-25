@@ -523,6 +523,7 @@ create table SIMITHEME_THEME_PUBLICATION (
     COVERAGE_IDENT varchar(100) not null,
     DATA_CLASS varchar(50) not null,
     CLASS_SUFFIX_OVERRIDE varchar(50),
+    TITLE_OVERRIDE varchar(200),
     SIMI_CLASS_SUFFIX varchar(255),
     --
     primary key (ID)

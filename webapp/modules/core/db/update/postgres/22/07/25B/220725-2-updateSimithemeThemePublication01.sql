@@ -1,0 +1,1 @@
+alter table SIMITHEME_THEME_PUBLICATION add column TITLE_OVERRIDE varchar(200) ;
