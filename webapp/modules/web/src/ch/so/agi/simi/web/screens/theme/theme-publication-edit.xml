@@ -27,13 +27,14 @@
     <layout expand="tableScroll" spacing="true">
         <form id="form" dataContainer="themePublicationDc">
             <column width="350px">
+                <textField id="derivedIdentField" property="derivedIdent" editable="false" caption="Result. Identifier"/>
                 <lookupField id="dataClassField" property="dataClass"/>
                 <textField id="classSuffixOverrideField" property="classSuffixOverride"/>
-                <textField id="suffixField" property="derivedIdent" editable="false" caption="Resultierender Suffix"/>
+                <textField id="titleOverrideField" property="titleOverride"/>
                 <textField id="coverageIdentField" property="coverageIdent"/>
             </column>
             <column width="350px">
-                <textArea id="remarksField" property="remarks" rows="6" rowspan="4"/>
+                <textArea id="remarksField" property="remarks" rows="7" rowspan="5"/>
             </column>
         </form>
         <tabSheet id="tableScroll">
@@ -41,47 +42,53 @@
                  caption="mainMsg://dataproduct.caption.browse"
                  margin="true"
                  spacing="true">
-                <table id="dataProductsTable" dataContainer="dataProductsDc" width="100%">
-                    <columns>
-                        <column id="identifier"/>
-                        <column id="title"/>
-                    </columns>
-                </table>
+                <scrollBox width="100%" height="100%">
+                    <table id="dataProductsTable" dataContainer="dataProductsDc" width="100%">
+                        <columns>
+                            <column id="derivedIdentifier"/>
+                            <column id="title"/>
+                        </columns>
+                    </table>
+                </scrollBox>
             </tab>
             <tab id="tab2"
                  caption="msg://ch.so.agi.simi.entity.theme/ThemePublication.publishedSubAreas"
                  margin="true"
                  spacing="true">
-                <table id="pubAreasTable" dataContainer="pubAreasDc" width="100%">
-                    <columns>
-                        <column id="subArea.identifier"/>
-                        <column id="subArea.title"/>
-                        <column id="published"/>
-                    </columns>
-                </table>
+                <scrollBox width="100%" height="100%">
+                    <table id="pubAreasTable" dataContainer="pubAreasDc" width="100%">
+                        <columns>
+                            <column id="subArea.identifier"/>
+                            <column id="subArea.title"/>
+                            <column id="published"/>
+                        </columns>
+                    </table>
+                </scrollBox>
             </tab>
             <tab id="tab3"
                  caption="msg://ch.so.agi.simi.entity.theme/ThemePublication.customFileTypes"
                  margin="true"
                  spacing="true">
-                <table id="customFileTypesTable" dataContainer="customFileTypesDc" width="100%">
-                    <actions>
-                        <action id="add" type="add"/>
-                        <action id="exclude" type="exclude">
-                            <properties>
-                                <property name="confirmation" value="false"/>
-                            </properties>
-                        </action>
-                    </actions>
-                    <columns>
-                        <column id="name"/>
-                        <column id="mimeType"/>
-                    </columns>
-                    <buttonsPanel>
-                        <button action="customFileTypesTable.add" stylename="primary"/>
-                        <button action="customFileTypesTable.exclude"/>
-                    </buttonsPanel>
-                </table>
+                <scrollBox width="100%" height="100%">
+                    <table id="customFileTypesTable" dataContainer="customFileTypesDc" width="100%">
+                        <actions>
+                            <action id="add" type="add"/>
+                            <action id="exclude" type="exclude">
+                                <properties>
+                                    <property name="confirmation" value="false"/>
+                                </properties>
+                            </action>
+                        </actions>
+                        <columns>
+                            <column id="name"/>
+                            <column id="mimeType"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="customFileTypesTable.add" stylename="primary"/>
+                            <button action="customFileTypesTable.exclude"/>
+                        </buttonsPanel>
+                    </table>
+                </scrollBox>
             </tab>
         </tabSheet>
         <!--

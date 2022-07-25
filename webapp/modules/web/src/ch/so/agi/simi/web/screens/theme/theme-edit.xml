@@ -58,7 +58,7 @@
                     </action>
                 </actions>
                 <columns>
-                    <column id="getDerivedIdent" caption="Result. Identifier"/>
+                    <column id="derivedIdent" caption="Result. Identifier"/>
                 </columns>
                 <buttonsPanel>
                     <button action="themePubTable.create" stylename="primary"/>

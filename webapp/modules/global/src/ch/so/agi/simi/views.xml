@@ -344,7 +344,9 @@
             <property name="themePublications" view="_minimal"/>
         </property>
         <property name="customFileTypes" view="_minimal"/>
-        <property name="dataProducts" view="_minimal"/>
+        <property name="dataProducts" view="_minimal">
+            <property name="derivedIdentifier"/>
+        </property>
         <property name="publishedSubAreas" view="_minimal">
             <property name="published"/>
             <property name="subArea" view="_minimal">
@@ -354,4 +356,9 @@
     </view>
     <view entity="simiTheme_Theme" name="themePublication-edit-theme" extends="_minimal"/>
     <view entity="simiTheme_CustomFileType" name="customFileType-browse-edit" extends="_local"/>
+    <view entity="simiTheme_SubArea" name="subArea-browse" extends="_minimal">
+        <property name="identifier"/>
+        <property name="updated"/>
+        <property name="coverageIdent"/>
+    </view>
 </views>

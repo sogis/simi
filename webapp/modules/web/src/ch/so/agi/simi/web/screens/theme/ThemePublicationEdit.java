@@ -15,7 +15,7 @@ import javax.inject.Inject;
 public class ThemePublicationEdit extends StandardEditor<ThemePublication> {
 
     @Inject
-    TextField<String> suffixField;
+    TextField<String> derivedIdentField;
 
     @Subscribe("dataClassField")
     public void onDataClassFieldValueChange(HasValue.ValueChangeEvent<ThemePublication_TypeEnum> event) {
@@ -29,6 +29,6 @@ public class ThemePublicationEdit extends StandardEditor<ThemePublication> {
 
     private void refreshSuffix(){
         String ident = this.getEditedEntity().deferFullIdent();
-        suffixField.setValue(ident);
+        derivedIdentField.setValue(ident);
     }
 }

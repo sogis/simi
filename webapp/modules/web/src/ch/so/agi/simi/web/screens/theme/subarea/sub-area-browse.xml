@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="mainMsg://subArea.caption.browse"
+        focusComponent="subAreasTable">
+    <data readOnly="true">
+        <collection id="subAreasDc"
+                    class="ch.so.agi.simi.entity.theme.subarea.SubArea"
+                    view="subArea-browse">
+            <loader id="subAreasDl">
+                <query>
+                    <![CDATA[select e from simiTheme_SubArea e order by e.coverageIdent, e.identifier]]>
+                    <condition>
+                        <or>
+                            <c:jpql>
+                                <c:where>lower(e.coverageIdent) like :term</c:where>
+                            </c:jpql>
+                            <c:jpql>
+                                <c:where>lower(e.identifier) like :term</c:where>
+                            </c:jpql>
+                            <c:jpql>
+                                <c:where>lower(e.title) like :term</c:where>
+                            </c:jpql>
+                        </or>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="subAreasTable"
+            spacing="true">
+        <table id="subAreasTable"
+                    width="100%"
+                    dataContainer="subAreasDc">
+            <actions>
+            </actions>
+            <columns>
+                <column id="coverageIdent"/>
+                <column id="identifier"/>
+                <column id="title"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+            </buttonsPanel>
+        </table>
+        <fragment screen="simi_FilterFragment">
+            <properties>
+                <property name="dataLoader" ref="subAreasDl"/>
+                <property name="inputPrompt" value="Filtern nach Name, Identifier, Coverage-Identifier"/>
+            </properties>
+        </fragment>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
