@@ -43,7 +43,6 @@
         <class>ch.so.agi.simi.entity.theme.CustomFileType</class>
         <class>ch.so.agi.simi.entity.theme.Theme</class>
         <class>ch.so.agi.simi.entity.theme.ThemePublication</class>
-        <class>ch.so.agi.simi.entity.theme.subarea</class>
         <class>ch.so.agi.simi.entity.theme.subarea.SubArea</class>
         <class>ch.so.agi.simi.entity.theme.subarea.PublishedSubArea</class>
     </persistence-unit>

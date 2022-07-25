@@ -2,6 +2,7 @@ package ch.so.agi.simi.entity.theme;
 
 import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.product.DataProduct;
+import ch.so.agi.simi.entity.theme.subarea.PublishedSubArea;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
@@ -55,6 +56,29 @@ public class ThemePublication extends SimiEntity {
             inverseJoinColumns = @JoinColumn(name = "CUSTOM_FILE_TYPE_ID"))
     @ManyToMany
     private List<CustomFileType> customFileTypes;
+
+    @Lob
+    @Column(name = "REMARKS")
+    private String remarks;
+
+    @OneToMany(mappedBy = "themePublication")
+    private List<PublishedSubArea> publishedSubAreas;
+
+    public List<PublishedSubArea> getPublishedSubAreas() {
+        return publishedSubAreas;
+    }
+
+    public void setPublishedSubAreas(List<PublishedSubArea> publishedSubAreas) {
+        this.publishedSubAreas = publishedSubAreas;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     public String getTitleOverride() {
         return titleOverride;

@@ -26,7 +26,6 @@ public class Util {
 
         Theme t = container.metadata().create(Theme.class);
         t.setIdentifier("copytest");
-        t.setCoverageIdent("covIdent");
         t.setTitle("title");
         t.setDescription("desc");
         t.setDataOwner(a);
@@ -34,6 +33,7 @@ public class Util {
         ThemePublication p = container.metadata().create(ThemePublication.class);
         p.setDataClass(ThemePublication_TypeEnum.TABLE_SIMPLE);
         p.setTheme(t);
+        p.setCoverageIdent("covIdent");
         p.setClassSuffixOverride(THEMEPUB_CLASS_SUFFIX_OVERRIDE);
 
         CommitContext c = new CommitContext();

@@ -525,6 +525,7 @@ create table SIMITHEME_THEME_PUBLICATION (
     CLASS_SUFFIX_OVERRIDE varchar(50),
     TITLE_OVERRIDE varchar(200),
     SIMI_CLASS_SUFFIX varchar(255),
+    REMARKS text,
     --
     primary key (ID)
 )^

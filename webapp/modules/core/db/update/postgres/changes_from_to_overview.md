@@ -40,7 +40,7 @@ Bemerkung: Das Framework macht
 |Änderung|Ordner|
 |---|---|
 |Theme.SubArea Klassen|25A|
-|ThemePublication: Title Override|25B|
+|ThemePublication: Title Override, Remarks|25B|
 
 ## Nach den Sommerferien
 

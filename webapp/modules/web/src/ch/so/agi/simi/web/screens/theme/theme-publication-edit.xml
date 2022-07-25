@@ -9,6 +9,7 @@
             <loader/>
             <collection id="customFileTypesDc" property="customFileTypes"/>
             <collection id="dataProductsDc" property="dataProducts"/>
+            <collection id="pubAreasDc" property="publishedSubAreas"/>
         </instance>
         <collection id="themesDc" class="ch.so.agi.simi.entity.theme.Theme" view="themePublication-edit-theme">
             <loader id="themesDl">
@@ -24,13 +25,66 @@
                 forceDialog="true"
                 resizable="true"/>
     <layout expand="tableScroll" spacing="true">
-            <form id="form" dataContainer="themePublicationDc">
-                <column width="350px">
-                    <lookupField id="dataClassField" property="dataClass"/>
-                    <textField id="classSuffixOverrideField" property="classSuffixOverride"/>
-                    <textField id="suffixField" property="getDerivedIdent" editable="false" caption="Resultierender Suffix"/>
-                </column>
-            </form>
+        <form id="form" dataContainer="themePublicationDc">
+            <column width="350px">
+                <lookupField id="dataClassField" property="dataClass"/>
+                <textField id="classSuffixOverrideField" property="classSuffixOverride"/>
+                <textField id="suffixField" property="derivedIdent" editable="false" caption="Resultierender Suffix"/>
+                <textField id="coverageIdentField" property="coverageIdent"/>
+            </column>
+            <column width="350px">
+                <textArea id="remarksField" property="remarks" rows="6" rowspan="4"/>
+            </column>
+        </form>
+        <tabSheet id="tableScroll">
+            <tab id="tab1"
+                 caption="mainMsg://dataproduct.caption.browse"
+                 margin="true"
+                 spacing="true">
+                <table id="dataProductsTable" dataContainer="dataProductsDc" width="100%">
+                    <columns>
+                        <column id="identifier"/>
+                        <column id="title"/>
+                    </columns>
+                </table>
+            </tab>
+            <tab id="tab2"
+                 caption="msg://ch.so.agi.simi.entity.theme/ThemePublication.publishedSubAreas"
+                 margin="true"
+                 spacing="true">
+                <table id="pubAreasTable" dataContainer="pubAreasDc" width="100%">
+                    <columns>
+                        <column id="subArea.identifier"/>
+                        <column id="subArea.title"/>
+                        <column id="published"/>
+                    </columns>
+                </table>
+            </tab>
+            <tab id="tab3"
+                 caption="msg://ch.so.agi.simi.entity.theme/ThemePublication.customFileTypes"
+                 margin="true"
+                 spacing="true">
+                <table id="customFileTypesTable" dataContainer="customFileTypesDc" width="100%">
+                    <actions>
+                        <action id="add" type="add"/>
+                        <action id="exclude" type="exclude">
+                            <properties>
+                                <property name="confirmation" value="false"/>
+                            </properties>
+                        </action>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                        <column id="mimeType"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="customFileTypesTable.add" stylename="primary"/>
+                        <button action="customFileTypesTable.exclude"/>
+                    </buttonsPanel>
+                </table>
+            </tab>
+        </tabSheet>
+        <!--
         <scrollBox id="tableScroll">
             <groupBox id="dataProductsBox" caption="mainMsg://dataproduct.caption.browse">
                 <table id="dataProductsTable" dataContainer="dataProductsDc" width="100%">
@@ -39,7 +93,15 @@
                         <column id="title"/>
                     </columns>
                 </table>
-
+            </groupBox>
+            <groupBox id="pubAreasBox" caption="Datenabdeckung (Teil-)Gebiete">
+                <table id="pubAreasTable" dataContainer="pubAreasDc" width="100%">
+                    <columns>
+                        <column id="subArea.identifier"/>
+                        <column id="subArea.title"/>
+                        <column id="published"/>
+                    </columns>
+                </table>
             </groupBox>
             <groupBox id="customFileTypesBox" caption="msg://ch.so.agi.simi.entity.theme/ThemePublication.customFileTypes">
                 <table id="customFileTypesTable" dataContainer="customFileTypesDc" width="100%">
@@ -62,6 +124,7 @@
                 </table>
             </groupBox>
 </scrollBox>
+-->
             <hbox id="editActions" spacing="true">
                 <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
                 <button id="closeBtn" action="windowClose"/>

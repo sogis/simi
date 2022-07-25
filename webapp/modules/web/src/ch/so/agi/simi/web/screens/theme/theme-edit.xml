@@ -33,7 +33,6 @@
                     </actions>
                 </lookupPickerField>
                 <textField id="titleField" property="title"/>
-                <textField id="coverageIdentField" property="coverageIdent"/>
             </column>
             <column width="350px">
                 <textArea id="descriptionField" property="description" rows="4" rowspan="3"/>
