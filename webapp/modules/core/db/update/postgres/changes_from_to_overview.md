@@ -34,3 +34,14 @@ Bemerkung: Das Framework macht
 |Änderung|Ordner|
 |---|---|
 |DataProduct: Anpassung Identifier|06B|
+
+## 25. Juli 2022
+
+|Änderung|Ordner|
+|---|---|
+|Theme.SubArea Klassen|25A|
+
+## Nach den Sommerferien
+
+Package Thema abschliessen mit den Entities zur Datenabdeckung.   
+Überlegen, welche Informationen direkt aus dem GRETL-Job folgen, und für welche es in SIMI Masken braucht.

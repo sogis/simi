@@ -44,10 +44,6 @@ public class Theme extends SimiEntity {
     @Column(name = "DESCRIPTION", nullable = false, length = 1000)
     private String description;
 
-    @NotNull
-    @Column(name = "COVERAGE_IDENT", nullable = false, length = 100)
-    private String coverageIdent;
-
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
@@ -90,14 +86,6 @@ public class Theme extends SimiEntity {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getCoverageIdent() {
-        return coverageIdent;
-    }
-
-    public void setCoverageIdent(String coverageIdent) {
-        this.coverageIdent = coverageIdent;
     }
 
     public String getIdentifier() {

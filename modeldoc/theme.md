@@ -29,7 +29,6 @@ Für die Steuerung der GDI macht es keinen Unterschied, ob ein Thema ein Einzelt
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |identifier|String(100)|j|Eindeutiger Identifier des Themas (ch.so.\[Amt\].\[Thema\]).|
-|coverageIdent|String(100)|j|Identifier der Datenabdeckung (DataCoverage) dieses Themas.|
 |title|String(200)|j|Angezeigter Titel des Themas.|
 |description|String(1000)|j|Kurze fachliche Bescheibung des Themas. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
 |remarks|String|n|Interne Bemerkungen.|
@@ -52,6 +51,7 @@ Konkrete Bereitstellung(en) eines Themas für einen Nutzungszweck. Beispiel Them
 |dataClass|Enum|j|Typ der Publikation: vecSimple, vecRelational, nonVec, other. Bei vec* werden die verfügbaren Dateitypen automatisch hergeleitet.|
 |classSuffixOverride|String(50)|(n)|Explizit gesetzter Suffix für den identifier. Bsp. **kommunal** für kommunale Nutzungsplanung. Resultierender Identifier: ch.so.arp.nutzungsplanung.kommunal|
 |simiClassSuffix|String(50)|j|Aus den type* Attributen hergeleiteter Suffix des Identifiers (Hilfsattribut, readonly)|
+|coverageIdent|String(100)|j|Identifier der Datenabdeckung (DataCoverage) dieser Themenbereitstellung. Default "ktso" für ganzer Kanton|
 
 ### Konstraints
 

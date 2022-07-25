@@ -29,6 +29,10 @@ public class ThemePublication extends SimiEntity {
     @JoinColumn(name = "THEME_ID")
     private Theme theme;
 
+    @NotNull
+    @Column(name = "COVERAGE_IDENT", nullable = false, length = 100)
+    private String coverageIdent = "ktso";
+
     @Composition
     @OneToMany(mappedBy = "themePublication")
     private List<DataProduct> dataProducts;
@@ -48,6 +52,14 @@ public class ThemePublication extends SimiEntity {
             inverseJoinColumns = @JoinColumn(name = "CUSTOM_FILE_TYPE_ID"))
     @ManyToMany
     private List<CustomFileType> customFileTypes;
+
+    public String getCoverageIdent() {
+        return coverageIdent;
+    }
+
+    public void setCoverageIdent(String coverageIdent) {
+        this.coverageIdent = coverageIdent;
+    }
 
     public List<DataProduct> getDataProducts() {
         return dataProducts;

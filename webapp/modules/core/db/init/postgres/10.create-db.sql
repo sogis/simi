@@ -520,6 +520,7 @@ create table SIMITHEME_THEME_PUBLICATION (
     VERSION integer not null,
     --
     THEME_ID uuid not null,
+    COVERAGE_IDENT varchar(100) not null,
     DATA_CLASS varchar(50) not null,
     CLASS_SUFFIX_OVERRIDE varchar(50),
     SIMI_CLASS_SUFFIX varchar(255),
@@ -540,7 +541,6 @@ create table SIMITHEME_THEME (
     DATA_OWNER_ID uuid not null,
     TITLE varchar(200) not null,
     DESCRIPTION varchar(1000) not null,
-    COVERAGE_IDENT varchar(100) not null,
     REMARKS text,
     --
     primary key (ID)
@@ -553,3 +553,33 @@ create table SIMI_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK (
     primary key (THEME_PUBLICATION_ID, CUSTOM_FILE_TYPE_ID)
 )^
 -- end SIMI_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK
+-- begin SIMITHEME_SUB_AREA
+create table SIMITHEME_SUB_AREA (
+    ID uuid,
+    --
+    IDENTIFIER varchar(100) not null,
+    GEOM_WKB bytea not null,
+    TITLE varchar(255),
+    UPDATED timestamp,
+    COVERAGE_IDENT varchar(100) not null,
+    --
+    primary key (ID)
+)^
+-- end SIMITHEME_SUB_AREA
+-- begin SIMITHEME_PUBLISHED_SUB_AREA
+create table SIMITHEME_PUBLISHED_SUB_AREA (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    --
+    PUBLISHED timestamp not null,
+    PREV_PUBLISHED timestamp not null,
+    SUB_AREA_ID uuid not null,
+    THEME_PUBLICATION_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMITHEME_PUBLISHED_SUB_AREA

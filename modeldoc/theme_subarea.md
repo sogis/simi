@@ -24,17 +24,16 @@ UK über die FK.
 Fläche eines Teilgebietes des Kanton Solothurn. Alle 1-n Teilgebiete der gleichen Datenabdeckung bilden zusammen ein AREA-Datensatz, welcher 
 die Datenabdeckung innerhalb des Kt. Solothurn dokumentiert.
 
-Wird mittels GRETL-Job aus dem Schema "agi_data_coverage" (Modell SO_AGI_Meta_Datenabdeckung_YYYMMMDD) gepflegt (Bulk InsUpdDel).
+Wird mittels GRETL-Job aus dem Schema "agi_data_coverage" (Modell SO_AGI_Meta_Datenabdeckung_YYYMMMDD) gepflegt (Bulk InsUpdDel). Trägt darum auch nicht die gewohnten Meta-Attribute zu Zeitpunkt und Benutzer der Erstellung eines Objektes (Vererbt nicht von SimiEntity sondern von BaseUuidEntity).
 
 ### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |identifier|String(100)|j|Eindeutige Kennung des Teilgebiets.|
-|coverageIdent|String(100)|j|Kennung der Datenabdeckung des Teilgebiets.|
-|geomWkb|byte[]|j|Polygon-Geometrie des Teilgebietes als WKB.|
+|coverageIdent|String(100)|n|Kennung der Datenabdeckung des importierten Teilgebiets (Sprechender FK auf die Datenabdeckung in der Edit-DB). |
+|geomWKB|byte[]|j|Polygon-Geometrie des Teilgebietes als WKB.|
 |title|String(255)|n|Sprechender Titel des Teilgebiets.|
-|updated|DateTime|n|Timestamp der letzten Ausführung des GRETL-Jobs.|
 
 ### Konstraints
 
@@ -42,10 +41,10 @@ UK über identifier, coverageIdent, updated
 
 # Ablauf der Datensynchronisation
 
-* db2db mit updated = null
+* db2db mit `update = null`
 * Update der bestehende Beziehungen von PublishedSubArea auf die neu importierten SubArea
-* Alle Subareas löschen: `where updated is not null`
-* Version für neu importierte setzen: `updated = now()`
+* Alle Subareas löschen: `where update is not null`
+* Version für neu importierte setzen: `update = now()`
 
 # Ablauf bei PUT-Aufruf durch Publisher
 
