@@ -36,8 +36,11 @@
         <form id="form" dataContainer="dataProductDc">
             <column width="450px">
                 <lookupField id="themePubField" dataContainer="dataProductDc" property="themePublication" optionsContainer="themePubsDc"/>
+                <hbox spacing="true" caption="Themenzu. Optionen:">
+                    <checkBox id="identIsPartialBox" property="identIsPartial" caption="mainMsg://dataproduct.identIsPartial"/>
+                    <checkBox id="themeOnlyForOrgCbx" property="themeOnlyForOrg" caption="mainMsg://dataproduct.themeOnlyForOrg"/>
+                </hbox>
                 <textField id="identPartField" property="identPart" />
-                <checkBox id="identIsPartialBox" property="identIsPartial" caption="Teil-Ident?"/>
                 <textField id="titleField" property="title" caption="Titel GDI"/>
                 <textField id="identifierListField" property="externalIdentifier" caption="Kennung extern" />
                 <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment" caption="Publikation">

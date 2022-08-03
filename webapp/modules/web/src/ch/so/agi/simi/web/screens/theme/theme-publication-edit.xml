@@ -34,7 +34,8 @@
                 <textField id="coverageIdentField" property="coverageIdent"/>
             </column>
             <column width="350px">
-                <textArea id="remarksField" property="remarks" rows="7" rowspan="5"/>
+                <textArea id="descriptionOverrideField" property="descriptionOverride" rows="5" rowspan="3"/>
+                <textArea id="remarksField" property="remarks" rows="3" rowspan="2"/>
             </column>
         </form>
         <tabSheet id="tableScroll">
@@ -70,7 +71,7 @@
                  margin="true"
                  spacing="true">
                 <scrollBox width="100%" height="100%">
-                    <table id="customFileTypesTable" dataContainer="customFileTypesDc" width="100%">
+                    <table id="customFileTypesTable" dataContainer="customFileTypesDc" width="100%" multiselect="true">
                         <actions>
                             <action id="add" type="add"/>
                             <action id="exclude" type="exclude">

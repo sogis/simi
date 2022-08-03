@@ -20,10 +20,15 @@
             spacing="true">
         <table id="orgUnitsTable"
                width="100%"
-               dataContainer="orgUnitsDc">
+               dataContainer="orgUnitsDc"
+               multiselect="true">
             <actions>
                 <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="remove" type="remove">
+                    <properties>
+                        <property name="confirmation" value="false"/>
+                    </properties>
+                </action>
             </actions>
             <columns>
                 <column id="name"/>

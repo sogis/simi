@@ -211,11 +211,11 @@
         <property name="pubScope" view="_minimal"/>
         <property name="singleActors" view="_minimal">
             <property name="singleActor" view="_minimal">
-                <property name="title"/>
             </property>
             <property name="sort"/>
             <property name="visible"/>
         </property>
+        <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiProduct_SingleActor" name="map-edit-singleActors" extends="_local"/>
     <view entity="simiData_RasterView" name="rasterView-edit" extends="_local">
@@ -230,7 +230,6 @@
             <property name="fileContent"/>
             <property name="isForServer"/>
         </property>
-        <property name="thermGroup" view="_minimal"/>
         <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiData_RasterDS" name="rasterView-edit-rasters" extends="_local"/>
@@ -252,7 +251,6 @@
             <property name="fileName"/>
             <property name="fileContent"/>
         </property>
-        <property name="thermGroup" view="_minimal"/>
         <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiIAM_Role" name="tableView-edit-roles" extends="_local"/>
@@ -316,8 +314,6 @@
         </property>
         <property name="themePublication" view="_minimal"/>
     </view>
-    <view entity="simiProduct_ThermGroup" name="thermGroup-browse" extends="_minimal"/>
-    <view entity="simiProduct_ThermGroup" name="thermGroup-edit" extends="_local"/>
     <view entity="simiTheme_OrgUnit" name="orgUnit-browse" extends="_local"/>
     <view entity="simiTheme_OrgUnit" name="theme-edit-dataOwners" extends="_minimal"/>
     <view entity="simiTheme_Agency" name="agency-edit" extends="_local"/>

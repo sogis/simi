@@ -41,15 +41,6 @@
                 </query>
             </loader>
         </collection>
-        <collection id="thermsDc"
-                    class="ch.so.agi.simi.entity.product.ThermGroup"
-                    view="thermGroup-browse">
-            <loader id="thermsDl">
-                <query>
-                    <![CDATA[select e from simiProduct_ThermGroup e ORDER BY e.name]]>
-                </query>
-            </loader>
-        </collection>
         <collection id="themePubsDc"
                     class="ch.so.agi.simi.entity.theme.ThemePublication"
                     view="dProdEditors-themePub-lookup">
@@ -70,8 +61,11 @@
             <form id="form" dataContainer="dataProductDc">
                 <column width="450px">
                     <lookupField id="themePubField" dataContainer="dataProductDc" property="themePublication" optionsContainer="themePubsDc"/>
+                    <hbox spacing="true" caption="Themenzu. Optionen:">
+                        <checkBox id="identIsPartialBox" property="identIsPartial" caption="mainMsg://dataproduct.identIsPartial"/>
+                        <checkBox id="themeOnlyForOrgCbx" property="themeOnlyForOrg" caption="mainMsg://dataproduct.themeOnlyForOrg"/>
+                    </hbox>
                     <textField id="identPartField" property="identPart" />
-                    <checkBox id="identIsPartialBox" property="identIsPartial" caption="Teil-Ident?"/>
                     <textField id="titleField" property="title"/>
                     <groupBox caption="Publikation" collapsable="false" spacing="true" width="100%">
                         <hbox spacing="true">
@@ -124,7 +118,6 @@
                     <column width="450px">
                         <textArea id="descriptionModelField" property="postgresTable.descriptionModel" editable="false" rows="3" rowspan="2"/>
                         <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
-                        <lookupField id="thermsDSField" dataContainer="dataProductDc" property="thermGroup" optionsContainer="thermsDc"/>
                     </column>
                 </form>
             </groupBox>

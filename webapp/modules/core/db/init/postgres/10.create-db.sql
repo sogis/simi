@@ -112,6 +112,8 @@ create table SIMIDATA_POSTGRES_TABLE (
     VERSION integer not null,
     --
     ID_FIELD_NAME varchar(100) not null,
+    KEYWORDS_ARR varchar(800),
+    SYNONYMS_ARR varchar(800),
     TABLE_IS_VIEW boolean not null,
     TITLE varchar(255) not null,
     DESCRIPTION_OVERRIDE text,
@@ -211,6 +213,7 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     DTYPE varchar(31),
     --
     IDENT_PART varchar(100),
+    THEME_ONLY_FOR_ORG boolean not null,
     DERIVED_IDENTIFIER varchar(100) not null,
     IDENT_IS_PARTIAL boolean not null,
     THEME_PUBLICATION_ID uuid not null,
@@ -329,7 +332,6 @@ create table SIMIDATA_DATA_SET_VIEW (
     ID uuid,
     --
     SERVICE_DOWNLOAD boolean not null,
-    THERM_GROUP_ID uuid,
     IS_FILE_DOWNLOAD_DSV boolean not null,
     STYLE_SERVER text,
     STYLE_SERVER_UPLOADED timestamp,
@@ -360,6 +362,8 @@ create table SIMIDATA_RASTER_VIEW (
     ID uuid,
     --
     RASTER_DS_ID uuid not null,
+    KEYWORDS_ARR varchar(800),
+    SYNONYMS_ARR varchar(800),
     --
     primary key (ID)
 )^
@@ -368,6 +372,8 @@ create table SIMIDATA_RASTER_VIEW (
 create table SIMIDATA_TABLE_VIEW (
     ID uuid,
     --
+    KEYWORDS_ARR_OVERWRITE varchar(800),
+    SYNONYMS_ARR_OVERWRITE varchar(800),
     POSTGRES_TABLE_ID uuid not null,
     ROW_FILTER_VIEW_NAME varchar(100),
     SEARCH_TYPE varchar(50) not null,
@@ -439,22 +445,6 @@ create table SIMIDATA_DB_SCHEMA (
     primary key (ID)
 )^
 -- end SIMIDATA_DB_SCHEMA
--- begin SIMIPRODUCT_THERM_GROUP
-create table SIMIPRODUCT_THERM_GROUP (
-    ID uuid,
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    VERSION integer not null,
-    --
-    NAME varchar(255) not null,
-    KEYWORDS varchar(800),
-    SYNONYMS varchar(800),
-    --
-    primary key (ID)
-)^
--- end SIMIPRODUCT_THERM_GROUP
 -- begin SIMITHEME_ORG_UNIT
 create table SIMITHEME_ORG_UNIT (
     ID uuid,
@@ -520,6 +510,7 @@ create table SIMITHEME_THEME_PUBLICATION (
     VERSION integer not null,
     --
     THEME_ID uuid not null,
+    DESCRIPTION_OVERRIDE varchar(1000),
     COVERAGE_IDENT varchar(100) not null,
     DATA_CLASS varchar(50) not null,
     CLASS_SUFFIX_OVERRIDE varchar(50),

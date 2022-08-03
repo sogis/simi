@@ -19,15 +19,6 @@
                 </query>
             </loader>
         </collection>
-        <collection id="thermsDc"
-                    class="ch.so.agi.simi.entity.product.ThermGroup"
-                    view="thermGroup-browse">
-            <loader id="thermsDl">
-                <query>
-                    <![CDATA[select e from simiProduct_ThermGroup e ORDER BY e.name]]>
-                </query>
-            </loader>
-        </collection>
         <collection id="themePubsDc"
                     class="ch.so.agi.simi.entity.theme.ThemePublication"
                     view="dProdEditors-themePub-lookup">
@@ -48,8 +39,11 @@
             <form id="form" dataContainer="dataProductDc">
                 <column width="450px">
                     <lookupField id="themePubField" dataContainer="dataProductDc" property="themePublication" optionsContainer="themePubsDc"/>
+                    <hbox spacing="true" caption="Themenzu. Optionen:">
+                        <checkBox id="identIsPartialBox" property="identIsPartial" caption="mainMsg://dataproduct.identIsPartial"/>
+                        <checkBox id="themeOnlyForOrgCbx" property="themeOnlyForOrg" caption="mainMsg://dataproduct.themeOnlyForOrg"/>
+                    </hbox>
                     <textField id="identPartField" property="identPart" />
-                    <checkBox id="identIsPartialBox" property="identIsPartial" caption="Teil-Ident?"/>
                     <textField id="titleField" property="title"/>
                     <fragment id="styleServerField" screen="simi_StyleFragment" caption="Darstellung Server">
                         <properties>
@@ -87,7 +81,6 @@
                                 <property name="singleActorDc" ref="dataProductDc"/>
                             </properties>
                         </fragment>
-                        <lookupField id="thermsDSField" dataContainer="dataProductDc" property="thermGroup" optionsContainer="thermsDc"/>
                     </column>
                     <column width="450px">
                         <textArea id="descriptionField" property="description" rows="7" rowspan="4"/>

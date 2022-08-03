@@ -1,0 +1,3 @@
+alter table SIMIDATA_DATA_SET_VIEW rename column therm_group_id to therm_group_id__u87797 ;
+alter table SIMIDATA_DATA_SET_VIEW drop constraint FK_SIMIDATA_DATA_SET_VIEW_ON_THERM_GROUP ;
+drop index IDX_SIMIDATA_DATA_SET_VIEW_ON_THERM_GROUP ;

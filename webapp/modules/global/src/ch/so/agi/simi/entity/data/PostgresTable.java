@@ -27,6 +27,12 @@ public class PostgresTable extends SimiEntity {
     @NotNull
     private String idFieldName;
 
+    @Column(name = "KEYWORDS_ARR", length = 800)
+    private String keywordsArr;
+
+    @Column(name = "SYNONYMS_ARR", length = 800)
+    private String synonymsArr;
+
     @NotNull
     @Column(name = "TABLE_IS_VIEW", nullable = false)
     private Boolean tableIsView = false;
@@ -78,6 +84,22 @@ public class PostgresTable extends SimiEntity {
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
+
+    public String getSynonymsArr() {
+        return synonymsArr;
+    }
+
+    public void setSynonymsArr(String synonymsArr) {
+        this.synonymsArr = synonymsArr;
+    }
+
+    public String getKeywordsArr() {
+        return keywordsArr;
+    }
+
+    public void setKeywordsArr(String keywordsArr) {
+        this.keywordsArr = keywordsArr;
+    }
 
     public String getDescriptionOverride() {
         return descriptionOverride;

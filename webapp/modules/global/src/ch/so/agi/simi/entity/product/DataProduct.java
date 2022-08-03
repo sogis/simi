@@ -7,12 +7,12 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
-import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
 @Entity(name = DataProduct.NAME)
@@ -27,6 +27,10 @@ public class DataProduct extends SimiEntity {
 
     @Column(name = "IDENT_PART", length = 100)
     private String identPart;
+
+    @NotNull
+    @Column(name = "THEME_ONLY_FOR_ORG", nullable = false)
+    private Boolean themeOnlyForOrg = false;
 
     @NotNull
     @Column(name = "DERIVED_IDENTIFIER", nullable = false, unique = true, length = 100)
@@ -64,6 +68,14 @@ public class DataProduct extends SimiEntity {
 
     @Column(name = "TITLE", length = 200)
     private String title;
+
+    public Boolean getThemeOnlyForOrg() {
+        return themeOnlyForOrg;
+    }
+
+    public void setThemeOnlyForOrg(Boolean themeOnlyForOrg) {
+        this.themeOnlyForOrg = themeOnlyForOrg;
+    }
 
     public Boolean getIdentIsPartial() {
         return identIsPartial;

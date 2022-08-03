@@ -1,0 +1,5 @@
+create table SIMI_THERM_GROUP_DATA_PRODUCT_LINK (
+    THERM_GROUP_ID uuid,
+    DATA_PRODUCT_ID uuid,
+    primary key (THERM_GROUP_ID, DATA_PRODUCT_ID)
+);

@@ -22,6 +22,7 @@ Beispiele:
 |---|---|---|---|
 |identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
 |identIsPartial|Boolean|j|Ist nur der Suffix-Teil des Identifiers erfasst? |
+|themeOnlyForOrg|Boolean|j|Ja: Dprod ist nur organisatorisch zugeordnet (Themenübergreifende DProds). Default: Nein |
 |pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](../metamodel.md#ebenenpublikation-in-dataproduct).|
 |keywords|String(200)|n|**DEPRECATED** Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|

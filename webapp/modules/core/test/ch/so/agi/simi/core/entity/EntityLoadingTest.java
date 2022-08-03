@@ -276,16 +276,6 @@ class EntityLoadingTest {
         );
     }
 
-    @Test
-    void thermGroup_OK() {
-        loadEntityViews(
-                ThermGroup.class,
-                new String[]{
-                        "thermGroup-edit",
-                        "thermGroup-browse"
-                }
-        );
-    }
 
     @Test
     void org_OrgUnit_OK(){

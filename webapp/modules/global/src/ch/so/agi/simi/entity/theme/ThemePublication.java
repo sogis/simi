@@ -30,6 +30,9 @@ public class ThemePublication extends SimiEntity {
     @JoinColumn(name = "THEME_ID")
     private Theme theme;
 
+    @Column(name = "DESCRIPTION_OVERRIDE", length = 1000)
+    private String descriptionOverride;
+
     @NotNull
     @Column(name = "COVERAGE_IDENT", nullable = false, length = 100)
     private String coverageIdent = "ktso";
@@ -63,6 +66,14 @@ public class ThemePublication extends SimiEntity {
 
     @OneToMany(mappedBy = "themePublication")
     private List<PublishedSubArea> publishedSubAreas;
+
+    public String getDescriptionOverride() {
+        return descriptionOverride;
+    }
+
+    public void setDescriptionOverride(String descriptionOverride) {
+        this.descriptionOverride = descriptionOverride;
+    }
 
     public List<PublishedSubArea> getPublishedSubAreas() {
         return publishedSubAreas;
