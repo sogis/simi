@@ -1,0 +1,1 @@
+alter table simi_theme_publication_custom_file_type_link rename to SIMI_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK__U49657 ;

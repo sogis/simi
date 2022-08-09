@@ -12,7 +12,6 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
 @Entity(name = DataProduct.NAME)

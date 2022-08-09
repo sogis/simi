@@ -58,7 +58,20 @@ Bemerkung: Das Framework macht
 
 # Todo
 
-Tabellenname setzen bei den Datentypen n:m Tabelle
+Schema:
+- Spez Keywords and Synonyms beschreiben (SPEZ)
+  - Keywords komplett bottom up?
+  - Synonyme eher top down? -> braucht es auf dem Thema
+
+- Synonyme auf Dataproduct
+- Synonyme (überschreibung) auf thema
+- boolean isThemeRepresenter auf Datenprodukt vergeben?
+- furtherInformation-Attribut auf Thema
+
+
+Verstehen, wie enum(fuu, bar) als Datentyp im SIMI landet
+
+
     
 Kopier und Morph-Funktionen testen
 

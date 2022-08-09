@@ -54,7 +54,7 @@ public class ThemePublication extends SimiEntity {
     @Column(name = "SIMI_CLASS_SUFFIX")
     private String simiClassSuffix;
 
-    @JoinTable(name = "SIMI_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK",
+    @JoinTable(name = "SIMITHEME_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK",
             joinColumns = @JoinColumn(name = "THEME_PUBLICATION_ID"),
             inverseJoinColumns = @JoinColumn(name = "CUSTOM_FILE_TYPE_ID"))
     @ManyToMany

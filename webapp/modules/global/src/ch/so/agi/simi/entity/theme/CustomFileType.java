@@ -28,7 +28,7 @@ public class CustomFileType extends SimiEntity {
     @NotNull
     private String kuerzel;
 
-    @JoinTable(name = "SIMI_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK",
+    @JoinTable(name = "SIMITHEME_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK",
             joinColumns = @JoinColumn(name = "CUSTOM_FILE_TYPE_ID"),
             inverseJoinColumns = @JoinColumn(name = "THEME_PUBLICATION_ID"))
     @ManyToMany

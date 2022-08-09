@@ -1,0 +1,1 @@
+drop table if exists SIMI_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK__U49657 cascade ;
