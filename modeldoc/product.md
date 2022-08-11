@@ -20,13 +20,13 @@ Beispiele:
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|identPart|String(100)|n|Manuell erfasster (Teil-)Identifier|
+|identPart|String(100)|n|Manuell erfasster (Teil-)Identifier. NULL falls das Produkt darstellerisch das Thema repräsentiert.|
 |identIsPartial|Boolean|j|Ist nur der Suffix-Teil des Identifiers erfasst? |
 |themeOnlyForOrg|Boolean|j|Ja: Dprod ist nur organisatorisch zugeordnet (Themenübergreifende DProds). Default: Nein |
 |pubScope|enum|j|Gibt an, in welchen Diensten und Applikationen das DP publiziert ist. Details siehe [hier](../metamodel.md#ebenenpublikation-in-dataproduct).|
-|keywords|String(200)|n|**DEPRECATED** Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
+|keywords|String(800)|n|Stichworte für das DataProduct. Können auch thematische Überbegriffe sein.|
 |remarks|String|n|Interne Bemerkungen.|
-|synonyms|String(200)|n|**DEPRECATED** Synonyme für das DataProduct.|
+|synonyms|String(800)|n|Synonyme für das DataProduct.|
 |title|String(200)|n|Angezeigter Titel (Bezeichnung) des Dataproduct. Falls null in Erstellungsphase wird identifier verwendet.|
 |description|String(1000)|n|Beschreibung. Ziel: < 500 Zeichen Text. Kann HTML-Markup enthalten (\<br\/\>, \<a ...\>\<\/a\>)|
 |derivedIdent|String(100)|j|Zusammengesetzter identifier für Filtern in SIMI, ...|

@@ -77,8 +77,6 @@ Spalten (via AttributeList) wie auch auf die angebotenen Zeilen (mittels Filter 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |rowFilterViewName|Sting(100)|n|Name der Db-View, über welche ein Subset der Records der Tabelle selektiert wird. Die View verändert weder Umfang noch Datentyp der Tabellenspalten.|
-|keywordArrOverwrite|String(800)|n|Stichworte. Übersteuert die Tabellen-Stichworte. Als Json-Array formatiert.|
-|synonymArrOverwrite|String(800)|n|Synonyme. Übersteuert die Tabellen-Synponyme. Als Json-Array formatiert.|
 |wgcEdit|boolean|j|Gibt an, ob die TableView im Web GIS Client editiert wird. Default: false|
 |searchType|enum|j|Gibt an, ob und wie die DSV durchsuchbar ist (Nein, immer, falls geladen). Default Nein|
 |searchFacet|String(100)|n|Facet-Key. Falls null wird der identifier verwendet|
@@ -123,8 +121,6 @@ GDI Postgres-Tabelle.
 |geoFieldName|String(100)|n|Name des Geometrieattributes. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
 |geoType|String(100)|n|Name des Geometrietyps. Null, wenn die Tabelle keine oder mehrere Geometrien umfasst.|
 |geoEpsgCode|Integer|n|EPSG-Code des Koordinatensystems. In aller Regel 2056|
-|keywordArr|String(800)|n|Stichworte für die Tabelle (den Tabelleninhalt). Als Json-Array formatiert.|
-|synonymArr|String(800)|n|Synonyme für die Tabelle (den Tabelleninhalt). Als Json-Array formatiert.|
 |remarks|String|n|Interne Bemerkungen zur Tabelle.|
 
 
@@ -203,10 +199,7 @@ Enthält die Darstellungsdefinition für ein Raster-DataSet.
 
 #### Attributbeschreibung
 
-|Name|Typ|Z|Beschreibung|
-|---|---|---|---|
-|keywordArr|String(800)|n|Stichworte für die Tabelle (den Tabelleninhalt). Als Json-Array formatiert.|
-|synonymArr|String(800)|n|Synonyme für die Tabelle (den Tabelleninhalt). Als Json-Array formatiert.|
+Keine eigenen Attribute.
 
 ### Klasse RasterDS
 
