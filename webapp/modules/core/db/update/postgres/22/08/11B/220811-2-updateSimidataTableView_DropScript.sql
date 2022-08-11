@@ -1,0 +1,2 @@
+alter table SIMIDATA_TABLE_VIEW drop column SYNONYMS_ARR_OVERWRITE__U10088 cascade ;
+alter table SIMIDATA_TABLE_VIEW drop column KEYWORDS_ARR_OVERWRITE__U60579 cascade ;

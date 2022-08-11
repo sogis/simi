@@ -112,8 +112,6 @@ create table SIMIDATA_POSTGRES_TABLE (
     VERSION integer not null,
     --
     ID_FIELD_NAME varchar(100) not null,
-    KEYWORDS_ARR varchar(800),
-    SYNONYMS_ARR varchar(800),
     TABLE_IS_VIEW boolean not null,
     TITLE varchar(255) not null,
     DESCRIPTION_OVERRIDE text,
@@ -213,19 +211,17 @@ create table SIMIPRODUCT_DATA_PRODUCT (
     VERSION integer not null,
     DTYPE varchar(31),
     --
-    IDENT_PART varchar(100),
-    KEYWORDS_ARR varchar(800),
-    SYNONYMS_ARR varchar(800),
-    THEME_ONLY_FOR_ORG boolean not null,
+    TITLE varchar(200),
     DERIVED_IDENTIFIER varchar(100) not null,
+    IDENT_PART varchar(100),
+    KEYWORDS varchar(800),
+    SYNONYMS varchar(800),
+    THEME_ONLY_FOR_ORG boolean not null,
     IDENT_IS_PARTIAL boolean not null,
     THEME_PUBLICATION_ID uuid not null,
     DESCRIPTION text,
     PUB_SCOPE_ID uuid not null,
-    _KEYWORDS_DEPRECATED varchar(500),
     REMARKS text,
-    _SYNONYMS_DEPRECATED varchar(800),
-    TITLE varchar(200),
     --
     primary key (ID)
 )^
@@ -365,8 +361,6 @@ create table SIMIDATA_RASTER_VIEW (
     ID uuid,
     --
     RASTER_DS_ID uuid not null,
-    KEYWORDS_ARR varchar(800),
-    SYNONYMS_ARR varchar(800),
     --
     primary key (ID)
 )^
@@ -375,8 +369,6 @@ create table SIMIDATA_RASTER_VIEW (
 create table SIMIDATA_TABLE_VIEW (
     ID uuid,
     --
-    KEYWORDS_ARR_OVERWRITE varchar(800),
-    SYNONYMS_ARR_OVERWRITE varchar(800),
     POSTGRES_TABLE_ID uuid not null,
     ROW_FILTER_VIEW_NAME varchar(100),
     SEARCH_TYPE varchar(50) not null,
@@ -518,7 +510,6 @@ create table SIMITHEME_THEME_PUBLICATION (
     DATA_CLASS varchar(50) not null,
     CLASS_SUFFIX_OVERRIDE varchar(50),
     TITLE_OVERRIDE varchar(200),
-    SIMI_CLASS_SUFFIX varchar(255),
     REMARKS text,
     --
     primary key (ID)
@@ -534,6 +525,9 @@ create table SIMITHEME_THEME (
     VERSION integer not null,
     --
     IDENTIFIER varchar(100) not null,
+    KEYWORDS_ARR varchar(800),
+    SYNONYMS_ARR varchar(800),
+    FURTHER_INFO_URL varchar(500),
     DATA_OWNER_ID uuid not null,
     TITLE varchar(200) not null,
     DESCRIPTION varchar(1000) not null,

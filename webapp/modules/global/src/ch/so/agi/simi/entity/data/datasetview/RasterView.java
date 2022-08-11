@@ -24,28 +24,6 @@ public class RasterView extends DataSetView {
     @OnDeleteInverse(DeletePolicy.DENY)
     private RasterDS rasterDS;
 
-    @Column(name = "KEYWORDS_ARR", length = 800)
-    private String keywordsArr;
-
-    @Column(name = "SYNONYMS_ARR", length = 800)
-    private String synonymsArr;
-
-    public String getSynonymsArr() {
-        return synonymsArr;
-    }
-
-    public void setSynonymsArr(String synonymsArr) {
-        this.synonymsArr = synonymsArr;
-    }
-
-    public String getKeywordsArr() {
-        return keywordsArr;
-    }
-
-    public void setKeywordsArr(String keywordsArr) {
-        this.keywordsArr = keywordsArr;
-    }
-
     public RasterDS getRasterDS() {
         return rasterDS;
     }

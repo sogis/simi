@@ -280,9 +280,9 @@
         <property name="service" view="_minimal"/>
         <property name="description"/>
         <property name="pubScope" view="_minimal"/>
-        <property name="_keywords_deprecated"/>
+        <property name="keywords"/>
         <property name="remarks"/>
-        <property name="_synonyms_deprecated"/>
+        <property name="synonyms"/>
         <property name="externalIdentifier"/>
         <property name="transparency"/>
         <property name="themePublication" view="_minimal"/>

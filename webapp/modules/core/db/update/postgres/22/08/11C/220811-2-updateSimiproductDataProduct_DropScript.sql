@@ -1,0 +1,2 @@
+alter table SIMIPRODUCT_DATA_PRODUCT drop column _KEYWORDS_DEPRECATED__U80971 cascade ;
+alter table SIMIPRODUCT_DATA_PRODUCT drop column _SYNONYMS_DEPRECATED__U48593 cascade ;

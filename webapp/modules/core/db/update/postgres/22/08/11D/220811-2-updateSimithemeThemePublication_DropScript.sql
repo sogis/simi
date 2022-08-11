@@ -1,0 +1,1 @@
+alter table SIMITHEME_THEME_PUBLICATION drop column SIMI_CLASS_SUFFIX__U19612 cascade ;

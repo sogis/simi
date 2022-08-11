@@ -51,9 +51,6 @@ public class ThemePublication extends SimiEntity {
     @Column(name = "TITLE_OVERRIDE", length = 200)
     private String titleOverride;
 
-    @Column(name = "SIMI_CLASS_SUFFIX")
-    private String simiClassSuffix;
-
     @JoinTable(name = "SIMITHEME_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK",
             joinColumns = @JoinColumn(name = "THEME_PUBLICATION_ID"),
             inverseJoinColumns = @JoinColumn(name = "CUSTOM_FILE_TYPE_ID"))
@@ -164,14 +161,6 @@ public class ThemePublication extends SimiEntity {
 
     public void setCustomFileTypes(List<CustomFileType> customFileTypes) {
         this.customFileTypes = customFileTypes;
-    }
-
-    public String getSimiClassSuffix() {
-        return simiClassSuffix;
-    }
-
-    public void setSimiClassSuffix(String simiClassSuffix) {
-        this.simiClassSuffix = simiClassSuffix;
     }
 
     public String getClassSuffixOverride() {

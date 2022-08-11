@@ -91,9 +91,9 @@ public class MorphProductServiceBean implements MorphProductService {
         toDp.setIdentIsPartial(fromDp.getIdentIsPartial());
         toDp.setDerivedIdentifier(fromDp.getDerivedIdentifier());
         toDp.setPubScope(fromDp.getPubScope());
-        toDp.set_keywords_deprecated(fromDp.get_keywords_deprecated());
+        toDp.setKeywords(fromDp.getKeywords());
         toDp.setRemarks(fromDp.getRemarks());
-        toDp.set_synonyms_deprecated(fromDp.get_synonyms_deprecated());
+        toDp.setSynonyms(fromDp.getSynonyms());
         toDp.setTitle(fromDp.getTitle());
     }
 

@@ -26,12 +26,6 @@ public class TableView extends DataSetView {
     @OrderBy("sort")
     private List<ViewField> viewFields;
 
-    @Column(name = "KEYWORDS_ARR_OVERWRITE", length = 800)
-    private String keywordsArrOverwrite;
-
-    @Column(name = "SYNONYMS_ARR_OVERWRITE", length = 800)
-    private String synonymsArrOverwrite;
-
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_TABLE_ID")
@@ -50,22 +44,6 @@ public class TableView extends DataSetView {
 
     @Column(name = "SEARCH_FILTER_WORD", length = 100)
     private String searchFilterWord;
-
-    public String getSynonymsArrOverwrite() {
-        return synonymsArrOverwrite;
-    }
-
-    public void setSynonymsArrOverwrite(String synonymsArrOverwrite) {
-        this.synonymsArrOverwrite = synonymsArrOverwrite;
-    }
-
-    public String getKeywordsArrOverwrite() {
-        return keywordsArrOverwrite;
-    }
-
-    public void setKeywordsArrOverwrite(String keywordsArrOverwrite) {
-        this.keywordsArrOverwrite = keywordsArrOverwrite;
-    }
 
     public String getRowFilterViewName() {
         return rowFilterViewName;

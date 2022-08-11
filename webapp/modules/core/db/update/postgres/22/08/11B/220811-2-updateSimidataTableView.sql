@@ -1,0 +1,2 @@
+alter table SIMIDATA_TABLE_VIEW rename column keywords_arr_overwrite to keywords_arr_overwrite__u60579 ;
+alter table SIMIDATA_TABLE_VIEW rename column synonyms_arr_overwrite to synonyms_arr_overwrite__u10088 ;

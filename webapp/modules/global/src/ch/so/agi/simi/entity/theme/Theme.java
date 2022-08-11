@@ -25,6 +25,15 @@ public class Theme extends SimiEntity {
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
     private String identifier;
 
+    @Column(name = "KEYWORDS_ARR", length = 800)
+    private String keywordsArr;
+
+    @Column(name = "SYNONYMS_ARR", length = 800)
+    private String synonymsArr;
+
+    @Column(name = "FURTHER_INFO_URL", length = 500)
+    private String furtherInfoUrl;
+
     @OneToMany(mappedBy = "theme")
     @Composition
     private List<ThemePublication> themePublications;
@@ -47,6 +56,30 @@ public class Theme extends SimiEntity {
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
+
+    public String getFurtherInfoUrl() {
+        return furtherInfoUrl;
+    }
+
+    public void setFurtherInfoUrl(String furtherInfoUrl) {
+        this.furtherInfoUrl = furtherInfoUrl;
+    }
+
+    public String getSynonymsArr() {
+        return synonymsArr;
+    }
+
+    public void setSynonymsArr(String synonymsArr) {
+        this.synonymsArr = synonymsArr;
+    }
+
+    public String getKeywordsArr() {
+        return keywordsArr;
+    }
+
+    public void setKeywordsArr(String keywordsArr) {
+        this.keywordsArr = keywordsArr;
+    }
 
     public List<ThemePublication> getThemePublications() {
         return themePublications;

@@ -62,25 +62,22 @@ Bemerkung: Das Framework macht
 |---|---|
 |TableField: IliEnum|09A|
 
+## 11. August 2022
+
+|Änderung|Ordner|
+|---|---|
+|ExtWMS FI-Enum verschieben (Aus Merge mit v1.x)|11A|
+|||
+|Keys and Synos auf Tabelle, DSV entfernen|11B|
+|Keys and Synos wieder auf Dataproduct (Wie v1.x)|11C|
+|Keys and Synos auf Thema|11D|
+|||
+|Themen(-Bereitstellung): furtherInfo, grooming|11D|
+
+
 # Todo
 
 Schema:
-- Spez Keywords and Synonyms beschreiben (SPEZ)
-  - Keywords komplett bottom up?
-  - Synonyme eher top down? -> braucht es auf dem Thema
-
-- Synonyme auf Dataproduct
-- Synonyme (überschreibung) auf thema
-- boolean isThemeRepresenter auf Datenprodukt vergeben?
-- furtherInformation-Attribut auf Thema
-
-
-Verstehen, wie enum(fuu, bar) als Datentyp im SIMI landet
-
-Requested db identifier {0} is not configured. Schemareader service has 1 dbs configured in the service
-
-
-    
 Kopier und Morph-Funktionen testen
 
 # Therm-Verkettung Thema und DataProduct (Keywords, Synonyms)

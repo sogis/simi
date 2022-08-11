@@ -24,16 +24,25 @@ public class DataProduct extends SimiEntity {
 
     private static final long serialVersionUID = -3456773582487680912L;
 
-    @Column(name = "IDENT_PART", length = 100)
-    private String identPart;
-
-    @NotNull
-    @Column(name = "THEME_ONLY_FOR_ORG", nullable = false)
-    private Boolean themeOnlyForOrg = false;
+    @Column(name = "TITLE", length = 200)
+    private String title;
 
     @NotNull
     @Column(name = "DERIVED_IDENTIFIER", nullable = false, unique = true, length = 100)
     private String derivedIdentifier;
+
+    @Column(name = "IDENT_PART", length = 100)
+    private String identPart;
+
+    @Column(name = "KEYWORDS", length = 800)
+    private String keywords;
+
+    @Column(name = "SYNONYMS", length = 800)
+    private String synonyms;
+
+    @NotNull
+    @Column(name = "THEME_ONLY_FOR_ORG", nullable = false)
+    private Boolean themeOnlyForOrg = false;
 
     @NotNull
     @Column(name = "IDENT_IS_PARTIAL", nullable = false)
@@ -55,18 +64,25 @@ public class DataProduct extends SimiEntity {
     @NotNull
     private DataProduct_PubScope pubScope;
 
-    @Column(name = "_KEYWORDS_DEPRECATED", length = 500)
-    private String _keywords_deprecated;
-
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
 
-    @Column(name = "_SYNONYMS_DEPRECATED", length = 800)
-    private String _synonyms_deprecated;
+    public String getSynonyms() {
+        return synonyms;
+    }
 
-    @Column(name = "TITLE", length = 200)
-    private String title;
+    public void setSynonyms(String synonyms) {
+        this.synonyms = synonyms;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
 
     public Boolean getThemeOnlyForOrg() {
         return themeOnlyForOrg;
@@ -150,28 +166,12 @@ public class DataProduct extends SimiEntity {
         this.title = title;
     }
 
-    public String get_synonyms_deprecated() {
-        return _synonyms_deprecated;
-    }
-
-    public void set_synonyms_deprecated(String _synonyms_deprecated) {
-        this._synonyms_deprecated = _synonyms_deprecated;
-    }
-
     public String getRemarks() {
         return remarks;
     }
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
-    }
-
-    public String get_keywords_deprecated() {
-        return _keywords_deprecated;
-    }
-
-    public void set_keywords_deprecated(String _keywords_deprecated) {
-        this._keywords_deprecated = _keywords_deprecated;
     }
 
     public String deriveIdentifier(ThemePublication tp){
