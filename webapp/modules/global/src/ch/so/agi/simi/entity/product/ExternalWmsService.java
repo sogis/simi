@@ -22,21 +22,9 @@ public class ExternalWmsService extends SimiEntity {
     @Column(name = "URL", nullable = false, unique = true)
     private String url;
 
-    @NotNull
-    @Column(name = "FEATURE_INFO_FORMAT", nullable = false)
-    private String featureInfoFormat;
-
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
-
-    public ExternalWmsService_FiFormat getFeatureInfoFormat() {
-        return featureInfoFormat == null ? null : ExternalWmsService_FiFormat.fromId(featureInfoFormat);
-    }
-
-    public void setFeatureInfoFormat(ExternalWmsService_FiFormat featureInfoFormat) {
-        this.featureInfoFormat = featureInfoFormat == null ? null : featureInfoFormat.getId();
-    }
 
     public String concatName(){
         return url;

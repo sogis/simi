@@ -18,7 +18,6 @@ import javax.validation.groups.Default;
 public class Identity extends SimiEntity {
     private static final long serialVersionUID = 8795833236734020501L;
 
-    @JsonField(groups = {UiComponentChecks.class})
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
     @NotNull
     private String identifier;

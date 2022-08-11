@@ -10,6 +10,7 @@ public class FieldInfo {
     private String geoFieldType;
     private String geoFieldSrOrg;
     private Integer geoFieldSrId;
+    private boolean iliEnum;
 
     public Integer getGeoFieldSrId() {
         return geoFieldSrId;
@@ -73,5 +74,13 @@ public class FieldInfo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isIliEnum() {
+        return iliEnum;
+    }
+
+    public void setIliEnum(boolean iliEnum) {
+        this.iliEnum = iliEnum;
     }
 }

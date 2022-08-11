@@ -57,6 +57,10 @@ public class TableField extends SimiEntity {
     @Column(name = "CAT_SYNCED", nullable = false)
     private Boolean catSynced = false;
 
+    @NotNull
+    @Column(name = "ILI_ENUM", nullable = false)
+    private Boolean iliEnum = false;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_TABLE_ID")
     @OnDeleteInverse(DeletePolicy.CASCADE)
@@ -72,6 +76,14 @@ public class TableField extends SimiEntity {
     @Lob
     @Column(name = "DISPLAY_PROPS4_JSON")
     private String displayProps4Json;
+
+    public Boolean getIliEnum() {
+        return iliEnum;
+    }
+
+    public void setIliEnum(Boolean iliEnum) {
+        this.iliEnum = iliEnum;
+    }
 
     public String getDescriptionOverride() {
         return descriptionOverride;

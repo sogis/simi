@@ -70,6 +70,7 @@ public class ThemeReaderBean {
         inOutTable.setTableName(ti.getTvName());
         inOutTable.setDescriptionModel(ti.getDescription());
         inOutTable.setIdFieldName(ti.getPkField());
+        inOutTable.setTableIsView(ti.isDbView());
         inOutTable.setCatSyncStamp(LocalDateTime.now());
 
         ArrayList<String> geoFieldTypes = new ArrayList<>();
@@ -132,6 +133,7 @@ public class ThemeReaderBean {
                 nf.setDescriptionModel(fi.getDescription());
                 nf.setMandatory(fi.getMandatory());
                 nf.setName(fi.getName());
+                nf.setIliEnum(fi.isIliEnum());
                 nf.setTypeName(fi.getType());
                 nf.setStrLength(fi.getLength());
                 nf.setAlias(buildAliasFromName(fi.getName()));

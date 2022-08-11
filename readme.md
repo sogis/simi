@@ -1,3 +1,5 @@
+# Maintenance Branch für Versionen 1.x
+
 # Repo Inhalt
 
 Das Repo umfasst die folgenden Teile (in Unterordnern):

@@ -4,7 +4,7 @@
 version: "3"
 services:
   schemareader:
-    image: sogis/simi_schemareader
+    image: sogis/simi_schemareader:2.0
     environment:
       - SPRING_APPLICATION_JSON={"dbs":[{"key":"geodb","url":"jdbc:postgresql://databases:5432/postgres","user":"postgres","pass":"postgres"}]}
     ports:

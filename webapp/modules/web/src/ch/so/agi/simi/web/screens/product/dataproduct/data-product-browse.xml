@@ -59,7 +59,7 @@
                         <action id="createFacadeLayer" caption="mainMsg://facadelayer.caption.edit"/>
                         <action id="createMap" caption="mainMsg://map.caption.edit"/>
                         <action id="createRasterView" caption="mainMsg://rasterview.caption.edit"/>
-                        <action id="createExtLayer" caption="mainMsg://extlayer.caption.edit"/>
+                        <action id="createExtLayer" caption="mainMsg://extwmslayer.caption.edit"/>
                     </actions>
                 </popupButton>
                 <button id="editBtn" action="dataProductsTable.edit" stylename="primary"/>

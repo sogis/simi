@@ -43,6 +43,7 @@
                 <textField id="identPartField" property="identPart" />
                 <textField id="titleField" property="title" caption="Titel GDI"/>
                 <textField id="identifierListField" property="externalIdentifier" caption="Kennung extern" />
+                <lookupField id="fiFormatField" property="featureInfoFormat" caption="FI Format"/>
                 <fragment id="pubScopeFragment" screen="simiProduct_PubScopeFragment" caption="Publikation">
                     <properties>
                         <property name="filterProperty" value="forDSV"/>

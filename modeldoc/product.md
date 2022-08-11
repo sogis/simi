@@ -172,6 +172,7 @@ Definition "Extern": Die Rohdaten der Ebene sind nicht als DataProduct erfasst. 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |externalIdentifier|String(1000)|j|Identifier der Ebene im referenzierten ext. WMS-Service.|
+|featureInfoFormat|enum(String)|j|Formatanforderung des FeatureInfo-Request an den WMS (text/plain, ...). "fi_unavailable" Falls kein FeatureInfo verfügbar.|
 
 ### Klasse ExternalWmsService
 
@@ -181,7 +182,6 @@ Externer WM(T)S Service, von welchem 1-n Ebenen im WGC oder SO-Locator gesucht u
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|featureInfoFormat|enum(String)|j|Formatanforderung des FeatureInfo-Request an den WMS (text/plain, ...). "fi_unavailable" Falls der Server kein FeatureInfo kann.|
 |url|String(255)|j|URL des Service. Falls WMTS die URL der GetCapabilities-Abfrage.|
 |remarks|String|n|Interne Bemerkungen.|
 

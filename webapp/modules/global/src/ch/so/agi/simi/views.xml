@@ -100,6 +100,9 @@
     </view>
     <view entity="simiData_PostgresTable" name="postgresTable-edit" extends="_local">
         <property name="dbSchema" view="_minimal">
+            <property name="postgresDB" view="_minimal">
+                <property name="identifier"/>
+            </property>
         </property>
         <property name="tableFields" view="_local">
             <property name="viewFields" view="_minimal"/>
@@ -285,9 +288,14 @@
         <property name="themePublication" view="_minimal"/>
         <property name="identPart"/>
         <property name="identIsPartial"/>
+        <property name="featureInfoFormat"/>
     </view>
     <view entity="simiProduct_ExternalWmsService" name="externalWmsLayers-edit-services" extends="_minimal"/>
-    <view entity="simiData_DbSchema" name="postgresTable-edit-dbSchemas" extends="_minimal"/>
+    <view entity="simiData_DbSchema" name="postgresTable-edit-dbSchemas" extends="_minimal">
+        <property name="postgresDB" view="_minimal">
+            <property name="identifier"/>
+        </property>
+    </view>
     <view entity="simiProduct_FacadeLayer" name="morph-FacadeLayer" extends="_local">
         <property name="dataSetViews" view="_minimal">
             <property name="dataSetView" view="_minimal"/>

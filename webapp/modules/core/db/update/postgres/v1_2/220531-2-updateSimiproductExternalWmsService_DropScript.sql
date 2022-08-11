@@ -1,0 +1,1 @@
+alter table SIMIPRODUCT_EXTERNAL_WMS_SERVICE drop column FEATURE_INFO_FORMAT__U06031 cascade ;

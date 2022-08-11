@@ -20,12 +20,24 @@ public class ExternalWmsLayer extends SingleActor {
     @Column(name = "EXT_IDENTIFIER", nullable = false)
     private String externalIdentifier;
 
+    @NotNull
+    @Column(name = "FEATURE_INFO_FORMAT", nullable = false)
+    private String featureInfoFormat;
+
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "clear"})
     @NotNull
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "SERVICE_ID")
     private ExternalWmsService service;
+
+    public ExternalWmsLayer_FiFormat getFeatureInfoFormat() {
+        return featureInfoFormat == null ? null : ExternalWmsLayer_FiFormat.fromId(featureInfoFormat);
+    }
+
+    public void setFeatureInfoFormat(ExternalWmsLayer_FiFormat featureInfoFormat) {
+        this.featureInfoFormat = featureInfoFormat == null ? null : featureInfoFormat.getId();
+    }
 
     @Override
     protected String typeAbbreviation(){

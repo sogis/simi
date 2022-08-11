@@ -81,7 +81,7 @@ Vorgehen:
   ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --data-only --disable-triggers gitignored/simi_t_v1.2.dmp```  
 * Anmelden mit dem Admin-Passwort "aus Dump" (Siehe Passwort-Manager)
   * Admin-Passwort überschreiben
-
+  
 ## Abdeckung mit automatisierten Tests
 
 Der Umfang der automatisierten Tests ist angepasst auf den Typ der entwickelten Funktionaliät. Standardfunktionalitäten des Frameworks wie Browse und Edit-Screens sind mit wenig Tests abgedeckt, während Beispielsweise bei Implementationen von SIMI-spezifischen Funktionen (Package ch.so.agi.simi.core.*) viel in Tests investiert wird. 
@@ -139,3 +139,7 @@ Hinweis: Die Vererbungen sind in den Diagrammen nicht abgebildet.
 ### Map
 
 ![Map Copy](res/copy-map.png)
+
+## Cuba API Javadoc
+
+Diese ist nicht ganz einfach zu finden, darum Link hier: https://files.cuba-platform.com/javadoc/cuba/7.2/

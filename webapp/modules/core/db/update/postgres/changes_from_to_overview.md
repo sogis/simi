@@ -56,6 +56,12 @@ Bemerkung: Das Framework macht
 |Remove ThermGroup and refs|03A|
 |Keywords and Synonyms|03B|
 
+## 9. August 2022
+
+|Änderung|Ordner|
+|---|---|
+|TableField: IliEnum|09A|
+
 # Todo
 
 Schema:
@@ -70,6 +76,8 @@ Schema:
 
 
 Verstehen, wie enum(fuu, bar) als Datentyp im SIMI landet
+
+Requested db identifier {0} is not configured. Schemareader service has 1 dbs configured in the service
 
 
     

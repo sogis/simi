@@ -24,7 +24,11 @@
                 forceDialog="true"
                 resizable="true"/>
     <layout expand="tableFieldsBox" spacing="true">
-        <button id="readFromServiceBtn" caption="Aus Quell-DB einlesen" stylename="danger" icon="BULK_EDIT_ACTION"/>
+        <buttonsPanel>
+            <button id="readFromServiceBtn" caption="Aus Quell-DB einlesen" stylename="danger" icon="BULK_EDIT_ACTION"/>
+            <label id="spacer" width="20" value=" "/>
+            <button id="reloadFromDb" caption="Neu laden (Änderungen verwerfen)" stylename="danger" icon="REFRESH"/>
+        </buttonsPanel>
         <form id="form" dataContainer="postgresTableDc">
             <column width="350px">
                 <lookupField id="dataThemeField" dataContainer="postgresTableDc" property="dbSchema" optionsContainer="dataThemeDc"/>
@@ -74,8 +78,9 @@
             </table>
         </groupBox>
         <hbox id="editActions" spacing="true">
-            <button action="windowCommitAndClose"/>
-            <button action="windowClose"/>
+            <button action="windowCommitAndClose" caption="mainMsg://actions.OkClose"/>
+            <button action="windowCommit"/>
+            <button action="windowClose" caption="Schliessen ohne speichern"/>
         </hbox>
     </layout>
 </window>

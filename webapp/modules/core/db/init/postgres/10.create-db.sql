@@ -162,6 +162,7 @@ create table SIMIDATA_TABLE_FIELD (
     MANDATORY boolean not null,
     STR_LENGTH integer,
     CAT_SYNCED boolean not null,
+    ILI_ENUM boolean not null,
     POSTGRES_TABLE_ID uuid not null,
     ALIAS varchar(100),
     WMS_FI_FORMAT varchar(100),
@@ -411,6 +412,7 @@ create table SIMIPRODUCT_EXTERNAL_WMS_LAYERS (
     ID uuid,
     --
     EXT_IDENTIFIER varchar(255) not null,
+    FEATURE_INFO_FORMAT varchar(50) not null,
     SERVICE_ID uuid not null,
     --
     primary key (ID)
@@ -426,7 +428,6 @@ create table SIMIPRODUCT_EXTERNAL_WMS_SERVICE (
     VERSION integer not null,
     --
     URL varchar(255) not null,
-    FEATURE_INFO_FORMAT varchar(50) not null,
     REMARKS text,
     --
     primary key (ID)

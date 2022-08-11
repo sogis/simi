@@ -23,11 +23,12 @@
                     <checkBox id="mandatoryField" property="mandatory" icon="BULK_EDIT_ACTION"/>
                     <textField id="typeNameField" property="typeName" icon="BULK_EDIT_ACTION"/>
                     <textField id="strLengthField" property="strLength" icon="BULK_EDIT_ACTION"/>
+                    <checkBox id="iliEnumField" property="iliEnum" icon="BULK_EDIT_ACTION"/>
                     <checkBox id="catSyncedField" property="catSynced" editable="false"/>
                 </column>
                 <column width="350px">
-                    <textArea id="descriptionOverrideField" property="descriptionOverride" rows="8" rowspan="6"/>
-                    <textArea id="descriptionModelField" property="descriptionModel" rows="8" editable="false" rowspan="6"/>
+                    <textArea id="descriptionOverrideField" property="descriptionOverride" rows="7" rowspan="5"/>
+                    <textArea id="descriptionModelField" property="descriptionModel" rows="7" editable="false" rowspan="5"/>
                 </column>
             </form>
         </scrollBox>

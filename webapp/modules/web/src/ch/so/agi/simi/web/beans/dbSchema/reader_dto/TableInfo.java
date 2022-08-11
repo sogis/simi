@@ -5,6 +5,8 @@ public class TableInfo extends TableShortInfo {
     private String description;
     private String pkField;
 
+    private boolean dbView;
+
     public String getPkField() {
         return pkField;
     }
@@ -19,5 +21,13 @@ public class TableInfo extends TableShortInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isDbView() {
+        return dbView;
+    }
+
+    public void setDbView(boolean dbView) {
+        this.dbView = dbView;
     }
 }

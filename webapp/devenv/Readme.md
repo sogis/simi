@@ -37,5 +37,5 @@ jdbc:postgresql://localhost:5432/postgres
 **Schemareader-Service:** Zugriff via localhost port 8081
 
 ```
-http://localhost:8081/geodb?schema=tiger
+http://localhost:8081/postgres?schema=tiger
 ```

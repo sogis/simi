@@ -18,7 +18,6 @@
         <form id="form" dataContainer="externalWmsServiceDc">
             <column width="350px">
                 <textField id="urlField" property="url" caption="URL"/>
-                <lookupField id="fiFormatField" property="featureInfoFormat" caption="FI Format"/>
                 <textArea id="remarksField" property="remarks" rows="5" caption="Bemerkungen"/>
             </column>
         </form>
