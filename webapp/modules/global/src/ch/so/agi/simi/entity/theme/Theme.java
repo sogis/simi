@@ -2,12 +2,14 @@ package ch.so.agi.simi.entity.theme;
 
 import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.theme.org.OrgUnit;
+import ch.so.agi.simi.global.validation.JsonArrayField;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.core.global.validation.groups.UiComponentChecks;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,9 +27,11 @@ public class Theme extends SimiEntity {
     @Column(name = "IDENTIFIER", nullable = false, unique = true, length = 100)
     private String identifier;
 
+    @JsonArrayField(groups = {UiComponentChecks.class})
     @Column(name = "KEYWORDS_ARR", length = 800)
     private String keywordsArr;
 
+    @JsonArrayField(groups = {UiComponentChecks.class})
     @Column(name = "SYNONYMS_ARR", length = 800)
     private String synonymsArr;
 

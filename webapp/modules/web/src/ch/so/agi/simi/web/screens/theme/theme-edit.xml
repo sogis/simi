@@ -33,12 +33,29 @@
                     </actions>
                 </lookupPickerField>
                 <textField id="titleField" property="title"/>
+                <textField id="furtherInfoUrlField" property="furtherInfoUrl"/>
             </column>
             <column width="350px">
-                <textArea id="descriptionField" property="description" rows="4" rowspan="3"/>
-                <textArea id="remarksField" property="remarks" rows="2" rowspan="2"/>
+                <textArea id="remarksField" property="remarks" rows="7" rowspan="5"/>
             </column>
         </form>
+        <groupBox caption="Weitere Eigenschaften" collapsable="true" collapsed="true">
+            <form dataContainer="themeDc">
+                <column width="350px">
+                    <textArea id="descriptionField" property="description" rows="9" rowspan="4"/>
+                </column>
+                <column width="350px">
+                    <textArea id="keywordsField" property="keywordsArr" rows="2" rowspan="1"/>
+                    <hbox>
+                        <button id="keywords2JsonBtn" caption="Als Json-Array formatieren" stylename="friendly"/>
+                    </hbox>
+                    <textArea id="synonymsField" property="synonymsArr" rows="2" rowspan="1"/>
+                    <hbox>
+                        <button id="synonyms2JsonBtn" caption="Als Json-Array formatieren" stylename="friendly"/>
+                    </hbox>
+                </column>
+            </form>
+        </groupBox>
         <groupBox id="themePubBox" caption="mainMsg://themePublication.caption.browse"
                   expand="themePubTable">
             <table id="themePubTable"

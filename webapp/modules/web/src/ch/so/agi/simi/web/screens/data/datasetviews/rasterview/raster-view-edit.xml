@@ -81,14 +81,16 @@
                                 <property name="singleActorDc" ref="dataProductDc"/>
                             </properties>
                         </fragment>
+                        <textArea id="keywordsField" property="keywords" rows="3" rowspan="2"/>
                     </column>
                     <column width="450px">
-                        <textArea id="descriptionField" property="description" rows="7" rowspan="4"/>
+                        <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
+                        <textArea id="synonymsField" property="synonyms" rows="3" rowspan="2"/>
                     </column>
                 </form>
             </groupBox>
             <groupBox id="permissionsBox" caption="Berechtigungen">
-                <fragment id="permissionsTable" screen="simi_RoleFragment"></fragment>
+                <fragment id="permissionsTable" screen="simi_RoleFragment"/>
             </groupBox>
         </scrollBox>
 

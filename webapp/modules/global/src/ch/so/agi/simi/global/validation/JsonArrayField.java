@@ -12,14 +12,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Validiert, ob der Inhalt eines String-Feldes als Json geparsed werden kann.
  *
  * Damit die Validierung vor dem Speichern in Cuba angestossen wird, muss die
- * korrekte Validierungsgruppe angegeben werden: @JsonField(groups = {UiComponentChecks.class})
+ * korrekte Validierungsgruppe angegeben werden: @JsonArrayField(groups = {UiComponentChecks.class})
  */
 @Target({ ElementType.FIELD })
 @Retention(RUNTIME)
-@Constraint(validatedBy = JsonFieldValidator.class)
-public @interface JsonField {
+@Constraint(validatedBy = JsonArrayUtil.class)
+public @interface JsonArrayField {
 
-    String message() default "Feldinhalt muss gültiges Json sein.";
+    String message() default "Feldinhalt muss ein flaches Json-Array sein.";
 
     Class<?>[] groups() default {};
 

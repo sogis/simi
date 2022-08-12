@@ -1,7 +1,7 @@
 package ch.so.agi.simi.entity.extended;
 
 import ch.so.agi.simi.entity.product.Map;
-import ch.so.agi.simi.global.validation.JsonField;
+import ch.so.agi.simi.global.validation.JsonArrayField;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
@@ -25,13 +25,13 @@ public class CCCIntegration extends Dependency {
     @NotNull
     private Map map;
 
-    @JsonField(groups = {UiComponentChecks.class})
+    @JsonArrayField(groups = {UiComponentChecks.class})
     @Lob
     @Column(name = "LOCATOR_LAYERS")
     @NotNull
     private String locatorLayers;
 
-    @JsonField(groups = {UiComponentChecks.class})
+    @JsonArrayField(groups = {UiComponentChecks.class})
     @Lob
     @Column(name = "NOTIFY_LAYERS")
     @NotNull

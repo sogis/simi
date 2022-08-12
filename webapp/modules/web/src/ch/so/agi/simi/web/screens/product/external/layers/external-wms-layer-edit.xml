@@ -34,7 +34,7 @@
                 resizable="true"/>
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="dataProductDc">
-            <column width="450px">
+            <column width="350px">
                 <lookupField id="themePubField" dataContainer="dataProductDc" property="themePublication" optionsContainer="themePubsDc"/>
                 <hbox spacing="true" caption="Themenzu. Optionen:">
                     <checkBox id="identIsPartialBox" property="identIsPartial" caption="mainMsg://dataproduct.identIsPartial"/>
@@ -50,11 +50,13 @@
                     </properties>
                 </fragment>
                 <textField id="transparencyField" property="transparency"/>
+                <textArea id="remarksField" property="remarks" rows="4" rowspan="3"/>
             </column>
-            <column width="450px">
+            <column width="350px">
                 <lookupField id="serviceField" dataContainer="dataProductDc" property="service" optionsContainer="servicesDc"/>
-                <textArea id="remarksField" property="remarks" rows="5" rowspan="4"/>
-                <textArea id="descriptionField" property="description" rows="7" rowspan="5"/>
+                <textArea id="descriptionField" property="description" rows="8" rowspan="6"/>
+                <textArea id="keywordsField" property="keywords" rows="3" rowspan="2"/>
+                <textArea id="synonymsField" property="synonyms" rows="3" rowspan="2"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

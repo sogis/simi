@@ -289,6 +289,7 @@
         <property name="identPart"/>
         <property name="identIsPartial"/>
         <property name="featureInfoFormat"/>
+        <property name="themeOnlyForOrg"/>
     </view>
     <view entity="simiProduct_ExternalWmsService" name="externalWmsLayers-edit-services" extends="_minimal"/>
     <view entity="simiData_DbSchema" name="postgresTable-edit-dbSchemas" extends="_minimal">

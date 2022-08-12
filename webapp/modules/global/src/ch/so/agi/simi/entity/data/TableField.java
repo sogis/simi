@@ -2,7 +2,7 @@ package ch.so.agi.simi.entity.data;
 
 import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.data.datasetview.ViewField;
-import ch.so.agi.simi.global.validation.JsonField;
+import ch.so.agi.simi.global.validation.JsonArrayField;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
@@ -72,7 +72,7 @@ public class TableField extends SimiEntity {
     @Column(name = "WMS_FI_FORMAT", length = 100)
     private String wmsFiFormat;
 
-    @JsonField(groups = {UiComponentChecks.class})
+    @JsonArrayField(groups = {UiComponentChecks.class})
     @Lob
     @Column(name = "DISPLAY_PROPS4_JSON")
     private String displayProps4Json;
