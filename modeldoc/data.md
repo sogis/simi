@@ -24,12 +24,13 @@ Einer DataSetView verweist optional auf eine Schlüsselwort-Gruppe (ThermGroup).
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
 |serviceDownload|boolean|j|Gibt an, ob die Daten in der Form von AtOS, DataService, WFS bezogen werden können. Default: Ja|
-|isFileDownloadDSV|boolean|j|Ist das DSV der "Konfigurationsträger" für den Datenbezug?. Default: False|
+|isFileDownloadDSV|boolean|j|Ist das DSV der "Konfigurationsträger" für den Datenbezug? Default: False|
 |styleServer|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Server bestimmt.|
 |styleServerChanged|DateTime|n|Zeitpunkt der letzten syleServer änderung.|
 |styleDesktop|String (XML)|n|QML-Datei, welche das Styling der Ebene in QGIS-Desktop bestimmt. Falls null und style_server <> null wird style_server verwendet.|
 |styleDesktopChanged|DateTime|n|Zeitpunkt der letzten syleDesktop änderung.|
 
+Todo isFileDownloadDSV: Hintergrund des Flags sind mehrfache DSV, welche auf die gleiche Tabelle zeigen. Das Flag ist aber nicht mehr notwendig, falls auf der Stufe der Dataproducts unterschieden wird, ob eine Zuweisung zu einem Thema nur für die Zuweisung der Organisationseinheit erfolgt.
 
 #### Konstraints
 
