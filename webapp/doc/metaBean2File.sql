@@ -7,7 +7,7 @@ attr AS (
     json_build_object(
       'name', name,
       'alias', alias,
-      'short_description', coalesce(description_override, description_model),
+      'shortDescription', coalesce(description_override, description_model),
       'datatype', 
       CASE
         WHEN str_length IS NOT NULL THEN concat(type_name, '(', str_length, ')')
@@ -16,7 +16,7 @@ attr AS (
       'mandatory', mandatory
     ) AS attr_json,
     table_view_id
-  FROM 
+  FROM
     simidata_view_field vf
   JOIN
     simidata_table_field tf ON vf.table_field_id = tf.id 
@@ -37,11 +37,11 @@ attr AS (
 ,tableview AS (
   SELECT   
     jsonb_build_object(
-      'sql_name', table_name,
+      'sqlName', table_name,
       'title', title,
-      'table_type', coalesce(geo_type, 'Tabelle ohne Geometrie'),--Dies muss sicher mit. Falls die Geometriespalte auch benannt ist: IN geeigneter Form Spaltenname mitgeben...
-      'short_description', coalesce(description_override, description_model),
-      'attributes_info', attrs_json
+      'tableType', coalesce(geo_type, 'Tabelle ohne Geometrie'),--Dies muss sicher mit. Falls die Geometriespalte auch benannt ist: IN geeigneter Form Spaltenname mitgeben...
+      'shortDescription', coalesce(description_override, description_model),
+      'attributesInfo', attrs_json
     ) AS tbl_json,
     table_view_id
   FROM 
@@ -54,14 +54,14 @@ attr AS (
 
 ,tp_tables AS (
   SELECT 
-    jsonb_agg(tbl_json) AS tables,
+    jsonb_agg(tbl_json) AS tables_json,
     dp.theme_publication_id AS tp_id
   FROM 
     tableview tv
   JOIN
     simiproduct_data_product dp ON tv.table_view_id = dp.id
   WHERE 
-    dp.theme_only_for_org IS FALSE
+    dp.theme_only_for_org IS FALSE OR dp.theme_only_for_org IS TRUE --todo einschränken auf false
   GROUP BY 
     theme_publication_id
 )
@@ -109,10 +109,10 @@ attr AS (
 ,org AS (
   SELECT 
     jsonb_build_object(
-      'agency_name', amt,
+      'agencyName', amt,
       'abbreviation', abbreviation,
       'division', division,
-      'office_at_web', url,
+      'officeAtWeb', url,
       'email', email,
       'phone', phone
     ) AS org_json, 
@@ -133,8 +133,8 @@ attr AS (
 
 ,tp_org AS (
   SELECT 
-    org_json AS owner,
-    servicer,
+    org_json AS data_owner,
+    servicer AS data_servicer,
     tp.id AS tp_id
   FROM
     simitheme_theme th
@@ -162,7 +162,7 @@ attr AS (
   SELECT
     dp.theme_publication_id AS tp_id,
     max(model) AS model,
-    min(model) AS model2 --debug: muss gleich sein wie model, sonst ist die konf nicht gut
+    min(model) AS model2 --debug: muss gleich sein wie model, sonst ist die konf nicht gut
   FROM 
     simidata_table_view tv
   JOIN
@@ -187,6 +187,7 @@ attr AS (
 ,sub_area AS (
   SELECT 
     st_envelope(st_geomfromwkb(geom_wkb)) AS geom_bbox,
+    st_astext(ST_SimplifyPreserveTopology(st_geomfromwkb(geom_wkb), 5)) AS geom_simplified_wkt,
     identifier,
     title,
     id AS sub_id
@@ -198,10 +199,11 @@ attr AS (
   SELECT 
     jsonb_build_object(
         'left', st_xmin(geom_bbox),
-        'lower', st_ymin(geom_bbox),
+        'bottom', st_ymin(geom_bbox),
         'right', st_xmax(geom_bbox),
-        'upper', st_ymax(geom_bbox)
+        'top', st_ymax(geom_bbox)
     ) AS bbox,
+    geom_simplified_wkt,
     identifier,
     title,
     published,
@@ -218,83 +220,33 @@ attr AS (
     jsonb_agg(
       jsonb_build_object(
         'bbox', bbox,
+        'geometry', geom_simplified_wkt,
         'identifier', identifier,
-        'name', title,
-        'last_publishing_date', published,
-        'second_to_last_publishing_date', prev_published
+        'title', title,
+        'lastPublishingDate', published,
+        'secondToLastPublishingDate', prev_published
       )
-    ) AS items,
+    ) AS pub_regions,
     tp_id
   FROM
     tp_pub_region
   GROUP BY 
     tp_id
+  LIMIT 1 --todo entfernen
 )
 
--- Schlagwörter (!!ALPHA!!) **********************************************************************************
+-- Schlagwörter **********************************************************************************
 
-,tp_keywords AS (
+,tp_therms AS (
   SELECT 
-    '["k1","k2"]'::jsonb AS keywords,
+    keywords_arr::jsonb AS keywords,
+    synonyms_arr::jsonb AS synonyms,
     tp.id AS tp_id
   FROM
-    simitheme_theme_publication tp
-)
-
-,tp_synonyms AS (
-  SELECT 
-    '["s1","s2"]'::jsonb AS synonyms,
-    tp.id AS tp_id
-  FROM
-    simitheme_theme_publication tp
-)
-
-/*
-,tv_tbl_therms AS (
-  SELECT
-    tv.id AS tv_id,
-    dp.theme_publication_id,
-    tbl.keywords_arr::jsonb AS keys,
-    tbl.synonyms_arr::jsonb AS synos
-  FROM 
-    simidata_table_view tv
+    simitheme_theme t
   JOIN
-    simidata_data_set_view dsv USING(id)
-  JOIN 
-    simiproduct_data_product dp USING(id)
-  JOIN
-    simidata_postgres_table tbl ON tv.postgres_table_id = tbl.id
-  WHERE 
-    keywords_arr IS NOT NULL OR synonyms_arr IS NOT NULL 
+    simitheme_theme_publication tp ON t.id = tp.theme_id 
 )
-
---todo where ergänzen in download_tv
-  WHERE 
-      dsv.is_file_download_dsv IS TRUE 
-    AND 
-      dp.theme_only_for_org IS FALSE 
-
-
-,themepub_keyword AS (
-  SELECT DISTINCT
-    theme_publication_id,
-    exploded.value AS therm
-  FROM
-    tv_tbl_therms
-  CROSS JOIN LATERAL 
-    jsonb_array_elements_text(keys) exploded
-)
-
-,tb_keywords AS (
-  SELECT 
-    json_agg(therm ORDER BY therm)::varchar AS keywords,
-    theme_publication_id
-  FROM 
-    themepub_keyword
-  GROUP BY 
-    theme_publication_id
-)
-*/
 
 -- Dateitypen *************************************************************************
 
@@ -315,8 +267,8 @@ attr AS (
     SELECT 
       jsonb_build_object(
         'name', name,
-        'kuerzel', kuerzel,
-        'mime_type', mime_type
+        'abbreviation', kuerzel,
+        'mimetype', mime_type
       ) AS filetype_json,
       only_pub_models
     FROM
@@ -378,8 +330,8 @@ attr AS (
 
 ,tp_pub_dates AS (
   SELECT 
-    max(published) AS last_publishing_date,
-    min(prev_published) AS second_to_last_publishing_date,
+    max(published) AS published,
+    min(prev_published) AS prev_published,
     theme_publication_id AS tp_id
   FROM 
     simitheme_published_sub_area ps
@@ -406,7 +358,7 @@ attr AS (
     concat_ws('.', th.identifier, coalesce(class_suffix_override, default_suffix)) AS identifier,
     COALESCE(tp.title_override, th.title) AS title,
     COALESCE(tp.description_override, th.description) AS short_description,
-    'todo furtherInfo' AS furtherInformation,
+    'https://geo.so.ch/map' AS further_info,
     tp.id AS tp_id
   FROM
     simitheme_theme_publication tp
@@ -421,12 +373,14 @@ attr AS (
 --todo nur die effektiv publizierten und öffentlich zugänglichen Ebenen ausgeben
 ,layers AS (
   SELECT 
+  /*
     jsonb_agg(
       jsonb_build_object(
         'title', title,
         'identifier', derived_identifier
       )
-    ) AS layers,
+    ) AS layers,*/
+    jsonb_agg(derived_identifier) AS layers,
     theme_publication_id AS tp_id
   FROM 
     simiproduct_data_product dp 
@@ -438,10 +392,13 @@ attr AS (
 
 ,tp_services AS (
   SELECT 
-    jsonb_build_object(
-      'layers', layers,
-      'endpoint', 'https://geo.so.ch/api/wms'
-    ) AS service,
+    jsonb_build_array(
+      jsonb_build_object(
+        'layerIdentifiers', layers,
+        'endpoint', 'https://geo.so.ch/api/wms'
+      )
+    )
+    AS services,
     tp_id
   FROM
     layers
@@ -453,21 +410,21 @@ attr AS (
   SELECT 
     inf.identifier,
     model,
-    last_publishing_date,
-    second_to_last_publishing_date,
+    published,
+    prev_published,
     inf.title,
     inf.short_description,
     keywords,
     synonyms,
-    OWNER,
-    servicer,
-    furtherInformation,
-    'fuu' AS license,
+    data_owner,
+    data_servicer,
+    further_info,
+    'https://geo.so.ch/licence' AS licence,
     'https://data.geo.so.ch' AS base_url,
     file_formats,
-    items,
-    TABLES,
-    service
+    pub_regions,
+    tables_json,
+    services
   FROM
     simitheme_theme_publication tp
   JOIN
@@ -476,25 +433,48 @@ attr AS (
     tp_model model ON tp.id = model.tp_id
   LEFT JOIN --todo INNER join
     tp_pub_dates dates ON tp.id = dates.tp_id
-  LEFT JOIN 
-    tp_keywords keys ON tp.id = keys.tp_id
-  LEFT JOIN 
-    tp_synonyms syn ON tp.id = syn.tp_id
+  JOIN
+    tp_therms th ON tp.id = th.tp_id
   JOIN 
     tp_org org ON tp.id = org.tp_id
   JOIN 
     tp_filetypes ft ON tp.id = ft.tp_id
-  LEFT JOIN --todo INNER join
-    tp_pub_regions reg ON tp.id = reg.tp_id
+  CROSS JOIN --todo INNER join
+    tp_pub_regions reg --ON tp.id = reg.tp_id
   LEFT JOIN 
     tp_tables tab ON tp.id = tab.tp_id
   LEFT JOIN 
     tp_services srv ON tp.id = srv.tp_id
 )
 
-SELECT * FROM themepub
+SELECT 
+  jsonb_pretty(
+  jsonb_build_object(
+    'identifier', identifier,
+    'model', model,
+    'lastPublishingDate', published,
+    'secondToLastPublishingDate', prev_published,    
+    'title', title,
+    'shortDescription', short_description,
+    'keywordsList', keywords,
+    'synonymsList', synonyms,
+    'furtherInformation', further_info,
+    'licence', licence,
+    'baseUrl', base_url,
+    'owner', data_owner,
+    'servicer', data_servicer,
+    'tablesInfo', tables_json,
+    'services', services,
+    'items', pub_regions,
+    'fileFormats', file_formats
+  )
+  )
+  AS tp_json
+FROM
+  themepub
+WHERE 
+  identifier = 'orgtheme.ada'
 ;
-
 
 
 
