@@ -431,8 +431,8 @@ attr AS (
     tp_ident_title_desc inf ON tp.id = inf.tp_id
   LEFT JOIN 
     tp_model model ON tp.id = model.tp_id
-  LEFT JOIN --todo INNER join
-    tp_pub_dates dates ON tp.id = dates.tp_id
+  CROSS JOIN --todo INNER join
+    tp_pub_dates dates --ON tp.id = dates.tp_id
   JOIN
     tp_therms th ON tp.id = th.tp_id
   JOIN 
