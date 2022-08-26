@@ -38,8 +38,8 @@
             <column width="350px">
                 <lookupField id="themePubField" dataContainer="dataProductDc" property="themePublication" optionsContainer="themePubsDc"/>
                 <hbox spacing="true" caption="Themenzu. Optionen:">
-                    <checkBox id="identIsPartialBox" property="identIsPartial" caption="mainMsg://dataproduct.identIsPartial"/>
-                    <checkBox id="themeOnlyForOrgCbx" property="themeOnlyForOrg" caption="mainMsg://dataproduct.themeOnlyForOrg"/>
+                    <checkBox id="identIsPartialBox" icon="EXCLAMATION_TRIANGLE" dataContainer="dataProductDc" property="identIsPartial" caption="mainMsg://dataproduct.identIsPartial"/>
+                    <checkBox id="themeOnlyForOrgCbx" dataContainer="dataProductDc" property="themeOnlyForOrg" caption="mainMsg://dataproduct.themeOnlyForOrg"/>
                 </hbox>
                 <textField id="identPartField" property="identPart" />
                 <textField id="titleField" property="title"/>

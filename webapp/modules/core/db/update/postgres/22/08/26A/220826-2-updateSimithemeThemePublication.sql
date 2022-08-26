@@ -1,0 +1,1 @@
+alter table SIMITHEME_THEME_PUBLICATION add column PUBLIC_MODEL_NAME varchar(150) ;

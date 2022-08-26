@@ -30,11 +30,12 @@
                 <textField id="derivedIdentField" property="derivedIdent" editable="false" caption="Result. Identifier"/>
                 <lookupField id="dataClassField" property="dataClass"/>
                 <textField id="classSuffixOverrideField" property="classSuffixOverride"/>
+                <textField property="publicModelName" id="publicModelNameField"/>
                 <textField id="titleOverrideField" property="titleOverride"/>
                 <textField id="coverageIdentField" property="coverageIdent"/>
             </column>
             <column width="350px">
-                <textArea id="descriptionOverrideField" property="descriptionOverride" rows="5" rowspan="3"/>
+                <textArea id="descriptionOverrideField" property="descriptionOverride" rows="6" rowspan="4"/>
                 <textArea id="remarksField" property="remarks" rows="3" rowspan="2"/>
             </column>
         </form>

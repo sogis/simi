@@ -505,6 +505,9 @@ create table SIMITHEME_THEME_PUBLICATION (
     VERSION integer not null,
     --
     THEME_ID uuid not null,
+    MODEL_UPDATE_TS timestamp,
+    MODEL_UPDATED_BY varchar(50),
+    PUBLIC_MODEL_NAME varchar(150),
     DESCRIPTION_OVERRIDE varchar(1000),
     COVERAGE_IDENT varchar(100) not null,
     DATA_CLASS varchar(50) not null,
@@ -574,3 +577,24 @@ create table SIMITHEME_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK (
     primary key (THEME_PUBLICATION_ID, CUSTOM_FILE_TYPE_ID)
 )^
 -- end SIMITHEME_THEME_PUBLICATION_CUSTOM_FILE_TYPE_LINK
+-- begin SIMITHEME_PUBLISHED_SUB_AREA_HELPER
+create table SIMITHEME_PUBLISHED_SUB_AREA_HELPER (
+    ID uuid,
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    VERSION integer not null,
+    --
+    PUBLISHED timestamp not null,
+    THEME_PUBLICATION_ID uuid not null,
+    PREV_PUBLISHED timestamp not null,
+    SUB_AREA_IDENT varchar(100) not null,
+    THEME_PUB_DATA_CLASS_OVERRIDE varchar(50),
+    THEME_IDENTIFIER varchar(100) not null,
+    THEME_PUB_DATA_CLASS varchar(50) not null,
+    SUB_AREA_ID uuid not null,
+    --
+    primary key (ID)
+)^
+-- end SIMITHEME_PUBLISHED_SUB_AREA_HELPER

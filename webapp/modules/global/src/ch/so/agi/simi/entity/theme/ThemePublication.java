@@ -13,6 +13,7 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "SIMITHEME_THEME_PUBLICATION")
@@ -29,6 +30,15 @@ public class ThemePublication extends SimiEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "THEME_ID")
     private Theme theme;
+
+    @Column(name = "MODEL_UPDATE_TS")
+    private LocalDateTime modelUpdateTs;
+
+    @Column(name = "MODEL_UPDATED_BY", length = 50)
+    private String modelUpdatedBy;
+
+    @Column(name = "PUBLIC_MODEL_NAME", length = 150)
+    private String publicModelName;
 
     @Column(name = "DESCRIPTION_OVERRIDE", length = 1000)
     private String descriptionOverride;
@@ -63,6 +73,30 @@ public class ThemePublication extends SimiEntity {
 
     @OneToMany(mappedBy = "themePublication")
     private List<PublishedSubArea> publishedSubAreas;
+
+    public String getModelUpdatedBy() {
+        return modelUpdatedBy;
+    }
+
+    public void setModelUpdatedBy(String modelUpdatedBy) {
+        this.modelUpdatedBy = modelUpdatedBy;
+    }
+
+    public LocalDateTime getModelUpdateTs() {
+        return modelUpdateTs;
+    }
+
+    public void setModelUpdateTs(LocalDateTime modelUpdateTs) {
+        this.modelUpdateTs = modelUpdateTs;
+    }
+
+    public String getPublicModelName() {
+        return publicModelName;
+    }
+
+    public void setPublicModelName(String publicModelName) {
+        this.publicModelName = publicModelName;
+    }
 
     public String getDescriptionOverride() {
         return descriptionOverride;

@@ -74,76 +74,15 @@ Bemerkung: Das Framework macht
 |||
 |Themen(-Bereitstellung): furtherInfo, grooming|11D|
 
+## 22. August 2022
 
-# Todo
+|Änderung|Ordner|
+|---|---|
+|Schattentabelle für Published Subarea|22A|
 
-Schema:
-Kopier und Morph-Funktionen testen
+## 26. August 2022
 
-# Therm-Verkettung Thema und DataProduct (Keywords, Synonyms)
-
-```sql
-/*
-DROP TABLE IF EXISTS layer;
-
-CREATE TABLE layer AS                                     
-WITH t (title, therms, theme_ident) AS (
- VALUES
-      ('this:x parent:-'::varchar, jsonb_build_array('a', 'b', 'c'), 'nulltherm'::varchar)
-      ,('this:x parent:1'::varchar, jsonb_build_array('a', 'b', 'c'), 'onetherm'::varchar)
-      ,('this:1 parent:x'::varchar, jsonb_build_array('a'), 'xtherm'::varchar)
-      ,('this:x parent:x'::varchar, jsonb_build_array('a', 'b', 'c'), 'xtherm'::varchar)
-      ,('this:0 parent:x'::varchar, jsonb_build_array(), 'xtherm'::varchar)
-)
-SELECT * FROM t;
-
-DROP TABLE IF EXISTS theme;
-
-CREATE TABLE theme AS                                     
-WITH t (ident, therms) AS (
- VALUES
-      ('nulltherm'::varchar, NULL)
-      ,('onetherm'::varchar, jsonb_build_array('1'))
-      ,('xtherm'::varchar, jsonb_build_array('b','1'))
-)
-SELECT * FROM t;
-*/
-
-
-WITH 
-
-lay_agg_duplicates AS (
-  SELECT 
-    l.title,
-    l.therms lt,
-    t.therms tt,
-    COALESCE(l.therms, jsonb_build_array()) || COALESCE(t.therms, jsonb_build_array()) AS agg
-  FROM 
-    layer l 
-  LEFT JOIN 
-    theme t ON l.theme_ident = t.ident
-)
-
-,lay_therms AS (
-  SELECT DISTINCT
-    title,
-    exploded.value AS therm
-  FROM
-    lay_agg_duplicates
-  CROSS JOIN LATERAL 
-    jsonb_array_elements_text(agg) exploded
-)
-
-,lay_agg AS (
-  SELECT 
-    title,
-    jsonb_agg(therm ORDER BY therm) AS therms
-  FROM
-    lay_therms
-  GROUP BY 
-    title
-)
-
-SELECT * FROM lay_agg;
-```
-
+|Änderung|Ordner|
+|---|---|
+|Modellname auf Themenbereitstellung|26A|
+|Metafelder Modelländerung|26B|

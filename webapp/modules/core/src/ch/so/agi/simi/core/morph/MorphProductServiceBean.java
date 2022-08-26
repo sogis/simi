@@ -39,7 +39,9 @@ public class MorphProductServiceBean implements MorphProductService {
             copyDprodProperties(fromDp, toDp);
             copyChildLinks(fromDp, toDp);
 
-            toDp.setDerivedIdentifier(fromDp.getDerivedIdentifier() + "-morph"); // Notwendig zur Vermeidung von UK verletzung.
+            String suffix = "-morph"; // Notwendig zur Vermeidung von UK-Verletzung.
+            toDp.setIdentPart(fromDp.getIdentPart() + suffix);
+            toDp.setDerivedIdentifier(fromDp.getDerivedIdentifier() + suffix);
 
             CommitContext trans = new CommitContext();
             trans.addInstanceToCommit(toDp);
@@ -48,7 +50,7 @@ public class MorphProductServiceBean implements MorphProductService {
 
             dataManager.commit(trans);
 
-            updateIdentifier(toDp.getId(), fromDp.getIdentPart()); // Reset auf original identifier ohne "-morph"
+            updateIdentifier(toDp.getId(), fromDp); // Reset auf original identifier ohne "-morph"
         }
         catch(MorphException me){
             throw me;
@@ -79,9 +81,10 @@ public class MorphProductServiceBean implements MorphProductService {
         }
     }
 
-    private void updateIdentifier(UUID dataProdId, String identifier){
+    private void updateIdentifier(UUID dataProdId, DataProduct fromProd){
         DataProduct dProd = dataManager.load(DataProduct.class).id(dataProdId).one();
-        dProd.setIdentPart(identifier);
+        dProd.setIdentPart(fromProd.getIdentPart());
+        dProd.setDerivedIdentifier(fromProd.getDerivedIdentifier());
         dataManager.commit(dProd);
     }
 
@@ -89,6 +92,7 @@ public class MorphProductServiceBean implements MorphProductService {
         toDp.setThemePublication(fromDp.getThemePublication());
         toDp.setIdentPart(fromDp.getIdentPart());
         toDp.setIdentIsPartial(fromDp.getIdentIsPartial());
+        toDp.setThemeOnlyForOrg(fromDp.getThemeOnlyForOrg());
         toDp.setDerivedIdentifier(fromDp.getDerivedIdentifier());
         toDp.setPubScope(fromDp.getPubScope());
         toDp.setKeywords(fromDp.getKeywords());
