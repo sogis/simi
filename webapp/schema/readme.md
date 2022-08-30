@@ -19,7 +19,7 @@ export CUBA_DATASOURCE_PASSWORD=postgres
 Falls Tabellen angepasst oder neu angelegt werden müssen nachfolgend die Rechte noch angepasst werden
 
 ```
-psql "sslmode=require host=geodb-t.rootso.org dbname=simi" -p 5432 -U simi_ddl -W --single-transaction -c 'GRANT SELECT ON ALL TABLES IN SCHEMA simi TO simi_read;'
-psql "sslmode=require host=geodb-t.rootso.org dbname=simi" -p 5432 -U simi_ddl -W --single-transaction -c 'GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA simi TO simi_write;'
+psql "sslmode=require host=hostname dbname=dbname" -p 5432 -U simi_user -W --single-transaction -c 'GRANT SELECT ON ALL TABLES IN SCHEMA simi TO simi_read;'
+psql "sslmode=require host=hostname dbname=dbname" -p 5432 -U simi_user -W --single-transaction -c 'GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA simi TO simi_write;'
 ```
 
