@@ -15,7 +15,7 @@
                             trim(' . '),
                             tbl.tableName,
                             ' | Db: ',
-                            db.dbName,
+                            db.title,
                             coalesce(
                                 concat(' (', tv.derivedIdentifier, ')'),
                                 ''

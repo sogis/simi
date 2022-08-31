@@ -5,6 +5,7 @@ import ch.so.agi.simi.entity.product.LayerGroup;
 import ch.so.agi.simi.entity.product.PropertiesInList;
 import ch.so.agi.simi.web.beans.sort.SortBean;
 import ch.so.agi.simi.web.beans.copy.UpdateFromOtherListsBean;
+import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
@@ -33,6 +34,8 @@ public class MapEdit extends StandardEditor<Map> {
     private ScreenBuilders screenBuilders;
     @Inject
     private UpdateFromOtherListsBean listUpdateBean;
+    @Inject
+    private DataManager manager;
 
 
     @Subscribe("btnPilAddSingleActor")
@@ -83,5 +86,10 @@ public class MapEdit extends StandardEditor<Map> {
             return;
 
         propertiesInListTable.requestFocus(firstAdded.get(), "sort");
+    }
+
+    @Subscribe
+    public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
+        this.getEditedEntity().updateDerivedIdentifier(manager);
     }
 }

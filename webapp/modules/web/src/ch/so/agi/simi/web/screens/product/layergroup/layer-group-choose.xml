@@ -34,7 +34,7 @@
                multiselect="true"
                settingsEnabled="false">
             <columns>
-                <column id="identifier" sort="ASCENDING"/>
+                <column id="derivedIdentifier" sort="ASCENDING"/>
                 <column id="title"/>
             </columns>
             <rowsCount/>
