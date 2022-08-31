@@ -16,3 +16,10 @@ export CUBA_DATASOURCE_PASSWORD=postgres
 ./gradlew updateDb
 ```
 
+Falls Tabellen angepasst oder neu angelegt werden müssen nachfolgend die Rechte noch angepasst werden
+
+```
+psql "sslmode=require host=hostname dbname=dbname" -p 5432 -U simi_user -W --single-transaction -c 'GRANT SELECT ON ALL TABLES IN SCHEMA simi TO simi_read;'
+psql "sslmode=require host=hostname dbname=dbname" -p 5432 -U simi_user -W --single-transaction -c 'GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA simi TO simi_write;'
+```
+
