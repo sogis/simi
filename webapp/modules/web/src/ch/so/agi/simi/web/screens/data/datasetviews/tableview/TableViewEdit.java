@@ -13,6 +13,7 @@ import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @UiController("simiData_TableView.edit")
@@ -33,35 +34,53 @@ public class TableViewEdit extends StandardEditor<TableView> {
     @Inject
     private DataManager dataManager;
 
+
     @Subscribe
     public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
         this.getEditedEntity().updateDerivedIdentifier(dataManager);
     }
-    
 
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
         loadTableFields();
     }
 
-/*    @Subscribe("postgresTableField")
+    @Subscribe("postgresTableField")
     public void onPostgresTableFieldValueChange(HasValue.ValueChangeEvent<PostgresTable> event) {
         if(!event.isUserOriginated())
             return;
 
-        if(viewFieldsDc.getMutableItems() == null)
-            return;
 
-        for(ViewField f : viewFieldsDc.getMutableItems()){
+        for (ViewField f : viewFieldsDc.getMutableItems()) {
             dataContext.remove(f);
         }
         viewFieldsDc.getMutableItems().clear();
 
         loadTableFields();
-    }*/
+        createDefaultViewFields();
+    }
+
+    private void createDefaultViewFields() {
+        List<ViewField> viewFields = new ArrayList<>();
+
+        int i=10;
+        for(TableField tf : tableFieldsDl.getContainer().getItems()){
+
+            ViewField f = dataContext.create(ViewField.class);
+            f.setSort(i);
+            i += 10;
+            f.setTableField(tf);
+            f.setWgcExposed(true);
+            f.setTableView(this.getEditedEntity());
+
+            viewFields.add(f);
+        }
+
+        viewFieldsDc.getMutableItems().addAll(viewFields);
+    }
 
     private void loadTableFields(){
-        if(this.getEditedEntity() == null || this.getEditedEntity().getPostgresTable() == null)
+        if(this.getEditedEntity().getPostgresTable() == null)
             return;
 
         tableFieldsDl.setParameter("table", this.getEditedEntity().getPostgresTable());
