@@ -3,20 +3,21 @@ package ch.so.agi.simi.web.screens.data.postgrestable;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import com.haulmont.cuba.core.global.MetadataTools;
-import com.haulmont.cuba.gui.ScreenBuilders;
-import com.haulmont.cuba.gui.UiComponents;
+import com.haulmont.cuba.gui.*;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
+import java.util.Set;
 
 @UiController("simiData_PostgresTable.browse")
 @UiDescriptor("postgres-table-browse.xml")
 @LookupComponent("postgresTablesTable")
 @LoadDataBeforeShow
 public class PostgresTableBrowse extends StandardLookup<PostgresTable> {
+
     @Inject
     private ScreenBuilders screenBuilders;
     @Inject
@@ -27,6 +28,10 @@ public class PostgresTableBrowse extends StandardLookup<PostgresTable> {
     private UiComponents uiComponents;
     @Inject
     private CollectionLoader<PostgresTable> postgresTablesDl;
+    @Inject
+    private Notifications notifications;
+    @Inject
+    private RemoveOperation removeOperation;
 
     @Subscribe("postgresTablesTable.createTableView")
     public void onPostgresTablesTableCreateTableView(Action.ActionPerformedEvent event) {
@@ -71,5 +76,32 @@ public class PostgresTableBrowse extends StandardLookup<PostgresTable> {
             .editEntity(tableView)
             .build()
             .show();
+    }
+
+    @Subscribe("postgresTablesTable.remove")
+    public void onPostgresTablesTableRemove(Action.ActionPerformedEvent event) {
+
+        boolean canDelete = true;
+
+        Set<PostgresTable> tables = postgresTablesTable.getSelected();
+
+        for(PostgresTable tbl : tables){
+            if(tbl.getTableViews().size() > 0){
+                canDelete = false;
+                break;
+            }
+        }
+
+        if(!canDelete){
+            notifications.create(Notifications.NotificationType.TRAY)
+                    .withCaption("Löschen nicht möglich")
+                    .withDescription("Bitte zuerst die verknüpften Dataset-Views entfernen")
+                    .show();
+        }
+        else{
+            removeOperation.builder(postgresTablesTable)
+                    .withConfirmation(false)
+                    .remove();
+        }
     }
 }

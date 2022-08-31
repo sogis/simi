@@ -38,8 +38,7 @@
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove">
                     <properties>
-                        <property name="confirmationTitle" value="Löschen bestätigen"/>
-                        <property name="confirmationMessage" value="Alle zugehörigen TableViews werden ebenfalls gelöscht. Sind Sie sicher, dass sie die ausgewählten Postgres Tabellen löschen möchten?"/>
+                        <property name="confirmation" value="false"/>
                     </properties>
                 </action>
             </actions>
