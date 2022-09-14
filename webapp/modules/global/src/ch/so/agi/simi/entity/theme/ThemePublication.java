@@ -45,7 +45,7 @@ public class ThemePublication extends SimiEntity {
 
     @NotNull
     @Column(name = "COVERAGE_IDENT", nullable = false, length = 100)
-    private String coverageIdent = "ktso";
+    private String coverageIdent = "av_kt";
 
     @Composition
     @OneToMany(mappedBy = "themePublication")

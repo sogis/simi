@@ -564,7 +564,8 @@ create table SIMITHEME_PUBLISHED_SUB_AREA (
     --
     PUBLISHED timestamp not null,
     PREV_PUBLISHED timestamp not null,
-    SUB_AREA_ID uuid not null,
+    SUB_AREA_ID uuid,
+    SUB_AREA_IDENT varchar(100),
     THEME_PUBLICATION_ID uuid not null,
     --
     primary key (ID)

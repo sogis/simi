@@ -26,17 +26,27 @@ public class PublishedSubArea extends SimiEntity {
     @Column(name = "PREV_PUBLISHED", nullable = false)
     private LocalDateTime prevPublished;
 
-    @NotNull
     @OnDeleteInverse(DeletePolicy.CASCADE)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SUB_AREA_ID")
     private SubArea subArea;
+
+    @Column(name = "SUB_AREA_IDENT", length = 100)
+    private String subAreaIdent;
 
     @NotNull
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "THEME_PUBLICATION_ID")
     private ThemePublication themePublication;
+
+    public String getSubAreaIdent() {
+        return subAreaIdent;
+    }
+
+    public void setSubAreaIdent(String subAreaIdent) {
+        this.subAreaIdent = subAreaIdent;
+    }
 
     public SubArea getSubArea() {
         return subArea;

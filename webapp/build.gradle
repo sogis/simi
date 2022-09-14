@@ -197,7 +197,7 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 restart.finalizedBy start
 
 String getVersion(boolean useFullVersion){
-    String version = "2.0"
+    String version = "2.1"
 
     if(useFullVersion)
         version = version + "." + getBuildNumber()
