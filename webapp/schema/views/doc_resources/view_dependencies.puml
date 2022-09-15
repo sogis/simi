@@ -1,0 +1,26 @@
+@startuml
+
+package "Abhängigkeiten der Views" {
+
+    [trafo_wms_layer_v]
+    [trafo_wms_geotable_v]
+    [trafo_published_dp_v]
+    [trafo_wms_rootlayer_v]
+    [trafo_wms_tableview_v]
+    
+    [trafo_ressource_role_v]
+    [app_themepub_v]
+    
+    trafo_wms_rootlayer_v --> trafo_published_dp_v
+    trafo_wms_tableview_v --> trafo_published_dp_v
+    
+    trafo_wms_tableview_v --> trafo_wms_geotable_v
+
+    trafo_wms_layer_v --> trafo_wms_geotable_v
+    trafo_wms_layer_v --> trafo_published_dp_v
+    trafo_wms_layer_v --> trafo_wms_tableview_v
+    
+    app_themepub_v --> trafo_ressource_role_v
+}
+
+@enduml
