@@ -5,11 +5,14 @@ import com.haulmont.cuba.core.entity.BaseUuidEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Table(name = "SIMITHEME_SUB_AREA")
+@Table(name = "SIMITHEME_SUB_AREA", indexes = {
+        @Index(name = "IDX_SIMI_SUB_AREA_UNQ", columnList = "IDENTIFIER, COVERAGE_IDENT", unique = true)
+})
 @Entity(name = SubArea.NAME)
 @NamePattern("%s|title")
 public class SubArea extends BaseUuidEntity {

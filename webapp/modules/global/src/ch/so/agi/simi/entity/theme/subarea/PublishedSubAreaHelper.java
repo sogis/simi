@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Table(name = "SIMITHEME_PUBLISHED_SUB_AREA_HELPER")
 @Entity(name = PublishedSubAreaHelper.NAME)
@@ -22,46 +21,42 @@ public class PublishedSubAreaHelper extends SimiEntity {
     private LocalDateTime published;
 
     @NotNull
-    @Column(name = "THEME_PUBLICATION_ID", nullable = false)
-    private UUID themePublicationId;
-
-    @NotNull
     @Column(name = "PREV_PUBLISHED", nullable = false)
     private LocalDateTime prevPublished;
 
     @NotNull
-    @Column(name = "SUB_AREA_IDENT", nullable = false, length = 100)
-    private String subAreaIdent;
+    @Column(name = "TPUB_DATA_CLASS", nullable = false)
+    private String tpubDataClass;
 
-    @Column(name = "THEME_PUB_DATA_CLASS_OVERRIDE", length = 50)
-    private String themePubDataClassOverride;
+    @Column(name = "TPUB_CLASS_SUFFIX_OVERRIDE", length = 50)
+    private String tpubClassSuffixOverride;
+
+    @NotNull
+    @Column(name = "SUBAREA_IDENTIFIER", nullable = false, length = 100)
+    private String subareaIdentifier;
+
+    @NotNull
+    @Column(name = "SUBAREA_COVERAGE_IDENT", nullable = false, length = 100)
+    private String subareaCoverageIdent;
 
     @NotNull
     @Column(name = "THEME_IDENTIFIER", nullable = false, length = 100)
     private String themeIdentifier;
 
-    @NotNull
-    @Column(name = "THEME_PUB_DATA_CLASS", nullable = false)
-    private String themePubDataClass;
-
-    @NotNull
-    @Column(name = "SUB_AREA_ID", nullable = false)
-    private UUID subAreaId;
-
-    public void setThemePubDataClass(ThemePublication_TypeEnum themePubDataClass) {
-        this.themePubDataClass = themePubDataClass == null ? null : themePubDataClass.getId();
+    public String getTpubClassSuffixOverride() {
+        return tpubClassSuffixOverride;
     }
 
-    public ThemePublication_TypeEnum getThemePubDataClass() {
-        return themePubDataClass == null ? null : ThemePublication_TypeEnum.fromId(themePubDataClass);
+    public void setTpubClassSuffixOverride(String tpubClassSuffixOverride) {
+        this.tpubClassSuffixOverride = tpubClassSuffixOverride;
     }
 
-    public String getThemePubDataClassOverride() {
-        return themePubDataClassOverride;
+    public ThemePublication_TypeEnum getTpubDataClass() {
+        return tpubDataClass == null ? null : ThemePublication_TypeEnum.fromId(tpubDataClass);
     }
 
-    public void setThemePubDataClassOverride(String themePubDataClassOverride) {
-        this.themePubDataClassOverride = themePubDataClassOverride;
+    public void setTpubDataClass(ThemePublication_TypeEnum tpubDataClass) {
+        this.tpubDataClass = tpubDataClass == null ? null : tpubDataClass.getId();
     }
 
     public String getThemeIdentifier() {
@@ -70,30 +65,6 @@ public class PublishedSubAreaHelper extends SimiEntity {
 
     public void setThemeIdentifier(String themeIdentifier) {
         this.themeIdentifier = themeIdentifier;
-    }
-
-    public String getSubAreaIdent() {
-        return subAreaIdent;
-    }
-
-    public void setSubAreaIdent(String subAreaIdent) {
-        this.subAreaIdent = subAreaIdent;
-    }
-
-    public UUID getSubAreaId() {
-        return subAreaId;
-    }
-
-    public void setSubAreaId(UUID subAreaId) {
-        this.subAreaId = subAreaId;
-    }
-
-    public UUID getThemePublicationId() {
-        return themePublicationId;
-    }
-
-    public void setThemePublicationId(UUID themePublicationId) {
-        this.themePublicationId = themePublicationId;
     }
 
     public LocalDateTime getPrevPublished() {
@@ -110,5 +81,21 @@ public class PublishedSubAreaHelper extends SimiEntity {
 
     public void setPublished(LocalDateTime published) {
         this.published = published;
+    }
+
+    public String getSubareaIdentifier() {
+        return subareaIdentifier;
+    }
+
+    public void setSubareaIdentifier(String subareaIdentifier) {
+        this.subareaIdentifier = subareaIdentifier;
+    }
+
+    public String getSubareaCoverageIdent() {
+        return subareaCoverageIdent;
+    }
+
+    public void setSubareaCoverageIdent(String subareaCoverageIdent) {
+        this.subareaCoverageIdent = subareaCoverageIdent;
     }
 }

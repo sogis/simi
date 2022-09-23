@@ -16,7 +16,9 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Table(name = "SIMITHEME_THEME_PUBLICATION")
+@Table(name = "SIMITHEME_THEME_PUBLICATION", indexes = {
+        @Index(name = "IDX_SIMI_THEME_PUBLICATION_UNQ", columnList = "THEME_ID, DATA_CLASS, CLASS_SUFFIX_OVERRIDE", unique = true)
+})
 @Entity(name = ThemePublication.NAME)
 @NamePattern("#deferFullIdent|classSuffixOverride,dataClass,theme")
 public class ThemePublication extends SimiEntity {

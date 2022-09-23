@@ -588,13 +588,12 @@ create table SIMITHEME_PUBLISHED_SUB_AREA_HELPER (
     VERSION integer not null,
     --
     PUBLISHED timestamp not null,
-    THEME_PUBLICATION_ID uuid not null,
     PREV_PUBLISHED timestamp not null,
-    SUB_AREA_IDENT varchar(100) not null,
-    THEME_PUB_DATA_CLASS_OVERRIDE varchar(50),
+    TPUB_DATA_CLASS varchar(50) not null,
+    TPUB_CLASS_SUFFIX_OVERRIDE varchar(50),
+    SUBAREA_IDENTIFIER varchar(100) not null,
+    SUBAREA_COVERAGE_IDENT varchar(100) not null,
     THEME_IDENTIFIER varchar(100) not null,
-    THEME_PUB_DATA_CLASS varchar(50) not null,
-    SUB_AREA_ID uuid not null,
     --
     primary key (ID)
 )^
