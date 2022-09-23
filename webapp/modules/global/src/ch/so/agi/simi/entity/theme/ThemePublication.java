@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "SIMITHEME_THEME_PUBLICATION", indexes = {
-        @Index(name = "IDX_SIMI_THEME_PUBLICATION_UNQ", columnList = "THEME_ID, DATA_CLASS, CLASS_SUFFIX_OVERRIDE", unique = true)
+        @Index(name = "IDX_SIMI_THEME_PUBLICATION_UNQ", columnList = "THEME_ID, CLASS_SUFFIX_OVERRIDE", unique = true)
 })
 @Entity(name = ThemePublication.NAME)
 @NamePattern("#deferFullIdent|classSuffixOverride,dataClass,theme")
@@ -57,7 +57,8 @@ public class ThemePublication extends SimiEntity {
     @Column(name = "DATA_CLASS", nullable = false)
     private String dataClass;
 
-    @Column(name = "CLASS_SUFFIX_OVERRIDE", length = 50)
+    @Column(name = "CLASS_SUFFIX_OVERRIDE", nullable = false, length = 50)
+    @NotNull
     private String classSuffixOverride;
 
     @Column(name = "TITLE_OVERRIDE", length = 200)
