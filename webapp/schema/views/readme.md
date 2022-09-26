@@ -33,6 +33,7 @@ psql -d simi -h host -U user -W \
   -f solr/solr_layer_background_v.sql \
   -f solr/solr_layer_foreground_v.sql \
 \
+  -f app/app_themepub_validation_v.sql \
   -f app/app_themepub_v.sql \
 \
   -f trafo/grant_trafo_views.sql \
