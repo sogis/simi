@@ -1,4 +1,4 @@
-package ch.so.agi.simi.web.screens.theme;
+package ch.so.agi.simi.web.screens.theme.theme;
 
 import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.theme.Theme;

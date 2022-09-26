@@ -57,8 +57,7 @@ public class ThemePublication extends SimiEntity {
     @Column(name = "DATA_CLASS", nullable = false)
     private String dataClass;
 
-    @Column(name = "CLASS_SUFFIX_OVERRIDE", nullable = false, length = 50)
-    @NotNull
+    @Column(name = "CLASS_SUFFIX_OVERRIDE", length = 50)
     private String classSuffixOverride;
 
     @Column(name = "TITLE_OVERRIDE", length = 200)
@@ -152,7 +151,7 @@ public class ThemePublication extends SimiEntity {
     public String deferFullIdent(){
         String res = theme.getIdentifier();
 
-        String suffix = deferSuffix();
+        String suffix = classSuffixOverride;
         if(suffix != null)
             res += "." + suffix;
 

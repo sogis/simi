@@ -31,7 +31,7 @@
                 </action>
             </actions>
             <columns>
-                <column id="name"/>
+                <column id="name" sort="ASCENDING"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

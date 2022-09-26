@@ -30,4 +30,13 @@ public enum ThemePublication_TypeEnum implements EnumClass<String> {
         }
         return null;
     }
+
+    public String getDefaultSuffix(){
+        String res = "";
+
+        if("tableRelational".equals(id))
+            res = "relational";
+
+        return res;
+    }
 }

@@ -1,11 +1,10 @@
-package ch.so.agi.simi.web.screens.theme;
+package ch.so.agi.simi.web.screens.theme.theme;
 
-import ch.so.agi.simi.global.validation.JsonArrayUtil;
-import com.haulmont.cuba.gui.screen.*;
 import ch.so.agi.simi.entity.theme.Theme;
-
+import ch.so.agi.simi.global.validation.JsonArrayUtil;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.TextArea;
+import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
 

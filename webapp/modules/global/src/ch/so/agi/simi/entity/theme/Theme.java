@@ -17,7 +17,7 @@ import java.util.List;
 
 @Table(name = "SIMITHEME_THEME")
 @Entity(name = Theme.NAME)
-@NamePattern("%s|identifier")
+@NamePattern("%s (%s)|identifier,title")
 public class Theme extends SimiEntity {
     public static final String NAME = "simiTheme_Theme";
 

@@ -337,7 +337,6 @@
     </view>
     <view entity="simiTheme_Theme" name="theme-edit" extends="_local">
         <property name="dataOwner" view="_minimal"/>
-        <property name="themePublications" view="_minimal"/>
     </view>
     <view entity="simiTheme_ThemePublication" name="theme-edit-themePubs" extends="_local">
         <property name="theme" view="_minimal"/>
@@ -365,5 +364,11 @@
         <property name="identifier"/>
         <property name="updated"/>
         <property name="coverageIdent"/>
+    </view>
+    <view entity="simiTheme_ThemePublication" name="themePublication-browse" extends="_minimal">
+        <property name="theme" view="_minimal">
+            <property name="title"/>
+        </property>
+        <property name="titleOverride"/>
     </view>
 </views>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="mainMsg://themePublication.caption.browse"
+        focusComponent="themePublicationsTable">
+    <data readOnly="true">
+        <collection id="themePublicationsDc"
+                    class="ch.so.agi.simi.entity.theme.ThemePublication"
+                    view="themePublication-browse">
+            <loader id="themePublicationsDl">
+                <query>
+                    <![CDATA[select e from simiTheme_ThemePublication e]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>lower(e.theme.identifier) like :term</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="themePublicationsTable"
+            spacing="true">
+        <table id="themePublicationsTable"
+               width="100%"
+               dataContainer="themePublicationsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="derivedIdent" sort="ASCENDING"/>
+                <column id="titleOverride"/>
+                <column id="theme.title"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="themePublicationsTable.create"/>
+                <button id="editBtn" action="themePublicationsTable.edit" stylename="friendly"/>
+                <button id="removeBtn" action="themePublicationsTable.remove" stylename="danger"/>
+            </buttonsPanel>
+        </table>
+        <fragment id="filter" screen="simi_FilterFragment">
+            <properties>
+                <property name="dataLoader" ref="themePublicationsDl"/>
+                <property name="inputPrompt" value="Filtern nach Kennung (ohne Bereitstellungs-Suffix)"/>
+            </properties>
+        </fragment>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

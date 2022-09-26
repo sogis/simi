@@ -43,7 +43,7 @@
                 </action>
             </actions>
             <columns>
-                <column id="identifier"/>
+                <column id="identifier" sort="ASCENDING"/>
                 <column id="title"/>
             </columns>
             <rowsCount/>
