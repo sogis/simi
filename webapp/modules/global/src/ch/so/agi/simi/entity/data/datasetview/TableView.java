@@ -45,6 +45,11 @@ public class TableView extends DataSetView {
     @Column(name = "SEARCH_FILTER_WORD", length = 100)
     private String searchFilterWord;
 
+    @Override
+    protected String typeAbbreviation(){
+        return "View (Table)";
+    }
+
     public String getRowFilterViewName() {
         return rowFilterViewName;
     }

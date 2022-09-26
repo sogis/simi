@@ -24,6 +24,11 @@ public class RasterView extends DataSetView {
     @OnDeleteInverse(DeletePolicy.DENY)
     private RasterDS rasterDS;
 
+    @Override
+    protected String typeAbbreviation(){
+        return "View (Raster)";
+    }
+
     public RasterDS getRasterDS() {
         return rasterDS;
     }

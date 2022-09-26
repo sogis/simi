@@ -14,23 +14,38 @@ bglayer_overrides AS ( -- Uebersteuerung der Eigenschaften der Background-Layer
     AS t (bg_ident, bg_facet)
 ),
 
+dp_props AS (
+  SELECT 
+    COALESCE(dp.title, t.title, dp.derived_identifier) AS title,
+    COALESCE(dp.description, t.description_override, t.description_model) AS description,
+    dp.id AS dp_id
+  FROM
+    simi.simiproduct_data_product dp
+  LEFT JOIN
+    simi.simidata_table_view tv ON dp.id = tv.id 
+  LEFT JOIN 
+    simi.simidata_postgres_table t ON tv.postgres_table_id = t.id
+),
+
 dp_base AS ( -- Umfasst alle für solr notwendigen Informationen eines DataProducts
   SELECT 
     derived_identifier AS identifier,    
-    COALESCE(title, derived_identifier) as title,
+    props.title as title,
     CASE dp.dtype
       WHEN 'simiProduct_LayerGroup' THEN 'layergroup'
       ELSE 'singleactor'
     END AS dp_typ,    
     COALESCE(bg.bg_facet, 'foreground') AS facet,
-    (description IS NOT NULL) AS dprod_has_info, -- Metainformationen vorhanden?
-    description,
+    (props.description IS NOT NULL) AS dprod_has_info, -- Metainformationen vorhanden?
+    props.description,
     keywords,
     synonyms,
     dp.id AS dp_id,
     dp.pub_scope_id 
   FROM 
     simi.simiproduct_data_product dp 
+  JOIN
+    dp_props props ON dp.id = props.dp_id
   LEFT JOIN
     simi.simiproduct_map m ON dp.id = m.id
   LEFT JOIN 

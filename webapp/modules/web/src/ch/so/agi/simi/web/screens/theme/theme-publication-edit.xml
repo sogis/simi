@@ -83,7 +83,7 @@
                         </actions>
                         <columns>
                             <column id="name"/>
-                            <column id="mimeType"/>
+                            <column id="kuerzel"/>
                         </columns>
                         <buttonsPanel>
                             <button action="customFileTypesTable.add" stylename="primary"/>

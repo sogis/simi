@@ -23,6 +23,8 @@ tv_attribute AS (
     simi.simidata_view_field vf
   JOIN 
     simi.simidata_table_field tf ON vf.table_field_id = tf.id 
+  WHERE
+    vf.wgc_exposed IS TRUE 
 ),
 
 tv_attributes AS (

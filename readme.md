@@ -1,5 +1,3 @@
-# Maintenance Branch für Versionen 1.x
-
 # Repo Inhalt
 
 Das Repo umfasst die folgenden Teile (in Unterordnern):
@@ -10,6 +8,8 @@ Templates für den Betrieb in OpenShift sind unter
 https://github.com/sogis/openshift-templates/tree/master/simi
 und https://github.com/sogis/openshift-templates/tree/master/simi-schemareader.
 
-# Version
+# Branching
 
-Das ist der Leading-Branch (head) für alle SIMI 2.x Versionen
+Neue Versionen werden auf dem Master-Branch entwickelt und zur Release-Reife gebracht.
+
+Nach der Version benannte Maintentance-Branches existieren temporär in "Zeitfenstern", in welchen eine neu auf dem Master entstehende Version noch nicht produktiv ist. Beispiel für Maintenance-Branch: v2.0.x

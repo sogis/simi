@@ -9,7 +9,7 @@ import java.util.List;
 
 @Table(name = "SIMITHEME_FILE_TYPE")
 @Entity(name = CustomFileType.NAME)
-@NamePattern("%s|name")
+@NamePattern("%s (%s)|name,kuerzel")
 public class CustomFileType extends SimiEntity {
     public static final String NAME = "simiTheme_CustomFileType";
 

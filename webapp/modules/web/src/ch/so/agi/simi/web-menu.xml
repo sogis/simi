@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <item screen="simiTheme_Theme.browse" id="simiTheme_Theme.browse2" caption="mainMsg://theme.caption.browse"/>
     <item screen="simiProduct_DataProduct.browse" id="product_browse" caption="mainMsg://dataproduct.caption.browse"/>
     <item screen="simiData_PostgresTable.browse" id="table_browse" caption="mainMsg://postgrestable.caption.browse"/>
     <menu id="grp_data" caption="Daten-Konfiguration ...">

@@ -66,8 +66,6 @@ public class DataSetView extends SingleActor {
     @Composition
     private List<Permission> permissions;
 
-
-
     public Boolean getIsFileDownloadDSV() {
         return isFileDownloadDSV;
     }
@@ -82,11 +80,6 @@ public class DataSetView extends SingleActor {
 
     public void setRelations(List<Relation> relations) {
         this.relations = relations;
-    }
-
-    @Override
-    protected String typeAbbreviation(){
-        return "View";
     }
 
     public List<StyleAsset> getStyleAssets() {

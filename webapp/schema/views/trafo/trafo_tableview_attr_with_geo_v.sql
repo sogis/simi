@@ -34,6 +34,8 @@ tableview_nongeo_attr AS (
     simi.simidata_view_field vf 
   JOIN
     simi.simidata_table_field tf on vf.table_field_id = tf.id 
+  WHERE 
+    vf.wgc_exposed IS TRUE 
 ),
     
 tableview_geo_attr as ( 

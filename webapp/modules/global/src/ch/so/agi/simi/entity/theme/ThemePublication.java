@@ -179,13 +179,11 @@ public class ThemePublication extends SimiEntity {
                 suffix = "relational";
                 break;
             case TABLE_SIMPLE:
-                suffix = null;
                 break;
             case NON_TABULAR:
-                suffix = classSuffixOverride;
                 break;
             default:
-                suffix = "error";
+                suffix = "err:suffix_not_set";
                 break;
         }
 

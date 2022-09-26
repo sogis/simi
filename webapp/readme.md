@@ -97,6 +97,4 @@ Beschreibung der Inhalte der Unterordner von /webapp sowie des Custom-Codes sieh
 
 ## Benutzer-Dokumentation
 
-Diese ist im Dok-Repo zuhause: [Benutzer-Dokumentation](https://github.com/sogis/dok/blob/dok/dok_div_anleitungen/Documents/simi/simi_anleitung.md)
-
-
+Diese ist im Dok-Repo zuhause: [Benutzer-Dokumentation](https://github.com/sogis/dok/blob/dok/dok_div_anleitungen/Documents/simi/simi_anleitung.md).

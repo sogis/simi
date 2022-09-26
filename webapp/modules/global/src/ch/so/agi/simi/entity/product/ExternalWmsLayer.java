@@ -31,17 +31,17 @@ public class ExternalWmsLayer extends SingleActor {
     @JoinColumn(name = "SERVICE_ID")
     private ExternalWmsService service;
 
+    @Override
+    protected String typeAbbreviation(){
+        return "Ext. WMS-Layer";
+    }
+
     public ExternalWmsLayer_FiFormat getFeatureInfoFormat() {
         return featureInfoFormat == null ? null : ExternalWmsLayer_FiFormat.fromId(featureInfoFormat);
     }
 
     public void setFeatureInfoFormat(ExternalWmsLayer_FiFormat featureInfoFormat) {
         this.featureInfoFormat = featureInfoFormat == null ? null : featureInfoFormat.getId();
-    }
-
-    @Override
-    protected String typeAbbreviation(){
-        return "Ext. WMS-Layers";
     }
 
     public ExternalWmsService getService() {

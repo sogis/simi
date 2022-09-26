@@ -10,21 +10,33 @@ CREATE VIEW simi.trafo_published_dp_v AS
  */
 WITH 
 
-dp_published AS ( -- Alle Dataproducts, welche nicht zum löschen markiert sind
+dp_title_ident AS (
   SELECT 
     derived_identifier AS identifier,
-    COALESCE(title, derived_identifier) as title_ident,
+    COALESCE(dp.title, t.title, dp.derived_identifier) AS title_ident,
+    dp.pub_scope_id,
+    dp.id AS dp_id
+  FROM
+    simi.simiproduct_data_product dp
+  LEFT JOIN
+    simi.simidata_table_view tv ON dp.id = tv.id 
+  LEFT JOIN 
+    simi.simidata_postgres_table t ON tv.postgres_table_id = t.id
+),
+
+dp_published AS ( -- Alle Dataproducts, welche nicht zum Löschen markiert sind
+  SELECT 
+    identifier,
+    title_ident,
     ps.display_text AS state_text,
     pub_to_wms,
-    dp.id AS dp_id
+    dp_id
   FROM 
-    simi.simiproduct_data_product dp 
+    dp_title_ident dp 
   JOIN  
     simi.simiproduct_data_product_pub_scope ps on dp.pub_scope_id = ps.id 
   WHERE
     ps.id != '55bdf0dd-d997-c537-f95b-7e641dc515df' --zu löschende
-/*    AND 
-      identifier LIKE 'test.%'*/
 ),
 
 wms_published_map AS ( -- Background-Map-Kinder sind Teil des WMS, unabhängig vom pub_to_wms flag
