@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="Validierung Themen-Bereitstellung"
+        focusComponent="form">
+    <data>
+        <instance id="themePubValidationDc"
+                  class="ch.so.agi.simi.entity.theme.dbview.ThemePubValidation"
+                  view="themePubValidation-edit">
+            <loader id="themePubValidationDl"/>
+        </instance>
+    </data>
+    <dialogMode height="95%"
+                width="80%"
+                modal="true"
+                forceDialog="true"
+                resizable="true"/>
+    <layout expand="jsonScroll" spacing="true">
+        <form id="form" dataContainer="themePubValidationDc">
+            <column width="450px">
+                <textField id="identifierField" property="identifier"/>
+                <textField id="titleField" property="title"/>
+                <textField id="publicModelNameField" property="publicModelName"/>
+                <textArea id="shortDescriptionField" property="shortDescription" rows="4" rowspan="3"/>
+            </column>
+            <column width="450px">
+                <textArea id="dataOwnerField" property="dataOwner" rows="4" rowspan="3"/>
+                <textArea id="dataServicerField" property="dataServicer" rows="4" rowspan="3"/>
+            </column>
+        </form>
+        <tabSheet id="jsonScroll" >
+            <tab id="tab1"
+                 caption="Tabellen"
+                 margin="true"
+                 spacing="true" expand="tablesJsonField" >
+                <textArea id="tablesJsonField" property="tablesJson" dataContainer="themePubValidationDc" width="100%"/>
+            </tab>
+            <tab id="tab2"
+                 caption="Dienste"
+                 margin="true"
+                 spacing="true" expand="servicesField">
+                <textArea id="servicesField" property="services" dataContainer="themePubValidationDc" width="100%"/>
+            </tab>
+            <tab id="tab3"
+                 caption="Dateitypen"
+                 margin="true"
+                 spacing="true" expand="fileFormatsField">
+                <textArea id="fileFormatsField" property="fileFormats" dataContainer="themePubValidationDc" width="100%"/>
+            </tab>
+            <tab id="tab4"
+                 caption="URL, Keys, Synos"
+                 margin="true"
+                 spacing="true" expand="synonymsField">
+                <textField id="furtherInfoField" property="furtherInfo" dataContainer="themePubValidationDc" width="100%"/>
+                <textArea id="keywordsField" property="keywords" dataContainer="themePubValidationDc" width="100%" rows="3"/>
+                <textArea id="synonymsField" property="synonyms" dataContainer="themePubValidationDc" width="100%"/>
+            </tab>
+        </tabSheet>
+        <hbox id="editActions" spacing="true">
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

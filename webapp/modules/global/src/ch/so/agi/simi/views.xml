@@ -371,4 +371,5 @@
         </property>
         <property name="titleOverride"/>
     </view>
+    <view entity="simiTheme_ThemePubValidation" name="themePubValidation-edit" extends="_local"/>
 </views>

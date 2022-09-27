@@ -41,6 +41,8 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="themePublicationsTable.create"/>
                 <button id="editBtn" action="themePublicationsTable.edit" stylename="friendly"/>
+                <button id="viewBtn" stylename="friendly" icon="font-icon:EYE" caption="Validierung"/>
+                <label id="spacer" width="50" value=" "/>
                 <button id="removeBtn" action="themePublicationsTable.remove" stylename="danger"/>
             </buttonsPanel>
         </table>

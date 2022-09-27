@@ -18,8 +18,6 @@
         <item screen="simiTheme_CustomFileType.browse" caption="mainMsg://customFileType.caption.browse"/>
         <item screen="simiTheme_SubArea.browse" caption="mainMsg://subArea.caption.browse"/>
         <item screen="simiTheme_Theme.browse" caption="mainMsg://theme.caption.browse"/>
-        <item screen="simiTheme_ThemePubValidation.browse"
-              caption="mainMsg://menu_config.simiTheme_ThemePubValidation.browse"/>
     </menu>
     <menu id="grp_iam" caption="Benutzer - Verwaltung ...">
         <item screen="simiIAM_User.browse" caption="mainMsg://user.caption.browse"/>
