@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <item screen="simiTheme_ThemePublication.browse" id="themepub_browse"
-          caption="mainMsg://menu_config.simiTheme_ThemePublication.browse"/>
+          caption="mainMsg://themePublication.caption.browse"/>
     <item screen="simiProduct_DataProduct.browse" id="product_browse" caption="mainMsg://dataproduct.caption.browse"/>
     <item screen="simiData_PostgresTable.browse" id="table_browse" caption="mainMsg://postgrestable.caption.browse"/>
     <menu id="grp_data" caption="Daten-Konfiguration ...">
@@ -13,11 +13,13 @@
     </menu>
     <menu id="grp_theme" caption="Themen - Verwaltung ...">
         <item screen="simiTheme_ThemePublication.browse"
-              caption="mainMsg://menu_config.simiTheme_ThemePublication.browse"/>
+              caption="mainMsg://themePublication.caption.browse"/>
         <item screen="simiTheme_OrgUnit.browse" caption="mainMsg://orgunit.browse"/>
         <item screen="simiTheme_CustomFileType.browse" caption="mainMsg://customFileType.caption.browse"/>
         <item screen="simiTheme_SubArea.browse" caption="mainMsg://subArea.caption.browse"/>
         <item screen="simiTheme_Theme.browse" caption="mainMsg://theme.caption.browse"/>
+        <item screen="simiTheme_ThemePubValidation.browse"
+              caption="mainMsg://menu_config.simiTheme_ThemePubValidation.browse"/>
     </menu>
     <menu id="grp_iam" caption="Benutzer - Verwaltung ...">
         <item screen="simiIAM_User.browse" caption="mainMsg://user.caption.browse"/>
