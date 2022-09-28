@@ -144,10 +144,11 @@
                         <column id="wgcExposed" editable="true" width="120"/>
                         <column id="sort" editable="true" sort="ASCENDING" width="150"/>
                     </columns>
-                    <buttonsPanel>
+                    <buttonsPanel align="MIDDLE_RIGHT">
                         <button id="addViewFieldBtn" icon="ADD_ACTION" caption="Erstellen" primary="true"/>
                         <button action="viewFieldsTable.remove" stylename="danger"/>
                         <label id="spacer" width="100" value=" "/>
+                        <button id="btnRefAll" caption="Fehlende beifügen" icon="font-icon:LIST" stylename="friendly"/>
                         <button id="btnSortAction" action="viewFieldsTable.sortAction" icon="SORT" stylename="friendly"/>
                     </buttonsPanel>
                 </table>

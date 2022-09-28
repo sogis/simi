@@ -14,6 +14,7 @@ import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @UiController("simiData_TableView.edit")
@@ -57,23 +58,38 @@ public class TableViewEdit extends StandardEditor<TableView> {
         viewFieldsDc.getMutableItems().clear();
 
         loadTableFields();
-        createDefaultViewFields();
+        addMissingViewFields();
     }
 
-    private void createDefaultViewFields() {
+    @Subscribe("btnRefAll")
+    public void onBtnRefAllClick(Button.ClickEvent event) {
+        addMissingViewFields();
+    }
+
+    private void addMissingViewFields() {
+        HashSet<String> existingFields = new HashSet<>();
+        if(viewFieldsDc.getMutableItems() != null){
+            for(ViewField vf : viewFieldsDc.getMutableItems()){
+                existingFields.add(vf.getTableField().getName());
+            }
+        }
+
         List<ViewField> viewFields = new ArrayList<>();
 
         int i=10;
         for(TableField tf : tableFieldsDl.getContainer().getItems()){
 
-            ViewField f = dataContext.create(ViewField.class);
-            f.setSort(i);
-            i += 10;
-            f.setTableField(tf);
-            f.setWgcExposed(true);
-            f.setTableView(this.getEditedEntity());
+            if(!existingFields.contains(tf.getName())) {
 
-            viewFields.add(f);
+                ViewField f = dataContext.create(ViewField.class);
+                f.setSort(i);
+                i += 10;
+                f.setTableField(tf);
+                f.setWgcExposed(true);
+                f.setTableView(this.getEditedEntity());
+
+                viewFields.add(f);
+            }
         }
 
         viewFieldsDc.getMutableItems().addAll(viewFields);
