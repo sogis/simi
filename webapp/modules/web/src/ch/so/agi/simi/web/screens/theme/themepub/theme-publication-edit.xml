@@ -65,7 +65,7 @@
                 <scrollBox width="100%" height="100%">
                     <table id="pubAreasTable" dataContainer="pubAreasDc" width="100%">
                         <columns>
-                            <column id="subArea.identifier"/>
+                            <column id="subArea" caption="Kennung"/>
                             <column id="subArea.title"/>
                             <column id="published"/>
                         </columns>

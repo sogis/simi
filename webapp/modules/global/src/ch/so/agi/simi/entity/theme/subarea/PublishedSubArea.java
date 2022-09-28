@@ -20,11 +20,11 @@ public class PublishedSubArea extends SimiEntity {
 
     @NotNull
     @Column(name = "PUBLISHED", nullable = false)
-    private LocalDateTime published;
+    private LocalDateTime published = LocalDateTime.now();
 
     @NotNull
     @Column(name = "PREV_PUBLISHED", nullable = false)
-    private LocalDateTime prevPublished;
+    private LocalDateTime prevPublished = LocalDateTime.now();
 
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY)

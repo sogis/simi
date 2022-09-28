@@ -354,16 +354,15 @@
         <property name="publishedSubAreas" view="_minimal">
             <property name="published"/>
             <property name="subArea" view="_minimal">
-                <property name="identifier"/>
+                <property name="title"/>
             </property>
         </property>
     </view>
     <view entity="simiTheme_Theme" name="themePublication-edit-theme" extends="_minimal"/>
     <view entity="simiTheme_CustomFileType" name="customFileType-browse-edit" extends="_local"/>
     <view entity="simiTheme_SubArea" name="subArea-browse" extends="_minimal">
-        <property name="identifier"/>
+        <property name="title"/>
         <property name="updated"/>
-        <property name="coverageIdent"/>
     </view>
     <view entity="simiTheme_ThemePublication" name="themePublication-browse" extends="_minimal">
         <property name="theme" view="_minimal">
@@ -372,4 +371,30 @@
         <property name="titleOverride"/>
     </view>
     <view entity="simiTheme_ThemePubValidation" name="themePubValidation-edit" extends="_local"/>
+    <view entity="simiTheme_PublishedSubArea" extends="_minimal" name="publishedSubArea-browse">
+        <property name="subArea" view="_minimal">
+            <property name="identifier"/>
+            <property name="coverageIdent"/>
+        </property>
+        <property name="themePublication" view="_minimal">
+            <property name="theme">
+                <property name="identifier"/>
+                <property name="title"/>
+            </property>
+            <property name="classSuffixOverride"/>
+        </property>
+    </view>
+    <view extends="_local" name="publishedSubArea-edit" entity="simiTheme_PublishedSubArea">
+        <property name="subArea" view="_minimal">
+            <property name="identifier"/>
+            <property name="coverageIdent"/>
+        </property>
+        <property name="themePublication" view="_minimal">
+            <property name="theme">
+                <property name="identifier"/>
+                <property name="title"/>
+            </property>
+            <property name="classSuffixOverride"/>
+        </property>
+    </view>
 </views>

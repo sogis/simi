@@ -511,7 +511,7 @@ create table SIMITHEME_THEME_PUBLICATION (
     DESCRIPTION_OVERRIDE varchar(1000),
     COVERAGE_IDENT varchar(100) not null,
     DATA_CLASS varchar(50) not null,
-    CLASS_SUFFIX_OVERRIDE varchar(50) not null,
+    CLASS_SUFFIX_OVERRIDE varchar(50),
     TITLE_OVERRIDE varchar(200),
     REMARKS text,
     --

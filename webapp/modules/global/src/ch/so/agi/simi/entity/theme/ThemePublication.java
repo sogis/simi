@@ -20,7 +20,7 @@ import java.util.List;
         @Index(name = "IDX_SIMI_THEME_PUBLICATION_UNQ", columnList = "THEME_ID, CLASS_SUFFIX_OVERRIDE", unique = true)
 })
 @Entity(name = ThemePublication.NAME)
-@NamePattern("#deferFullIdent|classSuffixOverride,dataClass,theme")
+@NamePattern("#deferFullIdent|classSuffixOverride,theme")
 public class ThemePublication extends SimiEntity {
     public static final String NAME = "simiTheme_ThemePublication";
 
@@ -75,6 +75,55 @@ public class ThemePublication extends SimiEntity {
 
     @OneToMany(mappedBy = "themePublication")
     private List<PublishedSubArea> publishedSubAreas;
+
+    public String deferFullIdent(){
+        String res = theme.getIdentifier();
+
+        String suffix = classSuffixOverride;
+        if(suffix != null)
+            res += "." + suffix;
+
+        return res;
+    }
+
+    @MetaProperty
+    public String getDerivedIdent(){
+        return deferFullIdent();
+    }
+
+    private String deferSuffix(){
+        String suffix = null;
+
+        ThemePublication_TypeEnum dataClassEnum = ThemePublication_TypeEnum.fromId(dataClass);
+        if(dataClassEnum == null)
+            return null;
+
+        if(classSuffixOverride != null)
+            return classSuffixOverride;
+
+        switch (dataClassEnum){
+            case TABLE_RELATIONAL:
+                suffix = "relational";
+                break;
+            case TABLE_SIMPLE:
+                break;
+            case NON_TABULAR:
+                break;
+            default:
+                suffix = "err:suffix_not_set";
+                break;
+        }
+
+        return suffix;
+    }
+
+    public String getClassSuffixOverride() {
+        return classSuffixOverride;
+    }
+
+    public void setClassSuffixOverride(String classSuffixOverride) {
+        this.classSuffixOverride = classSuffixOverride;
+    }
 
     public String getModelUpdatedBy() {
         return modelUpdatedBy;
@@ -148,61 +197,12 @@ public class ThemePublication extends SimiEntity {
         this.dataProducts = dataProducts;
     }
 
-    public String deferFullIdent(){
-        String res = theme.getIdentifier();
-
-        String suffix = classSuffixOverride;
-        if(suffix != null)
-            res += "." + suffix;
-
-        return res;
-    }
-
-    @MetaProperty
-    public String getDerivedIdent(){
-        return deferFullIdent();
-    }
-
-    private String deferSuffix(){
-        String suffix = null;
-
-        ThemePublication_TypeEnum dataClassEnum = ThemePublication_TypeEnum.fromId(dataClass);
-        if(dataClassEnum == null)
-            return null;
-
-        if(classSuffixOverride != null)
-            return classSuffixOverride;
-
-        switch (dataClassEnum){
-            case TABLE_RELATIONAL:
-                suffix = "relational";
-                break;
-            case TABLE_SIMPLE:
-                break;
-            case NON_TABULAR:
-                break;
-            default:
-                suffix = "err:suffix_not_set";
-                break;
-        }
-
-        return suffix;
-    }
-
     public List<CustomFileType> getCustomFileTypes() {
         return customFileTypes;
     }
 
     public void setCustomFileTypes(List<CustomFileType> customFileTypes) {
         this.customFileTypes = customFileTypes;
-    }
-
-    public String getClassSuffixOverride() {
-        return classSuffixOverride;
-    }
-
-    public void setClassSuffixOverride(String classSuffixOverride) {
-        this.classSuffixOverride = classSuffixOverride;
     }
 
     public ThemePublication_TypeEnum getDataClass() {

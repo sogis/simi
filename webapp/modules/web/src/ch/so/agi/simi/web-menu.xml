@@ -14,10 +14,13 @@
     <menu id="grp_theme" caption="Themen - Verwaltung ...">
         <item screen="simiTheme_ThemePublication.browse"
               caption="mainMsg://themePublication.caption.browse"/>
+        <item screen="simiTheme_Theme.browse" caption="mainMsg://theme.caption.browse"/>
         <item screen="simiTheme_OrgUnit.browse" caption="mainMsg://orgunit.browse"/>
+        <item id="theme_spacer" caption="--------" screen="simiTheme_OrgUnit.browse" />
         <item screen="simiTheme_CustomFileType.browse" caption="mainMsg://customFileType.caption.browse"/>
         <item screen="simiTheme_SubArea.browse" caption="mainMsg://subArea.caption.browse"/>
-        <item screen="simiTheme_Theme.browse" caption="mainMsg://theme.caption.browse"/>
+        <item screen="simiTheme_PublishedSubArea.browse"
+              caption="mainMsg://publishedSubArea.caption.browse"/>
     </menu>
     <menu id="grp_iam" caption="Benutzer - Verwaltung ...">
         <item screen="simiIAM_User.browse" caption="mainMsg://user.caption.browse"/>

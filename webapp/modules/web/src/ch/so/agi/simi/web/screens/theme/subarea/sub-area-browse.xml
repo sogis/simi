@@ -40,6 +40,7 @@
                 <column id="coverageIdent"/>
                 <column id="identifier"/>
                 <column id="title"/>
+                <column id="updated"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

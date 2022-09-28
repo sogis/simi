@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
         @Index(name = "IDX_SIMI_SUB_AREA_UNQ", columnList = "IDENTIFIER, COVERAGE_IDENT", unique = true)
 })
 @Entity(name = SubArea.NAME)
-@NamePattern("%s|title")
+@NamePattern("%s (%s)|identifier,coverageIdent")
 public class SubArea extends BaseUuidEntity {
     private static final long serialVersionUID = -2392977370805280401L;
 
