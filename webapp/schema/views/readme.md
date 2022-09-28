@@ -11,10 +11,10 @@ Das folgende Diagramm dokumentiert die Abhängigkeiten der Views untereinander.
 
 Bei jedem Ausführen der automatischen Migrationsskripte, weil die Abhängigkeiten vom Framework mit "cascade" gelöscht werden.
 
-Den folgenden Befehlt verwenden, um alle Views wieder herzustellen (Nach git repo pull):
+Den folgenden Befehlt verwenden, um alle Views wieder herzustellen (Nach git repo pull, Host -h und Benutzer -W entsprechend setzen):
 
 ```bash
-psql -d simi -h host -U user -W \
+psql -d simi -h localhost -U postgres -W \
   --single-transaction \
 \
   -f trafo/drop_trafo_views.sql \

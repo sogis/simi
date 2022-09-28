@@ -296,24 +296,11 @@ public_dp_ids AS (
     tp_id
 )
 
-
 -- Identifier, Name, Descr ********************************************************************
-
-,identsuffix_map AS (
-  SELECT 
-    * 
-  FROM (
-    VALUES 
-      ('tableSimple', NULL),
-      ('tableRelational', 'relational'),
-      ('nonTabular', '!NoDefaultAvailable')
-  ) 
-  AS t (data_class, default_suffix)
-)
 
 ,tp_ident_title_desc AS (
   SELECT 
-    concat_ws('.', th.identifier, coalesce(class_suffix_override, default_suffix)) AS identifier,
+    concat_ws('.', th.identifier, class_suffix_override) AS identifier,
     COALESCE(tp.title_override, th.title) AS title,
     COALESCE(tp.description_override, th.description) AS short_description,
     further_info_url AS further_info,
@@ -322,8 +309,6 @@ public_dp_ids AS (
     simi.simitheme_theme_publication tp
   JOIN
     simi.simitheme_theme th ON tp.theme_id = th.id 
-  JOIN
-    identsuffix_map suff ON tp.data_class = suff.data_class
 )
 
 -- Services *********************************************************************************
