@@ -52,8 +52,9 @@
                 <scrollBox width="100%" height="100%">
                     <table id="dataProductsTable" dataContainer="dataProductsDc" width="100%">
                         <columns>
-                            <column id="derivedIdentifier"/>
+                            <column id="derivedIdentifier" sort="ASCENDING"/>
                             <column id="title"/>
+                            <column id="themeOnlyForOrg"/>
                         </columns>
                     </table>
                 </scrollBox>

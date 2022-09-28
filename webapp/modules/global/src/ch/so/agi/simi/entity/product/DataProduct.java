@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 @Table(name = "SIMIPRODUCT_DATA_PRODUCT")
 @Entity(name = DataProduct.NAME)
-@NamePattern("#concatName|title")
+@NamePattern("#concatName|title,derivedIdentifier")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class DataProduct extends SimiEntity {
@@ -67,6 +67,56 @@ public class DataProduct extends SimiEntity {
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
+
+    public String concatName(){
+        return this.derivedIdentifier + " | " + this.title + " | " +  typeAbbreviation() ;
+    }
+
+    protected String typeAbbreviation(){
+        return " WARNING: override missing.";
+    }
+
+    @MetaProperty
+    public String getEntityName() { // For use in Tables, can be referenced as entityName
+        return concatName();
+    }
+
+    @MetaProperty
+    public String getTypeAbbreviation() { // For use in Tables, can be referenced as typeAbbreviation
+        return typeAbbreviation();
+    }
+
+    public String deriveIdentifier(ThemePublication tp){
+        String res = null;
+
+        if(identIsPartial)
+            res = tp.deferFullIdent() + "." + identPart;
+        else
+            res = identPart;
+
+        return res;
+    }
+
+    public void updateDerivedIdentifier(DataManager manager){
+        ThemePublication pub = manager.load(ThemePublication.class).
+                view("dProd-before-persist").
+                id(this.getThemePublication().getId())
+                .one();
+
+        String derived = null;
+
+        if(identIsPartial){
+            if(identPart != null)
+                derived = pub.deferFullIdent() + "." + identPart;
+            else
+                derived = pub.deferFullIdent();
+        }
+        else {
+            derived = identPart;
+        }
+
+        this.setDerivedIdentifier(derived);
+    }
 
     public String getSynonyms() {
         return synonyms;
@@ -124,24 +174,6 @@ public class DataProduct extends SimiEntity {
         this.themePublication = themePublication;
     }
 
-    protected String typeAbbreviation(){
-        return " WARNING: override missing.";
-    }
-
-    public String concatName(){
-        return this.derivedIdentifier + " | " + this.title + " | " +  typeAbbreviation() ;
-    }
-
-    @MetaProperty
-    public String getEntityName() { // For use in Tables, can be referenced as entityName
-        return concatName();
-    }
-
-    @MetaProperty
-    public String getTypeAbbreviation() { // For use in Tables, can be referenced as typeAbbreviation
-        return typeAbbreviation();
-    }
-
     public String getDescription() {
         return description;
     }
@@ -172,37 +204,5 @@ public class DataProduct extends SimiEntity {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
-    }
-
-    public String deriveIdentifier(ThemePublication tp){
-        String res = null;
-
-        if(identIsPartial)
-            res = tp.deferFullIdent() + "." + identPart;
-        else
-            res = identPart;
-
-        return res;
-    }
-
-    public void updateDerivedIdentifier(DataManager manager){
-        ThemePublication pub = manager.load(ThemePublication.class).
-                view("dProd-before-persist").
-                id(this.getThemePublication().getId())
-                .one();
-
-        String derived = null;
-
-        if(identIsPartial){
-            if(identPart != null)
-                derived = pub.deferFullIdent() + "." + identPart;
-            else
-                derived = pub.deferFullIdent();
-        }
-        else {
-            derived = identPart;
-        }
-
-        this.setDerivedIdentifier(derived);
     }
 }

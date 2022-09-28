@@ -349,6 +349,7 @@
         </property>
         <property name="customFileTypes" view="_minimal"/>
         <property name="dataProducts" view="_minimal">
+            <property name="themeOnlyForOrg"/>
             <property name="derivedIdentifier"/>
         </property>
         <property name="publishedSubAreas" view="_minimal">
