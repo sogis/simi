@@ -77,7 +77,10 @@ public class ThemePublication extends SimiEntity {
     private List<PublishedSubArea> publishedSubAreas;
 
     public String deferFullIdent(){
-        String res = theme.getIdentifier();
+        String res = "";
+
+        if(theme != null)
+            res = theme.getIdentifier();
 
         String suffix = classSuffixOverride;
         if(suffix != null)
