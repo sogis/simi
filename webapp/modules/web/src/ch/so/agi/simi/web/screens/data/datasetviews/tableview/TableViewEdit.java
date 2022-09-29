@@ -58,15 +58,15 @@ public class TableViewEdit extends StandardEditor<TableView> {
         viewFieldsDc.getMutableItems().clear();
 
         loadTableFields();
-        addMissingViewFields();
+        addMissingViewFields(0);
     }
 
     @Subscribe("btnRefAll")
     public void onBtnRefAllClick(Button.ClickEvent event) {
-        addMissingViewFields();
+        addMissingViewFields(500);
     }
 
-    private void addMissingViewFields() {
+    private void addMissingViewFields(int startSortIndex) {
         HashSet<String> existingFields = new HashSet<>();
         if(viewFieldsDc.getMutableItems() != null){
             for(ViewField vf : viewFieldsDc.getMutableItems()){
@@ -76,7 +76,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
         List<ViewField> viewFields = new ArrayList<>();
 
-        int i=10;
+        int i=startSortIndex;
         for(TableField tf : tableFieldsDl.getContainer().getItems()){
 
             if(!existingFields.contains(tf.getName())) {
@@ -85,7 +85,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
                 f.setSort(i);
                 i += 10;
                 f.setTableField(tf);
-                f.setWgcExposed(true);
+                f.setWgcExposed(false);
                 f.setTableView(this.getEditedEntity());
 
                 viewFields.add(f);
