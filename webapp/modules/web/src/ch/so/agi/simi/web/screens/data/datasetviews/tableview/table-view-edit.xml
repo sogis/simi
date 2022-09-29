@@ -51,7 +51,7 @@
             </loader>
         </collection>
     </data>
-    <dialogMode height="80%"
+    <dialogMode height="95%"
                 width="80%"
                 modal="true"
                 forceDialog="true"
