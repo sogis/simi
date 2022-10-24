@@ -141,7 +141,7 @@ area_geom_simplified AS (
     services,
     tp.tp_id
   FROM
-    simi.app_themepub_validation_v tp
+    simi.app_themepub_base_v tp
   JOIN
     tp_pub_dates dates ON tp.tp_id = dates.tp_id
   JOIN
