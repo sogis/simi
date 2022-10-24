@@ -165,7 +165,10 @@ public class ThemeReaderBean {
     }
 
     private static String buildAliasFromName(String fieldName){
+
         String alias = fieldName.replace("_", " ");
+
+        alias = deferGermanUmlaut(alias);
 
         String firstChar = fieldName.substring(0,1);
         alias = alias.replaceFirst(
@@ -174,6 +177,21 @@ public class ThemeReaderBean {
         );
 
         return alias;
+    }
+
+    /**
+     * Replaces ae, oe, ue with the corresponding german "Umlaut".
+     * @param fieldName Input string
+     * @return Deferred output string with replaced "Umlauts".
+     */
+    private static String deferGermanUmlaut(String fieldName){
+        String res = fieldName;
+
+        res = res.replaceAll("([u][e])", "ü");
+        res = res.replaceAll("([a][e])", "ä");
+        res = res.replaceAll("([o][e])", "ö");
+
+        return res;
     }
 
     private static String[] readTableNames(SchemaReader reader, DbSchema theme) {
