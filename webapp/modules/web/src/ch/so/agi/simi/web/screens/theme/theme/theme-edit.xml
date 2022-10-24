@@ -36,13 +36,13 @@
             </column>
             <column width="350px">
                 <textArea id="remarksField" property="remarks" rows="7" rowspan="5"/>
-                <textArea id="keywordsField" property="keywordsArr" rows="2" rowspan="1"/>
-                <hbox>
-                    <button id="keywords2JsonBtn" caption="Als Json-Array formatieren" stylename="friendly"/>
-                </hbox>
                 <textArea id="synonymsField" property="synonymsArr" rows="2" rowspan="1"/>
                 <hbox>
                     <button id="synonyms2JsonBtn" caption="Als Json-Array formatieren" stylename="friendly"/>
+                </hbox>
+                <textArea id="keywordsField" property="keywordsArr" rows="2" rowspan="1"/>
+                <hbox>
+                    <button id="keywords2JsonBtn" caption="Als Json-Array formatieren" stylename="friendly"/>
                 </hbox>
             </column>
         </form>

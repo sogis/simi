@@ -47,12 +47,15 @@
                 <textArea id="fileFormatsField" property="fileFormats" dataContainer="themePubValidationDc" width="100%"/>
             </tab>
             <tab id="tab4"
-                 caption="URL, Keys, Synos"
+                 caption="URL, Syno, Stich"
                  margin="true"
-                 spacing="true" expand="synonymsField">
+                 spacing="true" expand="keywordsField">
+                <label value="URL"/>
                 <textField id="furtherInfoField" property="furtherInfo" dataContainer="themePubValidationDc" width="100%"/>
-                <textArea id="keywordsField" property="keywords" dataContainer="themePubValidationDc" width="100%" rows="3"/>
-                <textArea id="synonymsField" property="synonyms" dataContainer="themePubValidationDc" width="100%"/>
+                <label value="Synonyme"/>
+                <textArea id="synonymsField" property="synonyms" dataContainer="themePubValidationDc" width="100%" rows="3"/>
+                <label value="Stichworte"/>
+                <textArea id="keywordsField" property="keywords" dataContainer="themePubValidationDc" width="100%"/>
             </tab>
         </tabSheet>
         <hbox id="editActions" spacing="true">
