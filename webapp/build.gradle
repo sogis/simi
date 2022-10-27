@@ -39,6 +39,7 @@ cuba {
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
     appComponent('com.haulmont.addon.helium:helium-global:0.4.0')
+    appComponent('com.haulmont.addon.restapi:restapi-global:7.2.4')
 }
 
 def postgres = 'org.postgresql:postgresql:42.2.9'
@@ -53,7 +54,8 @@ configure([globalModule, coreModule, webModule]) {
         testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
         testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
 
-        compile('com.fasterxml.jackson.core:jackson-databind:2.11.2')
+        compile('com.fasterxml.jackson.core:jackson-databind:2.13.4.2')
+        compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4')
     }
 
     task sourceJar(type: Jar) {

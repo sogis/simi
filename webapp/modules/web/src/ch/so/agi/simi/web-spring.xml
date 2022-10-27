@@ -16,6 +16,8 @@
                 <entry key="simi_PropertiesCheckerService"
                        value="ch.so.agi.simi.core.props.PropertiesCheckerService"/>
                 <entry key="simi_MorphProductService" value="ch.so.agi.simi.core.morph.MorphProductService"/>
+                <entry key="simi_UpdatePublishTimeService"
+                       value="ch.so.agi.simi.core.service.pub.UpdatePublishTimeService"/>
             </map>
         </property>
     </bean>

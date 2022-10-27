@@ -19,6 +19,7 @@ public class SubArea extends BaseUuidEntity {
     private static final long serialVersionUID = -2392977370805280401L;
 
     public static final String NAME = "simiTheme_SubArea";
+    public static final String KTSO_DEFAULT_IDENTIFIER = "SO";
 
     @NotNull
     @Column(name = "IDENTIFIER", nullable = false, length = 100)

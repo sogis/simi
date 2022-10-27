@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security">
+
+    <!-- Define a base package for your controllers-->
+    <context:component-scan base-package="ch.so.agi.simi.web.api"/>
+
+    <security:http pattern="/rest/simi/themepub/doc/**" security="none" />
+    <security:http pattern="/rest/simi/themepub/pubsignal/**" security="none" />
+
+</beans>
