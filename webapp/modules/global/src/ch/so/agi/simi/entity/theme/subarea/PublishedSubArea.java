@@ -11,7 +11,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Table(name = "SIMITHEME_PUBLISHED_SUB_AREA", indexes = {
-        @Index(name = "IDX_SIMI_PUBLISHED_SUB_AREA_UNQ", columnList = "SUB_AREA_ID, THEME_PUBLICATION_ID", unique = true)
+        @Index(name = "IDX_SIMI_PUBLISHED_SUB_AREA_1", columnList = "SUB_AREA_ID, THEME_PUBLICATION_ID"),
+        @Index(name = "IDX_SIMI_PUBLISHED_SUB_AREA", columnList = "SUB_AREA_ID, SUB_AREA_IDENT")
 })
 @Entity(name = PublishedSubArea.NAME)
 public class PublishedSubArea extends SimiEntity {

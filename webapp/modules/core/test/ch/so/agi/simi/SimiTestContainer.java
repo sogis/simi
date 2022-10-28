@@ -26,7 +26,9 @@ public class SimiTestContainer extends TestContainer {
         autoConfigureDataSource();
     }
 
-    
+    static {
+        System.setProperty("logback.configurationFile", "simi-test-logback.xml");
+    }
 
     public static class Common extends SimiTestContainer {
 

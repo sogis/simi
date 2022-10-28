@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.MessageFormat;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PubNotificationTest {
@@ -67,7 +69,7 @@ class PubNotificationTest {
     }
 
     @Test
-    void parse_SunnyJson_OK() {
+    void parse_SunnyBasketJson_OK() {
         String rawJson = "{" +
                     "'dataIdent': 'ch.so.afu.gewaesserschutz'," +
                     "'published': '2021-12-23T14:54:49.050062'," +
@@ -75,6 +77,32 @@ class PubNotificationTest {
                         "'model': 'SO_AGI_MOpublic_20201009'," +
                         "'topic': 'Bodenbedeckung'," +
                         "'basket': 'oltenBID'" +
+                    "}]" +
+                "}";
+        String sunnyJson = rawJson.replaceAll("\'", "\"");
+
+        PubNotification.parseFromJson(sunnyJson);
+    }
+
+    @Test
+    void parse_SunnyRegionJson_OK() {
+        String rawJson = "{" +
+                    "'dataIdent': 'ch.so.afu.gewaesserschutz'," +
+                    "'published': '2021-12-23T14:54:49.050062'," +
+                    "'publishedRegions': [{" +
+                        "'region': 'olten'," +
+                            "'publishedBaskets': [{" +
+                            "'model': 'SO_AGI_MOpublic_20201009'," +
+                            "'topic': 'Bodenbedeckung'," +
+                            "'basket': 'oltenBID'" +
+                        "}]" +
+                        "}, {" +
+                        "'region': 'wangen'," +
+                            "'publishedBaskets': [{" +
+                            "'model': 'SO_AGI_MOpublic_20201009'," +
+                            "'topic': 'Bodenbedeckung'," +
+                            "'basket': 'wangenBID'" +
+                        "}]" +
                     "}]" +
                 "}";
         String sunnyJson = rawJson.replaceAll("\'", "\"");

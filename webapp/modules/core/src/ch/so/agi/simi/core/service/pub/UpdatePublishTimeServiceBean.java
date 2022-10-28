@@ -9,6 +9,7 @@ import ch.so.agi.simi.entity.theme.subarea.SubArea;
 import ch.so.agi.simi.global.exc.CodedException;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
+import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,11 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
     @Inject
     private DataManager dataManager;
 
-    public void update(String jsonMessage) throws CodedException {
+    public Pair<Integer, Integer> update(String jsonMessage) throws CodedException {
         if (jsonMessage == null || jsonMessage.length() == 0)
             throw new CodedException(400, UpdatePublishTimeService.ERR_MSGBODY_EMPTY);
+
+        Pair<Integer, Integer> res = null;
 
         PubNotification request = PubNotification.parseFromJson(jsonMessage);
 
@@ -42,10 +45,12 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
         Map<String, PublishedSubArea> mapOfExistingPubSubs = loadExistingIntoKeyValMap(themePub, requestedSubAreaIdents);
 
-        execDbInsertsAndUpdates(themePub, requestedSubAreaIdents, mapOfExistingPubSubs, request.getPublished());
+        res = execDbInsertsAndUpdates(themePub, requestedSubAreaIdents, mapOfExistingPubSubs, request.getPublished());
+
+        return res;
     }
 
-    private void execDbInsertsAndUpdates(
+    private Pair<Integer, Integer> execDbInsertsAndUpdates(
             ThemePublication themePub,
             List<String> requestedSubAreaIdents,
             Map<String, PublishedSubArea> mapOfExistingPubSubs,
@@ -55,6 +60,9 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
         
         Map<String, SubArea> themePub_AllSubAreas = loadSubAreasIntoMap(themePub.getCoverageIdent());
 
+        int updateCount = 0;
+        int insertCount = 0;
+
         for(String requestedSubArea : requestedSubAreaIdents){
             if(mapOfExistingPubSubs.containsKey(requestedSubArea)){ //sql updates
                 PublishedSubArea existing = mapOfExistingPubSubs.get(requestedSubArea);
@@ -63,19 +71,27 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
                 existing.setPublished(published);
                 
                 context.addInstanceToCommit(existing);
+                updateCount++;
             }
             else{ // sql inserts
                 PublishedSubArea newPSub = new PublishedSubArea();
                 newPSub.setPublished(published);
                 newPSub.setPrevPublished(published);
                 newPSub.setThemePublication(themePub);
-                newPSub.setSubArea(themePub_AllSubAreas.get(requestedSubArea));
+
+                SubArea sub = themePub_AllSubAreas.get(requestedSubArea);
+                if(sub == null) // FK auf Subarea ist wegen Master Edit-DB nullable, muss aber gesetzt werden
+                    throw new CodedException(500, UpdatePublishTimeService.ERR_SUBAREA_UNKNOWN, MessageFormat.format("Requested subarea {0} not found.", requestedSubArea));
+
+                newPSub.setSubArea(sub);
 
                 context.addInstanceToCommit(newPSub);
+                insertCount++;
             }
         }
 
         dataManager.commit(context);
+        return Pair.of(insertCount, updateCount);
     }
 
     private Map<String, SubArea> loadSubAreasIntoMap(String coverageIdent) {
@@ -115,9 +131,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
             log.debug("Found theme with identifier {} (same as themepub identifier)", themePubIdentifier);
         }
         else{ // query with omitted suffix
-            List<String> identParts = Arrays.asList(themePubIdentifier.split("."));
-            identParts.remove(identParts.size()-1);
-            String themeIdent = String.join(".", identParts);
+            String themeIdent = splitOnLastDot(themePubIdentifier, true);
 
             Optional<Theme> themeWithShortenedIdentifier = dataManager.load(Theme.class)
                     .query(query)
@@ -139,37 +153,38 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
         ThemePublication res = null;
 
-        if(themePubIdentifier.equals(parent.getIdentifier())){
-            String query = MessageFormat.format("select e from {0} e where e.theme = :theme", ThemePublication.NAME);
+        String themePubSuffix = null;
+        if(!themePubIdentifier.equals(parent.getIdentifier()))
+            themePubSuffix = splitOnLastDot(themePubIdentifier, false);
 
-            Optional<ThemePublication> resWithThemeIdent = dataManager.load(ThemePublication.class)
-                    .query(query)
-                    .parameter("theme", parent)
-                    .optional();
+        String query = MessageFormat.format("select e from {0} e where e.theme = :theme and e.classSuffixOverride = :identSuffix", ThemePublication.NAME);
+        Optional<ThemePublication> resWithSuffix = dataManager.load(ThemePublication.class)
+                .query(query)
+                .parameter("theme", parent)
+                .parameter("identSuffix", themePubSuffix)
+                .optional();
 
-            log.debug("Load with parent {} and no suffix yielded {}", parent.getIdentifier(), resWithThemeIdent.orElse(null));
+        log.debug("Load with parent {} and suffix {} yielded {}", parent.getIdentifier(), themePubSuffix, resWithSuffix.orElse(null));
 
-            res = resWithThemeIdent.orElse(null);
-        }
-        else{
-            String identSuffix = null;
+        res = resWithSuffix.orElse(null);
 
-            String query = MessageFormat.format("select e from {0} e where e.theme = :theme and e.classSuffixOverride = :identSuffix", ThemePublication.NAME);
-
-            Optional<ThemePublication> resWithSuffix = dataManager.load(ThemePublication.class)
-                    .query(query)
-                    .parameter("theme", parent)
-                    .parameter("identSuffix", identSuffix)
-                    .optional();
-
-            log.debug("Load with parent {} and suffix {} yielded {}", parent.getIdentifier(), identSuffix, resWithSuffix.orElse(null));
-
-            res = resWithSuffix.orElse(null);
-        }
-
-        if(res == null)
+        if(res == null) {
             throw new CodedException(404, UpdatePublishTimeService.ERR_THEMEPUB_UNKNOWN,
                     MessageFormat.format("Could not find themepublication {0} in db", themePubIdentifier));
+        }
+
+        return res;
+    }
+
+    private static String splitOnLastDot(String wholeIdentifier, boolean returnLeftPart){
+        String res = null;
+
+        int dotIndex = wholeIdentifier.lastIndexOf(".");
+
+        if(returnLeftPart)
+            res = wholeIdentifier.substring(0, dotIndex);
+        else
+            res = wholeIdentifier.substring(dotIndex+1, wholeIdentifier.length());
 
         return res;
     }
@@ -192,8 +207,8 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
         String rawQuery = "select e from {0} e " +
                 "where e.themePublication = :themePublication " +
-                "and e.subArea.coverageIdent = :coverageIdent" +
-                "and e.subArea.identifier in (:subAreaIdentifiers)";
+                "and e.subArea.coverageIdent = :coverageIdent " +
+                "and e.subArea.identifier in :subAreaIdentifiers";
 
         String query = MessageFormat.format(rawQuery, PublishedSubArea.NAME);
 
@@ -202,6 +217,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
                 .parameter("themePublication", themePub)
                 .parameter("coverageIdent", themePub.getCoverageIdent())
                 .parameter("subAreaIdentifiers", subAreaIdents)
+                .view("publishedSubArea-pubService")
                 .list();
 
         return existing;
