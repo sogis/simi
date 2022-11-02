@@ -23,8 +23,8 @@ public interface UpdatePublishTimeService {
      * The method signature is intentional "stupid" to cover json-parsing, error handling, ...
      * with cuba framework integration tests.
      * @param jsonMessage The payload of the PUT-Request (Json).
-     * @return Tuple insert(left):update(right) giving the db insert and update count of the operation.
+     * @return Result of the Publication.
      * @throws CodedException Contains http status code and message to be returned to the rest service client.
      */
-    Pair<Integer, Integer> update(String jsonMessage) throws CodedException;
+    PublishResult update(String jsonMessage) throws CodedException;
 }

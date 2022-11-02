@@ -18,6 +18,7 @@
                 <entry key="simi_MorphProductService" value="ch.so.agi.simi.core.morph.MorphProductService"/>
                 <entry key="simi_UpdatePublishTimeService"
                        value="ch.so.agi.simi.core.service.pub.UpdatePublishTimeService"/>
+                <entry key="simi_GetThemePubDocService" value="ch.so.agi.simi.core.service.pub.GenerateThemePubDocService"/>
             </map>
         </property>
     </bean>

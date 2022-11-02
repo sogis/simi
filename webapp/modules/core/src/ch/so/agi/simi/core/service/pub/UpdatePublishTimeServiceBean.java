@@ -30,11 +30,11 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
     @Inject
     private DataManager dataManager;
 
-    public Pair<Integer, Integer> update(String jsonMessage) throws CodedException {
+    public PublishResult update(String jsonMessage) throws CodedException {
         if (jsonMessage == null || jsonMessage.length() == 0)
             throw new CodedException(400, UpdatePublishTimeService.ERR_MSGBODY_EMPTY);
 
-        Pair<Integer, Integer> res = null;
+        PublishResult res = null;
 
         PubNotification request = PubNotification.parseFromJson(jsonMessage);
 
@@ -45,7 +45,8 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
         Map<String, PublishedSubArea> mapOfExistingPubSubs = loadExistingIntoKeyValMap(themePub, requestedSubAreaIdents);
 
-        res = execDbInsertsAndUpdates(themePub, requestedSubAreaIdents, mapOfExistingPubSubs, request.getPublished());
+        Pair<Integer, Integer> updates = execDbInsertsAndUpdates(themePub, requestedSubAreaIdents, mapOfExistingPubSubs, request.getPublished());
+        res = new PublishResult(request.getDataIdent(), updates.getLeft(), updates.getRight());
 
         return res;
     }

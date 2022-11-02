@@ -56,6 +56,7 @@ configure([globalModule, coreModule, webModule]) {
 
         compile('com.fasterxml.jackson.core:jackson-databind:2.13.4.2')
         compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4')
+        compile('io.github.sogis:meta2file:1.0.67')
     }
 
     task sourceJar(type: Jar) {

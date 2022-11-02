@@ -29,6 +29,11 @@ public class SimiProperty implements Comparable, Serializable {
         SimiProperty.add("cuba.web.requirePasswordForNewUsers", true, CubaModule.WEB);
         SimiProperty.add("cuba.web.standardAuthenticationUsers", false, CubaModule.WEB);
 
+        SimiProperty.add("cuba.rest.client.id", true, CubaModule.WEB);
+        SimiProperty.add("cuba.rest.client.secret", false, CubaModule.WEB, false);
+
+
+
         /* Bis auf Weiteres nur einfaches url open hardcodiert
         SimiProperty.add("simi.publishJob.baseUrl", true, CubaModule.WEB);
         SimiProperty.add("simi.publishJob.pollTimeout", true, CubaModule.WEB);

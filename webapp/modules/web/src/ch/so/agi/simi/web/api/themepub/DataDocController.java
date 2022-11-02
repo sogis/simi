@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import java.text.MessageFormat;
 
 @RestController
-@RequestMapping("/simi/themepub/doc")
+@RequestMapping("doc")
 public class DataDocController {
 
     private static Logger log = LoggerFactory.getLogger(DataDocController.class);

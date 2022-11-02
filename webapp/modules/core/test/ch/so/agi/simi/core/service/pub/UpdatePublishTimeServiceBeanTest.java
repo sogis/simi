@@ -122,9 +122,9 @@ class UpdatePublishTimeServiceBeanTest {
         assertInsertUpdate(0,2, serviceBean.update(json));
     }
 
-    private static void assertInsertUpdate(int insCount, int updateCount, Pair<Integer, Integer> methodResult){
-        Assertions.assertEquals(insCount, methodResult.getLeft(), "Test must yield 1 insert");
-        Assertions.assertEquals(updateCount, methodResult.getRight(), "Test must yield 0 updates");
+    private static void assertInsertUpdate(int insCount, int updateCount, PublishResult res){
+        Assertions.assertEquals(insCount, res.getDbInsertCount(), "Test must yield 1 insert");
+        Assertions.assertEquals(updateCount, res.getDbUpdateCount(), "Test must yield 0 updates");
     }
 
     private static String buildTestJson(String testIdent, int regionCount, LocalDateTime published){
