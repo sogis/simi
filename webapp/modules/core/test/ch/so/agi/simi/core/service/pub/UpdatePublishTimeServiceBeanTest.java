@@ -15,7 +15,6 @@ import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.RemoteException;
 import com.haulmont.cuba.testsupport.TestContainer;
-import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.Logger;
@@ -65,7 +64,7 @@ class UpdatePublishTimeServiceBeanTest {
 
         String json = buildTestJson(testIdent, 0, null);
 
-        assertMatchingException(json, UpdatePublishTimeService.ERR_SUBAREA_UNKNOWN);
+        assertMatchingException(json, CodedException.ERR_SUBAREA_UNKNOWN);
     }
 
     @Test
@@ -79,7 +78,7 @@ class UpdatePublishTimeServiceBeanTest {
 
         String json = buildTestJson(testIdent, 0, null);
 
-        assertMatchingException(json, UpdatePublishTimeService.ERR_THEMEPUB_UNKNOWN);
+        assertMatchingException(json, CodedException.ERR_THEMEPUB_UNKNOWN);
     }
 
     private static void assertMatchingException(String jsonMessage, String exceptionMessage){

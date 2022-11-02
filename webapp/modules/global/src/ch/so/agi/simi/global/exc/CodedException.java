@@ -7,6 +7,12 @@ import java.util.Optional;
 @SupportedByClient
 public class CodedException extends RuntimeException {
 
+    public static final String ERR_MSGBODY_EMPTY =  "Message body is empty"; //400
+    public static final String ERR_MSGBODY_INVALID =  "Message body json is invalid or incomplete"; //400
+    public static final String ERR_THEMEPUB_UNKNOWN = "ThemePublication reference is not known"; //404
+    public static final String ERR_SUBAREA_UNKNOWN = "SubArea (region) reference is not known";  //404
+    public static final String ERR_SERVER = "Processing of the reqest failed";  //500
+
     private int errorCode = Integer.MIN_VALUE;
     private String detailMessage;
     private String innerExceptionMessage;

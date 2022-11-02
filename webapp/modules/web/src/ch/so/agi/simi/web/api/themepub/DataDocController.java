@@ -1,15 +1,14 @@
 package ch.so.agi.simi.web.api.themepub;
 
+import ch.so.agi.simi.core.service.pub.GenerateThemePubDocService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.constraints.NotEmpty;
-import java.text.MessageFormat;
 
 @RestController
 @RequestMapping("doc")
@@ -17,38 +16,29 @@ public class DataDocController {
 
     private static Logger log = LoggerFactory.getLogger(DataDocController.class);
 
+    @Inject
+    private GenerateThemePubDocService coreService;
+
     @GetMapping()
     public ResponseEntity<String> get(@NotEmpty @RequestParam String dataident) {
 
-        //OffsetDateTime odt = OffsetDateTime.parse( published );
+        ResponseEntity res = null;
 
-        String template = "<!DOCTYPE html>\n" +
-                "<html lang=\"de\">\n" +
-                "  <head>\n" +
-                "    <meta charset=\"utf-8\">\n" +
-                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "    <title>Datadoc</title>\n" +
-                "  </head>\n" +
-                "  <body>\n" +
-                "    <h1>Datadoc von {0}</h1>\n" +
-                "    <p>Freue mich auf den Publisher :)</p>\n" +
-                "  </body>\n" +
-                "</html>";
+        try{
+            String generatedDoc = coreService.generateDoc(dataident);
 
-        String body = MessageFormat.format(template, dataident);
+            res = ResponseEntity.ok()
+                    .contentType(MediaType.TEXT_HTML)
+                    .body(generatedDoc)
+            ;
 
-        HttpHeaders heads = new HttpHeaders();
-        heads.setContentType(MediaType.TEXT_HTML);
+            log.info("Returned doc for identifier: {}", dataident);
+        }
+        catch(Exception e){
+            res = ExcConverter.toResponse(e);
+        }
 
-        /*
-        List<Charset> charsets = new ArrayList<>(2);
-        charsets.add(Charset.forName("UTF-8"));
-        heads.setAcceptCharset(charsets);
-         */
-
-        log.info("Returned doc for {}", dataident);
-
-        return new ResponseEntity<String>(body, heads, HttpStatus.OK);
+        return res;
     }
 }
 

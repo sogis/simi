@@ -6,7 +6,20 @@
     <!-- Define a base package for your controllers-->
     <context:component-scan base-package="ch.so.agi.simi.web.api"/>
 
-    <security:http pattern="/rest/doc/**" security="none" />
+    <!--<security:http pattern="/rest/doc/**" security="none" />-->
+
+    <security:http pattern="/rest/doc/**"
+                   create-session="stateless"
+                   entry-point-ref="oauthAuthenticationEntryPoint"
+                   xmlns="http://www.springframework.org/schema/security">
+        <!-- Specify one or more protected URL patterns-->
+        <intercept-url pattern="/rest/doc/**" access="isAuthenticated()"/>
+        <anonymous enabled="false"/>
+        <csrf disabled="true"/>
+        <cors configuration-source-ref="cuba_RestCorsSource"/>
+        <custom-filter ref="resourceFilter" before="PRE_AUTH_FILTER"/>
+        <custom-filter ref="cuba_AnonymousAuthenticationFilter" after="PRE_AUTH_FILTER"/>
+    </security:http>
 
     <security:http pattern="/rest/pubsignal/**"
                    create-session="stateless"

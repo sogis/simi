@@ -2,7 +2,6 @@ package ch.so.agi.simi.core.service.pub;
 
 import ch.so.agi.simi.core.service.pub.request.PubNotification;
 import ch.so.agi.simi.core.service.pub.request.Region;
-import ch.so.agi.simi.entity.theme.Theme;
 import ch.so.agi.simi.entity.theme.ThemePublication;
 import ch.so.agi.simi.entity.theme.subarea.PublishedSubArea;
 import ch.so.agi.simi.entity.theme.subarea.SubArea;
@@ -32,7 +31,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
     public PublishResult update(String jsonMessage) throws CodedException {
         if (jsonMessage == null || jsonMessage.length() == 0)
-            throw new CodedException(400, UpdatePublishTimeService.ERR_MSGBODY_EMPTY);
+            throw new CodedException(400, CodedException.ERR_MSGBODY_EMPTY);
 
         PublishResult res = null;
 
@@ -40,8 +39,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
         List<String> requestedSubAreaIdents = deferSubAreasFromRequest(request);
 
-        Theme theme = loadTheme(request.getDataIdent());
-        ThemePublication themePub = loadThemePub(request.getDataIdent(), theme);
+        ThemePublication themePub = new ThemePubLoader(dataManager).byIdentifier(request.getDataIdent());
 
         Map<String, PublishedSubArea> mapOfExistingPubSubs = loadExistingIntoKeyValMap(themePub, requestedSubAreaIdents);
 
@@ -82,7 +80,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
                 SubArea sub = themePub_AllSubAreas.get(requestedSubArea);
                 if(sub == null) // FK auf Subarea ist wegen Master Edit-DB nullable, muss aber gesetzt werden
-                    throw new CodedException(500, UpdatePublishTimeService.ERR_SUBAREA_UNKNOWN, MessageFormat.format("Requested subarea {0} not found.", requestedSubArea));
+                    throw new CodedException(500, CodedException.ERR_SUBAREA_UNKNOWN, MessageFormat.format("Requested subarea {0} not found.", requestedSubArea));
 
                 newPSub.setSubArea(sub);
 
@@ -114,80 +112,6 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
             return List.of(SubArea.KTSO_DEFAULT_IDENTIFIER);
 
         return request.getPublishedRegions().stream().map(Region::getRegion).collect(Collectors.toList());
-    }
-
-
-    private Theme loadTheme(String themePubIdentifier){
-        Theme res = null;
-
-        String query = MessageFormat.format("select e from {0} e where e.identifier = :identifier", Theme.NAME);
-
-        Optional<Theme> themeWithThemePubIdentifier = dataManager.load(Theme.class)
-                .query(query)
-                .parameter("identifier", themePubIdentifier)
-                .optional();
-
-        if(themeWithThemePubIdentifier.isPresent()){
-            res = themeWithThemePubIdentifier.get();
-            log.debug("Found theme with identifier {} (same as themepub identifier)", themePubIdentifier);
-        }
-        else{ // query with omitted suffix
-            String themeIdent = splitOnLastDot(themePubIdentifier, true);
-
-            Optional<Theme> themeWithShortenedIdentifier = dataManager.load(Theme.class)
-                    .query(query)
-                    .parameter("identifier", themeIdent)
-                    .optional();
-
-            log.debug("Query with shortened identifier {} yielded {}", themeIdent, themeWithShortenedIdentifier.orElse(null));
-
-            res = themeWithShortenedIdentifier.orElse(null);
-        }
-
-        if(res == null)
-            throw new CodedException(402, UpdatePublishTimeService.ERR_THEMEPUB_UNKNOWN, "Could not find theme for given themepub identifier");
-
-        return res;
-    }
-
-    private ThemePublication loadThemePub(String themePubIdentifier, Theme parent){
-
-        ThemePublication res = null;
-
-        String themePubSuffix = null;
-        if(!themePubIdentifier.equals(parent.getIdentifier()))
-            themePubSuffix = splitOnLastDot(themePubIdentifier, false);
-
-        String query = MessageFormat.format("select e from {0} e where e.theme = :theme and e.classSuffixOverride = :identSuffix", ThemePublication.NAME);
-        Optional<ThemePublication> resWithSuffix = dataManager.load(ThemePublication.class)
-                .query(query)
-                .parameter("theme", parent)
-                .parameter("identSuffix", themePubSuffix)
-                .optional();
-
-        log.debug("Load with parent {} and suffix {} yielded {}", parent.getIdentifier(), themePubSuffix, resWithSuffix.orElse(null));
-
-        res = resWithSuffix.orElse(null);
-
-        if(res == null) {
-            throw new CodedException(404, UpdatePublishTimeService.ERR_THEMEPUB_UNKNOWN,
-                    MessageFormat.format("Could not find themepublication {0} in db", themePubIdentifier));
-        }
-
-        return res;
-    }
-
-    private static String splitOnLastDot(String wholeIdentifier, boolean returnLeftPart){
-        String res = null;
-
-        int dotIndex = wholeIdentifier.lastIndexOf(".");
-
-        if(returnLeftPart)
-            res = wholeIdentifier.substring(0, dotIndex);
-        else
-            res = wholeIdentifier.substring(dotIndex+1, wholeIdentifier.length());
-
-        return res;
     }
 
     private Map<String, PublishedSubArea> loadExistingIntoKeyValMap(ThemePublication themePub, List<String> requestedRegionIdents){

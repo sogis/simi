@@ -1,13 +1,10 @@
 package ch.so.agi.simi.core.service.pub.request;
 
-import ch.so.agi.simi.core.service.pub.UpdatePublishTimeService;
 import ch.so.agi.simi.global.exc.CodedException;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+//import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -16,8 +13,6 @@ import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,7 +38,7 @@ public class PubNotification {
 
     static{
         mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
+        //mapper.registerModule(new JavaTimeModule());
 
         valFact = Validation.buildDefaultValidatorFactory();
     }
@@ -52,7 +47,7 @@ public class PubNotification {
         PubNotification res = null;
 
         if(json == null || json.isEmpty())
-            throw new CodedException(400, UpdatePublishTimeService.ERR_MSGBODY_EMPTY);
+            throw new CodedException(400, CodedException.ERR_MSGBODY_EMPTY);
 
         try {
             res = mapper.readValue(json, PubNotification.class);
@@ -62,13 +57,13 @@ public class PubNotification {
             throw e;
         }
         catch(JsonParseException pe){
-            throw new CodedException(400, UpdatePublishTimeService.ERR_MSGBODY_INVALID, null, pe);
+            throw new CodedException(400, CodedException.ERR_MSGBODY_INVALID, null, pe);
         }
         catch(JsonProcessingException pe){
-            throw new CodedException(400, UpdatePublishTimeService.ERR_MSGBODY_INVALID, null, pe);
+            throw new CodedException(400, CodedException.ERR_MSGBODY_INVALID, null, pe);
         }
         catch (Exception e){
-            throw new CodedException(500, UpdatePublishTimeService.ERR_SERVER, e.getMessage());
+            throw new CodedException(500, CodedException.ERR_SERVER, e.getMessage());
         }
 
         return res;
@@ -88,7 +83,7 @@ public class PubNotification {
 
         if(violations.size() > 0){
             String innerMessages = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(" | "));
-            throw new CodedException(400, UpdatePublishTimeService.ERR_MSGBODY_INVALID, " Validation error(s): " + innerMessages);
+            throw new CodedException(400, CodedException.ERR_MSGBODY_INVALID, " Validation error(s): " + innerMessages);
         }
     }
 

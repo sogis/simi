@@ -54,9 +54,13 @@ configure([globalModule, coreModule, webModule]) {
         testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
         testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
 
-        compile('com.fasterxml.jackson.core:jackson-databind:2.13.4.2')
-        compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4')
-        compile('io.github.sogis:meta2file:1.0.67')
+        compile('com.fasterxml.jackson.core:jackson-databind:2.11.2')
+
+        //compile('com.fasterxml.jackson.core:jackson-databind:2.13.4.2')
+
+
+        //compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4')
+        //compile('io.github.sogis:meta2file:1.0.67')
     }
 
     task sourceJar(type: Jar) {
@@ -127,7 +131,6 @@ configure(webModule) {
         compileOnly(servletApi)
         compile(globalModule)
 
-        // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
     }
 

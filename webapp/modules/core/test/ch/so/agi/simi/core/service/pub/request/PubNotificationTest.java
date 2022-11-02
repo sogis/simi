@@ -1,20 +1,10 @@
 package ch.so.agi.simi.core.service.pub.request;
 
-import ch.so.agi.simi.core.service.pub.UpdatePublishTimeService;
 import ch.so.agi.simi.global.exc.CodedException;
-import ch.so.agi.simi.global.exc.SimiException;
-import com.haulmont.cuba.core.global.RemoteException;
-import org.aspectj.apache.bcel.classfile.Code;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.text.MessageFormat;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PubNotificationTest {
 
@@ -22,17 +12,17 @@ class PubNotificationTest {
 
     @Test
     void parse_Null_Throws() {
-        assertMatchingException(null, UpdatePublishTimeService.ERR_MSGBODY_EMPTY);
+        assertMatchingException(null, CodedException.ERR_MSGBODY_EMPTY);
     }
 
     @Test
     void parse_EmptyString_Throws() {
-        assertMatchingException("", UpdatePublishTimeService.ERR_MSGBODY_EMPTY);
+        assertMatchingException("", CodedException.ERR_MSGBODY_EMPTY);
     }
 
     @Test
     void parse_NonParseableJson_Throws() {
-        assertMatchingException("{]", UpdatePublishTimeService.ERR_MSGBODY_INVALID);
+        assertMatchingException("{]", CodedException.ERR_MSGBODY_INVALID);
     }
 
     @Test
@@ -48,7 +38,7 @@ class PubNotificationTest {
 
         String jsonMissingTimeStamp = rawJson.replaceAll("\'", "\"");
 
-        assertMatchingException(jsonMissingTimeStamp, UpdatePublishTimeService.ERR_MSGBODY_INVALID);
+        assertMatchingException(jsonMissingTimeStamp, CodedException.ERR_MSGBODY_INVALID);
     }
 
     @Test
@@ -65,7 +55,7 @@ class PubNotificationTest {
 
         String jsonWrongFieldType = rawJson.replaceAll("\'", "\"");
 
-        assertMatchingException(jsonWrongFieldType, UpdatePublishTimeService.ERR_MSGBODY_INVALID);
+        assertMatchingException(jsonWrongFieldType, CodedException.ERR_MSGBODY_INVALID);
     }
 
     @Test
@@ -119,7 +109,7 @@ class PubNotificationTest {
 
         String jsonMissingBasketAndRegion = rawJson.replaceAll("\'", "\"");
 
-        assertMatchingException(jsonMissingBasketAndRegion, UpdatePublishTimeService.ERR_MSGBODY_INVALID);
+        assertMatchingException(jsonMissingBasketAndRegion, CodedException.ERR_MSGBODY_INVALID);
     }
 
     private static void assertMatchingException(String jsonMessage, String exceptionMessage){
