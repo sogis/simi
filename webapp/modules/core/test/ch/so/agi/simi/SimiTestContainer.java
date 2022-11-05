@@ -8,12 +8,17 @@ import java.util.Arrays;
 
 public class SimiTestContainer extends TestContainer {
 
+    static {
+        System.setProperty("logback.configurationFile", "simi-test-logback.xml");
+    }
+
     public SimiTestContainer() {
         super();
         //noinspection ArraysAsListWithZeroOrOneArgument
         appComponents = Arrays.asList(
                 "com.haulmont.cuba",
-                "com.haulmont.addon.helium");
+                "com.haulmont.addon.helium",
+                "com.haulmont.addon.restapi");
         appPropertiesFiles = Arrays.asList(
                 // List the files defined in your web.xml
                 // in appPropertiesConfig context parameter of the core module
@@ -24,8 +29,6 @@ public class SimiTestContainer extends TestContainer {
                 "ch/so/agi/simi/test-app.properties");
         autoConfigureDataSource();
     }
-
-    
 
     public static class Common extends SimiTestContainer {
 

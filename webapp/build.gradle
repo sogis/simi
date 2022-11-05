@@ -1,3 +1,10 @@
+/*
+Vorgehen:
+- OK Rest Add-On
+- OK /pubsignal code
+- OK /pubsignal test code
+- OK /doc code
+* */
 
 buildscript {
     ext.cubaVersion = '7.2.19'
@@ -36,9 +43,12 @@ cuba {
     }
 }
 
+
+
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
     appComponent('com.haulmont.addon.helium:helium-global:0.4.0')
+    appComponent('com.haulmont.addon.restapi:restapi-global:7.2.4')
 }
 
 def postgres = 'org.postgresql:postgresql:42.2.9'
@@ -53,8 +63,19 @@ configure([globalModule, coreModule, webModule]) {
         testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
         testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
 
-        compile('com.fasterxml.jackson.core:jackson-databind:2.11.2')
+        compile('com.fasterxml.jackson.core:jackson-databind:2.13.4.2')
+        compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4')
+
+        compile('io.github.sogis:meta2file:1.0.67'){
+            exclude group: 'org.slf4j', module: 'slf4j-simple'
+        }
     }
+/*
+    configurations.implementation {
+        exclude(group: 'org.slf4j', module: 'slf4j-log4j12')
+        exclude(group: 'org.slf4j', module: 'slf4j-reload4j')
+        exclude(group: 'org.slf4j', module: 'slf4j-simple')
+    }*/
 
     task sourceJar(type: Jar) {
         from file('src')
@@ -124,7 +145,6 @@ configure(webModule) {
         compileOnly(servletApi)
         compile(globalModule)
 
-        // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
     }
 
@@ -197,7 +217,7 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 restart.finalizedBy start
 
 String getVersion(boolean useFullVersion){
-    String version = "2.1"
+    String version = "2.2"
 
     if(useFullVersion)
         version = version + "." + getBuildNumber()

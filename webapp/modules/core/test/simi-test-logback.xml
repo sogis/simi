@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="true">
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread%X{cubaApp}%X{cubaUser}] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="Console"/>
+    </root>
+
+    <logger name="com.haulmont.cuba" level="INFO"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.perf4j.TimingLogger" level="WARN"/>
+    <logger name="eclipselink" level="WARN"/>
+    <logger name="eclipselink.sql" level="DEBUG"/>
+    <logger name="org.hibernate.validator" level="WARN"/>
+    <logger name="com.zaxxer.hikari" level="WARN"/>
+
+    <!--
+        <logger name="com.haulmont.cuba.gui.logging.UIPerformanceLogger" level="OFF"/>
+       -->
+
+    <logger name="ch.so.agi.simi" level="DEBUG"/>
+
+</configuration>

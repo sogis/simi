@@ -129,8 +129,15 @@ public class StyleStorageBean {
         int maxMinor = maxQmlVersion[1];
 
         try {
-            XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-            XMLEventReader reader = xmlInputFactory.createXMLEventReader(new StringReader(qmlContent));
+            XMLInputFactory fact = XMLInputFactory.newInstance();
+
+            // Behaviour changed after import of meta2File jar - mitigated by setting these props
+            fact.setProperty("javax.xml.stream.isValidating", false);
+            fact.setProperty("javax.xml.stream.isSupportingExternalEntities", false);
+            fact.setProperty("javax.xml.stream.supportDTD", false);
+
+            XMLEventReader reader = fact.createXMLEventReader(new StringReader(qmlContent));
+
 
             while (reader.hasNext()) {
                 XMLEvent nextEvent = reader.nextEvent();

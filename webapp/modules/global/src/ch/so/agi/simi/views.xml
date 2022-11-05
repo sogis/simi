@@ -398,4 +398,8 @@
             <property name="classSuffixOverride"/>
         </property>
     </view>
+    <view entity="simiTheme_PublishedSubArea" name="publishedSubArea-pubService" extends="_local">
+        <property name="subArea" view="_minimal"/>
+        <property name="themePublication" view="_minimal"/>
+    </view>
 </views>

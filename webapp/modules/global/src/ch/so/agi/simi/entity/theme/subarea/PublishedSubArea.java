@@ -2,6 +2,7 @@ package ch.so.agi.simi.entity.theme.subarea;
 
 import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.theme.ThemePublication;
+import ch.so.agi.simi.global.exc.SimiException;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
@@ -39,6 +40,13 @@ public class PublishedSubArea extends SimiEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "THEME_PUBLICATION_ID")
     private ThemePublication themePublication;
+
+    public String deferSubAreaIdent() {
+        if(subArea == null)
+            throw new SimiException("Cant defer as linked subarea is not loaded");
+
+        return subArea.getIdentifier();
+    }
 
     public String getSubAreaIdent() {
         return subAreaIdent;

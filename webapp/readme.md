@@ -65,6 +65,21 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
 * **Konfiguration der Suche in den GRETL-Repos (Anzeige der Abhängigkeiten):**
   * SIMI_GITSEARCH_URL: Url, auf welche die Git-Suchen abgesetzt werden. Bsp: "https://api.github.com/search/code"
   * SIMI_GITSEARCH_REPOS: Liste aller zu durchsuchenden Git-Repos, mittels "," getrennt. Bsp: "sogis/gretljobs,oereb/jobs"
+* **Konfiguration Oauth-Tokenausgabe für die Publikations-Notifikation vom Publisher (GRETL)**
+  * CUBA_REST_CLIENT_ID: Benutzername für die Tokenausgabe
+  * CUBA_REST_CLIENT_SECRET: Passwort für die Tokenausgabe mit Präfix. Vor dem Passwort muss der **Präfix {noop}** stehen.
+  * Siehe zur Service-Konfiguration auch das folgende Kapitel...
+  
+## Service zur Publikations-Notifikation durch den GRETL-Publisher
+
+Für die Berechtigung zur Nutzung des Clients müssen zwei Konfigurationen vorgenommen werden:
+
+* Setzen der beiden Umgebungsvariablen CUBA_REST_CLIENT_*
+  * Entwicklung CUBA_REST_CLIENT_ID=notifier;CUBA_REST_CLIENT_SECRET={noop}pass
+* Erstellung und Berechtigung des Benutzers "gretl" via Admin-GUI
+  * Die Berechtigung muss beinhalten:
+    * Die bestehende Rolle rest-api-access
+    * Eine selbst erstellte Rolle für vollen Zugriff auf simiTheme_PublishedSubArea und lesenden Zugriff auf alle SIMI-Entitäten (Tabellen) im **SecurityScope "REST"**.
 
 ## Setzen des Loglevels
 

@@ -1,4 +1,4 @@
-package ch.so.agi.simi.global;
+package ch.so.agi.simi.global.exc;
 
 import java.text.MessageFormat;
 
