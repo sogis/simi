@@ -21,11 +21,11 @@ public class DataDocController {
     private GenerateThemePubDocService coreService;
 
     @GetMapping()
-    public ResponseEntity<String> get(@NotEmpty @RequestParam String dataIdent) {
+    public ResponseEntity<String> get(@NotEmpty @RequestParam String dataident) {
 
         ResponseEntity res = null;
 
-        res = returnUnderConstruction(dataIdent);
+        res = returnUnderConstruction(dataident);
         /*
         try{
             String generatedDoc = coreService.generateDoc(dataident);
