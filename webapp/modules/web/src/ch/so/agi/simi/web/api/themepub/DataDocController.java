@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotEmpty;
+import java.text.MessageFormat;
 
 @RestController
 @RequestMapping("doc")
@@ -20,10 +21,12 @@ public class DataDocController {
     private GenerateThemePubDocService coreService;
 
     @GetMapping()
-    public ResponseEntity<String> get(@NotEmpty @RequestParam String dataident) {
+    public ResponseEntity<String> get(@NotEmpty @RequestParam String dataIdent) {
 
         ResponseEntity res = null;
 
+        res = returnUnderConstruction(dataIdent);
+        /*
         try{
             String generatedDoc = coreService.generateDoc(dataident);
 
@@ -36,9 +39,29 @@ public class DataDocController {
         }
         catch(Exception e){
             res = ExcConverter.toResponse(e);
-        }
+            log.info("Generation of data-doc failed: {}", e.getMessage());
+        }*/
 
         return res;
+    }
+
+    private static ResponseEntity returnUnderConstruction(String dataident){
+        String template = "<!DOCTYPE html>\n" +
+                "<html lang=\"de\">\n" +
+                "  <head>\n" +
+                "    <meta charset=\"utf-8\">\n" +
+                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                "    <title>Datadoc-Mock</title>\n" +
+                "  </head>\n" +
+                "  <body>\n" +
+                "    <h1>Datadoc von {0}</h1>\n" +
+                "    <p>Pendent: Authentication für /doc schlägt fehl</p>\n" +
+                "  </body>\n" +
+                "</html>";
+
+        String body = MessageFormat.format(template, dataident);
+
+        return ResponseEntity.ok().body(body);
     }
 }
 
