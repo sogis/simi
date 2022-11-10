@@ -402,4 +402,8 @@
         <property name="subArea" view="_minimal"/>
         <property name="themePublication" view="_minimal"/>
     </view>
+    <view entity="simiTheme_ThemePublication" name="themePubDataSheet-edit" extends="_local">
+        <property name="theme" view="_minimal"/>
+        <property name="publishedSubAreas" view="_minimal"/>
+    </view>
 </views>

@@ -19,7 +19,8 @@
             spacing="true">
         <table id="publishedSubAreasTable"
                width="100%"
-               dataContainer="publishedSubAreasDc">
+               dataContainer="publishedSubAreasDc"
+               multiselect="true">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>

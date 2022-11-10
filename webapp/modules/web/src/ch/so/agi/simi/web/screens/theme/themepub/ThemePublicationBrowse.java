@@ -32,4 +32,20 @@ public class ThemePublicationBrowse extends StandardLookup<ThemePublication> {
         viewScreen.setReadOnly(true);
         viewScreen.show();
     }
+
+    @Subscribe("datSheetBtn")
+    public void onDatSheetBtnClick(Button.ClickEvent event) {
+
+        ThemePublication selected = themePublicationsTable.getSingleSelected();
+        if(selected == null)
+            return;
+
+        ThemePubDatasheet sheetScreen = screenBuilders.screen(this)
+                .withScreenClass(ThemePubDatasheet.class)
+                .withOpenMode(OpenMode.DIALOG)
+                .build();
+
+        sheetScreen.setThemePubId(selected.getId());
+        sheetScreen.show();
+    }
 }

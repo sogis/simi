@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="Datenblatt zur Themenpublikation">
+    <data>
+        <instance id="themePubDc"
+                  class="ch.so.agi.simi.entity.theme.ThemePublication"
+                  view="themePubDataSheet-edit">
+            <loader id="themePubDl"/>
+        </instance>
+    </data>
+    <dialogMode height="95%"
+                width="80%"
+                modal="true"
+                forceDialog="true"
+                resizable="true"/>
+    <layout>
+        <browserFrame id="browserFrame"
+                      height="100%"
+                      width="100%"/>
+    </layout>
+</window>

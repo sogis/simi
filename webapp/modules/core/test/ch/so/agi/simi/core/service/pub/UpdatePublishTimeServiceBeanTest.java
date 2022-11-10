@@ -28,6 +28,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Contains by intention no tests for linkToDefaultDataCoverage(...), as functionality is covered by
+ * the update(...) method.
+ */
 class UpdatePublishTimeServiceBeanTest {
 
     public static final String IDENT_PREFIX = "inttest.publishsrv";
@@ -244,7 +248,7 @@ class UpdatePublishTimeServiceBeanTest {
             sub.setGeomWKB(IDENT_PREFIX.getBytes());
 
             if(regionCountInRequest == 0)
-                sub.setIdentifier(SubArea.KTSO_DEFAULT_IDENTIFIER);
+                sub.setIdentifier(SubArea.KTSO_SUBAREA_IDENTIFIER);
             else
                 sub.setIdentifier(countedIdent);
 

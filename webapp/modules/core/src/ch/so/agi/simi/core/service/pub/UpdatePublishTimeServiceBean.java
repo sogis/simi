@@ -49,6 +49,22 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
         return res;
     }
 
+    public PublishResult linkToDefaultDataCoverage(String tpIdentifier, LocalDateTime publishInstant) throws CodedException {
+        PublishResult res = null;
+
+        ThemePublication themePub = new ThemePubLoader(dataManager).byIdentifier(tpIdentifier);
+
+        themePub.setCoverageIdent(SubArea.KTSO_COVERAGE_IDENTIFIER);
+        List<String> subAreaIdents = List.of(SubArea.KTSO_SUBAREA_IDENTIFIER);
+
+        Map<String, PublishedSubArea> mapOfExistingPubSubs = loadExistingIntoKeyValMap(themePub, subAreaIdents);
+
+        Pair<Integer, Integer> updates = execDbInsertsAndUpdates(themePub, subAreaIdents, mapOfExistingPubSubs, publishInstant);
+        res = new PublishResult(tpIdentifier, updates.getLeft(), updates.getRight());
+
+        return res;
+    }
+
     private Pair<Integer, Integer> execDbInsertsAndUpdates(
             ThemePublication themePub,
             List<String> requestedSubAreaIdents,
@@ -109,7 +125,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
     private List<String> deferSubAreasFromRequest(PubNotification request) {
         if(request.getPublishedRegions() == null || request.getPublishedRegions().size() == 0)
-            return List.of(SubArea.KTSO_DEFAULT_IDENTIFIER);
+            return List.of(SubArea.KTSO_SUBAREA_IDENTIFIER);
 
         return request.getPublishedRegions().stream().map(Region::getRegion).collect(Collectors.toList());
     }
@@ -118,7 +134,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
         List<String> regionIdents = requestedRegionIdents;
         if(regionIdents == null || regionIdents.size() == 0){
             regionIdents = new LinkedList<String>();
-            regionIdents.add(SubArea.KTSO_DEFAULT_IDENTIFIER); // Requests only submits regions if the theme is partitioned in > 1 parts.
+            regionIdents.add(SubArea.KTSO_SUBAREA_IDENTIFIER); // Requests only submits regions if the theme is partitioned in > 1 parts.
         }
 
         List<PublishedSubArea> existing = loadExistingPSubs(themePub, regionIdents);
