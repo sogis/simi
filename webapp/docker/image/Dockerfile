@@ -6,8 +6,8 @@ WORKDIR /home/simi
 
 RUN chown -R 1001:0 . && \
     chmod -R g+rw .
-COPY tmp/app.jar /home/simi
-COPY uber-jar-logback.xml /home/simi
+COPY tmp/app.jar .
+COPY uber-jar-logback.xml .
 RUN ls -la .
 
 USER 1001
