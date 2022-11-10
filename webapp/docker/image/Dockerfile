@@ -3,13 +3,12 @@ FROM openjdk:11-bullseye
 USER root
 
 WORKDIR /home/simi
+
+RUN chown -R 1001:0 . && \
+    chmod -R g+rw .
 COPY tmp/app.jar /home/simi
 COPY uber-jar-logback.xml /home/simi
-
-RUN cd /home/simi && \
-    chown -R 1001:0 /home/simi && \
-    chmod -R g+rw /home/simi && \
-    ls -la /home/simi
+RUN ls -la .
 
 USER 1001
 EXPOSE 8080
