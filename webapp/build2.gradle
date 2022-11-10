@@ -11,7 +11,7 @@ the docker image.
 */
 
 task buildUberJar(type: CubaUberJarBuilding) {
-    logbackConfigurationFile = 'docker/image/uber-jar-logback.xml'
+    //logbackConfigurationFile = 'docker/image/uber-jar-logback.xml'
     singleJar = true
     appProperties = [
             'cuba.automaticDatabaseUpdate':false,

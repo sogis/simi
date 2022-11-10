@@ -81,26 +81,28 @@ Für die Berechtigung zur Nutzung des Clients müssen zwei Konfigurationen vorge
     * Die bestehende Rolle rest-api-access
     * Eine selbst erstellte Rolle für vollen Zugriff auf simiTheme_PublishedSubArea und lesenden Zugriff auf alle SIMI-Entitäten (Tabellen) im **SecurityScope "REST"**.
 
-## Setzen des Loglevels
+## Setzen des Loglevels mittels Adminmaske
 
-Der Loglevel kann bequem mittels der vom Framework zur Verfügung gestellten Admin-Masken zur Laufzeit geändert werden.
+Im Docker-Image sind drei Logger vorkonfiguriert:
 
-Falls eine Fragestellung vor der Verfügbarkeit der Admin-Masken analysiert werden muss, kann der Loglevel in der
-Datei **\[repo root\]/webapp/docker/image/uber-jar-logback.xml** wie folgend beschrieben angepasst werden (Bedingt neuen Build des Image):
+* ROOT-Logger mit level "ERROR"
+* Logger "com.haulmont" (= Cuba Framework) mit level "WARN"
+* Logger "ch.so.agi.simi" mit level "INFO"
 
-Anpassung des levels, welcher überhaupt auf die Konsole geschrieben wird:
+Bei Bedarf kann der Loglevel der vorkonfigurierten Logger verändert werden:
 
-    <root level="debug">
-        <appender-ref ref="Console"/>
-    </root>
-
-Anpassung des log-levels für das Cuba-Framework:
-
-    <logger name="com.haulmont.cuba" level="DEBUG"/>
+* Zur entsprechenden Adminmaske navigieren: CUBA-Admin -> Server Log
+* In der Maske im Reiter "Options" den Logger im Dropdown wählen und den Loglevel setzen / abfragen
+    * Alternativ könne auch weitere Logger erstellt werden, Zum Beispiel "com.haulmont.rest" falls dieses temporär mit anderem Level geloggt werden soll.
     
-Anpassung des log-levels für Simi:
+**Bitte beachten:** Der ROOT-Logger sollte nicht auf Level DEBUG oder noch detaillierter gestellt werden, da dies massiv viel logging auslöst.
 
-    <logger name="ch.so.agi.simi" level="DEBUG"/>
+### Troubleshooting der App-Initialisierung
+
+Falls eine Fragestellung vor der Verfügbarkeit der Admin-Masken analysiert werden muss, kann der Loglevel in der 
+Datei **\[repo root\]/webapp/docker/image/uber-jar-logback.xml** angepasst werden (Bedingt neuen Build des Image).
+
+Bitte dazu den Applikationsverantwortlichen beiziehen.
 
 ## Erzeugen / Aktualisieren des Datenbankschemas
 

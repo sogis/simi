@@ -1,26 +1,3 @@
-# Entwicklungs-Dokumentation
-
-## Jar-Hell
-
-Warning:
-
-    SLF4J: Class path contains multiple SLF4J bindings.
-    SLF4J: Found binding in [jar:file:/home/bjsvwjek/code/simi/webapp/deploy/tomcat/shared/lib/slf4j-simple-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    SLF4J: Found binding in [jar:file:/home/bjsvwjek/code/simi/webapp/deploy/tomcat/shared/lib/logback-classic-1.2.3.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-
-Fehler:
-
-    java.lang.ClassCastException: class org.slf4j.impl.SimpleLogger cannot be cast to class ch.qos.logback.classic.Logger (org.slf4j.impl.SimpleLogger and ch.qos.logback.classic.Logger are in unnamed module of loader java.net.URLClassLoader @708f5957)
-    
-Logging-Binding `slf4j-simple-1.7.36.jar` wird durch meta2File transitiv beigefügt
-
-Versuch zum Ausschluss:
-
-        compile('io.github.sogis:meta2file:1.0.67'){
-            exclude group: 'org.slf4j', module: 'slf4j-simple'
-        }
-
 ## Abhängigkeiten
 
 Abhängig von der Anpassung bestehen die folgenden Abhängigkeiten:

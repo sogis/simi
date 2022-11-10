@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  simi:
+    image: sogis/simi
+    environment:
+    - CUBA_DATASOURCE_USERNAME=postgres
+    - CUBA_DATASOURCE_PASSWORD=postgres
+    - CUBA_DATASOURCE_JDBCURL=jdbc:postgresql://databases:5432/simi?currentSchema=simi
+    ports:
+      - "8080:8080"
+    networks:
+      - devenv_default
+networks: #join existing network
+  devenv_default:
+    external: true

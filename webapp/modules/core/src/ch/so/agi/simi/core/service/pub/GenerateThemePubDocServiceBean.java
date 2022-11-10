@@ -7,7 +7,6 @@ import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.security.app.Authentication;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -18,9 +17,6 @@ import java.util.UUID;
 public class GenerateThemePubDocServiceBean implements GenerateThemePubDocService {
 
     @Inject
-    Authentication auth;
-
-    @Inject
     private Persistence persistence;
 
     @Inject
@@ -28,7 +24,6 @@ public class GenerateThemePubDocServiceBean implements GenerateThemePubDocServic
 
     @Override
     public String generateDoc(String themePubIdent) throws CodedException {
-
 
         String res = null;
 
