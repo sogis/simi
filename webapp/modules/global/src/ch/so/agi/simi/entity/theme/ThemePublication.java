@@ -3,6 +3,7 @@ package ch.so.agi.simi.entity.theme;
 import ch.so.agi.simi.entity.SimiEntity;
 import ch.so.agi.simi.entity.product.DataProduct;
 import ch.so.agi.simi.entity.theme.subarea.PublishedSubArea;
+import ch.so.agi.simi.entity.theme.subarea.SubArea;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
@@ -47,7 +48,7 @@ public class ThemePublication extends SimiEntity {
 
     @NotNull
     @Column(name = "COVERAGE_IDENT", nullable = false, length = 100)
-    private String coverageIdent = "av_kt";
+    private String coverageIdent = SubArea.KTSO_COVERAGE_IDENTIFIER;
 
     @Composition
     @OneToMany(mappedBy = "themePublication")

@@ -9,6 +9,7 @@ public enum ExternalWmsLayer_FiFormat implements EnumClass<String> {
 
     GML("application/vnd.ogc.gml"),
     TEXT("text/plain"),
+    JSON("application/json"),
     FI_UNAVAILABLE("fi_unavailable");
 
     private String id;
