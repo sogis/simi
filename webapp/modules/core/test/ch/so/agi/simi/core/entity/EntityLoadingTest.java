@@ -329,6 +329,13 @@ class EntityLoadingTest {
                 "customFileType-browse-edit");
     }
 
+    @Test
+    void theme_DataProductDsv_OK(){
+        loadEntityView(
+                DataProductDsv.class,
+                "themePublication-edit-product");
+    }
+
     private void loadEntityViews(Class entityClass, String[] viewNames){
 
         ArrayList<ViewLoadException> ex = new ArrayList<>();

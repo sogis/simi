@@ -46,5 +46,6 @@
         <class>ch.so.agi.simi.entity.theme.subarea.PublishedSubArea</class>
         <class>ch.so.agi.simi.entity.theme.subarea.PublishedSubAreaHelper</class>
         <class>ch.so.agi.simi.entity.theme.dbview.ThemePubValidation</class>
+        <class>ch.so.agi.simi.entity.product.DataProductDsv</class>
     </persistence-unit>
 </persistence>

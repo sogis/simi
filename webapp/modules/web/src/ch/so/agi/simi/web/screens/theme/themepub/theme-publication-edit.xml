@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="mainMsg://themePublication.caption.edit"
         focusComponent="form">
     <data>
         <instance id="themePublicationDc"
                   class="ch.so.agi.simi.entity.theme.ThemePublication"
                   view="themePublication-edit">
-            <loader/>
+            <loader id="themePublicationDl"/>
             <collection id="customFileTypesDc" property="customFileTypes"/>
+            <!--
             <collection id="dataProductsDc" property="dataProducts"/>
+            -->
             <collection id="pubAreasDc" property="publishedSubAreas"/>
         </instance>
         <collection id="themesDc" class="ch.so.agi.simi.entity.theme.Theme" view="themePublication-edit-theme">
@@ -17,6 +20,8 @@
                     <![CDATA[select e from simiTheme_Theme e]]>
                 </query>
             </loader>
+        </collection>
+        <collection id="deepProductsDc" class="ch.so.agi.simi.entity.product.DataProductDsv" view="themePublication-edit-product">
         </collection>
     </data>
     <dialogMode height="80%"
@@ -50,11 +55,12 @@
                  margin="true"
                  spacing="true">
                 <scrollBox width="100%" height="100%">
-                    <table id="dataProductsTable" dataContainer="dataProductsDc" width="100%">
+                    <table id="dataProductsTable" dataContainer="deepProductsDc" width="100%">
                         <columns>
                             <column id="derivedIdentifier" sort="ASCENDING"/>
                             <column id="title"/>
                             <column id="themeOnlyForOrg"/>
+                            <column id="isFileDownloadDsv"/>
                         </columns>
                     </table>
                 </scrollBox>

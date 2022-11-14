@@ -359,6 +359,12 @@
             </property>
         </property>
     </view>
+    <view entity="simiProduct_DataProductDsv" name="themePublication-edit-product" extends="_minimal">
+        <property name="derivedIdentifier"/>
+        <property name="isFileDownloadDsv"/>
+        <property name="themeOnlyForOrg"/>
+        <property name="themePublication"/>
+    </view>
     <view entity="simiTheme_Theme" name="themePublication-edit-theme" extends="_minimal"/>
     <view entity="simiTheme_CustomFileType" name="customFileType-browse-edit" extends="_local"/>
     <view entity="simiTheme_SubArea" name="subArea-browse" extends="_minimal">
