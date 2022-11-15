@@ -3,8 +3,9 @@ WITH
 
 pairing AS (
   SELECT
-    'av_gem' AS coverage_ident,
-    'ch.so.agi.av' AS themepub_ident
+    'lidar_2019' AS coverage_ident,
+    'ch.so.agi.av' AS theme_ident,
+    '' AS themepub_suffix
   FROM
     pg_catalog.generate_series(1, 1)
 )
@@ -25,10 +26,13 @@ pairing AS (
   JOIN
     simitheme_theme_publication tp ON t.id = tp.theme_id
   JOIN
-    pairing p ON t.identifier = p.themepub_ident -- Nur für Testdaten OK - Joint alle themePubs des themas
+    pairing p ON t.identifier = p.theme_ident AND tp.suffix = p.themepub_suffix,
   JOIN
     simitheme_sub_area sa ON p.coverage_ident = sa.coverage_ident
 )
+
+select * from pubSubArea_Draft;
+
 
 INSERT INTO
   simitheme_published_sub_area (
