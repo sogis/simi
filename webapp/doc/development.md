@@ -71,14 +71,16 @@ Periodisch macht es Sinn, die aktuellen Daten aus der Integration zu übernehmen
 
 Vorgehen:
 
-* Dump lokal nehmen (Siehe dazu dok "Datenbanken")
+* Mittels CUBA-Gradle plugin das Schema ohne Inhalt erzeugen (In Ordner simi/webapp): ```./gradlew createDB``` 
+* Dump lokal nehmen (Siehe dazu dok "Datenbanken")
 * Dump restoren, ohne Übernahme von Ownern, Rollen, ... 
-  * Schema:   
-  ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --schema-only gitignored/simi_t_v1.2.dmp```
   * Daten:   
   ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --data-only --disable-triggers gitignored/simi_t_v1.2.dmp```  
 * Anmelden mit dem Admin-Passwort "aus Dump" (Siehe Passwort-Manager)
   * Admin-Passwort überschreiben
+
+Befehl für Restore der Tabellen-Definitionen (Ohne Daten):   
+```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --schema-only gitignored/simi_t_v1.2.dmp```
   
 ## Abdeckung mit automatisierten Tests
 
