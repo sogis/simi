@@ -129,7 +129,24 @@ configure(coreModule) {
         appJars(modulePrefix + '-global', modulePrefix + '-core')
     }
 
+    /*
+    Funktioniert. Problem sind die Abhängigkeiten von app auf trafo view
+    - Trafo View's auch inkludieren?
+
+    include filter nimmt alle dateien mit numerischem präfix -> die create script-dateien entsprechend umbenennen
+    0_xxx.sql, ...
+
+    task assembleDbViews(type: Copy, dependsOn: assembleDbScripts){
+        from '../../schema/views/app'
+        from '../../schema/views/trafo' // Wegen Abhängigkeit auf trafo_resource_role
+        include{ java.util.regex.Pattern.matches("[0-9]+[_]{1}.*", it.name) }
+        rename{ "99." + it.replace(".sql", "") +  ".create-db.sql"}
+        into 'build/db/60-simi/init/postgres'
+    }
+    */
+
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
+
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
