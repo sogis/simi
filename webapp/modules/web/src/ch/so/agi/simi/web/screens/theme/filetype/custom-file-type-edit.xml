@@ -9,8 +9,8 @@
             <loader/>
         </instance>
     </data>
-    <dialogMode height="80%"
-                width="80%"
+    <dialogMode height="AUTO"
+                width="AUTO"
                 modal="true"
                 forceDialog="true"
                 resizable="true"/>

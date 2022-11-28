@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://subOrgEdit.caption"
-        focusComponent="form"
-        messagesPack="ch.so.agi.simi.web.screens.theme.org">
+        caption="msg://suborg.edit"
+        focusComponent="form">
     <data>
         <instance id="subOrgDc"
                   class="ch.so.agi.simi.entity.theme.org.SubOrg"

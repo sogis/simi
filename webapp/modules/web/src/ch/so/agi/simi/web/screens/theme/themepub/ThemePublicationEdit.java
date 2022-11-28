@@ -57,10 +57,13 @@ public class ThemePublicationEdit extends StandardEditor<ThemePublication> {
 
     private void proposeSuffix(ThemePublication_TypeEnum prev, ThemePublication_TypeEnum current){
 
-        if(prev == null || current == null)
+        if(current == null)
             return;
 
-        String oldDefault = prev.getDefaultSuffix();
+        String oldDefault = "";
+        if(prev != null)
+            oldDefault = prev.getDefaultSuffix();
+
         String newDefault = current.getDefaultSuffix();
 
         String val = identSuffixField.getValue();
