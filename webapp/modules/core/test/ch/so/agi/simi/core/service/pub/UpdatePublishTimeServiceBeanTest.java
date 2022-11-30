@@ -25,6 +25,7 @@ import org.slf4j.helpers.MessageFormatter;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,6 +39,19 @@ class UpdatePublishTimeServiceBeanTest {
     public static final String THEME_THEMEPUB_SUFFIX = "suffix";
 
     public static Logger log = LoggerFactory.getLogger(UpdatePublishTimeServiceBeanTest.class);
+
+    /**
+     * Input-Base64-String ist Resutat von
+     * SELECT encode(
+     * 	st_asbinary(
+     * 		ST_MakeEnvelope(2600000, 1200000, 2600100, 1200100, 2056)
+     * 	),
+     * 	'base64'
+     * )
+     */
+    private static final byte[] BERN_WKB = Base64.getDecoder().decode(
+            "AQMAAAABAAAABQAAAAAAAAAg1kNBAAAAAIBPMkEAAAAAINZDQQAAAADkTzJBAAAAAFLWQ0EAAAAA5E8yQQAAAABS1kNBAAAAAIBPMkEAAAAAINZDQQAAAACATzJB"
+    );
 
 
     @RegisterExtension
@@ -123,6 +137,42 @@ class UpdatePublishTimeServiceBeanTest {
         serviceBean.update(json); // Inserts the pSubs as precondition for this test
 
         assertInsertUpdate(0,2, serviceBean.update(json));
+    }
+
+    /**
+     * Update auf die in der Themenbereitstellung genannte Datenabdeckung
+     */
+    @Test
+    public void update_ThemePub_Coverage_OK(){
+
+        String testIdent = String.join(".", IDENT_PREFIX, "ThemePub_Coverage");
+        log.info("Starting test {}", testIdent);
+
+        createSubAreas(testIdent, 2);
+        ThemePublication tp = createThemePub(testIdent, false);
+
+        assertInsertUpdate(2,0,
+                serviceBean.update(tp.deferFullIdent(), tp.getCoverageIdent(), LocalDateTime.now())
+        );
+    }
+
+    /**
+     * Update auf eine Datenabdeckung ungleich ThemePublication.getDataCoverage()
+     */
+    @Test
+    public void update_ThemePub_Coverage_CrossJoin_OK(){
+
+        String testIdent = String.join(".", IDENT_PREFIX, "ThemePub_Coverage_CrossJoin");
+        log.info("Starting test {}", testIdent);
+
+        String covIdent = testIdent + "XXX";
+
+        createSubAreas(covIdent, 1);
+        ThemePublication tp = createThemePub(testIdent, false);
+
+        assertInsertUpdate(1,0,
+                serviceBean.update(tp.deferFullIdent(), covIdent, LocalDateTime.now())
+        );
     }
 
     private static void assertInsertUpdate(int insCount, int updateCount, PublishResult res){
@@ -245,7 +295,7 @@ class UpdatePublishTimeServiceBeanTest {
 
             SubArea sub = container.metadata().create(SubArea.class);
             sub.setCoverageIdent(testIdent);
-            sub.setGeomWKB(IDENT_PREFIX.getBytes());
+            sub.setGeomWKB(BERN_WKB);
 
             if(regionCountInRequest == 0)
                 sub.setIdentifier(SubArea.KTSO_SUBAREA_IDENTIFIER);

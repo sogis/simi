@@ -49,13 +49,13 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
         return res;
     }
 
-    public PublishResult linkToDefaultDataCoverage(String tpIdentifier, LocalDateTime publishInstant) throws CodedException {
+    public PublishResult update(String tpIdentifier, String coverageIdentifier, LocalDateTime publishInstant) throws CodedException {
         PublishResult res = null;
 
-        ThemePublication themePub = new ThemePubLoader(dataManager).byIdentifier(tpIdentifier);
+        List<String> subAreaIdents = loadSubAreaIdentifier(coverageIdentifier);
 
-        themePub.setCoverageIdent(SubArea.KTSO_COVERAGE_IDENTIFIER);
-        List<String> subAreaIdents = List.of(SubArea.KTSO_SUBAREA_IDENTIFIER);
+        ThemePublication themePub = new ThemePubLoader(dataManager).byIdentifier(tpIdentifier);
+        themePub.setCoverageIdent(coverageIdentifier); // Non persistent overwrite for linking to default coverage
 
         Map<String, PublishedSubArea> mapOfExistingPubSubs = loadExistingIntoKeyValMap(themePub, subAreaIdents);
 
@@ -109,7 +109,23 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
         return Pair.of(insertCount, updateCount);
     }
 
+    private List<String> loadSubAreaIdentifier(String coverageIdent) {
+
+        List<SubArea> subAreaList = loadSubAreas(coverageIdent);
+        List<String> identList = subAreaList.stream().map(subArea -> subArea.getIdentifier()).collect(Collectors.toList());
+
+        return identList;
+    }
+
     private Map<String, SubArea> loadSubAreasIntoMap(String coverageIdent) {
+
+        List<SubArea> subAreaList = loadSubAreas(coverageIdent);
+        Map<String, SubArea> mapOfExisting = subAreaList.stream().collect(Collectors.toMap(SubArea::getIdentifier, Function.identity()));
+
+        return mapOfExisting;
+    }
+
+    private List<SubArea> loadSubAreas(String coverageIdent) {
         String query = MessageFormat.format("select e from {0} e where e.coverageIdent = :coverageIdent", SubArea.NAME);
 
         List<SubArea> subAreaList = dataManager.load(SubArea.class)
@@ -118,10 +134,10 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
                 .view("_minimal")
                 .list();
 
-        Map<String, SubArea> mapOfExisting = subAreaList.stream().collect(Collectors.toMap(SubArea::getIdentifier, Function.identity()));
-
-        return mapOfExisting;
+        return subAreaList;
     }
+
+
 
     private List<String> deferSubAreasFromRequest(PubNotification request) {
         if(request.getPublishedRegions() == null || request.getPublishedRegions().size() == 0)

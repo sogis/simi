@@ -9,7 +9,6 @@ import java.util.List;
 public interface UpdatePublishTimeService {
     String NAME = "simi_UpdatePublishTimeService";
 
-
     /**
      * Updates the corresponding collection of PublishedSubArea entries for a ThemePublication.
      *
@@ -24,11 +23,12 @@ public interface UpdatePublishTimeService {
     PublishResult update(String jsonMessage) throws CodedException;
 
     /**
-     * Variant for linking to the whole canton
+     * Variant for manual publication (raster, ...)
      * @param tpIdentifier Identifier of the theme-publication (ch.so. ...)
+     * @param coverageIdentifier Identifier of the data coverage identifying the subareas to link to
      * @param publishInstant Time instant of the publication
      * @return Result of the Publication.
      * @throws CodedException
      */
-    PublishResult linkToDefaultDataCoverage(String tpIdentifier, LocalDateTime publishInstant) throws CodedException;
+    PublishResult update(String tpIdentifier, String coverageIdentifier, LocalDateTime publishInstant) throws CodedException;
 }

@@ -5,6 +5,7 @@ import ch.so.agi.simi.core.service.pub.UpdatePublishTimeService;
 import ch.so.agi.simi.entity.theme.ThemePublication;
 import ch.so.agi.simi.entity.theme.dbview.ThemePubValidation;
 import ch.so.agi.simi.entity.theme.subarea.PublishedSubArea;
+import ch.so.agi.simi.entity.theme.subarea.SubArea;
 import com.haulmont.chile.core.model.Session;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.global.UserSessionSource;
@@ -82,13 +83,21 @@ public class ThemePubDatasheet extends Screen {
                         .show();
 
                 LocalDateTime dummy = LocalDateTime.of(1111, 11, 11, 11, 11, 11);
-                updateService.linkToDefaultDataCoverage(tpIdent, dummy);
+                updateService.update(tpIdent, SubArea.KTSO_COVERAGE_IDENTIFIER, dummy);
             }
         }
         else{
             notifications.create(Notifications.NotificationType.TRAY).withCaption("Lade Datenblatt...").show();
         }
 
+        String htmlDoc = docService.generateDoc(tpIdent);
+        byte[] bytes = htmlDoc.getBytes(StandardCharsets.UTF_8);
+
+        browserFrame.setSource(StreamResource.class)
+                .setStreamSupplier(() -> new ByteArrayInputStream(bytes))
+                .setMimeType("text/html");
+
+        /*
         try{
             String htmlDoc = docService.generateDoc(tpIdent);
             byte[] bytes = htmlDoc.getBytes(StandardCharsets.UTF_8);
@@ -99,7 +108,7 @@ public class ThemePubDatasheet extends Screen {
         }
         catch(Exception e){
             notifications.create(Notifications.NotificationType.ERROR).withCaption("Generieren Datenblatt fehlgeschlagen").withDescription(e.getMessage()).show();
-        }
+        }*/
     }
 
     private boolean needsDummy(ThemePublication tp){

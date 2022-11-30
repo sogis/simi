@@ -2,7 +2,6 @@ package ch.so.agi.simi.entity.product;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseUuidEntity;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.global.DbView;
 import com.haulmont.cuba.core.global.DdlGeneration;
 
@@ -18,16 +17,21 @@ import java.util.UUID;
 @NamePattern("%s|title")
 public class DataProductDsv extends BaseUuidEntity {
     private static final long serialVersionUID = -6189034884806619544L;
+
     public static final String NAME = "simiProduct_DataProductDsv";
 
     @Column(name = "derived_identifier", length = 100)
     private String derivedIdentifier;
+
     @Column(name = "is_file_download_dsv")
     private Boolean isFileDownloadDsv;
+
     @Column(name = "theme_only_for_org")
     private Boolean themeOnlyForOrg;
+
     @Column(name = "theme_publication_id")
     private UUID themePublication;
+
     @Column(name = "title", length = 200)
     private String title;
 

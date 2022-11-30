@@ -22,7 +22,6 @@
                dataContainer="publishedSubAreasDc"
                multiselect="true">
             <actions>
-                <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
@@ -33,7 +32,7 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="publishedSubAreasTable.create"/>
+                <button id="createBtn"  stylename="primary" icon="icons/bulk-edit.png" caption="Erstellen (Bulk)"/>
                 <button id="editBtn" action="publishedSubAreasTable.edit" stylename="friendly"/>
                 <button id="removeBtn" action="publishedSubAreasTable.remove" stylename="danger"/>
             </buttonsPanel>

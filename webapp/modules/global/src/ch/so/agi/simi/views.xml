@@ -402,6 +402,7 @@
                 <property name="title"/>
             </property>
             <property name="classSuffixOverride"/>
+            <property name="coverageIdent" />
         </property>
     </view>
     <view entity="simiTheme_PublishedSubArea" name="publishedSubArea-pubService" extends="_local">
