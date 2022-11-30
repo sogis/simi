@@ -30,3 +30,6 @@ values
     ('cb94803d-03d3-dc1f-8f08-3a842f14bf45', 1, NOW(), 'admin', NOW(), null,  true, 10, false, false,  true, 20, false,  true,  true, 'WGC u. QGIS'),
     ('0a866696-8903-c333-c2c7-db6b6fd8d628', 1, NOW(), 'admin', NOW(), null, false, 20,  true, false, false, 30, false, false, false, 'Nicht (selbst) publiziert'),
     ('55bdf0dd-d997-c537-f95b-7e641dc515df', 1, NOW(), 'admin', NOW(), null, false, 30,  true,  true,  true, 40, false, false, false, 'Zu Löschen');
+
+-- Datenbank postgis-enablen
+CREATE EXTENSION IF NOT EXISTS postgis;

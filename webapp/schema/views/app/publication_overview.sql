@@ -2,8 +2,8 @@
 /*
 * Query ermittelt unter Berücksichtigung der Permissions und der Layerschachtelung, 
 * ob ein DataProdukt publiziert ist oder nicht.
-* 
-* Query ist noch auf dem Strand von SIMI V 1.x. Eine DB-View ist dafür noch nicht angelegt.
+*
+* Query ist noch auf dem Strand von SIMI V 1.x. Eine DB-View ist dafür noch nicht angelegt.
 */
 WITH 
 

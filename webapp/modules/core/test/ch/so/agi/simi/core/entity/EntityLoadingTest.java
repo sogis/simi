@@ -329,7 +329,7 @@ class EntityLoadingTest {
                 "customFileType-browse-edit");
     }
 
-    //@Test Needs integration of the views into the database init scripts - ticket pending
+    @Test
     void theme_DataProductDsv_OK(){
         loadEntityView(
                 DataProductDsv.class,

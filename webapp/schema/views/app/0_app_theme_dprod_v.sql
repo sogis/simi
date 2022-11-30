@@ -1,7 +1,7 @@
 /* 
  * Gibt für die Darstellung der einer Themenbereitstellung
- * zugeordneten Produkte neben den Produkteigenschaften das
- * Attribut [DataSetView].is_file_download_dsv aus (true/false/NULL).
+ * zugeordneten Produkte neben den Produkteigenschaften das
+ * Attribut [DataSetView].is_file_download_dsv aus (true/false/NULL).
  */
 CREATE VIEW simi.app_theme_dprod_v AS 
 SELECT 
