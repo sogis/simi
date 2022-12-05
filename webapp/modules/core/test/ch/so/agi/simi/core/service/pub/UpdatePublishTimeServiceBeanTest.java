@@ -1,6 +1,9 @@
 package ch.so.agi.simi.core.service.pub;
 
 import ch.so.agi.simi.SimiTestContainer;
+import ch.so.agi.simi.core.service.pub.request.Basket;
+import ch.so.agi.simi.core.service.pub.request.PubNotification;
+import ch.so.agi.simi.core.service.pub.request.Region;
 import ch.so.agi.simi.entity.theme.Theme;
 import ch.so.agi.simi.entity.theme.ThemePublication;
 import ch.so.agi.simi.entity.theme.ThemePublication_TypeEnum;
@@ -71,6 +74,56 @@ class UpdatePublishTimeServiceBeanTest {
     }
 
     @Test
+    public void update_ModelMismatch_ThrowsMatching(){
+
+        String testIdent = String.join(".", IDENT_PREFIX, "ModelMismatch_ThrowsMatching");
+        log.info("Starting test {}", testIdent);
+
+        createThemePub(testIdent, false);
+
+        PubNotification not = buildNotification(testIdent, 0, null);
+        Basket first = not.getPublishedBaskets().get(0);
+        first.setModel("xxx" + first.getModel());
+
+        assertMatchingException(not.toJson(), CodedException.ERR_MODEL_MISMATCH);
+    }
+
+    @Test
+    public void update_ModelMismatch_NoRegion_ThrowsMatching(){
+
+        String testIdent = String.join(".", IDENT_PREFIX, "ModelMismatch_NoRegion_ThrowsMatching");
+        log.info("Starting test {}", testIdent);
+
+        createThemePub(testIdent, false);
+
+        PubNotification not = buildNotification(testIdent, 0, null);
+        Basket first = not.getPublishedBaskets().get(0);
+        first.setModel("xxx" + first.getModel());
+
+        assertMatchingException(not.toJson(), CodedException.ERR_MODEL_MISMATCH);
+    }
+
+    @Test
+    public void update_ModelMismatch_Regions_ThrowsMatching(){
+
+        String testIdent = String.join(".", IDENT_PREFIX, "ModelMismatch_Regions_ThrowsMatching");
+        log.info("Starting test {}", testIdent);
+
+        createThemePub(testIdent, false);
+
+        PubNotification not = buildNotification(testIdent, 2, null);
+
+        Basket inFirstRegion = not.getPublishedRegions().get(0).getPublishedBaskets().get(0);
+        String nonMatchingModel = "xxx" + inFirstRegion.getModel();
+        inFirstRegion.setModel(nonMatchingModel);
+
+        Basket inSecondRegion = not.getPublishedRegions().get(1).getPublishedBaskets().get(0);
+        inSecondRegion.setModel(nonMatchingModel);
+
+        assertMatchingException(not.toJson(), CodedException.ERR_MODEL_MISMATCH);
+    }
+
+    @Test
     public void update_UnknowSubArea_ThrowsMatching(){
 
         String testIdent = String.join(".", IDENT_PREFIX, "UnknowSubArea");
@@ -79,7 +132,7 @@ class UpdatePublishTimeServiceBeanTest {
         createThemePub(testIdent, false);
         //No subarea testdata generated -> subarea reference in json does not exist
 
-        String json = buildTestJson(testIdent, 0, null);
+        String json = buildNotification(testIdent, 0, null).toJson();
 
         assertMatchingException(json, CodedException.ERR_SUBAREA_UNKNOWN);
     }
@@ -93,7 +146,7 @@ class UpdatePublishTimeServiceBeanTest {
         createSubAreas(testIdent, 0);
         //No themepublication testdata generated -> themepub reference in json does not exist
 
-        String json = buildTestJson(testIdent, 0, null);
+        String json = buildNotification(testIdent, 0, null).toJson();
 
         assertMatchingException(json, CodedException.ERR_THEMEPUB_UNKNOWN);
     }
@@ -117,7 +170,7 @@ class UpdatePublishTimeServiceBeanTest {
         createSubAreas(testIdent, 0);
         createThemePub(testIdent, false);
 
-        String json = buildTestJson(testIdent, 0, null);
+        String json = buildNotification(testIdent, 0, null).toJson();
 
         assertInsertUpdate(1,0, serviceBean.update(json));
     }
@@ -131,7 +184,7 @@ class UpdatePublishTimeServiceBeanTest {
         createSubAreas(testIdent, 2);
         createThemePub(testIdent, true);
 
-        String json = buildTestJson(testIdent,2, null);
+        String json = buildNotification(testIdent,2, null).toJson();
 
         serviceBean.update(json); // Inserts the pSubs as precondition for this test
 
@@ -179,51 +232,41 @@ class UpdatePublishTimeServiceBeanTest {
         Assertions.assertEquals(updateCount, res.getDbUpdateCount(), "Test must yield 0 updates");
     }
 
-    private static String buildTestJson(String testIdent, int regionCount, LocalDateTime published){
-        String res = null;
+    private static PubNotification buildNotification(String testIdent, int regionCount, LocalDateTime published){
+        PubNotification res = null;
 
         String themePubIdent = String.join(".", testIdent, THEME_THEMEPUB_SUFFIX);
 
         if(published == null)
             published = LocalDateTime.now();
 
-        String basketPart = null;
+        res = new PubNotification();
+        res.setDataIdent(themePubIdent);
+        res.setPublished(published);
+
+        Basket b = new Basket();
+        b.setModel(testIdent);
+        b.setTopic(testIdent);
+        b.setBasket(testIdent);
 
         if(regionCount > 0){
-            String regionPart1 =  "'publishedRegions': [{}]";
-            String regionPart2 = "{" +
-                    "'region': '{}'," +
-                    "'publishedBaskets': [{" +
-                    "'model': 'SO_AGI_MOpublic_20201009'," +
-                    "'topic': 'Bodenbedeckung'," +
-                    "'basket': 'oltenBID'" +
-                    "}]" +
-                    "}";
+            List<Region> regList = new LinkedList<>();
 
-            LinkedList<String> regList = new LinkedList<>();
             for(int i=0; i<regionCount; i++){
-                regList.add(format(regionPart2, appendIndex(testIdent, i)));
-            }
-            String regions = String.join(",", regList);
+                Region r = new Region();
+                r.setPublishedBaskets(List.of(b));
+                r.setRegion(
+                        appendIndex(testIdent, i)
+                );
 
-            basketPart = format(regionPart1, regions);
+                regList.add(r);
+            }
+
+            res.setPublishedRegions(regList);
         }
         else{
-            basketPart = "'publishedBaskets': [{" +
-                    "'model': 'SO_AGI_MOpublic_20201009'," +
-                    "'topic': 'Bodenbedeckung'," +
-                    "'basket': 'oltenBID'" +
-                    "}]";
+            res.setPublishedBaskets(List.of(b));
         }
-
-        String bodyTemplate = " { " +
-                "'dataIdent': '{}'," +
-                "'published': '{}'," +
-                "{}" +
-                "}";
-
-        res = format(bodyTemplate, themePubIdent, published.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME), basketPart);
-        res = res.replaceAll("\'", "\"");
 
         return res;
     }
@@ -272,6 +315,7 @@ class UpdatePublishTimeServiceBeanTest {
         p.setTheme(t);
         p.setCoverageIdent(testIdent);
         p.setClassSuffixOverride(themePubSuffix);
+        p.setPublicModelName(testIdent);
         context.addInstanceToCommit(p);
         res = p;
 

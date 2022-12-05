@@ -6,6 +6,7 @@ import ch.so.agi.simi.entity.theme.ThemePublication;
 import ch.so.agi.simi.entity.theme.subarea.PublishedSubArea;
 import ch.so.agi.simi.entity.theme.subarea.SubArea;
 import ch.so.agi.simi.global.exc.CodedException;
+import ch.so.agi.simi.global.exc.SimiException;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
 import org.apache.commons.lang3.tuple.Pair;
@@ -41,12 +42,50 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
         ThemePublication themePub = new ThemePubLoader().byIdentifier(request.getDataIdent());
 
+        assertMatchingModelNames(request, themePub);
+
         Map<String, PublishedSubArea> mapOfExistingPubSubs = loadExistingIntoKeyValMap(themePub, requestedSubAreaIdents);
 
         Pair<Integer, Integer> updates = execDbInsertsAndUpdates(themePub, requestedSubAreaIdents, mapOfExistingPubSubs, request.getPublished());
         res = new PublishResult(request.getDataIdent(), updates.getLeft(), updates.getRight());
 
         return res;
+    }
+
+    private void assertMatchingModelNames(PubNotification request, ThemePublication themePub){
+        String modelInRequest = null;
+
+        if(request.getPublishedRegions() != null && request.getPublishedRegions().size() > 0){
+            List<String> distinctModels = request.getPublishedRegions().stream()
+                    .flatMap(region -> region.getPublishedBaskets().stream())
+                    .map(basket -> basket.getModel())
+                    .distinct()
+                    .collect(Collectors.toList());
+
+            if(distinctModels.size() != 1)
+                throw new SimiException("Unsupported: Basket.Regions in request reference multiple public models: " + distinctModels);
+
+            modelInRequest = distinctModels.get(0);
+        }
+        else{
+            List<String> distinctModels = request.getPublishedBaskets().stream()
+                    .map(basket -> basket.getModel())
+                    .distinct()
+                    .collect(Collectors.toList());
+
+            if(distinctModels.size() != 1)
+                throw new SimiException("Unsupported: Baskets in request reference multiple public models: " + distinctModels);
+
+            modelInRequest = distinctModels.get(0);
+        }
+
+        if(!modelInRequest.equals(themePub.getPublicModelName())) {
+            throw new CodedException(
+                    404,
+                    CodedException.ERR_MODEL_MISMATCH,
+                    MessageFormat.format("Model in request: {0}. In conf (simi): {1}", modelInRequest, themePub.getPublicModelName())
+            );
+        }
     }
 
     public PublishResult update(String tpIdentifier, String coverageIdentifier, LocalDateTime publishInstant) throws CodedException {

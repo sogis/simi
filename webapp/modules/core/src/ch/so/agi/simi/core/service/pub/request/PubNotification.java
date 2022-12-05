@@ -70,6 +70,18 @@ public class PubNotification {
         return res;
     }
 
+    public String toJson(){
+        String json = null;
+
+        try{
+            json = mapper.writeValueAsString(this);
+        }
+        catch(Exception e){
+            throw new RuntimeException(e);
+        }
+        return json;
+    }
+
     private void assertValid(){
         Validator validator = valFact.getValidator();
         Set<ConstraintViolation<Object>> violations = validator.validate(this);
