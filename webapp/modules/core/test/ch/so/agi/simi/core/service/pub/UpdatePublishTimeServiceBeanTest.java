@@ -53,7 +53,6 @@ class UpdatePublishTimeServiceBeanTest {
             "AQMAAAABAAAABQAAAAAAAAAg1kNBAAAAAIBPMkEAAAAAINZDQQAAAADkTzJBAAAAAFLWQ0EAAAAA5E8yQQAAAABS1kNBAAAAAIBPMkEAAAAAINZDQQAAAACATzJB"
     );
 
-
     @RegisterExtension
     static TestContainer container = SimiTestContainer.Common.INSTANCE;
 

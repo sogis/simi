@@ -61,7 +61,7 @@ public class GenerateThemePubDocServiceBean implements GenerateThemePubDocServic
     }
 
     private UUID queryUuid(String themePubIdent){
-        ThemePublication tp = new ThemePubLoader(dataManager).byIdentifier(themePubIdent);
+        ThemePublication tp = ThemePubLoader.byIdentifier(themePubIdent);
         return tp.getId();
     }
 }

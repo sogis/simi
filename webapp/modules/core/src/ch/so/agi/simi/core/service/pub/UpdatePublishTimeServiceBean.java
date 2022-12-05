@@ -39,7 +39,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
         List<String> requestedSubAreaIdents = deferSubAreasFromRequest(request);
 
-        ThemePublication themePub = new ThemePubLoader(dataManager).byIdentifier(request.getDataIdent());
+        ThemePublication themePub = new ThemePubLoader().byIdentifier(request.getDataIdent());
 
         Map<String, PublishedSubArea> mapOfExistingPubSubs = loadExistingIntoKeyValMap(themePub, requestedSubAreaIdents);
 
@@ -54,7 +54,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
         List<String> subAreaIdents = loadSubAreaIdentifier(coverageIdentifier);
 
-        ThemePublication themePub = new ThemePubLoader(dataManager).byIdentifier(tpIdentifier);
+        ThemePublication themePub = ThemePubLoader.byIdentifier(tpIdentifier);
         themePub.setCoverageIdent(coverageIdentifier); // Non persistent overwrite for linking to default coverage
 
         Map<String, PublishedSubArea> mapOfExistingPubSubs = loadExistingIntoKeyValMap(themePub, subAreaIdents);
@@ -136,8 +136,6 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
         return subAreaList;
     }
-
-
 
     private List<String> deferSubAreasFromRequest(PubNotification request) {
         if(request.getPublishedRegions() == null || request.getPublishedRegions().size() == 0)
