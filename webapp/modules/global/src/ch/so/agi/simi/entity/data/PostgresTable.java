@@ -27,6 +27,9 @@ public class PostgresTable extends SimiEntity {
     @NotNull
     private String idFieldName;
 
+    @Column(name = "DOC_TABLE_NAME", length = 100)
+    private String docTableName;
+
     @NotNull
     @Column(name = "TABLE_IS_VIEW", nullable = false)
     private Boolean tableIsView = false;
@@ -78,6 +81,14 @@ public class PostgresTable extends SimiEntity {
     @Lob
     @Column(name = "REMARKS")
     private String remarks;
+
+    public String getDocTableName() {
+        return docTableName;
+    }
+
+    public void setDocTableName(String docTableName) {
+        this.docTableName = docTableName;
+    }
 
     public String getDescriptionOverride() {
         return descriptionOverride;

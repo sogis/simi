@@ -57,6 +57,10 @@ public class PostgresTableEdit extends StandardEditor<PostgresTable> {
 
         List<SyncedField> synced = bean.actualizeWithDbCat(client, table);
 
+        if(table.getDocTableName() != null) {
+            bean.appendModelDoc(client, table, synced);
+        }
+
         List<TableField> uiExposedFields = tableFieldsDc.getMutableItems();
 
         uiExposedFields.clear();

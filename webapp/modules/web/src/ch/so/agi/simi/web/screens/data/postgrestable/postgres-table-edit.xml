@@ -32,7 +32,10 @@
         <form id="form" dataContainer="postgresTableDc">
             <column width="350px">
                 <lookupField id="dataThemeField" dataContainer="postgresTableDc" property="dbSchema" optionsContainer="dataThemeDc"/>
-                <textField id="tableNameField" property="tableName" editable="true"/>
+                <hbox spacing="true" caption="Tabelle | Dok-Tabelle">
+                    <textField id="tableNameField" property="tableName" editable="true" dataContainer="postgresTableDc" width="105%"/>
+                    <textField id="docTableNameField" property="docTableName" editable="true" dataContainer="postgresTableDc" width="100%"/>
+                </hbox>
                 <dateField id="catSyncStampField" property="catSyncStamp" editable="false" tabIndex="-1"/>
                 <checkBox id="tableIsViewField" property="tableIsView" editable="false" tabIndex="-1" icon="BULK_EDIT_ACTION"/>
                 <textField id="titleField" property="title" editable="true"/>

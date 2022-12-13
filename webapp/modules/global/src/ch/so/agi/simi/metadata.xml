@@ -3,6 +3,7 @@
 
     <metadata-model root-package="ch.so.agi.simi" namespace="simi">
         <class>ch.so.agi.simi.core.dependency.DependencyInfo</class>
+        <class>ch.so.agi.simi.web.screens.dependency_vm.Dependency_VM</class>
     </metadata-model>
 
 </metadata>

@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component(ThemeReaderBean.NAME)
 public class ThemeReaderBean {
@@ -43,11 +45,42 @@ public class ThemeReaderBean {
     }
 
     /**
+     * Typischerweise genutzt für DB-Views (inOutTable = View). Fügt der View und deren Attribute die
+     * Beschreibung der im Attribut PostgresTable.docTableName konfigurierten "Muttertabelle" bei.
+     * @param reader Client-Proxy des SchemaReader-Service.
+     * @param inOutTable PostgresTable-Entity, deren Beschreibung aus dem Katalog aktualisiert werden.
+     * @param inOutFields Liste der synced-fields. deren Beschreibungen aus dem Katalog aktualisiert werden.
+     */
+    public void appendModelDoc(SchemaReader reader, PostgresTable inOutTable, List<SyncedField> inOutFields){
+        if(inOutTable.getDocTableName() == null)
+            return;
+
+        TableAndFieldInfo tfi = reader.queryTableMeta(
+                inOutTable.getDbSchema().getPostgresDB().getIdentifier(),
+                inOutTable.getDbSchema().getSchemaName(),
+                inOutTable.getDocTableName()
+        );
+
+        inOutTable.setDescriptionModel(tfi.getTableInfo().getDescription());
+
+        Map<String, String> desc = tfi.getFields().stream()
+                .filter(fieldInfo -> fieldInfo.getDescription() != null)
+                .collect(Collectors.toMap(FieldInfo::getName, FieldInfo::getDescription));
+
+        for(SyncedField sf : inOutFields){
+            if(!desc.containsKey(sf.getTableField().getName()))
+                continue;
+
+            sf.getTableField().setDescriptionModel(desc.get(sf.getTableField().getName()));
+        }
+    }
+
+    /**
      * Aktualisiert die Eigenschaften und zugeordneten Attribute der Entity inOutTable aufgrund der Katalogdaten der Quell-Datenbank.
      * Siehe Erläuterungen in /dok_extensions
      * @param reader Client-Proxy des SchemaReader-Service.
      * @param inOutTable PostgresTable-Entity, deren Eigenschaften und Attribute aus dem Katalog aktualisiert werden.
-     * @return Liste
+     * @return Liste der SyncedFields = full outer join der vorgängig in SIMI vorhandenen Felder und der aktuell in der Quelle vorhandenen Felder.
      */
     public List<SyncedField> actualizeWithDbCat(SchemaReader reader, PostgresTable inOutTable) {
 

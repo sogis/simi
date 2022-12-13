@@ -112,6 +112,7 @@ create table SIMIDATA_POSTGRES_TABLE (
     VERSION integer not null,
     --
     ID_FIELD_NAME varchar(100) not null,
+    DOC_TABLE_NAME varchar(100),
     TABLE_IS_VIEW boolean not null,
     TITLE varchar(255) not null,
     DESCRIPTION_OVERRIDE text,

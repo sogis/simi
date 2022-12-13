@@ -10,8 +10,6 @@
         <item screen="simiData_DbSchema.browse" caption="mainMsg://dbschema.caption.browse"/>
         <item screen="simiData_PostgresDB.browse" caption="mainMsg://postgresdb.caption.browse"/>
         <item screen="simiData_RasterDS.browse" caption="mainMsg://rasterds.caption.browse"/>
-        <item screen="simi_ThemePubDatasheet" caption="mainMsg://menu_config.simi_ThemePubDatasheet"/>
-        <item screen="simi_PublishedSubAreaCreate" caption="mainMsg://menu_config.simi_PublishedSubAreaCreate"/>
     </menu>
     <menu id="grp_theme" caption="Themen - Verwaltung ...">
         <item screen="simiTheme_ThemePublication.browse"
@@ -35,6 +33,7 @@
         <item screen="simiProduct_ExternalWmsService.browse" caption="mainMsg://extwms.caption.browse"/>
         <item class="ch.so.agi.simi.web.menu.UrlOpen" id="urlopen_handbook" description="https://github.com/sogis/dok/blob/dok/dok_div_anleitungen/Documents/simi/simi_anleitung.md"
               caption="Handbuch (Link)"/>
+        <item screen="simi_Dependency_VM.browse" caption="mainMsg://menu_config.simi_Dependency_VM.browse"/>
     </menu>
     <item class="ch.so.agi.simi.web.menu.UrlOpen" id="urlopen_publish" description="https://jenkins-agi-apps-production.apps.ocp.so.ch/job/WebGISClient/"
           caption="Publizieren (Link)"/>

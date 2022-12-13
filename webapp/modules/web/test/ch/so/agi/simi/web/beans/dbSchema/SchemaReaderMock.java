@@ -71,6 +71,20 @@ public class SchemaReaderMock implements SchemaReader {
         else if(ThemeReaderBeanTest.SCHEMA_EXISTING_KEPT__SCHEMA.equals(schemaName)){
             res = tblAndFieldMock(schemaName, ThemeReaderBeanTest.SCHEMA_EXISTING_KEPT__NEW_TABLE, "fuu_");
         }
+        else if(ThemeReaderBeanTest.VIEW_DOC_FROM_TABLE__SCHEMA.equals(schemaName)){
+            res = tblAndFieldMock(schemaName, ThemeReaderBeanTest.VIEW_DOC_FROM_TABLE__TABLE,null);
+
+            res.getTableInfo().setDescription(ThemeReaderBeanTest.VIEW_DOC_FROM_TABLE__TABLE_DESC);
+
+            FieldInfo fi = fieldInfoMock(ThemeReaderBeanTest.VIEW_DOC_FROM_TABLE__FIELD);
+            fi.setDescription(ThemeReaderBeanTest.VIEW_DOC_FROM_TABLE__FIELD_DESC);
+
+            FieldInfo fieldNoDesc = fieldInfoMock(ThemeReaderBeanTest.VIEW_DOC_FROM_TABLE__FIELD + "_");
+            fieldNoDesc.setDescription(null);
+
+            res.getFields().add(fi);
+            res.getFields().add(fieldNoDesc);
+        }
 
         return res;
     }

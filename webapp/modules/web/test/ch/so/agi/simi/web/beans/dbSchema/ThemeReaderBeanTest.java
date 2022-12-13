@@ -4,11 +4,15 @@ import ch.so.agi.simi.entity.data.DbSchema;
 import ch.so.agi.simi.entity.data.PostgresDB;
 import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
+import ch.so.agi.simi.web.beans.dbSchema.reader_dto.update_dto.FieldSyncState;
+import ch.so.agi.simi.web.beans.dbSchema.reader_dto.update_dto.SyncedField;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ThemeReaderBeanTest {
 
@@ -54,6 +58,39 @@ public class ThemeReaderBeanTest {
     public static final String FIELD_NEW__SCHEMA = "field_new_schema";
     public static final String FIELD_NEW__TABLE = "fieldtable";
     public static final String FIELD_NEW__FIELD = "newfield";
+
+    public static final String VIEW_DOC_FROM_TABLE__SCHEMA = "view_doc";
+    public static final String VIEW_DOC_FROM_TABLE__TABLE = "table";
+    public static final String VIEW_DOC_FROM_TABLE__TABLE_DESC = "tableDesc";
+    public static final String VIEW_DOC_FROM_TABLE__FIELD = "field";
+    public static final String VIEW_DOC_FROM_TABLE__FIELD_DESC = "fieldDesc";
+
+    @Test
+    public void dbView_docFromTable_OK(){
+        ThemeReaderBean bean = new ThemeReaderBean();
+
+        DbSchema theme = themeCreateMock();
+        PostgresTable table = themeAddNewTable(theme);
+
+        theme.setSchemaName(VIEW_DOC_FROM_TABLE__SCHEMA);
+        table.setTableName(VIEW_DOC_FROM_TABLE__TABLE);
+        table.setDocTableName(VIEW_DOC_FROM_TABLE__TABLE);
+        table.setDescriptionModel(null);
+
+        table.getTableFields().get(0).setName(VIEW_DOC_FROM_TABLE__FIELD);
+        table.getTableFields().get(0).setDescriptionModel(null);
+
+        List<SyncedField> fields = new LinkedList<>();
+        fields.add(new SyncedField(table.getTableFields().get(0), FieldSyncState.POSSIBLY_ACTUALIZED));
+
+        bean.appendModelDoc(READER_MOCK, table, fields);
+
+        PostgresTable updatedTable = theme.findTableByName(VIEW_DOC_FROM_TABLE__TABLE);
+        Assertions.assertEquals(VIEW_DOC_FROM_TABLE__TABLE_DESC, updatedTable.getDescriptionModel());
+
+        TableField updatedField = updatedTable.findField(VIEW_DOC_FROM_TABLE__FIELD);
+        Assertions.assertEquals(VIEW_DOC_FROM_TABLE__FIELD_DESC, updatedField.getDescriptionModel());
+    }
 
     @Test
     public void schema_ReadAllTableAndFieldProperties_OK(){
