@@ -152,7 +152,7 @@ public_dp_ids AS (
     abbreviation,
     NULL AS division,
     url,
-    email,
+    'mailto:' || email AS email,
     phone,
     amt.id AS org_id
   FROM 
@@ -167,7 +167,7 @@ public_dp_ids AS (
     amt.abbreviation,
     org.name AS division,
     COALESCE(sub.url, amt.url) AS url,
-    COALESCE(sub.email, amt.email) AS email,
+    COALESCE('mailto:' || sub.email, amt.email) AS email,
     COALESCE(sub.phone, amt.phone) AS phone,
     sub.id AS org_id
   FROM 
