@@ -257,7 +257,7 @@
         <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiIAM_Role" name="tableView-edit-roles" extends="_local"/>
-    <view entity="simiData_TableField" name="tableView-edit-tableFields" extends="_local"/>
+    <view entity="simiData_TableField" name="tableView-edit-tableFields" extends="_minimal"/>
     <view entity="simiData_PostgresTable" name="tableView-edit-postgresTables" extends="_minimal">
         <property name="dbSchema" view="_minimal"/>
         <property name="descriptionModel"/>

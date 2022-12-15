@@ -78,12 +78,12 @@ public class TableField extends SimiEntity {
     @Column(name = "DISPLAY_PROPS4_JSON")
     private String displayProps4Json;
 
-    @MetaProperty
+    @MetaProperty(related = "descriptionModel")
     public Boolean getHasModelDesc(){
         return getDescriptionModel() != null;
     }
 
-    @MetaProperty
+    @MetaProperty(related = "descriptionOverride")
     public Boolean getHasDescOverride(){
         return getDescriptionOverride() != null;
     }

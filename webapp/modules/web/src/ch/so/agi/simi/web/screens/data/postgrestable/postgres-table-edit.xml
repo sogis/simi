@@ -32,24 +32,30 @@
         <form id="form" dataContainer="postgresTableDc">
             <column width="350px">
                 <lookupField id="dataThemeField" dataContainer="postgresTableDc" property="dbSchema" optionsContainer="dataThemeDc"/>
-                <hbox spacing="true" caption="Tabelle | Dok-Tabelle">
-                    <textField id="tableNameField" property="tableName" editable="true" dataContainer="postgresTableDc" width="105%"/>
-                    <textField id="docTableNameField" property="docTableName" editable="true" dataContainer="postgresTableDc" width="100%"/>
-                </hbox>
+                <textField id="tableNameField" property="tableName"/>
+                <textField id="docTableNameField" property="docTableName"/>
                 <dateField id="catSyncStampField" property="catSyncStamp" editable="false" tabIndex="-1"/>
-                <checkBox id="tableIsViewField" property="tableIsView" editable="false" tabIndex="-1" icon="BULK_EDIT_ACTION"/>
-                <textField id="titleField" property="title" editable="true"/>
-                <textField id="idFieldNameField" property="idFieldName" icon="BULK_EDIT_ACTION" />
-                <textField id="geoFieldNameField" property="geoFieldName" icon="BULK_EDIT_ACTION"/>
-                <textField id="geoTypeField" property="geoType" icon="BULK_EDIT_ACTION"/>
-                <textField id="geoEpsgCodeField" property="geoEpsgCode" icon="BULK_EDIT_ACTION"/>
+                <textField id="titleField" property="title" />
             </column>
             <column width="350px">
-                <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
-                <textArea id="descriptionModelField" property="descriptionModel" icon="BULK_EDIT_ACTION" editable="false" rows="5" rowspan="3"/>
-                <textArea id="descriptionOverrideField" property="descriptionOverride" editable="true" rows="5" rowspan="3"/>
+                <textArea id="remarksField" property="remarks" rows="7" rowspan="5"/>
             </column>
         </form>
+        <groupBox caption="Weitere Eigenschaften" collapsable="true" collapsed="true">
+            <form dataContainer="postgresTableDc">
+                <column width="350px">
+                    <checkBox id="tableIsViewField" property="tableIsView" editable="false" tabIndex="-1" icon="BULK_EDIT_ACTION"/>
+                    <textField id="idFieldNameField" property="idFieldName" icon="BULK_EDIT_ACTION" />
+                    <textField id="geoFieldNameField" property="geoFieldName" icon="BULK_EDIT_ACTION"/>
+                    <textField id="geoTypeField" property="geoType" icon="BULK_EDIT_ACTION"/>
+                    <textField id="geoEpsgCodeField" property="geoEpsgCode" icon="BULK_EDIT_ACTION"/>
+                </column>
+                <column width="350px">
+                    <textArea id="descriptionModelField" property="descriptionModel" icon="BULK_EDIT_ACTION" editable="false" rows="5" rowspan="3"/>
+                    <textArea id="descriptionOverrideField" property="descriptionOverride" editable="true" rows="5" rowspan="3"/>
+                </column>
+            </form>
+        </groupBox>
         <groupBox id="tableFieldsBox" caption="Tabellenspalten"
                   expand="tableFieldsTable">
             <table id="tableFieldsTable"
