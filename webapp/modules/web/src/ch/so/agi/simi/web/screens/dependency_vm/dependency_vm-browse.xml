@@ -6,7 +6,7 @@
         messagesPack="ch.so.agi.simi.web.screens.dependency_vm">
     <data readOnly="true">
         <collection id="dependency_VMsDc"
-                    class="ch.so.agi.simi.web.screens.depend_mock.Dependency_VM">
+                    class="ch.so.agi.simi.web.screens.dependency_vm.Dependency_VM">
             <view extends="_local">
                 <property name="display"/>
                 <property name="identifier"/>
@@ -20,11 +20,11 @@
                 width="800"/>
     <layout expand="dependency_VMsTable"
             spacing="true">
+        <label value="Hier kommt die Auswahl der Tabelle hin..."/>
         <treeTable id="dependency_VMsTable"
                    width="100%"
                    dataContainer="dependency_VMsDc"
-                   hierarchyProperty="parent"
-        >
+                   hierarchyProperty="parent">
             <actions>
                 <action id="edit" type="edit"/>
                 <action id="excel" caption="Als Excel exportieren" icon="icons/excel.png" type="excel">
@@ -36,8 +36,8 @@
             </actions>
             <columns>
                 <column id="display"/>
-                <column id="parentDisplay" caption="Abhängigkeit von"/>
-                <column id="relationDescription"/>
+                <column id="parentDisplay" caption="Abhängigkeit"/>
+                <column id="relationDescription" caption="Details"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
