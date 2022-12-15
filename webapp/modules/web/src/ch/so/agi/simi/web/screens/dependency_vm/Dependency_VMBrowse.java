@@ -1,7 +1,12 @@
 package ch.so.agi.simi.web.screens.dependency_vm;
 
+import ch.so.agi.simi.entity.SimiEntity;
+import ch.so.agi.simi.entity.data.PostgresTable;
+import com.haulmont.cuba.core.entity.BaseUuidEntity;
+import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.ScreenBuilders;
+import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.TreeTable;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.screen.*;
@@ -83,27 +88,39 @@ public class Dependency_VMBrowse extends StandardLookup<Dependency_VM> {
         dependency_VMsTable.expandAll();
     }
 
-    /*
+
     @Subscribe("dependency_VMsTable.edit")
     public void dependency_VMsTableEdit(Action.ActionPerformedEvent event) {
 
         Dependency_VM selected = dependency_VMsTable.getSingleSelected();
-        if(selected == null || selected.getEntityIdent() == null)
+        if(selected == null)// || selected.getEntityIdent() == null)
             return;
 
-        Entity<?> selEntity = manager.load(PostgresTable.class)
+        /*
+        PostgresTable selEntity = manager.load(PostgresTable.class)
                 .id(UUID.fromString("3203521e-2b8d-438a-b1d7-8053f5b9ed06"))
                 .one();
 
-        EditorScreen s = (EditorScreen)screenBuilders.editor(selEntity.getClass(), this)
-                .withOpenMode(OpenMode.DIALOG)
-                .build();
+        editSelectedEntity(selEntity, selEntity.getClass());
 
-        s.setEntityToEdit(selEntity);
-        s.sh
+         */
     }
 
-     */
+    private void editSelectedEntity(BaseUuidEntity entity, Class entityConcreteClass) {
+        screenBuilders.editor(entityConcreteClass, this)
+                .editEntity(entity)
+                .build()
+                .show();
+    }
+
+    private void editSelectedEntity(PostgresTable entity) {
+        // Geht das auch mit dynamic cast a la  castTo(class, object). castTo(PostgresTable.class, simiEntity)
+
+        screenBuilders.editor(PostgresTable.class, this)
+                .editEntity(entity)
+                .build()
+                .show();
+    }
 
 
 }

@@ -3,6 +3,7 @@ package ch.so.agi.simi.web.api.themepub;
 import ch.so.agi.simi.core.service.pub.GenerateThemePubDocService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,8 +47,9 @@ public class DataDocController {
     @GetMapping()
     public ResponseEntity<String> get(@NotEmpty @RequestParam String dataident, @RequestHeader Map<String, String> headers) {
 
-        log.debug("Dataident = {}", dataident);
+        log.info("Dataident = {}", dataident);
 
+        /*
         headers.forEach((key, value) -> {
                     if(value.toLowerCase().contains("bearer")){
                         String newVal = "Bearer" + " ***" + value.substring(value.length() - 4);
@@ -56,11 +58,10 @@ public class DataDocController {
 
                     log.debug(String.format("Header '%s' = %s", key, value));
                 });
+         */
 
         ResponseEntity res = null;
 
-        res = returnUnderConstruction(dataident);
-        /*
         try{
             String generatedDoc = coreService.generateDoc(dataident);
 
@@ -74,11 +75,12 @@ public class DataDocController {
         catch(Exception e){
             res = ExcConverter.toResponse(e);
             log.info("Generation of data-doc failed: {}", e.getMessage());
-        }*/
+        }
 
         return res;
     }
 
+    /*
     private static ResponseEntity returnUnderConstruction(String dataident){
         String template = "<!DOCTYPE html>\n" +
                 "<html lang=\"de\">\n" +
@@ -97,5 +99,6 @@ public class DataDocController {
 
         return ResponseEntity.ok().body(body);
     }
+     */
 }
 
