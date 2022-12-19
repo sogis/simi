@@ -4,6 +4,8 @@ USER root
 
 WORKDIR /home/simi
 
+COPY ca-certificates/ /usr/local/share/ca-certificates/
+RUN update-ca-certificates
 RUN chown -R 1001:0 . && \
     chmod -R g+rw .
 COPY tmp/app.jar .
