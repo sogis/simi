@@ -51,7 +51,7 @@ public class ThemePubLoader {
         query.setParameter(1, identifier);
 
         try{
-            log.debug("Executing query: {}", query);
+            log.debug("Executing query: {}", query.getQueryString());
             res = (UUID) query.getSingleResult(); // throws jaxax.persistence.NoResultException
         }
         catch(NoResultException nores) {

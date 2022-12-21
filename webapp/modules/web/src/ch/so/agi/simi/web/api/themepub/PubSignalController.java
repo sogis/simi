@@ -30,13 +30,14 @@ public class PubSignalController {
 
         try{
             PublishResult pRes = coreService.update(jsonBody);
-            res = ResponseEntity.ok().body(
-                    MessageFormat.format(
-                            "Updated {0}. Executed {1} db insert(s) and {2} db update(s).",
-                            pRes.getThemePubIdentifier(),
-                            pRes.getDbInsertCount(),
-                            pRes.getDbUpdateCount())
-            );
+            String msg = MessageFormat.format(
+                    "Updated {0}. Executed {1} db insert(s) and {2} db update(s).",
+                    pRes.getThemePubIdentifier(),
+                    pRes.getDbInsertCount(),
+                    pRes.getDbUpdateCount());
+
+            log.info(msg);
+            res = ResponseEntity.ok().body(msg);
         }
         catch(Exception e){
             res = ExcConverter.toResponse(e);

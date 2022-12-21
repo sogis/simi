@@ -70,7 +70,7 @@ public class DataDocController {
                     .body(generatedDoc)
             ;
 
-            log.info("Returned doc for identifier: {}", dataident);
+            log.info("Returned doc for identifier: {}. Doc string length: {}", dataident, generatedDoc.length());
         }
         catch(Exception e){
             res = ExcConverter.toResponse(e);
