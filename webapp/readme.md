@@ -97,6 +97,10 @@ Bei Bedarf kann der Loglevel der vorkonfigurierten Logger verändert werden:
     
 **Bitte beachten:** Der ROOT-Logger sollte nicht auf Level DEBUG oder noch detaillierter gestellt werden, da dies massiv viel logging auslöst.
 
+### GRETL-Publisher Endpunkte
+
+Zu Dokumentation und Simulation des Publisher mittels CURL siehe: [doc/gretl_publisher.md](doc/gretl_publisher.md)
+
 ### Troubleshooting der App-Initialisierung
 
 Falls eine Fragestellung vor der Verfügbarkeit der Admin-Masken analysiert werden muss, kann der Loglevel in der 
