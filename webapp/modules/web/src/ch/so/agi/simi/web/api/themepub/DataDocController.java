@@ -49,7 +49,6 @@ public class DataDocController {
 
         log.info("Dataident = {}", dataident);
 
-        /*
         headers.forEach((key, value) -> {
                     if(value.toLowerCase().contains("bearer")){
                         String newVal = "Bearer" + " ***" + value.substring(value.length() - 4);
@@ -58,8 +57,10 @@ public class DataDocController {
 
                     log.debug(String.format("Header '%s' = %s", key, value));
                 });
-         */
 
+        ResponseEntity res = returnUnderConstruction(dataident);
+
+        /*
         ResponseEntity res = null;
 
         try{
@@ -76,11 +77,12 @@ public class DataDocController {
             res = ExcConverter.toResponse(e);
             log.info("Generation of data-doc failed: {}", e.getMessage());
         }
+        */
 
         return res;
     }
 
-    /*
+
     private static ResponseEntity returnUnderConstruction(String dataident){
         String template = "<!DOCTYPE html>\n" +
                 "<html lang=\"de\">\n" +
@@ -99,6 +101,5 @@ public class DataDocController {
 
         return ResponseEntity.ok().body(body);
     }
-     */
 }
 
