@@ -28,39 +28,10 @@ public class DataDocController {
     @Inject
     private GenerateThemePubDocService coreService;
 
-    //@GetMapping
-    /*
-    public ResponseEntity<String> get(HttpServletRequest request) {
-        log.debug("Request: {}", request);
-        log.debug("User: {}", request.getUserPrincipal());
-        log.debug("QueryString: {}", request.getQueryString());
-
-        Iterator<String> iter = request.getHeaderNames().asIterator();
-        while(iter.hasNext()){
-            String headerKey = iter.next();
-            log.debug("Header: {}={}", headerKey, request.getHeader(headerKey));
-        }
-
-        return returnUnderConstruction("fuu");
-    }*/
-
     @GetMapping()
-    public ResponseEntity<String> get(@NotEmpty @RequestParam String dataident, @RequestHeader Map<String, String> headers) {
-
+    public ResponseEntity<String> get(@NotEmpty @RequestParam String dataident) {
         log.info("Dataident = {}", dataident);
 
-        headers.forEach((key, value) -> {
-                    if(value.toLowerCase().contains("bearer")){
-                        String newVal = "Bearer" + " ***" + value.substring(value.length() - 4);
-                        value = newVal;
-                    }
-
-                    log.debug(String.format("Header '%s' = %s", key, value));
-                });
-
-        ResponseEntity res = returnUnderConstruction(dataident);
-
-        /*
         ResponseEntity res = null;
 
         try{
@@ -77,13 +48,26 @@ public class DataDocController {
             res = ExcConverter.toResponse(e);
             log.info("Generation of data-doc failed: {}", e.getMessage());
         }
-        */
+
 
         return res;
     }
 
+/*
+    @GetMapping()
+    public ResponseEntity<String> get(@NotEmpty @RequestParam String dataident, @RequestHeader Map<String, String> headers) {
 
-    private static ResponseEntity returnUnderConstruction(String dataident){
+        log.info("Dataident = {}", dataident);
+
+        headers.forEach((key, value) -> {
+                    if(value.toLowerCase().contains("bearer")){
+                        String newVal = "Bearer" + " ***" + value.substring(value.length() - 4);
+                        value = newVal;
+                    }
+
+                    log.debug(String.format("Header '%s' = %s", key, value));
+                });
+
         String template = "<!DOCTYPE html>\n" +
                 "<html lang=\"de\">\n" +
                 "  <head>\n" +
@@ -101,5 +85,7 @@ public class DataDocController {
 
         return ResponseEntity.ok().body(body);
     }
+
+ */
 }
 
