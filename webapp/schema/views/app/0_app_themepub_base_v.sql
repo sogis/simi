@@ -241,7 +241,13 @@ public_dp_ids AS (
 
 ,ft_per_tp_default AS ( -- default filetypes for all tp with dataclass "tablesimple"
   SELECT 
-    ft.id AS ft_id,
+    jsonb_agg(
+      jsonb_build_object(
+          'name', ft.name,
+          'abbreviation', ft.kuerzel,
+          'mimetype', ft.mime_type
+      )
+    ) AS formats,
     tp.id AS tp_id
   FROM 
     simi.simitheme_file_type ft
@@ -251,32 +257,11 @@ public_dp_ids AS (
       ft.kuerzel IN ('xtf', 'gpkg', 'shp', 'dxf')  
     AND 
       tp.data_class = 'tableSimple'
-)
-
-,ft_per_tp_linked AS (
-  SELECT 
-    custom_file_type_id  AS ft_id,
-    theme_publication_id AS tp_id
-  FROM
-    simi.simitheme_theme_publication_custom_file_type_link
-)
-
-,ft_per_tp AS (
-  SELECT 
-    ft_id,
-    tp_id
-  FROM 
-    (
-      SELECT ft_id, tp_id FROM ft_per_tp_default
-      UNION ALL 
-      SELECT ft_id, tp_id FROM ft_per_tp_linked
-    ) t
   GROUP BY 
-    ft_id,
-    tp_id
+    tp.id
 )
 
-,tp_filetypes AS (
+,ft_per_tp_configured AS (
   SELECT 
     jsonb_agg(
       jsonb_build_object(
@@ -284,14 +269,24 @@ public_dp_ids AS (
           'abbreviation', ft.kuerzel,
           'mimetype', ft.mime_type
       )
-    ) AS file_formats,
-    tp_id
-  FROM 
-    ft_per_tp ids
+    ) AS formats,
+    theme_publication_id AS tp_id
+  FROM
+    simi.simitheme_theme_publication_custom_file_type_link link
   JOIN
-    simi.simitheme_file_type ft ON ids.ft_id = ft.id
+    simi.simitheme_file_type ft ON link.custom_file_type_id = ft.id
   GROUP BY 
-    tp_id
+    theme_publication_id
+)
+
+,tp_filetypes AS (
+  SELECT 
+    COALESCE(conf.formats, def.formats) AS file_formats,
+    COALESCE(conf.tp_id, def.tp_id) AS tp_id
+  FROM 
+    ft_per_tp_configured conf
+  FULL OUTER JOIN 
+    ft_per_tp_default def ON conf.tp_id = def.tp_id
 )
 
 -- Identifier, Name, Descr ********************************************************************
