@@ -52,29 +52,14 @@ public class ThemePublicationEdit extends StandardEditor<ThemePublication> {
 
     @Subscribe("dataClassField")
     public void onDataClassFieldValueChange(HasValue.ValueChangeEvent<ThemePublication_TypeEnum> event) {
-        proposeSuffix(event.getPrevValue(), event.getValue());
-    }
-
-    private void proposeSuffix(ThemePublication_TypeEnum prev, ThemePublication_TypeEnum current){
-
-        if(current == null)
+        if(!event.isUserOriginated())
             return;
 
-        String oldDefault = "";
-        if(prev != null)
-            oldDefault = prev.getDefaultSuffix();
+        String newSuffix = ThemePublication_TypeEnum.adaptSuffixToTypeChange(
+                event.getPrevValue(),
+                identSuffixField.getValue(),
+                event.getValue());
 
-        String newDefault = current.getDefaultSuffix();
-
-        String val = identSuffixField.getValue();
-        if(val == null)
-            val = "";
-
-        if(val.equals(oldDefault)){
-            if(newDefault.equals(""))
-                identSuffixField.setValue(null);
-            else
-                identSuffixField.setValue(newDefault);
-        }
+        identSuffixField.setValue(newSuffix);
     }
 }
