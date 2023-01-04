@@ -28,7 +28,7 @@ public class DataDocController {
     @Inject
     private GenerateThemePubDocService coreService;
 
-    @GetMapping()
+    @GetMapping(produces = "text/html; charset=utf-8")
     public ResponseEntity<String> get(@NotEmpty @RequestParam String dataident) {
         log.info("Dataident = {}", dataident);
 
@@ -38,7 +38,6 @@ public class DataDocController {
             String generatedDoc = coreService.generateDoc(dataident);
 
             res = ResponseEntity.ok()
-                    .contentType(MediaType.TEXT_HTML)
                     .body(generatedDoc)
             ;
 
@@ -49,12 +48,10 @@ public class DataDocController {
             log.info("Generation of data-doc failed: {}", e.getMessage());
         }
 
-
         return res;
     }
 
-/*
-    @GetMapping()
+/*    @GetMapping(produces = "text/html; charset=utf-8")
     public ResponseEntity<String> get(@NotEmpty @RequestParam String dataident, @RequestHeader Map<String, String> headers) {
 
         log.info("Dataident = {}", dataident);
@@ -83,9 +80,10 @@ public class DataDocController {
 
         String body = MessageFormat.format(template, dataident);
 
-        return ResponseEntity.ok().body(body);
-    }
+        ResponseEntity<String> res = ResponseEntity.ok().body(body);
+        return res;
+    }*/
 
- */
+
 }
 
