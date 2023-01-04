@@ -1,1 +1,1 @@
-docker-compose up -V schemareader
+docker compose up -V schemareader
