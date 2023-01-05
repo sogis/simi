@@ -75,6 +75,25 @@ class PubNotificationTest {
     }
 
     @Test
+    void serialize_OK() {
+        String rawJson = "{" +
+                    "'dataIdent': 'ch.so.afu.gewaesserschutz'," +
+                    "'published': '2021-12-23T14:54:49.050062'," +
+                    "'publishedBaskets': [{" +
+                        "'model': 'SO_AGI_MOpublic_20201009'," +
+                        "'topic': 'Bodenbedeckung'," +
+                        "'basket': 'oltenBID'" +
+                    "}]" +
+                "}";
+        String sunnyJson = rawJson.replaceAll("\'", "\"");
+
+        PubNotification testObj = PubNotification.parseFromJson(sunnyJson);
+        String json = testObj.toJson();
+
+        PubNotification.parseFromJson(json);
+    }
+
+    @Test
     void parse_SunnyRegionJson_OK() {
         String rawJson = "{" +
                     "'dataIdent': 'ch.so.afu.gewaesserschutz'," +
@@ -136,7 +155,7 @@ class PubNotificationTest {
         String sunnyJson = rawJson.replaceAll("\'", "\"");
         PubNotification p = PubNotification.parseFromJson(sunnyJson);
 
-        Assertions.assertEquals("SO_AGI_MOpublic_20201009", p.getModelName().orElse("NULL"));
+        Assertions.assertEquals("SO_AGI_MOpublic_20201009", p.deferModelName().orElse("NULL"));
     }
 
     @Test
@@ -158,7 +177,7 @@ class PubNotificationTest {
         String sunnyJson = rawJson.replaceAll("\'", "\"");
         PubNotification p = PubNotification.parseFromJson(sunnyJson);
 
-        Assertions.assertEquals("SO_AGI_MOpublic_20201009", p.getModelName().orElse("NULL"));
+        Assertions.assertEquals("SO_AGI_MOpublic_20201009", p.deferModelName().orElse("NULL"));
     }
 
     @Test
@@ -172,7 +191,7 @@ class PubNotificationTest {
 
         PubNotification p = PubNotification.parseFromJson(jsonMissingBasketAndRegion);
 
-        Assertions.assertFalse(p.getModelName().isPresent());
+        Assertions.assertFalse(p.deferModelName().isPresent());
     }
 
     private static void assertMatchingException(String jsonMessage, String exceptionMessage){

@@ -6,7 +6,6 @@ import ch.so.agi.simi.entity.theme.ThemePublication;
 import ch.so.agi.simi.entity.theme.subarea.PublishedSubArea;
 import ch.so.agi.simi.entity.theme.subarea.SubArea;
 import ch.so.agi.simi.global.exc.CodedException;
-import ch.so.agi.simi.global.exc.SimiException;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
 import org.apache.commons.lang3.tuple.Pair;
@@ -54,7 +53,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
     private void assertMatchingModelNames(PubNotification request, ThemePublication themePub){
 
-        String modelInRequest = request.getModelName().orElse(null);
+        String modelInRequest = request.deferModelName().orElse(null);
         if(modelInRequest == null){
             log.info("Skipping model equality check as no model name was submitted");
             return;

@@ -88,15 +88,13 @@ public class PubNotification {
         Validator validator = valFact.getValidator();
         Set<ConstraintViolation<Object>> violations = validator.validate(this);
 
-        List<String> validationErrors = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
-
         if(violations.size() > 0){
             String innerMessages = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(" | "));
             throw new CodedException(400, CodedException.ERR_MSGBODY_INVALID, " Validation error(s): " + innerMessages);
         }
     }
 
-    public Optional<String> getModelName(){
+    public Optional<String> deferModelName(){
         String modelName = null;
 
         if(publishedRegions != null && publishedRegions.size() > 0){
