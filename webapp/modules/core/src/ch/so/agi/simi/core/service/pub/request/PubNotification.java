@@ -1,6 +1,7 @@
 package ch.so.agi.simi.core.service.pub.request;
 
 import ch.so.agi.simi.global.exc.CodedException;
+import ch.so.agi.simi.global.exc.SimiException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -88,20 +90,49 @@ public class PubNotification {
 
         List<String> validationErrors = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
 
-        boolean regionsMissing = (publishedRegions == null || publishedRegions.size() == 0);
-        boolean basketsMissing = (publishedBaskets == null || publishedBaskets.size() == 0);
-
-        if(regionsMissing && basketsMissing)
-            validationErrors.add("Either publishedRegions or publishedBaskets must be set");
-
         if(violations.size() > 0){
             String innerMessages = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(" | "));
             throw new CodedException(400, CodedException.ERR_MSGBODY_INVALID, " Validation error(s): " + innerMessages);
         }
     }
 
-    public boolean hasRegionInfo(){
-        return publishedRegions.size() > 0;
+    public Optional<String> getModelName(){
+        String modelName = null;
+
+        if(publishedRegions != null && publishedRegions.size() > 0){
+            List<String> distinctModels = publishedRegions.stream()
+                    .flatMap(region -> region.getPublishedBaskets().stream())
+                    .map(basket -> basket.getModel())
+                    .distinct()
+                    .collect(Collectors.toList());
+
+            if(distinctModels.size() != 1){
+                throw new CodedException(
+                        400,
+                        CodedException.ERR_MSGBODY_INVALID,
+                        "Unsupported: Basket.Regions in request reference multiple public models: " + distinctModels
+                );
+            }
+
+            modelName = distinctModels.get(0);
+        }
+        else if(publishedBaskets != null && publishedBaskets.size() > 0){
+            List<String> distinctModels = publishedBaskets.stream()
+                    .map(basket -> basket.getModel())
+                    .distinct()
+                    .collect(Collectors.toList());
+
+            if(distinctModels.size() != 1) {
+                throw new CodedException(
+                        400,
+                        CodedException.ERR_MSGBODY_INVALID,
+                        "Unsupported: Baskets in request reference multiple public models: " + distinctModels
+                );
+            }
+
+            modelName = distinctModels.get(0);
+        }
+        return Optional.ofNullable(modelName);
     }
 
     public String getDataIdent() {

@@ -53,30 +53,11 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
     }
 
     private void assertMatchingModelNames(PubNotification request, ThemePublication themePub){
-        String modelInRequest = null;
 
-        if(request.getPublishedRegions() != null && request.getPublishedRegions().size() > 0){
-            List<String> distinctModels = request.getPublishedRegions().stream()
-                    .flatMap(region -> region.getPublishedBaskets().stream())
-                    .map(basket -> basket.getModel())
-                    .distinct()
-                    .collect(Collectors.toList());
-
-            if(distinctModels.size() != 1)
-                throw new SimiException("Unsupported: Basket.Regions in request reference multiple public models: " + distinctModels);
-
-            modelInRequest = distinctModels.get(0);
-        }
-        else{
-            List<String> distinctModels = request.getPublishedBaskets().stream()
-                    .map(basket -> basket.getModel())
-                    .distinct()
-                    .collect(Collectors.toList());
-
-            if(distinctModels.size() != 1)
-                throw new SimiException("Unsupported: Baskets in request reference multiple public models: " + distinctModels);
-
-            modelInRequest = distinctModels.get(0);
+        String modelInRequest = request.getModelName().orElse(null);
+        if(modelInRequest == null){
+            log.info("Skipping model equality check as no model name was submitted");
+            return;
         }
 
         if(!modelInRequest.equals(themePub.getPublicModelName())) {
