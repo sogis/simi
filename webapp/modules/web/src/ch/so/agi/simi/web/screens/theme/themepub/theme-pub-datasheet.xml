@@ -13,9 +13,14 @@
                 modal="true"
                 forceDialog="true"
                 resizable="true"/>
-    <layout>
-        <browserFrame id="browserFrame"
-                      height="100%"
-                      width="100%"/>
+    <layout expand="gbxIFrame">
+        <buttonsPanel>
+                <button id="btnSheetDownload" caption="Datenblatt herunterladen" stylename="friendly" icon="icons/download.png"/>
+        </buttonsPanel>
+        <groupBox id="gbxIFrame" collapsed="false" showAsPanel="true">
+            <browserFrame id="browserFrame"
+                          height="100%"
+                          width="100%"/>
+        </groupBox>
     </layout>
 </window>

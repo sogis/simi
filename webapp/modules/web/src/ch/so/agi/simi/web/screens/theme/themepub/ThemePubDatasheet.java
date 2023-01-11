@@ -11,7 +11,11 @@ import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.BrowserFrame;
+import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.StreamResource;
+import com.haulmont.cuba.gui.export.ByteArrayDataProvider;
+import com.haulmont.cuba.gui.export.ExportDisplay;
+import com.haulmont.cuba.gui.export.ExportFormat;
 import com.haulmont.cuba.gui.model.InstanceLoader;
 import com.haulmont.cuba.gui.screen.Screen;
 import com.haulmont.cuba.gui.screen.Subscribe;
@@ -29,7 +33,10 @@ import java.util.UUID;
 @UiController("simi_ThemePubDatasheet")
 @UiDescriptor("theme-pub-datasheet.xml")
 public class ThemePubDatasheet extends Screen {
+
     private UUID themePubId;
+    private byte[] htmlContentUtf8;
+    private String tpIdent;
 
     @Inject
     protected UserSessionSource userSessionSource;
@@ -52,6 +59,9 @@ public class ThemePubDatasheet extends Screen {
     @Inject
     private Metadata metadata;
 
+    @Inject
+    private ExportDisplay exportDisplay;
+
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         if(themePubId == null)
@@ -65,7 +75,7 @@ public class ThemePubDatasheet extends Screen {
     public void onAfterShow(AfterShowEvent event) {
 
         ThemePublication tp = themePubDl.getContainer().getItem();
-        String tpIdent = tp.deferFullIdent();
+        tpIdent = tp.deferFullIdent();
 
         if(needsDummy(tp)){
             if(!canCreateDummy()){
@@ -91,24 +101,22 @@ public class ThemePubDatasheet extends Screen {
         }
 
         String htmlDoc = docService.generateDoc(tpIdent);
-        byte[] bytes = htmlDoc.getBytes(StandardCharsets.UTF_8);
+        htmlContentUtf8 = htmlDoc.getBytes(StandardCharsets.UTF_8);
 
         browserFrame.setSource(StreamResource.class)
-                .setStreamSupplier(() -> new ByteArrayInputStream(bytes))
+                .setStreamSupplier(() -> new ByteArrayInputStream(htmlContentUtf8))
                 .setMimeType("text/html");
 
-        /*
-        try{
-            String htmlDoc = docService.generateDoc(tpIdent);
-            byte[] bytes = htmlDoc.getBytes(StandardCharsets.UTF_8);
+    }
 
-            browserFrame.setSource(StreamResource.class)
-                    .setStreamSupplier(() -> new ByteArrayInputStream(bytes))
-                    .setMimeType("text/html");
-        }
-        catch(Exception e){
-            notifications.create(Notifications.NotificationType.ERROR).withCaption("Generieren Datenblatt fehlgeschlagen").withDescription(e.getMessage()).show();
-        }*/
+    @Subscribe("btnSheetDownload")
+    public void onBtnSheetDownloadClick(Button.ClickEvent event) {
+        String filename = tpIdent.replaceAll("\\.", "_") + "_datenbeschreibung.html";
+
+        exportDisplay.show(
+                new ByteArrayDataProvider(htmlContentUtf8),
+                filename,
+                ExportFormat.OCTET_STREAM); // Set intentionally to stream to trigger direct download in browsers instead of display in new window
     }
 
     private boolean needsDummy(ThemePublication tp){
