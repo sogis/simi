@@ -139,6 +139,7 @@ area_geom_simplified AS (
     bbox,
     tables_json,
     services,
+    tp.portals_published,
     tp.tp_id
   FROM
     simi.app_themepub_base_v tp
@@ -172,7 +173,8 @@ SELECT
       'fileFormats', file_formats
     ) 
   ) AS tp_json,
-  tp_id
+  tp_id,
+  portals_published
 FROM
   themepub
 ;

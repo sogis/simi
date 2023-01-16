@@ -1,3 +1,6 @@
+# dbeaver tmp sql scripts
+**/Scripts/*.sql
+
 # anything under a gitignored folder
 **/gitignored/**
 

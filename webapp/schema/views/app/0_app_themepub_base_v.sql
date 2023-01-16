@@ -450,6 +450,7 @@ public_dp_ids AS (
     file_formats,
     tables_json,
     services,
+    data_class != 'tableRelational' as portals_published,
     tp.id AS tp_id
   FROM
     simi.simitheme_theme_publication tp
