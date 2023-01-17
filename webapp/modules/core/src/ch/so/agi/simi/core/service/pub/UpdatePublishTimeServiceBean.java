@@ -36,6 +36,10 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
         PublishResult res = null;
 
         PubNotification request = PubNotification.parseFromJson(jsonMessage);
+        if(!request.deferModelName().isPresent()) { //request with no regions and no baskets -> update not possible
+            log.info("Skipping publication as no regions and no baskets where submitted");
+            return new PublishResult(request.getDataIdent(), 0, 0);
+        }
 
         List<String> requestedSubAreaIdents = deferSubAreasFromRequest(request);
 
@@ -53,11 +57,7 @@ public class UpdatePublishTimeServiceBean implements UpdatePublishTimeService {
 
     private void assertMatchingModelNames(PubNotification request, ThemePublication themePub){
 
-        String modelInRequest = request.deferModelName().orElse(null);
-        if(modelInRequest == null){
-            log.info("Skipping model equality check as no model name was submitted");
-            return;
-        }
+        String modelInRequest = request.deferModelName().get();
 
         if(!modelInRequest.equals(themePub.getPublicModelName())) {
             throw new CodedException(

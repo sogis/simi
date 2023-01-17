@@ -34,21 +34,22 @@ public class GenerateThemePubDocServiceBean implements GenerateThemePubDocServic
 
             UUID themePubId = queryUuid(themePubIdent);
 
-            /*
-            res = "<!DOCTYPE html>\n" +
+            if(themePubId != null) {
+                res = Meta2Html.renderDataSheet(themePubId, con);
+            }
+            else{
+                res = "<!DOCTYPE html>\n" +
                 "<html lang=\"de\">\n" +
                 "  <head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "    <title>Datadoc</title>\n" +
+                "    <title>Themenbereitstellung nicht konfiguriert</title>\n" +
                 "  </head>\n" +
                 "  <body>\n" +
-                "    <p>Dummy für Datasheet</p>\n" +
+                "    <p>Datenblatt kann nicht abgefragt werden, da die Themenbereitstellung " + themePubIdent + " in den Metadaten nicht konfiguriert ist.</p>\n" +
                 "  </body>\n" +
                 "</html>";
-             */
-
-            res = Meta2Html.renderDataSheet(themePubId, con);
+            }
         }
         catch (CodedException ce){
             throw ce;
@@ -62,6 +63,9 @@ public class GenerateThemePubDocServiceBean implements GenerateThemePubDocServic
 
     private UUID queryUuid(String themePubIdent){
         ThemePublication tp = ThemePubLoader.byIdentifier(themePubIdent);
+        if(tp == null)
+            return null;
+
         return tp.getId();
     }
 }
