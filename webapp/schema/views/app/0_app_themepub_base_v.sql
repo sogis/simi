@@ -109,8 +109,8 @@ public_dp_ids AS (
 ,tableview AS (
   SELECT   
     jsonb_build_object(
-      'sqlName', table_name,
-      'title', COALESCE(dp.title, tbl.title),
+      'sqlName', COALESCE(doc_table_name, table_name),
+      'title', COALESCE(dp.title, tbl.title, '-'),
       'shortDescription', coalesce(description_override, description_model),
       'attributesInfo', attrs_json
     ) AS tbl_json,
