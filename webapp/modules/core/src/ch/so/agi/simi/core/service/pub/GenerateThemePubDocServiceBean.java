@@ -1,5 +1,6 @@
 package ch.so.agi.simi.core.service.pub;
 
+import ch.so.agi.meta2file.libmain.Environment;
 import ch.so.agi.meta2file.libmain.Meta2Html;
 import ch.so.agi.simi.entity.theme.ThemePublication;
 import ch.so.agi.simi.global.exc.CodedException;
@@ -35,7 +36,7 @@ public class GenerateThemePubDocServiceBean implements GenerateThemePubDocServic
             UUID themePubId = queryUuid(themePubIdent);
 
             if(themePubId != null) {
-                res = Meta2Html.renderDataSheet(themePubId, con);
+                res = Meta2Html.renderDataSheet(themePubId, con, Environment.PROD);
             }
             else{
                 res = "<!DOCTYPE html>\n" +
