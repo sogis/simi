@@ -348,15 +348,11 @@
             <property name="themePublications" view="_minimal"/>
         </property>
         <property name="customFileTypes" view="_minimal"/>
-        <property name="dataProducts" view="_minimal">
-            <property name="themeOnlyForOrg"/>
-            <property name="derivedIdentifier"/>
-        </property>
-        <property name="publishedSubAreas" view="_minimal">
-            <property name="published"/>
-            <property name="subArea" view="_minimal">
-                <property name="title"/>
-            </property>
+    </view>
+    <view entity="simiTheme_PublishedSubArea" name="themePublication-edit-pubareas" extends="_minimal">
+        <property name="published"/>
+        <property name="subArea" view="_minimal">
+            <property name="title"/>
         </property>
     </view>
     <view entity="simiProduct_DataProductDsv" name="themePublication-edit-product" extends="_minimal">

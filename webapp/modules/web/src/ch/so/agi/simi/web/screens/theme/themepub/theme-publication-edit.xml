@@ -12,7 +12,7 @@
             <!--
             <collection id="dataProductsDc" property="dataProducts"/>
             -->
-            <collection id="pubAreasDc" property="publishedSubAreas"/>
+            <!--<collection id="pubAreasDc" property="publishedSubAreas"/>-->
         </instance>
         <collection id="themesDc" class="ch.so.agi.simi.entity.theme.Theme" view="themePublication-edit-theme">
             <loader id="themesDl">
@@ -22,6 +22,10 @@
             </loader>
         </collection>
         <collection id="deepProductsDc" class="ch.so.agi.simi.entity.product.DataProductDsv" view="themePublication-edit-product">
+
+        </collection>
+        <collection id="pubAreasDc" class="ch.so.agi.simi.entity.theme.subarea.PublishedSubArea" view="themePublication-edit-pubareas">
+
         </collection>
     </data>
     <dialogMode height="80%"
