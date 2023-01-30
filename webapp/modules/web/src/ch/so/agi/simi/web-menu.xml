@@ -19,7 +19,7 @@
         <item id="theme_spacer" caption="--------" screen="simiTheme_OrgUnit.browse" />
         <item screen="simiTheme_CustomFileType.browse" caption="mainMsg://customFileType.caption.browse"/>
         <item screen="simiTheme_SubArea.browse" caption="mainMsg://subArea.caption.browse"/>
-        <item screen="simiTheme_PublishedSubArea.browse"
+        <item screen="simiTheme_PublishedSubAreaListItem.browse"
               caption="mainMsg://publishedSubArea.caption.browse"/>
     </menu>
     <menu id="grp_iam" caption="Benutzer - Verwaltung ...">

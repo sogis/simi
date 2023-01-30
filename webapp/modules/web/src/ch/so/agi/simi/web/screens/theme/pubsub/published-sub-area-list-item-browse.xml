@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="mainMsg://publishedSubArea.caption.browse"
+        focusComponent="publishedSubAreaListItemsTable">
+    <data readOnly="true">
+        <collection id="publishedSubAreaListItemsDc"
+                    class="ch.so.agi.simi.entity.theme.dbview.PublishedSubAreaListItem"
+                    view="_local">
+            <loader id="publishedSubAreaListItemsDl">
+                <query>
+                    <![CDATA[select e from simiTheme_PublishedSubAreaListItem e]]>
+                    <condition>
+                        <or>
+                            <c:jpql>
+                                <c:where>lower(e.subDisplay) like :term</c:where>
+                            </c:jpql>
+                            <c:jpql>
+                                <c:where>lower(e.tpDisplay) like :term</c:where>
+                            </c:jpql>
+                        </or>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="publishedSubAreaListItemsTable"
+            spacing="true">
+        <table id="publishedSubAreaListItemsTable"
+               width="100%"
+               dataContainer="publishedSubAreaListItemsDc"
+                multiselect="true">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="tpDisplay" caption="Themenbereitstellung" sort="ASCENDING"/>
+                <column id="subDisplay" caption="Gebiet (Datenabdeckung)"/>
+                <column id="published"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="publishedSubAreaListItemsTable.create"  stylename="primary" caption="Erstellen (Bulk)"/>
+                <button id="editBtn" action="publishedSubAreaListItemsTable.edit" stylename="friendly"/>
+                <button id="removeBtn" action="publishedSubAreaListItemsTable.remove" stylename="danger"/>
+            </buttonsPanel>
+        </table>
+        <fragment screen="simi_FilterFragment">
+            <properties>
+                <property name="dataLoader" ref="publishedSubAreaListItemsDl"/>
+                <property name="inputPrompt" value="Filtern nach Themenbereitstellung oder Gebiet"/>
+            </properties>
+        </fragment>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
