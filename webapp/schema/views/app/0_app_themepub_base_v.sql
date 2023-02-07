@@ -254,7 +254,7 @@ public_dp_ids AS (
   CROSS JOIN
     simi.simitheme_theme_publication tp
   WHERE 
-      ft.kuerzel IN ('xtf', 'gpkg', 'shp', 'dxf')  
+      ft.kuerzel IN ('xtf.zip', 'gpkg.zip', 'shp.zip', 'dxf.zip', 'xtf', 'gpkg', 'shp', 'dxf')  
     AND 
       tp.data_class = 'tableSimple'
   GROUP BY 
