@@ -110,7 +110,7 @@ public_dp_ids AS (
   SELECT   
     jsonb_build_object(
       'sqlName', COALESCE(doc_table_name, table_name),
-      'title', COALESCE(dp.title, tbl.title, '-'),
+      'title', COALESCE(tbl.title, dp.title, '-'),
       'shortDescription', coalesce(description_override, description_model),
       'attributesInfo', attrs_json
     ) AS tbl_json,
