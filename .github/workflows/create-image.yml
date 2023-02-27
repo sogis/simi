@@ -4,9 +4,11 @@ on:
   push:
     branches: 
       - master
-      - v2.0.x
     paths:
       - 'webapp/**'
+      - '!webapp/schema'
+      - '!webapp/doc'
+      - '!webapp/**/*.md'
 
 jobs:
   buildImage:
