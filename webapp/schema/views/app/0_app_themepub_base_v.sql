@@ -389,7 +389,7 @@ public_dp_ids AS (
   JOIN
     simi.simiproduct_data_product dp ON c.dp_id = dp.id
   WHERE 
-    dp.theme_only_for_org IS FALSE OR dp.theme_only_for_org IS TRUE --todo einschränken
+    dp.theme_only_for_org IS FALSE
 )
 
 ,tp_chann_raw AS (
@@ -469,7 +469,7 @@ public_dp_ids AS (
 )
 
 SELECT 
-*
+    *
 FROM
-  themepub
+    themepub
 ;
