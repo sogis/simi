@@ -31,7 +31,7 @@ area_geom_simplified AS (
     st_envelope(geom_simplified) AS geom_bbox,
     geom_simplified,
     identifier,
-    title,
+    COALESCE(title, identifier) AS title,
     sub_id
   FROM
     area_geom_simplified
