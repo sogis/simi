@@ -3,7 +3,7 @@ package Theme {
 
   class "Theme\nPublication" as tp
   class "Theme" as th
-  class "FileType" as ft 
+  class "CustomFileType" as ft 
   
   abstract class "DataProduct" as dp << package product >>
   
@@ -12,10 +12,9 @@ package Theme {
     note right
       AGI ist als tech. 
       OrgUnit aller Themes
-      hier auch erfasst.
-      Link wird für jede
-      ThemePub implizit
-      gesetzt.
+      hier auch erfasst
+      und wird global allen
+      Themen zugewiesen.
     end note
     
     class "Agency" as ag
@@ -27,22 +26,16 @@ package Theme {
     ou <|-- so
   }
   
-  package "SubArea" {
-    class "SubArea" as sa
+  package "SubArea (Ausschnitt)" {
     class "Published\nSubArea" as pa
-    
-    pa "*" -- "0..1" sa
   }
   
   tp "1" -- "1..n" pa
   
   th "1" -- "*" tp
   th "*" -- "1" ou : "fach"
-  tp "0..1" -- "1-n" dp : (b1)
+  tp "1" -- "1-n" dp
   tp "*" -- "*" ft
 }
 
-legend
-  b1: DSV sind immer einer ThemePub zuzuweisen --> SoftwareConstraint
-end legend
 @endumldc

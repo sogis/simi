@@ -10,7 +10,7 @@ Bildet die Themen und Themenbereitstellungen ab (Datenbezug)
 
 Die Geometrien werden mittels GRETL-Job in die SIMI-DB kopiert.
 
-Dokumentation siehe [hier](theme_subarea.md)
+Dokumentation SubArea siehe [hier](theme_subarea.md)
 
 ## Klasse Theme
 
@@ -51,12 +51,23 @@ Konkrete Bereitstellung(en) eines Themas für einen Nutzungszweck. Beispiel Them
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|dataClass|Enum|j|Typ der Publikation: vecSimple, vecRelational, nonVec, other. Bei vec* werden die verfügbaren Dateitypen automatisch hergeleitet.|
-|classSuffixOverride|String(50)|(n)|Explizit gesetzter Suffix für den identifier. Bsp. **kommunal** für kommunale Nutzungsplanung. Resultierender Identifier: ch.so.arp.nutzungsplanung.kommunal|
+|publicModelName|String|(n)|Name des Publikationsmodelles. Zwingend für tabellarische Daten. Der GRETL Publisher ermittelt dynamisch das Publikationsmodell und meldet dieses mit dem Publikations-Zeitpunkt an SIMI. Bei Differenzen bricht der GRETL-Job mit Fehler ab.|
+|dataClass|Enum|j|Typ der Publikation: tableSimple, tableRelational, nonTabular. Deprecated. Siehe Bemerkungen|
+|classSuffixOverride|String(50)|(n)|Suffix auf den Themen-Identifier zur Unterscheidung bei mehreren Bereitstellungen pro Thema (Null bei nur einer Bereitstellung). Bsp. **kommunal** für kommunale Nutzungsplanung. Resultierender Identifier: ch.so.arp.nutzungsplanung.kommunal. Todo: Rename auf identSuffix. Deprecated.|
 |titleOverride|String(200)|n|Überschreibung des Themen-Titels.|
 |descriptionOverride|String(1000)|n|Überschreibung der Themen-Beschreibung.|
 |coverageIdent|String(100)|j|Identifier der Datenabdeckung (DataCoverage) dieser Themenbereitstellung. Default "ktso" für ganzer Kanton.|
 |remarks|String|n|Interne Bemerkungen.|
+|modelUpdateTs|String|n|Deprecated|
+|modelUpdatedBy|String|n|Deprecated|
+
+Bemerkungen:
+
+* dataClass: Inzwischen unglücklicher Mix von Bedeutungen / Konsequenzen
+  * Falls =tableRelational wird identifier auf *.relational ausgefüllt
+  * Falls =tableRelational in data.geo.so.ch nicht sichtbar
+  * Falls =tableSimple und keine Dateitypen zugewiesen: Default-Zuweisung in View
+  * Fazit: Ersetzen mit Boolean "Nur auf files.geo.so.ch"
 
 ### Konstraints
 
@@ -64,17 +75,17 @@ UK über _typeSuffix, "FK auf Thema".
 
 ## Klasse CustomFileType
 
-Enthält die Dateitypen des Datenbezugs für nicht über den Publisher bereitgestellte ThemenBereitstellungen (Raster, ...).
+Enthält die Dateitypen des Datenbezugs. Zip wird nicht erfasst, da dieses nur als Ordner dient und nicht Aussagekräftig ist.
 
-Zip wird nicht erfasst, da dieses nur als Ordner dient und nicht Aussagekräftig ist.
+Deprecated: Umbenennen von CustomFileType auf FileType
 
 ### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|mimeType|String(255)|j|Mime-Type des Dateityps. Attribut ist auch der identifier für die automatische Zuordnung der "Vektor-Gebrauchsformate".|
+|mimeType|String(255)|j|Mime-Type des Dateityps.|
 |name|String(100)|j|Sprechender Name des Dateityps.|
-|kuerzel|String(50)|j|Suffix für Dateien dieses Typs für die Benennung des entsprechenden ZIP (xtf, itf, shp, gpkg, ...).|
+|kuerzel|String(50)|j|Suffix für die Dateibenennung. Bei gezippter Bereitstellung zweiteilig. Beispiele: xtf.zip, gpkg.zip, tif, laz. Wird in data.geo.so.ch, Geocat-Export als Key für weitere Eigenschaften verwendet (Sortierung, ...)|
 
 ### Konstraints
 
@@ -95,11 +106,15 @@ Siehe [DataSetView](data.md#klasse-datasetview-dsv) in Teilmodell "Data".
 
 Organisationseinheit, welche zu den Themen-Bereitstellungen fachlich oder technisch Auskunft geben kann.
 
-Da die technische Auskunft immer durch das AGI erfolgt, wird nur die Beziehung für die fachliche Auskunft ausmodelliert.
+Da die technische Auskunft immer durch das AGI erfolgt, wird nur die Beziehung für die fachliche Auskunft modelliert und geführt.
 
 ### Attributbeschreibung
 
-Keine Attribute.
+|Name|Typ|Z|Beschreibung|
+|---|---|---|---|
+|name|String(100)|j|Name (Bezeichnung) der Organisationseinheit. Bsp: "Amt für Geoinformation", SubOrg: "Abteilung Boden (AfU)", SubSubOrg: "Fachbereich Altlasten (AfU Abteilung Boden)"|
+
+Todo: Name unique setzen. Deprecated
 
 ## Klasse Agency
 
@@ -109,52 +124,29 @@ Informationen zum Amt (AfU, ARP, AGI, ...). Hinweis: Punktuell ist der Klassenü
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|name|String(100)|j|Name des Amts. Bsp: "Amt für Geoinformation"|
-|abbreviation|String(10)|j|Kürzel für das Amt (AfU, ARP, ...).|
+|abbreviation|String(10)|j|Kürzel für das Amt (AfU, ARP, ...). Kürzel "AGI" dient als Schlüssel für die "automatische" Zuweisung des techn. Kontaktes zu allen Themen.|
 |url|String(255)|j|URL der Homepage des Amts.|
 |phone|String(20)|j|Kennung und Vorwahl innerhalb CH: 032 212 66 77|
 |email|String(50)|j|Email-Adresse des Amtes|
 
 ### Konstraints
 
-UK auf name.   
-UK auf kuerzelAmt.
+UK auf abbreviation.
 
 ## Klasse SubOrg
 
-Unterorganisation innerhalb eines Amts. Der Einfachheit halber wird nur eine Hierarchiestufe ausmodelliert (Es gibt keine SubSubOrg). Beispiel für die Erfassung eines Fachbereiches als SubOrg: "Fachbereich Altlasten (Abteilung Boden)".
+Unterorganisation innerhalb eines Amts. Der Einfachheit halber wird nur eine Hierarchiestufe ausmodelliert (Es gibt keine Klasse SubSubOrg).
 
 ### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-|name|String(100)|j|Name der Unterorganisation. Bsp: "Abteilung Boden".|
 |url|String(255)|n|URL der Homepage des Amts.|
 |phone|String(20)|n|Kennung und Vorwahl innerhalb CH: 032 212 66 77.|
 |email|String(50)|n|Email-Adresse der Untereinheit.|
 
+Alle Attribute sind optionale Überschreibungen den Angaben auf der Agency.
+
 ### Konstraints
 
 UK auf name und FK zum Amt (Wird nur bei kleinem Aufwand umgesetzt).
-
-## Modellierungsvarianten ILI-Modell -> Klasse -> Attribut
-
-* Ueber DSV (Dokumentierte Version):
-  * Vorteile:
-    * Den Benutzern im AGI vertraut
-    * Durchgängig gleich für alle Datentypen (Vektor, Raster, ...)
-    * Konsistent bezüglich Keywords, Synonyms
-    * (Verknüpfung zu den Rollen besteht bereits für allfälligen Bezug von zugriffsgeschützten Dateien)
-  * Nachteile:
-    * "Identifier-Inflation": Beispielsweise ch.so.agi.gebaeude.adressen_bezug für Bezug und ch.so.agi.gebaeude.adressen_view für WGC, WMS
-    * Erfassungsfehler möglich, da ohne Validierung Konf <> Modell. Impact ausschliesslich auf die Dokumentation.
-      * Erfassung kann nach Bedarf unterstützt werden --> $td Abklären t_ili2db_attrname, t_ili2db_inheritance.
-* Ueber PostgresTable (Alternativ - Nicht ausmodelliert):
-  * Beschreibung: 
-    * Im Theme werden die Modelle eingetragen. Die geschützten Attribute in der PostgresTable markiert.
-    * Vorteile:
-      * "Konfiguration näher im Keller"
-    * Nachteile:
-      * Keywords, Synonyms
-      * Unterschiedliche Konfigurationsart bezüglich der Attribute
-      * Andere Konfiguration Vec, Non-Vec

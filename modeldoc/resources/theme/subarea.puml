@@ -7,9 +7,11 @@ package "agi_data_coverage (Edit-DB)" {
   da "1" -- "1..n" tf
 }
 
-package "Theme.SubArea (SIMI)" {
+package "SubArea (SIMI)" {
+  class "Published\nSubArea\nHelper" as pah
   class "SubArea" as sa
   class "Published\nSubArea" as pa
+  
   
   pa "*" -- "1" sa
 }
