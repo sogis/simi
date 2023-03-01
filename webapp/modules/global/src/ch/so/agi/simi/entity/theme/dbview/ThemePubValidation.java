@@ -10,13 +10,15 @@ import javax.persistence.*;
 @DbView
 @DdlGeneration(value = DdlGeneration.DbScriptGenerationMode.CREATE_ONLY)
 @Table(name = "app_themepub_validation_v")
-@Entity(name = "simiTheme_ThemePubValidation")
+@Entity(name = ThemePubValidation.NAME)
 @NamePattern("%s (%s)|identifier,title")
 @AttributeOverrides({
         @AttributeOverride(name = "id", column = @Column(name = "tp_id"))
 })
 public class ThemePubValidation extends BaseUuidEntity {
     private static final long serialVersionUID = -3991781548381925049L;
+
+    public static final String NAME = "simiTheme_ThemePubValidation";
 
     @Lob
     @Column(name = "data_owner")

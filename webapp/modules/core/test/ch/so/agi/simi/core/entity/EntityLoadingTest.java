@@ -14,9 +14,12 @@ import ch.so.agi.simi.entity.product.*;
 import ch.so.agi.simi.entity.theme.CustomFileType;
 import ch.so.agi.simi.entity.theme.Theme;
 import ch.so.agi.simi.entity.theme.ThemePublication;
+import ch.so.agi.simi.entity.theme.dbview.ThemePubValidation;
 import ch.so.agi.simi.entity.theme.org.Agency;
 import ch.so.agi.simi.entity.theme.org.OrgUnit;
 import ch.so.agi.simi.entity.theme.org.SubOrg;
+import ch.so.agi.simi.entity.theme.subarea.PublishedSubArea;
+import ch.so.agi.simi.entity.theme.subarea.SubArea;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
@@ -278,7 +281,7 @@ class EntityLoadingTest {
 
 
     @Test
-    void org_OrgUnit_OK(){
+    void theme_OrgUnit_OK(){
         loadEntityViews(
             OrgUnit.class,
             new String[]{
@@ -289,7 +292,7 @@ class EntityLoadingTest {
     }
 
     @Test
-    void org_Agency_OK(){
+    void theme_Agency_OK(){
         loadEntityViews(
             Agency.class,
             new String[]{"agency-edit",
@@ -298,7 +301,7 @@ class EntityLoadingTest {
     }
 
     @Test
-    void org_SubOrg_OK(){
+    void theme_SubOrg_OK(){
         loadEntityView(
                 SubOrg.class,
                 "subOrg-edit"
@@ -319,7 +322,24 @@ class EntityLoadingTest {
 
     @Test
     void theme_ThemePublication_OK(){
-        loadEntityView(ThemePublication.class, "themePublication-edit");
+        loadEntityViews(
+                ThemePublication.class,
+                new String[]{
+                        "themePublication-edit",
+                        "dProdEditors-themePub-lookup",
+                        "themePubDataSheet-edit"
+                }
+        );
+    }
+
+    @Test
+    void theme_ThemePubValidation_OK(){
+        loadEntityViews(
+                ThemePubValidation.class,
+                new String[]{
+                        "themePubValidation-edit"
+                }
+        );
     }
 
     @Test
@@ -334,6 +354,26 @@ class EntityLoadingTest {
         loadEntityView(
                 DataProductDsv.class,
                 "themePublication-edit-product");
+    }
+
+    @Test
+    void theme_PubSubArea_OK(){
+        loadEntityViews(
+                PublishedSubArea.class,
+                new String[]{
+                        "publishedSubArea-edit"
+                }
+        );
+    }
+
+    @Test
+    void theme_SubArea_OK(){
+        loadEntityViews(
+                SubArea.class,
+                new String[]{
+                        "subArea-browse"
+                }
+        );
     }
 
     private void loadEntityViews(Class entityClass, String[] viewNames){
