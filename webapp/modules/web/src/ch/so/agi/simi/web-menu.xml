@@ -35,9 +35,11 @@
               caption="Handbuch (Link)"/>
         <item screen="simi_Dependency_VM.browse" caption="Mock Abhängigkeiten"/>
     </menu>
-    <item class="ch.so.agi.simi.web.menu.UrlOpen" id="urlopen_publish" description="https://jenkins-agi-apps-production.apps.ocp.so.ch/job/WebGISClient/"
-          caption="Publizieren (Link)"/>
-    <menu id="administration" caption="        SIMI Admin" insertAfter="urlopen_publish">
+    <item class="ch.so.agi.simi.web.menu.UrlOpen" id="urlopen_wgc" description="https://jenkins-agi-apps-production.apps.ocp.so.ch/job/WebGISClient/"
+          caption="Publiz. WGC, ... (Link)"/>
+    <item class="ch.so.agi.simi.web.menu.UrlOpen" id="urlopen_datasearch" description="https://jenkins-agi-apps-production.apps.ocp.so.ch/job/agi-apps/job/sodata/"
+          caption="Publiz. Datensuche (Link)"/>
+    <menu id="administration" caption="        SIMI Admin" insertAfter="urlopen_datasearch">
         <item id="aboutWindow" openType="DIALOG"/>
         <item id="sec$User.browse"/>
         <item id="sec$Group.browse"/>
