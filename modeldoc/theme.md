@@ -36,7 +36,7 @@ UK auf identifier.
 
 Konkrete Bereitstellung(en) eines Themas. Im gängigen Fall der Bearbeitung im Edit-Modell mit Bereitstellung im Pub-Modell besteht eine "überall" sichtbare Bereitstellung gemäss Pub-Modell und eine nur auf [files.geo.so.ch](https://files.geo.so.ch) sichtbare Bereitstellung gemäss Edit-Modell.
 
-Eine Themenbereitstellung bei Vektordaten 1-n Tabellen. Bei nicht vektoriellen Daten ist per Konvention pro Themenbereitstellung nur eine Datendatei enthalten (z.B. ein GeoTiff). Die Beziehung der Themenbereitstellung zur Datendatei ist in diesem Fall nicht explizit ausmodelliert. Das korrekte Funktionieren der Verknüpfungen erfolgt über die übereinstimmenden Kennungen (Bsp: ch.so.agi.walkerkarte), Dateitypen und manuell korrekt gesetzten Ordner- und Dateinamen auf der Dateiablage (Bsp: ch.so.agi.walkerkarte/aktuell/ch.so.agi.walkerkarte.tif).
+Eine Themenbereitstellung enthält bei Vektordaten 1-n Tabellen. Bei nicht vektoriellen Daten ist per Konvention pro Themenbereitstellung nur eine Datendatei enthalten (z.B. ein GeoTiff). Die Beziehung der Themenbereitstellung zur Datendatei ist in diesem Fall nicht explizit ausmodelliert. Das korrekte Funktionieren der Verknüpfungen erfolgt über die übereinstimmenden Kennungen (Bsp: ch.so.agi.walkerkarte), Dateitypen und manuell korrekt gesetzten Ordner- und Dateinamen auf der Dateiablage (Bsp: ch.so.agi.walkerkarte/aktuell/ch.so.agi.walkerkarte.tif).
 
 ### Attributbeschreibung
 
