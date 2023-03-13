@@ -14,15 +14,7 @@ Dokumentation SubArea siehe [hier](theme_subarea.md)
 
 ## Klasse Theme
 
-Aufgrund der fachlichen (nicht technischen) Auseinandersetzung definiertes Thema, für welches Geodaten für den Bezug bereitgestellt werden. Der Nachführungsprozess bestimmt die Zugehörigkeit der Tabellen, ... zu einem Thema.   
-Bei Vektordaten gilt meist: Umfang des Publikations-Modelles = Datenumfang eines Themas. 
-
-Im Datenschatz von Solothurn bestehen zwei Haupt-Typen von Themen:
-
-* **Typ Einzelthema:** Thematisch eng umrissenes fachlich begründetes Thema. Beispiel: Bienenstandorte.
-* **Typ Themengruppe:** "Superthema", welches mehrere fachlich eng umrissene Einzelthemen zusammenfasst. Meist mit dem Hintergrund eines gemeinsamen Nachführungs- / Bewilligungsablaufes. Beispiele: AV, Nutzungsplanung.
-
-Für die Steuerung der GDI macht es keinen Unterschied, ob ein Thema ein Einzelthema oder eine Themengruppe ist, darum sind die Subklassen Einzelthema und Themengruppe nicht ausmodelliert.
+Aufgrund der fachlichen (nicht technischen) Auseinandersetzung definiertes Thema, für welches Geodaten für den Bezug bereitgestellt werden. Meistens wird ein Thema in einem einzigen Nachführungsablauf nachgeführt. Pro Theme gibt es ein bis mehrere zum Download bereitgestellte [Themenbereitstellungen (ThemePublication)](#klasse-themepublication)
 
 ### Attributbeschreibung
 
@@ -42,10 +34,9 @@ UK auf identifier.
 
 ## Klasse ThemePublication
 
-Konkrete Bereitstellung(en) eines Themas für einen Nutzungszweck. Beispiel Thema Verkehrszählung:
+Konkrete Bereitstellung(en) eines Themas. Im gängigen Fall der Bearbeitung im Edit-Modell mit Bereitstellung im Pub-Modell besteht eine "überall" sichtbare Bereitstellung gemäss Pub-Modell und eine nur auf [files.geo.so.ch](https://files.geo.so.ch) sichtbare Bereitstellung gemäss Edit-Modell.
 
-* Nutzungszweck lesend / darstellend: Bezug von ch.so.avt.verkehrszaelstellen (Strukturiert nach Pub-Modell).
-* Nutzungszweck "komplexe Weiterverarbeitung", in welcher die relationale Gliederung von Vorteil ist: Bezug von ch.so.avt.verkehrszaelstellen.struct (Strukturiert nach Edit-Modell).
+Eine Themenbereitstellung bei Vektordaten 1-n Tabellen. Bei nicht vektoriellen Daten ist per Konvention pro Themenbereitstellung nur eine Datendatei enthalten (z.B. ein GeoTiff). Die Beziehung der Themenbereitstellung zur Datendatei ist in diesem Fall nicht explizit ausmodelliert. Das korrekte Funktionieren der Verknüpfungen erfolgt über die übereinstimmenden Kennungen (Bsp: ch.so.agi.walkerkarte), Dateitypen und manuell korrekt gesetzten Ordner- und Dateinamen auf der Dateiablage (Bsp: ch.so.agi.walkerkarte/aktuell/ch.so.agi.walkerkarte.tif).
 
 ### Attributbeschreibung
 
