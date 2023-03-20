@@ -1,5 +1,3 @@
-DROP VIEW IF EXISTS simi.app_dependencies_v;
-
 /*
  * Basis-View aller in SIMI dokumentierten Abhängigkeiten gegliedert nach level.
  * Level muss man sich vorstellen wie Geschosse in einem Gebäude:

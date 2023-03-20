@@ -36,6 +36,7 @@ psql -d simi -h localhost -U postgres -W \
   -f app/0_app_pubsubarea_v.sql \
   -f app/0_app_theme_dprod_v.sql \
   -f app/0_app_themepub_base_v.sql \
+  -f app/app_dependencies_v.sql \
   -f app/1_app_themepub_validation_v.sql \
   -f app/1_app_themepub_v.sql \
 \
