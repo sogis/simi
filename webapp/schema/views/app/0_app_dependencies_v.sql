@@ -39,7 +39,7 @@ product_common AS (
         COALESCE(type_display, 'ERROR: dtype not in map')  as typ,
         id
     FROM
-        simiproduct_data_product p
+        simi.simiproduct_data_product p
     LEFT JOIN
         dtype_map m ON p.dtype  = m.dtype
 ),
@@ -55,9 +55,9 @@ tablelevel_obj AS (
         t.id as id,
         s.id as upstream_id
     FROM
-        simidata_postgres_table t
+        simi.simidata_postgres_table t
     JOIN
-        simidata_db_schema s ON t.db_schema_id = s.id
+        simi.simidata_db_schema s ON t.db_schema_id = s.id
 ),
 
 -- dsvlevel objects. Contains also ext wms as in same level ---------------------------
@@ -70,11 +70,11 @@ dsvlevel_base AS (
     FROM
         product_common p
     JOIN
-        simiproduct_single_actor s ON p.id = s.id --ONLY single actors
+        simi.simiproduct_single_actor s ON p.id = s.id --ONLY single actors
     LEFT JOIN 
-        simiproduct_facade_layer f ON p.id = f.id
+        simi.simiproduct_facade_layer f ON p.id = f.id
     LEFT JOIN
-        simidata_table_view v ON p.id = v.id
+        simi.simidata_table_view v ON p.id = v.id
     WHERE 
         f.id IS NULL -- EXCLUDE facade layer        
 ),
@@ -107,7 +107,7 @@ dsvlevel_p1_facade AS (
     FROM
         product_common p
     JOIN
-        simiproduct_properties_in_facade l ON p.id = l.facade_layer_id 
+        simi.simiproduct_properties_in_facade l ON p.id = l.facade_layer_id 
 ),
 
 dsvlevel_p1_prodlist AS (
@@ -117,9 +117,9 @@ dsvlevel_p1_prodlist AS (
     FROM
         product_common p
     JOIN
-        simiproduct_properties_in_list l ON p.id = l.product_list_id 
+        simi.simiproduct_properties_in_list l ON p.id = l.product_list_id 
     LEFT JOIN 
-        simiproduct_facade_layer f ON l.single_actor_id = f.id
+        simi.simiproduct_facade_layer f ON l.single_actor_id = f.id
     WHERE 
         f.id IS NULL -- EXCLUDE facade layer
 ),
@@ -132,9 +132,9 @@ dsvlevel_p1_dependencies AS (
         d.id,
         r.data_set_view_id AS upstream_id
     FROM
-        simiextended_dependency d
+        simi.simiextended_dependency d
     JOIN
-        simiextended_relation r ON d.id = r.dependency_id
+        simi.simiextended_relation r ON d.id = r.dependency_id
     LEFT JOIN
         dtype_map m ON d.dtype  = m.dtype
 ),
@@ -156,9 +156,9 @@ maplevel_obj AS (
     FROM
         product_common p
     JOIN
-        simiproduct_properties_in_list l ON p.id = l.product_list_id 
+        simi.simiproduct_properties_in_list l ON p.id = l.product_list_id 
     JOIN 
-        simiproduct_facade_layer f ON l.single_actor_id = f.id
+        simi.simiproduct_facade_layer f ON l.single_actor_id = f.id
 ),
 
 -- union all -----------------------------------------------------------------------
