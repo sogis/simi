@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="mainMsg://dependency.caption"
+        focusComponent="rootLookup">
+<data readOnly="true">
+    <collection id="rootObjDc"
+                class="ch.so.agi.simi.core.dependency.DependencyRootDto">
+    </collection>
+    <collection id="dependenciesDc"
+                class="ch.so.agi.simi.core.dependency.DependencyDto">
+    </collection>
+</data>
+<dialogMode height="600"
+            width="800"/>
+<layout spacing="true" expand="dependenciesTable">
+    <hbox spacing="true">
+        <lookupField id="rootLookup" optionsContainer="rootObjDc"
+                     captionProperty="display" width="800px"/>
+        <button id="btnListDependencies" caption="Abfragen" stylename="friendly"/>
+    </hbox>
+    <groupTable id="dependenciesTable"
+           width="100%"
+           dataContainer="dependenciesDc"
+           settingsEnabled="false">
+        <actions>
+            <action id="excel" caption="Als Excel exportieren" icon="icons/excel.png" type="excel">
+                <properties>
+                    <property name="fileName" value="abhaengigkeiten"/>
+                    <property name="exportAggregation" value="false"/>
+                </properties>
+            </action>
+        </actions>
+        <columns>
+            <column id="display" caption="Abhängigkeit"/>
+            <column id="dependency" caption="Beziehung"/>
+            <column id="upstreamDisplay" caption="Abhängig von"/>
+        </columns>
+    </groupTable>
+    <buttonsPanel>
+        <button action="dependenciesTable.excel" stylename="friendly"/>
+    </buttonsPanel>
+</layout>
+</window>

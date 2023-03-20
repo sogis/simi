@@ -48,5 +48,10 @@
         <class>ch.so.agi.simi.entity.theme.dbview.ThemePubValidation</class>
         <class>ch.so.agi.simi.entity.product.DataProductDsv</class>
         <class>ch.so.agi.simi.entity.theme.dbview.PublishedSubAreaListItem</class>
+        <class>ch.so.agi.simi.core.dependency.DependencyDto</class>
+        <class>ch.so.agi.simi.entity.dependency.DependencyForTest</class>
+        <class>ch.so.agi.simi.entity.dependency.DependencyBase</class>
+        <class>ch.so.agi.simi.entity.dependency.Dependency</class>
+        <class>ch.so.agi.simi.core.dependency.DependencyRootDto</class>
     </persistence-unit>
 </persistence>

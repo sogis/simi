@@ -1,7 +1,6 @@
-package ch.so.agi.simi.core.dependency;
+package ch.so.agi.simi.core.dependency.gretl;
 
-import java.util.ArrayList;
-import java.util.List;
+import ch.so.agi.simi.core.dependency.gretl.GretlSearchConfig;
 
 public class GretlSearchConfigForTest implements GretlSearchConfig {
 

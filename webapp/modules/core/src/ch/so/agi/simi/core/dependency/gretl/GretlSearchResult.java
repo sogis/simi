@@ -1,4 +1,4 @@
-package ch.so.agi.simi.core.dependency;
+package ch.so.agi.simi.core.dependency.gretl;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

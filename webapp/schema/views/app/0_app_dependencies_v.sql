@@ -1,3 +1,5 @@
+DROP VIEW IF EXISTS simi.app_dependencies_v;
+
 /*
  * Basis-View aller in SIMI dokumentierten Abhängigkeiten gegliedert nach level.
  * Level muss man sich vorstellen wie Geschosse in einem Gebäude:
@@ -7,7 +9,7 @@
  * OG1: Alle direkten Abhängigkeiten von Datasetviews (Facadelayer, Module, Spez. Featinfo, ...)
  * OG2: Layergruppen und Karten, welche Facadelayer enthalten
  * */
---CREATE VIEW 0_app_dependencies_v AS 
+CREATE VIEW simi.app_dependencies_v AS 
 
 WITH 
 
@@ -18,26 +20,25 @@ dtype_map AS (
     *
   FROM (
     VALUES
-      ('simiExtended_Component', 'module', 'Modul'),
-      ('simiExtended_FeatureInfo', 'feat_info', 'Spez. Featureinfo'),
-      ('simiExtended_CCCIntegration', 'ccc', 'CCC-Integration'),
-      ('simiExtended_Report', 'report', 'Report'),      
-      ('simiProduct_Map', 'map', 'Karte'),
-      ('simiProduct_ExternalWmsLayers', 'dsv_ext', 'Ext. WMS'),
-      ('simiProduct_FacadeLayer', 'fassade', 'Fassade'),
-      ('simiProduct_LayerGroup', 'group', 'Gruppe'),      
-      ('simiData_RasterView', 'dsv_ras', 'View (Raster)'),
-      ('simiData_TableView', 'dsv_vec', 'View (Vector)')
+      ('simiExtended_Component', 3, 'Modul'),
+      ('simiExtended_FeatureInfo', 3, 'Spez. Featureinfo'),
+      ('simiExtended_CCCIntegration', 3, 'CCC-Integration'),
+      ('simiExtended_Report', 3, 'Report'),      
+      ('simiProduct_Map', 4, 'Karte'),
+      ('simiProduct_ExternalWmsLayers', 2, 'Ext. WMS'),
+      ('simiProduct_FacadeLayer', 3, 'Fassade'),
+      ('simiProduct_LayerGroup', 4, 'Gruppe'),      
+      ('simiData_RasterView', 2, 'View (Raster)'),
+      ('simiData_TableView', 2, 'View (Vector)')
   )
-  AS t (dtype, type_ident, type_display)    
+  AS t (dtype, level_num, type_display)    
 ),
 
 product_common AS (
     SELECT
-        derived_identifier AS ident,
-        concat_ws(' | ', derived_identifier, title) as display,
-        COALESCE(type_ident, 'ERROR: dtype not in map')  as type_ident,
-        COALESCE(type_display, 'ERROR: dtype not in map')  as type_display,
+        concat_ws(' | ', derived_identifier, title) as obj,
+        level_num,
+        COALESCE(type_display, 'ERROR: dtype not in map')  as typ,
         id
     FROM
         simiproduct_data_product p
@@ -45,14 +46,14 @@ product_common AS (
         dtype_map m ON p.dtype  = m.dtype
 ),
 
+
 -- table level objects -----------------------------------------------------------------------
 
 tablelevel_obj AS (
     SELECT
-        concat_ws('.', s.schema_name, t.table_name) AS ident,
-        concat_ws(' | ', table_name, title) as display,
-        'table' as type_ident,
-        'Tabelle' AS type_display,
+        concat_ws('.', s.schema_name, t.table_name) AS obj,
+        1 AS level_num,
+        'Tabelle' AS typ,
         t.id as id,
         s.id as upstream_id
     FROM
@@ -82,10 +83,9 @@ dsvlevel_base AS (
 
 dsvlevel_search AS (
     SELECT     
-        ident,
-        display,
-        'dsv_search' as type_ident,
-        'View (Suchkonfiguration)' AS type_display,
+        level_num,
+        obj,
+        'View (Suchkonfiguration)' AS typ,
         id,
         upstream_id
     FROM 
@@ -95,7 +95,9 @@ dsvlevel_search AS (
 ),
 
 dsvlevel_obj AS (
-    SELECT display, type_ident, type_display, id, upstream_id FROM dsvlevel_search
+    SELECT obj, typ, level_num, id, upstream_id FROM dsvlevel_base
+    UNION ALL 
+    SELECT obj, typ, level_num, id, upstream_id FROM dsvlevel_search
 ),
 
 -- dsv plus 1 level objects. All obj that depend directly on dsv level: facade, group, report, module, ccc, ...
@@ -126,10 +128,9 @@ dsvlevel_p1_prodlist AS (
 
 dsvlevel_p1_dependencies AS (
     SELECT
-        d."name" AS ident,
-        d."name" AS display,
-        COALESCE(type_ident, 'ERROR: dtype not in map')  as type_ident,
-        COALESCE(type_display, 'ERROR: dtype not in map')  as type_display,
+        level_num,
+        d."name" AS obj,
+        COALESCE(type_display, 'ERROR: dtype not in map')  as typ,
         d.id,
         r.data_set_view_id AS upstream_id
     FROM
@@ -141,11 +142,11 @@ dsvlevel_p1_dependencies AS (
 ),
 
 dsvlevel_p1_obj AS (
-    SELECT display, type_ident, type_display, id, upstream_id FROM dsvlevel_p1_facade
+    SELECT obj, typ, level_num, id, upstream_id  FROM dsvlevel_p1_facade
     UNION ALL   
-    SELECT display, type_ident, type_display, id, upstream_id FROM dsvlevel_p1_prodlist
+    SELECT obj, typ, level_num, id, upstream_id FROM dsvlevel_p1_prodlist
     UNION ALL
-    SELECT display, type_ident, type_display, id, upstream_id FROM dsvlevel_p1_dependencies
+    SELECT obj, typ, level_num, id, upstream_id FROM dsvlevel_p1_dependencies
 ),    
 
 -- map level objects. All obj that depend directly on facade layer -------------------------
@@ -165,18 +166,27 @@ maplevel_obj AS (
 -- union all -----------------------------------------------------------------------
 
 unionall AS (
-    SELECT display, type_ident, type_display, id, upstream_id FROM tablelevel_obj
+    SELECT obj, typ, level_num, id, upstream_id, obj AS qual_table_name FROM tablelevel_obj
     UNION ALL
-    SELECT display, type_ident, type_display, id, upstream_id FROM dsvlevel_obj
+    SELECT obj, typ, level_num, id, upstream_id, NULL AS qual_table_name FROM dsvlevel_obj
     UNION ALL
-    SELECT display, type_ident, type_display, id, upstream_id FROM dsvlevel_p1_obj
+    SELECT obj, typ, level_num, id, upstream_id, NULL AS qual_table_name FROM dsvlevel_p1_obj
     UNION ALL
-    SELECT display, type_ident, type_display, id, upstream_id FROM maplevel_obj
+    SELECT obj, typ, level_num, id, upstream_id, NULL AS qual_table_name FROM maplevel_obj
 )
 
-SELECT * FROM unionall
+SELECT
+    obj AS obj_name, 
+    typ AS type_name, 
+    level_num, 
+    id AS obj_id, 
+    upstream_id,
+    qual_table_name,
+    ROW_NUMBER() OVER() AS id
+FROM 
+    unionall
+;
 
--- bis 16:15
 
 
 

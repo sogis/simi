@@ -1,6 +1,7 @@
 package ch.so.agi.simi.core.dependency;
 
 import ch.so.agi.simi.SimiTestContainer;
+import ch.so.agi.simi.entity.dependency.DependencyForTest;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.testsupport.TestContainer;
@@ -9,29 +10,25 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
+import java.util.List;
 import java.util.UUID;
 
-// See https://doc.cuba-platform.com/manual-7.2/integration_tests_mw.html
+import static org.junit.jupiter.api.Assertions.*;
 
-class TableNameQueryTest {
-
+class DependencyRootServiceBeanTest {
     @RegisterExtension
     static TestContainer container = SimiTestContainer.Common.INSTANCE;
 
-    static DataManager dataManager;
+    static DependencyRootService serviceBean;
 
     @BeforeAll
     static void beforeAll() {
-        dataManager = AppBeans.get(DataManager.class);
+        serviceBean = AppBeans.get(DependencyRootService.class);
     }
 
     @Test
-    void queryFullTableName_throwsTableNotFoundException() {
-
-        UUID dataSetId = UUID.randomUUID();
-
-        Assertions.assertThrows(TableNotFoundException.class ,() -> {
-            TableNameQuery.execute(UUID.randomUUID(), dataManager);
-        });
+    void queryRoots_OK(){
+        serviceBean.queryRoots();
     }
+
 }

@@ -1,5 +1,6 @@
-package ch.so.agi.simi.core.dependency;
+package ch.so.agi.simi.core.dependency.v1;
 
+import ch.so.agi.simi.core.dependency.DependencyInfo;
 import com.haulmont.bali.db.QueryRunner;
 import com.haulmont.cuba.core.*;
 import com.haulmont.cuba.core.global.Resources;

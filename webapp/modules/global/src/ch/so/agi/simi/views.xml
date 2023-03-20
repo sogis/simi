@@ -98,6 +98,20 @@
         </property>
         <property name="tableViews" view="_minimal"/>
     </view>
+    <view entity="simiData_PostgresTable" name="dependencyList-postgresTable" extends="_minimal">
+        <property name="dbSchema" view="_minimal">
+            <property name="postgresDB" view="_minimal">
+                <property name="identifier"/>
+            </property>
+        </property>
+    </view>
+    <view entity="simiData_PostgresTable" name="dependencyRoot-postgresTable" extends="_minimal">
+        <property name="dbSchema" view="_minimal">
+            <property name="postgresDB" view="_minimal">
+                <property name="identifier"/>
+            </property>
+        </property>
+    </view>
     <view entity="simiData_PostgresTable" name="postgresTable-edit" extends="_local">
         <property name="dbSchema" view="_minimal">
             <property name="postgresDB" view="_minimal">
@@ -210,6 +224,7 @@
         <property name="themePublication" view="_minimal"/>
     </view>
     <view entity="simiProduct_SingleActor" name="layerGroup-edit-singleActors" extends="_local"/>
+    <view entity="simiProduct_SingleActor" name="dependencyRoot-singleActor" extends="_minimal"/>
     <view entity="simiProduct_Map" name="map-edit" extends="_local">
         <property name="pubScope" view="_minimal"/>
         <property name="singleActors" view="_minimal">

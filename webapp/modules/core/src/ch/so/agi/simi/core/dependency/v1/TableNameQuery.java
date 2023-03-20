@@ -1,4 +1,4 @@
-package ch.so.agi.simi.core.dependency;
+package ch.so.agi.simi.core.dependency.v1;
 
 import ch.so.agi.simi.entity.data.PostgresTable;
 import com.haulmont.cuba.core.global.DataManager;

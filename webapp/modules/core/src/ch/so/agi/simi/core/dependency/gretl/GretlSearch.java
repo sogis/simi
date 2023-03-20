@@ -1,5 +1,6 @@
-package ch.so.agi.simi.core.dependency;
+package ch.so.agi.simi.core.dependency.gretl;
 
+import ch.so.agi.simi.core.dependency.DependencyInfo;
 import ch.so.agi.simi.util.properties.PropsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +35,48 @@ public class GretlSearch {
         this.confRepos = PropsUtil.toArray(config.getReposToSearch());
     }
 
-    public static List<DependencyInfo> queryGretlDependencies(String[] qualTableName, GretlSearchConfig config){
+    public static List<String> loadGretlDependencies(String[] qualTableName, GretlSearchConfig config){
+        GretlSearch query = new GretlSearch(qualTableName[0], qualTableName[1], config);
+
+        return query.exec();
+    }
+
+    public static List<DependencyInfo> queryGretlDependencies(String[] qualTableName, GretlSearchConfig config){ //used by v1
         GretlSearch query = new GretlSearch(qualTableName[0], qualTableName[1], config);
         return query.execQuery();
     }
+
+    private List<String> exec(){
+
+        List<String> res = new LinkedList<>();
+
+        for(String repo : confRepos){
+
+            String qValue = MessageFormat.format(
+                    "repo:{0} {1} {2}",
+                    repo,
+                    schemaName,
+                    tableName
+            );
+
+            log.debug("github search query for repo {}: {}", repo, qValue);
+
+            HashMap<String, String> params = new HashMap<>();
+            params.put("q", "\'" + qValue + "\'");
+
+            GretlSearchResult gitResult = restTemplate.getForObject(confUrl + "?q={q}", GretlSearchResult.class, params);
+
+            if(gitResult == null || gitResult.getItems() == null)
+                return res;
+
+            for( GretlSearchItem item : gitResult.getItems()){
+                res.add(item.getPath());
+            }
+        }
+
+        return res;
+    }
+
 
     private List<DependencyInfo> execQuery(){
 

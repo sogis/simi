@@ -12,6 +12,4 @@ public interface DependencyService {
      * @return Liste von DependencyInfo Objekten. Ein Objekt beschreibt menschenlesbar das abhängige Objekt
      */
     List<DependencyInfo> collectAllDependenciesForTable(UUID tableId);
-
-    //List<DependencyInfo> collectDependenciesForUnregisteredTable(String schemaName, String tableName);
 }

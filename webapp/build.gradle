@@ -52,6 +52,7 @@ dependencies {
 }
 
 def postgres = 'org.postgresql:postgresql:42.2.9'
+def hsql = 'org.hsqldb:hsqldb:2.7.1'
 
 configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'java')
@@ -118,6 +119,7 @@ configure(coreModule) {
         compileOnly(servletApi)
         jdbc(postgres)
         testRuntime(postgres)
+        testRuntime(hsql)
     }
 
     task cleanConf(description: 'Cleans up conf directory', type: Delete) {

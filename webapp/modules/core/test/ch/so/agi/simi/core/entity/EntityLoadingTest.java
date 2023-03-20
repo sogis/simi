@@ -72,7 +72,8 @@ class EntityLoadingTest {
                 new String[]{
                         "postgresTable-browse",
                         "postgresTable-edit",
-                        "tableView-edit-postgresTables"
+                        "tableView-edit-postgresTables",
+                        "dependencyList-postgresTable"
                 });
     }
 

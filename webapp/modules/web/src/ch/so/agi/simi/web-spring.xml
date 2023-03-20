@@ -20,6 +20,8 @@
                        value="ch.so.agi.simi.core.service.pub.UpdatePublishTimeService"/>
                 <entry key="simi_GenerateThemePubDocService"
                        value="ch.so.agi.simi.core.service.pub.GenerateThemePubDocService"/>
+                <entry key="simi_DependencyRootService" value="ch.so.agi.simi.core.dependency.DependencyRootService"/>
+                <entry key="simi_DependencyListService" value="ch.so.agi.simi.core.dependency.DependencyListService"/>
             </map>
         </property>
     </bean>
