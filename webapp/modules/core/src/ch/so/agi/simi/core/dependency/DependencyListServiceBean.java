@@ -35,8 +35,8 @@ public class DependencyListServiceBean implements DependencyListService {
 
         List<DependencyBase> simiDep = new SimiSearch(dataManager).loadSimiDependencies(ids);
 
-        List<DependencyBase> gretlDep = loadGretlDependencies(simiDep);
-        simiDep.addAll(gretlDep);
+        //List<DependencyBase> gretlDep = loadGretlDependencies(simiDep);
+        //simiDep.addAll(gretlDep);
 
         List<DependencyDto> res = convertToRes(simiDep);
         return res;
