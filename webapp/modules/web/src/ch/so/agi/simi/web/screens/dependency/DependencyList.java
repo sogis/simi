@@ -6,7 +6,9 @@ import ch.so.agi.simi.entity.dependency.DependencyBase;
 import ch.so.agi.simi.entity.product.DataProduct;
 import com.haulmont.cuba.core.entity.KeyValueEntity;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.Button;
+import com.haulmont.cuba.gui.components.ContentMode;
 import com.haulmont.cuba.gui.components.GroupTable;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionContainer;
@@ -45,6 +47,9 @@ public class DependencyList extends StandardLookup<DataProduct> {
     @Inject
     GroupTable<DependencyDto> dependenciesTable;
 
+    @Inject
+    Notifications notifications;
+
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         List<DependencyRootDto> roots = rootService.queryRoots();
@@ -65,11 +70,20 @@ public class DependencyList extends StandardLookup<DataProduct> {
         if(root.getIsSchema())
             ids = resolveTableIds(root.getId());
 
-        List<DependencyDto> list = listService.listDependenciesForObjs(ids);
+        DependencyListResult res = listService.listDependenciesForObjs(ids);
 
-        dependenciesDc.setItems(list);
+        dependenciesDc.setItems(res.getDependencies());
 
-        deferTableGrouping(list);
+        if(res.getMessages().size() > 0){
+            String allMsg = res.getMessages().stream().collect(Collectors.joining("\\n"));
+
+            notifications.create(Notifications.NotificationType.TRAY)
+                    .withContentMode(ContentMode.HTML)
+                    .withDescription(allMsg)
+                    .show();
+        }
+
+        deferTableGrouping(res.getDependencies());
     }
 
     private void deferTableGrouping(List<DependencyDto> list) {

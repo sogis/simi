@@ -47,7 +47,7 @@ public class TableView extends DataSetView {
 
     @Override
     protected String typeAbbreviation(){
-        return "View (Table)";
+        return "View (Tabelle)";
     }
 
     public String getRowFilterViewName() {

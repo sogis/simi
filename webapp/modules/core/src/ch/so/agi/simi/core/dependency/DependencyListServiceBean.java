@@ -31,15 +31,20 @@ public class DependencyListServiceBean implements DependencyListService {
     private Class subEntity = Dependency.class; // Modified by test to run with test data
 
     @Override
-    public List<DependencyDto> listDependenciesForObjs(List<UUID> ids){
+    public DependencyListResult listDependenciesForObjs(List<UUID> ids){
+        List<String> messages = new LinkedList<>();
 
-        List<DependencyBase> simiDep = new SimiSearch(dataManager).loadSimiDependencies(ids);
+        List<DependencyBase> allDep = new LinkedList<>();
+        List<DependencyBase> simiDep =  new SimiSearch(dataManager).loadSimiDependencies(ids);
 
-        //List<DependencyBase> gretlDep = loadGretlDependencies(simiDep);
-        //simiDep.addAll(gretlDep);
+        allDep.addAll(simiDep);
 
-        List<DependencyDto> res = convertToRes(simiDep);
-        return res;
+        String msg = tryAppendGretlDependencies(allDep);
+        if(msg != null)
+            messages.add(msg);
+
+        List<DependencyDto> dto = convertToRes(allDep);
+        return new DependencyListResult(dto, messages);
     }
 
     private static List<DependencyDto> convertToRes(List<DependencyBase> lDeps){
@@ -71,33 +76,47 @@ public class DependencyListServiceBean implements DependencyListService {
         return res;
     }
 
-    private List<DependencyBase> loadGretlDependencies(List<DependencyBase> simiDependencies){
+    private String tryAppendGretlDependencies(List<DependencyBase> simiDependencies){
 
-        List<DependencyBase> gretlDeps = new LinkedList<>();
+        String messageResult = null;
 
-        for(DependencyBase dep : simiDependencies){
+        try {
+            List<DependencyBase> gretlDep = new LinkedList<>();
 
-            if(dep.getQualTableName() == null)
-                continue;
+            for (DependencyBase dep : simiDependencies) {
 
-            String[] nameParts = dep.getQualTableName().split("\\.");
-            List<String> gretlPaths = GretlSearch.loadGretlDependencies(nameParts, gretlSearchConfig);
+                if (dep.getQualTableName() == null)
+                    continue;
 
-            for(String path: gretlPaths){
-                DependencyBase gretl = new DependencyBase();
-                gretl.setObjName(path);
-                gretl.setTypeName("GRETL");
-                gretl.setLevelNum(dep.getLevelNum() + 1);
-                gretl.setUpstreamId(dep.getObjId());
-                gretl.setObjId(UUID.randomUUID());
+                String tableName = dep.getQualTableName().split("\\.")[1];
+                List<String> gretlPaths = GretlSearch.loadGretlDependencies(tableName, gretlSearchConfig);
 
-                gretlDeps.add(gretl);
+                for (String path : gretlPaths) {
+                    DependencyBase gretl = new DependencyBase();
+                    gretl.setObjName(path);
+                    gretl.setTypeName("GRETL");
+                    gretl.setLevelNum(dep.getLevelNum() + 1);
+                    gretl.setUpstreamId(dep.getObjId());
+                    gretl.setObjId(UUID.randomUUID());
+
+                    gretlDep.add(gretl);
+                }
             }
+
+            copyRootToNext(simiDependencies, gretlDep);
+            simiDependencies.addAll(gretlDep);
+        }
+        catch(Exception e){
+            Set<String> schemas = simiDependencies.stream()
+                    .filter(dep -> dep.getQualTableName() != null)
+                    .map(dep -> dep.getQualTableName().split("\\.")[0])
+                    .collect(Collectors.toSet());
+            String schemaName = schemas.iterator().next();
+
+            messageResult = "Abfrage der GRETL-Abhängigkeiten der Tabellen in Schema " + schemaName + " nicht möglich.<br/>" + e.getMessage();
         }
 
-        copyRootToNext(simiDependencies, gretlDeps);
-
-        return gretlDeps;
+        return messageResult;
     }
 
     public static void copyRootToNext(List<DependencyBase> previous, List<DependencyBase> next){

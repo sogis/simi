@@ -53,6 +53,7 @@ public class SimiProperty implements Comparable, Serializable {
 
         SimiProperty.add("simi.gitSearch.url", true, CubaModule.CORE);
         SimiProperty.add("simi.gitSearch.repos", true, CubaModule.CORE);
+        SimiProperty.add("simi.gitSearch.token", true, CubaModule.CORE, false);
     }
 
     private String name;

@@ -2,7 +2,7 @@ package ch.so.agi.simi.core.dependency.v1;
 
 import ch.so.agi.simi.core.dependency.DependencyInfo;
 import ch.so.agi.simi.core.dependency.DependencyService;
-import ch.so.agi.simi.core.dependency.gretl.GretlSearch;
+import ch.so.agi.simi.core.dependency.gretl.GretlSearchV1;
 import ch.so.agi.simi.core.dependency.gretl.GretlSearchConfig;
 import ch.so.agi.simi.entity.dependency.Dependency;
 import com.haulmont.cuba.core.Persistence;
@@ -43,7 +43,7 @@ public class DependencyServiceBean implements DependencyService {
 
         String[] qualTableName = TableNameQuery.execute(tableId, dataManager);
 
-        List<DependencyInfo> gretlDep = GretlSearch.queryGretlDependencies(qualTableName, gretlSearchConfig);
+        List<DependencyInfo> gretlDep = GretlSearchV1.queryGretlDependencies(qualTableName, gretlSearchConfig);
         dependencies.addAll(gretlDep);
 
         return dependencies;

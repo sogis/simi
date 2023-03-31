@@ -7,6 +7,7 @@ import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -42,6 +43,19 @@ public class DependencyBase extends BaseIntegerIdEntity implements Comparable<De
 
     @Transient
     private String rootObjName;
+
+    @Override
+    public int compareTo(DependencyBase dependency) {
+        if(dependency == this)
+            return 0;
+
+        int res = this.getLevelNum().compareTo(dependency.getLevelNum());
+
+        if(res == 0) //same level
+            res = this.getObjName().compareTo(dependency.getObjName());
+
+        return res;
+    }
 
     public String getObjName() {
         return objName;
@@ -97,18 +111,5 @@ public class DependencyBase extends BaseIntegerIdEntity implements Comparable<De
 
     public void setRootObjName(String rootObjName) {
         this.rootObjName = rootObjName;
-    }
-
-    @Override
-    public int compareTo(DependencyBase dependency) {
-        if(dependency == this)
-            return 0;
-
-        int res = this.getLevelNum().compareTo(dependency.getLevelNum());
-
-        if(res == 0) //same level
-            res = this.getObjName().compareTo(dependency.getObjName());
-
-        return res;
     }
 }

@@ -1,5 +1,6 @@
 package ch.so.agi.simi.core.dependency.simi;
 
+import ch.so.agi.simi.core.dependency.DependencyListResult;
 import ch.so.agi.simi.core.dependency.DependencyListServiceBean;
 import ch.so.agi.simi.entity.dependency.Dependency;
 import ch.so.agi.simi.entity.dependency.DependencyBase;

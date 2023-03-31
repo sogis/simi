@@ -1,9 +1,9 @@
 package ch.so.agi.simi.core.dependency.gretl;
 
 import ch.so.agi.simi.core.dependency.DependencyInfo;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,22 +24,19 @@ public class GretlSearchTest {
             "simi-so/autotest_datadependency__"
     );
 
-    private static final String[] TABLE_EXISTING = new String[]{"simi_autotest_schema","simi_autotest_table"};
-    private static final String[] TABLE_NONEXISTING = new String[]{UUID.randomUUID().toString(),UUID.randomUUID().toString()};
+    private static final String TABLE_EXISTING = "simi_autotest_table";
+    private static final String TABLE_NONEXISTING = UUID.randomUUID().toString();
+    private static final String DUMMY_TOKEN = "DUMMY_TOKEN";
 
-    //@Test
-    public void searchExistingTherm_Success_v1(){
-        List<DependencyInfo> di = GretlSearch.queryGretlDependencies(TABLE_EXISTING, CONF_VALID);
-
-        Assertions.assertEquals(
-                12,
-                di.size(),
-                "Size must be 12. Therms must be found in all 6 files, with the test repo being configured twice. 6 Files * 2 Repos = 12"
-        );
+    @BeforeEach
+    void beforeEach(){
+        System.setProperty(GretlSearch.SIMI_GITSEARCH_TOKEN_PROP, DUMMY_TOKEN); // replace with real token to run tests
     }
 
     @Test
-    public void searchExistingTherm_Success(){
+    void searchExistingTherm_Success(){
+        assumeRealTokenPresent();
+
         List<String> di = GretlSearch.loadGretlDependencies(TABLE_EXISTING, CONF_VALID);
 
         Assertions.assertEquals(
@@ -49,19 +46,10 @@ public class GretlSearchTest {
         );
     }
 
-    //@Test
-    public void searchMissingTherm_EmptyList_V1(){
-        List<DependencyInfo> di = GretlSearch.queryGretlDependencies(TABLE_NONEXISTING, CONF_VALID);
-
-        Assertions.assertEquals(
-                0,
-                di.size(),
-                "Size must be 0. UUID search therms are not part of the test repo"
-        );
-    }
-
     @Test
-    public void searchMissingTherm_EmptyList(){
+    void searchMissingTherm_EmptyList(){
+        assumeRealTokenPresent();
+
         List<String> di = GretlSearch.loadGretlDependencies(TABLE_NONEXISTING, CONF_VALID);
 
         Assertions.assertEquals(
@@ -71,31 +59,38 @@ public class GretlSearchTest {
         );
     }
 
-    //@Test
-    public void searchInvalidRepo_RuntimeException_V1(){
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            GretlSearch.queryGretlDependencies(TABLE_NONEXISTING, CONF_INVALID_REPO);
-        });
-    }
-
     @Test
-    public void searchInvalidRepo_RuntimeException(){
+    void searchInvalidRepo_RuntimeException(){
+        assumeRealTokenPresent();
+
         Assertions.assertThrows(RuntimeException.class, () -> {
             GretlSearch.loadGretlDependencies(TABLE_NONEXISTING, CONF_INVALID_REPO);
         });
     }
 
-    //@Test
-    public void searchInvalidUrl_RuntimeException_V1(){
+
+    @Test
+    void searchInvalidUrl_RuntimeException(){
+        assumeRealTokenPresent();
+
         Assertions.assertThrows(RuntimeException.class, () -> {
-            GretlSearch.queryGretlDependencies(TABLE_NONEXISTING, CONF_INVALID_URL);
+            GretlSearch.loadGretlDependencies(TABLE_NONEXISTING, CONF_INVALID_URL);
         });
     }
 
     @Test
-    public void searchInvalidUrl_RuntimeException(){
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            GretlSearch.loadGretlDependencies(TABLE_NONEXISTING, CONF_INVALID_URL);
+    void searchInvalidToken_Throws(){
+        System.setProperty(GretlSearch.SIMI_GITSEARCH_TOKEN_PROP, "dummy");
+
+        Assertions.assertThrows(Exception.class, () -> {
+            GretlSearch.loadGretlDependencies(TABLE_EXISTING, CONF_VALID);
         });
+    }
+
+    private void assumeRealTokenPresent(){
+        Assumptions.assumeFalse(
+                DUMMY_TOKEN.equals(System.getProperty(GretlSearch.SIMI_GITSEARCH_TOKEN_PROP)),
+                MessageFormat.format("System Property '{0}' must be set to run test", GretlSearch.SIMI_GITSEARCH_TOKEN_PROP)
+        );
     }
 }

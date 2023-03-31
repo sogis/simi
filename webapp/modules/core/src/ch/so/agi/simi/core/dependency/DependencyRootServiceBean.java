@@ -2,12 +2,17 @@ package ch.so.agi.simi.core.dependency;
 
 import ch.so.agi.simi.entity.data.DbSchema;
 import ch.so.agi.simi.entity.data.PostgresTable;
+import ch.so.agi.simi.entity.data.datasetview.RasterView;
+import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.product.DataProduct;
+import ch.so.agi.simi.entity.product.ExternalWmsLayer;
+import ch.so.agi.simi.entity.product.FacadeLayer;
 import ch.so.agi.simi.entity.product.SingleActor;
 import com.haulmont.cuba.core.global.DataManager;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +43,7 @@ public class DependencyRootServiceBean implements DependencyRootService {
         List<DependencyRootDto>  res = tbls.stream().map(tbl -> {
             DependencyRootDto dt = new DependencyRootDto();
             dt.setId(tbl.getId());
-            dt.setDisplay(tbl.getDbSchema().getSchemaName() + "." + tbl.getTableName() + " | Db: " + tbl.getDbSchema().getPostgresDB().getTitle());
+            dt.setDisplay(tbl.getDbSchema().getSchemaName() + "." + tbl.getTableName() + " | Tabelle | Db: " + tbl.getDbSchema().getPostgresDB().getTitle());
             return dt;
         }).collect(Collectors.toList());
 
@@ -48,7 +53,7 @@ public class DependencyRootServiceBean implements DependencyRootService {
                 DependencyRootDto dt = new DependencyRootDto();
                 dt.setId(schema.getId());
                 dt.setIsSchema(true);
-                dt.setDisplay(schema.getSchemaName() + " | Db: " + schema.getPostgresDB().getTitle());
+                dt.setDisplay(schema.getSchemaName() + " | Schema | Db: " + schema.getPostgresDB().getTitle());
                 res.add(dt);
         });
 
@@ -64,7 +69,7 @@ public class DependencyRootServiceBean implements DependencyRootService {
         List<DependencyRootDto> res = sas.stream().map(sa -> {
             DependencyRootDto dt = new DependencyRootDto();
             dt.setId(sa.getId());
-            dt.setDisplay(sa.getDerivedIdentifier() + " | " + sa.getTitle());
+            dt.setDisplay(sa.getDerivedIdentifier() + " | " + sa.getTypeAbbreviation() + " | " + sa.getTitle());
             return dt;
         }).collect(Collectors.toList());
 

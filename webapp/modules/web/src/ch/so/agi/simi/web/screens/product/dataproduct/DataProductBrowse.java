@@ -133,36 +133,4 @@ public class DataProductBrowse extends StandardLookup<DataProduct> {
 
         dataProductsDl.load();
     }
-
-    /*
-      <popupButton id="morphBtn" caption="Umwandeln" stylename="friendly">
-                    <actions>
-                        <action id="morphToFacadeLayer" caption="-> Facade"/>
-                        <action id="morphToLayerGroup" caption="-> Gruppe"/>
-                        <action id="morphToMap" caption="-> Karte"/>
-     */
-
-
-    /*
-        @Inject
-    private JobRunner runner;
-    @Inject
-    PublishConfig config;
-    @Inject
-    private WebBrowserTools webBrowserTools;
-
-
-    @Subscribe("btnPublish")
-    public void onBtnPublishClick(Button.ClickEvent event) {
-        String jenkinsPageUrl = null;
-
-        boolean inTime = runner.runJob(config);
-        if(inTime)
-            jenkinsPageUrl = config.getJobBaseUrl() + "/lastBuild";
-        else
-            jenkinsPageUrl = config.getJobBaseUrl();
-
-        webBrowserTools.showWebPage(jenkinsPageUrl, ParamsMap.of("_target", "blank"));
-    }
-     */
 }

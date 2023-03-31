@@ -65,6 +65,7 @@ Die Konfiguration erfolgt mittels der folgenden Umgebungsvariablen:
 * **Konfiguration der Suche in den GRETL-Repos (Anzeige der Abhängigkeiten):**
   * SIMI_GITSEARCH_URL: Url, auf welche die Git-Suchen abgesetzt werden. Bsp: "https://api.github.com/search/code"
   * SIMI_GITSEARCH_REPOS: Liste aller zu durchsuchenden Git-Repos, mittels "," getrennt. Bsp: "sogis/gretljobs,oereb/jobs"
+  * SIMI_GITSEARCH_TOKEN: Github API Token (für die Tabellen-Suche in den GRETL-Dateien).
 * **Konfiguration Oauth-Tokenausgabe für die Publikations-Notifikation vom Publisher (GRETL)**
   * CUBA_REST_CLIENT_ID: Benutzername für die Tokenausgabe
   * CUBA_REST_CLIENT_SECRET: Passwort für die Tokenausgabe mit Präfix. Vor dem Passwort muss der **Präfix {noop}** stehen.

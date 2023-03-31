@@ -1,33 +1,62 @@
 package ch.so.agi.simi.core.dependency.gretl;
 
-import ch.so.agi.simi.core.dependency.DependencyInfo;
+import ch.so.agi.simi.global.exc.SimiException;
 import ch.so.agi.simi.util.properties.PropsUtil;
+import com.haulmont.cuba.core.sys.AppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class GretlSearch {
 
     private static Logger log = LoggerFactory.getLogger(GretlSearch.class);
 
-    private String schemaName;
+    public static final String SIMI_GITSEARCH_TOKEN_PROP = "simi.gitSearch.token";
+
     private String tableName;
+    private String gitSearchToken;
 
     private String confUrl;
     private String[] confRepos;
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    private GretlSearch(String schemaName, String tableName, GretlSearchConfig config){
-        this.schemaName = schemaName;
+    private GretlSearch(String tableName, GretlSearchConfig config){
+
+        this.gitSearchToken = readToken();
+        if(this.gitSearchToken == null || this.gitSearchToken.length() == 0)
+            throw new SimiException("Configuration error - required property " + SIMI_GITSEARCH_TOKEN_PROP + " not set.");
+
         this.tableName = tableName;
 
         resolveConfig(config);
+    }
+
+    private String readToken(){
+
+        String res = null;
+
+        try{
+            res = AppContext.getProperty(SIMI_GITSEARCH_TOKEN_PROP);
+        }
+        catch(Exception e){}
+
+        if(res == null || res.length() == 0) { // unit test
+            try {
+                res = System.getProperty(SIMI_GITSEARCH_TOKEN_PROP);
+            }
+            catch(Exception e){}
+        }
+
+        if(res == null || res.length() == 0)
+            throw new SimiException("Could not read property {0} from environment", SIMI_GITSEARCH_TOKEN_PROP);
+
+        return res;
     }
 
     private void resolveConfig(GretlSearchConfig config){
@@ -35,89 +64,45 @@ public class GretlSearch {
         this.confRepos = PropsUtil.toArray(config.getReposToSearch());
     }
 
-    public static List<String> loadGretlDependencies(String[] qualTableName, GretlSearchConfig config){
-        GretlSearch query = new GretlSearch(qualTableName[0], qualTableName[1], config);
+    public static List<String> loadGretlDependencies(String tableName, GretlSearchConfig config){
+        GretlSearch query = new GretlSearch(tableName, config);
 
         return query.exec();
     }
 
-    public static List<DependencyInfo> queryGretlDependencies(String[] qualTableName, GretlSearchConfig config){ //used by v1
-        GretlSearch query = new GretlSearch(qualTableName[0], qualTableName[1], config);
-        return query.execQuery();
-    }
-
     private List<String> exec(){
 
-        List<String> res = new LinkedList<>();
+        List<String> searchRes = new LinkedList<>();
+        String message = "";
 
-        for(String repo : confRepos){
+        for (String repo : confRepos) {
+            GretlSearchResult gitResult = searchInRepo(repo);
 
-            String qValue = MessageFormat.format(
-                    "repo:{0} {1} {2}",
-                    repo,
-                    schemaName,
-                    tableName
-            );
+            if (gitResult == null || gitResult.getItems() == null)
+                continue;
 
-            log.debug("github search query for repo {}: {}", repo, qValue);
-
-            HashMap<String, String> params = new HashMap<>();
-            params.put("q", "\'" + qValue + "\'");
-
-            GretlSearchResult gitResult = restTemplate.getForObject(confUrl + "?q={q}", GretlSearchResult.class, params);
-
-            if(gitResult == null || gitResult.getItems() == null)
-                return res;
-
-            for( GretlSearchItem item : gitResult.getItems()){
-                res.add(item.getPath());
+            for (GretlSearchItem item : gitResult.getItems()) {
+                searchRes.add(item.getPath());
             }
         }
 
-        return res;
+        return searchRes;
     }
 
+    private GretlSearchResult searchInRepo(String repoName){
 
-    private List<DependencyInfo> execQuery(){
+        String queryUrl = MessageFormat.format("{0}?q=repo:{1} {2}", confUrl, repoName, tableName);
 
-        List<DependencyInfo> diUnion = new LinkedList<>();
+        log.debug("Searching github using url {}", queryUrl);
 
-        for(String repo : confRepos){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.set("Authorization", "Bearer " + gitSearchToken);
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
 
-            String qValue = MessageFormat.format(
-                    "repo:{0} {1} {2}",
-                    repo,
-                    schemaName,
-                    tableName
-            );
+        ResponseEntity<GretlSearchResult> response = restTemplate.exchange(queryUrl,
+                HttpMethod.GET, entity, new ParameterizedTypeReference<GretlSearchResult>() {});
 
-            log.debug("github search query for repo {}: {}", repo, qValue);
-
-            HashMap<String, String> params = new HashMap<>();
-            params.put("q", "\'" + qValue + "\'");
-
-            GretlSearchResult res = restTemplate.getForObject(confUrl + "?q={q}", GretlSearchResult.class, params);
-
-            if(res != null)
-                appendToDiList(diUnion, res.getItems());
-        }
-
-        return diUnion;
-    }
-
-    private static void appendToDiList(List<DependencyInfo> diUnion, List<GretlSearchItem> items) {
-
-        if(items == null)
-            return;
-
-        for( GretlSearchItem item : items){
-            DependencyInfo di = new DependencyInfo();
-
-            di.setObjectName(item.getPath());
-            di.setDependencyInfo("Schema- und Tabellenname kommt in GRETL-Datei vor.");
-            di.setObjectType("GRETL-Datei");
-
-            diUnion.add(di);
-        }
+        return response.getBody();
     }
 }

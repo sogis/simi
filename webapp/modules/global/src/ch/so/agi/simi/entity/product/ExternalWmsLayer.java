@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 public class ExternalWmsLayer extends SingleActor {
     public static final String NAME = "simiProduct_ExternalWmsLayers";
+    public static final String DISPLAY = "Ext. WMS-Ebene";
 
     private static final long serialVersionUID = 640051427821660156L;
 
