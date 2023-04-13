@@ -28,12 +28,11 @@
         <item screen="simiIAM_Role.browse" caption="mainMsg://role.caption.browse"/>
     </menu>
     <menu id="grp_others" caption="Weitere ...">
-        <item screen="simiData_TableDependency.list" caption="mainMsg://tabledependency.caption"/>
+        <item screen="simi_DependencyList" caption="mainMsg://dependency.caption"/>
         <item screen="simiExtended_Dependency.browse" caption="mainMsg://dependency.caption.browse"/>
         <item screen="simiProduct_ExternalWmsService.browse" caption="mainMsg://extwms.caption.browse"/>
         <item class="ch.so.agi.simi.web.menu.UrlOpen" id="urlopen_handbook" description="https://github.com/sogis/dok/blob/dok/dok_div_anleitungen/Documents/simi/simi_anleitung.md"
               caption="Handbuch (Link)"/>
-        <item screen="simi_DependencyList" caption="mainMsg://dependency.caption"/>
     </menu>
     <item class="ch.so.agi.simi.web.menu.UrlOpen" id="urlopen_wgc" description="https://jenkins-agi-apps-production.apps.ocp.so.ch/job/WebGISClient/"
           caption="Publiz. WGC, ... (Link)"/>
