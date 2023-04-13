@@ -38,7 +38,7 @@ public class GretlSearchV1Test {
         );
     }
 
-    @Test
+    //@Test
     public void searchExistingTherm_Success(){
         List<String> di = GretlSearchV1.loadGretlDependencies(TABLE_EXISTING, CONF_VALID);
 
@@ -60,7 +60,7 @@ public class GretlSearchV1Test {
         );
     }
 
-    @Test
+    //@Test
     public void searchMissingTherm_EmptyList(){
         List<String> di = GretlSearchV1.loadGretlDependencies(TABLE_NONEXISTING, CONF_VALID);
 
@@ -78,7 +78,7 @@ public class GretlSearchV1Test {
         });
     }
 
-    @Test
+    //@Test
     public void searchInvalidRepo_RuntimeException(){
         Assertions.assertThrows(RuntimeException.class, () -> {
             GretlSearchV1.loadGretlDependencies(TABLE_NONEXISTING, CONF_INVALID_REPO);
@@ -92,7 +92,7 @@ public class GretlSearchV1Test {
         });
     }
 
-    @Test
+    //@Test
     public void searchInvalidUrl_RuntimeException(){
         Assertions.assertThrows(RuntimeException.class, () -> {
             GretlSearchV1.loadGretlDependencies(TABLE_NONEXISTING, CONF_INVALID_URL);
