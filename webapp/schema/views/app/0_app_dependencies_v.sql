@@ -137,6 +137,8 @@ dsvlevel_p1_dependencies AS (
         simi.simiextended_relation r ON d.id = r.dependency_id
     LEFT JOIN
         dtype_map m ON d.dtype  = m.dtype
+    WHERE 
+        r.relation_type != '1_display'
 ),
 
 dsvlevel_p1_obj AS (
