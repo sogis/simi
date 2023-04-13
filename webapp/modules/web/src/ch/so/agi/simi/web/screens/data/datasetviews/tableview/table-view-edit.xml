@@ -123,11 +123,10 @@
                     </column>
                 </form>
             </groupBox>
-            <groupBox id="viewFieldsBox" caption="Attribut-Verknüpfung" spacing="true" collapsable="true">
+            <groupBox id="viewFieldsBox" caption="Attribut-Verknüpfung" spacing="true" collapsable="true"  >
                 <table id="viewFieldsTable"
                        dataContainer="viewFieldsDc"
                        width="100%"
-                       height="100%"
                        editable="true"
                        multiselect="true"
                        settingsEnabled="false">
