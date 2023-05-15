@@ -19,3 +19,6 @@ GRANT SELECT ON TABLE simi.trafo_wms_tableview_v TO simi_read;
 
 GRANT SELECT ON TABLE simi.trafo_resource_role_v TO simi_write;
 GRANT SELECT ON TABLE simi.trafo_resource_role_v TO simi_read;
+
+GRANT SELECT ON TABLE simi.trafo_dprod_description_v TO simi_write;
+GRANT SELECT ON TABLE simi.trafo_dprod_description_v TO simi_read;

@@ -25,6 +25,7 @@ psql -d simi -h localhost -U postgres -W \
   -f trafo/0_trafo_published_dp_v.sql \
   -f trafo/0_trafo_resource_role_v.sql \
   -f trafo/0_trafo_wms_geotable_v.sql \
+  -f trafo/0_trafo_dprod_description_v.sql \
   -f trafo/1_trafo_wms_rootlayer_v.sql \
   -f trafo/1_trafo_wms_tableview_v.sql \
   -f trafo/2_trafo_wms_layer_v.sql \

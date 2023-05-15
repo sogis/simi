@@ -6,3 +6,4 @@ DROP VIEW IF EXISTS simi.trafo_wms_layer_v CASCADE;
 DROP VIEW IF EXISTS simi.trafo_wms_rootlayer_v CASCADE;
 DROP VIEW IF EXISTS simi.trafo_wms_tableview_v CASCADE;
 DROP VIEW IF EXISTS simi.trafo_resource_role_v CASCADE;
+DROP VIEW IF EXISTS simi.trafo_dprod_description_v CASCADE;
