@@ -5,16 +5,40 @@ version: "3"
 services:
   schemareader:
     image: sogis/simi_schemareader:2.0
+    profiles: ["schemareader"]
     environment:
-      - SPRING_APPLICATION_JSON={"dbs":[{"key":"geodb","url":"jdbc:postgresql://databases:5432/postgres","user":"postgres","pass":"postgres"}]}
+      - SPRING_APPLICATION_JSON={"dbs":[{"key":"geodb","url":"jdbc:postgresql://dbs_int:5432/postgres","user":"postgres","pass":"postgres"}]}
     ports:
       - "8081:8080"
-  databases:
+  dbs_int:
     image: postgis/postgis:13-3.1
     environment:
       - POSTGRES_PASSWORD=postgres
       - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
-      - "5432:5432"
+      - "54325:5432"
     volumes:
       - "./gitignored/pgdata_int:/var/lib/postgresql/data/pgdata"
+  dbs_prod:
+    image: postgis/postgis:13-3.1
+    profiles: ["rollout"]
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "54326:5432"
+    volumes:
+      - "./gitignored/pgdata_prod:/var/lib/postgresql/data/pgdata"
+  gretl: # Notwendig, um lokal gretl ausführen zu können
+    image: sogis/gretl:${GRETL_IMAGE_TAG:-2.2.373}
+    profiles: ["gretl"]
+    environment:
+      ORG_GRADLE_PROJECT_gretlEnvironment: development
+    entrypoint: ["gretl", "--project-cache-dir=/home/gradle/projectcache"]
+    volumes:
+      - type: bind
+        source: $HOME/gretljobs.properties
+        target: /home/gradle/.gradle/gradle.properties
+      - type: bind
+        source: ../../../gretljobs # bind auf gretljobs root Verzeichnis
+        target: /home/gradle/project
