@@ -1,1 +1,1 @@
-docker compose up -V databases
+docker compose up -V dbs_int

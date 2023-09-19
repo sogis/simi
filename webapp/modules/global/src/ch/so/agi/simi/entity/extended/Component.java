@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 public class Component extends Dependency {
 
     public static final String NAME = "simiExtended_Component";
+
     private static final long serialVersionUID = -4862112351147530759L;
 
     @Override
