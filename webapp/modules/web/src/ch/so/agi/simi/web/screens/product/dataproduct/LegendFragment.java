@@ -90,10 +90,10 @@ public class LegendFragment extends ScreenFragment {
         SingleActor sa = singleActorDc.getItem();
 
         if(sa.getCustomLegend() != null){
-            legendLabel.setValue("vorhanden");
+            legendLabel.setValue("Vorhanden");
         }
         else {
-            legendLabel.setValue("keine");
+            legendLabel.setValue("Nicht vorh.");
         }
     }
 
