@@ -26,6 +26,14 @@ public class TableView extends DataSetView {
     @OrderBy("sort")
     private List<ViewField> viewFields;
 
+    @Lob
+    @Column(name = "FORM_JSON")
+    private String formJson;
+
+    @Lob
+    @Column(name = "FORM_QGS")
+    private String formQgs;
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "POSTGRES_TABLE_ID")
@@ -44,6 +52,22 @@ public class TableView extends DataSetView {
 
     @Column(name = "SEARCH_FILTER_WORD", length = 100)
     private String searchFilterWord;
+
+    public String getFormQgs() {
+        return formQgs;
+    }
+
+    public void setFormQgs(String formQgs) {
+        this.formQgs = formQgs;
+    }
+
+    public String getFormJson() {
+        return formJson;
+    }
+
+    public void setFormJson(String formJson) {
+        this.formJson = formJson;
+    }
 
     @Override
     protected String typeAbbreviation(){

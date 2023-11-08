@@ -370,6 +370,8 @@ create table SIMIDATA_RASTER_VIEW (
 create table SIMIDATA_TABLE_VIEW (
     ID uuid,
     --
+    FORM_JSON text,
+    FORM_QGS text,
     POSTGRES_TABLE_ID uuid not null,
     ROW_FILTER_VIEW_NAME varchar(100),
     SEARCH_TYPE varchar(50) not null,

@@ -4,15 +4,23 @@ import ch.so.agi.simi.entity.data.PostgresTable;
 import ch.so.agi.simi.entity.data.TableField;
 import ch.so.agi.simi.entity.data.datasetview.TableView;
 import ch.so.agi.simi.entity.data.datasetview.ViewField;
+import ch.so.agi.simi.entity.product.SingleActor;
 import ch.so.agi.simi.web.beans.sort.SortBean;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.gui.AppConfig;
 import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.gui.export.ByteArrayDataProvider;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.model.DataContext;
+import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -34,6 +42,16 @@ public class TableViewEdit extends StandardEditor<TableView> {
     private SortBean sortBean;
     @Inject
     private DataManager dataManager;
+    @Inject
+    private Label<String> formQgsStateLabel;
+    @Inject
+    private Label<String> formJsonStateLabel;
+    @Inject
+    private FileUploadField formJsonUploadBtn;
+    @Inject
+    private FileUploadField formQgsUploadBtn;
+    @Inject
+    private InstanceContainer<TableView> dataProductDc;
 
 
     @Subscribe
@@ -44,6 +62,8 @@ public class TableViewEdit extends StandardEditor<TableView> {
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
         loadTableFields();
+        refreshFormStateLabel(true);
+        refreshFormStateLabel(false);
     }
 
     @Subscribe("postgresTableField")
@@ -126,5 +146,105 @@ public class TableViewEdit extends StandardEditor<TableView> {
 
         // set focus on the new viewField
         viewFieldsTable.requestFocus(viewField, "sort");
+    }
+
+    @Subscribe("formJsonUploadBtn")
+    public void onFormJsonUploadBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
+        String fileContent = extractStringFromUpload(formJsonUploadBtn);
+        TableView tv = dataProductDc.getItem();
+
+        tv.setFormJson(fileContent);
+        refreshFormStateLabel(true);
+    }
+
+    @Subscribe("formQgsUploadBtn")
+    public void onFormQgsUploadBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
+        String fileContent = extractStringFromUpload(formQgsUploadBtn);
+        TableView tv = dataProductDc.getItem();
+
+        tv.setFormQgs(fileContent);
+        refreshFormStateLabel(false);
+    }
+
+    private String extractStringFromUpload(FileUploadField uploadBtn){
+        String uploaded = null;
+
+        try {
+            InputStream is = uploadBtn.getFileContent();
+            byte[] bytes  = is.readAllBytes();
+            uploaded = new String(bytes, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return uploaded;
+    }
+
+    @Subscribe("formJsonDeleteBtn")
+    public void onFormJsonDeleteBtnClick(Button.ClickEvent event) {
+        TableView tv = dataProductDc.getItem();
+        tv.setFormJson(null);
+        refreshFormStateLabel(true);
+    }
+
+    @Subscribe("formQgsDeleteBtn")
+    public void onFormQgsDeleteBtnClick(Button.ClickEvent event) {
+        TableView tv = dataProductDc.getItem();
+        tv.setFormQgs(null);
+        refreshFormStateLabel(false);
+    }
+
+    private void refreshFormStateLabel(boolean jsonForm){
+        Label<String> uploadStateLabel = null;
+        boolean fieldIsNull = false;
+        TableView tv = dataProductDc.getItem();
+
+        if(jsonForm) {
+            uploadStateLabel = formJsonStateLabel;
+            fieldIsNull = tv.getFormJson() == null;
+        }
+        else {
+            uploadStateLabel = formQgsStateLabel;
+            fieldIsNull = tv.getFormQgs() == null;
+        }
+
+        if(fieldIsNull)
+            uploadStateLabel.setValue("Nicht vorh.");
+        else
+            uploadStateLabel.setValue("Vorhanden");
+    }
+
+    @Subscribe("formJsonDownloadBtn")
+    public void onFormJsonDownloadBtnClick(Button.ClickEvent event) {
+        downloadFormData(true);
+    }
+
+    @Subscribe("formQgsDownloadBtn")
+    public void onFormQgsDownloadBtnClick(Button.ClickEvent event) {
+        downloadFormData(false);
+    }
+
+    private void downloadFormData(boolean fromJsonField){
+        TableView tv = dataProductDc.getItem();
+        String dataString = null;
+        String fileSuffix = null;
+        if(fromJsonField) {
+            dataString = tv.getFormJson();
+            fileSuffix = "json";
+        }
+        else {
+            dataString = tv.getFormQgs();
+            fileSuffix = "qgs";
+        }
+
+        if(dataString == null)
+            return;
+
+        byte[] data = dataString.getBytes(StandardCharsets.UTF_8);
+        String fileName = tv.getDerivedIdentifier() + "." + fileSuffix;
+
+        AppConfig.createExportDisplay(null).show(
+                new ByteArrayDataProvider(data),
+                fileName
+        );
     }
 }

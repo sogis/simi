@@ -114,12 +114,34 @@
                                 <property name="singleActorDc" ref="dataProductDc"/>
                             </properties>
                         </fragment>
-                        <textArea id="keywordsField" property="keywords" rows="2" rowspan="2"/>
+                        <hbox id="formJson" caption="Edit-Form: Json" >
+                            <hbox id="formJson1" spacing="false">
+                                <!-- Übersteuern der caption des upload button ist nicht einfach möglich -> fallback auf upload, download -->
+                                <button id="formJsonDownloadBtn" caption="Download"/>
+                                <hbox width="10"/>
+                                <upload id="formJsonUploadBtn" fileStoragePutMode="MANUAL" permittedExtensions=".json"/>
+                                <button id="formJsonDeleteBtn" icon="REMOVE"/>
+                                <hbox width="10"/>
+                                <label id="formJsonStateLabel"/>
+                            </hbox>
+                        </hbox>
+                        <hbox id="formQqs" caption="Edit-Form: Qgs">
+                            <hbox id="formQgs1" spacing="false">
+                                <!-- Übersteuern der caption des upload button ist nicht einfach möglich -> fallback auf upload, download -->
+                                <button id="formQgsDownloadBtn" caption="Download"/>
+                                <hbox width="10"/>
+                                <upload id="formQgsUploadBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qgs"/>
+                                <button id="formQgsDeleteBtn" icon="REMOVE"/>
+                                <hbox width="10"/>
+                                <label id="formQgsStateLabel"/>
+                            </hbox>
+                        </hbox>
                     </column>
                     <column width="450px">
                         <textArea id="descriptionModelField" property="postgresTable.descriptionModel" editable="false" rows="5" rowspan="3"/>
                         <textArea id="descriptionField" property="description" rows="5" rowspan="3"/>
-                        <textArea id="synonymsField" property="synonyms" rows="2" rowspan="2"/>
+                        <textArea id="synonymsField" property="synonyms" rows="1" rowspan="1"/>
+                        <textArea id="keywordsField" property="keywords" rows="1" rowspan="1"/>
                     </column>
                 </form>
             </groupBox>
