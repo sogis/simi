@@ -7,14 +7,84 @@ CREATE VIEW simi.trafo_wms_layer_v AS
  */
 WITH
 
+-- CTE für WMS-weit eindeutige Datasetview identifier
+
+published_dsv AS (
+  SELECT 
+    id AS dsv_id,
+    p.root_published
+  FROM
+    simi.simidata_data_set_view d
+  JOIN
+    simi.trafo_published_dp_v p ON d.id = p.dp_id 
+),
+
+facade_dsv_children AS (
+  SELECT 
+    data_set_view_id AS child_id, 
+    facade_layer_id AS parent_id
+  FROM 
+    simi.simiproduct_properties_in_facade pif
+  JOIN
+    published_dsv p ON pif.data_set_view_id = p.dsv_id
+),
+
+group_dsv_children AS (
+  SELECT 
+    product_list_id AS parent_id, 
+    single_actor_id AS child_id
+  FROM 
+    simi.simiproduct_properties_in_list pil
+  JOIN 
+    simi.simiproduct_layer_group lg ON pil.product_list_id = lg.id 
+  JOIN
+    published_dsv p ON pil.single_actor_id = p.dsv_id   
+),
+
+root_dsv AS (
+  SELECT 
+    dsv_id AS child_id
+  FROM 
+    published_dsv
+  WHERE
+    root_published IS TRUE            
+),
+
+dsv_treenodes AS (
+  SELECT child_id, parent_id, 'facade' AS parent_type, 3 AS name_prio FROM facade_dsv_children
+  UNION ALL 
+  SELECT child_id, parent_id, 'group' AS parent_type, 2 AS name_prio FROM group_dsv_children
+  UNION ALL 
+  SELECT child_id, NULL AS parent_id, 'none' AS parent_type, 1 AS name_prio FROM root_dsv
+),
+
+/*
+Weist innerhalb aller publizierten Datasetviews den Duplikaten einen Suffix von 2 bis * zu.
+Genau einer Kopie jedes publizierten Singleactor bleibt der Original-Identifier erhalten (suffix = null).
+*/
+dsv_unique_suffix AS (
+  SELECT 
+    child_id,
+    parent_id,
+    NULLIF(ROW_NUMBER() OVER (PARTITION BY s.child_id ORDER BY s.name_prio ASC), 1) AS suffix     
+  FROM 
+    dsv_treenodes s
+),
+
+-- CTE für Json-Erzeugung ...
+
 productlist_children AS ( -- Alle publizierten Kinder einer Productlist, sortiert nach pil.sort
   SELECT  
     pil.product_list_id, 
-    jsonb_agg(identifier ORDER BY pil.sort) AS ident_json
+    jsonb_agg(
+      concat_ws('.', identifier, suffix) ORDER BY pil.sort
+    ) AS ident_json
   FROM 
     simi.simiproduct_properties_in_list pil 
   JOIN 
     simi.trafo_published_dp_v dp ON pil.single_actor_id = dp.dp_id
+  LEFT JOIN 
+    dsv_unique_suffix u ON pil.product_list_id = u.parent_id AND pil.single_actor_id = u.child_id
   GROUP BY 
     product_list_id  
 ),
@@ -40,11 +110,15 @@ productlist AS ( -- Alle publizierten Productlists, mit ihren publizierten Kinde
 facadelayer_children AS ( -- Alle direkt oder indirekt publizierten Kinder eines Facadelayer, sortiert nach pif.sort
   SELECT  
     pif.facade_layer_id,
-    jsonb_agg(identifier ORDER BY pif.sort) AS ident_json
+    jsonb_agg(
+      concat_ws('.', identifier, suffix) ORDER BY pif.sort
+    ) AS ident_json
   FROM 
     simi.simiproduct_properties_in_facade pif
   JOIN 
     simi.trafo_published_dp_v dp ON pif.data_set_view_id = dp.dp_id
+  LEFT JOIN 
+    dsv_unique_suffix u ON pif.facade_layer_id = u.parent_id AND pif.data_set_view_id = u.child_id
   GROUP BY 
     facade_layer_id  
 ),
@@ -92,17 +166,17 @@ dsv_qml_assetfiles AS (
 
 vector_layer AS (
   SELECT 
-    identifier,
+    concat_ws('.', identifier, suffix) AS identifier,
     FALSE AS print_or_ext,
     jsonb_strip_nulls(
       jsonb_build_object(
-      'name', identifier,
+      'name', concat_ws('.', identifier, suffix),
       'type', 'layer',
       'datatype', 'vector',
       'title', title_ident,
       'postgis_datasource', tbl_json,
       'qml_base64', encode(convert_to(style_server, 'UTF8'), 'base64'),
-      'qml_assets', COALESCE(assetfiles_json, jsonb_build_array()), --$td COALESCE entfernen
+      'qml_assets', COALESCE(assetfiles_json, jsonb_build_array()),
       'attributes', attr_name_js
       )
     ) AS layer_json
@@ -112,16 +186,18 @@ vector_layer AS (
     simi.simidata_data_set_view dsv ON tv.tv_id = dsv.id
   JOIN 
     simi.trafo_wms_geotable_v tbl ON tv.tv_id = tbl.tv_id 
+  JOIN
+    dsv_unique_suffix s ON tv.tv_id = s.child_id
   LEFT JOIN 
     dsv_qml_assetfiles files ON tv.tv_id = files.dsv_id
 ),
 
 raster_layer AS (
   SELECT 
-    identifier,
+    concat_ws('.', identifier, suffix) AS identifier,
     print_or_ext,
     jsonb_strip_nulls(jsonb_build_object(
-      'name', identifier,
+      'name', concat_ws('.', identifier, suffix),
       'type', 'layer',
       'datatype', 'raster',
       'title', title_ident,
@@ -136,6 +212,8 @@ raster_layer AS (
     simi.simidata_raster_view rv ON dsv.id = rv.id
   JOIN 
     simi.simidata_raster_ds rds ON rv.raster_ds_id = rds.id   
+  JOIN
+    dsv_unique_suffix s ON dp.dp_id = s.child_id
 ),
 
 ext_wms_layerbase AS (
