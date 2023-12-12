@@ -7,19 +7,20 @@ CREATE VIEW simi.trafo_wms_layer_v AS
  */
 WITH
 
--- CTE für WMS-weit eindeutige Datasetview identifier
 
-published_dsv AS (
+-- CTE für WMS-weit eindeutige singleactor identifier
+
+published_sa AS ( -- Alle publizierten SingleActors  
   SELECT 
-    id AS dsv_id,
+    sa.id AS sa_id,
     p.root_published
   FROM
-    simi.simidata_data_set_view d
+    simi.simiproduct_single_actor sa
   JOIN
-    simi.trafo_published_dp_v p ON d.id = p.dp_id 
-),
+    simi.trafo_published_dp_v p ON sa.id = p.dp_id 
+)
 
-layergroup_children AS (
+,layergroup_children AS ( 
   SELECT 
     product_list_id AS lg_id,
     single_actor_id AS sa_id
@@ -27,9 +28,9 @@ layergroup_children AS (
     simi.simiproduct_layer_group lg
   JOIN 
     simi.simiproduct_properties_in_list pil ON lg.id = pil.product_list_id
-),
+)
 
-facade_dsv_children AS (
+,facade_dsv_children AS (
   SELECT 
     data_set_view_id AS child_id, 
     facade_layer_id AS parent_id,
@@ -37,12 +38,12 @@ facade_dsv_children AS (
   FROM 
     simi.simiproduct_properties_in_facade pif
   JOIN
-    published_dsv p ON pif.data_set_view_id = p.dsv_id
+    published_sa p ON pif.data_set_view_id = p.sa_id
   LEFT JOIN 
     layergroup_children lg ON pif.facade_layer_id = lg.sa_id
-),
+)
 
-group_dsv_children AS (
+,group_sa_children AS (
   SELECT 
     product_list_id AS parent_id, 
     single_actor_id AS child_id
@@ -51,44 +52,50 @@ group_dsv_children AS (
   JOIN 
     simi.simiproduct_layer_group lg ON pil.product_list_id = lg.id 
   JOIN
-    published_dsv p ON pil.single_actor_id = p.dsv_id   
-),
+    published_sa p ON pil.single_actor_id = p.sa_id   
+)
 
-root_dsv AS (
+,root_sa AS (
   SELECT 
-    dsv_id AS child_id
+    sa_id AS child_id
   FROM 
-    published_dsv
+    published_sa
   WHERE
     root_published IS TRUE            
-),
+)
 
-dsv_treenodes AS (
+/*
+Suffix-Prioritäten:
+1. Root publizierte Singleactors parent=null
+2. Singleactors in Layergruppen parent.type = layergroup
+3. Datasetviews in Facadelayern parent.type = facadelayer
+*/
+,sa_treenodes AS (
   SELECT child_id, parent_id, grandpa_id, 'facade' AS parent_type, 3 AS name_prio FROM facade_dsv_children
   UNION ALL 
-  SELECT child_id, parent_id, NULL AS grandpa_id, 'group' AS parent_type, 2 AS name_prio FROM group_dsv_children
+  SELECT child_id, parent_id, NULL AS grandpa_id, 'group' AS parent_type, 2 AS name_prio FROM group_sa_children
   UNION ALL 
-  SELECT child_id, NULL AS parent_id, NULL AS grandpa_id, 'none' AS parent_type, 1 AS name_prio FROM root_dsv
-),
+  SELECT child_id, NULL AS parent_id, NULL AS grandpa_id, 'none' AS parent_type, 1 AS name_prio FROM root_sa
+)
+
 
 /*
 Weist innerhalb aller publizierten Datasetviews den Duplikaten einen Suffix von 2 bis * zu.
 Genau einer Kopie jedes publizierten Singleactor bleibt der Original-Identifier erhalten (suffix = null).
 */
-dsv_unique_suffix AS (
+,sa_unique_suffix AS (
   SELECT 
     child_id,
     parent_id,
-    parent_type,
-    NULLIF(ROW_NUMBER() OVER (PARTITION BY s.child_id ORDER BY s.name_prio ASC), 1) AS suffix,
-    grandpa_id
+    grandpa_id,
+    NULLIF(ROW_NUMBER() OVER (PARTITION BY s.child_id ORDER BY s.name_prio ASC), 1) AS suffix     
   FROM 
-    dsv_treenodes s
-),
+    sa_treenodes s
+)
 
 -- CTE für Json-Erzeugung ...
 
-productlist_children AS ( -- Alle publizierten Kinder einer Productlist, sortiert nach pil.sort
+,productlist_children AS ( -- Alle publizierten Kinder einer Productlist, sortiert nach pil.sort
   SELECT  
     pil.product_list_id, 
     jsonb_agg(
@@ -99,12 +106,12 @@ productlist_children AS ( -- Alle publizierten Kinder einer Productlist, sortier
   JOIN 
     simi.trafo_published_dp_v dp ON pil.single_actor_id = dp.dp_id
   LEFT JOIN 
-    dsv_unique_suffix u ON pil.product_list_id = u.parent_id AND pil.single_actor_id = u.child_id
+    sa_unique_suffix u ON pil.product_list_id = u.parent_id AND pil.single_actor_id = u.child_id
   GROUP BY 
     product_list_id  
-),
+)
 
-productlist AS ( -- Alle publizierten Productlists, mit ihren publizierten Kindern. (Background-)Map.print_or_ext = TRUE, Layergroup.print_or_ext = FALSE 
+,productlist AS ( -- Alle publizierten Productlists, mit ihren publizierten Kindern. (Background-)Map.print_or_ext = TRUE, Layergroup.print_or_ext = FALSE 
   SELECT 
     identifier,
     print_or_ext, 
@@ -120,80 +127,101 @@ productlist AS ( -- Alle publizierten Productlists, mit ihren publizierten Kinde
     productlist_children sa ON dp.dp_id = sa.product_list_id
   LEFT JOIN 
     simi.simiproduct_map m ON dp.dp_id = m.id
-),
+)
 
-facade_placements AS ( -- Facadelayer innerhalb Gruppe oder auf root-ebene platziert
-  SELECT 
-    parent_id AS fl_id,
-    grandpa_id AS lg_id
-  FROM 
-    dsv_unique_suffix
-  WHERE 
-    parent_type = 'facade'
-  GROUP BY 
-    parent_id, 
-    grandpa_id
-),
-
-null_uid_placeholder AS ( -- Künstliche eindeutige uid. Wird für Root-Facadelayer als Ersatz von NULL als grandpa_id verwendet, damit homogenes query geschrieben werden kann.
+,null_uid_placeholder AS ( -- Künstliche eindeutige uid. Wird für root publizierte SingleActor als Ersatz der layergruppen-id verwendet (macht where clause einfacher).
   SELECT   
     uuid_generate_v4() AS null_uid
-),
+)
 
-facade_placements_suffix AS (
+,lg_childlinks AS (
   SELECT 
-    fl_id,
-    NULLIF(ROW_NUMBER() OVER (PARTITION BY fl_id ORDER BY lg_id ASC), 1) AS fl_suffix,
-    COALESCE(lg_id, null_uid) AS lg_id_nullreplaced
-  FROM
-    facade_placements,
-    null_uid_placeholder
-),    
-
-facade_placements_childarr AS ( -- Alle direkt oder indirekt publizierten Kinder eines Facadelayer, sortiert nach pif.sort
-  SELECT 
-    fl_id,
-    fl_suffix,
-    lg_id_nullreplaced,
-    jsonb_agg(
-      concat_ws('.', identifier, suffix) ORDER BY pif.sort
-    ) AS ident_json
+    l.id AS lg_id,
+    p.single_actor_id AS sa_id
   FROM 
-    facade_placements_suffix fp
+    simi.simiproduct_layer_group l
   JOIN
-    simi.simiproduct_properties_in_facade pif ON fp.fl_id = pif.facade_layer_id
-  JOIN 
-    simi.trafo_published_dp_v dp ON pif.data_set_view_id = dp.dp_id
+    simi.simiproduct_properties_in_list p ON l.id = p.product_list_id
+)
+
+,facade_node AS (-- FL im Layer-Tree. Mit Referenz auf den Parent oder die null_uid für root FL
+  SELECT    
+    f.id AS fl_id,
+    coalesce(lc.lg_id, null_uid) AS lg_or_null_id
+  FROM 
+    simi.simiproduct_facade_layer f 
+  CROSS JOIN 
+    null_uid_placeholder nid
+  LEFT JOIN
+    lg_childlinks lc ON f.id = lc.sa_id
+)
+
+,facade_node_2 AS (
+  SELECT 
+    concat_ws('.', dp.derived_identifier, suffix) AS fl_identifier,
+    fl_id,
+    lg_or_null_id
+  FROM 
+    facade_node fn
   CROSS JOIN
-    null_uid_placeholder nup
+    null_uid_placeholder nid
+  JOIN
+    sa_unique_suffix s ON fn.fl_id = s.child_id AND fn.lg_or_null_id = COALESCE(s.parent_id, null_uid)
+  JOIN
+    simi.simiproduct_data_product dp ON fn.fl_id = dp.id
+)
+
+,facade_node_child_ident AS (--  Kinder von Facade-Knoten im Layerbaum. Werden mit baumweit eindeutigen identifiern versehen
+  SELECT 
+    concat_ws('.', dp.derived_identifier, suffix) AS dsv_identifier,
+    fn.fl_id,
+    fn.lg_or_null_id,
+    pif.sort
+  FROM 
+    sa_unique_suffix s
+  CROSS JOIN 
+    null_uid_placeholder nid
+  JOIN
+    facade_node fn ON s.parent_id = fn.fl_id AND COALESCE(s.grandpa_id, nid.null_uid) = fn.lg_or_null_id
   JOIN 
-    dsv_unique_suffix u ON fp.fl_id = u.parent_id AND pif.data_set_view_id = u.child_id AND fp.lg_id_nullreplaced = COALESCE(u.grandpa_id, nup.null_uid)    
+    simi.simiproduct_properties_in_facade pif ON s.child_id = pif.data_set_view_id AND s.parent_id = pif.facade_layer_id
+  JOIN
+    simi.simiproduct_data_product dp ON s.child_id = dp.id
+)
+
+,facade_node_child_arr AS (
+  SELECT 
+    jsonb_agg(
+      dsv_identifier ORDER BY sort
+    ) AS ident_json,
+    fl_id,
+    lg_or_null_id
+  FROM 
+    facade_node_child_ident
   GROUP BY 
     fl_id,
-    lg_id_nullreplaced,
-    fl_suffix
-),
+    lg_or_null_id
+)
 
-facadelayer_placed AS ( -- fl mit referenz auf die enthaltende layergruppe (Attribut lg_id_nullreplaced). Facadelayer kann mehrfach vorkommen
+,facadelayer AS (
   SELECT 
-    concat_ws('.', identifier, fl_suffix) AS identifier,
+    fl_identifier AS identifier,
     print_or_ext,
     jsonb_build_object(
-      'name', concat_ws('.', identifier, fl_suffix),
+      'name', fl_identifier,
       'type', 'productset',
       'title', title_ident,
       'sublayers', ident_json
-    ) AS layer_json,
-    lg_id_nullreplaced
+    ) AS layer_json
   FROM 
-    simi.simiproduct_facade_layer fl
+    facade_node_2 fn
   JOIN 
-    simi.trafo_published_dp_v dp ON fl.id = dp.dp_id
+    simi.trafo_published_dp_v dp ON fn.fl_id = dp.dp_id
   JOIN
-    facade_placements_childarr dsv ON dp.dp_id = dsv.fl_id
-),
+    facade_node_child_arr fc ON fn.fl_id = fc.fl_id AND fn.lg_or_null_id = fc.lg_or_null_id
+)
 
-dsv_qml_assetfile AS (
+,dsv_qml_assetfile AS (
   SELECT 
     dataset_set_view_id AS dsv_id,
     jsonb_build_object(
@@ -204,9 +232,9 @@ dsv_qml_assetfile AS (
     simi.simidata_styleasset     
   WHERE 
     is_for_server IS TRUE  
-),
+)
 
-dsv_qml_assetfiles AS (
+,dsv_qml_assetfiles AS (
   SELECT 
     dsv_id,
     jsonb_agg(file_json) AS assetfiles_json
@@ -214,9 +242,9 @@ dsv_qml_assetfiles AS (
     dsv_qml_assetfile
   GROUP BY 
     dsv_id
-),
+)
 
-vector_layer AS (
+,vector_layer AS (
   SELECT 
     concat_ws('.', identifier, suffix) AS identifier,
     FALSE AS print_or_ext,
@@ -239,12 +267,12 @@ vector_layer AS (
   JOIN 
     simi.trafo_wms_geotable_v tbl ON tv.tv_id = tbl.tv_id 
   JOIN
-    dsv_unique_suffix s ON tv.tv_id = s.child_id
+    sa_unique_suffix s ON tv.tv_id = s.child_id
   LEFT JOIN 
     dsv_qml_assetfiles files ON tv.tv_id = files.dsv_id
-),
+)
 
-raster_layer AS (
+,raster_layer AS (
   SELECT 
     concat_ws('.', identifier, suffix) AS identifier,
     print_or_ext,
@@ -265,10 +293,10 @@ raster_layer AS (
   JOIN 
     simi.simidata_raster_ds rds ON rv.raster_ds_id = rds.id   
   JOIN
-    dsv_unique_suffix s ON dp.dp_id = s.child_id
-),
+    sa_unique_suffix s ON dp.dp_id = s.child_id
+)
 
-ext_wms_layerbase AS (
+,ext_wms_layerbase AS (
   SELECT  
     identifier,
     title_ident,  
@@ -286,9 +314,9 @@ ext_wms_layerbase AS (
     simi.simiproduct_external_wms_layers el ON dp.dp_id = el.id
   JOIN
     simi.simiproduct_external_wms_service es ON el.service_id = es.id
-),
+)
 
-ext_wms AS (
+,ext_wms AS (
   SELECT 
     identifier,
     TRUE AS print_or_ext,
@@ -301,12 +329,12 @@ ext_wms AS (
     ) AS layer_json
   FROM
     ext_wms_layerbase
-),
+)
 
-layer_union AS (
+,layer_union AS (
   SELECT identifier, print_or_ext, layer_json FROM productlist
   UNION ALL 
-  SELECT identifier, print_or_ext, layer_json FROM facadelayer_placed
+  SELECT identifier, print_or_ext, layer_json FROM facadelayer
   UNION ALL 
   SELECT identifier, print_or_ext, layer_json FROM vector_layer
   UNION ALL 
@@ -322,4 +350,3 @@ SELECT
 FROM
   layer_union
 ;
-
