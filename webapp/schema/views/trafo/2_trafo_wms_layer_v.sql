@@ -7,7 +7,6 @@ CREATE VIEW simi.trafo_wms_layer_v AS
  */
 WITH
 
-
 -- CTE für WMS-weit eindeutige singleactor identifier
 
 published_sa AS ( -- Alle publizierten SingleActors  
@@ -144,7 +143,9 @@ Genau einer Kopie jedes publizierten Singleactor bleibt der Original-Identifier 
     simi.simiproduct_properties_in_list p ON l.id = p.product_list_id
 )
 
-,facade_node AS (-- FL im Layer-Tree. Mit Referenz auf den Parent oder die null_uid für root FL
+-- FL im Layer-Tree. Mit Referenz auf den Parent oder die null_uid für root FL. 
+-- Ein root publizierter und LG enthaltener FL wird nur als "LG-Kind" zurückgegeben
+,facade_node AS (
   SELECT    
     f.id AS fl_id,
     coalesce(lc.lg_id, null_uid) AS lg_or_null_id
