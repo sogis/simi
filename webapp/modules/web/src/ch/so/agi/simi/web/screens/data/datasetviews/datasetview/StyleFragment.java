@@ -30,7 +30,7 @@ import java.util.Optional;
 @UiDescriptor("style-fragment.xml")
 public class StyleFragment extends ScreenFragment {
 
-    private static final int[] QGIS_SERVER_MAXVERSION = new int[]{2,18};
+    private static final int[] QGIS_SERVER_MAXVERSION = new int[]{3,28};
     private static final int[] QGIS_DESKTOP_MAXVERSION = new int[]{3,28};
 
     private InstanceContainer<DataSetView> dataSetViewDc;
