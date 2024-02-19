@@ -43,13 +43,13 @@ public class TableViewEdit extends StandardEditor<TableView> {
     @Inject
     private DataManager dataManager;
     @Inject
-    private Label<String> formQgsStateLabel;
+    private Label<String> formQmlStateLabel;
     @Inject
     private Label<String> formJsonStateLabel;
     @Inject
     private FileUploadField formJsonUploadBtn;
     @Inject
-    private FileUploadField formQgsUploadBtn;
+    private FileUploadField formQmlUploadBtn;
     @Inject
     private InstanceContainer<TableView> dataProductDc;
 
@@ -157,9 +157,9 @@ public class TableViewEdit extends StandardEditor<TableView> {
         refreshFormStateLabel(true);
     }
 
-    @Subscribe("formQgsUploadBtn")
-    public void onFormQgsUploadBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
-        String fileContent = extractStringFromUpload(formQgsUploadBtn);
+    @Subscribe("formQmlUploadBtn")
+    public void onFormQmlUploadBtnFileUploadSucceed(FileUploadField.FileUploadSucceedEvent event) {
+        String fileContent = extractStringFromUpload(formQmlUploadBtn);
         TableView tv = dataProductDc.getItem();
 
         tv.setFormQgs(fileContent);
@@ -186,8 +186,8 @@ public class TableViewEdit extends StandardEditor<TableView> {
         refreshFormStateLabel(true);
     }
 
-    @Subscribe("formQgsDeleteBtn")
-    public void onFormQgsDeleteBtnClick(Button.ClickEvent event) {
+    @Subscribe("formQmlDeleteBtn")
+    public void onFormQmlDeleteBtnClick(Button.ClickEvent event) {
         TableView tv = dataProductDc.getItem();
         tv.setFormQgs(null);
         refreshFormStateLabel(false);
@@ -203,7 +203,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
             fieldIsNull = tv.getFormJson() == null;
         }
         else {
-            uploadStateLabel = formQgsStateLabel;
+            uploadStateLabel = formQmlStateLabel;
             fieldIsNull = tv.getFormQgs() == null;
         }
 
@@ -218,8 +218,8 @@ public class TableViewEdit extends StandardEditor<TableView> {
         downloadFormData(true);
     }
 
-    @Subscribe("formQgsDownloadBtn")
-    public void onFormQgsDownloadBtnClick(Button.ClickEvent event) {
+    @Subscribe("formQmlDownloadBtn")
+    public void onFormQmlDownloadBtnClick(Button.ClickEvent event) {
         downloadFormData(false);
     }
 
@@ -233,7 +233,7 @@ public class TableViewEdit extends StandardEditor<TableView> {
         }
         else {
             dataString = tv.getFormQgs();
-            fileSuffix = "qgs";
+            fileSuffix = "qml";
         }
 
         if(dataString == null)

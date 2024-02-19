@@ -125,15 +125,15 @@
                                 <label id="formJsonStateLabel"/>
                             </hbox>
                         </hbox>
-                        <hbox id="formQqs" caption="Edit-Form: Qgs">
-                            <hbox id="formQgs1" spacing="false">
+                        <hbox id="formQml" caption="Edit-Form: Qml">
+                            <hbox id="formQml1" spacing="false">
                                 <!-- Übersteuern der caption des upload button ist nicht einfach möglich -> fallback auf upload, download -->
-                                <button id="formQgsDownloadBtn" caption="Download"/>
+                                <button id="formQmlDownloadBtn" caption="Download"/>
                                 <hbox width="10"/>
-                                <upload id="formQgsUploadBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qgs"/>
-                                <button id="formQgsDeleteBtn" icon="REMOVE"/>
+                                <upload id="formQmlUploadBtn" fileStoragePutMode="MANUAL" permittedExtensions=".qml"/>
+                                <button id="formQmlDeleteBtn" icon="REMOVE"/>
                                 <hbox width="10"/>
-                                <label id="formQgsStateLabel"/>
+                                <label id="formQmlStateLabel"/>
                             </hbox>
                         </hbox>
                     </column>
