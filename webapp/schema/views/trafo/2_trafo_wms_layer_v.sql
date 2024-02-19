@@ -130,7 +130,7 @@ Genau einer Kopie jedes publizierten Singleactor bleibt der Original-Identifier 
 
 ,null_uid_placeholder AS ( -- Künstliche eindeutige uid. Wird für root publizierte SingleActor als Ersatz der layergruppen-id verwendet (macht where clause einfacher).
   SELECT   
-    uuid_generate_v4() AS null_uid
+    gen_random_uuid() AS null_uid
 )
 
 ,lg_childlinks AS (
