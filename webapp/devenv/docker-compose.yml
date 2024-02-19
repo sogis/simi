@@ -11,7 +11,7 @@ services:
     ports:
       - "8081:8080"
   dbs_int:
-    image: postgis/postgis:13-3.1
+    image: postgis/postgis:14-3.3
     environment:
       - POSTGRES_PASSWORD=postgres
       - PGDATA=/var/lib/postgresql/data/pgdata
@@ -20,7 +20,7 @@ services:
     volumes:
       - "./gitignored/pgdata_int:/var/lib/postgresql/data/pgdata"
   dbs_prod:
-    image: postgis/postgis:13-3.1
+    image: postgis/postgis:14-3.3
     profiles: ["rollout"]
     environment:
       - POSTGRES_PASSWORD=postgres

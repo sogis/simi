@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: postgis/postgis:11-2.5-alpine
+    image: postgis/postgis:14-3.3
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=simi
@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432" # for create db action
   await-db:
-    image: postgis/postgis:11-2.5-alpine
+    image: postgis/postgis:14-3.3
     command: /var/lib/postgresql/data/await-db/await.sh
     environment:
       - POSTGRES_PASSWORD=postgres
