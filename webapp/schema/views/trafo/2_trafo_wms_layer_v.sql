@@ -87,7 +87,7 @@ Genau einer Kopie jedes publizierten Singleactor bleibt der Original-Identifier 
     child_id,
     parent_id,
     grandpa_id,
-    NULLIF(ROW_NUMBER() OVER (PARTITION BY s.child_id ORDER BY s.name_prio ASC), 1) AS suffix     
+    NULLIF(ROW_NUMBER() OVER (PARTITION BY s.child_id ORDER BY s.name_prio, parent_id::text, grandpa_id::text ASC), 1) AS suffix     
   FROM 
     sa_treenodes s
 )
