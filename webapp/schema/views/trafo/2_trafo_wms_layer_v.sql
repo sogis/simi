@@ -1,4 +1,4 @@
---CREATE VIEW simi.trafo_wms_layer_v AS
+CREATE VIEW simi.trafo_wms_layer_v AS
 
 /*
  * Gibt für den WMS die Dataproducts (DP) mit ihren jeweiligen Detailinformationen aus.
@@ -120,7 +120,6 @@ productlist_children AS ( -- Alle publizierten pl aka gruppen und maps mit ihren
   JOIN
     productlist_children_json sa ON dp.dp_id = sa.pl_id
 )
-
 
 ,null_uid_placeholder AS ( -- Künstliche eindeutige uid. Wird für root publizierte SingleActor als Ersatz der layergruppen-id verwendet (macht where clause einfacher).
   SELECT   
