@@ -11,7 +11,7 @@ themepub_descr_part AS (
             '<br/><br/>', 
             'Teil des Themas <b>' || COALESCE(tp.title_override, t.title) || ':</b>', 
             COALESCE(tp.description_override, t.description),
-            '<a href="' || t.further_info_url || '">Weitere Informationen zum Thema</a>'
+            '<a href="' || t.further_info_url || '"  target="_blank">Weitere Informationen zum Thema</a>'
             ) AS descr_part,
         tp.id AS tp_id
     FROM 
