@@ -71,15 +71,19 @@ Periodisch macht es Sinn, die aktuellen Daten aus der Integration zu übernehmen
 
 Vorgehen:
 
-* Mittels CUBA-Gradle plugin das Schema ohne Inhalt erzeugen (In Ordner simi/webapp): ```./gradlew createDB``` 
-* Dump lokal nehmen (Siehe dazu dok "Datenbanken")
-* Dump restoren, ohne Übernahme von Ownern, Rollen, ... 
-  * Daten:   
-  ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --data-only --disable-triggers gitignored/simi_t_v1.2.dmp```  
+* Mittels CUBA-Gradle plugin das Schema ohne Inhalt erzeugen (In Ordner simi/webapp): ```./gradlew createDB```   
+* Dump restoren
+  * Dump lokal nehmen (Siehe dazu dok "Datenbanken")
+    * In den Ordner devenv/gitignored/pgdata_int/ kopieren, damit innerhalb container zugreifbar.
+      * Siehe docker-compose.yml bzgl. Ordner
+  * Bash innerhalb container öffnen, zwecks Ausführen von pg_restore: ```docker exec -it 656 bash``` (656 ersetzen mit aktueller Container-ID)
+    * In den Ordner .../pgdata/ wechseln (Siehe docker-compose.yml)
+  * "pg_restore" ausführen, ohne Übernahme von Ownern, Rollen, ... 
+    * ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --data-only --disable-triggers [dumpname].dmp``` 
 * Anmelden mit dem Admin-Passwort "aus Dump" (Siehe Passwort-Manager)
   * Admin-Passwort überschreiben
 
-Befehl für Restore der Tabellen-Definitionen (Ohne Daten):   
+(Befehl für Restore der Tabellen-Definitionen (Ohne Daten):)   
 ```pg_restore -d postgresql://postgres:postgres@localhost/simi -x -O --schema-only gitignored/simi_t_v1.2.dmp```
   
 ## Abdeckung mit automatisierten Tests
