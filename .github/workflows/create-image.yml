@@ -25,7 +25,7 @@ jobs:
         run: docker compose up -d -V db
         working-directory: ./webapp/docker
       - name: Wait until db is up
-        run: docker-compose up -V --exit-code-from await-db await-db
+        run: docker compose up -V --exit-code-from await-db await-db
         working-directory: ./webapp/docker
       - name: create the simi schema
         run: ./gradlew createDb
@@ -43,7 +43,7 @@ jobs:
         run: ./gradlew imgBuild
         working-directory: ./webapp
       - name: Start simi image
-        run: docker-compose up -d -V simi
+        run: docker compose up -d -V simi
         working-directory: ./webapp/docker
       - name: middle tier - check health
         run: ./await.sh http://localhost:8080/app-core/remoting/health
