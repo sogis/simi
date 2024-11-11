@@ -5,6 +5,7 @@ on:
     branches: 
       - master
     paths:
+      - '.github/workflows/**'
       - 'webapp/**'
       - '!webapp/schema'
       - '!webapp/doc'
