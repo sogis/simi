@@ -21,11 +21,22 @@ public class User extends Identity {
     @ManyToMany
     private List<Group> groups;
 
+    @Column(name = "ADDRESS", length = 100)
+    private String address;
+
     @JoinTable(name = "SIMIIAM_ROLE_USER_LINK",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     @ManyToMany
     private List<Role> roles;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public List<Role> getRoles() {
         return roles;

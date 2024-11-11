@@ -290,6 +290,8 @@ create table SIMIPRODUCT_PROPERTIES_IN_FACADE (
 create table SIMIIAM_USER (
     ID uuid,
     --
+    ADDRESS varchar(100),
+    --
     primary key (ID)
 )^
 -- end SIMIIAM_USER
