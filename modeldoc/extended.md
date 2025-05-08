@@ -75,13 +75,15 @@ Konfiguration der entsprechenden CCC-Integration. Die Datasetviews, von welchen 
 
 ## Klasse Report
 
-Relevanz nur bezüglich der Abhängigkeits-Anzeige oder auch Funktional?
+Konfiguration der Integration und Autorisierung eines Jasper-Reports.
+
+Todo: Beschreibung der Attribute präzisieren nach Erfahrungssammlung durch Michael.
 
 ### Attributbeschreibung
 
 |Name|Typ|Z|Beschreibung|
 |---|---|---|---|
-
-
-
-
+|repDatasource|String|j|Jdbc Connection String der Datenbank, auf welche der Report zugreift.|
+|repTable|String|j|Schemaqualifizierter Name der Tabelle oder View, die vom Report abgefragt wird.|
+|repUniqueKey|String|j|Name der Unique-Tabellenspalte, über die das im Objektblatt anzuzeigende Objekt eindeutig identifiziert wird.|
+|repParameterName|String|j|Name des Parameters, über den der Wert der Unique-Spalte übergeben wird.|

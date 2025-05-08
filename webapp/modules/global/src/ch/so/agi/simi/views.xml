@@ -195,6 +195,10 @@
         </property>
         <property name="name"/>
         <property name="remarks"/>
+        <property name="repDatasource"/>
+        <property name="repTable"/>
+        <property name="repUniqueKey"/>
+        <property name="repParameterName"/>
     </view>
     <view entity="simiProduct_DataProduct" name="dataProduct-browse" extends="_local">
         <property name="pubScope" view="_minimal">

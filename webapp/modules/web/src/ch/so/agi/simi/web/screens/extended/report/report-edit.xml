@@ -19,7 +19,13 @@
             <form id="form" dataContainer="reportDc">
                 <column width="450px">
                     <textField id="nameField" caption="Name" property="name"/>
-                    <textArea id="remarksField" property="remarks" rows="5"/>
+                    <textArea id="remarksField" property="remarks" rows="5" rowspan="3"/>
+                </column>
+                <column width="450px">
+                    <textField id="repDatasourceField" caption="Datenquelle" property="repDatasource"/>
+                    <textField id="repTableField" caption="Tabelle" property="repTable"/>
+                    <textField id="repUniqueKeyField" caption="Unique Key" property="repUniqueKey"/>
+                    <textField id="repParameterName" caption="Para. Name" property="repParameterName"/>
                 </column>
             </form>
             <groupBox id="relationsBox" caption="mainMsg://dependency.caption.related_dsv">

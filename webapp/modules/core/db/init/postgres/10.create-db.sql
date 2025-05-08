@@ -250,6 +250,12 @@ create table SIMIEXTENDED_DEPENDENCY (
     SQL_QUERY text,
     PY_MODULE_NAME varchar(100),
     --
+    -- from simiExtended_Report
+    REP_DATASOURCE varchar(255),
+    REP_TABLE                     <textField id=,
+    REP_UNIQUE_KEY varchar(255),
+    REP_PARAMETER_NAME varchar(255),
+    --
     primary key (ID)
 )^
 -- end SIMIEXTENDED_DEPENDENCY
