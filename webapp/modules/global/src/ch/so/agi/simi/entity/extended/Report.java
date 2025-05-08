@@ -27,6 +27,14 @@ public class Report extends Dependency {
     @NotNull(message = "'Para. Name' darf nicht null sein.")
     private String repParameterName;
 
+    public String getRepTable() {
+        return repTable;
+    }
+
+    public void setRepTable(String repTable) {
+        this.repTable = repTable;
+    }
+
     public String getRepUniqueKey() {
         return repUniqueKey;
     }
@@ -41,14 +49,6 @@ public class Report extends Dependency {
 
     public void setRepParameterName(String repParameterName) {
         this.repParameterName = repParameterName;
-    }
-
-    public String getRepTable() {
-        return repTable;
-    }
-
-    public void setRepTable(String repTable) {
-        this.repTable = repTable;
     }
 
     public String getRepDatasource() {

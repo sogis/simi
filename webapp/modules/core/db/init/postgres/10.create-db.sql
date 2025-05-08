@@ -252,7 +252,7 @@ create table SIMIEXTENDED_DEPENDENCY (
     --
     -- from simiExtended_Report
     REP_DATASOURCE varchar(255),
-    REP_TABLE                     <textField id=,
+    REP_TABLE varchar(255),
     REP_UNIQUE_KEY varchar(255),
     REP_PARAMETER_NAME varchar(255),
     --
