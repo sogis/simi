@@ -23,6 +23,8 @@ productlist_children AS ( -- Alle publizierten pl aka gruppen und maps mit ihren
     simi.trafo_published_dp_v psa ON pil.single_actor_id = psa.dp_id
   LEFT JOIN  
     simi.simiproduct_layer_group lg ON pil.product_list_id = lg.id
+  WHERE 
+    split_part(plg.identifier::text, '.'::text, 2) <> ''::text -- ausgenommen in Layergruppen umgewandelte Maps. Die umgewandelten Maps sind an ihrem Identifier zu erkennen, der nicht der AGI Norm entspricht (2026.03.31 mp)
 )
 
 ,layergroup_children AS (
@@ -119,6 +121,8 @@ productlist_children AS ( -- Alle publizierten pl aka gruppen und maps mit ihren
     simi.trafo_published_dp_v dp
   JOIN
     productlist_children_json sa ON dp.dp_id = sa.pl_id
+  WHERE 
+    split_part(dp.identifier::text, '.'::text, 2) <> ''::text -- ausgenommen in Layergruppen umgewandelte Maps. Die umgewandelten Maps sind an ihrem Identifier zu erkennen, der nicht der AGI Norm entspricht (2026.03.31 mp)
 )
 
 ,null_uid_placeholder AS ( -- Künstliche eindeutige uid. Wird für root publizierte SingleActor als Ersatz der layergruppen-id verwendet (macht where clause einfacher).
