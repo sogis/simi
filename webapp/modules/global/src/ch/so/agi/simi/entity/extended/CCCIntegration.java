@@ -3,6 +3,7 @@ package ch.so.agi.simi.entity.extended;
 import ch.so.agi.simi.entity.product.Map;
 import ch.so.agi.simi.global.validation.JsonArrayField;
 import ch.so.agi.simi.global.validation.JsonObjectField;
+import ch.so.agi.simi.global.validation.MapOrNotifyLayersRequired;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
@@ -12,6 +13,7 @@ import com.haulmont.cuba.core.global.validation.groups.UiComponentChecks;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@MapOrNotifyLayersRequired(groups = {UiComponentChecks.class})
 @Entity(name = CCCIntegration.NAME)
 public class CCCIntegration extends Dependency {
 
@@ -23,7 +25,6 @@ public class CCCIntegration extends Dependency {
     @OnDeleteInverse(DeletePolicy.DENY)
     @JoinColumn(name = "MAP_ID")
     @OneToOne(fetch = FetchType.LAZY)
-    @NotNull
     private Map map;
 
     @JsonArrayField(groups = {UiComponentChecks.class})
